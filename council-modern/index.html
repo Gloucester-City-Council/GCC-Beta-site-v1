@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-theme="auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Modern, intelligent council services. Quick access to bins, Council Tax, housing, planning, and more.">
+    <meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="District Council">
+
+    <title>District Council – Modern Services Platform</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" as="script" href="script.js">
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Loading Screen (removed on page load) -->
+    <div id="loading-screen" class="loading-screen" aria-hidden="true">
+        <div class="loading-spinner"></div>
+        <p>Loading services...</p>
+    </div>
+
+    <!-- Command Palette (CMD+K / CTRL+K) -->
+    <div id="command-palette" class="command-palette" role="dialog" aria-modal="true" aria-labelledby="command-title" hidden>
+        <div class="command-backdrop" data-close-command></div>
+        <div class="command-content">
+            <div class="command-header">
+                <h2 id="command-title" class="sr-only">Quick command search</h2>
+                <div class="command-search-wrapper">
+                    <svg class="command-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                    <input
+                        type="search"
+                        id="command-input"
+                        class="command-input"
+                        placeholder="Search services, type a command..."
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-autocomplete="list"
+                        aria-controls="command-results"
+                    >
+                    <kbd class="command-hint">ESC</kbd>
+                </div>
+            </div>
+            <div id="command-results" class="command-results" role="listbox"></div>
+            <div class="command-footer">
+                <div class="command-tips">
+                    <kbd>↑↓</kbd> Navigate
+                    <kbd>↵</kbd> Select
+                    <kbd>ESC</kbd> Close
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="container header-grid">
+            <a href="/" class="site-brand" aria-label="District Council - Home">
+                <div class="site-logo" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 10 12 6.16-1.26 10-6.45 10-12V7l-10-5z"/>
+                    </svg>
+                </div>
+                <div class="site-brand-text">
+                    <span class="site-name">District Council</span>
+                    <span class="site-tagline">Smart services</span>
+                </div>
+            </a>
+
+            <nav class="header-nav" aria-label="Utility navigation">
+                <!-- Search trigger -->
+                <button
+                    id="search-trigger"
+                    class="header-btn header-btn--search"
+                    aria-label="Open search (Cmd+K)"
+                    title="Search (Cmd+K)"
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                    <kbd>⌘K</kbd>
+                </button>
+
+                <!-- Voice Search -->
+                <button
+                    id="voice-trigger"
+                    class="header-btn header-btn--voice"
+                    aria-label="Voice search"
+                    title="Voice search"
+                    hidden
+                >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                    </svg>
+                </button>
+
+                <!-- Dark Mode Toggle -->
+                <button
+                    id="theme-toggle"
+                    class="header-btn header-btn--theme"
+                    aria-label="Toggle dark mode"
+                    title="Toggle theme"
+                >
+                    <svg class="theme-icon theme-icon--light" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                    </svg>
+                    <svg class="theme-icon theme-icon--dark" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+                    </svg>
+                </button>
+
+                <!-- Emergency -->
+                <a href="/emergency" class="header-btn header-btn--emergency">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                    </svg>
+                    <span>Emergency</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero with Adaptive Tasks -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="hero-greeting">Good <span id="time-of-day">morning</span></span>
+                        What do you need to do?
+                    </h1>
+                    <p class="hero-subtitle">
+                        Quick access to your most-used services
+                    </p>
+                </div>
+
+                <!-- Adaptive Top Tasks (personalizes based on usage) -->
+                <div id="top-tasks" class="top-tasks-grid">
+                    <!-- Dynamically populated by JS -->
+                </div>
+
+                <div class="hero-actions">
+                    <button class="link-button" id="customize-tasks">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/>
+                        </svg>
+                        Customize tasks
+                    </button>
+                    <a href="/services" class="link-button">Browse all services</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status Banner (collapsible) -->
+        <section class="status-section" id="status-section">
+            <div class="container">
+                <div class="status-banner status-banner--info">
+                    <div class="status-icon" aria-hidden="true">ℹ️</div>
+                    <div class="status-content">
+                        <h2 class="status-title">Service updates</h2>
+                        <p>Bin collections may be delayed due to icy conditions. <a href="/service-status">Check your collection</a></p>
+                    </div>
+                    <button class="status-close" aria-label="Dismiss">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="section section--services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Council services</h2>
+                    <div class="section-actions">
+                        <label class="filter-toggle">
+                            <input type="checkbox" id="show-descriptions">
+                            <span>Show descriptions</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="services-grid" class="services-grid"></div>
+            </div>
+        </section>
+
+        <!-- Quick Stats (data visualization) -->
+        <section class="section section--stats">
+            <div class="container">
+                <h2 class="section-title">Service insights</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" aria-hidden="true">♻️</div>
+                        <div class="stat-content">
+                            <div class="stat-value" data-count="89">89%</div>
+                            <div class="stat-label">Recycling rate</div>
+                            <div class="stat-trend stat-trend--up">+3% this quarter</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" aria-hidden="true">📋</div>
+                        <div class="stat-content">
+                            <div class="stat-value" data-count="142">142</div>
+                            <div class="stat-label">Planning applications</div>
+                            <div class="stat-trend">In your area</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" aria-hidden="true">🏠</div>
+                        <div class="stat-content">
+                            <div class="stat-value" data-count="24">24hrs</div>
+                            <div class="stat-label">Average response</div>
+                            <div class="stat-trend">To online reports</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" aria-hidden="true">⭐</div>
+                        <div class="stat-content">
+                            <div class="stat-value" data-count="4.6">4.6/5</div>
+                            <div class="stat-label">Service rating</div>
+                            <div class="stat-trend">From 2,300+ reviews</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Now (dynamic) -->
+        <section class="section section--popular">
+            <div class="container">
+                <h2 class="section-title">Popular right now</h2>
+                <div id="popular-list" class="popular-grid"></div>
+            </div>
+        </section>
+
+        <!-- News -->
+        <section class="section section--news">
+            <div class="container">
+                <div class="section-header">
+                    <h2>News and updates</h2>
+                    <a href="/news/rss" class="rss-link" aria-label="Subscribe to news RSS feed">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6.18 15.64c-1.18 0-2.14.96-2.14 2.14s.96 2.14 2.14 2.14 2.14-.96 2.14-2.14-.95-2.14-2.14-2.14zM4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+                        </svg>
+                        RSS
+                    </a>
+                </div>
+                <div id="news-grid" class="news-grid"></div>
+            </div>
+        </section>
+
+        <!-- Help & Contact -->
+        <section class="section section--contact">
+            <div class="container">
+                <h2 class="section-title">Help and contact</h2>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>Get in touch</h3>
+                        <ul class="contact-list">
+                            <li>
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                                <div>
+                                    <strong>Online</strong>
+                                    <p><a href="/contact">Contact form</a> – 2 working day response</p>
+                                </div>
+                            </li>
+                            <li>
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                                <div>
+                                    <strong>Phone</strong>
+                                    <p><a href="tel:01234567890">01234 567 890</a><br>Mon–Fri, 9am–5pm</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-card">
+                        <h3>Accessibility</h3>
+                        <ul class="contact-list">
+                            <li>
+                                <a href="/accessibility">Accessibility statement</a>
+                            </li>
+                            <li>
+                                <a href="/translate">Translate this page</a>
+                            </li>
+                            <li>
+                                <a href="/help">Help using services</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="/about">About us</a></li>
+                        <li><a href="/councillors">Councillors</a></li>
+                        <li><a href="/meetings">Meetings</a></li>
+                        <li><a href="/jobs">Jobs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Your information</h4>
+                    <ul>
+                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="/cookies">Cookies</a></li>
+                        <li><a href="/data-protection">Data protection</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>This website</h4>
+                    <ul>
+                        <li><a href="/accessibility">Accessibility</a></li>
+                        <li><a href="/terms">Terms</a></li>
+                        <li><a href="/feedback">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow</h4>
+                    <ul>
+                        <li><a href="https://twitter.com/council" rel="external">Twitter</a></li>
+                        <li><a href="https://facebook.com/council" rel="external">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 District Council</p>
+                <p class="footer-version">v2.0 • <span id="online-status">Online</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

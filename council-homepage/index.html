@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Access council services: pay Council Tax, check bin collection days, report issues, apply for housing, and more.">
+    <title>District Council – Services for residents and businesses</title>
+
+    <style>
+        /* =================================================================
+           CSS CUSTOM PROPERTIES / DESIGN TOKENS
+           Two theme examples: Ocean (default) and Plum (commented out)
+           Ensures WCAG 2.2 AA contrast ratios (4.5:1 text, 3:1 UI)
+           ================================================================= */
+
+        :root {
+            /* OCEAN THEME (Default) */
+            --color-primary: #005A8C;        /* Dark ocean blue */
+            --color-primary-dark: #003D5C;
+            --color-primary-light: #E6F2F8;
+            --color-secondary: #00758F;      /* Teal */
+            --color-accent: #F47721;         /* Warm orange for CTAs */
+
+            --color-background: #FFFFFF;
+            --color-surface: #F8F9FA;
+            --color-surface-raised: #FFFFFF;
+
+            --color-text: #1A1A1A;
+            --color-text-muted: #5A5A5A;
+            --color-text-on-primary: #FFFFFF;
+
+            --color-border: #D1D5DB;
+            --color-border-focus: #005A8C;
+
+            --color-link: #005A8C;
+            --color-link-hover: #003D5C;
+            --color-link-visited: #4B0082;
+
+            --color-success: #047857;
+            --color-warning: #D97706;
+            --color-error: #DC2626;
+
+            --color-focus-ring: #005A8C;
+            --focus-ring-width: 3px;
+            --focus-ring-offset: 2px;
+
+            /* Typography */
+            --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-size-base: 1rem;       /* 16px */
+            --font-size-sm: 0.875rem;     /* 14px */
+            --font-size-lg: 1.125rem;     /* 18px */
+            --font-size-xl: 1.25rem;      /* 20px */
+            --font-size-2xl: 1.5rem;      /* 24px */
+            --font-size-3xl: 2rem;        /* 32px */
+
+            --line-height-tight: 1.25;
+            --line-height-normal: 1.5;
+            --line-height-relaxed: 1.75;
+
+            /* Spacing */
+            --spacing-xs: 0.25rem;    /* 4px */
+            --spacing-sm: 0.5rem;     /* 8px */
+            --spacing-md: 1rem;       /* 16px */
+            --spacing-lg: 1.5rem;     /* 24px */
+            --spacing-xl: 2rem;       /* 32px */
+            --spacing-2xl: 3rem;      /* 48px */
+            --spacing-3xl: 4rem;      /* 64px */
+
+            /* Layout */
+            --container-max: 1200px;
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+
+            /* Minimum tap target size for accessibility */
+            --tap-target-min: 44px;
+        }
+
+        /* PLUM THEME (Alternative - uncomment to use)
+        :root {
+            --color-primary: #6B1B7F;
+            --color-primary-dark: #4A1258;
+            --color-primary-light: #F3E6F5;
+            --color-secondary: #8B2F97;
+            --color-accent: #E67E22;
+
+            --color-link: #6B1B7F;
+            --color-link-hover: #4A1258;
+            --color-focus-ring: #6B1B7F;
+        }
+        */
+
+        /* =================================================================
+           RESET & BASE STYLES
+           ================================================================= */
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-normal);
+            color: var(--color-text);
+            background-color: var(--color-background);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Respect reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* =================================================================
+           SKIP LINK (Accessibility requirement)
+           Visible only on keyboard focus
+           ================================================================= */
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            background: var(--color-primary);
+            color: var(--color-text-on-primary);
+            padding: var(--spacing-md) var(--spacing-lg);
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 9999;
+            border-radius: 0 0 var(--border-radius-md) 0;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: var(--focus-ring-width) solid var(--color-focus-ring);
+            outline-offset: var(--focus-ring-offset);
+        }
+
+        /* =================================================================
+           TYPOGRAPHY
+           ================================================================= */
+
+        h1, h2, h3, h4, h5, h6 {
+            line-height: var(--line-height-tight);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text);
+        }
+
+        h1 {
+            font-size: var(--font-size-3xl);
+        }
+
+        h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        h3 {
+            font-size: var(--font-size-xl);
+        }
+
+        h4 {
+            font-size: var(--font-size-lg);
+        }
+
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Links: Visible and accessible focus states */
+        a {
+            color: var(--color-link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+
+        a:hover {
+            color: var(--color-link-hover);
+        }
+
+        a:visited {
+            color: var(--color-link-visited);
+        }
+
+        /* Use :focus-visible for keyboard-only focus styles (modern approach) */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: var(--focus-ring-width) solid var(--color-focus-ring);
+            outline-offset: var(--focus-ring-offset);
+            border-radius: var(--border-radius-sm);
+        }
+
+        /* =================================================================
+           LAYOUT CONTAINERS
+           ================================================================= */
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 var(--spacing-xl);
+            }
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* =================================================================
+           HEADER (Landmark)
+           Logo, search, emergency link
+           ================================================================= */
+
+        .site-header {
+            background-color: var(--color-surface-raised);
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--spacing-md) 0;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            align-items: stretch;
+        }
+
+        @media (min-width: 768px) {
+            .header-container {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .site-branding {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            text-decoration: none;
+        }
+
+        .site-logo {
+            width: 48px;
+            height: 48px;
+            background: var(--color-primary);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .site-logo svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--color-text-on-primary);
+        }
+
+        .site-name {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: var(--line-height-tight);
+        }
+
+        .header-actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .header-actions {
+                flex-direction: row;
+                align-items: center;
+                width: auto;
+                gap: var(--spacing-md);
+            }
+        }
+
+        /* Search form - Accessible label, visible focus */
+        .search-form {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex: 1;
+            max-width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .search-form {
+                max-width: 400px;
+            }
+        }
+
+        .search-form label {
+            /* Visually hidden but accessible to screen readers */
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            font-size: var(--font-size-base);
+            min-height: var(--tap-target-min);
+        }
+
+        .search-button,
+        .button {
+            background: var(--color-primary);
+            color: var(--color-text-on-primary);
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--border-radius-md);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            min-height: var(--tap-target-min);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .search-button:hover,
+        .button:hover {
+            background: var(--color-primary-dark);
+        }
+
+        .emergency-link {
+            background: transparent;
+            color: var(--color-error);
+            border: 2px solid var(--color-error);
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-decoration: none;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            min-height: var(--tap-target-min);
+            white-space: nowrap;
+        }
+
+        .emergency-link:hover {
+            background: var(--color-error);
+            color: white;
+        }
+
+        /* =================================================================
+           HERO SECTION
+           "What do you need to do today?" + Top tasks
+           ================================================================= */
+
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: var(--color-text-on-primary);
+            padding: var(--spacing-2xl) 0;
+        }
+
+        .hero h1 {
+            color: var(--color-text-on-primary);
+            text-align: center;
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero-intro {
+            text-align: center;
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.95;
+        }
+
+        /* Top tasks grid - Mobile-first, responsive */
+        .top-tasks {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        @media (min-width: 480px) {
+            .top-tasks {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .top-tasks {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Task card - Accessible, large tap target */
+        .task-card {
+            background: var(--color-surface-raised);
+            color: var(--color-text);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: var(--spacing-md);
+            min-height: 120px;
+            justify-content: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .task-card:active {
+            transform: translateY(0);
+        }
+
+        .task-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        .task-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--color-primary);
+        }
+
+        .task-label {
+            font-weight: 600;
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-tight);
+        }
+
+        .hero-help {
+            text-align: center;
+        }
+
+        .hero-help a {
+            color: var(--color-text-on-primary);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* =================================================================
+           ALERT COMPONENT (Dismissible, accessible)
+           ================================================================= */
+
+        .alert {
+            background: var(--color-warning);
+            color: #1A1A1A;
+            padding: var(--spacing-md);
+            border-left: 4px solid #92400E;
+            margin-bottom: var(--spacing-lg);
+            border-radius: var(--border-radius-md);
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: flex-start;
+        }
+
+        .alert[hidden] {
+            display: none;
+        }
+
+        .alert-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .alert-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: var(--spacing-xs);
+            color: inherit;
+            font-size: 1.5rem;
+            line-height: 1;
+            min-width: var(--tap-target-min);
+            min-height: var(--tap-target-min);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .alert-close:hover {
+            opacity: 0.7;
+        }
+
+        /* =================================================================
+           SERVICE CATEGORIES
+           Tiles for main district services
+           ================================================================= */
+
+        .section {
+            padding: var(--spacing-2xl) 0;
+        }
+
+        .section--grey {
+            background: var(--color-surface);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        @media (min-width: 640px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .service-tile {
+            background: var(--color-surface-raised);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--color-border);
+            text-decoration: none;
+            display: block;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .service-tile:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-tile h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .service-tile p {
+            color: var(--color-text-muted);
+            font-size: var(--font-size-sm);
+            margin: 0;
+        }
+
+        /* =================================================================
+           POPULAR LINKS
+           ================================================================= */
+
+        .popular-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-sm);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .popular-list {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 100%;
+            }
+        }
+
+        .popular-list li {
+            background: var(--color-surface-raised);
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--color-border);
+        }
+
+        .popular-list a {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+            text-decoration: none;
+            color: var(--color-text);
+            min-height: var(--tap-target-min);
+        }
+
+        .popular-list a:hover {
+            background: var(--color-primary-light);
+        }
+
+        .popular-list a::before {
+            content: "→";
+            color: var(--color-primary);
+            font-weight: 700;
+            font-size: var(--font-size-xl);
+        }
+
+        /* =================================================================
+           NEWS CARDS
+           ================================================================= */
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        @media (min-width: 768px) {
+            .news-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .news-card {
+            background: var(--color-surface-raised);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card-content {
+            padding: var(--spacing-lg);
+            flex: 1;
+        }
+
+        .news-date {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .news-card h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .news-card p {
+            color: var(--color-text-muted);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .news-card a {
+            font-weight: 600;
+        }
+
+        .news-footer {
+            text-align: center;
+            margin-top: var(--spacing-xl);
+        }
+
+        /* =================================================================
+           HELP & CONTACT
+           ================================================================= */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .contact-card {
+            background: var(--color-surface-raised);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        .contact-card h3 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .contact-detail {
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+        }
+
+        .contact-detail svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--color-primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .contact-detail-content {
+            flex: 1;
+        }
+
+        .contact-detail strong {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* =================================================================
+           FOOTER (Landmark)
+           ================================================================= */
+
+        .site-footer {
+            background: var(--color-text);
+            color: #FFFFFF;
+            padding: var(--spacing-xl) 0 var(--spacing-lg);
+            margin-top: auto;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        @media (min-width: 640px) {
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .footer-links {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .footer-section h4 {
+            color: #FFFFFF;
+            font-size: var(--font-size-base);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-section a {
+            color: #E5E7EB;
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+        }
+
+        .footer-section a:hover {
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4B5563;
+            padding-top: var(--spacing-md);
+            text-align: center;
+            font-size: var(--font-size-sm);
+            color: #9CA3AF;
+        }
+
+        /* =================================================================
+           UTILITY CLASSES
+           ================================================================= */
+
+        .sr-only {
+            /* Screen reader only - accessible but invisible */
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* =================================================================
+           RESPONSIVE ADJUSTMENTS
+           ================================================================= */
+
+        @media (max-width: 359px) {
+            /* Handle very small screens gracefully */
+            html {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         SKIP LINK (Keyboard navigation)
+         First focusable element for accessibility
+         ======================================== -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- ========================================
+         HEADER (Landmark)
+         ======================================== -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="header-container">
+                <!-- Logo and site name -->
+                <a href="/" class="site-branding" aria-label="District Council - Home">
+                    <div class="site-logo" aria-hidden="true">
+                        <!-- Inline SVG placeholder icon -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 10 12 6.16-1.26 10-6.45 10-12V7l-10-5z"/>
+                        </svg>
+                    </div>
+                    <span class="site-name">District Council</span>
+                </a>
+
+                <div class="header-actions">
+                    <!-- Search with visible label for accessibility -->
+                    <form class="search-form" role="search" action="/search" method="get">
+                        <label for="site-search">Search services and information</label>
+                        <input
+                            type="search"
+                            id="site-search"
+                            name="q"
+                            class="search-input"
+                            placeholder="Search..."
+                            aria-label="Search services and information"
+                        >
+                        <button type="submit" class="search-button">
+                            <span class="sr-only">Search</span>
+                            <span aria-hidden="true">🔍</span>
+                        </button>
+                    </form>
+
+                    <!-- Emergency / out of hours - clear, non-alarming -->
+                    <a href="/emergency" class="emergency-link">
+                        <span aria-hidden="true">⚠️</span>
+                        Emergency
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================
+         MAIN CONTENT (Landmark)
+         ======================================== -->
+    <main id="main-content">
+
+        <!-- ========================================
+             HERO: What do you need to do today?
+             Top tasks for district council
+             ======================================== -->
+        <section class="hero">
+            <div class="container">
+                <h1>What do you need to do today?</h1>
+                <p class="hero-intro">
+                    Quick access to the services you use most
+                </p>
+
+                <!-- Top 8 tasks - verb phrases, district-focused -->
+                <div class="top-tasks">
+                    <a href="/bins" class="task-card">
+                        <div class="task-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/>
+                            </svg>
+                        </div>
+                        <span class="task-label">Find my bin day</span>
+                    </a>
+
+                    <a href="/report/missed-bin" class="task-card">
+                        <div class="task-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                        </div>
+                        <span class="task-label">Report a missed bin</span>
+                    </a>
+
+                    <a href="/pay/council-tax" class="task-card">
+                        <div class="task-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                            </svg>
+                        </div>
+                        <span class="task-label">Pay Council Tax</span>
+                    </a>
+
+                    <a href="/report/fly-tipping" class="task-card">
+                        <div class="task-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                        </div>
+                        <span class="task-label">Report fly-tipping</span>
+                    </a>
+
+                    <a href="/planning/search" class="task-card">
+                        <div class="task-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h4l3 3 3-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 3.5c1.84 0 3.48.96 4.34 2.5h-8.68c.86-1.54 2.5-2.5 4.34-2.5z"/>
+                            </svg>
+                        </div>
+                        <span class="task-label">Check planning applications</span>
+                    </a>
+
+                    <a href="/housing/apply" class="task-card">
+                        <div class="task-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                            </svg>
+                        </div>
+                        <span class="task-label">Apply for housing help</span>
+                    </a>
+
+                    <a href="/bulky-waste" class="task-card">
+                        <div class="task-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
+                        </div>
+                        <span class="task-label">Book bulky waste</span>
+                    </a>
+
+                    <a href="/pay/business-rates" class="task-card">
+                        <div class="task-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+                            </svg>
+                        </div>
+                        <span class="task-label">Pay business rates</span>
+                    </a>
+                </div>
+
+                <p class="hero-help">
+                    <a href="/services-a-z">Not sure? Browse all services A–Z</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- ========================================
+             ALERT (Dismissible, keyboard accessible)
+             Only shows when needed
+             ======================================== -->
+        <div class="container">
+            <div id="service-alert" class="alert" role="alert" aria-live="polite" style="margin-top: var(--spacing-xl);">
+                <div class="alert-icon" aria-hidden="true">⚠️</div>
+                <div class="alert-content">
+                    <div class="alert-title">Bin collection delays</div>
+                    <p>Due to icy conditions, some bin collections may be delayed. Check your collection day status online or call us.</p>
+                </div>
+                <button class="alert-close" aria-label="Dismiss alert" onclick="dismissAlert()">×</button>
+            </div>
+        </div>
+
+        <!-- ========================================
+             SERVICE CATEGORIES
+             District council services only
+             ======================================== -->
+        <section class="section section--grey">
+            <div class="container">
+                <h2 class="section-title">Council services</h2>
+
+                <div class="services-grid">
+                    <a href="/bins-recycling" class="service-tile">
+                        <h3>
+                            <span aria-hidden="true">♻️</span>
+                            Bins and recycling
+                        </h3>
+                        <p>Collection days, missed bins, bulky waste, garden waste subscriptions, what goes in which bin</p>
+                    </a>
+
+                    <a href="/council-tax" class="service-tile">
+                        <h3>
+                            <span aria-hidden="true">💷</span>
+                            Council Tax
+                        </h3>
+                        <p>Pay your bill, set up direct debit, apply for discounts and reductions, change your details</p>
+                    </a>
+
+                    <a href="/housing" class="service-tile">
+                        <h3>
+                            <span aria-hidden="true">🏠</span>
+                            Housing
+                        </h3>
+                        <p>Housing register, homelessness help, housing options advice, council housing, private renting support</p>
+                    </a>
+
+                    <a href="/planning" class="service-tile">
+                        <h3>
+                            <span aria-hidden="true">📋</span>
+                            Planning
+                        </h3>
+                        <p>Search and comment on planning applications, planning decisions, submit an application, planning policy</p>
+                    </a>
+
+                    <a href="/environmental-health" class="service-tile">
+                        <h3>
+                            <span aria-hidden="true">🛡️</span>
+                            Environmental health
+                        </h3>
+                        <p>Food hygiene, noise complaints, pest control, contaminated land, air quality, health and safety</p>
+                    </a>
+
+                    <a href="/benefits" class="service-tile">
+                        <h3>
+                            <span aria-hidden="true">💳</span>
+                            Benefits support
+                        </h3>
+                        <p>Council Tax Reduction, Housing Benefit (if applicable), help with costs, income maximisation advice</p>
+                    </a>
+
+                    <a href="/parking" class="service-tile">
+                        <h3>
+                            <span aria-hidden="true">🅿️</span>
+                            Parking
+                        </h3>
+                        <p>Permits, car parks, blue badge applications, parking enforcement, season tickets</p>
+                    </a>
+
+                    <a href="/licensing" class="service-tile">
+                        <h3>
+                            <span aria-hidden="true">📜</span>
+                            Licensing
+                        </h3>
+                        <p>Alcohol licences, taxi licences, street trading, gambling, animal licences, pavement licences</p>
+                    </a>
+
+                    <a href="/business-rates" class="service-tile">
+                        <h3>
+                            <span aria-hidden="true">🏢</span>
+                            Business rates
+                        </h3>
+                        <p>Pay business rates, relief and exemptions, business account, revaluations</p>
+                    </a>
+
+                    <a href="/leisure" class="service-tile">
+                        <h3>
+                            <span aria-hidden="true">⚽</span>
+                            Community and leisure
+                        </h3>
+                        <p>Leisure centres, parks, community spaces, activities, events, sports facilities</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             POPULAR / MOST USED
+             Can be updated seasonally
+             ======================================== -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Popular right now</h2>
+
+                <ul class="popular-list">
+                    <li><a href="/garden-waste/renew">Renew garden waste subscription</a></li>
+                    <li><a href="/council-tax/direct-debit">Set up Council Tax Direct Debit</a></li>
+                    <li><a href="/report/noise">Report noise nuisance</a></li>
+                    <li><a href="/housing-register">Join the housing register</a></li>
+                    <li><a href="/planning/search">View planning applications near me</a></li>
+                    <li><a href="/food-hygiene">Check food hygiene ratings</a></li>
+                    <li><a href="/bulky-waste/book">Book bulky waste collection</a></li>
+                    <li><a href="/report/antisocial-behaviour">Report antisocial behaviour</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ========================================
+             NEWS & UPDATES (Customer-relevant)
+             ======================================== -->
+        <section class="section section--grey">
+            <div class="container">
+                <h2 class="section-title">News and updates</h2>
+
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-card-content">
+                            <time class="news-date" datetime="2026-01-15">15 January 2026</time>
+                            <h3>New recycling service begins next month</h3>
+                            <p>From February, you'll be able to recycle food waste in your green bin. Find out what's changing and how to prepare.</p>
+                            <a href="/news/food-waste-recycling">Read more</a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-card-content">
+                            <time class="news-date" datetime="2026-01-10">10 January 2026</time>
+                            <h3>Council Tax bills: what's changing</h3>
+                            <p>Your Council Tax bill for 2026/27 will arrive in March. Check what support is available if you're struggling to pay.</p>
+                            <a href="/news/council-tax-2026">Read more</a>
+                        </div>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-card-content">
+                            <time class="news-date" datetime="2026-01-05">5 January 2026</time>
+                            <h3>Free energy advice sessions</h3>
+                            <p>Book a free appointment with our energy advisors to reduce your bills and make your home warmer this winter.</p>
+                            <a href="/news/energy-advice">Read more</a>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="news-footer">
+                    <a href="/news" class="button">View all news</a>
+                    <a href="/news/rss" style="margin-left: var(--spacing-md);">RSS feed</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             HELP & CONTACT
+             ======================================== -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Help and contact</h2>
+
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>Contact us</h3>
+
+                        <div class="contact-detail">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10h5v-2h-5c-4.34 0-8-3.66-8-8s3.66-8 8-8 8 3.66 8 8v1.43c0 .79-.71 1.57-1.5 1.57s-1.5-.78-1.5-1.57V12c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.38 0 2.64-.56 3.54-1.47.65.89 1.77 1.47 2.96 1.47 1.97 0 3.5-1.6 3.5-3.57V12c0-5.52-4.48-10-10-10zm0 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+                            </svg>
+                            <div class="contact-detail-content">
+                                <strong>Online</strong>
+                                <p>Use our <a href="/contact">online contact form</a> – we'll reply within 2 working days</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            <div class="contact-detail-content">
+                                <strong>Phone</strong>
+                                <p><a href="tel:01234567890">01234 567 890</a><br>
+                                Monday to Friday, 9am–5pm<br>
+                                <a href="/emergency">Emergency out of hours</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <div class="contact-detail-content">
+                                <strong>Visit us</strong>
+                                <p>Council Offices, High Street<br>
+                                Town, County, AB1 2CD<br>
+                                <a href="/contact/visit">Opening hours and directions</a></p>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: var(--spacing-lg); font-size: var(--font-size-sm); color: var(--color-text-muted);">
+                            Many services are quicker online – you can track your request and get updates 24/7.
+                        </p>
+                    </div>
+
+                    <div class="contact-card">
+                        <h3>Accessibility and support</h3>
+
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: var(--spacing-md);">
+                                <a href="/accessibility">Accessibility statement</a>
+                                <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: var(--spacing-xs);">
+                                    How accessible this website is and how to get help
+                                </p>
+                            </li>
+                            <li style="margin-bottom: var(--spacing-md);">
+                                <a href="/translate">Translate this page</a>
+                                <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: var(--spacing-xs);">
+                                    Read this website in other languages
+                                </p>
+                            </li>
+                            <li style="margin-bottom: var(--spacing-md);">
+                                <a href="/accessible-formats">Documents in other formats</a>
+                                <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: var(--spacing-xs);">
+                                    Request large print, audio, or Braille
+                                </p>
+                            </li>
+                            <li>
+                                <a href="/help">Help using our services</a>
+                                <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: var(--spacing-xs);">
+                                    Support with online forms, payments, and more
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================
+         FOOTER (Landmark)
+         ======================================== -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>About the council</h4>
+                    <ul>
+                        <li><a href="/about">About us</a></li>
+                        <li><a href="/councillors">Councillors</a></li>
+                        <li><a href="/meetings">Meetings and decisions</a></li>
+                        <li><a href="/jobs">Jobs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Your information</h4>
+                    <ul>
+                        <li><a href="/privacy">Privacy notice</a></li>
+                        <li><a href="/cookies">Cookie policy</a></li>
+                        <li><a href="/data-protection">Data protection</a></li>
+                        <li><a href="/foi">Freedom of Information</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Using this website</h4>
+                    <ul>
+                        <li><a href="/accessibility">Accessibility</a></li>
+                        <li><a href="/terms">Terms and conditions</a></li>
+                        <li><a href="/sitemap">Sitemap</a></li>
+                        <li><a href="/feedback">Feedback</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Follow us</h4>
+                    <ul>
+                        <li><a href="https://twitter.com/council" rel="external">Twitter</a></li>
+                        <li><a href="https://facebook.com/council" rel="external">Facebook</a></li>
+                        <li><a href="https://instagram.com/council" rel="external">Instagram</a></li>
+                        <li><a href="/newsletter">Email newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 District Council. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================
+         PROGRESSIVE ENHANCEMENT JAVASCRIPT
+         Minimal, degrades gracefully
+         ======================================== -->
+    <script>
+        // Alert dismissal (progressive enhancement - works without JS too via hidden attribute)
+        function dismissAlert() {
+            const alert = document.getElementById('service-alert');
+            if (alert) {
+                // Add fade out animation if motion is not reduced
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                if (!prefersReducedMotion) {
+                    alert.style.transition = 'opacity 0.3s ease';
+                    alert.style.opacity = '0';
+                    setTimeout(() => {
+                        alert.hidden = true;
+                    }, 300);
+                } else {
+                    alert.hidden = true;
+                }
+
+                // Store dismissal in sessionStorage so it doesn't reappear
+                try {
+                    sessionStorage.setItem('alert-dismissed', 'true');
+                } catch (e) {
+                    // Session storage not available, that's fine
+                }
+            }
+        }
+
+        // Check if alert was already dismissed in this session
+        (function() {
+            try {
+                if (sessionStorage.getItem('alert-dismissed') === 'true') {
+                    const alert = document.getElementById('service-alert');
+                    if (alert) {
+                        alert.hidden = true;
+                    }
+                }
+            } catch (e) {
+                // Session storage not available, that's fine
+            }
+        })();
+    </script>
+</body>
+</html>
