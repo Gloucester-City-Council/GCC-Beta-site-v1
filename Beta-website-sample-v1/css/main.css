@@ -123,8 +123,46 @@ body.text-size-large {
     font-size: 1.125rem;
 }
 
+body.text-size-large h1,
+body.text-size-large h2,
+body.text-size-large h3,
+body.text-size-large h4,
+body.text-size-large h5,
+body.text-size-large h6,
+body.text-size-large a,
+body.text-size-large span,
+body.text-size-large li,
+body.text-size-large label,
+body.text-size-large input,
+body.text-size-large button,
+body.text-size-large .service-title,
+body.text-size-large .menu-item a,
+body.text-size-large .search-label,
+body.text-size-large .section-heading {
+    font-size: 1.125em;
+}
+
 body.text-size-xlarge {
     font-size: 1.25rem;
+}
+
+body.text-size-xlarge h1,
+body.text-size-xlarge h2,
+body.text-size-xlarge h3,
+body.text-size-xlarge h4,
+body.text-size-xlarge h5,
+body.text-size-xlarge h6,
+body.text-size-xlarge a,
+body.text-size-xlarge span,
+body.text-size-xlarge li,
+body.text-size-xlarge label,
+body.text-size-xlarge input,
+body.text-size-xlarge button,
+body.text-size-xlarge .service-title,
+body.text-size-xlarge .menu-item a,
+body.text-size-xlarge .search-label,
+body.text-size-xlarge .section-heading {
+    font-size: 1.25em;
 }
 
 /* Skip link for keyboard users */
