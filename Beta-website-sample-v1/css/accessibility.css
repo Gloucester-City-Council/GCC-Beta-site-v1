@@ -1,0 +1,389 @@
+/*
+ * Gloucester City Council - Accessibility Stylesheet
+ * High contrast and low contrast modes
+ * WCAG 2.2 AA compliant
+ */
+
+/* High Contrast Mode */
+body.contrast-high {
+    --colour-primary: #000000;
+    --colour-primary-dark: #000000;
+    --colour-primary-light: #333333;
+
+    --colour-link: #0000ee;
+    --colour-link-hover: #0000aa;
+    --colour-link-visited: #551a8b;
+
+    --colour-text: #000000;
+    --colour-text-secondary: #000000;
+
+    --colour-background: #ffffff;
+    --colour-background-grey: #ffffff;
+    --colour-background-light: #ffffff;
+
+    --colour-border: #000000;
+    --colour-border-dark: #000000;
+
+    --colour-focus: #ffff00;
+
+    --colour-cta: #000000;
+    --colour-cta-hover: #333333;
+}
+
+body.contrast-high .site-header,
+body.contrast-high .hero-section,
+body.contrast-high .main-nav {
+    background-color: #000000;
+}
+
+body.contrast-high .service-link {
+    background-color: #ffffff;
+    border: 3px solid #000000;
+}
+
+body.contrast-high .service-link:hover,
+body.contrast-high .service-link:focus {
+    background-color: #ffff00;
+    border-color: #000000;
+}
+
+body.contrast-high .service-icon {
+    background-color: #000000;
+}
+
+body.contrast-high .news-article {
+    border: 2px solid #000000;
+}
+
+body.contrast-high .news-section {
+    background-color: #ffffff;
+}
+
+body.contrast-high .site-footer {
+    background-color: #ffffff;
+    border-top: 3px solid #000000;
+}
+
+body.contrast-high .footer-social a {
+    background-color: #000000;
+    border: 2px solid #000000;
+}
+
+body.contrast-high .alert-banner {
+    background-color: #ffffff;
+    border: 3px solid #000000;
+}
+
+body.contrast-high .accessibility-btn {
+    border-width: 3px;
+}
+
+body.contrast-high .accessibility-btn[aria-pressed="true"] {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+body.contrast-high .search-input {
+    border-width: 3px;
+}
+
+body.contrast-high .notification-banner {
+    background-color: #000000;
+    border: 3px solid #ffffff;
+}
+
+body.contrast-high .tasks-list li {
+    border-bottom: 2px solid #000000;
+}
+
+/* Low Contrast Mode (for light sensitivity) */
+body.contrast-low {
+    --colour-primary: #4a7c6f;
+    --colour-primary-dark: #3d6a5e;
+    --colour-primary-light: #5a9485;
+
+    --colour-link: #4a6fa5;
+    --colour-link-hover: #3d5c8a;
+    --colour-link-visited: #6a5a8a;
+
+    --colour-text: #3d3d3d;
+    --colour-text-secondary: #5a5a5a;
+
+    --colour-background: #f5f5f0;
+    --colour-background-grey: #ebebdf;
+    --colour-background-light: #fafaf5;
+
+    --colour-border: #b0b0a5;
+    --colour-border-dark: #8a8a80;
+
+    --colour-focus: #e0d060;
+    --colour-focus-text: #3d3d3d;
+
+    --colour-cta: #4a7c6f;
+    --colour-cta-hover: #3d6a5e;
+}
+
+body.contrast-low .site-header,
+body.contrast-low .hero-section {
+    background-color: #4a7c6f;
+}
+
+body.contrast-low .main-nav {
+    background-color: #3d6a5e;
+}
+
+/* Inverted Mode (dark mode) */
+body.contrast-inverted {
+    --colour-primary: #00c896;
+    --colour-primary-dark: #00a57d;
+    --colour-primary-light: #00e6ad;
+
+    --colour-link: #6db3f2;
+    --colour-link-hover: #8ec5f7;
+    --colour-link-visited: #b19cd9;
+
+    --colour-text: #f0f0f0;
+    --colour-text-secondary: #c0c0c0;
+
+    --colour-background: #1a1a1a;
+    --colour-background-grey: #2a2a2a;
+    --colour-background-light: #252525;
+
+    --colour-border: #505050;
+    --colour-border-dark: #f0f0f0;
+
+    --colour-focus: #ffdd00;
+    --colour-focus-text: #0b0c0c;
+
+    --colour-cta: #00a57d;
+    --colour-cta-hover: #00c896;
+}
+
+body.contrast-inverted .site-header,
+body.contrast-inverted .hero-section {
+    background-color: #00796b;
+}
+
+body.contrast-inverted .main-nav {
+    background-color: #004d40;
+}
+
+body.contrast-inverted .service-link {
+    background-color: #2a2a2a;
+}
+
+body.contrast-inverted .service-icon {
+    background-color: #00796b;
+}
+
+body.contrast-inverted .news-article {
+    background-color: #2a2a2a;
+}
+
+body.contrast-inverted .site-footer {
+    background-color: #2a2a2a;
+}
+
+body.contrast-inverted .footer-social a {
+    background-color: #00796b;
+}
+
+body.contrast-inverted .alert-banner {
+    background-color: #2a2a2a;
+}
+
+body.contrast-inverted .accessibility-toolbar {
+    background-color: #252525;
+}
+
+body.contrast-inverted .accessibility-btn {
+    background-color: #2a2a2a;
+    color: #f0f0f0;
+    border-color: #f0f0f0;
+}
+
+body.contrast-inverted .search-input {
+    background-color: #ffffff;
+    color: #0b0c0c;
+}
+
+/* Focus visible polyfill support */
+.js-focus-visible :focus:not(.focus-visible) {
+    outline: none;
+}
+
+.js-focus-visible .focus-visible {
+    outline: 3px solid var(--colour-focus);
+    outline-offset: 0;
+    background-color: var(--colour-focus);
+    color: var(--colour-focus-text);
+}
+
+/* Enhanced focus for Windows High Contrast Mode */
+@media (forced-colors: active) {
+    a:focus,
+    button:focus,
+    input:focus,
+    select:focus,
+    textarea:focus,
+    [tabindex]:focus {
+        outline: 3px solid CanvasText;
+        outline-offset: 2px;
+    }
+
+    .service-link:focus,
+    .service-link:hover {
+        outline: 3px solid Highlight;
+        forced-color-adjust: none;
+    }
+
+    .btn-cta {
+        border: 2px solid ButtonText;
+    }
+
+    .btn-cta:focus {
+        outline: 3px solid Highlight;
+    }
+
+    .skip-link:focus {
+        background-color: Highlight;
+        color: HighlightText;
+    }
+}
+
+/* Prefers contrast media query support */
+@media (prefers-contrast: more) {
+    body:not(.contrast-low):not(.contrast-inverted) {
+        --colour-text: #000000;
+        --colour-background: #ffffff;
+        --colour-border: #000000;
+        --colour-link: #0000ee;
+    }
+
+    .service-link {
+        border: 2px solid #000000;
+    }
+
+    .news-article {
+        border: 1px solid #000000;
+    }
+}
+
+@media (prefers-contrast: less) {
+    body:not(.contrast-high):not(.contrast-inverted) {
+        --colour-text: #3d3d3d;
+        --colour-background: #f5f5f0;
+        --colour-border: #a0a0a0;
+    }
+}
+
+/* Prefers color scheme (dark mode) support */
+@media (prefers-color-scheme: dark) {
+    body:not(.contrast-high):not(.contrast-low):not(.contrast-default) {
+        --colour-text: #f0f0f0;
+        --colour-text-secondary: #c0c0c0;
+        --colour-background: #1a1a1a;
+        --colour-background-grey: #2a2a2a;
+        --colour-background-light: #252525;
+        --colour-border: #505050;
+        --colour-link: #6db3f2;
+        --colour-link-hover: #8ec5f7;
+        --colour-link-visited: #b19cd9;
+    }
+}
+
+/* Target size for touch/click targets (WCAG 2.2) */
+.service-link,
+.btn-cta,
+.btn-secondary,
+.menu-item a,
+.header-nav-list a,
+.footer-social a,
+.accessibility-btn {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Ensure spacing between clickable elements */
+.header-nav-list li,
+.main-menu li,
+.footer-list li,
+.tasks-list li {
+    margin-bottom: 0.5rem;
+}
+
+/* Large clickable areas for mobile */
+@media screen and (max-width: 768px) {
+    .menu-item a,
+    .header-nav-list a,
+    .footer-list a,
+    .tasks-list a {
+        display: block;
+        padding: 0.75rem 0;
+    }
+}
+
+/* Text spacing override support (WCAG 2.2 1.4.12) */
+body {
+    word-spacing: normal;
+    letter-spacing: normal;
+}
+
+/* Allow user stylesheets to override text spacing */
+p, li, dd, dt, td, th, label, span, a {
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+    word-spacing: inherit !important;
+}
+
+/* Animation toggle for vestibular disorders */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Reading guide line (optional assistive feature) */
+.reading-guide-enabled {
+    cursor: crosshair;
+}
+
+.reading-guide {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--colour-focus);
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+}
+
+.reading-guide-enabled .reading-guide {
+    display: block;
+}
+
+/* Dyslexia-friendly font option */
+body.dyslexia-friendly {
+    font-family: 'OpenDyslexic', Verdana, Arial, sans-serif;
+    letter-spacing: 0.05em;
+    word-spacing: 0.1em;
+    line-height: 1.8;
+}
+
+/* Link underline always visible */
+body.links-underlined a {
+    text-decoration: underline !important;
+    text-decoration-thickness: 2px !important;
+}
+
+/* Increased line height option */
+body.line-height-large {
+    line-height: 2;
+}
+
+body.line-height-large p,
+body.line-height-large li {
+    line-height: 2;
+}

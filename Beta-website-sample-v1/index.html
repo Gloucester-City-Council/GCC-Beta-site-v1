@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gloucester City Council - Your local district council providing services for residents, businesses and visitors">
+    <meta name="theme-color" content="#1d70b8">
+    <title>Gloucester City Council</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+</head>
+<body class="contrast-default">
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Accessibility toolbar -->
+    <div class="accessibility-toolbar" role="region" aria-label="Accessibility options">
+        <div class="accessibility-toolbar-inner">
+            <span class="accessibility-label">Accessibility:</span>
+            <button type="button" id="contrast-toggle" class="accessibility-btn" aria-pressed="false" title="Toggle high contrast mode">
+                High contrast
+            </button>
+            <button type="button" id="text-size-increase" class="accessibility-btn" title="Increase text size">
+                A+
+            </button>
+            <button type="button" id="text-size-decrease" class="accessibility-btn" title="Decrease text size">
+                A-
+            </button>
+            <button type="button" id="text-size-reset" class="accessibility-btn" title="Reset text size">
+                Reset
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification banner -->
+    <div class="notification-banner" role="alert" aria-live="polite" id="notification-banner" hidden>
+        <div class="notification-banner-inner">
+            <p class="notification-text" id="notification-text"></p>
+            <button type="button" class="notification-close" aria-label="Close notification" id="notification-close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="header-top">
+            <div class="header-inner">
+                <a href="index.html" class="logo-link" title="Go to Gloucester City Council homepage">
+                    <span class="logo-text">Gloucester City Council</span>
+                </a>
+                <nav class="header-nav" aria-label="Header navigation">
+                    <ul class="header-nav-list">
+                        <li><a href="pages/my-account.html" title="Sign in or register for My Account">My account</a></li>
+                        <li><a href="pages/contact-us.html" title="Find contact details for council services">Contact us</a></li>
+                        <li><a href="pages/accessibility-statement.html" title="Read our accessibility statement">Accessibility</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main navigation -->
+        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+            <div class="main-nav-inner">
+                <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="main-menu" id="menu-toggle">
+                    <span class="menu-toggle-text">Menu</span>
+                    <span class="menu-toggle-icon" aria-hidden="true"></span>
+                </button>
+                <ul class="main-menu" id="main-menu">
+                    <li class="menu-item">
+                        <a href="pages/council-tax.html" title="Information about council tax payments and support">Council tax</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="pages/benefits.html" title="Apply for housing benefit and council tax support">Benefits</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="pages/housing.html" title="Find housing options and apply for housing">Housing</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="pages/bins-recycling.html" title="Check bin collection days and recycling information">Bins and recycling</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="pages/planning.html" title="View and submit planning applications">Planning</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="pages/business.html" title="Support and services for local businesses">Business</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main id="main-content" role="main">
+        <!-- Hero section with search -->
+        <section class="hero-section" aria-labelledby="hero-heading">
+            <div class="hero-inner">
+                <h1 id="hero-heading" class="visually-hidden">Welcome to Gloucester City Council</h1>
+                <div class="search-container">
+                    <form action="pages/search-results.html" method="get" role="search" aria-label="Search the council website">
+                        <label for="site-search" class="search-label">How can we help you today?</label>
+                        <div class="search-input-wrapper">
+                            <input type="search" id="site-search" name="q" class="search-input" placeholder="Search for a service, such as council tax or bins" autocomplete="off" aria-describedby="search-hint">
+                            <button type="submit" class="search-button" title="Search the website">
+                                <span class="visually-hidden">Search</span>
+                                <svg class="search-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p id="search-hint" class="search-hint">Popular searches: <a href="pages/council-tax.html" title="Pay your council tax">pay council tax</a>, <a href="pages/bins-recycling.html" title="Check your bin collection day">bin collection</a>, <a href="pages/planning.html" title="Search planning applications">planning</a></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alert banner (Bootstrap-style for temporary notices) -->
+        <section class="alert-section" role="region" aria-label="Important notices" id="alert-section" hidden>
+            <div class="alert-banner alert-info">
+                <div class="alert-inner">
+                    <span class="alert-icon" aria-hidden="true">!</span>
+                    <p class="alert-text" id="alert-text"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services grid -->
+        <section class="services-section" aria-labelledby="services-heading">
+            <div class="services-inner">
+                <h2 id="services-heading" class="section-heading">Services</h2>
+                <ul class="services-grid">
+                    <li class="service-item">
+                        <a href="pages/council-tax.html" class="service-link" title="Pay, manage or get support with your council tax">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg>
+                            </span>
+                            <span class="service-title">Council tax</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/benefits.html" class="service-link" title="Apply for housing benefit or council tax support">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                            </span>
+                            <span class="service-title">Benefits</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/housing.html" class="service-link" title="Find housing options, apply for housing or report issues">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                            </span>
+                            <span class="service-title">Housing</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/bins-recycling.html" class="service-link" title="Check bin collection days and find recycling information">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                            </span>
+                            <span class="service-title">Bins and recycling</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/planning.html" class="service-link" title="View, comment on or submit planning applications">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                            </span>
+                            <span class="service-title">Planning</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/parking.html" class="service-link" title="Find car parks, pay for parking or appeal a fine">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M13 3H6v18h4v-6h3c3.31 0 6-2.69 6-6s-2.69-6-6-6zm.2 8H10V7h3.2c1.1 0 2 .9 2 2s-.9 2-2 2z"/></svg>
+                            </span>
+                            <span class="service-title">Parking</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/environmental.html" class="service-link" title="Report noise, pests, pollution or other environmental issues">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9zM5.6 10.25c0 1.38 1.12 2.5 2.5 2.5.53 0 1.01-.16 1.42-.44l-.02.19c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5l-.02-.19c.4.28.89.44 1.42.44 1.38 0 2.5-1.12 2.5-2.5 0-1-.59-1.85-1.43-2.25.84-.4 1.43-1.25 1.43-2.25 0-1.38-1.12-2.5-2.5-2.5-.53 0-1.01.16-1.42.44l.02-.19C14.5 2.12 13.38 1 12 1S9.5 2.12 9.5 3.5l.02.19c-.4-.28-.89-.44-1.42-.44-1.38 0-2.5 1.12-2.5 2.5 0 1 .59 1.85 1.43 2.25-.84.4-1.43 1.25-1.43 2.25zM12 5.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5S9.5 9.38 9.5 8s1.12-2.5 2.5-2.5zM3 13c0 4.97 4.03 9 9 9 0-4.97-4.03-9-9-9z"/></svg>
+                            </span>
+                            <span class="service-title">Environment</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/licensing.html" class="service-link" title="Apply for licences for business, taxi or events">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                            </span>
+                            <span class="service-title">Licensing</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/elections.html" class="service-link" title="Register to vote, find polling stations and election information">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M18 13h-.68l-2 2h1.91L19 17H5l1.78-2h2.05l-2-2H6l-3 3v4c0 1.1.89 2 1.99 2H19c1.1 0 2-.89 2-2v-4l-3-3zm-1-5.05l-4.95 4.95-2.12-2.12 4.95-4.95 2.12 2.12zM17.71 6.12l1.42-1.41c.39-.39.39-1.02 0-1.41l-.71-.71a.9959.9959 0 0 0-1.41 0l-1.42 1.41 2.12 2.12z"/></svg>
+                            </span>
+                            <span class="service-title">Elections</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/leisure.html" class="service-link" title="Find parks, leisure centres and things to do">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>
+                            </span>
+                            <span class="service-title">Leisure</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/business.html" class="service-link" title="Support for businesses including rates and grants">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg>
+                            </span>
+                            <span class="service-title">Business</span>
+                        </a>
+                    </li>
+                    <li class="service-item">
+                        <a href="pages/community-safety.html" class="service-link" title="Report anti-social behaviour and community safety concerns">
+                            <span class="service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="40" height="40"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                            </span>
+                            <span class="service-title">Community safety</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="services-more">
+                    <a href="pages/all-services.html" class="link-more" title="Browse all council services">View all services</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- News and updates -->
+        <section class="news-section" aria-labelledby="news-heading">
+            <div class="news-inner">
+                <h2 id="news-heading" class="section-heading">News and updates</h2>
+                <ul class="news-list">
+                    <li class="news-item">
+                        <article class="news-article">
+                            <time datetime="2026-02-03" class="news-date">3 February 2026</time>
+                            <h3 class="news-title">
+                                <a href="pages/news-article.html" title="Read the full article about new recycling service">New food waste collection service launches in March</a>
+                            </h3>
+                            <p class="news-summary">Residents can sign up now for the new weekly food waste collection starting next month.</p>
+                        </article>
+                    </li>
+                    <li class="news-item">
+                        <article class="news-article">
+                            <time datetime="2026-01-28" class="news-date">28 January 2026</time>
+                            <h3 class="news-title">
+                                <a href="pages/news-article.html" title="Read the full article about council tax">Council tax support available for residents</a>
+                            </h3>
+                            <p class="news-summary">Check if you can get help with your council tax payments.</p>
+                        </article>
+                    </li>
+                    <li class="news-item">
+                        <article class="news-article">
+                            <time datetime="2026-01-20" class="news-date">20 January 2026</time>
+                            <h3 class="news-title">
+                                <a href="pages/news-article.html" title="Read the full article about park improvements">City park improvements complete</a>
+                            </h3>
+                            <p class="news-summary">New playground and walking paths now open at Riverside Park.</p>
+                        </article>
+                    </li>
+                </ul>
+                <a href="pages/news.html" class="link-more" title="View all news articles">View all news</a>
+            </div>
+        </section>
+
+        <!-- Popular tasks -->
+        <section class="tasks-section" aria-labelledby="tasks-heading">
+            <div class="tasks-inner">
+                <h2 id="tasks-heading" class="section-heading">Popular tasks</h2>
+                <ul class="tasks-list">
+                    <li><a href="pages/council-tax.html#pay" title="Make a council tax payment online">Pay council tax</a></li>
+                    <li><a href="pages/bins-recycling.html#collection" title="Find out when your bins are collected">Check bin collection day</a></li>
+                    <li><a href="pages/housing.html#apply" title="Apply for council housing">Apply for housing</a></li>
+                    <li><a href="pages/planning.html#search" title="Search for planning applications">Search planning applications</a></li>
+                    <li><a href="pages/benefits.html#apply" title="Apply for housing benefit">Apply for benefits</a></li>
+                    <li><a href="pages/report.html" title="Report a problem to the council">Report a problem</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-section">
+                <h2 class="footer-heading">Contact us</h2>
+                <ul class="footer-list">
+                    <li>Phone: <a href="tel:01onal11232526700" title="Call the main council switchboard">01onal11 232 6700</a></li>
+                    <li>Email: <a href="mailto:info@gloucester.gov.uk" title="Send an email to the council">info@gloucester.gov.uk</a></li>
+                    <li><a href="pages/contact-us.html" title="Find more contact options">All contact options</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h2 class="footer-heading">About the council</h2>
+                <ul class="footer-list">
+                    <li><a href="pages/about.html" title="Learn about Gloucester City Council">About us</a></li>
+                    <li><a href="pages/councillors.html" title="Find your local councillor">Councillors</a></li>
+                    <li><a href="pages/meetings.html" title="View council meeting dates and agendas">Council meetings</a></li>
+                    <li><a href="pages/jobs.html" title="View current job vacancies">Jobs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h2 class="footer-heading">Help</h2>
+                <ul class="footer-list">
+                    <li><a href="pages/accessibility-statement.html" title="Read our accessibility commitment">Accessibility statement</a></li>
+                    <li><a href="pages/privacy.html" title="Read our privacy policy">Privacy policy</a></li>
+                    <li><a href="pages/cookies.html" title="Learn about cookies on this site">Cookies</a></li>
+                    <li><a href="pages/terms.html" title="Read our terms and conditions">Terms and conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h2 class="footer-heading">Connect with us</h2>
+                <ul class="footer-social">
+                    <li>
+                        <a href="https://www.facebook.com/gloucestercitycouncil" title="Follow us on Facebook (opens in new tab)" target="_blank" rel="noopener noreferrer">
+                            <span class="visually-hidden">Facebook</span>
+                            <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z"/></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.twitter.com/gloucestercc" title="Follow us on X (opens in new tab)" target="_blank" rel="noopener noreferrer">
+                            <span class="visually-hidden">X (formerly Twitter)</span>
+                            <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Gloucester City Council. All rights reserved.</p>
+            <p class="footer-crown">
+                <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" title="View the Open Government Licence (opens in new tab)" target="_blank" rel="noopener noreferrer">Open Government Licence v3.0</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/accessibility.js"></script>
+</body>
+</html>
