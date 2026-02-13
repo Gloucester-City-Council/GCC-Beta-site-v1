@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Access local authority services quickly and easily. Search for council services, report issues, and find information.">
+    <title>Council Services - Home</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <!-- Skip to main content for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">Council Services</h1>
+                <nav aria-label="Accessibility options">
+                    <button id="theme-toggle" class="theme-button" aria-label="Change colour theme" aria-expanded="false">
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                        </svg>
+                        Colour theme
+                    </button>
+                    <div id="theme-options" class="theme-options" role="menu" aria-label="Theme options" hidden>
+                        <button class="theme-option" data-theme="default" role="menuitem" aria-label="Set colour theme to default orange">Default orange</button>
+                        <button class="theme-option" data-theme="pink" role="menuitem" aria-label="Set colour theme to pink">Pink</button>
+                        <button class="theme-option" data-theme="green" role="menuitem" aria-label="Set colour theme to green">Green</button>
+                        <button class="theme-option" data-theme="blue" role="menuitem" aria-label="Set colour theme to blue">Blue</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        <div class="container">
+            <!-- Search section -->
+            <section class="search-section" aria-labelledby="search-heading">
+                <h2 id="search-heading" class="search-title">What are you looking for today?</h2>
+                <p class="search-description">Search for council services, report an issue, or find information</p>
+
+                <div class="search-container">
+                    <label for="main-search" class="visually-hidden">Search council services</label>
+                    <div class="search-wrapper">
+                        <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input
+                            type="search"
+                            id="main-search"
+                            class="search-input"
+                            placeholder="For example: bin collection, council tax, planning"
+                            autocomplete="off"
+                            aria-autocomplete="list"
+                            aria-controls="search-suggestions"
+                            aria-expanded="false"
+                        >
+                        <button type="button" class="search-clear" aria-label="Clear search" hidden>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <ul id="search-suggestions" class="suggestions-list" role="listbox" hidden></ul>
+                </div>
+            </section>
+
+            <!-- Services section -->
+            <section class="services-section" aria-labelledby="services-heading">
+                <h2 id="services-heading" class="visually-hidden">Quick access to services</h2>
+                <p class="services-intro">Or choose a service</p>
+
+                <div class="services-grid">
+                    <!-- Licensing -->
+                    <a href="pages/licensing.html" class="service-card" aria-label="Licensing services - Apply for licences and permits">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <h3 class="service-title">Licensing</h3>
+                    </a>
+
+                    <!-- Bins and recycling -->
+                    <a href="#" class="service-card" aria-label="Bins and recycling - Collection dates and waste services">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                        <h3 class="service-title">Bins and recycling</h3>
+                    </a>
+
+                    <!-- Council tax -->
+                    <a href="#" class="service-card" aria-label="Council tax - Pay bills and manage your account">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            <line x1="8" y1="13" x2="8" y2="13"></line>
+                        </svg>
+                        <h3 class="service-title">Council tax</h3>
+                    </a>
+
+                    <!-- Planning and building -->
+                    <a href="#" class="service-card" aria-label="Planning and building - Apply for planning permission and building control">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        <h3 class="service-title">Planning and building</h3>
+                    </a>
+
+                    <!-- Housing -->
+                    <a href="#" class="service-card" aria-label="Housing - Apply for housing and report repairs">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                        </svg>
+                        <h3 class="service-title">Housing</h3>
+                    </a>
+
+                    <!-- Environmental health -->
+                    <a href="#" class="service-card" aria-label="Environmental health - Report issues and get advice">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <path d="M9 12l2 2 4-4"></path>
+                        </svg>
+                        <h3 class="service-title">Environmental health</h3>
+                    </a>
+
+                    <!-- Parking -->
+                    <a href="#" class="service-card" aria-label="Parking - Permits, pay for parking and appeals">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <rect x="5" y="11" width="14" height="10" rx="2" ry="2"></rect>
+                            <circle cx="9" cy="18" r="2"></circle>
+                            <circle cx="15" cy="18" r="2"></circle>
+                            <path d="M5 11V6a1 1 0 0 1 1-1h4"></path>
+                            <polyline points="11 5 14 2 14 8"></polyline>
+                        </svg>
+                        <h3 class="service-title">Parking</h3>
+                    </a>
+
+                    <!-- Business support -->
+                    <a href="#" class="service-card" aria-label="Business support - Licences, rates and advice for businesses">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2-2v16"></path>
+                        </svg>
+                        <h3 class="service-title">Business support</h3>
+                    </a>
+
+                    <!-- Benefits -->
+                    <a href="#" class="service-card" aria-label="Benefits - Apply for housing benefit and council tax support">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                        </svg>
+                        <h3 class="service-title">Benefits</h3>
+                    </a>
+
+                    <!-- Elections and voting -->
+                    <a href="#" class="service-card" aria-label="Elections and voting - Register to vote and election information">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path d="M9 11l3 3L22 4"></path>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                        </svg>
+                        <h3 class="service-title">Elections and voting</h3>
+                    </a>
+
+                    <!-- Community facilities -->
+                    <a href="#" class="service-card" aria-label="Community facilities - Book community centres and sports facilities">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <h3 class="service-title">Community facilities</h3>
+                    </a>
+
+                    <!-- Report a problem -->
+                    <a href="#" class="service-card" aria-label="Report a problem - Report issues in your local area">
+                        <svg class="service-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <h3 class="service-title">Report a problem</h3>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <p>&copy; 2026 Council Services. All rights reserved.</p>
+            <nav aria-label="Footer navigation">
+                <ul class="footer-links">
+                    <li><a href="pages/accessibility.html">Accessibility statement</a></li>
+                    <li><a href="#">Privacy policy</a></li>
+                    <li><a href="#">Contact us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
