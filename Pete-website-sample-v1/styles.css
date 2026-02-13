@@ -7,9 +7,9 @@
 
 /* GOV.UK inspired colour palette - District Council theme */
 :root {
-    --primary-color: #007a8c;
-    --primary-hover: #005f6b;
-    --primary-focus: #003d45;
+    --primary-color: #F37021;
+    --primary-hover: #d15e1a;
+    --primary-focus: #a84b15;
     --text-color: #0b0c0c;
     --link-color: #1d70b8;
     --link-visited: #4c2c92;
@@ -20,8 +20,34 @@
     --background: #ffffff;
     --error-color: #d4351c;
     --success-color: #00703c;
-    --notification-bg: #1d70b8;
-    --notification-text: #ffffff;
+}
+
+/* Theme: Orange (RGB 243 112 33) - Default */
+body.theme-orange {
+    --primary-color: #F37021;
+    --primary-hover: #d15e1a;
+    --primary-focus: #a84b15;
+}
+
+/* Theme: Pink (RGB 236 0 140) */
+body.theme-pink {
+    --primary-color: #EC008C;
+    --primary-hover: #c20074;
+    --primary-focus: #99005d;
+}
+
+/* Theme: Green (RGB 167 197 57) */
+body.theme-green {
+    --primary-color: #A7C539;
+    --primary-hover: #8ba62e;
+    --primary-focus: #6f8625;
+}
+
+/* Theme: Blue (RGB 0 191 223) */
+body.theme-blue {
+    --primary-color: #00BFDF;
+    --primary-hover: #00a0bc;
+    --primary-focus: #008099;
 }
 
 /* High contrast mode colours */
@@ -87,19 +113,6 @@ body {
     border: 0;
 }
 
-/* Notification banner */
-.notification-banner {
-    background-color: var(--notification-bg);
-    color: var(--notification-text);
-    padding: 16px 0;
-    text-align: center;
-}
-
-.notification-banner p {
-    margin: 0;
-    font-size: 16px;
-}
-
 /* Container */
 .container {
     max-width: 1200px;
@@ -129,6 +142,13 @@ header {
     margin: 0;
 }
 
+/* Accessibility tools navigation */
+nav[aria-label*="Accessibility"] {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
 /* Accessibility button */
 .accessibility-button {
     background-color: var(--light-grey);
@@ -148,6 +168,36 @@ header {
 }
 
 .accessibility-button:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+    background-color: var(--focus-color);
+}
+
+/* Theme switcher */
+.theme-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.theme-select {
+    background-color: var(--light-grey);
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.theme-select:hover {
+    background-color: var(--border-color);
+    border-color: var(--text-color);
+}
+
+.theme-select:focus {
     outline: 3px solid var(--focus-color);
     outline-offset: 2px;
     background-color: var(--focus-color);
@@ -303,8 +353,8 @@ main {
 /* Services grid */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -314,7 +364,7 @@ main {
     background-color: var(--light-grey);
     border: 2px solid var(--border-color);
     border-radius: 4px;
-    padding: 24px;
+    padding: 16px;
     text-align: center;
     text-decoration: none;
     color: var(--text-color);
@@ -323,7 +373,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 160px;
+    min-height: 110px;
 }
 
 .service-card:hover {
@@ -340,9 +390,14 @@ main {
 }
 
 .service-icon {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     color: var(--primary-color);
     transition: transform 0.2s ease;
+}
+
+.service-icon svg {
+    width: 36px;
+    height: 36px;
 }
 
 .service-card:hover .service-icon {
@@ -350,10 +405,11 @@ main {
 }
 
 .service-title {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
     margin: 0;
     color: var(--text-color);
+    line-height: 1.3;
 }
 
 /* Links - GOV.UK style */
@@ -423,17 +479,22 @@ footer {
     }
 
     .services-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 12px;
     }
 
     .service-card {
-        padding: 20px;
-        min-height: 140px;
+        padding: 14px;
+        min-height: 100px;
     }
 
     .service-title {
-        font-size: 16px;
+        font-size: 14px;
+    }
+
+    .service-icon svg {
+        width: 32px;
+        height: 32px;
     }
 
     .site-title {
@@ -477,8 +538,8 @@ footer {
 
 /* Print styles */
 @media print {
-    .notification-banner,
     .accessibility-button,
+    .theme-switcher,
     .search-section {
         display: none;
     }

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Apply for a private hire vehicle licence - driver, vehicle and operator licences">
+    <title>Private hire licensing - Council Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .content-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .content-page h1 {
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .content-page h2 {
+            font-size: 24px;
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .content-page h3 {
+            font-size: 20px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .content-page p,
+        .content-page li {
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .content-page ul,
+        .content-page ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .inset-text {
+            padding: 16px;
+            margin: 24px 0;
+            background-color: var(--light-grey);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .button-primary {
+            background-color: var(--primary-color);
+            color: var(--background);
+            border: 2px solid var(--primary-color);
+            padding: 12px 24px;
+            font-size: 19px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 16px;
+            transition: background-color 0.2s ease;
+        }
+
+        .button-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+            color: var(--background);
+        }
+
+        .button-primary:focus {
+            outline: 3px solid var(--focus-color);
+            outline-offset: 2px;
+            background-color: var(--primary-focus);
+            border-color: var(--primary-focus);
+        }
+
+        .info-box {
+            background-color: #d4e5f7;
+            border: 2px solid #1d70b8;
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .info-box h3 {
+            margin-top: 0;
+        }
+
+        .warning-box {
+            background-color: #fff8e5;
+            border: 2px solid #d4351c;
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box h3 {
+            margin-top: 0;
+            color: #d4351c;
+        }
+
+        .fees-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        .fees-table th,
+        .fees-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        .fees-table th {
+            background-color: var(--light-grey);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="site-title">Council Services</h1>
+                <nav aria-label="Accessibility and theme tools">
+                    <button id="contrast-toggle" class="accessibility-button" aria-label="Toggle high contrast mode" title="Toggle high contrast mode">
+                        <span aria-hidden="true">🔆</span> Contrast
+                    </button>
+                    <div class="theme-switcher">
+                        <label for="theme-select" class="visually-hidden">Select colour theme</label>
+                        <select id="theme-select" class="theme-select" aria-label="Select colour theme">
+                            <option value="orange">Orange theme</option>
+                            <option value="pink">Pink theme</option>
+                            <option value="green">Green theme</option>
+                            <option value="blue">Blue theme</option>
+                        </select>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        <div class="content-page">
+            <a href="index.html" class="back-link" title="Return to homepage">← Back to home</a>
+
+            <h1>Private hire licensing</h1>
+
+            <p class="lede">A private hire vehicle can only be booked in advance through a licensed operator. Private hire vehicles cannot ply for hire or wait at taxi ranks.</p>
+
+            <div class="warning-box">
+                <h3>Important difference</h3>
+                <p>Private hire vehicles <strong>cannot</strong> be hailed in the street or wait at taxi ranks. They must be pre-booked through a licensed operator. Operating without proper licensing is a criminal offence.</p>
+            </div>
+
+            <h2>Types of private hire licences</h2>
+
+            <h3>Driver licence</h3>
+            <p>You need a private hire driver licence to drive a licensed private hire vehicle. The licence is valid for 3 years.</p>
+
+            <h3>Vehicle licence</h3>
+            <p>Your vehicle must be licensed as a private hire vehicle. Vehicle licences are valid for 1 year and must be renewed annually.</p>
+
+            <h3>Operator licence</h3>
+            <p>You must have a private hire operator licence to take bookings and dispatch private hire vehicles. This is mandatory even if you are a single driver. The licence is valid for 5 years.</p>
+
+            <div class="inset-text">
+                <p><strong>Note:</strong> All three licences are required to operate legally. You cannot work as a private hire driver without being affiliated to a licensed operator.</p>
+            </div>
+
+            <h2>Requirements for a driver licence</h2>
+
+            <p>To apply for a private hire driver licence, you must:</p>
+
+            <ul>
+                <li>be at least 18 years old</li>
+                <li>have held a full United Kingdom (UK) or European Economic Area (EEA) driving licence for at least 12 months</li>
+                <li>have the right to work in the UK</li>
+                <li>pass an enhanced Disclosure and Barring Service (DBS) check</li>
+                <li>pass a medical examination to Group 2 (HGV) standard</li>
+                <li>complete a safeguarding and child sexual exploitation course</li>
+                <li>pass a driving assessment</li>
+                <li>provide proof of address and National Insurance number</li>
+                <li>complete disability equality training</li>
+            </ul>
+
+            <h2>Requirements for a vehicle licence</h2>
+
+            <p>Your vehicle must:</p>
+
+            <ul>
+                <li>be less than 6 years old when first licensed</li>
+                <li>not be more than 10 years old (exceptional condition exemptions may apply)</li>
+                <li>pass a council vehicle inspection</li>
+                <li>have a valid MOT certificate</li>
+                <li>be insured for hire and reward (public hire insurance)</li>
+                <li>be right-hand drive</li>
+                <li>have at least 4 passenger seats</li>
+                <li>meet emission standards (ULEZ compliant)</li>
+                <li>have sufficient luggage capacity</li>
+                <li>not display taxi signage or roof lights</li>
+            </ul>
+
+            <div class="info-box">
+                <h3>Executive and prestige vehicles</h3>
+                <p>We license executive and prestige vehicles for private hire use. These vehicles may be subject to different age restrictions but must meet all other requirements.</p>
+            </div>
+
+            <h2>Requirements for an operator licence</h2>
+
+            <p>To apply for a private hire operator licence, you must:</p>
+
+            <ul>
+                <li>be a fit and proper person</li>
+                <li>have public liability insurance</li>
+                <li>have suitable business premises within the district</li>
+                <li>keep proper booking records</li>
+                <li>maintain a register of all drivers and vehicles</li>
+                <li>have a complaints procedure</li>
+                <li>pass a basic DBS check (or enhanced if you also hold a driver licence)</li>
+            </ul>
+
+            <h2>How to apply</h2>
+
+            <h3>New driver licence</h3>
+            <ol>
+                <li>Complete the online application form</li>
+                <li>Pay the application fee</li>
+                <li>Book and attend a medical examination (Group 2 standard)</li>
+                <li>Apply for an enhanced DBS check through the council</li>
+                <li>Book and pass the driving assessment</li>
+                <li>Complete the safeguarding and disability equality training</li>
+                <li>Provide all required documentation</li>
+                <li>Attend an appointment to finalise your application</li>
+            </ol>
+
+            <h3>Vehicle licence</h3>
+            <ol>
+                <li>Ensure your vehicle meets all requirements</li>
+                <li>Book a vehicle inspection at our testing station</li>
+                <li>Complete the application form with vehicle details</li>
+                <li>Submit proof of insurance (hire and reward) and MOT</li>
+                <li>Provide V5C registration document</li>
+                <li>Pay the licence fee</li>
+                <li>Collect your vehicle licence plate and internal notice</li>
+            </ol>
+
+            <h3>Operator licence</h3>
+            <ol>
+                <li>Complete the operator application form</li>
+                <li>Provide details of your business premises</li>
+                <li>Submit proof of public liability insurance</li>
+                <li>Provide details of booking and record-keeping systems</li>
+                <li>Apply for a basic DBS check</li>
+                <li>Pay the licence fee</li>
+                <li>Attend an interview if required</li>
+            </ol>
+
+            <h2>Fees</h2>
+
+            <table class="fees-table">
+                <caption class="visually-hidden">Private hire licensing fees</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Licence type</th>
+                        <th scope="col">Fee</th>
+                        <th scope="col">Valid for</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Driver licence (new)</td>
+                        <td>£320</td>
+                        <td>3 years</td>
+                    </tr>
+                    <tr>
+                        <td>Driver licence (renewal)</td>
+                        <td>£260</td>
+                        <td>3 years</td>
+                    </tr>
+                    <tr>
+                        <td>Vehicle licence</td>
+                        <td>£220</td>
+                        <td>1 year</td>
+                    </tr>
+                    <tr>
+                        <td>Operator licence (1-2 vehicles)</td>
+                        <td>£450</td>
+                        <td>5 years</td>
+                    </tr>
+                    <tr>
+                        <td>Operator licence (3-5 vehicles)</td>
+                        <td>£750</td>
+                        <td>5 years</td>
+                    </tr>
+                    <tr>
+                        <td>Operator licence (6-10 vehicles)</td>
+                        <td>£1,200</td>
+                        <td>5 years</td>
+                    </tr>
+                    <tr>
+                        <td>Operator licence (11+ vehicles)</td>
+                        <td>£1,800</td>
+                        <td>5 years</td>
+                    </tr>
+                    <tr>
+                        <td>Driving assessment</td>
+                        <td>£75</td>
+                        <td>Per attempt</td>
+                    </tr>
+                    <tr>
+                        <td>Vehicle inspection</td>
+                        <td>£55</td>
+                        <td>Per test</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Renewals</h2>
+
+            <p>You should apply to renew your licence at least 6 weeks before it expires. If your licence expires, you cannot work and will need to apply as a new applicant.</p>
+
+            <h3>Driver licence renewals require:</h3>
+            <ul>
+                <li>a new enhanced DBS check</li>
+                <li>an updated medical certificate (every 3 years, or annually if over 65)</li>
+                <li>proof of continued safeguarding training</li>
+            </ul>
+
+            <h3>Vehicle licence renewals require:</h3>
+            <ul>
+                <li>a fresh vehicle inspection</li>
+                <li>current MOT certificate</li>
+                <li>proof of hire and reward insurance</li>
+            </ul>
+
+            <h2>Conditions and obligations</h2>
+
+            <p>As a licensed private hire driver and operator, you must:</p>
+
+            <ul>
+                <li>only accept bookings through a licensed operator</li>
+                <li>display your licence plate on the rear of the vehicle</li>
+                <li>display the internal notice inside the vehicle</li>
+                <li>wear your driver badge visibly at all times when working</li>
+                <li>not display any taxi signage, roof lights or livery</li>
+                <li>not ply for hire or wait at taxi ranks</li>
+                <li>maintain accurate records of all bookings (operators)</li>
+                <li>report any convictions within 7 days</li>
+                <li>keep the vehicle clean and in good condition</li>
+                <li>comply with the council's code of conduct</li>
+                <li>use a properly calibrated meter if charging by time and distance</li>
+            </ul>
+
+            <h2>Working with app-based platforms</h2>
+
+            <p>If you work with app-based platforms (such as Uber, Bolt, or others), you still need:</p>
+
+            <ul>
+                <li>a private hire driver licence from this council</li>
+                <li>a vehicle licensed by this council</li>
+                <li>to work through an operator licensed by this council</li>
+            </ul>
+
+            <p>The app-based company must hold a valid private hire operator licence. Check with the platform to confirm their licensing status in this district.</p>
+
+            <h2>Enforcement and penalties</h2>
+
+            <p>Failure to comply with licence conditions may result in:</p>
+            <ul>
+                <li>a warning letter</li>
+                <li>penalty points on your licence</li>
+                <li>suspension of your licence</li>
+                <li>revocation of your licence</li>
+                <li>prosecution and unlimited fines</li>
+            </ul>
+
+            <p>Operating without a valid licence is a criminal offence under the Local Government (Miscellaneous Provisions) Act 1976.</p>
+
+            <h2>Contact and support</h2>
+
+            <p>For more information about private hire licensing:</p>
+
+            <ul>
+                <li><strong>Email:</strong> taxi.licensing@council.gov.uk</li>
+                <li><strong>Telephone:</strong> 01234 567890</li>
+                <li><strong>Address:</strong> Licensing Team, Council Offices, Town, Postcode</li>
+            </ul>
+
+            <p><strong>Opening hours:</strong> Monday to Friday, 9am to 5pm</p>
+
+            <a href="#" class="button-primary" title="Start your private hire licence application">Start now</a>
+
+            <h2>Related services</h2>
+
+            <ul>
+                <li><a href="hackney-carriage.html" title="Hackney carriage taxi licensing information">Hackney carriage licensing</a></li>
+                <li><a href="#licensing" title="Other licensing services">Other licensing services</a></li>
+                <li><a href="#report" title="Report unlicensed taxi operations">Report unlicensed taxi operation</a></li>
+            </ul>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <nav aria-label="Footer navigation">
+                <ul class="footer-links">
+                    <li><a href="accessibility-statement.html" title="Read our accessibility statement">Accessibility statement</a></li>
+                    <li><a href="#privacy" title="Read our privacy policy">Privacy</a></li>
+                    <li><a href="#cookies" title="Manage cookie preferences">Cookies</a></li>
+                    <li><a href="#contact" title="Contact the council">Contact us</a></li>
+                </ul>
+            </nav>
+            <p class="footer-text">© 2026 District Council. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

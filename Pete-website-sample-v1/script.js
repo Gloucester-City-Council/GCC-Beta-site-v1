@@ -23,13 +23,16 @@ const searchData = [
     { title: 'Food hygiene ratings', keywords: ['food', 'hygiene', 'ratings', 'inspection', 'restaurant'] },
     { title: 'Noise complaints', keywords: ['noise', 'complaint', 'nuisance', 'loud'] },
     { title: 'Park a vehicle', keywords: ['parking', 'permit', 'resident', 'visitor'] },
-    { title: 'Leisure centre membership', keywords: ['leisure', 'membership', 'gym', 'swimming', 'fitness'] }
+    { title: 'Leisure centre membership', keywords: ['leisure', 'membership', 'gym', 'swimming', 'fitness'] },
+    { title: 'Hackney carriage', keywords: ['hackney carriage', 'taxi', 'cab', 'taxi licence', 'taxi driver', 'black cab'] },
+    { title: 'Private hire', keywords: ['private hire', 'minicab', 'private hire licence', 'pco', 'uber', 'cab'] }
 ];
 
 // DOM elements
 const searchInput = document.getElementById('service-search');
 const searchSuggestions = document.getElementById('search-suggestions');
 const contrastToggle = document.getElementById('contrast-toggle');
+const themeSelect = document.getElementById('theme-select');
 
 let currentFocus = -1;
 
@@ -39,6 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (localStorage.getItem('highContrast') === 'true') {
         document.body.classList.add('high-contrast');
     }
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('colorTheme') || 'orange';
+    applyTheme(savedTheme);
+    themeSelect.value = savedTheme;
 
     // Search input event listeners
     searchInput.addEventListener('input', handleSearch);
@@ -54,6 +62,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Contrast toggle
     contrastToggle.addEventListener('click', toggleContrast);
+
+    // Theme switcher
+    themeSelect.addEventListener('change', function() {
+        const selectedTheme = themeSelect.value;
+        applyTheme(selectedTheme);
+        localStorage.setItem('colorTheme', selectedTheme);
+
+        // Announce to screen readers
+        announceToScreenReader(`${selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)} theme applied`);
+    });
 });
 
 // Handle search input
@@ -190,6 +208,28 @@ function performSearch(query) {
     // window.location.href = `/search?q=${encodeURIComponent(query)}`;
 }
 
+// Apply color theme
+function applyTheme(themeName) {
+    // Remove all theme classes
+    document.body.classList.remove('theme-orange', 'theme-pink', 'theme-green', 'theme-blue');
+    // Add selected theme class
+    document.body.classList.add('theme-' + themeName);
+}
+
+// Announce message to screen readers
+function announceToScreenReader(message) {
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.className = 'visually-hidden';
+    announcement.textContent = message;
+    document.body.appendChild(announcement);
+
+    setTimeout(() => {
+        document.body.removeChild(announcement);
+    }, 1000);
+}
+
 // Toggle high contrast mode
 function toggleContrast() {
     document.body.classList.toggle('high-contrast');
@@ -198,18 +238,7 @@ function toggleContrast() {
     localStorage.setItem('highContrast', isHighContrast);
 
     // Announce to screen readers
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.className = 'visually-hidden';
-    announcement.textContent = isHighContrast ?
-        'High contrast mode enabled' :
-        'High contrast mode disabled';
-    document.body.appendChild(announcement);
-
-    setTimeout(() => {
-        document.body.removeChild(announcement);
-    }, 1000);
+    announceToScreenReader(isHighContrast ? 'High contrast mode enabled' : 'High contrast mode disabled');
 }
 
 // Handle search button click
