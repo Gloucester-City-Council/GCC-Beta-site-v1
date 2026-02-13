@@ -1,0 +1,589 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* GOV.UK inspired colour palette - District Council theme */
+:root {
+    --primary-color: #F37021;
+    --primary-hover: #d15e1a;
+    --primary-focus: #a84b15;
+    --text-color: #0b0c0c;
+    --link-color: #1d70b8;
+    --link-visited: #4c2c92;
+    --link-hover: #003078;
+    --focus-color: #ffdd00;
+    --border-color: #b1b4b6;
+    --light-grey: #f3f2f1;
+    --background: #ffffff;
+    --error-color: #d4351c;
+    --success-color: #00703c;
+}
+
+/* Theme: Orange (RGB 243 112 33) - Default */
+body.theme-orange {
+    --primary-color: #F37021;
+    --primary-hover: #d15e1a;
+    --primary-focus: #a84b15;
+}
+
+/* Theme: Pink (RGB 236 0 140) */
+body.theme-pink {
+    --primary-color: #EC008C;
+    --primary-hover: #c20074;
+    --primary-focus: #99005d;
+}
+
+/* Theme: Green (RGB 167 197 57) */
+body.theme-green {
+    --primary-color: #A7C539;
+    --primary-hover: #8ba62e;
+    --primary-focus: #6f8625;
+}
+
+/* Theme: Blue (RGB 0 191 223) */
+body.theme-blue {
+    --primary-color: #00BFDF;
+    --primary-hover: #00a0bc;
+    --primary-focus: #008099;
+}
+
+/* High contrast mode colours */
+body.high-contrast {
+    --primary-color: #003d45;
+    --primary-hover: #002027;
+    --text-color: #000000;
+    --link-color: #003078;
+    --link-hover: #000000;
+    --background: #ffffff;
+    --light-grey: #e8e8e8;
+    --border-color: #000000;
+}
+
+body.high-contrast .service-card {
+    border: 2px solid #000000;
+}
+
+body.high-contrast .search-input {
+    border: 2px solid #000000;
+}
+
+/* Typography - GOV.UK style */
+body {
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--text-color);
+    color: var(--background);
+    padding: 12px 16px;
+    text-decoration: none;
+    font-weight: 700;
+    z-index: 1000;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--focus-color);
+    outline-offset: 0;
+}
+
+/* Visually hidden but accessible to screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background-color: var(--background);
+    border-bottom: 4px solid var(--primary-color);
+    padding: 20px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.site-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+}
+
+/* Accessibility tools navigation */
+nav[aria-label*="Accessibility"] {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Accessibility button */
+.accessibility-button {
+    background-color: var(--light-grey);
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.accessibility-button:hover {
+    background-color: var(--border-color);
+    border-color: var(--text-color);
+}
+
+.accessibility-button:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+    background-color: var(--focus-color);
+}
+
+/* Theme switcher */
+.theme-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.theme-select {
+    background-color: var(--light-grey);
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.theme-select:hover {
+    background-color: var(--border-color);
+    border-color: var(--text-color);
+}
+
+.theme-select:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+    background-color: var(--focus-color);
+}
+
+/* Main content */
+main {
+    padding: 40px 0 60px;
+}
+
+/* Search section - primary focus */
+.search-section {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 40px 0;
+}
+
+.search-heading {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+
+.search-subtitle {
+    font-size: 20px;
+    color: #505a5f;
+    margin-bottom: 32px;
+}
+
+/* Search container - larger and centred */
+.search-container {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.search-wrapper {
+    display: flex;
+    gap: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.search-input {
+    flex: 1;
+    padding: 16px 20px;
+    font-size: 19px;
+    border: 2px solid var(--text-color);
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    font-family: inherit;
+}
+
+.search-input:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 0;
+    border-color: var(--text-color);
+    z-index: 1;
+}
+
+.search-input::placeholder {
+    color: #505a5f;
+}
+
+.search-button {
+    background-color: var(--primary-color);
+    color: var(--background);
+    border: 2px solid var(--primary-color);
+    padding: 16px 32px;
+    font-size: 19px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 0 4px 4px 0;
+    font-family: inherit;
+}
+
+.search-button:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+.search-button:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+    background-color: var(--primary-focus);
+    border-color: var(--primary-focus);
+}
+
+/* Search suggestions (autocomplete) */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--background);
+    border: 2px solid var(--text-color);
+    border-top: none;
+    list-style: none;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.search-suggestions.active {
+    display: block;
+}
+
+.search-suggestion-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--light-grey);
+    text-align: left;
+    transition: background-color 0.15s ease;
+}
+
+.search-suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.search-suggestion-item:hover,
+.search-suggestion-item:focus,
+.search-suggestion-item.highlighted {
+    background-color: var(--light-grey);
+    outline: none;
+}
+
+.search-suggestion-item:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: -3px;
+}
+
+/* Services section */
+.services-section {
+    margin-top: 40px;
+}
+
+.services-heading {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+/* Services grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Service cards */
+.service-card {
+    background-color: var(--light-grey);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    padding: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 110px;
+}
+
+.service-card:hover {
+    background-color: var(--background);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.service-card:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+    background-color: var(--focus-color);
+}
+
+.service-icon {
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    transition: transform 0.2s ease;
+}
+
+.service-icon svg {
+    width: 36px;
+    height: 36px;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1);
+}
+
+.service-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-color);
+    line-height: 1.3;
+}
+
+/* Links - GOV.UK style */
+a {
+    color: var(--link-color);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--link-visited);
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+a:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+    background-color: var(--focus-color);
+    color: var(--text-color);
+}
+
+/* Footer */
+footer {
+    background-color: var(--light-grey);
+    border-top: 1px solid var(--border-color);
+    padding: 32px 0;
+    margin-top: 60px;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.footer-links a {
+    color: var(--link-color);
+    text-decoration: underline;
+    font-size: 16px;
+}
+
+.footer-text {
+    text-align: center;
+    color: #505a5f;
+    font-size: 14px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .search-heading {
+        font-size: 28px;
+    }
+
+    .search-subtitle {
+        font-size: 18px;
+    }
+
+    .search-input,
+    .search-button {
+        font-size: 16px;
+        padding: 12px 16px;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 12px;
+    }
+
+    .service-card {
+        padding: 14px;
+        min-height: 100px;
+    }
+
+    .service-title {
+        font-size: 14px;
+    }
+
+    .service-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .site-title {
+        font-size: 24px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-heading {
+        font-size: 24px;
+    }
+
+    .search-subtitle {
+        font-size: 16px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-wrapper {
+        flex-direction: column;
+    }
+
+    .search-input {
+        border-right: 2px solid var(--text-color);
+        border-radius: 4px 4px 0 0;
+    }
+
+    .search-button {
+        border-radius: 0 0 4px 4px;
+        justify-content: center;
+    }
+}
+
+/* Print styles */
+@media print {
+    .accessibility-button,
+    .theme-switcher,
+    .search-section {
+        display: none;
+    }
+
+    body {
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+    }
+
+    .service-card {
+        break-inside: avoid;
+        border: 1px solid #000;
+    }
+
+    a {
+        text-decoration: underline;
+        color: #000;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 10pt;
+    }
+}
+
+/* Focus visible - modern approach for keyboard navigation */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+}
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
