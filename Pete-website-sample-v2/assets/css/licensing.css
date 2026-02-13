@@ -1,0 +1,380 @@
+/* Licensing Page Specific Styles */
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+    background: var(--background-secondary);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.breadcrumb-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb-list li {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-list li:not(:last-child)::after {
+    content: '›';
+    margin-left: 8px;
+    color: var(--text-secondary);
+    font-size: 18px;
+}
+
+.breadcrumb-list a {
+    color: var(--link-color);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb-list a:hover {
+    color: var(--link-hover);
+}
+
+.breadcrumb-list a:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+    background: var(--text-color);
+    color: var(--background);
+}
+
+.breadcrumb-list [aria-current="page"] {
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+/* Page Header */
+.page-header {
+    padding: 32px 0;
+    border-bottom: 3px solid var(--primary-color);
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: var(--text-color);
+}
+
+.page-header .lead {
+    font-size: 20px;
+    color: var(--text-secondary);
+    max-width: 800px;
+}
+
+/* Licensing Grid */
+.licensing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    margin: 32px 0;
+}
+
+/* Licensing Cards */
+.licensing-card {
+    background: var(--background);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+}
+
+.licensing-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.licensing-card:focus-within {
+    border-color: var(--primary-color);
+}
+
+.licensing-icon {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.licensing-card h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+
+.licensing-card > p {
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.licence-types {
+    list-style: none;
+    margin: 16px 0 24px 0;
+    padding: 0;
+}
+
+.licence-types li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    color: var(--text-color);
+}
+
+.licence-types li::before {
+    content: '•';
+    position: absolute;
+    left: 8px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* CTA Button */
+.cta-button {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--background);
+    padding: 12px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    margin-top: auto;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 3px;
+}
+
+.cta-button:active {
+    transform: translateY(0);
+}
+
+/* Information Section */
+.info-section {
+    margin-top: 60px;
+    padding: 40px 0;
+    background: var(--background-secondary);
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.info-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: var(--text-color);
+}
+
+.info-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.info-box {
+    background: var(--background);
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.info-box h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+
+.info-box p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.info-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-box ul li {
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    color: var(--text-color);
+}
+
+.info-box ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.info-box a {
+    color: var(--link-color);
+    text-decoration: underline;
+}
+
+.info-box a:hover {
+    color: var(--link-hover);
+}
+
+.info-box a:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+    background: var(--text-color);
+    color: var(--background);
+}
+
+.info-box strong {
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .page-header .lead {
+        font-size: 18px;
+    }
+
+    .licensing-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .licensing-card {
+        padding: 24px;
+    }
+
+    .licensing-card h3 {
+        font-size: 20px;
+    }
+
+    .info-section {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .info-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .breadcrumb,
+    .theme-button,
+    .theme-options,
+    .skip-link {
+        display: none;
+    }
+
+    .licensing-card {
+        break-inside: avoid;
+        border: 1px solid #000;
+    }
+
+    .cta-button {
+        display: none;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .licensing-card {
+        border-width: 3px;
+    }
+
+    .info-box {
+        border-width: 2px;
+    }
+}
+
+/* Content Section (for text-heavy pages like accessibility) */
+.content-section {
+    max-width: 800px;
+    line-height: 1.8;
+}
+
+.content-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    color: var(--text-color);
+}
+
+.content-section h2:first-child {
+    margin-top: 0;
+}
+
+.content-section h3 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+
+.content-section p {
+    margin-bottom: 16px;
+    color: var(--text-color);
+}
+
+.content-section ul,
+.content-section ol {
+    margin-bottom: 16px;
+    padding-left: 24px;
+}
+
+.content-section li {
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.content-section a {
+    color: var(--link-color);
+    text-decoration: underline;
+}
+
+.content-section a:hover {
+    color: var(--link-hover);
+}
+
+.content-section a:focus {
+    outline: 3px solid var(--focus-color);
+    outline-offset: 2px;
+    background: var(--text-color);
+    color: var(--background);
+}
