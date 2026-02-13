@@ -59,19 +59,14 @@ class ThemeManager {
         this.themeButton = document.getElementById('theme-toggle');
         this.themeOptions = document.getElementById('theme-options');
         this.themeButtons = document.querySelectorAll('.theme-option');
-        this.customColorPicker = document.getElementById('custom-color-picker');
-        this.applyCustomButton = document.getElementById('apply-custom-color');
-        this.setDefaultButton = document.getElementById('set-default-theme');
         this.currentTheme = localStorage.getItem('councilTheme') || 'default';
-        this.customColor = localStorage.getItem('councilCustomColor') || null;
-        this.defaultTheme = localStorage.getItem('councilDefaultTheme') || 'default';
 
         this.init();
     }
 
     init() {
-        // Apply saved theme or default
-        this.applyTheme(this.defaultTheme);
+        // Apply saved theme
+        this.applyTheme(this.currentTheme);
 
         // Toggle theme options
         this.themeButton.addEventListener('click', () => this.toggleThemeMenu());
@@ -83,26 +78,6 @@ class ThemeManager {
                 this.selectTheme(theme);
             });
         });
-
-        // Custom color picker
-        if (this.customColorPicker && this.applyCustomButton) {
-            this.applyCustomButton.addEventListener('click', () => {
-                this.applyCustomColor();
-            });
-
-            // If there's a saved custom color, set it in the picker
-            if (this.customColor) {
-                this.customColorPicker.value = this.customColor;
-            }
-        }
-
-        // Set default theme button
-        if (this.setDefaultButton) {
-            this.setDefaultButton.addEventListener('click', () => {
-                this.setAsDefault();
-            });
-            this.updateDefaultButtonState();
-        }
 
         // Close menu on escape key
         document.addEventListener('keydown', (e) => {
@@ -201,9 +176,8 @@ class ThemeManager {
             'default': 'default orange',
             'pink': 'pink',
             'green': 'green',
-            'blue': 'blue',
-            'custom': 'custom colour'
-        }[theme] || theme;
+            'blue': 'blue'
+        }[theme];
 
         const announcement = document.createElement('div');
         announcement.setAttribute('role', 'status');
@@ -213,81 +187,6 @@ class ThemeManager {
         document.body.appendChild(announcement);
 
         setTimeout(() => announcement.remove(), 1000);
-    }
-
-    applyCustomColor() {
-        const color = this.customColorPicker.value;
-        this.customColor = color;
-        localStorage.setItem('councilCustomColor', color);
-
-        // Convert hex to RGB
-        const rgb = this.hexToRgb(color);
-        const hoverRgb = this.darkenColor(rgb, 20);
-
-        // Create custom theme
-        document.documentElement.style.setProperty('--primary-color', `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`);
-        document.documentElement.style.setProperty('--primary-hover', `rgb(${hoverRgb.r}, ${hoverRgb.g}, ${hoverRgb.b})`);
-        document.documentElement.style.setProperty('--primary-light', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.1)`);
-
-        // Remove active state from preset themes
-        this.themeButtons.forEach(button => {
-            button.classList.remove('active');
-            button.removeAttribute('aria-current');
-        });
-
-        this.currentTheme = 'custom';
-        localStorage.setItem('councilTheme', 'custom');
-
-        this.updateDefaultButtonState();
-        this.announceThemeChange('custom');
-    }
-
-    hexToRgb(hex) {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
-        } : { r: 243, g: 112, b: 33 };
-    }
-
-    darkenColor(rgb, percent) {
-        return {
-            r: Math.max(0, Math.floor(rgb.r * (100 - percent) / 100)),
-            g: Math.max(0, Math.floor(rgb.g * (100 - percent) / 100)),
-            b: Math.max(0, Math.floor(rgb.b * (100 - percent) / 100))
-        };
-    }
-
-    setAsDefault() {
-        this.defaultTheme = this.currentTheme;
-        localStorage.setItem('councilDefaultTheme', this.currentTheme);
-
-        if (this.currentTheme === 'custom' && this.customColor) {
-            localStorage.setItem('councilDefaultCustomColor', this.customColor);
-        }
-
-        this.updateDefaultButtonState();
-
-        // Announce to screen readers
-        const announcement = document.createElement('div');
-        announcement.setAttribute('role', 'status');
-        announcement.setAttribute('aria-live', 'polite');
-        announcement.className = 'visually-hidden';
-        announcement.textContent = 'Current theme set as your default';
-        document.body.appendChild(announcement);
-
-        setTimeout(() => announcement.remove(), 1000);
-    }
-
-    updateDefaultButtonState() {
-        if (this.setDefaultButton) {
-            if (this.currentTheme === this.defaultTheme) {
-                this.setDefaultButton.classList.add('is-default');
-            } else {
-                this.setDefaultButton.classList.remove('is-default');
-            }
-        }
     }
 }
 
