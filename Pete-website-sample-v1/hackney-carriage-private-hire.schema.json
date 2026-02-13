@@ -1,0 +1,361 @@
+{
+  "schema_metadata": {
+    "schema_version": "1.0.0",
+    "package_type": "service_definition",
+    "status": "draft"
+  },
+  "package_identity": {
+    "package_id": "hackney-carriage-private-hire",
+    "package_name": "Hackney Carriage & Private Hire (Gloucester City Council)",
+    "package_description": "Driver, vehicle and operator licensing for hackney carriage and private hire in Gloucester"
+  },
+  "pages": [
+    {
+      "page_id": "driver",
+      "title": "Driver",
+      "audience": "Applicants and licensed drivers (Hackney Carriage & Private Hire)",
+      "requirements": {
+        "eligibility": {
+          "age_min_years": 21,
+          "uk_driving_licence_min_months": 12,
+          "max_current_dvla_points_new_applicant": 3,
+          "fit_and_proper_test": true
+        },
+        "checks_and_clearances": {
+          "dbs_type": "Enhanced (Other Workforce) with Child & Adult Barred Lists",
+          "dbs_recheck_frequency": "6 months (Update Service subscription required)",
+          "nr3_check": "All new and renewal applications checked; refusals/revocations recorded",
+          "right_to_work_check": true,
+          "medical_group_2": "Initial certificate ≤3 months old; from 45: every 5 years; from 65: annually"
+        },
+        "assessments_and_training": {
+          "driving_assessment": "Approved provider, retake every 10 years",
+          "knowledge_test": {
+            "hackney_carriage": "Regulations & topographical knowledge",
+            "private_hire": "Basic literacy & numeracy"
+          },
+          "safeguarding_training": "Mandatory; refresher every 3 years",
+          "english_proficiency": "Test unless appropriate certificate provided"
+        },
+        "foreign_nationals_or_applicants_resident_abroad": {
+          "addresses_required_years": 5,
+          "certificate_of_good_conduct": "From every country lived in >6 months since age 18; certified translation if needed",
+          "student_visa_applications": "Not accepted"
+        },
+        "licence_duration": {
+          "standard_years": 3,
+          "council_discretion_shorter_term": true
+        },
+        "self_reporting_duty": {
+          "notify_within_hours": 48,
+          "events_to_notify": [
+            "Arrest/release, charge or conviction (sexual, dishonesty, violence)",
+            "Any conviction, caution, fixed penalty, pending court case",
+            "Any motoring offence"
+          ],
+          "note": "Drivers must also inform police of licensed status if arrested/interviewed under caution"
+        }
+      },
+      "conduct_expectations": {
+        "badge_visibility_required": true,
+        "politeness_and_punctuality": true,
+        "assistance_with_luggage_and_to_disabled_passengers": true,
+        "shortest_or_economical_route": true,
+        "smokefree_compliance": true,
+        "audio_policy": "No loud music; turn off radio on request",
+        "guide_and_assistance_dogs": "Must be carried unless medical exemption",
+        "receipts_on_request": true,
+        "mobile_phone": "Hands-free only while driving",
+        "dress_and_appearance": "Clean and tidy appearance"
+      },
+      "fees_2025_26_gbp": {
+        "driver_new": { "one_year": 115.00, "three_year": 251.00 },
+        "driver_renewal": { "one_year": 81.00, "three_year": 210.00 },
+        "knowledge_test": { "hackney_carriage": 130.00, "private_hire": 58.00, "re_take_hc": 130.00 },
+        "safeguarding_training": 40.00,
+        "english_proficiency_test": 45.00,
+        "replacement_badge": 10.00
+      },
+      "enforcement_and_appeals": {
+        "penalty_points_system": "Totting-up; >12 points in 12 months triggers Sub-Committee review",
+        "immediate_action": "Possible immediate suspension/revocation for public safety",
+        "appeal_right": "21 days to appeal to Magistrates’ Court (or Crown Court where applicable)"
+      },
+      "contacts": {
+        "licensing_email": "licensing@gloucester.gov.uk",
+        "general_phone": "01452 396396"
+      },
+      "sources": [
+        "Driver Rule Book & sections on applications, medicals, training, English, self-reporting, NR3, code of conduct ([1](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Fees & Charges 2025/26 ([1](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Common Standards—fit & proper, information sharing, NR3 ([2](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))"
+      ]
+    },
+    {
+      "page_id": "vehicles",
+      "title": "Vehicles",
+      "audience": "Vehicle proprietors (Hackney Carriage & Private Hire)",
+      "hackney_carriage": {
+        "colour": "White (all Hackney Carriage vehicles)",
+        "wheelchair_access": "All newly licensed Hackney Carriage vehicles must be wheelchair accessible",
+        "age_and_emissions": {
+          "first_licence": "≤7 years old and Euro 6",
+          "re_licensing_limit": "Not after 15th anniversary of first registration",
+          "wav_exemption": "WAVs exempt from 7-year first licence limit but must be Euro 5+; still limited to 15 years"
+        },
+        "testing": {
+          "licensing_authority_test": "Annual",
+          "six_monthly_from_age_years": 8,
+          "mot_required_unless_under_one_year_old": true
+        },
+        "equipment_and_layout": {
+          "seat_dimensions_inches": { "height": 30, "knee_space": 10, "width_per_passenger": 16, "depth": 18 },
+          "fire_extinguisher": "BSEN3 1kg powder (in date)",
+          "first_aid_kit": "HSE minimum contents",
+          "cctv_dashcam": "Permitted with Licensing approval; must comply with data protection",
+          "card_machine": "Mandatory; provide receipt with time/date, driver number, fare"
+        },
+        "plates_and_signage": {
+          "plates": "Rear exterior + interior; must be visible",
+          "roof_sign": "Standardised 'TAXI' sign; illuminated when available for hire",
+          "door_panels": "Council recognition panel incl. City crest and plate number; optional business name/phone (max 0.61m²)",
+          "advertising": "Whole-vehicle livery allowed (single product/service) with prior approval"
+        },
+        "meter_and_tariff": {
+          "meter_inspection": "Required; set to current tariff; visible to hirer",
+          "tariff_card_display": true
+        },
+        "temporary_replacement_vehicle": {
+          "similar_type_required": true,
+          "max_age_years": 10,
+          "colour": "White",
+          "dual_licensing_prohibited": true,
+          "max_licence_months": 3,
+          "process": "Application with V5/insurance/MOT/inspection/meter cert + fee; ‘T’ plate issued"
+        }
+      },
+      "private_hire": {
+        "colour_restriction": "Must not be white",
+        "roof_sign": "Not permitted",
+        "signage_and_door_panels": "Approved yellow panels stating company name, 'Private Hire', and 'Pre-Bookings Only'; no 'taxi' or 'cab' wording",
+        "meter_if_fitted": {
+          "visible": true,
+          "inspected_and_set_to_tariff": true
+        },
+        "equipment_and_layout": {
+          "seat_dimensions_inches": { "height": 30, "knee_space": 10, "width_per_passenger": 16, "depth": 18 },
+          "fire_extinguisher": "BSEN3 1kg powder (in date)",
+          "first_aid_kit": "HSE minimum contents",
+          "cctv_dashcam": "Permitted with approval; must comply with data protection",
+          "card_machine": "Mandatory; provide receipt on request"
+        },
+        "age_emissions_testing": {
+          "first_licence": "≤7 years old and Euro 6 (WAVs Euro 5+ exempt from 7-year rule)",
+          "re_licensing_limit": "Not after 15th anniversary of first registration",
+          "six_monthly_from_age_years": 8
+        },
+        "temporary_replacement_vehicle": {
+          "similar_type_required": true,
+          "max_age_years": 10,
+          "colour": "Any except white",
+          "dual_licensing_prohibited": true,
+          "max_licence_months": 3
+        }
+      },
+      "vehicle_proprietor_criminality_check": "Annual Basic DBS (unless also licensed as a driver with Gloucester City Council)",
+      "approved_testing_stations_2024": [
+        "Auditechnik, 90 Bristol Road, GL1 5SQ, 01452 386580",
+        "Hempstead Motor Centre Ltd, Unit 2E Sudmeadow Road, GL1 5HD, 01452 307367",
+        "Express Repairs, Units 14/15 Severnside Trading Estate, Sudmeadow Road, 01452 505599",
+        "Autovalue 5 Ltd, 151 Bristol Road, 01452 501723",
+        "Just MOT’s, Severn Road, 01452 303828",
+        "Cedar Motor House, Grove Court, Upton St Leonards, 01452 617240",
+        "Auto Mech Services, Eastbrook Road, GL4 3DB, 01452 380955",
+        "Whaddon Garage, Stroud Road, Brookthorpe, GL4 0UG, 01452 813384",
+        "Pritchard Motor Services, 22 Hempsted Lane, GL2 5JA, 01452 525254",
+        "Motus Commercials, Spinnaker Road, GL2 5FD, 01452 508700",
+        "PDL MOT & Repairs, Unit 4, 279 Bristol Road, GL2 5DD, 01452 524611",
+        "Ley-Dat Services, Units G5/G6 Innsworth Technology Park, 01452 731263"
+      ],
+      "fees_2025_26_gbp": {
+        "vehicle_licence_annual": 193.00,
+        "transfer_of_ownership": 51.00,
+        "change_of_vehicle_incl_plates": 68.00,
+        "licensing_officer_vehicle_inspection": 20.00,
+        "replacement_rear_exterior_plate": 20.00,
+        "replacement_interior_or_front_plate": 15.00,
+        "copy_or_replacement_licence_certificate": 10.50,
+        "change_of_address_notification": 10.50
+      },
+      "sources": [
+        "Hackney Carriage & Private Hire vehicle requirements (colour, WAV, age/Euro, testing, equipment, plates, meter/tariff, signage, temp vehicles) ([3](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Approved testing stations list 2024 ([3](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Fees & Charges 2025/26 ([1](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))"
+      ]
+    },
+    {
+      "page_id": "operators",
+      "title": "Operators",
+      "audience": "Private Hire Operators (companies and sole traders)",
+      "licensing": {
+        "licence_duration_standard_years": 5,
+        "shorter_terms_at_discretion": true,
+        "fit_and_proper_applies_to_directors_partners": true,
+        "operator_base": "Must be within Gloucester City boundaries"
+      },
+      "dbs_and_staff": {
+        "operator_dbs": "Annual Basic DBS if not also a licensed driver",
+        "booking_and_dispatch_staff_dbs": "Basic DBS (operator must define frequency and policies; common standard is every 3 years)",
+        "ex_offenders_policy": "Operator must have written policy on employing ex-offenders and on the timing of re-checks",
+        "outsourced_booking_dispatch": "Operator must ensure third-party provider meets DBS and policy requirements"
+      },
+      "record_keeping": {
+        "mandatory_fields_per_booking": [
+          "Passenger name",
+          "Time of request",
+          "Pick-up point",
+          "Destination",
+          "Driver name",
+          "Driver licence number",
+          "Vehicle registration number",
+          "Name of person taking the booking",
+          "Name of person dispatching the vehicle"
+        ],
+        "retention_minimum": "At least 6 months from last entry",
+        "availability": "Records must be produced to Council officers or police on request",
+        "vehicles_and_drivers_records": "Keep details of vehicles operated (owner, reg/plate) and drivers (name/badge)"
+      },
+      "charging_and_booking": {
+        "pre_agreed_fare_required_for_out_of_district": true,
+        "no_use_of_taxi_or_cab_in_advertising": true,
+        "only_gloucester_licensed_drivers_vehicles": true,
+        "sub_contracting": "Permitted to other licensed operators under Deregulation Act 2015"
+      },
+      "fees_2025_26_gbp": {
+        "private_hire_operator_licence_1_year": {
+          "micro_up_to_3_vehicles": 306.00,
+          "small_4_to_10": 632.00,
+          "medium_11_to_30": 1020.00,
+          "large_31_plus": 1530.00
+        },
+        "private_hire_operator_licence_5_year": {
+          "micro_up_to_3_vehicles": 1224.00,
+          "small_4_to_10": 2530.00,
+          "medium_11_to_30": 4080.00,
+          "large_31_plus": 6120.00
+        }
+      },
+      "enforcement_and_appeals": {
+        "complaints_signage_required_in_vehicles": true,
+        "penalty_points_and_sanctions": "Warnings, suspension, revocation, prosecution depending on severity/history",
+        "appeal_right": "21 days to appeal to Magistrates’ Court (except immediate vehicle suspension under s68)"
+      },
+      "contacts": {
+        "licensing_email": "licensing@gloucester.gov.uk",
+        "general_phone": "01452 396396"
+      },
+      "sources": [
+        "Common Standards: operator licence duration; booking/dispatch staff DBs; record-keeping list; outsourcing ([2](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Private Hire Rule Book: records retention, operator base, advertising restrictions, production of records ([2](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Fees & Charges 2025/26 ([2](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))"
+      ]
+    },
+    {
+      "page_id": "passengers",
+      "title": "Passengers",
+      "audience": "People using hackney carriage and private hire services",
+      "your_rights_and_safety": {
+        "guide_and_assistance_dogs": "Drivers must carry assistance dogs (no extra charge) unless medically exempt",
+        "smokefree_vehicles": "All licensed vehicles are smokefree at all times, including e-cigarettes/vaping; ‘No Smoking’ signs required",
+        "seatbelts": "All passengers must wear seatbelts; drivers are responsible for passengers under 14",
+        "fares_and_meters": {
+          "hackney_carriage_in_district": "Fare must not exceed the meter; meter and tariff card must be visible",
+          "out_of_district_or_private_hire": "Fare/method of calculation must be agreed in advance",
+          "card_payments": "Contactless/card payment available in all licensed vehicles; receipts available on request"
+        },
+        "accessibility_in_hackney_carriages": {
+          "wheelchair_access": "All newly licensed hackney carriages are wheelchair accessible",
+          "minimum_standards": "Ramps with locking/stowage; anchorages for wheelchair and occupant; grab handles; doorway ≥75cm; doorway height ≥1.2m; compartment height ≥1.3m; non-slip treads"
+        }
+      },
+      "complaints_and_lost_property": {
+        "complaints_how_to": "Vehicles must display how to complain (Council contact, plate number, website). Complaints are recorded and investigated; serious cases may be referred to police.",
+        "lost_property": "Drivers must check after each journey. Unclaimed items after 48 hours should be handed to the Council or police with a receipt."
+      },
+      "safety_and_enforcement": {
+        "vehicle_checks": "Annual inspection (every 6 months for vehicles ≥8 years)",
+        "required_equipment": "Fire extinguisher (BSEN3, 1kg powder) and HSE-compliant first aid kit",
+        "cctv": "Some vehicles may have approved CCTV/dashcams compliant with data protection"
+      },
+      "contacts": {
+        "complaints_or_lost_property": {
+          "email": "licensing@gloucester.gov.uk",
+          "phone": "01452 396396"
+        }
+      },
+      "sources": [
+        "Passenger rights on assistance dogs, smokefree, seatbelts, fares/meters, complaints signage, lost property ([4](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Accessibility standards for wheelchair users ([4](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Safety equipment and inspection cycles ([4](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))"
+      ]
+    },
+    {
+      "page_id": "policy",
+      "title": "Policy",
+      "audience": "Officers, decision-makers, auditors",
+      "service_framework": {
+        "legislation": [
+          "Town Police Clauses Act 1847",
+          "Local Government (Miscellaneous Provisions) Act 1976 (Part II)",
+          "Equality Act 2010 (assistance dogs & non-discrimination)",
+          "Licensing Act 2003 (alcohol sale restrictions)",
+          "Police and Criminal Evidence Act 1984 (PACE) – interviews under caution",
+          "DfT Statutory Taxi and Private Hire Vehicle Standards (July 2020)"
+        ],
+        "strategy": [
+          "Corporate Plan 2025–28: Work with operators to increase the number of zero-emission hackney carriage and private hire vehicles; retain Purple Flag; safer spaces work, especially for women and girls"
+        ],
+        "policy": [
+          "Hackney Carriage Rule Book (Approved June 2025)",
+          "Private Hire Rule Book (Approved June 2025)",
+          "Hackney Carriage & Private Hire Regulatory Guidelines (Approved September 2021)",
+          "Common Standards for Licensing Hackney Carriage and Private Hire in Gloucestershire (based on DfT standards)"
+        ],
+        "operational_guidance": [
+          "Enforcement & Complaints Policy/Procedure; penalty points scheme; immediate suspension/revocation process",
+          "Approved testing stations list (2024) and Licensing Authority Vehicle Test Certificate requirements",
+          "NR3 (National Register of Taxi Licence Refusals and Revocations) use for checks and recording",
+          "Record-keeping requirements for operators (mandatory booking fields; 6+ months retention)"
+        ],
+        "value": [
+          "Protect public health and safety",
+          "Establish a professional, respected trade",
+          "Ensure access to efficient, effective public transport",
+          "Protect the environment",
+          "Improve standards and visibility in support of city regeneration"
+        ],
+        "quality": [
+          "Six-monthly Enhanced DBS checks for drivers (Update Service)",
+          "Vehicle inspections annually (and every 6 months after 8 years)",
+          "Operator booking records: mandatory fields & minimum retention",
+          "Time-based expectations: driver self-reporting within 48 hours; accident notification within 72 hours; renewal submissions before expiry"
+        ],
+        "consistency": [
+          "Adopted common standards across Gloucestershire authorities",
+          "Joint authorisation of enforcement officers; information-sharing agreements",
+          "Use of NR3 to check refusals/revocations nationally"
+        ],
+        "accountability": [
+          "Table of Delegations: Licensing Officers, Licensing & Enforcement Sub-Committee, and Full Committee responsibilities",
+          "Right of appeal to Magistrates’ (or Crown) Court within 21 days"
+        ]
+      },
+      "sources": [
+        "Legislation & best practice references, regulatory objectives, enforcement model ([5](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf)[1](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Corporate Plan 2025–28 strategic actions (zero-emission vehicles; safety & night-time economy) ([5](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Common Standards (DfT-aligned) incl. joint enforcement and information sharing ([5](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))",
+        "Appendix A—Table of Delegations; rights of appeal ([5](https://gloucester365-my.sharepoint.com/personal/peter_egan_gloucester_gov_uk/Documents/Microsoft%20Copilot%20Chat%20Files/Binder1.pdf))"
+      ]
+    }
+  ]
+}
