@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gloucester City Council</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #e91e8c;
+            --primary-hover: #c91876;
+            --primary-light: #f24ca3;
+            --text-color: #0b0c0c;
+            --link-color: #e91e8c;
+            --background: #ffffff;
+            --grey-1: #fef5f9;
+            --grey-2: #fce8f2;
+            --grey-3: #f8d0e3;
+            --focus-color: #ffdd00;
+            --shadow: 0 4px 6px rgba(233, 30, 140, 0.1);
+            --shadow-hover: 0 8px 12px rgba(233, 30, 140, 0.15);
+        }
+
+        /* Theme color variations */
+        body[data-theme="pink"] {
+            --primary-color: #e91e8c;
+            --primary-hover: #c91876;
+            --primary-light: #f24ca3;
+            --link-color: #e91e8c;
+            --grey-1: #fef5f9;
+            --grey-2: #fce8f2;
+            --grey-3: #f8d0e3;
+            --shadow: 0 4px 6px rgba(233, 30, 140, 0.1);
+            --shadow-hover: 0 8px 12px rgba(233, 30, 140, 0.15);
+        }
+
+        body[data-theme="blue"] {
+            --primary-color: #0099ff;
+            --primary-hover: #007acc;
+            --primary-light: #33adff;
+            --link-color: #0099ff;
+            --grey-1: #f0f8ff;
+            --grey-2: #e0f2ff;
+            --grey-3: #b3e0ff;
+            --shadow: 0 4px 6px rgba(0, 153, 255, 0.1);
+            --shadow-hover: 0 8px 12px rgba(0, 153, 255, 0.15);
+        }
+
+        body[data-theme="purple"] {
+            --primary-color: #a855f7;
+            --primary-hover: #8b3fd9;
+            --primary-light: #c084fc;
+            --link-color: #a855f7;
+            --grey-1: #faf5ff;
+            --grey-2: #f3e8ff;
+            --grey-3: #e9d5ff;
+            --shadow: 0 4px 6px rgba(168, 85, 247, 0.1);
+            --shadow-hover: 0 8px 12px rgba(168, 85, 247, 0.15);
+        }
+
+        body[data-theme="green"] {
+            --primary-color: #0a5f4e;
+            --primary-hover: #084839;
+            --primary-light: #0d7763;
+            --link-color: #0a5f4e;
+            --grey-1: #f0f8f6;
+            --grey-2: #e0f1ed;
+            --grey-3: #c0e3db;
+            --shadow: 0 4px 6px rgba(10, 95, 78, 0.1);
+            --shadow-hover: 0 8px 12px rgba(10, 95, 78, 0.15);
+        }
+
+        body[data-theme="orange"] {
+            --primary-color: #ff6600;
+            --primary-hover: #e55a00;
+            --primary-light: #ff8533;
+            --link-color: #ff6600;
+            --grey-1: #fff7f0;
+            --grey-2: #ffede0;
+            --grey-3: #ffd9b3;
+            --shadow: 0 4px 6px rgba(255, 102, 0, 0.1);
+            --shadow-hover: 0 8px 12px rgba(255, 102, 0, 0.15);
+        }
+
+        body[data-theme="yellow"] {
+            --primary-color: #4caf50;
+            --primary-hover: #3d8b40;
+            --primary-light: #66bb6a;
+            --link-color: #3d8b40;
+            --text-color: #1a1a1a;
+            --grey-1: #f5faf5;
+            --grey-2: #e8f5e9;
+            --grey-3: #c8e6c9;
+            --shadow: 0 4px 6px rgba(76, 175, 80, 0.1);
+            --shadow-hover: 0 8px 12px rgba(76, 175, 80, 0.15);
+        }
+
+        body[data-theme="red"] {
+            --primary-color: #8b0000;
+            --primary-hover: #6b0000;
+            --primary-light: #a52a2a;
+            --link-color: #8b0000;
+            --grey-1: #fdf5f5;
+            --grey-2: #fae8e8;
+            --grey-3: #f5d0d0;
+            --shadow: 0 4px 6px rgba(139, 0, 0, 0.1);
+            --shadow-hover: 0 8px 12px rgba(139, 0, 0, 0.15);
+        }
+
+        body[data-theme="lilac"] {
+            --primary-color: #008b8b;
+            --primary-hover: #006b6b;
+            --primary-light: #00a5a5;
+            --link-color: #008b8b;
+            --grey-1: #f0f9f9;
+            --grey-2: #e0f2f2;
+            --grey-3: #c0e5e5;
+            --shadow: 0 4px 6px rgba(0, 139, 139, 0.1);
+            --shadow-hover: 0 8px 12px rgba(0, 139, 139, 0.15);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-color);
+            background: var(--background);
+        }
+
+        body.high-contrast {
+            --background: #000000;
+            --text-color: #ffffff;
+            --grey-1: #1a1a1a;
+            --grey-2: #2a2a2a;
+        }
+
+        body.high-contrast[data-theme="pink"] {
+            --link-color: #e91e8c;
+            --primary-color: #e91e8c;
+            --primary-hover: #c91876;
+            --primary-light: #f24ca3;
+        }
+
+        body.high-contrast[data-theme="blue"] {
+            --link-color: #0099ff;
+            --primary-color: #0099ff;
+            --primary-hover: #007acc;
+            --primary-light: #33adff;
+        }
+
+        body.high-contrast[data-theme="purple"] {
+            --link-color: #a855f7;
+            --primary-color: #a855f7;
+            --primary-hover: #8b3fd9;
+            --primary-light: #c084fc;
+        }
+
+        body.high-contrast[data-theme="green"] {
+            --link-color: #0a5f4e;
+            --primary-color: #0a5f4e;
+            --primary-hover: #084839;
+            --primary-light: #0d7763;
+        }
+
+        body.high-contrast[data-theme="orange"] {
+            --link-color: #ff6600;
+            --primary-color: #ff6600;
+            --primary-hover: #e55a00;
+            --primary-light: #ff8533;
+        }
+
+        body.high-contrast[data-theme="yellow"] {
+            --link-color: #4caf50;
+            --primary-color: #4caf50;
+            --primary-hover: #3d8b40;
+            --primary-light: #66bb6a;
+        }
+
+        body.high-contrast[data-theme="red"] {
+            --link-color: #8b0000;
+            --primary-color: #8b0000;
+            --primary-hover: #6b0000;
+            --primary-light: #a52a2a;
+        }
+
+        body.high-contrast[data-theme="lilac"] {
+            --link-color: #008b8b;
+            --primary-color: #008b8b;
+            --primary-hover: #006b6b;
+            --primary-light: #00a5a5;
+        }
+
+        body.high-contrast * {
+            color: var(--text-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+
+        body.high-contrast header *,
+        body.high-contrast footer * {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .logo {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast nav a {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .footer-section a,
+        body.high-contrast .footer-bottom p {
+            color: #ffffff !important;
+        }
+
+        body.high-contrast .quick-links,
+        body.high-contrast .services {
+            background: #000000 !important;
+        }
+
+        body.high-contrast .quick-links h2,
+        body.high-contrast .services h2 {
+            color: var(--primary-color) !important;
+        }
+
+        body.high-contrast .alert-card h2 {
+            color: var(--primary-color) !important;
+        }
+
+        body.high-contrast .alert-link {
+            color: var(--primary-color) !important;
+        }
+
+        body.high-contrast .alert-link:hover,
+        body.high-contrast .alert-link:focus {
+            color: var(--primary-hover) !important;
+        }
+
+        body.high-contrast .service-card {
+            background: #1a1a1a !important;
+            border-color: var(--primary-color) !important;
+        }
+
+        body.high-contrast .service-card h3 {
+            color: var(--primary-color) !important;
+        }
+
+        body.high-contrast .service-card:hover,
+        body.high-contrast .service-card:focus {
+            background: #000000 !important;
+            outline: 5px solid #ffdd00 !important;
+        }
+
+        body.high-contrast .quick-link-item {
+            background: #1a1a1a !important;
+            border: 2px solid var(--primary-color) !important;
+        }
+
+        body.high-contrast .quick-link-icon {
+            color: var(--primary-color) !important;
+        }
+
+        body.high-contrast .quick-link-item:hover,
+        body.high-contrast .quick-link-item:focus {
+            background: #000000 !important;
+            outline: 5px solid #ffdd00 !important;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--text-color);
+            color: var(--background);
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: 5px solid var(--focus-color);
+        }
+
+        /* Accessibility toolbar */
+        .accessibility-bar {
+            background: var(--grey-1);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--grey-3);
+        }
+
+        body.high-contrast .accessibility-bar {
+            background: #000000;
+            border-bottom-color: var(--primary-color);
+        }
+
+        .accessibility-controls {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .left-controls {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .right-controls {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Google Translate styling */
+        #google_translate_element {
+            display: inline-block;
+        }
+
+        .goog-te-combo {
+            padding: 6px 16px;
+            font-size: 14px;
+            border: 2px solid var(--primary-color);
+            border-radius: 4px;
+            background: var(--background);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .goog-te-combo:hover,
+        .goog-te-combo:focus {
+            outline: 5px solid var(--focus-color);
+            transform: scale(1.05);
+        }
+
+        body.high-contrast .goog-te-combo {
+            background: #1a1a1a;
+            color: #ffffff;
+            border-color: var(--primary-color);
+        }
+
+        .accessibility-controls label {
+            font-size: 14px;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .accessibility-controls button {
+            background: var(--background);
+            border: 2px solid var(--primary-color);
+            padding: 6px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .accessibility-controls button:hover,
+        .accessibility-controls button:focus {
+            background: var(--primary-color);
+            color: white;
+            outline: 5px solid var(--focus-color);
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(255, 0, 128, 0.3);
+        }
+
+        /* Theme color buttons */
+        .theme-color-btn {
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 8px !important;
+            border: 3px solid #666 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            padding: 0 !important;
+            min-width: 40px !important;
+        }
+
+        .theme-pink {
+            background: #e91e8c !important;
+        }
+
+        .theme-blue {
+            background: #0099ff !important;
+        }
+
+        .theme-purple {
+            background: #a855f7 !important;
+        }
+
+        .theme-green {
+            background: #0a5f4e !important;
+        }
+
+        .theme-orange {
+            background: #ff6600 !important;
+        }
+
+        .theme-yellow {
+            background: #4caf50 !important;
+        }
+
+        .theme-red {
+            background: #8b0000 !important;
+        }
+
+        .theme-lilac {
+            background: #008b8b !important;
+        }
+
+        .theme-color-btn:hover,
+        .theme-color-btn:focus {
+            transform: scale(1.15) !important;
+            border-color: #000 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+            outline: 3px solid var(--focus-color) !important;
+        }
+
+        .theme-color-btn.active {
+            border-color: #000 !important;
+            border-width: 4px !important;
+            box-shadow: 0 0 0 2px white, 0 0 0 6px #000 !important;
+            transform: scale(1.05) !important;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 24px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo:focus {
+            outline: 5px solid var(--focus-color);
+            outline-offset: 4px;
+        }
+
+        body.high-contrast .logo:hover,
+        body.high-contrast .logo:focus {
+            color: #ffffff;
+        }
+
+        .logo-img {
+            height: 70px;
+            width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .logo-text {
+            display: none;
+        }
+
+        .logo-icon {
+            display: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            background: rgba(255, 255, 255, 0.2);
+            outline: 5px solid var(--focus-color);
+            transform: translateY(-2px);
+        }
+
+        body.high-contrast nav a:hover,
+        body.high-contrast nav a:focus {
+            background: var(--primary-color);
+            color: #ffffff;
+            outline: 5px solid var(--focus-color);
+        }
+
+        body.high-contrast .search-button {
+            background: white;
+            color: #000000;
+            border: 2px solid var(--primary-color);
+        }
+
+        body.high-contrast .search-button:hover,
+        body.high-contrast .search-button:focus {
+            background: var(--primary-color);
+            color: #ffffff;
+            border: 2px solid var(--primary-color);
+            outline: 5px solid var(--focus-color);
+        }
+
+        body.high-contrast .accessibility-controls button:hover,
+        body.high-contrast .accessibility-controls button:focus {
+            background: var(--primary-color) !important;
+            color: #ffffff !important;
+        }
+
+        /* Search bar */
+        .search-section {
+            background: var(--grey-1);
+            padding: 48px 0;
+            border-bottom: 1px solid var(--grey-3);
+        }
+
+        body.high-contrast .search-section {
+            background: #000000;
+            border-bottom-color: var(--primary-color);
+        }
+
+        .search-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 12px;
+            max-width: 1150px;
+            position: relative;
+        }
+
+        .search-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-input {
+            flex: 1;
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 18px;
+            border: 2px solid var(--grey-3);
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s ease;
+            min-width: 0;
+            color: var(--text-color);
+            background: white;
+        }
+
+        body.high-contrast .search-input {
+            background: #1a1a1a !important;
+            color: #ffffff !important;
+            border-color: var(--primary-color) !important;
+        }
+
+        body.high-contrast .search-input::placeholder {
+            color: #aaaaaa !important;
+        }
+
+        .search-input:focus {
+            outline: 5px solid var(--focus-color);
+            border-color: var(--primary-color);
+        }
+
+        /* Search suggestions dropdown */
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid var(--grey-3);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        body.high-contrast .search-suggestions {
+            background: #1a1a1a;
+            border-color: var(--primary-color);
+        }
+
+        .search-suggestions.active {
+            display: block;
+        }
+
+        .suggestion-item {
+            padding: 16px 24px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border-bottom: 1px solid var(--grey-2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        body.high-contrast .suggestion-item {
+            border-bottom-color: var(--primary-color);
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item:hover,
+        .suggestion-item:focus {
+            background: var(--grey-1);
+            outline: none;
+        }
+
+        body.high-contrast .suggestion-item:hover,
+        body.high-contrast .suggestion-item:focus {
+            background: #000000;
+        }
+
+        .suggestion-item.highlighted {
+            background: var(--grey-1);
+        }
+
+        body.high-contrast .suggestion-item.highlighted {
+            background: #000000;
+        }
+
+        .suggestion-icon {
+            font-size: 20px;
+            color: var(--primary-color);
+            min-width: 24px;
+        }
+
+        .suggestion-text {
+            flex: 1;
+            color: var(--text-color);
+        }
+
+        body.high-contrast .suggestion-text {
+            color: #ffffff;
+        }
+
+        .suggestion-category {
+            font-size: 12px;
+            color: #666;
+            background: var(--grey-2);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        body.high-contrast .suggestion-category {
+            color: #ffffff;
+            background: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .search-button {
+            padding: 18px 40px;
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: Arial, sans-serif;
+            white-space: nowrap;
+        }
+
+        .search-button:hover,
+        .search-button:focus {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            outline: 5px solid var(--focus-color);
+        }
+
+        body.high-contrast .search-button {
+            background: white;
+            color: #000000;
+            border: 2px solid #d8b4f8;
+        }
+
+        body.high-contrast .search-button:hover,
+        body.high-contrast .search-button:focus {
+            background: #d8b4f8;
+            color: #ffffff;
+            border: 2px solid #d8b4f8;
+            outline: 5px solid var(--focus-color);
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, rgba(233, 30, 140, 0.05) 0%, rgba(242, 76, 163, 0.05) 100%);
+            padding: 48px 0;
+        }
+
+        body[data-theme="blue"] .hero {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.05) 0%, rgba(51, 173, 255, 0.05) 100%);
+        }
+
+        body[data-theme="purple"] .hero {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(192, 132, 252, 0.05) 100%);
+        }
+
+        body[data-theme="green"] .hero {
+            background: linear-gradient(135deg, rgba(10, 95, 78, 0.05) 0%, rgba(13, 119, 99, 0.05) 100%);
+        }
+
+        body[data-theme="orange"] .hero {
+            background: linear-gradient(135deg, rgba(255, 102, 0, 0.05) 0%, rgba(255, 133, 51, 0.05) 100%);
+        }
+
+        body[data-theme="yellow"] .hero {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.05) 0%, rgba(102, 187, 106, 0.05) 100%);
+        }
+
+        body[data-theme="red"] .hero {
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.05) 0%, rgba(165, 42, 42, 0.05) 100%);
+        }
+
+        body[data-theme="lilac"] .hero {
+            background: linear-gradient(135deg, rgba(0, 139, 139, 0.05) 0%, rgba(0, 165, 165, 0.05) 100%);
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .alerts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .alert-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .alert-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .alert-card h2 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+        }
+
+        .alert-card p {
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .alert-link {
+            color: var(--link-color);
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .alert-link:hover,
+        .alert-link:focus {
+            color: var(--primary-hover);
+            outline: 5px solid var(--focus-color);
+        }
+
+        /* Quick links section */
+        .quick-links {
+            background: var(--grey-2);
+            padding: 48px 0;
+        }
+
+        .quick-links-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .quick-links h2 {
+            font-size: 32px;
+            margin-bottom: 32px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .quick-link-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .quick-link-item:hover,
+        .quick-link-item:focus {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            background: var(--grey-1);
+            outline: 5px solid var(--focus-color);
+        }
+
+        .quick-link-icon {
+            font-size: 36px;
+            color: var(--primary-color);
+        }
+
+        .quick-link-text {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Service cards */
+        .services {
+            padding: 48px 0;
+            background: white;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .services h2 {
+            font-size: 32px;
+            margin-bottom: 32px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+        }
+
+        .service-card:hover,
+        .service-card:focus {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            outline: 5px solid var(--focus-color);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 18px;
+            margin: 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 48px 0 24px 0;
+            margin-top: 48px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin: 10px 0;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: underline;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover,
+        .footer-section a:focus {
+            color: var(--grey-1);
+            outline: 5px solid var(--focus-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 24px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .social-icon {
+            color: white;
+            text-decoration: none;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover,
+        .social-icon:focus {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            outline: 5px solid var(--focus-color);
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-links-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 100%;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        *:focus-visible {
+            outline: 5px solid var(--focus-color);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="accessibility-bar" role="region" aria-label="Accessibility controls">
+        <div class="accessibility-controls">
+            <div class="left-controls">
+                <label for="contrast-mode">Contrast:</label>
+                <button id="standard-contrast" onclick="setContrast('standard')" aria-label="Standard contrast">Standard</button>
+                <button id="high-contrast" onclick="setContrast('high')" aria-label="High contrast">High</button>
+                
+                <label for="google_translate_element">Language:</label>
+                <div id="google_translate_element"></div>
+            </div>
+            
+            <div class="right-controls">
+                <label for="theme-color">Theme:</label>
+                <button class="theme-color-btn theme-pink active" onclick="setTheme('pink')" aria-label="Pink theme" title="Pink"></button>
+                <button class="theme-color-btn theme-blue" onclick="setTheme('blue')" aria-label="Blue theme" title="Blue"></button>
+                <button class="theme-color-btn theme-purple" onclick="setTheme('purple')" aria-label="Purple theme" title="Purple"></button>
+                <button class="theme-color-btn theme-green" onclick="setTheme('green')" aria-label="Green theme" title="Green"></button>
+                <button class="theme-color-btn theme-orange" onclick="setTheme('orange')" aria-label="Orange theme" title="Orange"></button>
+                <button class="theme-color-btn theme-yellow" onclick="setTheme('yellow')" aria-label="Green theme" title="Green"></button>
+                <button class="theme-color-btn theme-red" onclick="setTheme('red')" aria-label="Red theme" title="Red"></button>
+                <button class="theme-color-btn theme-lilac" onclick="setTheme('lilac')" aria-label="Teal theme" title="Teal"></button>
+                
+                <label for="font-size">Text size:</label>
+                <button onclick="changeFontSize(-2)" aria-label="Decrease text size">A-</button>
+                <button onclick="changeFontSize(0)" aria-label="Reset text size">A</button>
+                <button onclick="changeFontSize(2)" aria-label="Increase text size">A+</button>
+            </div>
+        </div>
+    </div>
+
+    <header role="banner">
+        <div class="header-container">
+            <div class="logo-section">
+                <a href="/" class="logo" aria-label="Gloucester City Council homepage">
+                    <svg class="logo-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="textGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <text x="250" y="75" font-family="Arial, sans-serif" font-size="52" font-weight="300" fill="url(#textGradient)" text-anchor="middle" letter-spacing="3">GLOUCESTER</text>
+                        <text x="250" y="125" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="url(#textGradient)" text-anchor="middle" letter-spacing="2">CITY COUNCIL</text>
+                        <text x="250" y="165" font-family="Arial, sans-serif" font-size="26" font-weight="300" fill="url(#textGradient)" text-anchor="middle" letter-spacing="1.5" font-style="italic">Transforming Your City</text>
+                    </svg>
+                    <span class="logo-text">Gloucester City Council</span>
+                </a>
+            </div>
+            <nav role="navigation" aria-label="Main navigation">
+                <ul>
+                    <li><a href="/contact">Contact us</a></li>
+                    <li><a href="/my-gloucester">My Gloucester</a></li>
+                    <li><a href="/news">News</a></li>
+                    <li><a href="/subscribe">Subscribe</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="search-section">
+        <div class="search-container">
+            <form role="search" aria-label="Search the website" onsubmit="handleSearch(event)">
+                <div class="search-box">
+                    <div class="search-wrapper">
+                        <input 
+                            type="search" 
+                            class="search-input" 
+                            id="search-input"
+                            placeholder="Search Gloucester City Council" 
+                            aria-label="Search"
+                            autocomplete="off"
+                            oninput="handleSearchInput(event)"
+                            onkeydown="handleKeyDown(event)"
+                            onfocus="showSuggestions()"
+                        >
+                        <div class="search-suggestions" id="search-suggestions" role="listbox"></div>
+                    </div>
+                    <button type="submit" class="search-button" id="search-btn">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <main id="main-content" role="main">
+        <section class="hero">
+            <div class="hero-container">
+                <div class="alerts">
+                    <div class="alert-card">
+                        <h2>📧 Go paperless – get your Council Tax bills by email</h2>
+                        <p>It's quicker, safer and better for the environment. Sign up for paperless billing and receive your council tax statements securely by email.</p>
+                        <a href="/council-tax/paperless-billing-for-council-tax" class="alert-link">More information</a>
+                    </div>
+                    
+                    <div class="alert-card">
+                        <h2>🧩 How will Local Government Reorganisation affect you?</h2>
+                        <p>Government wants to change how councils work across Gloucestershire. Find out what is proposed and how the changes could affect you.</p>
+                        <a href="/about-the-council/local-government-reorganisation-and-devolution" class="alert-link">Read more</a>
+                    </div>
+
+                    <div class="alert-card">
+                        <h2>🎥 Watch our meetings online</h2>
+                        <p>Did you know you can watch council meetings online? Follow our YouTube channel to see how the council makes decisions about improving our city.</p>
+                        <a href="https://www.youtube.com/@GloucesterCityCouncilMeetings/streams" class="alert-link">Watch meetings</a>
+                    </div>
+
+                    <div class="alert-card">
+                        <h2>🟣 Gloucester is a Purple Flag City</h2>
+                        <p>Gloucester holds the Purple Flag National Safety award.</p>
+                        <a href="/news/prestigious-purple-flag-award-win-for-gloucester" class="alert-link">Find out how we're making our city safer</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-links">
+            <div class="quick-links-container">
+                <h2>Quick links</h2>
+                <div class="quick-links-grid">
+                    <a href="https://publicaccess.gloucester.gov.uk/online-applications/" class="quick-link-item">
+                        <span class="quick-link-icon">🗂️</span>
+                        <span class="quick-link-text">Search planning applications</span>
+                    </a>
+                    <a href="/community-living/cost-of-living" class="quick-link-item">
+                        <span class="quick-link-icon">💷</span>
+                        <span class="quick-link-text">Cost of living</span>
+                    </a>
+                    <a href="/environment-waste-recycling/waste-recycling-street-cleaning/bins-recycling/check-your-bin-day" class="quick-link-item">
+                        <span class="quick-link-icon">🗑️</span>
+                        <span class="quick-link-text">Check your bin day</span>
+                    </a>
+                    <a href="/council-tax/pay-your-council-tax" class="quick-link-item">
+                        <span class="quick-link-icon">💳</span>
+                        <span class="quick-link-text">Pay Council Tax</span>
+                    </a>
+                    <a href="/environment-waste-recycling/waste-recycling-street-cleaning/report-an-issue-in-a-street-park-or-open-space" class="quick-link-item">
+                        <span class="quick-link-icon">⚠️</span>
+                        <span class="quick-link-text">Report it</span>
+                    </a>
+                    <a href="/pay-for-it" class="quick-link-item">
+                        <span class="quick-link-icon">💰</span>
+                        <span class="quick-link-text">Make a payment</span>
+                    </a>
+                    <a href="https://rebate.gloucester.gov.uk/opweb/web/ctax/movein.p" class="quick-link-item">
+                        <span class="quick-link-icon">📝</span>
+                        <span class="quick-link-text">Register for Council Tax</span>
+                    </a>
+                    <a href="/environment-waste-recycling/waste-recycling-street-cleaning/bins-recycling/waste-recycling-updates" class="quick-link-item">
+                        <span class="quick-link-icon">♻️</span>
+                        <span class="quick-link-text">Waste & Recycling Updates</span>
+                    </a>
+                    <a href="/about-the-council/consultations-and-feedback/have-your-say" class="quick-link-item">
+                        <span class="quick-link-icon">💬</span>
+                        <span class="quick-link-text">Have your say</span>
+                    </a>
+                    <a href="/environment-waste-recycling/waste-recycling-street-cleaning/bins-recycling/collection-services/garden-waste" class="quick-link-item">
+                        <span class="quick-link-icon">🌿</span>
+                        <span class="quick-link-text">Renew Garden Waste</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="services">
+            <div class="services-container">
+                <h2>Council services</h2>
+                <div class="services-grid">
+                    <a href="/planning-development" class="service-card">
+                        <span class="service-icon">🗂️</span>
+                        <h3>Planning and development</h3>
+                    </a>
+
+                    <a href="/council-tax" class="service-card">
+                        <span class="service-icon">🏠</span>
+                        <h3>Council Tax</h3>
+                    </a>
+
+                    <a href="/environment-waste-recycling" class="service-card">
+                        <span class="service-icon">♻️</span>
+                        <h3>Environment, waste and recycling</h3>
+                    </a>
+
+                    <a href="/parking-transport-and-streets" class="service-card">
+                        <span class="service-icon">🚗</span>
+                        <h3>Parking, transport and streets</h3>
+                    </a>
+
+                    <a href="/about-the-council" class="service-card">
+                        <span class="service-icon">ℹ️</span>
+                        <h3>About us</h3>
+                    </a>
+
+                    <a href="/housing" class="service-card">
+                        <span class="service-icon">🏘️</span>
+                        <h3>Housing</h3>
+                    </a>
+
+                    <a href="/jobs-careers" class="service-card">
+                        <span class="service-icon">💼</span>
+                        <h3>Jobs and careers</h3>
+                    </a>
+
+                    <a href="/culture-leisure" class="service-card">
+                        <span class="service-icon">🎭</span>
+                        <h3>Leisure and culture</h3>
+                    </a>
+
+                    <a href="/licensing-regulations" class="service-card">
+                        <span class="service-icon">📋</span>
+                        <h3>Licensing and regulations</h3>
+                    </a>
+
+                    <a href="/community-living" class="service-card">
+                        <span class="service-icon">👥</span>
+                        <h3>Community and living</h3>
+                    </a>
+
+                    <a href="/business-economy" class="service-card">
+                        <span class="service-icon">📊</span>
+                        <h3>Business and economy</h3>
+                    </a>
+
+                    <a href="/benefits-and-support" class="service-card">
+                        <span class="service-icon">🤝</span>
+                        <h3>Benefits and support</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>About Gloucester</h3>
+                    <ul>
+                        <li><a href="http://visitgloucester.co.uk/">Visit Gloucester</a></li>
+                        <li><a href="http://democracy.gloucester.gov.uk/mgFindMember.aspx">Find your councillor</a></li>
+                        <li><a href="https://www.gloucesterlottery.co.uk/">Gloucester Lottery</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Using our site</h3>
+                    <ul>
+                        <li><a href="/about-the-council/data-protection-and-freedom-of-information/data-protection">How we use your information</a></li>
+                        <li><a href="/sitemap">Sitemap</a></li>
+                        <li><a href="/accessibility">Accessibility</a></li>
+                        <li><a href="/cookies">Cookies</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Feedback</h3>
+                    <ul>
+                        <li><a href="/about-the-council/consultations-and-feedback/compliments-comments-and-complaints">Make a comment, complaint or compliment</a></li>
+                        <li><a href="/about-the-council/consultations-and-feedback/customer-charter">Customer Charter</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Follow us</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/GloucesterCityCouncil/" class="social-icon" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/GloucesterCity" class="social-icon" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Gloucester City Council. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'ar,bg,bn,zh-CN,zh-TW,hr,cs,da,nl,et,fil,fi,fr,de,el,gu,hi,hu,it,ja,ko,lv,lt,ms,mt,no,pl,pt,pa,ro,ru,sr,sk,sl,es,sv,ta,th,tr,uk,ur,vi,cy',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+        
+        // Initialize translate when script loads
+        window.addEventListener('load', function() {
+            // Check if Google Translate is available
+            if (typeof google !== 'undefined' && google.translate) {
+                googleTranslateElementInit();
+            } else {
+                console.log('Google Translate script not loaded');
+            }
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        // Search suggestions data
+        const searchSuggestions = [
+            { text: "Pay Council Tax", icon: "💳", category: "Payments", url: "/council-tax/pay-your-council-tax" },
+            { text: "Check bin collection day", icon: "🗑️", category: "Waste", url: "/environment-waste-recycling/waste-recycling-street-cleaning/bins-recycling/check-your-bin-day" },
+            { text: "Report a problem", icon: "⚠️", category: "Services", url: "/environment-waste-recycling/waste-recycling-street-cleaning/report-an-issue-in-a-street-park-or-open-space" },
+            { text: "Apply for parking permit", icon: "🅿️", category: "Parking", url: "/parking-transport-and-streets" },
+            { text: "Register for Council Tax", icon: "📝", category: "Council Tax", url: "https://rebate.gloucester.gov.uk/opweb/web/ctax/movein.p" },
+            { text: "Planning applications", icon: "🗂️", category: "Planning", url: "https://publicaccess.gloucester.gov.uk/online-applications/" },
+            { text: "Renew garden waste collection", icon: "🌿", category: "Waste", url: "/environment-waste-recycling/waste-recycling-street-cleaning/bins-recycling/collection-services/garden-waste" },
+            { text: "Council Tax reduction", icon: "💷", category: "Benefits", url: "/council-tax" },
+            { text: "Housing services", icon: "🏠", category: "Housing", url: "/housing" },
+            { text: "Licensing applications", icon: "📋", category: "Licensing", url: "/licensing-regulations" },
+            { text: "Jobs and careers", icon: "💼", category: "Jobs", url: "/jobs-careers" },
+            { text: "Report missed bin collection", icon: "🗑️", category: "Waste", url: "/environment-waste-recycling/waste-recycling-street-cleaning/report-an-issue-in-a-street-park-or-open-space" },
+            { text: "Find my councillor", icon: "👥", category: "Council", url: "http://democracy.gloucester.gov.uk/mgFindMember.aspx" },
+            { text: "Business rates", icon: "📊", category: "Business", url: "/business-economy" },
+            { text: "Benefits and support", icon: "🤝", category: "Benefits", url: "/benefits-and-support" },
+            { text: "Leisure centre", icon: "🎭", category: "Leisure", url: "/culture-leisure" },
+            { text: "Street cleaning", icon: "🧹", category: "Services", url: "/environment-waste-recycling" },
+            { text: "Noise complaint", icon: "🔊", category: "Environmental", url: "/environment-waste-recycling" },
+            { text: "School admissions", icon: "🎓", category: "Education", url: "/community-living" },
+            { text: "Council meetings", icon: "🎥", category: "Democracy", url: "https://www.youtube.com/@GloucesterCityCouncilMeetings/streams" }
+        ];
+
+        let currentFocus = -1;
+        let filteredSuggestions = [];
+
+        function handleSearchInput(event) {
+            const query = event.target.value.toLowerCase().trim();
+            const suggestionsDiv = document.getElementById('search-suggestions');
+            
+            if (query.length === 0) {
+                showAllSuggestions();
+                return;
+            }
+            
+            filteredSuggestions = searchSuggestions.filter(item => 
+                item.text.toLowerCase().includes(query) || 
+                item.category.toLowerCase().includes(query)
+            );
+            
+            displaySuggestions(filteredSuggestions);
+            currentFocus = -1;
+        }
+
+        function showAllSuggestions() {
+            filteredSuggestions = searchSuggestions.slice(0, 8);
+            displaySuggestions(filteredSuggestions);
+        }
+
+        function showSuggestions() {
+            const input = document.getElementById('search-input');
+            if (input.value.trim().length === 0) {
+                showAllSuggestions();
+            }
+        }
+
+        function displaySuggestions(suggestions) {
+            const suggestionsDiv = document.getElementById('search-suggestions');
+            
+            if (suggestions.length === 0) {
+                suggestionsDiv.classList.remove('active');
+                return;
+            }
+            
+            suggestionsDiv.innerHTML = suggestions.map((item, index) => `
+                <div class="suggestion-item" 
+                     role="option" 
+                     tabindex="0"
+                     data-index="${index}"
+                     onclick="selectSuggestion('${item.text}', '${item.url}')"
+                     onkeydown="handleSuggestionKeyDown(event, '${item.text}', '${item.url}')">
+                    <span class="suggestion-icon">${item.icon}</span>
+                    <span class="suggestion-text">${item.text}</span>
+                    <span class="suggestion-category">${item.category}</span>
+                </div>
+            `).join('');
+            
+            suggestionsDiv.classList.add('active');
+        }
+
+        function handleKeyDown(event) {
+            const suggestionsDiv = document.getElementById('search-suggestions');
+            const items = suggestionsDiv.querySelectorAll('.suggestion-item');
+            
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                currentFocus++;
+                if (currentFocus >= items.length) currentFocus = 0;
+                setActive(items);
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                currentFocus--;
+                if (currentFocus < 0) currentFocus = items.length - 1;
+                setActive(items);
+            } else if (event.key === 'Enter' && currentFocus > -1) {
+                event.preventDefault();
+                items[currentFocus].click();
+            } else if (event.key === 'Escape') {
+                suggestionsDiv.classList.remove('active');
+                currentFocus = -1;
+            }
+        }
+
+        function setActive(items) {
+            items.forEach((item, index) => {
+                if (index === currentFocus) {
+                    item.classList.add('highlighted');
+                    item.focus();
+                } else {
+                    item.classList.remove('highlighted');
+                }
+            });
+        }
+
+        function handleSuggestionKeyDown(event, text, url) {
+            if (event.key === 'Enter') {
+                selectSuggestion(text, url);
+            }
+        }
+
+        function selectSuggestion(text, url) {
+            document.getElementById('search-input').value = text;
+            document.getElementById('search-suggestions').classList.remove('active');
+            // Navigate to the URL
+            window.location.href = url;
+        }
+
+        function handleSearch(event) {
+            event.preventDefault();
+            const query = document.getElementById('search-input').value;
+            // In a real implementation, this would perform the search
+            console.log('Searching for:', query);
+        }
+
+        // Close suggestions when clicking outside
+        document.addEventListener('click', function(event) {
+            const searchInput = document.getElementById('search-input');
+            const suggestionsDiv = document.getElementById('search-suggestions');
+            
+            if (!searchInput.contains(event.target) && !suggestionsDiv.contains(event.target)) {
+                suggestionsDiv.classList.remove('active');
+            }
+        });
+
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            
+            // Update active state on buttons
+            document.querySelectorAll('.theme-color-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('.theme-' + theme).classList.add('active');
+        }
+
+        function setContrast(mode) {
+            document.body.className = '';
+            const currentTheme = document.body.getAttribute('data-theme') || 'pink';
+            document.body.setAttribute('data-theme', currentTheme);
+            
+            if (mode === 'high') {
+                document.body.classList.add('high-contrast');
+                // Force search button styling
+                const searchBtn = document.getElementById('search-btn');
+                if (searchBtn) {
+                    searchBtn.style.background = '#1a1a1a';
+                    searchBtn.style.color = '#aaaaaa';
+                }
+            } else {
+                // Reset search button styling
+                const searchBtn = document.getElementById('search-btn');
+                if (searchBtn) {
+                    searchBtn.style.background = '';
+                    searchBtn.style.color = '';
+                }
+            }
+        }
+
+        function changeFontSize(delta) {
+            const currentSize = parseInt(getComputedStyle(document.body).fontSize);
+            const newSize = delta === 0 ? 16 : currentSize + delta;
+            if (newSize >= 14 && newSize <= 24) {
+                document.body.style.fontSize = newSize + 'px';
+            }
+        }
+
+        // Initialize with pink theme
+        window.addEventListener('DOMContentLoaded', function() {
+            document.body.setAttribute('data-theme', 'pink');
+        });
+    </script>
+</body>
+</html>
