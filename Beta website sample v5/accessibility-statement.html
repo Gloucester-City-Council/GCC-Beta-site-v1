@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gloucester City Council accessibility statement – how our website meets WCAG 2.2 AA standards and what to do if you cannot access content.">
+  <title>Accessibility statement – Gloucester City Council</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Skip links -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#primary-nav" class="skip-link">Skip to navigation</a>
+
+  <!-- Accessibility toolbar -->
+  <div class="accessibility-toolbar" role="toolbar" aria-label="Accessibility options">
+    <div class="container">
+      <span class="accessibility-toolbar__label" id="a11y-toolbar-label">Accessibility:</span>
+      <button class="accessibility-toolbar__btn" id="btn-text-size"
+              aria-pressed="false" title="Increase text size for easier reading">Larger text</button>
+      <button class="accessibility-toolbar__btn" id="btn-high-contrast"
+              aria-pressed="false" title="Switch to high contrast mode">High contrast</button>
+      <a href="accessibility-statement.html"
+         class="accessibility-toolbar__btn active"
+         aria-current="page"
+         title="You are viewing the accessibility statement">Accessibility statement</a>
+    </div>
+  </div>
+
+  <!-- Site header -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a href="index.html" class="site-header__logo"
+         aria-label="Gloucester City Council – go to homepage"
+         title="Gloucester City Council homepage">
+        <div class="site-header__logo-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="36" height="36" aria-hidden="true" focusable="false">
+            <rect width="44" height="44" rx="3" fill="#1A3461"/>
+            <path d="M8 8 h28 v18 Q36 38 22 42 Q8 38 8 26 Z" fill="white"/>
+            <path d="M20 12 h4 v18 h-4 Z M8 20 h28 v4 H8 Z" fill="#1A3461"/>
+          </svg>
+        </div>
+        <div class="site-header__logo-text">
+          <span class="site-header__logo-name">Gloucester City Council</span>
+          <span class="site-header__logo-tagline">District Council</span>
+        </div>
+      </a>
+      <div class="site-header__actions">
+        <a href="#" class="site-header__council-tax-link"
+           title="Pay your Council Tax bill online">Pay Council Tax</a>
+        <button class="nav-toggle" id="nav-toggle"
+                aria-expanded="false" aria-controls="primary-nav"
+                aria-label="Open navigation menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+          Menu
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Primary navigation -->
+  <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+    <div class="container">
+      <ul class="primary-nav__list" role="list">
+        <li class="primary-nav__item">
+          <a href="index.html" class="primary-nav__link" title="Go to the Gloucester City Council homepage">Home</a>
+        </li>
+        <li class="primary-nav__item">
+          <a href="#" class="primary-nav__link" title="Find council services for residents">Residents</a>
+        </li>
+        <li class="primary-nav__item">
+          <a href="#" class="primary-nav__link" title="Planning and building services">Planning and building</a>
+        </li>
+        <li class="primary-nav__item">
+          <a href="#" class="primary-nav__link" title="Business services and support">Business</a>
+        </li>
+        <li class="primary-nav__item">
+          <a href="#" class="primary-nav__link" title="About Gloucester City Council">About the council</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list" aria-label="Breadcrumb navigation">
+        <li class="breadcrumb__item">
+          <a href="index.html" title="Gloucester City Council homepage">Home</a>
+        </li>
+        <li class="breadcrumb__item" aria-current="page">Accessibility statement</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <main id="main-content" tabindex="-1">
+    <div class="section">
+      <div class="container--narrow">
+
+        <h1>Accessibility statement</h1>
+        <p>
+          This accessibility statement applies to the Gloucester City Council website at
+          <a href="index.html" title="Gloucester City Council website">gloucestercity.gov.uk</a>.
+        </p>
+        <p>
+          This website is run by Gloucester City Council. We want as many people as possible to be able to use this website. For example, that means you should be able to:
+        </p>
+        <ul>
+          <li>zoom in up to 400% without the text spilling off the screen</li>
+          <li>navigate most of the website using just a keyboard</li>
+          <li>navigate most of the website using speech recognition software</li>
+          <li>listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)</li>
+          <li>change colours, contrast levels and fonts using browser or device settings</li>
+        </ul>
+        <p>
+          We have also made the website text as simple as possible to understand, aiming for a maximum reading age of 11.
+        </p>
+        <p>
+          <a href="https://mcmw.abilitynet.org.uk/"
+             title="AbilityNet – advice on making your device easier to use if you have a disability (opens in a new tab)"
+             rel="noopener noreferrer"
+             target="_blank">
+            AbilityNet
+          </a>
+          has advice on making your device easier to use if you have a disability.
+        </p>
+
+        <h2>How accessible this website is</h2>
+        <p>
+          We know some parts of this website are not fully accessible. The known issues are listed in the 'non-accessible content' section below.
+        </p>
+
+        <h2>Feedback and contact information</h2>
+        <p>
+          If you need information on this website in a different format like accessible PDF, large print, easy read, audio recording or braille:
+        </p>
+        <ul>
+          <li>email: <a href="mailto:accessibility@gloucestercity.gov.uk"
+                       title="Send an email to our accessibility team">accessibility@gloucestercity.gov.uk</a></li>
+          <li>phone: <a href="tel:01452396396"
+                       title="Call Gloucester City Council on 01452 396 396">01452 396 396</a></li>
+        </ul>
+        <p>
+          We will consider your request and get back to you in 5 working days.
+        </p>
+
+        <h2>Reporting accessibility problems with this website</h2>
+        <p>
+          We are always looking to improve the accessibility of this website. If you find any problems not listed on this page or think we are not meeting accessibility requirements, contact:
+        </p>
+        <ul>
+          <li>email: <a href="mailto:accessibility@gloucestercity.gov.uk"
+                       title="Report an accessibility issue to our team">accessibility@gloucestercity.gov.uk</a></li>
+          <li>phone: <a href="tel:01452396396"
+                       title="Call Gloucester City Council on 01452 396 396">01452 396 396</a></li>
+        </ul>
+
+        <h2>Enforcement procedure</h2>
+        <p>
+          The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the 'accessibility regulations'). If you're not happy with how we respond to your complaint,
+          <a href="https://www.equalityadvisoryservice.com/"
+             title="Contact the Equality Advisory and Support Service (opens in a new tab)"
+             rel="noopener noreferrer"
+             target="_blank">
+            contact the Equality Advisory and Support Service (EASS)
+          </a>.
+        </p>
+
+        <h2>Technical information about this website's accessibility</h2>
+        <p>
+          Gloucester City Council is committed to making its website accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
+        </p>
+
+        <h3>Compliance status</h3>
+        <p>
+          This website is partially compliant with the
+          <a href="https://www.w3.org/TR/WCAG22/"
+             title="Web Content Accessibility Guidelines (WCAG) 2.2 (opens in a new tab)"
+             rel="noopener noreferrer"
+             target="_blank">
+            Web Content Accessibility Guidelines (WCAG) version 2.2
+          </a>
+          AA standard, due to the non-compliances listed below.
+        </p>
+
+        <h2>Non-accessible content</h2>
+        <p>The content listed below is non-accessible for the following reasons.</p>
+
+        <h3>Non-compliance with the accessibility regulations</h3>
+        <ul>
+          <li>Some older PDF documents do not meet accessibility standards. We are working to fix these or provide accessible HTML alternatives by March 2027. This fails WCAG 2.2 success criterion 4.1.2 (name, role, value).</li>
+          <li>Some images in older news articles do not have adequate alternative text. We are reviewing and updating these by June 2026. This fails WCAG 2.2 success criterion 1.1.1 (non-text content).</li>
+          <li>Some third-party embedded content (such as mapping tools) may not be fully keyboard navigable. We are working with our suppliers to improve this. This fails WCAG 2.2 success criterion 2.1.1 (keyboard).</li>
+        </ul>
+
+        <h2>What we are doing to improve accessibility</h2>
+        <p>
+          We review our website's accessibility at least every 12 months and after significant changes. Our accessibility improvement plan includes:
+        </p>
+        <ul>
+          <li>replacing all inaccessible PDFs with accessible HTML pages by March 2027</li>
+          <li>auditing all images for alternative text by June 2026</li>
+          <li>working with third-party suppliers to improve accessibility of embedded content</li>
+          <li>training all content editors in writing accessible content</li>
+          <li>carrying out user testing with people who use assistive technology</li>
+        </ul>
+
+        <h2>Preparation of this accessibility statement</h2>
+        <p>
+          This statement was prepared on <time datetime="2026-02-20">20 February 2026</time>.
+          It was last reviewed on <time datetime="2026-02-20">20 February 2026</time>.
+        </p>
+        <p>
+          This website was last tested in February 2026. The test was carried out by the Gloucester City Council digital team.
+        </p>
+        <p>
+          We tested a sample of pages including the homepage, service landing pages and online forms. We used automated tools (Axe, Wave) and manual testing with keyboard navigation and screen readers (JAWS, NVDA and VoiceOver).
+        </p>
+        <p>
+          We will review and update this statement regularly, at minimum every 12 months.
+        </p>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__bottom">
+        <ul class="site-footer__legal" role="list">
+          <li><a href="#" title="Privacy notice">Privacy notice</a></li>
+          <li><a href="#" title="Cookies policy">Cookies</a></li>
+          <li><a href="accessibility-statement.html" aria-current="page"
+                 title="Accessibility statement – current page">Accessibility statement</a></li>
+          <li><a href="#" title="Terms and conditions">Terms and conditions</a></li>
+        </ul>
+        <p class="site-footer__copyright">
+          &copy; <span id="copyright-year">2026</span> Gloucester City Council. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
