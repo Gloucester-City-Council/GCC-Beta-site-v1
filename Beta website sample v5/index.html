@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gloucester City Council – your local district council. Pay Council Tax, report issues, apply for services and find information for residents and businesses.">
+  <meta name="theme-color" content="#1A3461">
+  <title>Gloucester City Council – Home</title>
+
+  <!-- Preload critical font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Favicon placeholder (use approved council crest in production) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%231A3461'/><text y='22' x='6' font-size='18' fill='white' font-family='Verdana'>G</text></svg>">
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="Gloucester City Council">
+  <meta property="og:description" content="Your local district council for Gloucester city. Find services, pay bills and report issues online.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
+</head>
+
+<body>
+
+  <!-- ===================================================================
+       SKIP LINKS (Accessibility – keyboard / screen reader users)
+       =================================================================== -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#primary-nav" class="skip-link">Skip to navigation</a>
+
+  <!-- ===================================================================
+       ACCESSIBILITY TOOLBAR
+       =================================================================== -->
+  <div class="accessibility-toolbar" role="toolbar" aria-label="Accessibility options">
+    <div class="container">
+      <span class="accessibility-toolbar__label" id="a11y-toolbar-label">Accessibility:</span>
+      <button class="accessibility-toolbar__btn"
+              id="btn-text-size"
+              aria-pressed="false"
+              aria-describedby="a11y-toolbar-label"
+              title="Increase text size for easier reading">
+        Larger text
+      </button>
+      <button class="accessibility-toolbar__btn"
+              id="btn-high-contrast"
+              aria-pressed="false"
+              aria-describedby="a11y-toolbar-label"
+              title="Switch to high contrast mode">
+        High contrast
+      </button>
+      <a href="accessibility-statement.html"
+         class="accessibility-toolbar__btn"
+         title="Read our accessibility statement – how we meet WCAG 2.2 AA standards">
+        Accessibility statement
+      </a>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       NOTIFICATION BANNER (Short-term information only – update as needed)
+       =================================================================== -->
+  <div class="notification-banner"
+       role="region"
+       aria-label="Important notice"
+       id="notification-banner">
+    <div class="container">
+      <div class="notification-banner__icon" aria-hidden="true">i</div>
+      <div class="notification-banner__content">
+        <span class="notification-banner__title">Bin collection changes over the bank holiday</span>
+        <p class="notification-banner__text">
+          Collections on Monday 26 May will move to Tuesday 27 May.
+          <a href="#"
+             class="notification-banner__link"
+             title="Check your bin collection day including bank holiday changes">Check your collection day</a>
+        </p>
+      </div>
+      <button class="notification-banner__close"
+              id="close-banner"
+              aria-label="Close this notice"
+              title="Dismiss this notice">
+        ✕ Dismiss
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       SITE HEADER
+       =================================================================== -->
+  <header class="site-header" role="banner">
+    <div class="container">
+
+      <!-- Logo / brand -->
+      <a href="index.html"
+         class="site-header__logo"
+         aria-label="Gloucester City Council – go to homepage"
+         title="Gloucester City Council homepage">
+        <!-- Council crest SVG (Gloucester city arms simplified) -->
+        <div class="site-header__logo-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="36" height="36" aria-hidden="true" focusable="false">
+            <rect width="44" height="44" rx="3" fill="#1A3461"/>
+            <!-- Shield shape -->
+            <path d="M8 8 h28 v18 Q36 38 22 42 Q8 38 8 26 Z" fill="white"/>
+            <!-- Cross -->
+            <path d="M20 12 h4 v18 h-4 Z M8 20 h28 v4 H8 Z" fill="#1A3461"/>
+          </svg>
+        </div>
+        <div class="site-header__logo-text">
+          <span class="site-header__logo-name">Gloucester City Council</span>
+          <span class="site-header__logo-tagline">District Council</span>
+        </div>
+      </a>
+
+      <!-- Header actions -->
+      <div class="site-header__actions">
+        <a href="#"
+           class="site-header__council-tax-link"
+           title="Pay your Council Tax bill online">
+          Pay Council Tax
+        </a>
+        <!-- Mobile menu toggle -->
+        <button class="nav-toggle"
+                id="nav-toggle"
+                aria-expanded="false"
+                aria-controls="primary-nav"
+                aria-label="Open navigation menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2.5"
+               aria-hidden="true" focusable="false">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+          Menu
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       PRIMARY NAVIGATION
+       =================================================================== -->
+  <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+    <div class="container">
+      <ul class="primary-nav__list" role="list">
+
+        <li class="primary-nav__item">
+          <button class="primary-nav__link"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="nav-residents">
+            Residents
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <ul class="primary-nav__dropdown" id="nav-residents" role="list">
+            <li><a href="#" title="Find information about paying and managing your Council Tax">Council Tax</a></li>
+            <li><a href="#" title="Check bin collection days and find your nearest recycling point">Bins and recycling</a></li>
+            <li><a href="#" title="Apply for housing, report repairs and find help with homelessness">Housing</a></li>
+            <li><a href="#" title="Find car parks, pay for parking and report issues">Parking</a></li>
+            <li><a href="#" title="Apply for benefits and financial help including Housing Benefit">Benefits and support</a></li>
+            <li><a href="#" title="Register to vote, find your polling station and view election results">Elections</a></li>
+          </ul>
+        </li>
+
+        <li class="primary-nav__item">
+          <button class="primary-nav__link"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="nav-planning">
+            Planning and building
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <ul class="primary-nav__dropdown" id="nav-planning" role="list">
+            <li><a href="#" title="Submit, view or comment on planning applications">Planning applications</a></li>
+            <li><a href="#" title="Apply for building regulations approval for construction work">Building regulations</a></li>
+            <li><a href="#" title="View the local plan and planning policies for Gloucester">Local plan and policies</a></li>
+            <li><a href="#" title="View conservation areas and listed buildings in Gloucester">Conservation and heritage</a></li>
+            <li><a href="#" title="Check if you need planning permission for your project">Do I need permission?</a></li>
+          </ul>
+        </li>
+
+        <li class="primary-nav__item">
+          <button class="primary-nav__link"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="nav-business">
+            Business
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <ul class="primary-nav__dropdown" id="nav-business" role="list">
+            <li><a href="#" title="Apply for a licence for your business including alcohol and food">Business licences</a></li>
+            <li><a href="#" title="Business rates – pay, get relief and find out what you owe">Business rates</a></li>
+            <li><a href="#" title="Get support to start, grow or develop your business in Gloucester">Business support</a></li>
+            <li><a href="#" title="Find council-managed commercial properties available to rent">Commercial property</a></li>
+          </ul>
+        </li>
+
+        <li class="primary-nav__item">
+          <button class="primary-nav__link"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="nav-environment">
+            Environment
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <ul class="primary-nav__dropdown" id="nav-environment" role="list">
+            <li><a href="#" title="Report environmental problems such as fly-tipping, noise or pests">Report an issue</a></li>
+            <li><a href="#" title="Find parks, green spaces and leisure facilities in Gloucester">Parks and open spaces</a></li>
+            <li><a href="#" title="Food hygiene ratings for businesses in Gloucester">Food safety</a></li>
+            <li><a href="#" title="Information about air quality in Gloucester">Air quality</a></li>
+          </ul>
+        </li>
+
+        <li class="primary-nav__item">
+          <a href="#"
+             class="primary-nav__link"
+             title="Information about the council – meetings, decisions, spending and contact details">
+            About the council
+          </a>
+        </li>
+
+        <li class="primary-nav__item">
+          <a href="#"
+             class="primary-nav__link"
+             title="Current news, updates and consultations from Gloucester City Council">
+            News and consultations
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===================================================================
+       MAIN CONTENT
+       =================================================================== -->
+  <main id="main-content" tabindex="-1">
+
+    <!-- -----------------------------------------------------------------
+         HERO – Search
+         ----------------------------------------------------------------- -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <h1 class="hero__heading" id="hero-heading">
+          Welcome to Gloucester City Council
+        </h1>
+        <p class="hero__subheading">
+          Find council services, pay bills and get help – all in one place.
+        </p>
+
+        <!-- Search form -->
+        <form class="search-form"
+              action="search-results.html"
+              method="get"
+              role="search"
+              aria-label="Search the council website">
+          <fieldset class="search-form__fieldset">
+            <legend class="search-form__legend">Search for a service or information</legend>
+            <div class="search-form__group">
+              <label for="site-search" class="sr-only">Search</label>
+              <input type="search"
+                     id="site-search"
+                     name="q"
+                     class="search-form__input"
+                     placeholder="For example: pay Council Tax, bins, parking permit…"
+                     autocomplete="off"
+                     spellcheck="false"
+                     aria-label="Search the website – enter a service or topic">
+              <button type="submit"
+                      class="search-form__btn"
+                      title="Search the website">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" aria-hidden="true" focusable="false">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                Search
+              </button>
+            </div>
+          </fieldset>
+          <p class="search-form__hint" id="search-hint" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <!-- Popular tasks quick links -->
+      <div class="popular-tasks" aria-label="Popular services">
+        <div class="container">
+          <span class="popular-tasks__label" id="popular-tasks-label">Popular:</span>
+          <ul class="popular-tasks__list" role="list" aria-labelledby="popular-tasks-label">
+            <li><a href="#" title="Pay your Council Tax bill online">Pay Council Tax</a></li>
+            <li><a href="#" title="Find your bin collection day by entering your address">Bin collection days</a></li>
+            <li><a href="#" title="Find available car parks and pay for parking in Gloucester">Parking</a></li>
+            <li><a href="#" title="View or comment on planning applications in Gloucester">Planning applications</a></li>
+            <li><a href="#" title="Report a problem such as fly-tipping, potholes or anti-social behaviour">Report a problem</a></li>
+            <li><a href="#" title="Register to vote or update your details on the electoral roll">Register to vote</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------
+         SERVICES GRID (Icons only – no descriptions on homepage)
+         ----------------------------------------------------------------- -->
+    <section class="section" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="services-heading">Council services</h2>
+          <p class="section__intro">
+            Choose a service below to find what you need quickly.
+          </p>
+        </div>
+
+        <ul class="services-grid" role="list" aria-label="Council service categories">
+
+          <!-- Council Tax -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Council Tax – pay, apply for discounts, report changes and more">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <rect x="8" y="10" width="36" height="32" rx="3"/>
+                <path d="M18 26 h6 M18 32 h4"/>
+                <circle cx="34" cy="26" r="6"/>
+                <path d="M31 26 h6 M34 23 v6"/>
+              </svg>
+              <span class="service-tile__name">Council Tax</span>
+            </a>
+          </li>
+
+          <!-- Bins and recycling -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Bins and recycling – check collection days, report missed bins and find recycling centres">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <rect x="14" y="18" width="24" height="26" rx="2"/>
+                <path d="M10 18 h32 M20 12 h12 M22 24 v14 M26 24 v14 M30 24 v14"/>
+                <!-- Recycling arrows -->
+                <path d="M26 8 a10 10 0 0 1 8.7 5"/>
+                <path d="M34.7 13 l2-5 -5-2"/>
+              </svg>
+              <span class="service-tile__name">Bins and recycling</span>
+            </a>
+          </li>
+
+          <!-- Planning -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Planning and building – submit applications, check planning rules and view local plan">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <rect x="8" y="30" width="36" height="14" rx="2"/>
+                <path d="M16 30 v-16 l10-8 10 8 v16"/>
+                <rect x="20" y="36" width="12" height="8"/>
+                <rect x="12" y="18" width="8" height="8"/>
+                <rect x="32" y="18" width="8" height="8"/>
+              </svg>
+              <span class="service-tile__name">Planning and building</span>
+            </a>
+          </li>
+
+          <!-- Housing -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Housing – apply for social housing, report repairs, get help with homelessness">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <path d="M10 28 L26 12 L42 28"/>
+                <rect x="14" y="28" width="24" height="16" rx="1"/>
+                <rect x="21" y="34" width="10" height="10"/>
+                <path d="M10 28 v16 M42 28 v16"/>
+              </svg>
+              <span class="service-tile__name">Housing</span>
+            </a>
+          </li>
+
+          <!-- Parking -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Parking – find car parks, pay parking fines and apply for a permit">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <rect x="8" y="8" width="36" height="36" rx="4" fill="currentColor" stroke="none" opacity="0.08"/>
+                <path d="M20 38 v-24 h10 a8 8 0 0 1 0 16 H20"/>
+                <text x="22" y="26" font-family="Verdana, Arial, sans-serif" font-weight="700"
+                      font-size="16" fill="currentColor" stroke="none">P</text>
+              </svg>
+              <span class="service-tile__name">Parking</span>
+            </a>
+          </li>
+
+          <!-- Benefits -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Benefits and financial support – Housing Benefit, Council Tax Reduction and cost of living help">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <circle cx="26" cy="20" r="12"/>
+                <path d="M26 14 v2 M26 24 v2 M22 17 h3 a3 3 0 0 1 0 6 h-3 a3 3 0 0 0 0 6 h5"/>
+                <path d="M18 38 c0-6 16-6 16 0" stroke-linecap="round"/>
+                <path d="M14 44 c0-4 24-4 24 0" stroke-linecap="round"/>
+              </svg>
+              <span class="service-tile__name">Benefits and support</span>
+            </a>
+          </li>
+
+          <!-- Business -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Business – rates, licences, support and commercial property in Gloucester">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <rect x="8" y="22" width="36" height="24" rx="2"/>
+                <path d="M18 22 v-6 a8 8 0 0 1 16 0 v6"/>
+                <rect x="20" y="26" width="12" height="8" rx="1"/>
+                <path d="M8 34 h36"/>
+              </svg>
+              <span class="service-tile__name">Business</span>
+            </a>
+          </li>
+
+          <!-- Environment -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Environment – report fly-tipping, find parks and check food hygiene ratings">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <path d="M26 44 v-18"/>
+                <path d="M26 26 q-12-4-12-18 a12 12 0 0 1 12 0 a12 12 0 0 1 12 0 q0 14-12 18 z"/>
+                <path d="M26 32 q-8-2-8-10"/>
+                <path d="M26 44 h-8 M26 44 h8"/>
+              </svg>
+              <span class="service-tile__name">Environment</span>
+            </a>
+          </li>
+
+          <!-- Elections -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Elections – register to vote, find your polling station and view results">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <rect x="10" y="8" width="32" height="40" rx="3"/>
+                <path d="M16 20 l5 5 9-9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 32 h8 M16 38 h12"/>
+              </svg>
+              <span class="service-tile__name">Elections</span>
+            </a>
+          </li>
+
+          <!-- Licensing -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Licensing – apply for licences including alcohol, taxi, food business and street trading">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <rect x="10" y="6" width="32" height="40" rx="3"/>
+                <path d="M16 14 h20 M16 20 h20 M16 26 h14 M16 32 h10"/>
+                <!-- Badge / seal -->
+                <circle cx="36" cy="36" r="8" fill="white" stroke="currentColor"/>
+                <path d="M33 36 l2.5 2.5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="service-tile__name">Licensing</span>
+            </a>
+          </li>
+
+          <!-- Community -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Community – grants, events, community groups and local area information">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <circle cx="26" cy="16" r="7"/>
+                <circle cx="12" cy="22" r="5"/>
+                <circle cx="40" cy="22" r="5"/>
+                <path d="M10 44 c0-8 32-8 32 0"/>
+                <path d="M2 44 c0-6 16-6 16 0"/>
+                <path d="M34 44 c0-6 16-6 16 0"/>
+              </svg>
+              <span class="service-tile__name">Community</span>
+            </a>
+          </li>
+
+          <!-- Health and wellbeing -->
+          <li class="service-tile">
+            <a href="#"
+               class="service-tile__link"
+               title="Health and wellbeing – public health, sports facilities and healthy lifestyles in Gloucester">
+              <svg class="service-tile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                   fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+                <path d="M26 40 C14 32 8 24 8 18 a9 9 0 0 1 18-3 a9 9 0 0 1 18 3 c0 6-6 14-18 22 z"/>
+                <!-- Pulse / health cross -->
+                <path d="M14 26 h6 l3-6 4 12 3-6 h8" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+              </svg>
+              <span class="service-tile__name">Health and wellbeing</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------
+         COUNCIL TAX SPOTLIGHT (with single CTA)
+         ----------------------------------------------------------------- -->
+    <section class="spotlight" aria-labelledby="spotlight-heading">
+      <div class="container">
+
+        <div class="spotlight__content">
+          <h2 class="spotlight__title" id="spotlight-heading">
+            Council Tax 2025 to 2026
+          </h2>
+          <p class="spotlight__body">
+            Council Tax bills for 2025 to 2026 have been issued. Find out what you need to pay, how to set up a direct debit, and what help is available if you are struggling.
+          </p>
+
+          <ul class="spotlight__tasks" role="list" aria-label="Council Tax quick tasks">
+            <li>
+              <a href="#" title="Pay your Council Tax online by direct debit, card or bank transfer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+                Pay your Council Tax
+              </a>
+            </li>
+            <li>
+              <a href="#" title="Apply for a Council Tax discount or exemption">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+                Apply for a discount or exemption
+              </a>
+            </li>
+            <li>
+              <a href="#" title="Tell us about a change that affects your Council Tax">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+                Tell us about a change
+              </a>
+            </li>
+            <li>
+              <a href="#" title="Apply for Council Tax Reduction if you are on a low income">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+                Apply for Council Tax Reduction
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Single CTA per section – positioned below information -->
+        <div class="spotlight__cta-area">
+          <p style="color: rgba(255,255,255,0.88); margin-bottom: 1.5rem; font-size: 1rem; max-width: 100%;">
+            Use our online service to manage your Council Tax account. You can pay your bill, set up a direct debit and view your balance.
+          </p>
+          <a href="#"
+             class="btn-cta"
+             title="Start now – manage your Council Tax account online"
+             role="button">
+            Start now
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+          <p style="color: rgba(255,255,255,0.65); font-size: 0.875rem; margin-top: 0.75rem; max-width: 100%;">
+            You will need to sign in or create an account.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------
+         NEWS AND CONSULTATIONS (Merged as per requirements)
+         ----------------------------------------------------------------- -->
+    <section class="section section--grey" aria-labelledby="news-heading">
+      <div class="container">
+
+        <div class="section__header">
+          <h2 class="section__title" id="news-heading">News and consultations</h2>
+          <p class="section__intro">
+            The latest news, updates and opportunities to have your say on council plans.
+          </p>
+        </div>
+
+        <ul class="cards-grid" role="list" aria-label="News and consultations">
+
+          <!-- News card 1 -->
+          <li class="card">
+            <div class="card__image-placeholder" role="img" aria-label="Gloucester city centre regeneration – artist impression of new public square">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">News</span>
+              <h3 class="card__title">
+                <a href="#"
+                   title="Read more: City centre regeneration update – new public square plans approved">
+                  City centre regeneration – new public square plans approved
+                </a>
+              </h3>
+              <p class="card__meta">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <time datetime="2026-02-18">18 February 2026</time>
+              </p>
+              <p class="card__excerpt">
+                Plans for a new public square in Gloucester city centre have been approved, bringing improved seating, planting and improved walking routes.
+              </p>
+            </div>
+            <div class="card__footer">
+              <a href="#"
+                 title="Read the full story: City centre regeneration update">
+                Read more
+                <span class="sr-only">about city centre regeneration plans</span>
+              </a>
+            </div>
+          </li>
+
+          <!-- Consultation card -->
+          <li class="card">
+            <div class="card__image-placeholder" role="img" aria-label="Local plan consultation – illustration of planning documents">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">Consultation</span>
+              <h3 class="card__title">
+                <a href="#"
+                   title="Have your say: Local Plan Review 2024 to 2041 – consultation closes 14 March 2026">
+                  Have your say: Local Plan Review 2024 to 2041
+                </a>
+              </h3>
+              <p class="card__meta">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Closes <time datetime="2026-03-14">14 March 2026</time>
+              </p>
+              <p class="card__excerpt">
+                We are reviewing Gloucester's Local Plan. Tell us your views on housing, transport, green spaces and economic development up to 2041.
+              </p>
+            </div>
+            <div class="card__footer">
+              <a href="#"
+                 title="Read more and respond to the Local Plan Review consultation">
+                Read more and respond
+                <span class="sr-only">to the Local Plan Review consultation</span>
+              </a>
+            </div>
+          </li>
+
+          <!-- News card 2 -->
+          <li class="card">
+            <div class="card__image-placeholder" role="img" aria-label="Gloucester docks – updated waste collection service">
+              <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+                <polyline points="1 4 1 10 7 10"/>
+                <polyline points="23 20 23 14 17 14"/>
+                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+              </svg>
+            </div>
+            <div class="card__body">
+              <span class="card__tag">News</span>
+              <h3 class="card__title">
+                <a href="#"
+                   title="Read more: Changes to kerbside recycling collections from April 2026">
+                  Changes to kerbside recycling collections from April 2026
+                </a>
+              </h3>
+              <p class="card__meta">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <time datetime="2026-02-14">14 February 2026</time>
+              </p>
+              <p class="card__excerpt">
+                From 1 April 2026, glass bottles and jars will be collected from the kerbside. Find out what changes and how to prepare.
+              </p>
+            </div>
+            <div class="card__footer">
+              <a href="#"
+                 title="Read the full story: Changes to recycling collections from April 2026">
+                Read more
+                <span class="sr-only">about changes to recycling collections</span>
+              </a>
+            </div>
+          </li>
+
+        </ul>
+
+        <a href="#"
+           class="view-all-link"
+           title="View all news, press releases and consultations from Gloucester City Council">
+          View all news and consultations
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" focusable="false">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------
+         ABOUT THE COUNCIL / QUICK LINKS ROW
+         ----------------------------------------------------------------- -->
+    <section class="section" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="about-heading">More from the council</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem;">
+
+          <!-- About -->
+          <div style="border: 1px solid #DEE0E2; border-top: 4px solid #1A3461; border-radius: 8px; padding: 1.5rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                 fill="none" stroke="#1A3461" stroke-width="1.8" aria-hidden="true" focusable="false"
+                 style="margin-bottom: 0.75rem;">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">About the council</h3>
+            <p style="font-size: 0.875rem; color: #6F777B; margin-bottom: 1rem; max-width: 100%;">
+              Council meetings, decisions, senior officers and how we spend public money.
+            </p>
+            <a href="#"
+               title="Find out about how Gloucester City Council works, its leadership and finances"
+               style="font-size: 0.875rem; font-weight: 700; color: #1055A0; text-decoration: underline;">
+              About us
+            </a>
+          </div>
+
+          <!-- Contact -->
+          <div style="border: 1px solid #DEE0E2; border-top: 4px solid #1A3461; border-radius: 8px; padding: 1.5rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                 fill="none" stroke="#1A3461" stroke-width="1.8" aria-hidden="true" focusable="false"
+                 style="margin-bottom: 0.75rem;">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.09 6.09l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.88 17z"/>
+            </svg>
+            <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Contact us</h3>
+            <p style="font-size: 0.875rem; color: #6F777B; margin-bottom: 1rem; max-width: 100%;">
+              Get in touch with the council by phone, email or in person at the Guildhall.
+            </p>
+            <a href="#"
+               title="Find contact details for Gloucester City Council services and departments"
+               style="font-size: 0.875rem; font-weight: 700; color: #1055A0; text-decoration: underline;">
+              Contact us
+            </a>
+          </div>
+
+          <!-- Jobs -->
+          <div style="border: 1px solid #DEE0E2; border-top: 4px solid #1A3461; border-radius: 8px; padding: 1.5rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                 fill="none" stroke="#1A3461" stroke-width="1.8" aria-hidden="true" focusable="false"
+                 style="margin-bottom: 0.75rem;">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+            <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Jobs at the council</h3>
+            <p style="font-size: 0.875rem; color: #6F777B; margin-bottom: 1rem; max-width: 100%;">
+              Browse current vacancies and find out about working for Gloucester City Council.
+            </p>
+            <a href="#"
+               title="Search current job vacancies at Gloucester City Council"
+               style="font-size: 0.875rem; font-weight: 700; color: #1055A0; text-decoration: underline;">
+              View vacancies
+            </a>
+          </div>
+
+          <!-- My account -->
+          <div style="border: 1px solid #DEE0E2; border-top: 4px solid #C65800; border-radius: 8px; padding: 1.5rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                 fill="none" stroke="#C65800" stroke-width="1.8" aria-hidden="true" focusable="false"
+                 style="margin-bottom: 0.75rem;">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">My council account</h3>
+            <p style="font-size: 0.875rem; color: #6F777B; margin-bottom: 1rem; max-width: 100%;">
+              Sign in to manage your Council Tax, benefits and other services in one place.
+            </p>
+            <a href="#"
+               title="Sign in or create your Gloucester City Council online account"
+               style="font-size: 0.875rem; font-weight: 700; color: #1055A0; text-decoration: underline;">
+              Sign in or register
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================
+       SITE FOOTER
+       =================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+
+      <div class="site-footer__main">
+
+        <!-- Brand and social -->
+        <div class="site-footer__brand">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="40" height="40"
+                 aria-hidden="true" focusable="false">
+              <rect width="44" height="44" rx="3" fill="rgba(255,255,255,0.15)"/>
+              <path d="M8 8 h28 v18 Q36 38 22 42 Q8 38 8 26 Z" fill="white"/>
+              <path d="M20 12 h4 v18 h-4 Z M8 20 h28 v4 H8 Z" fill="#1A3461"/>
+            </svg>
+            <div>
+              <div style="font-weight: 700; font-size: 1.125rem; color: white; line-height: 1.2;">Gloucester City Council</div>
+              <div style="font-size: 0.75rem; color: rgba(255,255,255,0.65); text-transform: uppercase; letter-spacing: 0.04em;">District Council</div>
+            </div>
+          </div>
+
+          <p class="site-footer__about">
+            Gloucester City Council provides local government services for residents and businesses within the city of Gloucester. We are a district council, separate from Gloucestershire County Council.
+          </p>
+
+          <div style="margin-bottom: 1.5rem;">
+            <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.65); margin-bottom: 0.5rem; font-weight: 700;">Follow us</p>
+            <div class="social-links">
+              <a href="#"
+                 aria-label="Follow Gloucester City Council on Facebook"
+                 title="Follow Gloucester City Council on Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a href="#"
+                 aria-label="Follow Gloucester City Council on X (formerly Twitter)"
+                 title="Follow Gloucester City Council on X (formerly Twitter)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                </svg>
+              </a>
+              <a href="#"
+                 aria-label="Watch Gloucester City Council on YouTube"
+                 title="Watch Gloucester City Council on YouTube">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                     fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                  <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#1A3461"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services links -->
+        <nav aria-label="Footer navigation – services">
+          <h2 class="site-footer__col-title">Services</h2>
+          <ul class="site-footer__links" role="list">
+            <li><a href="#" title="Council Tax – pay, discounts, exemptions and more">Council Tax</a></li>
+            <li><a href="#" title="Bins and recycling – collection days and centres">Bins and recycling</a></li>
+            <li><a href="#" title="Planning and building applications">Planning and building</a></li>
+            <li><a href="#" title="Housing – apply, repairs and homelessness">Housing</a></li>
+            <li><a href="#" title="Parking – car parks, permits and fines">Parking</a></li>
+            <li><a href="#" title="Benefits and financial support">Benefits and support</a></li>
+            <li><a href="#" title="Elections – register and find your polling station">Elections</a></li>
+            <li><a href="#" title="View all council services">All services</a></li>
+          </ul>
+        </nav>
+
+        <!-- About links -->
+        <nav aria-label="Footer navigation – about the council">
+          <h2 class="site-footer__col-title">The council</h2>
+          <ul class="site-footer__links" role="list">
+            <li><a href="#" title="About Gloucester City Council">About us</a></li>
+            <li><a href="#" title="Councillors and wards">Councillors and wards</a></li>
+            <li><a href="#" title="Council meetings, agendas and minutes">Meetings and minutes</a></li>
+            <li><a href="#" title="How we spend public money – budgets and accounts">Spending and accounts</a></li>
+            <li><a href="#" title="Current job vacancies at Gloucester City Council">Jobs</a></li>
+            <li><a href="#" title="Freedom of information requests">Freedom of information</a></li>
+            <li><a href="accessibility-statement.html" title="Our accessibility statement – how we meet WCAG 2.2 AA">Accessibility statement</a></li>
+          </ul>
+        </nav>
+
+        <!-- Contact -->
+        <div class="site-footer__contact">
+          <h2 class="site-footer__col-title">Contact us</h2>
+          <p>
+            <strong>Phone</strong>
+            <a href="tel:01452396396"
+               class="link--inverse"
+               title="Call Gloucester City Council on 01452 396 396">
+              01452 396 396
+            </a>
+          </p>
+          <p>
+            <strong>Opening hours</strong>
+            Monday to Friday, 9am to 5pm
+          </p>
+          <p>
+            <strong>Visit us</strong>
+            The Guildhall<br>
+            23 Eastgate Street<br>
+            Gloucester<br>
+            GL1 1NS
+          </p>
+          <p>
+            <a href="#"
+               class="link--inverse"
+               title="Send a message or enquiry to Gloucester City Council online">
+              Send us a message
+            </a>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Footer bottom bar -->
+      <div class="site-footer__bottom">
+        <ul class="site-footer__legal" role="list">
+          <li><a href="#" title="Read our privacy notice and how we handle your data">Privacy notice</a></li>
+          <li><a href="#" title="Read our cookies policy">Cookies</a></li>
+          <li><a href="accessibility-statement.html" title="Read our accessibility statement">Accessibility statement</a></li>
+          <li><a href="#" title="Read our terms and conditions of use">Terms and conditions</a></li>
+          <li><a href="#" title="View the modern slavery statement for Gloucester City Council">Modern slavery statement</a></li>
+        </ul>
+        <p class="site-footer__copyright">
+          &copy; <span id="copyright-year">2026</span> Gloucester City Council. All rights reserved.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
