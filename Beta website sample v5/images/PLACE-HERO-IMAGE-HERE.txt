@@ -1,0 +1,10 @@
+Place your Gloucester hero photograph in this folder and name it:
+
+  gloucester-hero.jpg
+
+Recommended content: Gloucester Cathedral, Gloucester Docks, or an aerial cityscape.
+Recommended size: 1600 × 900 px minimum, saved as WebP or JPEG.
+Target file size: under 300 KB for fast page load.
+
+The image will have a semi-transparent dark navy overlay applied via CSS,
+so lighter, mid-toned photographs work best.

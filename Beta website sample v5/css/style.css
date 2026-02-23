@@ -627,7 +627,15 @@ a:active {
    12. HERO / SEARCH SECTION
    ------------------------------------------------------------------------- */
 .hero {
-  background: linear-gradient(135deg, var(--colour-brand) 0%, var(--colour-brand-mid) 60%, #3A5EA0 100%);
+  /* Gloucester photo with dark navy overlay for text legibility.
+     Replace gloucester-hero.jpg with an approved photograph of the city.
+     Recommended: aerial view of Gloucester Cathedral or Gloucester Docks.
+     Minimum resolution: 1600×900px. Keep file size under 300 KB (WebP preferred). */
+  background:
+    linear-gradient(rgba(26, 52, 97, 0.70), rgba(13, 30, 61, 0.82)),
+    url('../images/gloucester-hero.jpg') no-repeat center center / cover;
+  /* Fallback gradient if image is missing */
+  background-color: var(--colour-brand);
   padding: var(--space-8) 0 var(--space-7);
   position: relative;
   overflow: hidden;
