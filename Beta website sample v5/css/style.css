@@ -348,43 +348,12 @@ a:active {
   flex-shrink: 0;
 }
 
-.site-header__logo-icon {
-  width: 44px;
-  height: 44px;
-  background-color: var(--colour-white);
-  border-radius: var(--border-radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
-}
-
-.site-header__logo-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.site-header__logo-name {
-  font-family: var(--font-family);
-  font-size: var(--font-size-md);
-  font-weight: 700;
-  color: var(--colour-white);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-.site-header__logo-tagline {
-  font-size: var(--font-size-xs);
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.site-header__logo:hover .site-header__logo-name,
-.site-header__logo:focus .site-header__logo-name {
-  text-decoration: underline;
-  color: var(--colour-focus);
+.site-header__logo-img {
+  display: block;
+  height: 52px;
+  width: auto;
+  /* Invert the black logo to white for the dark navy header */
+  filter: brightness(0) invert(1);
 }
 
 /* Header right actions */
@@ -1244,14 +1213,12 @@ main {
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.site-footer__brand .site-header__logo-name {
-  font-size: var(--font-size-xl);
-  color: var(--colour-white);
-}
-
-.site-footer__brand .site-header__logo-tagline {
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: var(--space-4);
+.site-footer__logo-img {
+  display: block;
+  height: 44px;
+  width: auto;
+  /* Invert the black logo to white for the dark footer */
+  filter: brightness(0) invert(1);
 }
 
 .site-footer__about {
@@ -1566,8 +1533,8 @@ body.large-text .primary-nav__link { font-size: 1rem; }
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .site-header__logo-tagline {
-    display: none;
+  .site-header__logo-img {
+    height: 40px;
   }
 }
 
