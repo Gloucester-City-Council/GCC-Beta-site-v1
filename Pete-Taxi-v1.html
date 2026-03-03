@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apply for hackney carriage and private hire licences in Gloucester. Licensing for drivers, vehicles and operators.">
+  <title>Hackney carriage and private hire licensing – Gloucester City Council</title>
+  <style>
+    /* =============================================================
+       PETE-TAXI-V1 — HC ACCESSIBLE COLOUR PALETTE
+       Gloucester City Council
+       WCAG 2.2 AA compliant
+       ============================================================= */
+
+    /* ---- HC Design Tokens ---- */
+    :root {
+      /* Primary */
+      --hc-primary:           #003A75;   /* 10.2:1 – buttons, links, focus rings */
+      --hc-primary-hover:     #00295C;   /* 13.1:1 – hover and active states */
+      --hc-primary-tint:      #CCE0FF;   /* selected/focus backgrounds (use #000 text) */
+
+      /* Secondary */
+      --hc-secondary:         #005F5F;   /* 8.2:1 – secondary buttons, tags, accents */
+      --hc-secondary-hover:   #004040;   /* 11.4:1 – hover and active states */
+      --hc-secondary-tint:    #C8F0F0;   /* selected/focus backgrounds (use #000 text) */
+
+      /* Neutrals */
+      --hc-surface:           #FFFFFF;   /* page background */
+      --hc-surface-alt:       #F0F0F0;   /* alternate row / card background */
+      --hc-border:            #767676;   /* 4.6:1 – borders, dividers */
+      --hc-subtle-text:       #595959;   /* 7.0:1 – secondary / helper text */
+      --hc-text:              #000000;   /* 21:1 – all primary text and headings */
+
+      /* Background (explicit alias) */
+      --hc-bg:                #FFFFFF;
+      --hc-fg:                #000000;
+
+      /* Error */
+      --hc-error-bg:          #FFF0F0;
+      --hc-error:             #9E0000;   /* 9.1:1 */
+      --hc-error-dark:        #6E0000;   /* 13.7:1 */
+
+      /* Success */
+      --hc-success-bg:        #F0FFF0;
+      --hc-success:           #1A5C1A;   /* 7.5:1 */
+      --hc-success-dark:      #0D3D0D;   /* 14.9:1 */
+
+      /* Warning */
+      --hc-warning-bg:        #FFF8E0;
+      --hc-warning:           #7A4800;   /* 7.2:1 */
+      --hc-warning-dark:      #4D2E00;   /* 14.0:1 */
+
+      /* Info */
+      --hc-info-bg:           #EDF5FF;
+      --hc-info:              #0047AB;   /* 7.1:1 */
+      --hc-info-dark:         #003A75;   /* 10.2:1 */
+
+      /* Focus ring (GOV.UK yellow – always use with --hc-text on text) */
+      --focus:                #FFDD00;
+      --focus-text:           #000000;
+
+      /* Spacing */
+      --sp-4:   4px;
+      --sp-8:   8px;
+      --sp-12:  12px;
+      --sp-16:  16px;
+      --sp-24:  24px;
+      --sp-32:  32px;
+      --sp-48:  48px;
+      --sp-64:  64px;
+    }
+
+    /* ---- Reset ---- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ---- Base ---- */
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--hc-text);
+      background-color: var(--hc-surface);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- Skip Link ---- */
+    .skip-link {
+      position: absolute;
+      top: -48px;
+      left: 0;
+      background: var(--hc-text);
+      color: var(--hc-surface);
+      padding: var(--sp-8) var(--sp-16);
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      z-index: 200;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 3px solid var(--focus);
+      outline-offset: 0;
+      background: var(--focus);
+      color: var(--focus-text);
+    }
+
+    /* ---- Visually hidden ---- */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ---- Container ---- */
+    .gcc-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--sp-16);
+      width: 100%;
+    }
+
+    /* ---- Header ---- */
+    .gcc-header {
+      background: var(--hc-primary);
+      color: var(--hc-surface);
+      border-bottom: 4px solid var(--hc-secondary);
+    }
+    .gcc-header__inner {
+      display: flex;
+      align-items: center;
+      padding: var(--sp-16);
+      min-height: 64px;
+    }
+    .gcc-header__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-8);
+      text-decoration: none;
+      color: var(--hc-surface);
+    }
+    .gcc-header__logo-img {
+      width: 40px;
+      height: 40px;
+      background: var(--hc-surface);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .gcc-header__logo-img svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--hc-primary);
+    }
+    .gcc-header__org-name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .gcc-header__logo:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* ---- Phase Banner ---- */
+    .gcc-phase-banner {
+      background: var(--hc-surface-alt);
+      border-bottom: 1px solid var(--hc-border);
+      padding: var(--sp-8) 0;
+      font-size: 0.875rem;
+    }
+    .gcc-phase-banner__inner {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-8);
+      flex-wrap: wrap;
+    }
+    .gcc-phase-tag {
+      background: var(--hc-primary);
+      color: var(--hc-surface);
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 2px var(--sp-8);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .gcc-phase-banner a {
+      color: var(--hc-primary);
+      text-decoration: underline;
+    }
+    .gcc-phase-banner a:hover {
+      color: var(--hc-primary-hover);
+    }
+    .gcc-phase-banner a:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      background: var(--focus);
+      color: var(--focus-text);
+    }
+
+    /* ---- Breadcrumb ---- */
+    .gcc-breadcrumb {
+      background: var(--hc-surface-alt);
+      border-bottom: 1px solid var(--hc-border);
+      padding: var(--sp-8) 0;
+    }
+    .gcc-breadcrumb__list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+      align-items: center;
+      font-size: 0.875rem;
+    }
+    .gcc-breadcrumb__list li {
+      display: flex;
+      align-items: center;
+    }
+    .gcc-breadcrumb__list li:not(:last-child)::after {
+      content: '›';
+      margin-left: var(--sp-8);
+      color: var(--hc-subtle-text);
+    }
+    .gcc-breadcrumb__list a {
+      color: var(--hc-primary);
+      text-decoration: underline;
+    }
+    .gcc-breadcrumb__list a:hover {
+      color: var(--hc-primary-hover);
+    }
+    .gcc-breadcrumb__list a:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      background: var(--focus);
+      color: var(--focus-text);
+    }
+    .gcc-breadcrumb__list [aria-current="page"] {
+      color: var(--hc-subtle-text);
+    }
+
+    /* ---- Notification Banner ---- */
+    .gcc-notification-banner {
+      background: var(--hc-info-bg);
+      border-left: 5px solid var(--hc-info);
+      padding: var(--sp-16);
+      margin-top: var(--sp-24);
+    }
+    .gcc-notification-banner__title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--hc-info-dark);
+      margin-bottom: var(--sp-4);
+    }
+    .gcc-notification-banner p {
+      font-size: 0.9375rem;
+      color: var(--hc-text);
+    }
+    .gcc-notification-banner a {
+      color: var(--hc-primary);
+      text-decoration: underline;
+    }
+    .gcc-notification-banner a:hover {
+      color: var(--hc-primary-hover);
+    }
+    .gcc-notification-banner a:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      background: var(--focus);
+      color: var(--focus-text);
+    }
+
+    /* ---- Page Header ---- */
+    .gcc-page-header {
+      background: var(--hc-primary);
+      color: var(--hc-surface);
+      padding: var(--sp-48) 0 var(--sp-32);
+    }
+    .gcc-page-header h1 {
+      font-size: clamp(1.625rem, 4vw, 2.25rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--hc-surface);
+      margin-bottom: var(--sp-16);
+    }
+    .gcc-lead {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 60ch;
+    }
+
+    /* ---- Main ---- */
+    .gcc-main {
+      padding: var(--sp-32) 0 var(--sp-64);
+    }
+    .gcc-main > .gcc-container > p {
+      margin-bottom: var(--sp-16);
+      max-width: 70ch;
+    }
+
+    /* ---- Audience Cards Grid ---- */
+    .gcc-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+      gap: var(--sp-24);
+      margin: var(--sp-32) 0;
+    }
+    .gcc-card {
+      background: var(--hc-surface);
+      border: 2px solid var(--hc-border);
+      border-radius: 4px;
+      padding: var(--sp-24);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-16);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .gcc-card:hover {
+      border-color: var(--hc-primary);
+      box-shadow: 0 4px 16px rgba(0, 58, 117, 0.15);
+    }
+    .gcc-card:focus-within {
+      border-color: var(--hc-primary);
+    }
+
+    /* Card icon */
+    .gcc-card__icon {
+      width: 48px;
+      height: 48px;
+      background: var(--hc-primary-tint);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .gcc-card__icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--hc-primary);
+      fill: none;
+    }
+
+    /* Card tag */
+    .gcc-card__tag {
+      display: inline-block;
+      background: var(--hc-secondary-tint);
+      color: var(--hc-text);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px var(--sp-8);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-radius: 2px;
+    }
+    .gcc-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--hc-text);
+      margin: 0;
+    }
+    .gcc-card p {
+      font-size: 0.9375rem;
+      color: var(--hc-text);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    /* ---- Buttons ---- */
+    .gcc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: var(--sp-8) var(--sp-24);
+      font-family: inherit;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+      white-space: nowrap;
+    }
+    .gcc-btn--primary {
+      background: var(--hc-primary);
+      color: var(--hc-surface);
+      border-color: var(--hc-primary);
+      box-shadow: 0 3px 0 var(--hc-primary-hover);
+    }
+    .gcc-btn--primary:hover {
+      background: var(--hc-primary-hover);
+      border-color: var(--hc-primary-hover);
+      box-shadow: 0 2px 0 var(--hc-primary-hover);
+      transform: translateY(1px);
+    }
+    .gcc-btn--primary:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+      background: var(--hc-primary-hover);
+      border-color: var(--hc-primary-hover);
+    }
+    .gcc-btn--primary:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 var(--hc-primary-hover);
+    }
+    .gcc-btn--secondary {
+      background: var(--hc-surface);
+      color: var(--hc-primary);
+      border-color: var(--hc-primary);
+    }
+    .gcc-btn--secondary:hover {
+      background: var(--hc-primary-tint);
+      border-color: var(--hc-primary-hover);
+      color: var(--hc-primary-hover);
+    }
+    .gcc-btn--secondary:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+      background: var(--hc-primary-tint);
+    }
+
+    /* ---- Content Sections ---- */
+    .gcc-content-section {
+      margin-bottom: var(--sp-48);
+    }
+    .gcc-content-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--hc-text);
+      margin-bottom: var(--sp-16);
+      padding-bottom: var(--sp-8);
+      border-bottom: 2px solid var(--hc-border);
+    }
+    .gcc-content-section h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--hc-text);
+      margin-bottom: var(--sp-8);
+      margin-top: var(--sp-24);
+    }
+    .gcc-content-section p {
+      margin-bottom: var(--sp-16);
+      max-width: 70ch;
+    }
+
+    /* ---- Inset Box ---- */
+    .gcc-inset {
+      background: var(--hc-primary-tint);
+      border-left: 5px solid var(--hc-primary);
+      padding: var(--sp-16) var(--sp-24);
+      margin: var(--sp-24) 0;
+    }
+    .gcc-inset h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--hc-primary-hover);
+      margin-bottom: var(--sp-8);
+      margin-top: 0;
+    }
+    .gcc-inset p,
+    .gcc-inset ul {
+      font-size: 0.9375rem;
+      color: var(--hc-text);
+    }
+
+    /* ---- Warning Box ---- */
+    .gcc-warning {
+      background: var(--hc-warning-bg);
+      border-left: 5px solid var(--hc-warning);
+      padding: var(--sp-16) var(--sp-24);
+      margin: var(--sp-24) 0;
+    }
+    .gcc-warning p {
+      font-size: 0.9375rem;
+      color: var(--hc-text);
+    }
+    .gcc-warning strong {
+      color: var(--hc-warning-dark);
+    }
+
+    /* ---- List ---- */
+    .gcc-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--sp-8) 0 var(--sp-16) 0;
+    }
+    .gcc-list li {
+      position: relative;
+      padding-left: var(--sp-24);
+      padding-top: var(--sp-4);
+      padding-bottom: var(--sp-4);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+    .gcc-list li::before {
+      content: '';
+      position: absolute;
+      left: var(--sp-8);
+      top: 0.6em;
+      width: 6px;
+      height: 6px;
+      background: var(--hc-primary);
+      border-radius: 50%;
+    }
+
+    /* ---- Contact Panel ---- */
+    .gcc-contact-panel {
+      background: var(--hc-secondary-tint);
+      border: 2px solid var(--hc-secondary);
+      border-radius: 4px;
+      padding: var(--sp-24);
+      margin-top: var(--sp-32);
+    }
+    .gcc-contact-panel h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--hc-secondary-hover);
+      margin-bottom: var(--sp-16);
+      border: none;
+      padding: 0;
+    }
+    .gcc-contact-panel a {
+      color: var(--hc-primary);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .gcc-contact-panel a:hover {
+      color: var(--hc-primary-hover);
+    }
+    .gcc-contact-panel a:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      background: var(--focus);
+      color: var(--focus-text);
+    }
+    .gcc-contact-panel dl {
+      margin: 0;
+    }
+    .gcc-contact-panel dt {
+      font-weight: 700;
+      font-size: 0.9375rem;
+      color: var(--hc-text);
+      margin-top: var(--sp-8);
+    }
+    .gcc-contact-panel dd {
+      margin: 0 0 var(--sp-8) 0;
+    }
+
+    /* ---- Footer ---- */
+    .gcc-footer {
+      background: var(--hc-fg);
+      color: var(--hc-surface);
+      padding: var(--sp-48) 0 var(--sp-32);
+      margin-top: var(--sp-64);
+    }
+    .gcc-footer__inner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--sp-32);
+      margin-bottom: var(--sp-32);
+    }
+    .gcc-footer h2 {
+      color: var(--hc-surface);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: var(--sp-16);
+    }
+    .gcc-footer ul {
+      list-style: none;
+      padding: 0;
+    }
+    .gcc-footer li {
+      margin-bottom: var(--sp-8);
+    }
+    .gcc-footer a {
+      color: var(--hc-primary-tint);
+      text-decoration: underline;
+      font-size: 0.9375rem;
+    }
+    .gcc-footer a:hover {
+      color: var(--hc-surface);
+    }
+    .gcc-footer a:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      background: var(--focus);
+      color: var(--focus-text);
+    }
+    .gcc-footer__hr {
+      border: none;
+      border-top: 1px solid var(--hc-border);
+      margin-bottom: var(--sp-24);
+    }
+    .gcc-footer__meta {
+      font-size: 0.875rem;
+      color: var(--hc-border);
+    }
+
+    /* ---- Global link styles ---- */
+    a {
+      color: var(--hc-primary);
+      text-decoration: underline;
+    }
+    a:hover {
+      color: var(--hc-primary-hover);
+    }
+    a:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      background: var(--focus);
+      color: var(--focus-text);
+      text-decoration: none;
+    }
+
+    /* ---- Focus visible (keyboard only) ---- */
+    *:focus:not(:focus-visible) {
+      outline: none;
+      background: transparent;
+    }
+    *:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* ---- Reduced motion ---- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      .gcc-cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .gcc-page-header {
+        padding: var(--sp-32) 0 var(--sp-24);
+      }
+    }
+
+    /* ---- Print ---- */
+    @media print {
+      .gcc-header,
+      .gcc-phase-banner,
+      .gcc-breadcrumb,
+      .gcc-notification-banner,
+      .gcc-footer { display: none; }
+      .gcc-main { padding: 0; }
+      .gcc-btn { display: none; }
+      body { color: #000; background: #fff; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip to main content -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ========================================================
+       HEADER
+       ======================================================== -->
+  <header class="gcc-header" role="banner">
+    <div class="gcc-container">
+      <div class="gcc-header__inner">
+        <a href="index.html" class="gcc-header__logo" aria-label="Gloucester City Council – go to homepage">
+          <div class="gcc-header__logo-img" aria-hidden="true">
+            <!-- Shield / crest icon -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2L2 7v10c0 5.55 3.84 10.74 10 12 6.16-1.26 10-6.45 10-12V7l-10-5z"/>
+            </svg>
+          </div>
+          <span class="gcc-header__org-name">Gloucester City Council</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       PHASE BANNER
+       ======================================================== -->
+  <div class="gcc-phase-banner" role="region" aria-label="Service phase information">
+    <div class="gcc-container">
+      <div class="gcc-phase-banner__inner">
+        <span class="gcc-phase-tag">Beta</span>
+        <span>This is a new service – your <a href="accessibility-statement.html">feedback</a> will help us to improve it.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       BREADCRUMB
+       ======================================================== -->
+  <nav aria-label="Breadcrumb" class="gcc-breadcrumb">
+    <div class="gcc-container">
+      <ol class="gcc-breadcrumb__list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Licensing</a></li>
+        <li aria-current="page">Hackney carriage and private hire</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ========================================================
+       NOTIFICATION BANNER
+       ======================================================== -->
+  <div class="gcc-container">
+    <div class="gcc-notification-banner" role="region" aria-labelledby="notification-title">
+      <p class="gcc-notification-banner__title" id="notification-title">Important update</p>
+      <p>Fees shown are for the 2025 to 2026 financial year. New rule books came into effect in June 2025. <a href="#">Read the policy and rule books</a>.</p>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       PAGE HEADER
+       ======================================================== -->
+  <div class="gcc-page-header">
+    <div class="gcc-container">
+      <h1>Hackney carriage and private hire licensing</h1>
+      <p class="gcc-lead">Get a licence to drive, operate or own a hackney carriage or private hire vehicle in Gloucester. Find out what you need and how to apply.</p>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MAIN CONTENT
+       ======================================================== -->
+  <main id="main-content" class="gcc-main" role="main">
+    <div class="gcc-container">
+
+      <p>Gloucester City Council licenses all hackney carriages (taxis) and private hire vehicles operating in the city. You must have the correct licence before you work or operate.</p>
+
+      <p>Choose the section that applies to you:</p>
+
+      <!-- ---- Audience cards ---- -->
+      <div class="gcc-cards-grid" role="list">
+
+        <!-- Driver -->
+        <div class="gcc-card" role="listitem">
+          <div class="gcc-card__icon" aria-hidden="true">
+            <!-- Person / driver icon -->
+            <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+          </div>
+          <span class="gcc-card__tag">Driver</span>
+          <h2>Driver licensing</h2>
+          <p>Apply for or renew a hackney carriage or private hire driver licence. Find out about checks, training, fees and your duties as a licensed driver.</p>
+          <a href="hackney-carriage.html" class="gcc-btn gcc-btn--primary" aria-label="Driver licensing – view requirements and apply">Start now</a>
+        </div>
+
+        <!-- Vehicle — TAXI ICON -->
+        <div class="gcc-card" role="listitem">
+          <div class="gcc-card__icon" aria-hidden="true">
+            <!-- Taxi icon: body, windshield, wheels and illuminated roof sign -->
+            <svg viewBox="0 0 24 24" stroke-width="1.5" fill="none" aria-hidden="true">
+              <!-- Taxi body -->
+              <rect x="2" y="10" width="20" height="9" rx="2"/>
+              <!-- Windshield / cabin area -->
+              <path d="M7 10V7a1 1 0 0 1 1-1h5l4 4"/>
+              <!-- Rear wheel -->
+              <circle cx="6.5" cy="19" r="2"/>
+              <!-- Front wheel -->
+              <circle cx="17.5" cy="19" r="2"/>
+              <!-- Illuminated TAXI roof sign (the distinctive hackney carriage element) -->
+              <rect x="9" y="3.5" width="6" height="2.5" rx="0.5"/>
+            </svg>
+          </div>
+          <span class="gcc-card__tag">Vehicle proprietor</span>
+          <h2>Vehicle licensing</h2>
+          <p>Get a licence for your hackney carriage or private hire vehicle. Find vehicle standards, testing stations, plates and signage requirements.</p>
+          <a href="#" class="gcc-btn gcc-btn--primary" aria-label="Vehicle licensing – view standards and apply">Start now</a>
+        </div>
+
+        <!-- Operator -->
+        <div class="gcc-card" role="listitem">
+          <div class="gcc-card__icon" aria-hidden="true">
+            <!-- Building / operator icon -->
+            <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <span class="gcc-card__tag">Operator</span>
+          <h2>Operator licensing</h2>
+          <p>Apply for a private hire operator licence. Find out about record keeping, staff checks, fees and your responsibilities as a licensed operator.</p>
+          <a href="private-hire.html" class="gcc-btn gcc-btn--primary" aria-label="Operator licensing – view requirements and apply">Start now</a>
+        </div>
+
+        <!-- Passenger -->
+        <div class="gcc-card" role="listitem">
+          <div class="gcc-card__icon" aria-hidden="true">
+            <!-- Group / passengers icon -->
+            <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <span class="gcc-card__tag">Passenger</span>
+          <h2>Passenger information</h2>
+          <p>Understand your rights when using a hackney carriage or private hire vehicle in Gloucester. Find out how to complain or report lost property.</p>
+          <a href="#" class="gcc-btn gcc-btn--secondary" aria-label="Passenger information – your rights and how to get help">Find out more</a>
+        </div>
+
+        <!-- Policy -->
+        <div class="gcc-card" role="listitem">
+          <div class="gcc-card__icon" aria-hidden="true">
+            <!-- Document / policy icon -->
+            <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <line x1="10" y1="9" x2="8" y2="9"/>
+            </svg>
+          </div>
+          <span class="gcc-card__tag">Policy</span>
+          <h2>Policy and guidance</h2>
+          <p>Read the licensing policy, rule books, legislation and enforcement framework for hackney carriage and private hire in Gloucester.</p>
+          <a href="#" class="gcc-btn gcc-btn--secondary" aria-label="Policy and guidance – read the framework and rule books">Read policy</a>
+        </div>
+
+      </div>
+
+      <!-- ---- Before you apply ---- -->
+      <section class="gcc-content-section" aria-labelledby="before-apply-heading">
+        <h2 id="before-apply-heading">Before you apply</h2>
+        <div class="gcc-inset">
+          <h3>What you will need</h3>
+          <ul class="gcc-list">
+            <li>Valid identification documents</li>
+            <li>Proof of address</li>
+            <li>Relevant certificates and qualifications</li>
+            <li>Disclosure and Barring Service (DBS) check</li>
+            <li>Payment for the application fee</li>
+          </ul>
+          <p>Most applications are processed within 28 days of receiving all required documents. Some may take longer if additional checks are needed.</p>
+        </div>
+
+        <div class="gcc-warning" role="note">
+          <p><strong>Important:</strong> You must not work or operate as a hackney carriage or private hire vehicle until you have received your licence from Gloucester City Council.</p>
+        </div>
+      </section>
+
+      <!-- ---- Contact panel ---- -->
+      <div class="gcc-contact-panel" role="complementary" aria-label="Contact information">
+        <h2>Contact licensing</h2>
+        <dl>
+          <dt>Email</dt>
+          <dd><a href="mailto:licensing@gloucester.gov.uk">licensing@gloucester.gov.uk</a></dd>
+          <dt>Phone</dt>
+          <dd><a href="tel:01452396396">01452 396396</a></dd>
+          <dt>Opening hours</dt>
+          <dd>Monday to Friday, 9am to 5pm</dd>
+        </dl>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+  <footer class="gcc-footer" role="contentinfo">
+    <div class="gcc-container">
+      <div class="gcc-footer__inner">
+        <div>
+          <h2>Gloucester City Council</h2>
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">About the council</a></li>
+            <li><a href="#">News and events</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Licensing</h2>
+          <ul>
+            <li><a href="hackney-carriage.html">Driver licensing</a></li>
+            <li><a href="#">Vehicle licensing</a></li>
+            <li><a href="private-hire.html">Operator licensing</a></li>
+            <li><a href="#">Passenger information</a></li>
+            <li><a href="#">Policy and guidance</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Legal</h2>
+          <ul>
+            <li><a href="accessibility-statement.html">Accessibility statement</a></li>
+            <li><a href="#">Privacy notice</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="gcc-footer__hr">
+      <p class="gcc-footer__meta">&copy; 2026 Gloucester City Council. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
