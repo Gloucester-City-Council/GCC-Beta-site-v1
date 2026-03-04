@@ -18,10 +18,10 @@
   --primary-darker:   #ff0000;
 
   /* Secondary */
-  --secondary-light:   #E6F7F7;
-  --secondary-base:    #0A9E9E;
-  --secondary-dark:    #0A7C7C;
-  --secondary-darker:  #065555;
+  --secondary-light:   #ff0000;
+  --secondary-base:    #ff0000;
+  --secondary-dark:    #ff0000;
+  --secondary-darker:  #ff0000;
 
   /* Neutrals */
   --neutral-50:        #F8F9FA;
