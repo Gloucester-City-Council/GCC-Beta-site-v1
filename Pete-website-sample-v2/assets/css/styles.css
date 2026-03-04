@@ -7,7 +7,7 @@
 
 /* Root Variables - Default Theme (Orange) */
 :root {
-    --primary-color: rgb(243, 112, 33);
+    --primary-color: rgb(156, 72, 20);
     --primary-hover: rgb(220, 95, 20);
     --primary-light: rgba(243, 112, 33, 0.1);
     --text-color: #0b0c0c;
