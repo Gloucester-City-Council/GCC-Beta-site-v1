@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Order recycling containers including green bins, boxes and food waste caddies for your home in Gloucester">
+    <title>Order recycling containers - Gloucester City Council</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/accessibility.css">
+    <style>
+        /* ── Form steps ── */
+        .form-steps {
+            counter-reset: step;
+            margin: 0 0 var(--space-5);
+            padding: 0;
+            list-style: none;
+            display: flex;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+        }
+        .form-steps li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--font-size-small);
+            color: var(--colour-text-secondary);
+        }
+        .form-steps li.active {
+            font-weight: 700;
+            color: var(--colour-text);
+        }
+        .form-steps li.completed {
+            color: var(--colour-success);
+        }
+        .form-steps li::before {
+            counter-increment: step;
+            content: counter(step);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 50%;
+            background: var(--colour-border);
+            color: var(--colour-text);
+            font-weight: 700;
+            font-size: var(--font-size-small);
+            flex-shrink: 0;
+        }
+        .form-steps li.active::before {
+            background: var(--colour-primary);
+            color: #fff;
+        }
+        .form-steps li.completed::before {
+            background: var(--colour-success);
+            color: #fff;
+            content: "✓";
+        }
+
+        /* ── Sections / panels ── */
+        .form-section {
+            display: none;
+        }
+        .form-section.is-active {
+            display: block;
+        }
+
+        /* ── Address lookup ── */
+        .address-lookup-wrapper {
+            position: relative;
+        }
+        .address-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--colour-background);
+            border: 2px solid var(--colour-border-dark);
+            border-top: none;
+            max-height: 220px;
+            overflow-y: auto;
+            display: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .address-suggestions.is-open {
+            display: block;
+        }
+        .address-suggestions li {
+            padding: var(--space-2) var(--space-3);
+            cursor: pointer;
+            border-bottom: 1px solid var(--colour-border);
+        }
+        .address-suggestions li:last-child {
+            border-bottom: none;
+        }
+        .address-suggestions li:hover,
+        .address-suggestions li:focus,
+        .address-suggestions li[aria-selected="true"] {
+            background: var(--colour-background-grey);
+        }
+        .address-suggestions li .address-uprn {
+            font-size: var(--font-size-small);
+            color: var(--colour-text-secondary);
+        }
+
+        /* ── UPRN status indicator ── */
+        .uprn-status {
+            margin-top: var(--space-2);
+            font-size: var(--font-size-small);
+            display: none;
+        }
+        .uprn-status.is-set {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--colour-success);
+            font-weight: 700;
+        }
+        .uprn-status.is-pending {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--colour-warning);
+        }
+        .uprn-status.is-error {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--colour-error);
+            font-weight: 700;
+        }
+        .uprn-status-icon {
+            font-size: 1.1em;
+            line-height: 1;
+        }
+
+        /* ── Radio group ── */
+        .radio-group {
+            margin: 0;
+            padding: 0;
+        }
+        .radio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-3);
+            margin-bottom: var(--space-3);
+        }
+        .radio-item input[type="radio"] {
+            width: 1.375rem;
+            height: 1.375rem;
+            margin-top: 0.15rem;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: var(--colour-primary);
+        }
+        .radio-item label {
+            cursor: pointer;
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-base);
+        }
+
+        /* ── Conditional reveal panel ── */
+        .conditional-reveal {
+            display: none;
+            border-left: 4px solid var(--colour-border);
+            padding-left: var(--space-4);
+            margin-left: 0.6875rem;
+            margin-top: var(--space-1);
+        }
+        .conditional-reveal.is-visible {
+            display: block;
+        }
+
+        /* ── Repeatable items (Green Recycling Boxes) ── */
+        .repeatable-section {
+            border: 2px solid var(--colour-border);
+            padding: var(--space-4);
+            margin-bottom: var(--space-4);
+            background: var(--colour-background-grey);
+        }
+        .repeatable-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-3);
+        }
+        .repeatable-section-title {
+            font-weight: 700;
+            font-size: var(--font-size-base);
+            margin: 0;
+        }
+        .repeatable-items-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .repeatable-item {
+            background: var(--colour-background);
+            border: 1px solid var(--colour-border);
+            padding: var(--space-3);
+            margin-bottom: var(--space-3);
+        }
+        .repeatable-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-3);
+        }
+        .repeatable-item-label {
+            font-weight: 700;
+        }
+        .btn-remove {
+            background: none;
+            border: none;
+            color: var(--colour-error);
+            cursor: pointer;
+            font-size: var(--font-size-small);
+            padding: var(--space-1) var(--space-2);
+            text-decoration: underline;
+            font-family: var(--font-family);
+        }
+        .btn-remove:hover {
+            color: #a8290e;
+        }
+        .btn-remove:focus {
+            outline: 3px solid var(--colour-focus);
+            outline-offset: 0;
+            background: var(--colour-focus);
+            color: var(--colour-focus-text);
+            text-decoration: none;
+        }
+        .btn-add {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            background: none;
+            border: 2px solid var(--colour-primary);
+            color: var(--colour-primary);
+            padding: var(--space-2) var(--space-3);
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: var(--space-3);
+        }
+        .btn-add:hover {
+            background: var(--colour-primary);
+            color: #fff;
+        }
+        .btn-add:focus {
+            outline: 3px solid var(--colour-focus);
+            outline-offset: 0;
+            background: var(--colour-focus);
+            color: var(--colour-focus-text);
+            border-color: var(--colour-focus-text);
+        }
+        .btn-add::before {
+            content: "+";
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        /* ── Navigation buttons ── */
+        .form-nav {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: var(--space-5);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--colour-border);
+        }
+        .btn-continue {
+            background: var(--colour-cta);
+            color: var(--colour-cta-text);
+            border: none;
+            padding: var(--space-2) var(--space-5);
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-continue:hover {
+            background: var(--colour-cta-hover);
+        }
+        .btn-continue:focus {
+            outline: 3px solid var(--colour-focus);
+            outline-offset: 0;
+            background: var(--colour-focus);
+            color: var(--colour-focus-text);
+        }
+        .btn-continue:disabled {
+            background: var(--colour-border);
+            color: var(--colour-text-secondary);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .btn-back {
+            background: none;
+            border: none;
+            color: var(--colour-link);
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
+            cursor: pointer;
+            text-decoration: underline;
+            padding: var(--space-2) 0;
+        }
+        .btn-back:hover {
+            color: var(--colour-link-hover);
+        }
+        .btn-back:focus {
+            outline: 3px solid var(--colour-focus);
+            outline-offset: 0;
+            background: var(--colour-focus);
+            color: var(--colour-focus-text);
+            text-decoration: none;
+            padding: var(--space-2);
+        }
+
+        /* ── Summary / review ── */
+        .review-list {
+            list-style: none;
+            margin: 0 0 var(--space-5);
+            padding: 0;
+        }
+        .review-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--colour-border);
+            gap: var(--space-3);
+            flex-wrap: wrap;
+        }
+        .review-row dt {
+            font-weight: 700;
+            flex: 0 0 40%;
+        }
+        .review-row dd {
+            flex: 1 1 50%;
+            margin: 0;
+        }
+        .review-row .change-link {
+            flex: 0 0 auto;
+            font-size: var(--font-size-small);
+        }
+
+        /* ── Confirmation ── */
+        .confirmation-panel {
+            border: 5px solid var(--colour-success);
+            padding: var(--space-5);
+            margin-bottom: var(--space-5);
+        }
+        .confirmation-panel h2 {
+            color: var(--colour-success);
+            margin-top: 0;
+        }
+        .confirmation-ref {
+            font-size: var(--font-size-large);
+            font-weight: 700;
+        }
+
+        /* ── Fieldset reset ── */
+        fieldset {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+        legend {
+            font-weight: 700;
+            font-size: var(--font-size-base);
+            margin-bottom: var(--space-3);
+            padding: 0;
+        }
+        legend.form-label-legend {
+            font-size: var(--font-size-base);
+        }
+
+        /* ── Container type selection ── */
+        .container-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+        .container-type-card {
+            border: 2px solid var(--colour-border);
+            padding: var(--space-3);
+            cursor: pointer;
+            background: var(--colour-background);
+        }
+        .container-type-card:has(input:checked) {
+            border-color: var(--colour-primary);
+            background: #e8f5f1;
+        }
+        .container-type-card input[type="checkbox"] {
+            margin-right: var(--space-2);
+            accent-color: var(--colour-primary);
+        }
+        .container-type-card label {
+            cursor: pointer;
+            display: block;
+        }
+        .container-type-card .container-desc {
+            font-size: var(--font-size-small);
+            color: var(--colour-text-secondary);
+            margin-top: var(--space-1);
+        }
+
+        /* ── Error summary ── */
+        .error-summary {
+            border: 4px solid var(--colour-error);
+            padding: var(--space-4);
+            margin-bottom: var(--space-4);
+            display: none;
+        }
+        .error-summary.is-visible {
+            display: block;
+        }
+        .error-summary h2 {
+            color: var(--colour-error);
+            margin-top: 0;
+            font-size: var(--font-size-large);
+        }
+        .error-summary ul {
+            margin: 0;
+            padding-left: var(--space-4);
+        }
+        .error-summary a {
+            color: var(--colour-error);
+        }
+
+        /* Hidden UPRN field */
+        .uprn-field-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="contrast-default">
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Accessibility toolbar -->
+    <div class="accessibility-toolbar" role="region" aria-label="Accessibility options">
+        <div class="accessibility-toolbar-inner">
+            <span class="accessibility-label">Accessibility:</span>
+            <button type="button" id="contrast-toggle" class="accessibility-btn" aria-pressed="false" title="Toggle high contrast mode">
+                High contrast
+            </button>
+            <button type="button" id="text-size-increase" class="accessibility-btn" title="Increase text size">
+                A+
+            </button>
+            <button type="button" id="text-size-decrease" class="accessibility-btn" title="Decrease text size">
+                A-
+            </button>
+            <button type="button" id="text-size-reset" class="accessibility-btn" title="Reset text size">
+                Reset
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header" role="banner">
+        <div class="header-top">
+            <div class="header-inner">
+                <a href="../index.html" class="logo-link" title="Go to Gloucester City Council homepage">
+                    <span class="logo-text">Gloucester City Council</span>
+                </a>
+                <nav class="header-nav" aria-label="Header navigation">
+                    <ul class="header-nav-list">
+                        <li><a href="my-account.html" title="Sign in or register for My Account">My account</a></li>
+                        <li><a href="contact-us.html" title="Find contact details for council services">Contact us</a></li>
+                        <li><a href="accessibility-statement.html" title="Read our accessibility statement">Accessibility</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb-inner">
+            <ol class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="../index.html" title="Go to homepage">Home</a></li>
+                <li class="breadcrumb-item"><a href="bins-recycling.html" title="Go to bins and recycling">Bins and recycling</a></li>
+                <li class="breadcrumb-item" aria-current="page">Order recycling containers</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main id="main-content" role="main" class="content-page">
+        <div class="content-wrapper">
+
+            <!-- Error summary (shown on validation failure) -->
+            <div class="error-summary" id="error-summary" role="alert" aria-labelledby="error-summary-title" tabindex="-1">
+                <h2 id="error-summary-title">There is a problem</h2>
+                <ul id="error-summary-list"></ul>
+            </div>
+
+            <h1>Order recycling containers</h1>
+
+            <!-- Step indicator -->
+            <ol class="form-steps" id="form-steps" aria-label="Form progress">
+                <li class="active" id="step-indicator-1">Your address</li>
+                <li id="step-indicator-2">Collection address</li>
+                <li id="step-indicator-3">Containers</li>
+                <li id="step-indicator-4">Check your answers</li>
+            </ol>
+
+            <!-- ═══════════════════════════════════════════
+                 STEP 1 — Your home address
+            ══════════════════════════════════════════════ -->
+            <section class="form-section is-active" id="step-1" aria-labelledby="step1-heading">
+                <h2 id="step1-heading">Your home address</h2>
+                <p>Enter the address where you live. This will be used to find your account and check your eligibility.</p>
+
+                <div class="form-group">
+                    <label class="form-label" for="home-postcode">
+                        Postcode
+                        <span class="form-hint">For example, GL1 2EP</span>
+                    </label>
+                    <div style="display:flex; gap: var(--space-2); flex-wrap: wrap; align-items: flex-start;">
+                        <input class="form-input" type="text" id="home-postcode"
+                               name="home-postcode" autocomplete="postal-code"
+                               style="max-width: 12rem; text-transform: uppercase;"
+                               aria-describedby="home-postcode-hint">
+                        <button type="button" class="btn-continue" id="home-find-address"
+                                style="margin-top: 0; padding-top: 0.45rem; padding-bottom: 0.45rem;">
+                            Find address
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group" id="home-address-select-group" style="display:none;">
+                    <label class="form-label" for="home-address-select">
+                        Select your address
+                        <span class="form-hint">Choose from the list. This sets your UPRN (Unique Property Reference Number).</span>
+                    </label>
+                    <div class="address-lookup-wrapper">
+                        <select class="form-select" id="home-address-select" name="home-address-select"
+                                aria-describedby="home-uprn-status">
+                            <option value="">-- Please select your address --</option>
+                        </select>
+                    </div>
+                    <!-- Hidden UPRN field — always populated via selection, never typed -->
+                    <input type="hidden" id="home-uprn" name="home-uprn" value="">
+                    <div class="uprn-status" id="home-uprn-status" aria-live="polite">
+                        <span class="uprn-status-icon" aria-hidden="true"></span>
+                        <span class="uprn-status-text"></span>
+                    </div>
+                </div>
+
+                <div class="form-group" id="home-address-notlisted-group" style="display:none;">
+                    <p>
+                        <a href="contact-us.html" id="home-address-not-listed">
+                            My address is not in the list
+                        </a>
+                    </p>
+                </div>
+
+                <div class="form-nav">
+                    <button type="button" class="btn-continue" id="step1-continue" disabled>
+                        Continue
+                    </button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 STEP 2 — Collection address
+            ══════════════════════════════════════════════ -->
+            <section class="form-section" id="step-2" aria-labelledby="step2-heading">
+                <h2 id="step2-heading">Address containers are collected from</h2>
+
+                <fieldset>
+                    <legend class="form-label-legend" id="same-address-legend">
+                        Is <span id="step2-home-address-display" class=""></span> the address your containers are collected from?
+                    </legend>
+                    <div class="radio-group" role="group" aria-labelledby="same-address-legend">
+                        <div class="radio-item">
+                            <input type="radio" id="same-address-yes" name="same-address" value="yes">
+                            <label for="same-address-yes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="same-address-no" name="same-address" value="no">
+                            <label for="same-address-no">No</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- ── Conditional reveal: different collection address ── -->
+                <div class="conditional-reveal" id="collection-address-panel"
+                     aria-live="polite" aria-relevant="additions removals">
+
+                    <div class="info-box" style="margin-bottom: var(--space-3);">
+                        <p><strong>You must select your collection address from the list below.</strong>
+                        The form cannot proceed until a valid address with a UPRN is confirmed.
+                        If you type in the box, please wait for the list to appear and select an option.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="collection-postcode">
+                            Collection address postcode
+                            <span class="form-hint">For example, GL1 2EP</span>
+                        </label>
+                        <div style="display:flex; gap: var(--space-2); flex-wrap: wrap; align-items: flex-start;">
+                            <input class="form-input" type="text" id="collection-postcode"
+                                   name="collection-postcode" autocomplete="postal-code"
+                                   style="max-width: 12rem; text-transform: uppercase;">
+                            <button type="button" class="btn-continue" id="collection-find-address"
+                                    style="margin-top: 0; padding-top: 0.45rem; padding-bottom: 0.45rem;">
+                                Find address
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="collection-address-select-group" style="display:none;">
+                        <label class="form-label" for="collection-address-select">
+                            Select the collection address
+                            <span class="form-hint">
+                                Choose an address from the list. The UPRN will be confirmed once you make a selection.
+                            </span>
+                        </label>
+                        <select class="form-select" id="collection-address-select"
+                                name="collection-address-select"
+                                aria-describedby="collection-uprn-status"
+                                aria-required="true">
+                            <option value="">-- Please select the collection address --</option>
+                        </select>
+                        <!-- newUPRN — only populated by selecting from the dropdown, never by typing -->
+                        <input type="hidden" id="new-uprn" name="newUPRN" value="">
+
+                        <!--
+                            UPRN STATUS INDICATOR
+                            ─────────────────────
+                            This element shows the current state of the UPRN and is checked
+                            before the form can advance.  Three states:
+                              • is-pending  — "No" selected but address not yet chosen
+                              • is-set      — Address selected, UPRN confirmed ✓
+                              • is-error    — User attempted to continue without selecting
+                        -->
+                        <div class="uprn-status is-pending" id="collection-uprn-status"
+                             role="status" aria-live="polite" aria-atomic="true">
+                            <span class="uprn-status-icon" aria-hidden="true">⚠</span>
+                            <span class="uprn-status-text">
+                                Please select an address from the list to confirm the collection UPRN.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="collection-address-notlisted-group" style="display:none;">
+                        <p>
+                            <a href="contact-us.html">My collection address is not in the list</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-nav">
+                    <button type="button" class="btn-continue" id="step2-continue" disabled>
+                        Continue
+                    </button>
+                    <button type="button" class="btn-back" id="step2-back">Back</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 STEP 3 — Choose containers
+                 Includes repeatable Green Recycling Boxes
+                 (pattern from Order Green Recycling Boxes)
+            ══════════════════════════════════════════════ -->
+            <section class="form-section" id="step-3" aria-labelledby="step3-heading">
+                <h2 id="step3-heading">Choose your containers</h2>
+                <p>Select the containers you need. You can order more than one type.</p>
+
+                <!-- Container type checkboxes -->
+                <fieldset>
+                    <legend class="form-label">What do you need?</legend>
+                    <div class="container-type-grid" id="container-type-grid">
+                        <div class="container-type-card">
+                            <input type="checkbox" id="need-green-bin" name="container-types" value="green-bin">
+                            <label for="need-green-bin">
+                                <strong>Green recycling bin</strong>
+                                <span class="container-desc">240-litre wheeled bin for paper, cardboard, cans, glass and plastic.</span>
+                            </label>
+                        </div>
+                        <div class="container-type-card">
+                            <input type="checkbox" id="need-green-box" name="container-types" value="green-box">
+                            <label for="need-green-box">
+                                <strong>Green recycling box</strong>
+                                <span class="container-desc">55-litre box for glass bottles and jars.</span>
+                            </label>
+                        </div>
+                        <div class="container-type-card">
+                            <input type="checkbox" id="need-food-caddy" name="container-types" value="food-caddy">
+                            <label for="need-food-caddy">
+                                <strong>Food waste caddy</strong>
+                                <span class="container-desc">Small kitchen caddy and outdoor food bin for all food waste.</span>
+                            </label>
+                        </div>
+                        <div class="container-type-card">
+                            <input type="checkbox" id="need-black-bin" name="container-types" value="black-bin">
+                            <label for="need-black-bin">
+                                <strong>Black general waste bin</strong>
+                                <span class="container-desc">240-litre wheeled bin for non-recyclable waste.</span>
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- ── Repeatable section: Green Recycling Boxes ──────────── -->
+                <!--
+                    This repeatable pattern mirrors the "Order Green Recycling Boxes"
+                    subform. It allows residents to specify how many boxes they need
+                    and for which address (useful for flats / multi-occupancy).
+                    Each row is added by clicking "Add another address" and can be
+                    individually removed.
+                -->
+                <div id="green-boxes-section" style="display:none;" aria-live="polite">
+                    <div class="repeatable-section">
+                        <div class="repeatable-section-header">
+                            <h3 class="repeatable-section-title">Green recycling box details</h3>
+                        </div>
+                        <p class="form-hint">
+                            Add one row for each delivery address you need boxes sent to.
+                            If you need boxes for a block of flats, add a row for each flat.
+                        </p>
+
+                        <ul class="repeatable-items-list" id="green-box-items" aria-label="Green recycling box orders">
+                            <!-- Items injected by JS -->
+                        </ul>
+
+                        <button type="button" class="btn-add" id="add-green-box-row"
+                                aria-controls="green-box-items">
+                            Add another address
+                        </button>
+                    </div>
+                </div>
+                <!-- ── End repeatable section ── -->
+
+                <div class="form-nav">
+                    <button type="button" class="btn-continue" id="step3-continue">
+                        Continue
+                    </button>
+                    <button type="button" class="btn-back" id="step3-back">Back</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 STEP 4 — Check your answers
+            ══════════════════════════════════════════════ -->
+            <section class="form-section" id="step-4" aria-labelledby="step4-heading">
+                <h2 id="step4-heading">Check your answers</h2>
+                <p>Check the details below before submitting your order.</p>
+
+                <dl class="review-list" id="review-list">
+                    <!-- populated by JS -->
+                </dl>
+
+                <div class="info-box">
+                    <h3>What happens next</h3>
+                    <p>We will process your order within 10 working days. Containers will be delivered to the collection address.</p>
+                    <p>You will receive a confirmation email if you provide your email address.</p>
+                </div>
+
+                <div class="form-nav">
+                    <button type="button" class="btn-continue" id="step4-submit">
+                        Submit order
+                    </button>
+                    <button type="button" class="btn-back" id="step4-back">Back</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 STEP 5 — Confirmation
+            ══════════════════════════════════════════════ -->
+            <section class="form-section" id="step-5" aria-labelledby="step5-heading">
+                <div class="confirmation-panel">
+                    <h2 id="step5-heading">Order submitted</h2>
+                    <p>Your recycling container order has been received.</p>
+                    <p class="confirmation-ref" id="confirmation-ref"></p>
+                </div>
+                <h3>What happens next</h3>
+                <p>We will process your order within 10 working days.</p>
+                <p>Your containers will be delivered to <strong id="confirmation-address"></strong>.</p>
+                <p><a href="bins-recycling.html">Return to bins and recycling</a></p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-section">
+                <h2 class="footer-heading">Contact us</h2>
+                <ul class="footer-list">
+                    <li>Phone: <a href="tel:01452396396" title="Call the main council switchboard">01452 396 396</a></li>
+                    <li>Email: <a href="mailto:heretohelp@gloucester.gov.uk" title="Send an email to the council">heretohelp@gloucester.gov.uk</a></li>
+                    <li><a href="contact-us.html" title="Find more contact options">All contact options</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h2 class="footer-heading">About the council</h2>
+                <ul class="footer-list">
+                    <li><a href="about.html" title="Learn about Gloucester City Council">About us</a></li>
+                    <li><a href="councillors.html" title="Find your local councillor">Councillors</a></li>
+                    <li><a href="meetings.html" title="View council meeting dates and agendas">Council meetings</a></li>
+                    <li><a href="jobs.html" title="View current job vacancies">Jobs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h2 class="footer-heading">Help</h2>
+                <ul class="footer-list">
+                    <li><a href="accessibility-statement.html" title="Read our accessibility commitment">Accessibility statement</a></li>
+                    <li><a href="privacy.html" title="Read our privacy policy">Privacy policy</a></li>
+                    <li><a href="cookies.html" title="Learn about cookies on this site">Cookies</a></li>
+                    <li><a href="terms.html" title="Read our terms and conditions">Terms and conditions</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Gloucester City Council. All rights reserved.</p>
+            <p class="footer-crown">
+                <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" title="View the Open Government Licence (opens in new tab)" target="_blank" rel="noopener noreferrer">Open Government Licence v3.0</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/accessibility.js"></script>
+    <script>
+    /**
+     * Order Recycling Containers — Form Controller
+     *
+     * KEY DESIGN DECISIONS FOR UPRN RELIABILITY
+     * ──────────────────────────────────────────
+     * The newUPRN field is populated ONLY when the user selects an address from
+     * the <select> dropdown (the 'change' event).  It is never populated by
+     * free-text entry.  This prevents the race condition where customers submit
+     * before the lookup has resolved.
+     *
+     * The "Continue" button on step 2 remains disabled until:
+     *   1. A radio option (yes / no) is chosen, AND
+     *   2. If "no" was chosen: the collection-address <select> has a non-empty
+     *      value AND the hidden #new-uprn field contains a confirmed UPRN string.
+     *
+     * The UPRN status indicator gives real-time feedback so customers know
+     * they must complete the selection before moving on.
+     */
+    (function () {
+        'use strict';
+
+        /* ── State ────────────────────────────────────────────────── */
+        var state = {
+            currentStep: 1,
+            homeAddress: '',
+            homeUprn: '',
+            collectionSameAsHome: null,   // true / false
+            collectionAddress: '',
+            newUprn: '',                  // confirmed only after selection
+            collectionUprnConfirmed: false,
+            containerTypes: [],
+            greenBoxRows: []
+        };
+
+        /* ── Mock address data (simulates lookup API response) ─────── */
+        var mockAddresses = {
+            'GL1': [
+                { display: '1 Kings Square, Gloucester, GL1 1RG',  uprn: '100120486491' },
+                { display: '2 Kings Square, Gloucester, GL1 1RG',  uprn: '100120486492' },
+                { display: '5 Westgate Street, Gloucester, GL1 2NG', uprn: '100120486500' },
+                { display: '10 Westgate Street, Gloucester, GL1 2NG', uprn: '100120486510' },
+                { display: '12 Northgate Street, Gloucester, GL1 2AA', uprn: '100120486520' }
+            ],
+            'GL2': [
+                { display: '3 Hempsted Lane, Gloucester, GL2 5LA',  uprn: '100120487001' },
+                { display: '7 Hempsted Lane, Gloucester, GL2 5LA',  uprn: '100120487007' },
+                { display: '14 Naas Lane, Quedgeley, GL2 2SN',      uprn: '100120487014' }
+            ],
+            'GL4': [
+                { display: '2 Abbeymead Avenue, Gloucester, GL4 5EB', uprn: '100120488002' },
+                { display: '8 Abbeymead Avenue, Gloucester, GL4 5EB', uprn: '100120488008' },
+                { display: '3 Brockworth Road, Gloucester, GL4 7PH',  uprn: '100120488030' }
+            ]
+        };
+
+        /**
+         * Simulate an async address lookup.
+         * Returns a Promise resolving to an array of address objects.
+         * A short artificial delay (300 ms) mimics a real API call.
+         */
+        function lookupAddresses(postcode) {
+            return new Promise(function (resolve) {
+                setTimeout(function () {
+                    var district = (postcode || '').toUpperCase().split(' ')[0].substring(0, 3);
+                    resolve(mockAddresses[district] || []);
+                }, 300);
+            });
+        }
+
+        /* ── Utilities ────────────────────────────────────────────── */
+        function showErrorSummary(errors) {
+            var summary = document.getElementById('error-summary');
+            var list = document.getElementById('error-summary-list');
+            list.innerHTML = '';
+            errors.forEach(function (e) {
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                a.href = '#' + e.fieldId;
+                a.textContent = e.message;
+                li.appendChild(a);
+                list.appendChild(li);
+            });
+            if (errors.length) {
+                summary.classList.add('is-visible');
+                summary.focus();
+            } else {
+                summary.classList.remove('is-visible');
+            }
+        }
+
+        function clearErrorSummary() {
+            showErrorSummary([]);
+        }
+
+        function goToStep(n) {
+            document.querySelectorAll('.form-section').forEach(function (s) {
+                s.classList.remove('is-active');
+            });
+            var target = document.getElementById('step-' + n);
+            if (target) {
+                target.classList.add('is-active');
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Move focus to the section heading for screen readers
+                var heading = target.querySelector('h2, h3');
+                if (heading) {
+                    heading.setAttribute('tabindex', '-1');
+                    heading.focus();
+                }
+            }
+            state.currentStep = n;
+            updateStepIndicators(n);
+            clearErrorSummary();
+        }
+
+        function updateStepIndicators(active) {
+            for (var i = 1; i <= 4; i++) {
+                var li = document.getElementById('step-indicator-' + i);
+                if (!li) continue;
+                li.classList.remove('active', 'completed');
+                if (i < active) li.classList.add('completed');
+                else if (i === active) li.classList.add('active');
+            }
+        }
+
+        /* ── Address lookup helper ────────────────────────────────── */
+        function populateAddressSelect(selectEl, addresses) {
+            // Remove all options except the placeholder
+            while (selectEl.options.length > 1) {
+                selectEl.remove(1);
+            }
+            addresses.forEach(function (addr) {
+                var opt = document.createElement('option');
+                opt.value = addr.uprn;
+                opt.textContent = addr.display;
+                opt.dataset.uprn = addr.uprn;
+                opt.dataset.display = addr.display;
+                selectEl.appendChild(opt);
+            });
+        }
+
+        /* ── UPRN status helper ───────────────────────────────────── */
+        function setUprnStatus(statusEl, state_) {
+            statusEl.className = 'uprn-status';
+            var icon = statusEl.querySelector('.uprn-status-icon');
+            var text = statusEl.querySelector('.uprn-status-text');
+            if (state_ === 'set') {
+                statusEl.classList.add('is-set');
+                icon.textContent = '✓';
+                text.textContent = 'Collection address UPRN confirmed.';
+            } else if (state_ === 'pending') {
+                statusEl.classList.add('is-pending');
+                icon.textContent = '⚠';
+                text.textContent = 'Please select an address from the list to confirm the collection UPRN.';
+            } else if (state_ === 'error') {
+                statusEl.classList.add('is-error');
+                icon.textContent = '✗';
+                text.textContent = 'You must select a collection address before continuing.';
+            } else {
+                // hidden
+            }
+        }
+
+        /* ══════════════════════════════════════════════════════════
+           STEP 1 — Home address
+        ══════════════════════════════════════════════════════════ */
+        var homePostcode   = document.getElementById('home-postcode');
+        var homeFindBtn    = document.getElementById('home-find-address');
+        var homeSelectGrp  = document.getElementById('home-address-select-group');
+        var homeSelectEl   = document.getElementById('home-address-select');
+        var homeUprnEl     = document.getElementById('home-uprn');
+        var homeUprnStatus = document.getElementById('home-uprn-status');
+        var homeNotListed  = document.getElementById('home-address-notlisted-group');
+        var step1Continue  = document.getElementById('step1-continue');
+
+        homeFindBtn.addEventListener('click', function () {
+            var pc = homePostcode.value.trim();
+            if (!pc) {
+                homePostcode.classList.add('form-error');
+                showErrorSummary([{ fieldId: 'home-postcode', message: 'Enter a postcode' }]);
+                return;
+            }
+            homePostcode.classList.remove('form-error');
+            homeFindBtn.textContent = 'Searching…';
+            homeFindBtn.disabled = true;
+
+            lookupAddresses(pc).then(function (addresses) {
+                homeFindBtn.textContent = 'Find address';
+                homeFindBtn.disabled = false;
+
+                if (addresses.length === 0) {
+                    showErrorSummary([{
+                        fieldId: 'home-postcode',
+                        message: 'No addresses found for that postcode. Check and try again.'
+                    }]);
+                    return;
+                }
+
+                populateAddressSelect(homeSelectEl, addresses);
+
+                // Reset any previous UPRN
+                homeUprnEl.value = '';
+                state.homeUprn = '';
+                state.homeAddress = '';
+                step1Continue.disabled = true;
+
+                var statusIcon = homeUprnStatus.querySelector('.uprn-status-icon');
+                var statusText = homeUprnStatus.querySelector('.uprn-status-text');
+                homeUprnStatus.className = 'uprn-status is-pending';
+                statusIcon.textContent = '⚠';
+                statusText.textContent = 'Please select your address from the list.';
+
+                homeSelectGrp.style.display = '';
+                homeNotListed.style.display = '';
+                homeSelectEl.focus();
+            });
+        });
+
+        // Allow Enter key on postcode field to trigger find
+        homePostcode.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') { e.preventDefault(); homeFindBtn.click(); }
+        });
+
+        /**
+         * UPRN is set HERE — only when the user actively selects from the dropdown.
+         * This guarantees the hidden field is always in sync with the visible
+         * selection and eliminates the race condition.
+         */
+        homeSelectEl.addEventListener('change', function () {
+            var selected = homeSelectEl.options[homeSelectEl.selectedIndex];
+            if (!selected || !selected.value) {
+                homeUprnEl.value = '';
+                state.homeUprn = '';
+                state.homeAddress = '';
+                step1Continue.disabled = true;
+
+                var statusIcon = homeUprnStatus.querySelector('.uprn-status-icon');
+                var statusText = homeUprnStatus.querySelector('.uprn-status-text');
+                homeUprnStatus.className = 'uprn-status is-pending';
+                statusIcon.textContent = '⚠';
+                statusText.textContent = 'Please select your address from the list.';
+                return;
+            }
+
+            // Confirmed selection — set UPRN immediately
+            homeUprnEl.value = selected.dataset.uprn;
+            state.homeUprn   = selected.dataset.uprn;
+            state.homeAddress = selected.dataset.display;
+
+            var statusIcon = homeUprnStatus.querySelector('.uprn-status-icon');
+            var statusText = homeUprnStatus.querySelector('.uprn-status-text');
+            homeUprnStatus.className = 'uprn-status is-set';
+            statusIcon.textContent = '✓';
+            statusText.textContent = 'Address confirmed (UPRN: ' + selected.dataset.uprn + ')';
+
+            step1Continue.disabled = false;
+        });
+
+        step1Continue.addEventListener('click', function () {
+            if (!state.homeUprn) return;
+            // Populate step 2 legend with chosen address
+            var display = document.getElementById('step2-home-address-display');
+            if (display) display.textContent = state.homeAddress;
+            goToStep(2);
+            evaluateStep2Continue();
+        });
+
+        /* ══════════════════════════════════════════════════════════
+           STEP 2 — Collection address
+        ══════════════════════════════════════════════════════════ */
+        var sameYes               = document.getElementById('same-address-yes');
+        var sameNo                = document.getElementById('same-address-no');
+        var collectionPanel       = document.getElementById('collection-address-panel');
+        var collPostcode          = document.getElementById('collection-postcode');
+        var collFindBtn           = document.getElementById('collection-find-address');
+        var collSelectGrp         = document.getElementById('collection-address-select-group');
+        var collSelectEl          = document.getElementById('collection-address-select');
+        var newUprnEl             = document.getElementById('new-uprn');
+        var collUprnStatusEl      = document.getElementById('collection-uprn-status');
+        var collNotListed         = document.getElementById('collection-address-notlisted-group');
+        var step2Continue         = document.getElementById('step2-continue');
+        var step2Back             = document.getElementById('step2-back');
+
+        function evaluateStep2Continue() {
+            var radioSelected = sameYes.checked || sameNo.checked;
+            if (!radioSelected) {
+                step2Continue.disabled = true;
+                return;
+            }
+            if (sameYes.checked) {
+                // Use home address UPRN — always available from step 1
+                step2Continue.disabled = false;
+                return;
+            }
+            // "No" selected: only enable once UPRN is confirmed
+            step2Continue.disabled = !state.collectionUprnConfirmed;
+        }
+
+        sameYes.addEventListener('change', function () {
+            collectionPanel.classList.remove('is-visible');
+            state.collectionSameAsHome = true;
+            // Carry home address / UPRN as the collection address
+            state.collectionAddress = state.homeAddress;
+            state.newUprn = state.homeUprn;
+            state.collectionUprnConfirmed = true;
+            evaluateStep2Continue();
+        });
+
+        sameNo.addEventListener('change', function () {
+            collectionPanel.classList.add('is-visible');
+            state.collectionSameAsHome = false;
+            // Reset the collection UPRN — customer must select a new address
+            newUprnEl.value = '';
+            state.newUprn = '';
+            state.collectionAddress = '';
+            state.collectionUprnConfirmed = false;
+            setUprnStatus(collUprnStatusEl, 'pending');
+            evaluateStep2Continue();
+            collPostcode.focus();
+        });
+
+        collFindBtn.addEventListener('click', function () {
+            var pc = collPostcode.value.trim();
+            if (!pc) {
+                collPostcode.classList.add('form-error');
+                showErrorSummary([{ fieldId: 'collection-postcode', message: 'Enter a collection address postcode' }]);
+                return;
+            }
+            collPostcode.classList.remove('form-error');
+            collFindBtn.textContent = 'Searching…';
+            collFindBtn.disabled = true;
+
+            lookupAddresses(pc).then(function (addresses) {
+                collFindBtn.textContent = 'Find address';
+                collFindBtn.disabled = false;
+
+                if (addresses.length === 0) {
+                    showErrorSummary([{
+                        fieldId: 'collection-postcode',
+                        message: 'No addresses found for that postcode. Check and try again.'
+                    }]);
+                    return;
+                }
+
+                populateAddressSelect(collSelectEl, addresses);
+
+                // ── CRITICAL: reset UPRN whenever new results are loaded ──
+                // This prevents an old UPRN from a previous search remaining
+                // set while a different address is displayed in the dropdown.
+                newUprnEl.value = '';
+                state.newUprn = '';
+                state.collectionAddress = '';
+                state.collectionUprnConfirmed = false;
+                setUprnStatus(collUprnStatusEl, 'pending');
+                step2Continue.disabled = true;
+
+                collSelectGrp.style.display = '';
+                collNotListed.style.display = '';
+                collSelectEl.focus();
+            });
+        });
+
+        collPostcode.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') { e.preventDefault(); collFindBtn.click(); }
+        });
+
+        /**
+         * newUPRN update — the core fix.
+         *
+         * The hidden #new-uprn field is ONLY written here, in the 'change'
+         * handler for the collection address <select>.  This means:
+         *
+         *   • The value is set atomically with the visible selection.
+         *   • Fast customers who skip directly to "Continue" will be blocked
+         *     because the Continue button remains disabled until this fires.
+         *   • There is no reliance on timers, debounce delays or polling —
+         *     the form simply cannot advance until a positive selection is made.
+         *
+         * If the user clears the dropdown back to the placeholder, the UPRN
+         * is immediately cleared and the Continue button disabled again.
+         */
+        collSelectEl.addEventListener('change', function () {
+            var selected = collSelectEl.options[collSelectEl.selectedIndex];
+
+            if (!selected || !selected.value) {
+                // User de-selected — clear UPRN and block continuation
+                newUprnEl.value = '';
+                state.newUprn = '';
+                state.collectionAddress = '';
+                state.collectionUprnConfirmed = false;
+                setUprnStatus(collUprnStatusEl, 'pending');
+                evaluateStep2Continue();
+                return;
+            }
+
+            // ── Selection confirmed — write newUPRN ──────────────────────
+            newUprnEl.value               = selected.dataset.uprn;
+            state.newUprn                 = selected.dataset.uprn;
+            state.collectionAddress       = selected.dataset.display;
+            state.collectionUprnConfirmed = true;
+
+            setUprnStatus(collUprnStatusEl, 'set');
+            evaluateStep2Continue();
+        });
+
+        step2Continue.addEventListener('click', function () {
+            // Guard: should not be reachable if disabled, but belt-and-braces
+            if (sameNo.checked && !state.collectionUprnConfirmed) {
+                setUprnStatus(collUprnStatusEl, 'error');
+                showErrorSummary([{
+                    fieldId: 'collection-address-select',
+                    message: 'Select a collection address from the list to confirm the UPRN'
+                }]);
+                collSelectEl.focus();
+                return;
+            }
+            goToStep(3);
+        });
+
+        step2Back.addEventListener('click', function () { goToStep(1); });
+
+        /* ══════════════════════════════════════════════════════════
+           STEP 3 — Containers + Repeatable Green Boxes
+        ══════════════════════════════════════════════════════════ */
+        var greenBoxSection   = document.getElementById('green-boxes-section');
+        var greenBoxItemsList = document.getElementById('green-box-items');
+        var addGreenBoxBtn    = document.getElementById('add-green-box-row');
+        var step3Continue     = document.getElementById('step3-continue');
+        var step3Back         = document.getElementById('step3-back');
+        var greenBoxCounter   = 0;
+
+        // Show/hide Green Box repeatable section based on checkbox
+        document.getElementById('need-green-box').addEventListener('change', function () {
+            if (this.checked) {
+                greenBoxSection.style.display = '';
+                // Auto-add first row if none exist
+                if (greenBoxItemsList.children.length === 0) {
+                    addGreenBoxRow();
+                }
+            } else {
+                greenBoxSection.style.display = 'none';
+            }
+        });
+
+        /**
+         * Build a repeatable Green Recycling Box row.
+         * Each row contains:
+         *   – A delivery address (pre-filled with the confirmed collection address)
+         *   – A quantity selector
+         *   – A remove button (hidden on the last remaining row)
+         */
+        function addGreenBoxRow(prefillAddress) {
+            greenBoxCounter++;
+            var id = 'green-box-row-' + greenBoxCounter;
+            var li = document.createElement('li');
+            li.className = 'repeatable-item';
+            li.id = id;
+            li.setAttribute('aria-label', 'Green recycling box order ' + greenBoxCounter);
+
+            var address = prefillAddress || state.collectionAddress || state.homeAddress || '';
+
+            li.innerHTML = [
+                '<div class="repeatable-item-header">',
+                    '<span class="repeatable-item-label">Order ' + greenBoxCounter + '</span>',
+                    '<button type="button" class="btn-remove" data-removes="' + id + '" aria-label="Remove order ' + greenBoxCounter + '">',
+                        'Remove',
+                    '</button>',
+                '</div>',
+
+                /* Delivery address */
+                '<div class="form-group">',
+                    '<label class="form-label" for="' + id + '-address">',
+                        'Delivery address',
+                        '<span class="form-hint">',
+                            'The address where the boxes will be delivered.',
+                            ' If different from your collection address, enter the full address below.',
+                        '</span>',
+                    '</label>',
+                    '<input class="form-input" type="text" id="' + id + '-address"',
+                    '       name="' + id + '-address" value="' + escapeHtml(address) + '"',
+                    '       autocomplete="street-address" style="max-width:40rem;">',
+                '</div>',
+
+                /* Quantity */
+                '<div class="form-group">',
+                    '<label class="form-label" for="' + id + '-quantity">',
+                        'Number of green boxes needed',
+                    '</label>',
+                    '<select class="form-select" id="' + id + '-quantity"',
+                    '        name="' + id + '-quantity" style="max-width:8rem;">',
+                        '<option value="1">1</option>',
+                        '<option value="2">2</option>',
+                        '<option value="3">3</option>',
+                        '<option value="4">4</option>',
+                        '<option value="5">5</option>',
+                    '</select>',
+                '</div>',
+
+                /* Reason (optional) */
+                '<div class="form-group">',
+                    '<label class="form-label" for="' + id + '-reason">',
+                        'Reason for request',
+                        '<span class="form-hint">Optional — for example: new property, replacement, additional</span>',
+                    '</label>',
+                    '<select class="form-select" id="' + id + '-reason"',
+                    '        name="' + id + '-reason" style="max-width:20rem;">',
+                        '<option value="">-- Select a reason --</option>',
+                        '<option value="new">New property / first request</option>',
+                        '<option value="replacement">Replacement (lost, stolen or damaged)</option>',
+                        '<option value="additional">Additional box needed</option>',
+                        '<option value="new-resident">New resident</option>',
+                    '</select>',
+                '</div>'
+            ].join('');
+
+            greenBoxItemsList.appendChild(li);
+
+            // Remove handler
+            li.querySelector('.btn-remove').addEventListener('click', function () {
+                var targetId = this.getAttribute('data-removes');
+                var target   = document.getElementById(targetId);
+                if (target) {
+                    target.remove();
+                    announceToScreenReader('Order row removed.');
+                    updateRemoveButtons();
+                }
+            });
+
+            updateRemoveButtons();
+            li.querySelector('input, select').focus();
+            return li;
+        }
+
+        function updateRemoveButtons() {
+            var rows = greenBoxItemsList.querySelectorAll('.repeatable-item');
+            rows.forEach(function (row, idx) {
+                var btn = row.querySelector('.btn-remove');
+                if (btn) {
+                    // Hide remove button when only one row remains
+                    btn.style.display = rows.length === 1 ? 'none' : '';
+                    // Update aria-label to reflect current position
+                    btn.setAttribute('aria-label', 'Remove order ' + (idx + 1));
+                }
+            });
+        }
+
+        addGreenBoxBtn.addEventListener('click', function () {
+            addGreenBoxRow();
+            announceToScreenReader('New order row added.');
+        });
+
+        step3Continue.addEventListener('click', function () {
+            var checked = document.querySelectorAll('input[name="container-types"]:checked');
+            if (checked.length === 0) {
+                showErrorSummary([{
+                    fieldId: 'need-green-bin',
+                    message: 'Select at least one container type'
+                }]);
+                return;
+            }
+            state.containerTypes = Array.from(checked).map(function (c) { return c.value; });
+            buildReviewPage();
+            goToStep(4);
+        });
+
+        step3Back.addEventListener('click', function () { goToStep(2); });
+
+        /* ══════════════════════════════════════════════════════════
+           STEP 4 — Check your answers
+        ══════════════════════════════════════════════════════════ */
+        var step4Submit = document.getElementById('step4-submit');
+        var step4Back   = document.getElementById('step4-back');
+
+        var containerLabels = {
+            'green-bin':  'Green recycling bin (240L)',
+            'green-box':  'Green recycling box (55L)',
+            'food-caddy': 'Food waste caddy',
+            'black-bin':  'Black general waste bin (240L)'
+        };
+
+        function buildReviewPage() {
+            var dl  = document.getElementById('review-list');
+            var collAddr = state.collectionSameAsHome
+                ? state.homeAddress + ' (same as home address)'
+                : state.collectionAddress;
+
+            var containers = state.containerTypes.map(function (t) {
+                return containerLabels[t] || t;
+            }).join(', ');
+
+            var rows = [
+                { label: 'Home address',       value: state.homeAddress,  field: 'step-1' },
+                { label: 'Home address UPRN',   value: state.homeUprn,     field: 'step-1' },
+                { label: 'Collection address',  value: collAddr,           field: 'step-2' },
+                { label: 'Collection UPRN',     value: state.newUprn || state.homeUprn, field: 'step-2' },
+                { label: 'Containers ordered',  value: containers,         field: 'step-3' }
+            ];
+
+            dl.innerHTML = rows.map(function (r) {
+                return '<div class="review-row">' +
+                    '<dt>' + escapeHtml(r.label) + '</dt>' +
+                    '<dd>' + escapeHtml(r.value || '—') + '</dd>' +
+                    '<dd class="change-link"><a href="#" data-go-step="' + r.field + '" ' +
+                        'aria-label="Change ' + escapeHtml(r.label) + '">Change</a></dd>' +
+                    '</div>';
+            }).join('');
+
+            // Wire up change links
+            dl.querySelectorAll('[data-go-step]').forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var stepNum = this.getAttribute('data-go-step').replace('step-', '');
+                    goToStep(parseInt(stepNum, 10));
+                });
+            });
+        }
+
+        step4Submit.addEventListener('click', function () {
+            // In a real implementation this would POST to an API/back-end
+            var ref = 'GCC-RC-' + Date.now().toString(36).toUpperCase();
+            document.getElementById('confirmation-ref').textContent = 'Your reference number is ' + ref;
+            var collAddr = state.collectionSameAsHome ? state.homeAddress : state.collectionAddress;
+            document.getElementById('confirmation-address').textContent = collAddr || state.homeAddress;
+            goToStep(5);
+        });
+
+        step4Back.addEventListener('click', function () { goToStep(3); });
+
+        /* ── Utility: safe HTML escaping ─────────────────────────── */
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        /* ── Announce helper (reuse from main.js if available) ──── */
+        function announceToScreenReader(msg) {
+            if (window.announceToScreenReader) {
+                window.announceToScreenReader(msg);
+            }
+        }
+
+    }());
+    </script>
+</body>
+</html>
