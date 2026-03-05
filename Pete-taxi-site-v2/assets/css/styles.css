@@ -230,7 +230,8 @@ a:focus {
 }
 
 /* ====================================================
-   ACCESSIBILITY TOOLBAR
+   ACCESSIBILITY TOOLBAR (legacy simple bar — kept for
+   non-JS fallback; hidden once JS toolbar injects)
    ==================================================== */
 .gcc-a11y-bar {
   background: var(--neutral-900);
@@ -290,6 +291,395 @@ a:focus {
   color: var(--focus-text);
   border-color: var(--focus);
   font-weight: 700;
+}
+
+/* ====================================================
+   FULL ACCESSIBILITY TOOLBAR (JS-injected)
+   ==================================================== */
+
+/* Push page content down when toolbar is fixed at top */
+body.a11y-toolbar-open {
+  padding-top: 64px;
+}
+
+/* ---- Launch button (fixed bottom-right) ---- */
+.a11y-launch-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #1565c0, #0d47a1);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(13, 71, 161, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 44px;
+}
+
+.a11y-launch-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(13, 71, 161, 0.65);
+}
+
+.a11y-launch-btn:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* ---- Main toolbar bar ---- */
+.a11y-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 6px 10px;
+  background: linear-gradient(90deg, #0d2137 0%, #0a3d6b 50%, #0d2137 100%);
+  border-bottom: 2px solid #4fc3f7;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  min-height: 60px;
+}
+
+.a11y-toolbar__logo {
+  color: #4fc3f7;
+  font-weight: 800;
+  font-size: 0.8125rem;
+  margin-right: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ---- Toolbar buttons ---- */
+.a11y-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 9px;
+  min-width: 54px;
+  min-height: 44px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.625rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.a11y-btn .a11y-btn-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.a11y-btn .a11y-btn-label {
+  font-size: 0.625rem;
+}
+
+.a11y-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.a11y-btn:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  background: var(--focus);
+  color: var(--focus-text);
+  border-color: transparent;
+}
+
+.a11y-btn--active {
+  background: #1a3a5c !important;
+  border-color: #4fc3f7 !important;
+}
+
+.a11y-btn--active:hover {
+  background: #1e4570 !important;
+}
+
+/* ---- Font size display ---- */
+.a11y-font-size-display {
+  color: #4fc3f7;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-align: center;
+  min-width: 32px;
+  flex-shrink: 0;
+}
+
+/* ---- Divider ---- */
+.a11y-divider {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 4px 2px;
+  flex-shrink: 0;
+}
+
+/* ---- Dropdown wrapper ---- */
+.a11y-dropdown-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ---- Dropdown menus ---- */
+.a11y-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 10001;
+  min-width: 160px;
+  background: #0d2137;
+  border: 1px solid #4fc3f7;
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.a11y-dropdown-wrap--right .a11y-menu {
+  left: auto;
+  right: 0;
+}
+
+.a11y-menu--scroll {
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.a11y-menu-heading {
+  color: #4fc3f7;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px 8px;
+}
+
+.a11y-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  padding: 6px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: background 0.1s;
+  min-height: 36px;
+}
+
+.a11y-menu-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.a11y-menu-item:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+
+.a11y-menu-item--active {
+  background: #1a3a5c;
+  font-weight: 700;
+}
+
+/* ---- Colour swatch in menu ---- */
+.a11y-color-swatch {
+  display: inline-block;
+  width: 22px;
+  height: 14px;
+  border-radius: 3px;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+
+/* ---- Close button ---- */
+.a11y-close-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin-left: auto;
+  padding: 6px 12px;
+  min-height: 44px;
+  background: rgba(255, 80, 80, 0.12);
+  border: 1px solid rgba(255, 80, 80, 0.4);
+  border-radius: 6px;
+  color: #ff8080;
+  font-family: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.a11y-close-btn .a11y-btn-label {
+  font-size: 0.625rem;
+  color: #ff8080;
+}
+
+.a11y-close-btn:hover {
+  background: rgba(255, 80, 80, 0.22);
+}
+
+.a11y-close-btn:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ---- Reading ruler ---- */
+.a11y-ruler {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 40px;
+  z-index: 9990;
+  background: rgba(255, 255, 100, 0.28);
+  border-top: 2px solid #ffcc00;
+  border-bottom: 2px solid #ffcc00;
+  pointer-events: none;
+}
+
+/* ---- Screen mask ---- */
+.a11y-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 9985;
+  background: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+/* ---- Magnifier ---- */
+.a11y-magnifier {
+  position: fixed;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 3px solid #4fc3f7;
+  box-shadow: 0 0 0 4px rgba(79, 195, 247, 0.3), 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+}
+
+/* ---- Dictionary popup ---- */
+.a11y-dict-popup {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  z-index: 10000;
+  min-width: 280px;
+  max-width: 340px;
+  background: #0d2137;
+  border: 1px solid #4fc3f7;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.a11y-dict-popup__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.a11y-dict-word {
+  color: #4fc3f7;
+  font-size: 1rem;
+}
+
+.a11y-dict-def {
+  color: #cdd6f4;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.a11y-dict-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.125rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-height: 36px;
+  min-width: 36px;
+}
+
+.a11y-dict-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.a11y-dict-close:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ---- Language notice ---- */
+.a11y-lang-notice {
+  position: fixed;
+  bottom: 80px;
+  left: 24px;
+  z-index: 10000;
+  max-width: 340px;
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 10px 16px;
+  color: #856404;
+  font-size: 0.8125rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ---- Responsive — stack toolbar on small screens ---- */
+@media (max-width: 40rem) {
+  .a11y-toolbar {
+    gap: 2px;
+    padding: 4px 6px;
+  }
+
+  .a11y-btn {
+    min-width: 44px;
+    padding: 4px 6px;
+  }
+
+  .a11y-btn .a11y-btn-label,
+  .a11y-font-size-display {
+    display: none;
+  }
+
+  body.a11y-toolbar-open {
+    padding-top: 54px;
+  }
 }
 
 /* ====================================================
