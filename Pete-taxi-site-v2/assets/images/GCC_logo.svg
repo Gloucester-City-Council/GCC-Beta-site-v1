@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" role="img" aria-label="Gloucester City Council logo">
+  <title>Gloucester City Council</title>
+  <!-- Shield / crest shape -->
+  <path d="M10 8 L10 36 C10 50 20 58 30 60 C40 58 50 50 50 36 L50 8 Z" fill="#1a5c38"/>
+  <!-- Cross on shield -->
+  <rect x="27" y="12" width="6" height="32" fill="#ffffff"/>
+  <rect x="14" y="25" width="32" height="6" fill="#ffffff"/>
+  <!-- Council name text -->
+  <text x="60" y="22" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#1a5c38" letter-spacing="0.5">Gloucester City</text>
+  <text x="60" y="40" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#1a5c38" letter-spacing="0.5">Council</text>
+</svg>
