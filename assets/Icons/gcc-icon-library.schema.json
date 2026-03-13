@@ -1,0 +1,397 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gloucester.gov.uk/schemas/icon-library/v1.1.0",
+  "title": "GCC Icon Library",
+  "description": "Standard icon library for Gloucester City Council digital services. Two parallel icon systems: (1) icon_library — Unicode emoji, zero dependency, for inline content; (2) svg_icons — open-source SVG sets, for UI components and service navigation.",
+  "version": "1.1.0",
+  "_publish_status": "draft",
+  "_source": "Gloucester City Council — Head of Transformation and Commissioning",
+  "_schema_url": "https://gloucester.gov.uk/schemas/icon-library/v1.1.0",
+  "_changelog": [
+    { "version": "1.1.0", "date": "2026-03-13", "note": "Added svg_icon_libraries metadata and svg_icons section mapping all canonical GCC icons across Lucide, Heroicons, Material Symbols, and Phosphor." },
+    { "version": "1.0.0", "date": "2026-03-13", "note": "Initial emoji icon library." }
+  ],
+
+  "svg_icon_libraries": {
+    "_description": "Approved open-source SVG icon libraries for GCC digital services. All permissively licensed — no attribution required in compiled output.",
+    "_recommendation": "Default to Lucide. Use Material Symbols as fallback for icons not in Lucide's set. Use Heroicons when outline/solid toggle states are needed. Use Phosphor when weight variants (thin, bold, duotone) are required.",
+    "libraries": [
+      {
+        "id": "lucide",
+        "name": "Lucide",
+        "licence": "MIT",
+        "url": "https://lucide.dev",
+        "icon_count": "1400+",
+        "style": "Outline only, 1.5px stroke, rounded linecaps/joins",
+        "recommended_for": "Primary library. Consistent, clean, municipal-appropriate. Navigation, forms, service pages.",
+        "cdn_base": "https://unpkg.com/lucide-static/icons/",
+        "cdn_bundle": "https://unpkg.com/lucide@latest/dist/umd/lucide.min.js",
+        "install_npm": "npm install lucide-react",
+        "usage_react": "import { Trash2 } from 'lucide-react'; <Trash2 size={24} />",
+        "usage_html": "<img src=\"https://unpkg.com/lucide-static/icons/trash-2.svg\" width=\"24\" height=\"24\" alt=\"General waste\" />"
+      },
+      {
+        "id": "heroicons",
+        "name": "Heroicons",
+        "licence": "MIT",
+        "url": "https://heroicons.com",
+        "icon_count": "292",
+        "style": "Outline (1.5px stroke) and Solid (filled) variants per icon",
+        "recommended_for": "When active/inactive toggle states are needed — outline = inactive, solid = active.",
+        "cdn_base_outline": "https://unpkg.com/heroicons/24/outline/",
+        "cdn_base_solid": "https://unpkg.com/heroicons/24/solid/",
+        "install_npm": "npm install @heroicons/react",
+        "usage_react": "import { TrashIcon } from '@heroicons/react/24/outline'; <TrashIcon className=\"size-6\" />"
+      },
+      {
+        "id": "material",
+        "name": "Material Symbols",
+        "licence": "Apache 2.0",
+        "url": "https://fonts.google.com/icons",
+        "icon_count": "3000+",
+        "style": "Outlined, Filled, Rounded, Sharp — variable font with weight/fill axes",
+        "recommended_for": "Fallback when Lucide lacks the required icon. Also works as a web font with no SVG files needed.",
+        "web_font_cdn": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined",
+        "install_cdn": "<link href=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined\" rel=\"stylesheet\">",
+        "usage_html": "<span class=\"material-symbols-outlined\" aria-hidden=\"true\">search</span>"
+      },
+      {
+        "id": "phosphor",
+        "name": "Phosphor Icons",
+        "licence": "MIT",
+        "url": "https://phosphoricons.com",
+        "icon_count": "9000+",
+        "style": "Thin, Light, Regular, Bold, Fill, Duotone",
+        "recommended_for": "When visual weight variants are needed (e.g. bold headings, light body, duotone decorative).",
+        "cdn_base_regular": "https://unpkg.com/@phosphor-icons/core/assets/regular/",
+        "install_npm": "npm install @phosphor-icons/react",
+        "usage_react": "import { Trash } from '@phosphor-icons/react'; <Trash size={24} />"
+      }
+    ]
+  },
+
+  "svg_icons": {
+    "_description": "GCC canonical icon set mapped across all four approved libraries. The 'id' field is the stable GCC reference — use this in all schemas, MCP tools, and HTML templates. Each entry maps to the closest semantic equivalent in each library.",
+    "categories": [
+      {
+        "id": "waste-recycling",
+        "name": "Waste & recycling",
+        "icons": [
+          {
+            "id": "bin-general", "name": "General waste", "tags": ["rubbish", "refuse", "black bin", "trash"],
+            "lucide":    { "icon": "Trash2",              "cdn": "https://unpkg.com/lucide-static/icons/trash-2.svg",           "import": "import { Trash2 } from 'lucide-react'" },
+            "heroicons": { "icon": "TrashIcon",           "cdn_outline": "https://unpkg.com/heroicons/24/outline/trash.svg",    "cdn_solid": "https://unpkg.com/heroicons/24/solid/trash.svg",    "import": "import { TrashIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "delete",              "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/delete/default/24px.svg",              "font_usage": "<span class=\"material-symbols-outlined\">delete</span>" },
+            "phosphor":  { "icon": "Trash",               "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/trash.svg",                                              "import": "import { Trash } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "bin-recycling", "name": "Recycling", "tags": ["recycle", "blue bin", "green"],
+            "lucide":    { "icon": "Recycle",             "cdn": "https://unpkg.com/lucide-static/icons/recycle.svg",           "import": "import { Recycle } from 'lucide-react'" },
+            "heroicons": { "icon": "ArrowPathIcon",       "cdn_outline": "https://unpkg.com/heroicons/24/outline/arrow-path.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/arrow-path.svg","import": "import { ArrowPathIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "recycling",           "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/recycling/default/24px.svg",          "font_usage": "<span class=\"material-symbols-outlined\">recycling</span>" },
+            "phosphor":  { "icon": "ArrowsClockwise",     "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/arrows-clockwise.svg",                                   "import": "import { ArrowsClockwise } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "bin-garden", "name": "Garden waste", "tags": ["garden", "brown bin", "leaves", "green waste"],
+            "lucide":    { "icon": "Leaf",                "cdn": "https://unpkg.com/lucide-static/icons/leaf.svg",              "import": "import { Leaf } from 'lucide-react'" },
+            "heroicons": { "icon": "SparklesIcon",        "cdn_outline": "https://unpkg.com/heroicons/24/outline/sparkles.svg", "cdn_solid": "https://unpkg.com/heroicons/24/solid/sparkles.svg", "import": "import { SparklesIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "yard",                "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/yard/default/24px.svg",               "font_usage": "<span class=\"material-symbols-outlined\">yard</span>" },
+            "phosphor":  { "icon": "Plant",               "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/plant.svg",                                              "import": "import { Plant } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "bulky-waste", "name": "Bulky waste", "tags": ["large items", "furniture", "collection"],
+            "lucide":    { "icon": "Sofa",                "cdn": "https://unpkg.com/lucide-static/icons/sofa.svg",              "import": "import { Sofa } from 'lucide-react'" },
+            "heroicons": { "icon": "ArchiveBoxArrowDownIcon","cdn_outline": "https://unpkg.com/heroicons/24/outline/archive-box-arrow-down.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/archive-box-arrow-down.svg","import": "import { ArchiveBoxArrowDownIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "weekend",             "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/weekend/default/24px.svg",            "font_usage": "<span class=\"material-symbols-outlined\">weekend</span>" },
+            "phosphor":  { "icon": "Couch",               "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/couch.svg",                                              "import": "import { Couch } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "street-cleansing", "name": "Street cleansing", "tags": ["sweep", "litter", "clean", "brush"],
+            "lucide":    { "icon": "Brush",               "cdn": "https://unpkg.com/lucide-static/icons/brush.svg",             "import": "import { Brush } from 'lucide-react'" },
+            "heroicons": { "icon": "WrenchScrewdriverIcon","cdn_outline": "https://unpkg.com/heroicons/24/outline/wrench-screwdriver.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/wrench-screwdriver.svg","import": "import { WrenchScrewdriverIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "cleaning_services",   "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/cleaning_services/default/24px.svg", "font_usage": "<span class=\"material-symbols-outlined\">cleaning_services</span>" },
+            "phosphor":  { "icon": "Broom",               "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/broom.svg",                                              "import": "import { Broom } from '@phosphor-icons/react'" }
+          }
+        ]
+      },
+      {
+        "id": "payments-council-tax",
+        "name": "Payments & council tax",
+        "icons": [
+          {
+            "id": "council-tax", "name": "Council tax", "tags": ["tax", "bill", "local tax"],
+            "lucide":    { "icon": "Landmark",            "cdn": "https://unpkg.com/lucide-static/icons/landmark.svg",          "import": "import { Landmark } from 'lucide-react'" },
+            "heroicons": { "icon": "BuildingLibraryIcon", "cdn_outline": "https://unpkg.com/heroicons/24/outline/building-library.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/building-library.svg","import": "import { BuildingLibraryIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "account_balance",     "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/account_balance/default/24px.svg",   "font_usage": "<span class=\"material-symbols-outlined\">account_balance</span>" },
+            "phosphor":  { "icon": "Bank",                "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/bank.svg",                                               "import": "import { Bank } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "payment", "name": "Make a payment", "tags": ["pay", "card", "online"],
+            "lucide":    { "icon": "CreditCard",          "cdn": "https://unpkg.com/lucide-static/icons/credit-card.svg",       "import": "import { CreditCard } from 'lucide-react'" },
+            "heroicons": { "icon": "CreditCardIcon",      "cdn_outline": "https://unpkg.com/heroicons/24/outline/credit-card.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/credit-card.svg","import": "import { CreditCardIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "payment",             "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/payment/default/24px.svg",            "font_usage": "<span class=\"material-symbols-outlined\">payment</span>" },
+            "phosphor":  { "icon": "CreditCard",          "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/credit-card.svg",                                        "import": "import { CreditCard } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "direct-debit", "name": "Direct debit", "tags": ["DD", "bank", "recurring"],
+            "lucide":    { "icon": "Repeat",              "cdn": "https://unpkg.com/lucide-static/icons/repeat.svg",            "import": "import { Repeat } from 'lucide-react'" },
+            "heroicons": { "icon": "ArrowPathRoundedSquareIcon","cdn_outline": "https://unpkg.com/heroicons/24/outline/arrow-path-rounded-square.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/arrow-path-rounded-square.svg","import": "import { ArrowPathRoundedSquareIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "autorenew",           "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/autorenew/default/24px.svg",          "font_usage": "<span class=\"material-symbols-outlined\">autorenew</span>" },
+            "phosphor":  { "icon": "Repeat",              "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/repeat.svg",                                             "import": "import { Repeat } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "discount", "name": "Discount / reduction", "tags": ["single person", "SMI", "reduction"],
+            "lucide":    { "icon": "Tag",                 "cdn": "https://unpkg.com/lucide-static/icons/tag.svg",               "import": "import { Tag } from 'lucide-react'" },
+            "heroicons": { "icon": "TagIcon",             "cdn_outline": "https://unpkg.com/heroicons/24/outline/tag.svg",      "cdn_solid": "https://unpkg.com/heroicons/24/solid/tag.svg",      "import": "import { TagIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "local_offer",         "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/local_offer/default/24px.svg",        "font_usage": "<span class=\"material-symbols-outlined\">local_offer</span>" },
+            "phosphor":  { "icon": "Tag",                 "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/tag.svg",                                                "import": "import { Tag } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "exemption", "name": "Exemption", "tags": ["Class E", "exempt", "student"],
+            "lucide":    { "icon": "BadgeCheck",          "cdn": "https://unpkg.com/lucide-static/icons/badge-check.svg",       "import": "import { BadgeCheck } from 'lucide-react'" },
+            "heroicons": { "icon": "CheckBadgeIcon",      "cdn_outline": "https://unpkg.com/heroicons/24/outline/check-badge.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/check-badge.svg","import": "import { CheckBadgeIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "verified",            "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/verified/default/24px.svg",           "font_usage": "<span class=\"material-symbols-outlined\">verified</span>" },
+            "phosphor":  { "icon": "SealCheck",           "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/seal-check.svg",                                         "import": "import { SealCheck } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "invoice", "name": "Invoice / bill", "tags": ["receipt", "statement", "demand"],
+            "lucide":    { "icon": "Receipt",             "cdn": "https://unpkg.com/lucide-static/icons/receipt.svg",           "import": "import { Receipt } from 'lucide-react'" },
+            "heroicons": { "icon": "DocumentTextIcon",    "cdn_outline": "https://unpkg.com/heroicons/24/outline/document-text.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/document-text.svg","import": "import { DocumentTextIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "receipt_long",        "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/receipt_long/default/24px.svg",       "font_usage": "<span class=\"material-symbols-outlined\">receipt_long</span>" },
+            "phosphor":  { "icon": "Receipt",             "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/receipt.svg",                                            "import": "import { Receipt } from '@phosphor-icons/react'" }
+          }
+        ]
+      },
+      {
+        "id": "planning-building",
+        "name": "Planning & building",
+        "icons": [
+          {
+            "id": "planning-app", "name": "Planning application", "tags": ["development", "permission", "planning"],
+            "lucide":    { "icon": "Ruler",               "cdn": "https://unpkg.com/lucide-static/icons/ruler.svg",             "import": "import { Ruler } from 'lucide-react'" },
+            "heroicons": { "icon": "DocumentCheckIcon",   "cdn_outline": "https://unpkg.com/heroicons/24/outline/document-check.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/document-check.svg","import": "import { DocumentCheckIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "rule",                "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/rule/default/24px.svg",               "font_usage": "<span class=\"material-symbols-outlined\">rule</span>" },
+            "phosphor":  { "icon": "Ruler",               "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/ruler.svg",                                              "import": "import { Ruler } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "listed-building", "name": "Listed building", "tags": ["heritage", "historic", "Grade I", "Grade II"],
+            "lucide":    { "icon": "Columns",             "cdn": "https://unpkg.com/lucide-static/icons/columns.svg",           "import": "import { Columns } from 'lucide-react'" },
+            "heroicons": { "icon": "BuildingOfficeIcon",  "cdn_outline": "https://unpkg.com/heroicons/24/outline/building-office.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/building-office.svg","import": "import { BuildingOfficeIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "museum",              "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/museum/default/24px.svg",             "font_usage": "<span class=\"material-symbols-outlined\">museum</span>" },
+            "phosphor":  { "icon": "Buildings",           "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/buildings.svg",                                          "import": "import { Buildings } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "conservation", "name": "Conservation area", "tags": ["NPPF", "character", "heritage"],
+            "lucide":    { "icon": "Trees",               "cdn": "https://unpkg.com/lucide-static/icons/trees.svg",             "import": "import { Trees } from 'lucide-react'" },
+            "heroicons": { "icon": "GlobeEuropeAfricaIcon","cdn_outline": "https://unpkg.com/heroicons/24/outline/globe-europe-africa.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/globe-europe-africa.svg","import": "import { GlobeEuropeAfricaIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "park",                "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/park/default/24px.svg",               "font_usage": "<span class=\"material-symbols-outlined\">park</span>" },
+            "phosphor":  { "icon": "Tree",                "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/tree.svg",                                               "import": "import { Tree } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "building-control", "name": "Building control", "tags": ["regulations", "inspection", "BCO"],
+            "lucide":    { "icon": "HardHat",             "cdn": "https://unpkg.com/lucide-static/icons/hard-hat.svg",          "import": "import { HardHat } from 'lucide-react'" },
+            "heroicons": { "icon": "WrenchIcon",          "cdn_outline": "https://unpkg.com/heroicons/24/outline/wrench.svg",   "cdn_solid": "https://unpkg.com/heroicons/24/solid/wrench.svg",   "import": "import { WrenchIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "construction",        "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/construction/default/24px.svg",       "font_usage": "<span class=\"material-symbols-outlined\">construction</span>" },
+            "phosphor":  { "icon": "Hammer",              "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/hammer.svg",                                             "import": "import { Hammer } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "enforcement", "name": "Enforcement", "tags": ["breach", "notice", "complaint", "warning"],
+            "lucide":    { "icon": "AlertTriangle",       "cdn": "https://unpkg.com/lucide-static/icons/alert-triangle.svg",    "import": "import { AlertTriangle } from 'lucide-react'" },
+            "heroicons": { "icon": "ExclamationTriangleIcon","cdn_outline": "https://unpkg.com/heroicons/24/outline/exclamation-triangle.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/exclamation-triangle.svg","import": "import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "warning",             "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/warning/default/24px.svg",            "font_usage": "<span class=\"material-symbols-outlined\">warning</span>" },
+            "phosphor":  { "icon": "Warning",             "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/warning.svg",                                            "import": "import { Warning } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "map", "name": "Maps / GIS", "tags": ["map", "GIS", "address", "location"],
+            "lucide":    { "icon": "Map",                 "cdn": "https://unpkg.com/lucide-static/icons/map.svg",               "import": "import { Map } from 'lucide-react'" },
+            "heroicons": { "icon": "MapIcon",             "cdn_outline": "https://unpkg.com/heroicons/24/outline/map.svg",      "cdn_solid": "https://unpkg.com/heroicons/24/solid/map.svg",      "import": "import { MapIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "map",                 "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/map/default/24px.svg",                "font_usage": "<span class=\"material-symbols-outlined\">map</span>" },
+            "phosphor":  { "icon": "MapTrifold",          "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/map-trifold.svg",                                        "import": "import { MapTrifold } from '@phosphor-icons/react'" }
+          }
+        ]
+      },
+      {
+        "id": "council-democracy",
+        "name": "Council & democracy",
+        "icons": [
+          {
+            "id": "democracy", "name": "Council & democracy", "tags": ["council", "democracy", "governance", "vote"],
+            "lucide":    { "icon": "Vote",                "cdn": "https://unpkg.com/lucide-static/icons/vote.svg",              "import": "import { Vote } from 'lucide-react'" },
+            "heroicons": { "icon": "BuildingOffice2Icon", "cdn_outline": "https://unpkg.com/heroicons/24/outline/building-office-2.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/building-office-2.svg","import": "import { BuildingOffice2Icon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "how_to_vote",         "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/how_to_vote/default/24px.svg",        "font_usage": "<span class=\"material-symbols-outlined\">how_to_vote</span>" },
+            "phosphor":  { "icon": "Lectern",             "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/lectern.svg",                                            "import": "import { Lectern } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "councillor", "name": "Find your councillor", "tags": ["councillor", "ward", "representative"],
+            "lucide":    { "icon": "UserRound",           "cdn": "https://unpkg.com/lucide-static/icons/user-round.svg",        "import": "import { UserRound } from 'lucide-react'" },
+            "heroicons": { "icon": "UserIcon",            "cdn_outline": "https://unpkg.com/heroicons/24/outline/user.svg",     "cdn_solid": "https://unpkg.com/heroicons/24/solid/user.svg",     "import": "import { UserIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "person",              "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/person/default/24px.svg",             "font_usage": "<span class=\"material-symbols-outlined\">person</span>" },
+            "phosphor":  { "icon": "User",                "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/user.svg",                                               "import": "import { User } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "committee", "name": "Committees", "tags": ["committee", "meeting", "ModernGov"],
+            "lucide":    { "icon": "CalendarDays",        "cdn": "https://unpkg.com/lucide-static/icons/calendar-days.svg",     "import": "import { CalendarDays } from 'lucide-react'" },
+            "heroicons": { "icon": "CalendarIcon",        "cdn_outline": "https://unpkg.com/heroicons/24/outline/calendar.svg", "cdn_solid": "https://unpkg.com/heroicons/24/solid/calendar.svg", "import": "import { CalendarIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "event",               "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/event/default/24px.svg",              "font_usage": "<span class=\"material-symbols-outlined\">event</span>" },
+            "phosphor":  { "icon": "CalendarBlank",       "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/calendar-blank.svg",                                     "import": "import { CalendarBlank } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "agenda", "name": "Agendas & minutes", "tags": ["agenda", "minutes", "decisions"],
+            "lucide":    { "icon": "FileText",            "cdn": "https://unpkg.com/lucide-static/icons/file-text.svg",         "import": "import { FileText } from 'lucide-react'" },
+            "heroicons": { "icon": "DocumentTextIcon",    "cdn_outline": "https://unpkg.com/heroicons/24/outline/document-text.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/document-text.svg","import": "import { DocumentTextIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "description",         "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/description/default/24px.svg",        "font_usage": "<span class=\"material-symbols-outlined\">description</span>" },
+            "phosphor":  { "icon": "FileText",            "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/file-text.svg",                                          "import": "import { FileText } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "constitution", "name": "Constitution", "tags": ["constitution", "rules", "powers", "legal"],
+            "lucide":    { "icon": "Scale",               "cdn": "https://unpkg.com/lucide-static/icons/scale.svg",             "import": "import { Scale } from 'lucide-react'" },
+            "heroicons": { "icon": "ScaleIcon",           "cdn_outline": "https://unpkg.com/heroicons/24/outline/scale.svg",    "cdn_solid": "https://unpkg.com/heroicons/24/solid/scale.svg",    "import": "import { ScaleIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "balance",             "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/balance/default/24px.svg",            "font_usage": "<span class=\"material-symbols-outlined\">balance</span>" },
+            "phosphor":  { "icon": "Scales",              "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/scales.svg",                                             "import": "import { Scales } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "procurement", "name": "Procurement", "tags": ["contracts", "tender", "CPR"],
+            "lucide":    { "icon": "Package",             "cdn": "https://unpkg.com/lucide-static/icons/package.svg",           "import": "import { Package } from 'lucide-react'" },
+            "heroicons": { "icon": "ArchiveBoxIcon",      "cdn_outline": "https://unpkg.com/heroicons/24/outline/archive-box.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/archive-box.svg","import": "import { ArchiveBoxIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "inventory_2",         "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/inventory_2/default/24px.svg",        "font_usage": "<span class=\"material-symbols-outlined\">inventory_2</span>" },
+            "phosphor":  { "icon": "Package",             "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/package.svg",                                            "import": "import { Package } from '@phosphor-icons/react'" }
+          }
+        ]
+      },
+      {
+        "id": "general-ui",
+        "name": "General UI",
+        "icons": [
+          {
+            "id": "search", "name": "Search", "tags": ["find", "search", "lookup"],
+            "lucide":    { "icon": "Search",              "cdn": "https://unpkg.com/lucide-static/icons/search.svg",            "import": "import { Search } from 'lucide-react'" },
+            "heroicons": { "icon": "MagnifyingGlassIcon", "cdn_outline": "https://unpkg.com/heroicons/24/outline/magnifying-glass.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/magnifying-glass.svg","import": "import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "search",              "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/search/default/24px.svg",             "font_usage": "<span class=\"material-symbols-outlined\">search</span>" },
+            "phosphor":  { "icon": "MagnifyingGlass",     "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/magnifying-glass.svg",                                   "import": "import { MagnifyingGlass } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "alert", "name": "Alert / important", "tags": ["notification", "warning", "alert"],
+            "lucide":    { "icon": "Bell",                "cdn": "https://unpkg.com/lucide-static/icons/bell.svg",              "import": "import { Bell } from 'lucide-react'" },
+            "heroicons": { "icon": "BellIcon",            "cdn_outline": "https://unpkg.com/heroicons/24/outline/bell.svg",     "cdn_solid": "https://unpkg.com/heroicons/24/solid/bell.svg",     "import": "import { BellIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "notifications",       "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/notifications/default/24px.svg",      "font_usage": "<span class=\"material-symbols-outlined\">notifications</span>" },
+            "phosphor":  { "icon": "Bell",                "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/bell.svg",                                               "import": "import { Bell } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "download", "name": "Download", "tags": ["download", "save", "document"],
+            "lucide":    { "icon": "Download",            "cdn": "https://unpkg.com/lucide-static/icons/download.svg",          "import": "import { Download } from 'lucide-react'" },
+            "heroicons": { "icon": "ArrowDownTrayIcon",   "cdn_outline": "https://unpkg.com/heroicons/24/outline/arrow-down-tray.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/arrow-down-tray.svg","import": "import { ArrowDownTrayIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "download",            "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/download/default/24px.svg",           "font_usage": "<span class=\"material-symbols-outlined\">download</span>" },
+            "phosphor":  { "icon": "DownloadSimple",      "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/download-simple.svg",                                    "import": "import { DownloadSimple } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "external-link", "name": "External link", "tags": ["external", "link", "URL", "new tab"],
+            "lucide":    { "icon": "ExternalLink",        "cdn": "https://unpkg.com/lucide-static/icons/external-link.svg",     "import": "import { ExternalLink } from 'lucide-react'" },
+            "heroicons": { "icon": "ArrowTopRightOnSquareIcon","cdn_outline": "https://unpkg.com/heroicons/24/outline/arrow-top-right-on-square.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/arrow-top-right-on-square.svg","import": "import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "open_in_new",         "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/open_in_new/default/24px.svg",        "font_usage": "<span class=\"material-symbols-outlined\">open_in_new</span>" },
+            "phosphor":  { "icon": "ArrowSquareOut",      "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/arrow-square-out.svg",                                   "import": "import { ArrowSquareOut } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "info", "name": "Information", "tags": ["info", "help", "guidance"],
+            "lucide":    { "icon": "Info",                "cdn": "https://unpkg.com/lucide-static/icons/info.svg",              "import": "import { Info } from 'lucide-react'" },
+            "heroicons": { "icon": "InformationCircleIcon","cdn_outline": "https://unpkg.com/heroicons/24/outline/information-circle.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/information-circle.svg","import": "import { InformationCircleIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "info",                "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/info/default/24px.svg",               "font_usage": "<span class=\"material-symbols-outlined\">info</span>" },
+            "phosphor":  { "icon": "Info",                "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/info.svg",                                               "import": "import { Info } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "phone", "name": "Phone / contact", "tags": ["phone", "call", "telephone"],
+            "lucide":    { "icon": "Phone",               "cdn": "https://unpkg.com/lucide-static/icons/phone.svg",             "import": "import { Phone } from 'lucide-react'" },
+            "heroicons": { "icon": "PhoneIcon",           "cdn_outline": "https://unpkg.com/heroicons/24/outline/phone.svg",    "cdn_solid": "https://unpkg.com/heroicons/24/solid/phone.svg",    "import": "import { PhoneIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "call",                "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/call/default/24px.svg",               "font_usage": "<span class=\"material-symbols-outlined\">call</span>" },
+            "phosphor":  { "icon": "Phone",               "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/phone.svg",                                              "import": "import { Phone } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "email", "name": "Email", "tags": ["email", "message", "contact"],
+            "lucide":    { "icon": "Mail",                "cdn": "https://unpkg.com/lucide-static/icons/mail.svg",              "import": "import { Mail } from 'lucide-react'" },
+            "heroicons": { "icon": "EnvelopeIcon",        "cdn_outline": "https://unpkg.com/heroicons/24/outline/envelope.svg", "cdn_solid": "https://unpkg.com/heroicons/24/solid/envelope.svg", "import": "import { EnvelopeIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "mail",                "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/mail/default/24px.svg",               "font_usage": "<span class=\"material-symbols-outlined\">mail</span>" },
+            "phosphor":  { "icon": "Envelope",            "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/envelope.svg",                                           "import": "import { Envelope } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "location", "name": "Location / address", "tags": ["address", "location", "map pin"],
+            "lucide":    { "icon": "MapPin",              "cdn": "https://unpkg.com/lucide-static/icons/map-pin.svg",           "import": "import { MapPin } from 'lucide-react'" },
+            "heroicons": { "icon": "MapPinIcon",          "cdn_outline": "https://unpkg.com/heroicons/24/outline/map-pin.svg",  "cdn_solid": "https://unpkg.com/heroicons/24/solid/map-pin.svg",  "import": "import { MapPinIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "location_on",         "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/location_on/default/24px.svg",        "font_usage": "<span class=\"material-symbols-outlined\">location_on</span>" },
+            "phosphor":  { "icon": "MapPin",              "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/map-pin.svg",                                            "import": "import { MapPin } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "calendar", "name": "Calendar / date", "tags": ["date", "time", "schedule"],
+            "lucide":    { "icon": "Calendar",            "cdn": "https://unpkg.com/lucide-static/icons/calendar.svg",          "import": "import { Calendar } from 'lucide-react'" },
+            "heroicons": { "icon": "CalendarIcon",        "cdn_outline": "https://unpkg.com/heroicons/24/outline/calendar.svg", "cdn_solid": "https://unpkg.com/heroicons/24/solid/calendar.svg", "import": "import { CalendarIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "calendar_today",      "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/calendar_today/default/24px.svg",     "font_usage": "<span class=\"material-symbols-outlined\">calendar_today</span>" },
+            "phosphor":  { "icon": "Calendar",            "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/calendar.svg",                                           "import": "import { Calendar } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "form", "name": "Online form", "tags": ["form", "apply", "submit"],
+            "lucide":    { "icon": "FilePen",             "cdn": "https://unpkg.com/lucide-static/icons/file-pen.svg",          "import": "import { FilePen } from 'lucide-react'" },
+            "heroicons": { "icon": "PencilSquareIcon",    "cdn_outline": "https://unpkg.com/heroicons/24/outline/pencil-square.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/pencil-square.svg","import": "import { PencilSquareIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "edit_note",           "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/edit_note/default/24px.svg",          "font_usage": "<span class=\"material-symbols-outlined\">edit_note</span>" },
+            "phosphor":  { "icon": "NotePencil",          "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/note-pencil.svg",                                        "import": "import { NotePencil } from '@phosphor-icons/react'" }
+          },
+          {
+            "id": "accessibility", "name": "Accessibility", "tags": ["accessible", "disability", "WCAG", "a11y"],
+            "lucide":    { "icon": "Accessibility",       "cdn": "https://unpkg.com/lucide-static/icons/accessibility.svg",     "import": "import { Accessibility } from 'lucide-react'" },
+            "heroicons": { "icon": "UserGroupIcon",       "cdn_outline": "https://unpkg.com/heroicons/24/outline/user-group.svg","cdn_solid": "https://unpkg.com/heroicons/24/solid/user-group.svg","import": "import { UserGroupIcon } from '@heroicons/react/24/outline'" },
+            "material":  { "icon": "accessibility_new",   "cdn": "https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/accessibility_new/default/24px.svg",  "font_usage": "<span class=\"material-symbols-outlined\">accessibility_new</span>" },
+            "phosphor":  { "icon": "PersonArmsSpread",    "cdn": "https://unpkg.com/@phosphor-icons/core/assets/regular/person-arms-spread.svg",                                 "import": "import { PersonArmsSpread } from '@phosphor-icons/react'" }
+          }
+        ]
+      }
+    ]
+  },
+
+  "icon_library": {
+    "_description": "Emoji icon set (v1.0.0). Use for inline content, notifications, and contexts where SVG is not appropriate (plain text email, SMS, accessibility fallback).",
+    "categories": [
+      { "id": "waste-recycling", "name": "Waste & recycling", "icons": [
+        { "id": "bin-general",     "name": "General waste",    "emoji": "🗑️", "unicode": "U+1F5D1", "tags": ["rubbish","black bin","refuse"] },
+        { "id": "bin-recycling",   "name": "Recycling",        "emoji": "♻️", "unicode": "U+267B",  "tags": ["blue bin","recycle"] },
+        { "id": "bin-garden",      "name": "Garden waste",     "emoji": "🌿", "unicode": "U+1F33F", "tags": ["brown bin","green waste"] },
+        { "id": "bin-glass",       "name": "Glass collection", "emoji": "🍾", "unicode": "U+1F37E", "tags": ["glass","bottles"] },
+        { "id": "bulky-waste",     "name": "Bulky waste",      "emoji": "🛋️", "unicode": "U+1F6CB", "tags": ["large items","furniture"] },
+        { "id": "street-cleansing","name": "Street cleansing", "emoji": "🧹", "unicode": "U+1F9F9", "tags": ["sweep","litter"] }
+      ]},
+      { "id": "payments-council-tax", "name": "Payments & council tax", "icons": [
+        { "id": "council-tax",   "name": "Council tax",         "emoji": "🏦", "unicode": "U+1F3E6", "tags": ["tax","bill"] },
+        { "id": "payment",       "name": "Make a payment",      "emoji": "💳", "unicode": "U+1F4B3", "tags": ["pay","card"] },
+        { "id": "direct-debit",  "name": "Direct debit",        "emoji": "🔁", "unicode": "U+1F501", "tags": ["DD","bank"] },
+        { "id": "discount",      "name": "Discount / reduction","emoji": "🏷️", "unicode": "U+1F3F7", "tags": ["single person","reduction"] },
+        { "id": "exemption",     "name": "Exemption",           "emoji": "✳️", "unicode": "U+2733",  "tags": ["Class E","exempt"] },
+        { "id": "invoice",       "name": "Invoice / bill",      "emoji": "🧾", "unicode": "U+1F9FE", "tags": ["receipt","statement"] }
+      ]},
+      { "id": "planning-building", "name": "Planning & building", "icons": [
+        { "id": "planning-app",     "name": "Planning application","emoji": "📐", "unicode": "U+1F4D0", "tags": ["development","permission"] },
+        { "id": "listed-building",  "name": "Listed building",     "emoji": "🏛️", "unicode": "U+1F3DB", "tags": ["heritage","historic"] },
+        { "id": "conservation",     "name": "Conservation area",   "emoji": "🌳", "unicode": "U+1F333", "tags": ["NPPF","character"] },
+        { "id": "building-control", "name": "Building control",    "emoji": "🔨", "unicode": "U+1F528", "tags": ["regulations","inspection"] },
+        { "id": "enforcement",      "name": "Enforcement",         "emoji": "⚠️", "unicode": "U+26A0",  "tags": ["breach","notice"] },
+        { "id": "map",              "name": "Maps / GIS",          "emoji": "🗺️", "unicode": "U+1F5FA", "tags": ["map","GIS"] }
+      ]},
+      { "id": "council-democracy", "name": "Council & democracy", "icons": [
+        { "id": "democracy",   "name": "Council & democracy",  "emoji": "🏛️", "unicode": "U+1F3DB", "tags": ["council","democracy"] },
+        { "id": "councillor",  "name": "Find your councillor", "emoji": "👤", "unicode": "U+1F464", "tags": ["councillor","ward"] },
+        { "id": "committee",   "name": "Committees",           "emoji": "📅", "unicode": "U+1F4C5", "tags": ["committee","meeting"] },
+        { "id": "agenda",      "name": "Agendas & minutes",    "emoji": "📄", "unicode": "U+1F4C4", "tags": ["agenda","minutes"] },
+        { "id": "constitution","name": "Constitution",         "emoji": "⚖️", "unicode": "U+2696",  "tags": ["constitution","rules"] },
+        { "id": "procurement", "name": "Procurement",          "emoji": "📦", "unicode": "U+1F4E6", "tags": ["contracts","tender"] }
+      ]},
+      { "id": "general-ui", "name": "General UI", "icons": [
+        { "id": "alert",        "name": "Alert / important",  "emoji": "🔔", "unicode": "U+1F514", "tags": ["notification","alert"] },
+        { "id": "search",       "name": "Search",             "emoji": "🔍", "unicode": "U+1F50D", "tags": ["find","search"] },
+        { "id": "download",     "name": "Download",           "emoji": "⬇️", "unicode": "U+2B07",  "tags": ["download","save"] },
+        { "id": "link",         "name": "External link",      "emoji": "🔗", "unicode": "U+1F517", "tags": ["external","link"] },
+        { "id": "info",         "name": "Information",        "emoji": "ℹ️", "unicode": "U+2139",  "tags": ["info","help"] },
+        { "id": "phone",        "name": "Phone / contact",    "emoji": "📞", "unicode": "U+1F4DE", "tags": ["phone","call"] },
+        { "id": "email",        "name": "Email",              "emoji": "✉️", "unicode": "U+2709",  "tags": ["email","message"] },
+        { "id": "location",     "name": "Location / address", "emoji": "📍", "unicode": "U+1F4CD", "tags": ["address","location"] },
+        { "id": "calendar",     "name": "Calendar / date",    "emoji": "📆", "unicode": "U+1F4C6", "tags": ["date","schedule"] },
+        { "id": "form",         "name": "Online form",        "emoji": "📝", "unicode": "U+1F4DD", "tags": ["form","apply"] },
+        { "id": "accessibility","name": "Accessibility",      "emoji": "♿", "unicode": "U+267F",  "tags": ["accessible","WCAG"] }
+      ]}
+    ]
+  }
+}
