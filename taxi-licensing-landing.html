@@ -1105,57 +1105,221 @@
 
     <!-- ===================================================================
          SECTION: FEES
-         Data source: JSON_COMPLETE.json - pages.fees (flagged as missing details)
+         Data source: JSON_COMPLETE.json - pages.fees
+         Effective from: 2026-05-01
          =================================================================== -->
     <section class="section" aria-labelledby="fees-title">
       <div class="container">
         <div class="section__header">
           <h2 class="section__title" id="fees-title">Licensing fees</h2>
           <p class="section__intro">
-            How much does it cost to apply for or renew a licence?
+            All fees shown are effective from 1 May 2026 and are charged in British pounds (GBP).
           </p>
         </div>
 
-        <div class="missing-info-flag">
-          <div class="missing-info-flag__title">⚠️ Information not available in schema</div>
-          <p>
-            The fee amounts for driver, vehicle, and operator licences are <strong>not included in the JSON schema</strong>.
-            <br><br>
-            <strong>Please contact the licensing team directly:</strong>
+        <!-- DRIVER FEES -->
+        <div style="margin: var(--sp-32) 0;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16);">Driver licence fees</h3>
+          <table class="requirements-table">
+            <thead>
+              <tr>
+                <th>Application type</th>
+                <th>Duration</th>
+                <th>Fee</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>New driver licence</td>
+                <td>1 year</td>
+                <td><strong>£132.00</strong></td>
+              </tr>
+              <tr>
+                <td>New driver licence</td>
+                <td>3 years</td>
+                <td><strong>£289.00</strong></td>
+              </tr>
+              <tr>
+                <td>Renew driver licence</td>
+                <td>1 year</td>
+                <td><strong>£93.00</strong></td>
+              </tr>
+              <tr>
+                <td>Renew driver licence</td>
+                <td>3 years</td>
+                <td><strong>£241.00</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+            <span class="data-source-flag">Source: driver_fees</span>
           </p>
         </div>
 
-        <div class="contact-box">
-          <div class="contact-box__title">Gloucester City Council – Licensing Team</div>
-          <div class="contact-box__item">
-            <span class="contact-box__label">Address:</span>
-            <span class="contact-box__value">
-              Licensing Team<br>
-              Eastgate Management Suite<br>
-              Eastgate Street<br>
-              Gloucester GL1 1PA
-            </span>
-          </div>
-          <div class="contact-box__item">
-            <span class="contact-box__label">Telephone:</span>
-            <span class="contact-box__value"><a href="tel:01452396396">01452 396396</a></span>
-          </div>
-          <div class="contact-box__item">
-            <span class="contact-box__label">Email:</span>
-            <span class="contact-box__value"><a href="mailto:licensing@gloucester.gov.uk">licensing@gloucester.gov.uk</a></span>
-          </div>
-          <div class="contact-box__item">
-            <span class="contact-box__label">Alternative contact:</span>
-            <span class="contact-box__value"><a href="mailto:heretohelp@gloucester.gov.uk">heretohelp@gloucester.gov.uk</a></span>
-          </div>
-          <div class="contact-box__item">
-            <span class="contact-box__label">Website:</span>
-            <span class="contact-box__value"><a href="https://www.gloucester.gov.uk">www.gloucester.gov.uk</a></span>
-          </div>
+        <!-- ADDITIONAL DRIVER FEES -->
+        <div style="margin: var(--sp-32) 0; border-top: 2px solid var(--border); padding-top: var(--sp-32);">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16);">Additional driver fees</h3>
+          <table class="requirements-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Fee</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hackney Carriage Knowledge Test</td>
+                <td><strong>£149.00</strong></td>
+              </tr>
+              <tr>
+                <td>Hackney Carriage Knowledge Test Re-take</td>
+                <td><strong>£149.00</strong></td>
+              </tr>
+              <tr>
+                <td>Private Hire Knowledge Test</td>
+                <td><strong>£67.00</strong></td>
+              </tr>
+              <tr>
+                <td>Replacement Driver Badge</td>
+                <td><strong>£10.00</strong></td>
+              </tr>
+              <tr>
+                <td>Safeguarding Training</td>
+                <td><strong>£40.00</strong></td>
+              </tr>
+              <tr>
+                <td>English Proficiency Test</td>
+                <td><strong>£45.00</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+            <span class="data-source-flag">Source: additional_driver_fees</span>
+          </p>
+        </div>
+
+        <!-- VEHICLE FEES -->
+        <div style="margin: var(--sp-32) 0; border-top: 2px solid var(--border); padding-top: var(--sp-32);">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16);">Vehicle licence fees</h3>
+          <table class="requirements-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Fee</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Annual vehicle licence</td>
+                <td><strong>£222.00</strong></td>
+              </tr>
+              <tr>
+                <td>Transfer of vehicle ownership</td>
+                <td><strong>£59.00</strong></td>
+              </tr>
+              <tr>
+                <td>Change of vehicle (includes new plates)</td>
+                <td><strong>£78.00</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+            <span class="data-source-flag">Source: vehicle_fees</span>
+          </p>
+        </div>
+
+        <!-- ADDITIONAL VEHICLE FEES -->
+        <div style="margin: var(--sp-32) 0; border-top: 2px solid var(--border); padding-top: var(--sp-32);">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16);">Additional vehicle fees</h3>
+          <table class="requirements-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Fee</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Licensing Officer vehicle inspection check</td>
+                <td><strong>£23.00</strong></td>
+              </tr>
+              <tr>
+                <td>Replacement rear exterior plate</td>
+                <td><strong>£20.00</strong></td>
+              </tr>
+              <tr>
+                <td>Replacement interior plate or front exterior plate</td>
+                <td><strong>£15.00</strong></td>
+              </tr>
+              <tr>
+                <td>Copy or replacement of licence certificate</td>
+                <td><strong>£12.00</strong></td>
+              </tr>
+              <tr>
+                <td>Application to notify change of address</td>
+                <td><strong>£12.00</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+            <span class="data-source-flag">Source: additional_vehicle_fees</span>
+          </p>
+        </div>
+
+        <!-- OPERATOR FEES -->
+        <div style="margin: var(--sp-32) 0; border-top: 2px solid var(--border); padding-top: var(--sp-32);">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16);">Private Hire Operator licence fees</h3>
+          <p style="margin-bottom: var(--sp-16); color: var(--text-secondary);">
+            Fees are based on operator size (number of vehicles) and licence duration.
+          </p>
+          <table class="requirements-table">
+            <thead>
+              <tr>
+                <th>Operator size</th>
+                <th>Vehicle capacity</th>
+                <th>1-year licence</th>
+                <th>5-year licence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Micro</strong></td>
+                <td>Up to 3 vehicles</td>
+                <td>£352.00</td>
+                <td>£1,407.00</td>
+              </tr>
+              <tr>
+                <td><strong>Small</strong></td>
+                <td>4 vehicles</td>
+                <td>£727.00</td>
+                <td>£2,909.00</td>
+              </tr>
+              <tr>
+                <td><strong>Medium</strong></td>
+                <td>5–10 vehicles</td>
+                <td>£1,173.00</td>
+                <td>£4,692.00</td>
+              </tr>
+              <tr>
+                <td><strong>Large</strong></td>
+                <td>11+ vehicles</td>
+                <td>£1,759.00</td>
+                <td>£7,038.00</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.9375rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+            <span class="data-source-flag">Source: operator_fees</span>
+          </p>
+        </div>
+
+        <div class="notification notification--info" style="margin-top: var(--sp-32);">
+          <div class="notification__title">Operators not licensed as drivers</div>
+          <p>If you operate a Private Hire business but are not yourself a licensed driver, you must also apply for a basic DBS (Disclosure and Barring Service) check.</p>
         </div>
 
         <p style="margin-top: var(--sp-24); font-size: 0.9375rem; color: var(--text-secondary);">
-          <span class="data-source-flag">Source: fees (schema exists but amounts missing)</span>
+          <span class="data-source-flag">Source: pages.fees (effective 2026-05-01)</span>
         </p>
       </div>
     </section>
@@ -1286,9 +1450,9 @@
         </div>
 
         <div class="notification notification--info" style="margin-top: var(--sp-32);">
-          <div class="notification__title">⚠️ Missing guidance pages</div>
+          <div class="notification__title">ℹ️ Pages referenced but not yet detailed</div>
           <p>
-            The JSON schema references pages for the above topics, but the detailed content for these pages is not yet included in JSON_COMPLETE.json.
+            The JSON schema references pages for the above topics, but detailed guidance content is not yet included in JSON_COMPLETE.json.
             We have the structural framework but need the full guidance text to complete these pages.
           </p>
         </div>
