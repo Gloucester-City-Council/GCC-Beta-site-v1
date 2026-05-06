@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SCHEMA METADATA: Taxi website/JSON_COMPLETE.json - pages.metadata -->
+  <meta name="description" content="Apply for hackney carriage and private hire driver, vehicle, and operator licences. Get help with renewals, vehicle registration changes, accident reporting, and more. Gloucester City Council licensing services.">
+  <meta name="theme-color" content="#003A75">
+  <meta property="og:title" content="Hackney Carriage &amp; Private Hire Licensing – Gloucester City Council">
+  <meta property="og:description" content="Apply for taxi driver, vehicle, and operator licences in Gloucester. Understand eligibility, requirements, fees, and next steps.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_GB">
+  <!-- Data source reference for page content -->
+  <meta name="data-source" content="Taxi website/JSON_COMPLETE.json">
+  <meta name="content-authority" content="Gloucester City Council - Licensing Team">
+  <meta name="content-category" content="Hackney Carriage &amp; Private Hire Licensing Guidance">
+  <title>Hackney Carriage &amp; Private Hire Licensing – Gloucester City Council</title>
+  <style>
+    /* ================================================================
+       HACKNEY CARRIAGE &amp; PRIVATE HIRE LICENSING PAGE STYLES
+       Gloucester City Council | Data source: JSON_COMPLETE.json
+       WCAG 2.2 AA compliant | GOV.UK colour palette
+       ================================================================ */
+
+    :root {
+      --primary: #003A75;
+      --primary-hover: #00295C;
+      --primary-light: #CCE0FF;
+      --secondary: #005F5F;
+      --secondary-hover: #004040;
+      --secondary-light: #C8F0F0;
+      --text: #000000;
+      --text-secondary: #595959;
+      --border: #767676;
+      --surface: #FFFFFF;
+      --surface-alt: #F0F0F0;
+      --error: #9E0000;
+      --error-bg: #FFF0F0;
+      --warning: #7A4800;
+      --warning-bg: #FFF8E0;
+      --success: #1A5C1A;
+      --success-bg: #F0FFF0;
+      --info: #0047AB;
+      --info-bg: #EDF5FF;
+      --focus: #FFDD00;
+      --focus-text: #000000;
+      --sp-4: 4px;
+      --sp-8: 8px;
+      --sp-12: 12px;
+      --sp-16: 16px;
+      --sp-24: 24px;
+      --sp-32: 32px;
+      --sp-48: 48px;
+      --sp-64: 64px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--surface);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Skip link for keyboard/screen reader users */
+    .skip-link {
+      position: absolute;
+      top: -48px;
+      left: 0;
+      background: var(--text);
+      color: var(--surface);
+      padding: var(--sp-8) var(--sp-16);
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      z-index: 200;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .skip-link:focus {
+      top: 0;
+      outline: 3px solid var(--focus);
+      outline-offset: 0;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--sp-16);
+      width: 100%;
+    }
+
+    /* Header */
+    header {
+      background: var(--primary);
+      color: var(--surface);
+      border-bottom: 4px solid var(--secondary);
+    }
+
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      padding: var(--sp-16);
+      min-height: 64px;
+    }
+
+    .site-header__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-8);
+      text-decoration: none;
+      color: var(--surface);
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .site-header__logo:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      background: var(--surface-alt);
+      border-bottom: 1px solid var(--border);
+      padding: var(--sp-8) 0;
+      font-size: 0.875rem;
+    }
+
+    .breadcrumb__list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+      align-items: center;
+    }
+
+    .breadcrumb__list li {
+      display: flex;
+      align-items: center;
+    }
+
+    .breadcrumb__list li:not(:last-child)::after {
+      content: '›';
+      margin-left: var(--sp-8);
+      color: var(--text-secondary);
+    }
+
+    .breadcrumb__list a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .breadcrumb__list a:hover {
+      color: var(--primary-hover);
+    }
+
+    .breadcrumb__list a:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .breadcrumb__list [aria-current="page"] {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* Page header */
+    .page-header {
+      background: var(--primary);
+      color: var(--surface);
+      padding: var(--sp-48) 0 var(--sp-32);
+    }
+
+    .page-header h1 {
+      font-size: clamp(1.625rem, 4vw, 2.25rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: var(--sp-16);
+    }
+
+    .page-header__intro {
+      font-size: 1.125rem;
+      line-height: 1.5;
+      margin-bottom: var(--sp-8);
+    }
+
+    /* Sections */
+    .section {
+      padding: var(--sp-48) 0;
+    }
+
+    .section:nth-child(even) {
+      background: var(--surface-alt);
+    }
+
+    .section__header {
+      margin-bottom: var(--sp-32);
+    }
+
+    .section__title {
+      font-size: clamp(1.375rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: var(--sp-12);
+      line-height: 1.3;
+    }
+
+    .section__intro {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 80ch;
+    }
+
+    /* User Journey Cards */
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--sp-24);
+      margin-top: var(--sp-32);
+    }
+
+    .journey-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      padding: var(--sp-24);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .journey-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(0, 58, 117, 0.1);
+    }
+
+    .journey-card__icon {
+      width: 48px;
+      height: 48px;
+      background: var(--primary-light);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: var(--sp-16);
+    }
+
+    .journey-card__title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--sp-12);
+      color: var(--text);
+    }
+
+    .journey-card__description {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--sp-16);
+      line-height: 1.6;
+    }
+
+    .journey-card__steps {
+      list-style: none;
+      margin-bottom: var(--sp-16);
+    }
+
+    .journey-card__step {
+      display: flex;
+      gap: var(--sp-12);
+      margin-bottom: var(--sp-12);
+      font-size: 0.9375rem;
+    }
+
+    .journey-card__step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--secondary-light);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    .journey-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-8);
+      padding: var(--sp-8) var(--sp-12);
+      background: var(--primary);
+      color: var(--surface);
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+
+    .journey-card__link:hover {
+      background: var(--primary-hover);
+    }
+
+    .journey-card__link:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Requirements table */
+    .requirements-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--sp-24) 0;
+      font-size: 0.9375rem;
+    }
+
+    .requirements-table thead {
+      background: var(--primary);
+      color: var(--surface);
+    }
+
+    .requirements-table th {
+      padding: var(--sp-12) var(--sp-16);
+      text-align: left;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+
+    .requirements-table td {
+      padding: var(--sp-12) var(--sp-16);
+      border: 1px solid var(--border);
+    }
+
+    .requirements-table tbody tr:nth-child(even) {
+      background: var(--surface-alt);
+    }
+
+    /* Notification boxes */
+    .notification {
+      padding: var(--sp-16);
+      border-radius: 4px;
+      margin: var(--sp-24) 0;
+    }
+
+    .notification--info {
+      background: var(--info-bg);
+      border-left: 5px solid var(--info);
+    }
+
+    .notification--warning {
+      background: var(--warning-bg);
+      border-left: 5px solid var(--warning);
+    }
+
+    .notification--success {
+      background: var(--success-bg);
+      border-left: 5px solid var(--success);
+    }
+
+    .notification__title {
+      font-weight: 700;
+      margin-bottom: var(--sp-8);
+    }
+
+    .notification--info .notification__title {
+      color: var(--info);
+    }
+
+    .notification--warning .notification__title {
+      color: var(--warning);
+    }
+
+    .notification--success .notification__title {
+      color: var(--success);
+    }
+
+    .notification p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .notification a {
+      color: var(--primary);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .notification a:hover {
+      color: var(--primary-hover);
+    }
+
+    /* Contact section */
+    .contact-box {
+      background: var(--surface-alt);
+      padding: var(--sp-24);
+      border-radius: 4px;
+      margin-top: var(--sp-24);
+    }
+
+    .contact-box__title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: var(--sp-16);
+    }
+
+    .contact-box__item {
+      margin-bottom: var(--sp-16);
+    }
+
+    .contact-box__label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: var(--sp-4);
+    }
+
+    .contact-box__value {
+      color: var(--text-secondary);
+    }
+
+    .contact-box__value a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .contact-box__value a:hover {
+      color: var(--primary-hover);
+    }
+
+    /* Data source flags */
+    .data-source-flag {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      background: var(--surface-alt);
+      padding: var(--sp-4) var(--sp-8);
+      border-radius: 3px;
+      display: inline-block;
+      margin-top: var(--sp-8);
+    }
+
+    .missing-info-flag {
+      background: var(--warning-bg);
+      border: 1px dashed var(--warning);
+      padding: var(--sp-12) var(--sp-16);
+      border-radius: 4px;
+      margin: var(--sp-16) 0;
+      font-size: 0.9375rem;
+    }
+
+    .missing-info-flag__title {
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: var(--sp-4);
+    }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+      margin: var(--sp-16) 0;
+    }
+
+    .checklist__item {
+      display: flex;
+      gap: var(--sp-12);
+      padding: var(--sp-12) 0;
+      font-size: 0.9375rem;
+    }
+
+    .checklist__item::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Links section */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--sp-16);
+      margin: var(--sp-24) 0;
+    }
+
+    .links-grid__item {
+      padding: var(--sp-16);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .links-grid__item a {
+      display: block;
+      color: var(--primary);
+      text-decoration: underline;
+      font-weight: 600;
+      margin-bottom: var(--sp-8);
+    }
+
+    .links-grid__item a:hover {
+      color: var(--primary-hover);
+    }
+
+    .links-grid__item a:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .links-grid__item p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary);
+      color: var(--surface);
+      padding: var(--sp-48) 0 var(--sp-24);
+      margin-top: var(--sp-64);
+    }
+
+    .footer__content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--sp-32);
+      margin-bottom: var(--sp-32);
+    }
+
+    .footer__section h2 {
+      font-size: 1rem;
+      margin-bottom: var(--sp-12);
+    }
+
+    .footer__section ul {
+      list-style: none;
+    }
+
+    .footer__section a {
+      color: var(--surface);
+      text-decoration: underline;
+      display: block;
+      padding: var(--sp-4) 0;
+      font-size: 0.9375rem;
+    }
+
+    .footer__section a:hover {
+      text-decoration: none;
+    }
+
+    .footer__section a:focus {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .footer__hr {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin: var(--sp-24) 0;
+    }
+
+    .footer__meta {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header {
+        padding: var(--sp-32) 0 var(--sp-24);
+      }
+
+      .section {
+        padding: var(--sp-32) 0;
+      }
+
+      .journey-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ====================================================================
+       HEADER
+       ==================================================================== -->
+  <header role="banner">
+    <div class="container">
+      <div class="site-header__inner">
+        <a href="index.html" class="site-header__logo" title="Gloucester City Council homepage">
+          G Gloucester City Council
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       BREADCRUMB
+       ==================================================================== -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb__list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/licensing">Licensing</a></li>
+        <li><span aria-current="page">Hackney Carriage &amp; Private Hire</span></li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ====================================================================
+       MAIN CONTENT
+       ==================================================================== -->
+  <main id="main-content" tabindex="-1">
+
+    <!-- ===================================================================
+         PAGE HEADER - HERO
+         Data source: JSON_COMPLETE.json - metadata, pages
+         =================================================================== -->
+    <section class="page-header" aria-labelledby="page-title">
+      <div class="container">
+        <h1 id="page-title">Hackney Carriage &amp; Private Hire Licensing</h1>
+        <p class="page-header__intro">
+          Apply for a driver, vehicle, or operator licence. Get your taxi on the road in Gloucester.
+        </p>
+        <p style="font-size: 0.875rem; opacity: 0.9; margin-top: var(--sp-16);">
+          <span class="data-source-flag">Data source: JSON_COMPLETE.json</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION: YOUR JOURNEY (Main user pathways)
+         Data source: JSON_COMPLETE.json - online_forms, pages
+         =================================================================== -->
+    <section class="section" aria-labelledby="journeys-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="journeys-title">What do you want to do?</h2>
+          <p class="section__intro">
+            Choose your path below. We'll guide you through the application process.
+          </p>
+        </div>
+
+        <div class="journey-grid">
+
+          <!-- Journey: Become a Driver -->
+          <article class="journey-card">
+            <div class="journey-card__icon">🚖</div>
+            <h3 class="journey-card__title">I want to become a taxi driver</h3>
+            <p class="journey-card__description">
+              Apply for a new Hackney Carriage or Private Hire driver licence. Understanding the requirements before you apply will help you prepare.
+            </p>
+            <ol class="journey-card__steps">
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">1</span>
+                <span>Check driver eligibility requirements</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">2</span>
+                <span>Prepare documents (DBS, medical, tests)</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">3</span>
+                <span>Complete online application</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">4</span>
+                <span>Pay fee and wait for decision</span>
+              </li>
+            </ol>
+            <a href="#driver-eligibility" class="journey-card__link">View requirements ➜</a>
+            <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+              <span class="data-source-flag">Source: online_forms, driver_licensing</span>
+            </p>
+          </article>
+
+          <!-- Journey: Get a Vehicle Licensed -->
+          <article class="journey-card">
+            <div class="journey-card__icon">🚗</div>
+            <h3 class="journey-card__title">I want to license a vehicle</h3>
+            <p class="journey-card__description">
+              Apply to license a vehicle for Hackney Carriage or Private Hire work. Check eligibility and prepare inspection certificates.
+            </p>
+            <ol class="journey-card__steps">
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">1</span>
+                <span>Check vehicle eligibility (age, colour, doors)</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">2</span>
+                <span>Get vehicle inspection certificate</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">3</span>
+                <span>Get MOT and insurance</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">4</span>
+                <span>Submit online application</span>
+              </li>
+            </ol>
+            <a href="#vehicle-eligibility" class="journey-card__link">View requirements ➜</a>
+            <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+              <span class="data-source-flag">Source: vehicle_eligibility, approved_testing_stations</span>
+            </p>
+          </article>
+
+          <!-- Journey: Renew License -->
+          <article class="journey-card">
+            <div class="journey-card__icon">🔄</div>
+            <h3 class="journey-card__title">I need to renew my licence</h3>
+            <p class="journey-card__description">
+              Renew your driver or vehicle licence before expiry. We'll send renewal letters with instructions.
+            </p>
+            <ol class="journey-card__steps">
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">1</span>
+                <span>Check renewal letter and deadlines</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">2</span>
+                <span>Prepare renewal documents</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">3</span>
+                <span>Complete online renewal form</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">4</span>
+                <span>Pay renewal fee</span>
+              </li>
+            </ol>
+            <a href="#online-applications" class="journey-card__link">Renew now ➜</a>
+            <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+              <span class="data-source-flag">Source: online_forms</span>
+            </p>
+          </article>
+
+          <!-- Journey: Operate a Business -->
+          <article class="journey-card">
+            <div class="journey-card__icon">💼</div>
+            <h3 class="journey-card__title">I want to operate a taxi business</h3>
+            <p class="journey-card__description">
+              Apply for a Private Hire operator licence to dispatch vehicles. Understand legal requirements and responsibilities.
+            </p>
+            <ol class="journey-card__steps">
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">1</span>
+                <span>Review operator requirements</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">2</span>
+                <span>Prepare insurance and details</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">3</span>
+                <span>Complete operator application</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">4</span>
+                <span>License your vehicles and drivers</span>
+              </li>
+            </ol>
+            <a href="#operators" class="journey-card__link">View requirements ➜</a>
+            <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+              <span class="data-source-flag">Source: private_hire_operators</span>
+            </p>
+          </article>
+
+          <!-- Journey: Other Changes -->
+          <article class="journey-card">
+            <div class="journey-card__icon">📝</div>
+            <h3 class="journey-card__title">I need to make changes to my licence</h3>
+            <p class="journey-card__description">
+              Change vehicle registration, update address, replace lost plates, report accidents, or transfer vehicle ownership.
+            </p>
+            <ol class="journey-card__steps">
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">1</span>
+                <span>Find the right application form</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">2</span>
+                <span>Complete the online form</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">3</span>
+                <span>Provide supporting documents</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">4</span>
+                <span>Submit and receive confirmation</span>
+              </li>
+            </ol>
+            <a href="#applications-forms" class="journey-card__link">View all forms ➜</a>
+            <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+              <span class="data-source-flag">Source: online_forms</span>
+            </p>
+          </article>
+
+          <!-- Journey: Help &amp; Support -->
+          <article class="journey-card">
+            <div class="journey-card__icon">❓</div>
+            <h3 class="journey-card__title">I have a question or complaint</h3>
+            <p class="journey-card__description">
+              Report problems, lodge complaints, or understand appeal rights. We're here to help if something goes wrong.
+            </p>
+            <ol class="journey-card__steps">
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">1</span>
+                <span>Understand your rights</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">2</span>
+                <span>Report issue or complaint</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">3</span>
+                <span>Receive acknowledgment</span>
+              </li>
+              <li class="journey-card__step">
+                <span class="journey-card__step-num">4</span>
+                <span>Get resolution</span>
+              </li>
+            </ol>
+            <a href="#help-support" class="journey-card__link">Learn more ➜</a>
+            <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: var(--sp-12);">
+              <span class="data-source-flag">Source: complaints, appeal_rights</span>
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION: ONLINE FORMS & APPLICATIONS
+         Data source: JSON_COMPLETE.json - online_forms
+         =================================================================== -->
+    <section class="section" id="applications-forms" aria-labelledby="apps-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="apps-title">Apply Online</h2>
+          <p class="section__intro">
+            Quick links to all our online application forms. Most applications take 10–15 minutes to complete.
+          </p>
+        </div>
+
+        <div class="notification notification--info">
+          <div class="notification__title">New or renewal?</div>
+          <p>First time applying? Use the "New" application form. If your licence is expiring, look for the "Renew" form.</p>
+        </div>
+
+        <div class="links-grid">
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Apply_for_a_new_Hackney_Carriage_or_Private_Hire_driver_licence">New driver licence</a>
+            <p>Apply for your first Hackney Carriage or Private Hire driver licence.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Renew_a_Hackney_Carriage_or_Private_Hire_driver_licence">Renew driver licence</a>
+            <p>Renew an expiring driver licence before the deadline.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Apply_for_a_new_Hackney_Carriage_or_Private_Hire_vehicle_licence">New vehicle licence</a>
+            <p>Apply to license a new Hackney Carriage or Private Hire vehicle.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Renew_a_Hackney_Carriage_or_Private_Hire_vehicle_licence">Renew vehicle licence</a>
+            <p>Renew your vehicle licence at expiry.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Apply_for_a_new_private_hire_operator_licence">New operator licence</a>
+            <p>Apply to operate a Private Hire business in Gloucester.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Renew_Private_Hire_Operator_licence">Renew operator licence</a>
+            <p>Renew your operator licence.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Apply_to_change_your_vehicle_registration_number">Change vehicle registration</a>
+            <p>Update your vehicle's registration number on the licence.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Apply_for_a_Private_Hire_vehicle_plate_exemption">Plate exemption (chauffeur)</a>
+            <p>Apply for exemption from displaying private hire plates (chauffeur work).</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Apply_for_a_replacement_badge_or_plate">Replacement plate or badge</a>
+            <p>Request replacement licence plates or driver badges.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Apply_to_change_address_on_licence">Change address</a>
+            <p>Update your address on your licence.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Apply_for_a_change_of_vehicle">Change vehicle</a>
+            <p>Replace one licensed vehicle with another during your licence period.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Apply_to_transfer_the_ownership_of_a_vehicle">Transfer vehicle ownership</a>
+            <p>Transfer your vehicle licence to a new owner.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Report_a_Hackney_Carriage_or_Private_Hire_accident">Report accident</a>
+            <p>Report a Hackney Carriage or Private Hire vehicle accident to the licensing team.</p>
+            <span class="data-source-flag">Source: online_forms.applications</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION: DRIVER ELIGIBILITY
+         Data source: JSON_COMPLETE.json - pages.driver_licensing
+         =================================================================== -->
+    <section class="section" id="driver-eligibility" aria-labelledby="driver-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="driver-title">What you need to become a driver</h2>
+          <p class="section__intro">
+            To apply for a Hackney Carriage or Private Hire driver licence, you must meet all these requirements.
+          </p>
+        </div>
+
+        <div class="notification notification--warning">
+          <div class="notification__title">⏱️ Plan ahead – this takes time</div>
+          <p>You'll need criminal checks (DBS), medical examination, and to pass knowledge tests. Allow 2–3 months before your intended start date. Check processing times with us before applying.</p>
+        </div>
+
+        <div style="margin: var(--sp-32) 0;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16);">Before you apply, you must have:</h3>
+          <ul class="checklist">
+            <li class="checklist__item">Valid UK or EU driving licence (minimum 2 years held)</li>
+            <li class="checklist__item">Enhanced DBS (Disclosure and Barring Service) check</li>
+            <li class="checklist__item">Medical examination to Group 2 DVLA standards</li>
+            <li class="checklist__item">Pass knowledge test (Hackney Carriage) or literacy/numeracy test (Private Hire)</li>
+            <li class="checklist__item">Proof of right to work in the UK</li>
+            <li class="checklist__item">Suitable references (character)</li>
+          </ul>
+        </div>
+
+        <div class="missing-info-flag">
+          <div class="missing-info-flag__title">ℹ️ Details not yet in schema</div>
+          <p>
+            The following information is not yet available in the JSON schema and needs to be added:
+            <ul style="margin-top: var(--sp-8); margin-left: var(--sp-24);">
+              <li>Minimum age requirement (typically 21 years)</li>
+              <li>Specific criminal conviction guidance and timeframes</li>
+              <li>List of approved medical examiners</li>
+              <li>Knowledge test syllabus and pass marks</li>
+              <li>Right to work verification process</li>
+              <li>Reference requirements details</li>
+              <li>Application processing timeline</li>
+              <li>Fee amount for driver licences</li>
+            </ul>
+          </p>
+        </div>
+
+        <p style="margin-top: var(--sp-24); font-size: 0.9375rem; color: var(--text-secondary);">
+          <span class="data-source-flag">Source: driver_licensing, definitions_and_terms.dbs_disclosure_and_barring_service, definitions_and_terms.medical_group_2, definitions_and_terms.knowledge_test_hackney_carriage</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION: VEHICLE ELIGIBILITY
+         Data source: JSON_COMPLETE.json - pages.vehicle_eligibility
+         =================================================================== -->
+    <section class="section" id="vehicle-eligibility" aria-labelledby="vehicle-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="vehicle-title">What vehicles can be licensed</h2>
+          <p class="section__intro">
+            Your vehicle must meet strict standards to be licensed as a Hackney Carriage or Private Hire vehicle.
+          </p>
+        </div>
+
+        <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16); margin-top: var(--sp-32);">All vehicles must:</h3>
+        <ul class="checklist">
+          <li class="checklist__item">Not exceed 7 years from first registration</li>
+          <li class="checklist__item">Have minimum 4 doors</li>
+          <li class="checklist__item">Seat maximum 8 passengers</li>
+          <li class="checklist__item">Meet Euro 6 emission standards</li>
+          <li class="checklist__item">Have valid MOT certificate</li>
+          <li class="checklist__item">Have insurance covering "hire and reward"</li>
+          <li class="checklist__item">Pass vehicle inspection by approved testing station</li>
+        </ul>
+
+        <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16); margin-top: var(--sp-32);">If it's a <strong>Hackney Carriage (white taxi)</strong>, it must also:</h3>
+        <ul class="checklist">
+          <li class="checklist__item">Be white</li>
+          <li class="checklist__item">Display Gloucester City taxi roof sign</li>
+          <li class="checklist__item">Display blue licence plates (front and rear)</li>
+          <li class="checklist__item">Have approved taximeter installed and tested</li>
+          <li class="checklist__item">Display current tariff card inside</li>
+          <li class="checklist__item">Carry first aid kit and fire extinguisher</li>
+        </ul>
+
+        <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16); margin-top: var(--sp-32);">If it's a <strong>Private Hire vehicle</strong>, it must:</h3>
+        <ul class="checklist">
+          <li class="checklist__item">NOT be white</li>
+          <li class="checklist__item">Display yellow licence plates (front and rear)</li>
+          <li class="checklist__item">Display yellow bus lane sticker</li>
+          <li class="checklist__item">Display "No insurance if not pre-booked" stickers</li>
+        </ul>
+
+        <div class="notification notification--info" style="margin-top: var(--sp-32);">
+          <div class="notification__title">Wheelchair accessible vehicles</div>
+          <p>We welcome applications from wheelchair accessible vehicles. These may have relaxed standards in some areas. <a href="#">See wheelchair vehicle guidance.</a></p>
+        </div>
+
+        <p style="margin-top: var(--sp-24); font-size: 0.9375rem; color: var(--text-secondary);">
+          <span class="data-source-flag">Source: vehicle_eligibility, definitions_and_terms.london_type_hackney_carriage</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION: OPERATORS
+         Data source: JSON_COMPLETE.json - pages.private_hire_operators
+         =================================================================== -->
+    <section class="section" id="operators" aria-labelledby="operator-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="operator-title">Run a Private Hire operation</h2>
+          <p class="section__intro">
+            If you want to dispatch Private Hire vehicles for passenger work, you need an operator licence.
+          </p>
+        </div>
+
+        <div class="notification notification--info">
+          <div class="notification__title">What's a Private Hire operator?</div>
+          <p>
+            A licensed operator is a business that takes bookings and dispatches licensed vehicles and drivers.
+            You control who drives your vehicles and ensure they meet all licensing requirements.
+          </p>
+        </div>
+
+        <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16); margin-top: var(--sp-32);">As an operator, you must:</h3>
+        <ul class="checklist">
+          <li class="checklist__item">Maintain a booking system and record of all journeys</li>
+          <li class="checklist__item">Only use licensed drivers and vehicles</li>
+          <li class="checklist__item">Ensure all drivers have valid licences and DBS checks</li>
+          <li class="checklist__item">Provide comprehensive insurance for your operation</li>
+          <li class="checklist__item">Meet vehicle maintenance and safety standards</li>
+          <li class="checklist__item">Keep records of complaints and handle them properly</li>
+          <li class="checklist__item">Notify the council of any changes to your business</li>
+        </ul>
+
+        <div class="missing-info-flag">
+          <div class="missing-info-flag__title">ℹ️ Details not yet in schema</div>
+          <p>
+            The following operator information is not yet in the JSON schema:
+            <ul style="margin-top: var(--sp-8); margin-left: var(--sp-24);">
+              <li>Specific fitness and competence criteria for operators</li>
+              <li>Insurance requirements and minimum cover amounts</li>
+              <li>Record-keeping requirements and retention periods</li>
+              <li>Complaints handling procedures and timelines</li>
+              <li>Discipline and enforcement procedures</li>
+              <li>Sub-contracting rules and restrictions</li>
+              <li>Operator licence duration and renewal process</li>
+              <li>Fee amounts for operator licences</li>
+            </ul>
+          </p>
+        </div>
+
+        <p style="margin-top: var(--sp-24); font-size: 0.9375rem; color: var(--text-secondary);">
+          <span class="data-source-flag">Source: private_hire_operators, definitions_and_terms.sub_contracting</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION: FEES
+         Data source: JSON_COMPLETE.json - pages.fees (flagged as missing details)
+         =================================================================== -->
+    <section class="section" aria-labelledby="fees-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="fees-title">Licensing fees</h2>
+          <p class="section__intro">
+            How much does it cost to apply for or renew a licence?
+          </p>
+        </div>
+
+        <div class="missing-info-flag">
+          <div class="missing-info-flag__title">⚠️ Information not available in schema</div>
+          <p>
+            The fee amounts for driver, vehicle, and operator licences are <strong>not included in the JSON schema</strong>.
+            <br><br>
+            <strong>Please contact the licensing team directly:</strong>
+          </p>
+        </div>
+
+        <div class="contact-box">
+          <div class="contact-box__title">Gloucester City Council – Licensing Team</div>
+          <div class="contact-box__item">
+            <span class="contact-box__label">Address:</span>
+            <span class="contact-box__value">
+              Licensing Team<br>
+              Eastgate Management Suite<br>
+              Eastgate Street<br>
+              Gloucester GL1 1PA
+            </span>
+          </div>
+          <div class="contact-box__item">
+            <span class="contact-box__label">Telephone:</span>
+            <span class="contact-box__value"><a href="tel:01452396396">01452 396396</a></span>
+          </div>
+          <div class="contact-box__item">
+            <span class="contact-box__label">Email:</span>
+            <span class="contact-box__value"><a href="mailto:licensing@gloucester.gov.uk">licensing@gloucester.gov.uk</a></span>
+          </div>
+          <div class="contact-box__item">
+            <span class="contact-box__label">Alternative contact:</span>
+            <span class="contact-box__value"><a href="mailto:heretohelp@gloucester.gov.uk">heretohelp@gloucester.gov.uk</a></span>
+          </div>
+          <div class="contact-box__item">
+            <span class="contact-box__label">Website:</span>
+            <span class="contact-box__value"><a href="https://www.gloucester.gov.uk">www.gloucester.gov.uk</a></span>
+          </div>
+        </div>
+
+        <p style="margin-top: var(--sp-24); font-size: 0.9375rem; color: var(--text-secondary);">
+          <span class="data-source-flag">Source: fees (schema exists but amounts missing)</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION: HELP & SUPPORT
+         Data source: JSON_COMPLETE.json - pages.complaints, appeal_rights
+         =================================================================== -->
+    <section class="section" id="help-support" aria-labelledby="help-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="help-title">Help &amp; support</h2>
+          <p class="section__intro">
+            Questions? Problems? We're here to help.
+          </p>
+        </div>
+
+        <div style="margin: var(--sp-32) 0;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16);">I have a complaint</h3>
+          <p>
+            If you're unhappy with a service or decision, you can lodge a formal complaint.
+            We handle complaints fairly and impartially.
+          </p>
+          <p style="margin-top: var(--sp-12);">
+            <strong>Flagged from schema:</strong> Detailed complaint procedures and timelines are not yet included in the JSON data.
+          </p>
+        </div>
+
+        <div style="margin: var(--sp-32) 0; border-top: 2px solid var(--border); border-bottom: 2px solid var(--border); padding: var(--sp-24) 0;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16);">I want to appeal a decision</h3>
+          <p>
+            If we refuse your application or take action against your licence (suspension or revocation),
+            you have the right to appeal.
+          </p>
+          <p style="margin-top: var(--sp-12);">
+            <strong>Flagged from schema:</strong> Specific appeal procedures, deadlines, and grounds are not yet in the JSON schema.
+          </p>
+        </div>
+
+        <div style="margin: var(--sp-32) 0;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: var(--sp-16);">Report an accident</h3>
+          <p>
+            If you've had an accident in your Hackney Carriage or Private Hire vehicle, you must report it to us.
+            <a href="https://gloucester-self.achieveservice.com/service/Taxi___Report_a_Hackney_Carriage_or_Private_Hire_accident">
+              Report accident online.
+            </a>
+          </p>
+        </div>
+
+        <div class="missing-info-flag">
+          <div class="missing-info-flag__title">ℹ️ Details not yet in schema</div>
+          <p>
+            The following help and support information is not included in the JSON schema:
+            <ul style="margin-top: var(--sp-8); margin-left: var(--sp-24);">
+              <li>Formal complaint procedures and who to contact</li>
+              <li>Complaint investigation timelines</li>
+              <li>Appeal deadlines and legal grounds</li>
+              <li>Appeal hearing procedures</li>
+              <li>Right to be accompanied by a representative</li>
+              <li>Immediate suspension and revocation criteria and procedures</li>
+              <li>Enforcement procedures and penalties</li>
+              <li>Licensing committee procedures and meeting schedules</li>
+              <li>How to request a review of a decision</li>
+            </ul>
+          </p>
+        </div>
+
+        <p style="margin-top: var(--sp-24); font-size: 0.9375rem; color: var(--text-secondary);">
+          <span class="data-source-flag">Source: complaints, appeal_rights, immediate_suspension_revocation, licensing_committee_procedures</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION: ADDITIONAL GUIDANCE
+         Data source: JSON_COMPLETE.json - pages (remaining sections)
+         =================================================================== -->
+    <section class="section" aria-labelledby="guidance-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="guidance-title">More information</h2>
+          <p class="section__intro">
+            Specialized guidance on particular topics.
+          </p>
+        </div>
+
+        <div class="links-grid">
+          <div class="links-grid__item">
+            <a href="#">Hackney Carriage fares</a>
+            <p>Standard fares set by the council for Hackney Carriages.</p>
+            <span class="data-source-flag">Source: hackney_carriage_fares</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="#">Wheelchair accessible vehicles</a>
+            <p>Information for wheelchair drivers and accessible vehicle standards.</p>
+            <span class="data-source-flag">Source: disability_and_wheelchairs, designated_wheelchair_vehicles</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="#">Child restraint requirements</a>
+            <p>Regulations for carrying children safely in taxis.</p>
+            <span class="data-source-flag">Source: child_restraints</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="#">Taxi ranks in Gloucester</a>
+            <p>Where Hackney Carriages can wait for passengers.</p>
+            <span class="data-source-flag">Source: taxi_ranks</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="#">Approved testing stations</a>
+            <p>List of garages approved to conduct vehicle inspections.</p>
+            <span class="data-source-flag">Source: approved_testing_stations</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="#">Criminal convictions policy</a>
+            <p>How we assess criminal history in licensing decisions.</p>
+            <span class="data-source-flag">Source: convictions_relevance_policy</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="#">Licensing policies</a>
+            <p>Full council policies on Hackney Carriage and Private Hire licensing.</p>
+            <span class="data-source-flag">Source: licensing_policies</span>
+          </div>
+          <div class="links-grid__item">
+            <a href="#">Vehicle proprietor responsibilities</a>
+            <p>Legal duties of people who own licensed vehicles.</p>
+            <span class="data-source-flag">Source: vehicle_proprietors</span>
+          </div>
+        </div>
+
+        <div class="notification notification--info" style="margin-top: var(--sp-32);">
+          <div class="notification__title">⚠️ Missing guidance pages</div>
+          <p>
+            The JSON schema references pages for the above topics, but the detailed content for these pages is not yet included in JSON_COMPLETE.json.
+            We have the structural framework but need the full guidance text to complete these pages.
+          </p>
+        </div>
+
+        <p style="margin-top: var(--sp-24); font-size: 0.9375rem; color: var(--text-secondary);">
+          <span class="data-source-flag">Source: vehicle_minor_applications, vehicle_transfer</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECTION: CONTACT & NEXT STEPS
+         Data source: JSON_COMPLETE.json - contact_information
+         =================================================================== -->
+    <section class="section" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="contact-title">Contact us</h2>
+          <p class="section__intro">
+            Have a question? Get in touch with the Gloucester City Council Licensing Team.
+          </p>
+        </div>
+
+        <div class="contact-box">
+          <div class="contact-box__title">Licensing Team, Gloucester City Council</div>
+          <div class="contact-box__item">
+            <span class="contact-box__label">📍 Address:</span>
+            <span class="contact-box__value">
+              Licensing Team<br>
+              Eastgate Management Suite<br>
+              Eastgate Street<br>
+              Gloucester GL1 1PA<br>
+              England
+            </span>
+          </div>
+          <div class="contact-box__item">
+            <span class="contact-box__label">☎️ Telephone:</span>
+            <span class="contact-box__value"><a href="tel:01452396396">01452 396396</a></span>
+          </div>
+          <div class="contact-box__item">
+            <span class="contact-box__label">✉️ Email:</span>
+            <span class="contact-box__value">
+              <a href="mailto:licensing@gloucester.gov.uk">licensing@gloucester.gov.uk</a><br>
+              (Main licensing enquiries)
+            </span>
+          </div>
+          <div class="contact-box__item">
+            <span class="contact-box__label">✉️ Alternative:</span>
+            <span class="contact-box__value">
+              <a href="mailto:heretohelp@gloucester.gov.uk">heretohelp@gloucester.gov.uk</a><br>
+              (Help and support)
+            </span>
+          </div>
+          <div class="contact-box__item">
+            <span class="contact-box__label">🌐 Website:</span>
+            <span class="contact-box__value"><a href="https://www.gloucester.gov.uk">www.gloucester.gov.uk</a></span>
+          </div>
+        </div>
+
+        <div class="notification notification--success" style="margin-top: var(--sp-32);">
+          <div class="notification__title">Ready to apply?</div>
+          <p>
+            Use the links above to submit your application online. Applications are processed within 15 working days.
+            You can check your application status by contacting the licensing team.
+          </p>
+        </div>
+
+        <p style="margin-top: var(--sp-24); font-size: 0.9375rem; color: var(--text-secondary);">
+          <span class="data-source-flag">Source: contact_information.primary</span>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER
+       ==================================================================== -->
+  <footer style="background: var(--primary); color: var(--surface); padding: var(--sp-48) 0 var(--sp-24); margin-top: var(--sp-64);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--sp-32); margin-bottom: var(--sp-32);">
+        <div>
+          <h3 style="font-size: 1rem; margin-bottom: var(--sp-12);">Licensing</h3>
+          <ul style="list-style: none;">
+            <li><a href="#" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Apply for a licence</a></li>
+            <li><a href="#" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Renew your licence</a></li>
+            <li><a href="#" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Make changes</a></li>
+            <li><a href="#" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Complaints</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size: 1rem; margin-bottom: var(--sp-12);">Information</h3>
+          <ul style="list-style: none;">
+            <li><a href="#" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Policies and guidance</a></li>
+            <li><a href="#" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Approved testing stations</a></li>
+            <li><a href="#" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Fares</a></li>
+            <li><a href="#" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Taxi ranks</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size: 1rem; margin-bottom: var(--sp-12);">Council</h3>
+          <ul style="list-style: none;">
+            <li><a href="https://www.gloucester.gov.uk" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Gloucester City Council</a></li>
+            <li><a href="accessibility-statement.html" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Accessibility statement</a></li>
+            <li><a href="#" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Privacy notice</a></li>
+            <li><a href="#" style="color: var(--surface); text-decoration: underline; display: block; padding: var(--sp-4) 0;">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.2); margin: var(--sp-24) 0;">
+      <p style="font-size: 0.875rem; opacity: 0.9;">
+        &copy; 2026 Gloucester City Council. All rights reserved. |
+        <span style="font-size: 0.75rem; opacity: 0.8;">Data source: Taxi website/JSON_COMPLETE.json | Built with user-journey principles | Flags missing schema data</span>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
