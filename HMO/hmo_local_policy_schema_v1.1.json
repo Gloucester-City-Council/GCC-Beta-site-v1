@@ -1,0 +1,1858 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gloucester.gov.uk/schemas/hmo-local-policy/v1.1",
+  "title": "Gloucester City Council \u2013 HMO Local Policy Schema",
+  "description": "A structured schema containing Gloucester City Council's local HMO policies, standards and requirements. Every field value is a verbatim quotation from a published Gloucester City Council source document. No content from any other local authority has been used. No inference, interpretation or invention has been applied. TODO items are included wherever a source document could not be retrieved or has not yet been published.",
+  "version": "1.1.0",
+  "lastUpdated": "2026-05-14",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        "schemaLayer": {
+          "type": "string",
+          "const": "local-policy"
+        },
+        "issuingAuthority": {
+          "type": "string",
+          "const": "Gloucester City Council"
+        },
+        "extractionRule": {
+          "type": "string",
+          "const": "All values are verbatim quotations from published Gloucester City Council source documents. No content from any other local authority. No inference, interpretation or invention."
+        },
+        "sourceDocuments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "documentRef": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "accessStatus": {
+                "type": "string",
+                "enum": [
+                  "retrieved",
+                  "inaccessible",
+                  "not-located"
+                ]
+              },
+              "accessNote": {
+                "type": "string"
+              }
+            }
+          },
+          "default": [
+            {
+              "documentRef": "SRC-01",
+              "title": "Housing in Multiple Occupancy (HMO) \u2013 Gloucester City Council web page",
+              "url": "https://www.gloucester.gov.uk/housing/hmo-licences/housing-in-multiple-occupancy-hmo/",
+              "accessStatus": "retrieved"
+            },
+            {
+              "documentRef": "SRC-02",
+              "title": "Houses in Multiple Occupation \u2013 A Guide for Landlords, Managers and Tenants (2024)",
+              "url": "https://www.gloucester.gov.uk/media/ghqhvpgz/houses-in-multiple-occupation-a-guide-for-landlords-managers-and-tenants-2024.pdf",
+              "accessStatus": "retrieved"
+            },
+            {
+              "documentRef": "SRC-03",
+              "title": "Planning guidance \u2013 HMO Licences \u2013 Gloucester City Council web page",
+              "url": "https://www.gloucester.gov.uk/housing/hmo-licences/planning-guidance/",
+              "accessStatus": "retrieved"
+            },
+            {
+              "documentRef": "SRC-04",
+              "title": "Houses in Multiple Occupation \u2013 A guide for applicants and decision takers (August 2023)",
+              "url": "https://www.gloucester.gov.uk/media/cj1jbtez/hmo-guide-sept-2023.pdf",
+              "accessStatus": "retrieved"
+            },
+            {
+              "documentRef": "SRC-05",
+              "title": "Guidance Notes to assist applicants in completing the licence application form for a House in Multiple Occupation (2020, revised)",
+              "url": "https://www.gloucester.gov.uk/media/of4hvdn1/2020-revised-guidance-notes-for-hmo-application.pdf",
+              "accessStatus": "retrieved"
+            },
+            {
+              "documentRef": "SRC-06",
+              "title": "Regulating Housing Standards Policy \u2013 Gloucester City Council",
+              "url": "https://democracy.gloucester.gov.uk/documents/s60900/Appendix%201%20-%20Main%20Report%20Regulating%20Housing%20Standards%20Policy.pdf",
+              "accessStatus": "inaccessible",
+              "accessNote": "URL returns HTTP 403. Document exists on the GCC democracy portal but cannot be retrieved. Referenced in SRC-02 Sections 2.0, 3.1 and 5.0."
+            },
+            {
+              "documentRef": "SRC-07",
+              "title": "Gloucester City Council \u2013 Licensing Fit and Proper Person and Cause for Concern Statement of Principles",
+              "url": "not-located",
+              "accessStatus": "not-located",
+              "accessNote": "Referenced verbatim in SRC-05 as 'the Council's licensing fit and proper person and cause for concern statement of principles'. No standalone published URL has been located."
+            },
+            {
+              "documentRef": "SRC-08",
+              "title": "Gloucester City Council \u2013 Additional HMO Licensing Scheme Designation",
+              "url": "not-located",
+              "accessStatus": "not-located",
+              "accessNote": "No published additional licensing scheme designation document has been located. Consultation ran March\u2013May 2026 but no final designation document has been published."
+            },
+            {
+              "documentRef": "SRC-09",
+              "title": "Gloucester City Council \u2013 Article 4 Direction",
+              "url": "not-located",
+              "accessStatus": "not-located",
+              "accessNote": "No confirmed Article 4 Direction document has been located. Consultation ran March\u2013May 2026 but no confirmed direction document has been published."
+            },
+            {
+              "documentRef": "SRC-10",
+              "title": "Gloucester City Council \u2013 10-Year Housing Strategy",
+              "url": "not-located",
+              "accessStatus": "not-located",
+              "accessNote": "Referenced in the Corporate Plan 2025\u20132028 as a document to be adopted. Not yet published at time of schema creation."
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "schemaLayer",
+        "issuingAuthority",
+        "extractionRule",
+        "sourceDocuments"
+      ]
+    },
+    "hmoDefinitions": {
+      "type": "object",
+      "description": "Definitions of HMO types as published by Gloucester City Council",
+      "properties": {
+        "generalDefinition": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "A HMO is a house in multiple occupation and applies to buildings that are either a single dwelling or a flat where one or more separate households share facilities such as; kitchens, toilet and bathroom."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-01"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: What is a HMO?"
+            }
+          }
+        },
+        "hmoTypes": {
+          "type": "array",
+          "description": "The four descriptions of an HMO as published in the GCC landlord guide",
+          "items": {
+            "type": "object",
+            "properties": {
+              "typeRef": {
+                "type": "string"
+              },
+              "verbatimText": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "documentLocation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": [
+            {
+              "typeRef": "HMO-TYPE-1",
+              "verbatimText": "An entire house or flat which is let to three or more tenants who form two or more households and who share a kitchen, bathroom or toilet (facilities or amenities). A household includes co-habiting couples, step and foster children and relatives extending to cousins, nephews and nieces.",
+              "source": "SRC-02",
+              "documentLocation": "Section 1.0 \u2013 What is a House in Multiple Occupation (HMO)?"
+            },
+            {
+              "typeRef": "HMO-TYPE-2",
+              "verbatimText": "A house which has been converted into bedsits or other non-self-contained accommodation and which is let to three or more tenants who form two or more households and who share kitchen, bathroom or toilet (facilities or amenities).",
+              "source": "SRC-02",
+              "documentLocation": "Section 1.0 \u2013 What is a House in Multiple Occupation (HMO)?"
+            },
+            {
+              "typeRef": "HMO-TYPE-3",
+              "verbatimText": "A converted house which contains self-contained flats and one or more flats which are not wholly self contained (i.e. the flat does not contain within it a kitchen, bathroom and toilet) and which is occupied by three or more tenants who form two or more households.",
+              "source": "SRC-02",
+              "documentLocation": "Section 1.0 \u2013 What is a House in Multiple Occupation (HMO)?"
+            },
+            {
+              "typeRef": "HMO-TYPE-4",
+              "verbatimText": "A building converted entirely into self-contained flats, where the conversion does not meet the standards of the 1991 Building Regulations or later and less than two-thirds of the flats are owner-occupied. These types of HMOs are classified as Section 257 Houses of Multiple Occupation.",
+              "source": "SRC-02",
+              "documentLocation": "Section 1.0 \u2013 What is a House in Multiple Occupation (HMO)?"
+            }
+          ]
+        },
+        "whatIsNotAnHMO": {
+          "type": "array",
+          "description": "Properties that are not an HMO as explicitly stated in the GCC landlord guide",
+          "items": {
+            "type": "object",
+            "properties": {
+              "verbatimText": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "documentLocation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": [
+            {
+              "verbatimText": "An entire flat or house let to one person, a couple, a family or two people sharing.",
+              "source": "SRC-02",
+              "documentLocation": "Section 1.1 \u2013 What is not a HMO?"
+            },
+            {
+              "verbatimText": "Two lodgers with an owner occupier living in the house.",
+              "source": "SRC-02",
+              "documentLocation": "Section 1.1 \u2013 What is not a HMO?"
+            }
+          ]
+        },
+        "smallHMO": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "A small HMO is a property occupied by between three and six unrelated individuals, as their only or main residence, who share basic amenities such as a kitchen or bathroom. Change of use to a small HMO does not typically require planning permission but will require licensing. Physical changes to the building or boundary may require planning permission. Do contact the council to check before you start work."
+            },
+            "useClass": {
+              "type": "string",
+              "const": "C4"
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-03"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Small HMO (use class C4)"
+            }
+          }
+        },
+        "largeHMO": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "A large HMO is a property occupied by 7 or more people who form more than 1 household. These require planning permission and licensing."
+            },
+            "useClass": {
+              "type": "string",
+              "const": "Sui-Generis"
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-03"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Large HMO (use class Sui-Generis)"
+            }
+          }
+        },
+        "planningPermissionLawfulUse": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "This is required for all large HMOs that are occupied by more than six people who are not related. All works carried out in an HMO must comply with Building Regulation requirements."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 1.2 \u2013 Planning Permission lawful use"
+            }
+          }
+        }
+      }
+    },
+    "licensingPolicy": {
+      "type": "object",
+      "description": "Gloucester City Council's HMO licensing requirements as explicitly stated in published GCC documents",
+      "properties": {
+        "licensingRequirement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "A licence is required for all HMOs that are occupied by five or more people belonging to 2 or more households and who share a facility or amenity."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 2.0 \u2013 HMO Licensing"
+            }
+          }
+        },
+        "mandatoryLicensingStatement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "If your HMO property has 5 persons or more who form more than one household and share facilities it must now be licensed."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-01"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: HMO licensing \u2013 THE LAW HAS CHANGED"
+            }
+          }
+        },
+        "tenantLicensingStatement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Your landlord must have a licence for all HMO properties which are occupied by five or more people forming two or more households."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-01"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Information for tenants"
+            }
+          }
+        },
+        "preGrantConditions": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Before granting a licence the Council will determine if the proposed licence holder and manager is fit and proper persons, that suitable financial and management arrangements are in place for the management of the HMO and that the HMO is suitable for occupation by a specified number of tenants based on the minimum standards in this document."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 2.0 \u2013 HMO Licensing"
+            }
+          }
+        },
+        "licenceConditionsStatement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Each HMO licence that is granted will come with specific conditions that the licence holder will be bound to comply with. Failure to comply with the conditions of a HMO licence is an offence for each breach and may lead to enforcement action being taken."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 2.0 \u2013 HMO Licensing"
+            }
+          }
+        },
+        "regulatingPolicyReference": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Licensing decisions will be guided by the Councils Regulating Housing Standards Policy."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 2.0 \u2013 HMO Licensing"
+            }
+          }
+        },
+        "fees": {
+          "type": "object",
+          "description": "HMO licensing fees as published on the GCC website",
+          "properties": {
+            "feesIntroductoryStatement": {
+              "type": "object",
+              "properties": {
+                "verbatimText": {
+                  "type": "string",
+                  "const": "Following the introduction of the Housing and Planning Act 2016, Gloucester City Council has recently reviewed its application processes and fees."
+                },
+                "source": {
+                  "type": "string",
+                  "const": "SRC-01"
+                },
+                "documentLocation": {
+                  "type": "string",
+                  "const": "Section: HMO Licensing Fees"
+                }
+              }
+            },
+            "feesFromApril2025": {
+              "type": "array",
+              "description": "Fees effective from April 2025 as published on SRC-01",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "duration": {
+                    "type": "string"
+                  },
+                  "fee": {
+                    "type": "string"
+                  }
+                }
+              },
+              "default": [
+                {
+                  "type": "New",
+                  "duration": "up to 5 years",
+                  "fee": "\u00a3947.00"
+                },
+                {
+                  "type": "Renewal",
+                  "duration": "up to 5 years",
+                  "fee": "\u00a3797.00"
+                }
+              ],
+              "source": "SRC-01",
+              "documentLocation": "Section: HMO Licensing Fees \u2013 table effective from April 2025"
+            },
+            "feesFrom1April2026": {
+              "type": "array",
+              "description": "Fees effective from 1 April 2026 as published on SRC-01",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "duration": {
+                    "type": "string"
+                  },
+                  "fee": {
+                    "type": "string"
+                  }
+                }
+              },
+              "default": [
+                {
+                  "type": "New",
+                  "duration": "up to 5 years",
+                  "fee": "\u00a31260.00"
+                },
+                {
+                  "type": "Renewal",
+                  "duration": "up to 5 years",
+                  "fee": "\u00a3900.00"
+                }
+              ],
+              "source": "SRC-01",
+              "documentLocation": "Section: HMO Licensing Fees \u2013 table effective from 1 April 2026"
+            }
+          }
+        },
+        "planningAndLicensingDistinction": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Planning and licensing are two different matters. You may not need planning permission but could still need a license from the Council to operate. HMOs with five or more people require a license. Please ensure you are familiar with both planning and licensing. Failure to meet the requirements for either planning or licensing can result in enforcement action and fines."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-03"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Planning and licensing are two different matters"
+            }
+          }
+        },
+        "licenceApplicationGuidanceNotes": {
+          "type": "object",
+          "description": "GCC licence application guidance notes as published in SRC-05",
+          "properties": {
+            "licenceDurationStatement": {
+              "type": "object",
+              "properties": {
+                "verbatimText": {
+                  "type": "string",
+                  "const": "The licence is valid for a period of up to five years, the expiry date being calculated as follows, please refer to the Council's licensing fit and proper person and cause for concern statement of principles."
+                },
+                "source": {
+                  "type": "string",
+                  "const": "SRC-05"
+                },
+                "documentLocation": {
+                  "type": "string",
+                  "const": "Section: Length of the HMO Licence"
+                }
+              }
+            },
+            "licenceDurationCategories": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "category": {
+                    "type": "string"
+                  },
+                  "verbatimText": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "documentLocation": {
+                    "type": "string"
+                  }
+                }
+              },
+              "default": [
+                {
+                  "category": "Initial licence for a new HMO or application from a new owner",
+                  "verbatimText": "Up to 5 years from the date the application is deemed valid (\"duly made\")",
+                  "source": "SRC-05",
+                  "documentLocation": "Section: Length of the HMO Licence"
+                },
+                {
+                  "category": "Initial licence for a HMO under development",
+                  "verbatimText": "Up to 5 years from the date the applicant anticipates the HMO will be ready for occupation",
+                  "source": "SRC-05",
+                  "documentLocation": "Section: Length of the HMO Licence"
+                },
+                {
+                  "category": "Application for a HMO already operating without a licence",
+                  "verbatimText": "Up to 5 years from the date the Council became aware the HMO was operating without a licence",
+                  "source": "SRC-05",
+                  "documentLocation": "Section: Length of the HMO Licence"
+                },
+                {
+                  "category": "Application for a new licence following expiry of a previous licence from the same licence holder (renewal)",
+                  "verbatimText": "Up to 5 years from the expiry date of the previous licence.",
+                  "source": "SRC-05",
+                  "documentLocation": "Section: Length of the HMO Licence"
+                }
+              ]
+            },
+            "nonComplianceReductionStatement": {
+              "type": "object",
+              "properties": {
+                "verbatimText": {
+                  "type": "string",
+                  "const": "The Council reserves the right, where it deems fit, to reduce the term awarded to an individual applicant where there is a history of non-compliance with licence conditions or HMO management regulations or of failure to co-operate with the Council."
+                },
+                "source": {
+                  "type": "string",
+                  "const": "SRC-05"
+                },
+                "documentLocation": {
+                  "type": "string",
+                  "const": "Section: Length of the HMO Licence"
+                }
+              }
+            },
+            "namedPersonRequirement": {
+              "type": "object",
+              "properties": {
+                "verbatimText": {
+                  "type": "string",
+                  "const": "Gloucester City Council will only accept licence applications with a named person as the licence holder. If a company wishes to Licence a property the licence holder must be a named person within the company who will be responsible on behalf of the company for all obligations in relation to the licence."
+                },
+                "source": {
+                  "type": "string",
+                  "const": "SRC-05"
+                },
+                "documentLocation": {
+                  "type": "string",
+                  "const": "Section 1.1.3"
+                }
+              }
+            }
+          }
+        },
+        "fitAndProperPersonPolicy": {
+          "type": "object",
+          "properties": {
+            "todo": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "const": "TODO"
+                },
+                "reason": {
+                  "type": "string",
+                  "const": "SRC-07 (Gloucester City Council Licensing Fit and Proper Person and Cause for Concern Statement of Principles) is referenced in SRC-05 but has not been located as a standalone published document. No URL found. Content cannot be populated without the source document."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "Obtain the published 'Licensing Fit and Proper Person and Cause for Concern Statement of Principles' from Gloucester City Council and extract verbatim content for this section."
+                },
+                "referencedIn": {
+                  "type": "string",
+                  "const": "SRC-05: 'please refer to the Council's licensing fit and proper person and cause for concern statement of principles'"
+                }
+              }
+            }
+          }
+        },
+        "regulatingHousingStandardsPolicy": {
+          "type": "object",
+          "properties": {
+            "todo": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "const": "TODO"
+                },
+                "reason": {
+                  "type": "string",
+                  "const": "SRC-06 (Regulating Housing Standards Policy) is referenced in SRC-02 Sections 2.0, 3.1 and 5.0 but the document URL returns HTTP 403 and cannot be retrieved. Content cannot be populated without the source document."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "Obtain the published Regulating Housing Standards Policy from Gloucester City Council (democracy portal or direct from the Housing team) and extract verbatim content for this section."
+                },
+                "referencedIn": {
+                  "type": "array",
+                  "const": [
+                    "SRC-02 Section 2.0: 'Licensing decisions will be guided by the Councils Regulating Housing Standards Policy.'",
+                    "SRC-02 Section 3.1: 'For more information please refer to the Councils Regulating Housing Standards Policy.'",
+                    "SRC-02 Section 5.0: 'Please refer to the Council Regulating Housing Standards Policy for more information.'"
+                  ]
+                },
+                "knownUrl": {
+                  "type": "string",
+                  "const": "https://democracy.gloucester.gov.uk/documents/s60900/Appendix%201%20-%20Main%20Report%20Regulating%20Housing%20Standards%20Policy.pdf"
+                },
+                "urlStatus": {
+                  "type": "string",
+                  "const": "HTTP 403 \u2013 access denied"
+                }
+              }
+            }
+          }
+        },
+        "additionalLicensing": {
+          "type": "object",
+          "properties": {
+            "todo": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "const": "TODO"
+                },
+                "reason": {
+                  "type": "string",
+                  "const": "SRC-08 (Additional HMO Licensing Scheme Designation) does not exist as a published document. A public consultation ran from 2 March 2026 to 11 May 2026 but no final designation has been published at time of schema creation."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "Once Gloucester City Council publishes the Additional Licensing Scheme Designation document, extract verbatim content and populate this section. Monitor gloucester.gov.uk for publication."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "planningPolicy": {
+      "type": "object",
+      "description": "Gloucester City Council planning policies for HMOs as explicitly published",
+      "properties": {
+        "developmentPlanReference": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "The Gloucester City Plan (2011-2031) (GCP) sets out when planning permission will be granted. All policies in the GCP require consideration but there is also a specific policy for HMOs."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-03"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Large HMO (use class Sui-Generis)"
+            }
+          }
+        },
+        "policyA2": {
+          "type": "object",
+          "description": "Policy A2: Houses in Multiple Occupation \u2013 verbatim from GCC planning guidance page",
+          "properties": {
+            "policyTitle": {
+              "type": "string",
+              "const": "Policy A2: Houses in Multiple Occupation"
+            },
+            "verbatimText": {
+              "type": "string",
+              "const": "Planning permission for the creation of a House in Multiple Occupation (HMOs) will be permitted where: 1. The development would not result in any existing residential property (C3 use) being 'sandwiched' between two HMOs; and 2. The development would not result in the creation of more than two adjacent properties in HMO use; and 3. HMOs, including the proposed development, would represent no more than 10% of properties within a 100-metre radius of the application property."
+            },
+            "criteria": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "criterionNumber": {
+                    "type": "integer"
+                  },
+                  "verbatimText": {
+                    "type": "string"
+                  }
+                }
+              },
+              "default": [
+                {
+                  "criterionNumber": 1,
+                  "verbatimText": "The development would not result in any existing residential property (C3 use) being 'sandwiched' between two HMOs."
+                },
+                {
+                  "criterionNumber": 2,
+                  "verbatimText": "The development would not result in the creation of more than two adjacent properties in HMO use."
+                },
+                {
+                  "criterionNumber": 3,
+                  "verbatimText": "HMOs, including the proposed development, would represent no more than 10% of properties within a 100-metre radius of the application property."
+                }
+              ]
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-03"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Policy A2: Houses in Multiple Occupation"
+            }
+          }
+        },
+        "saturationCalculationRules": {
+          "type": "array",
+          "description": "The explicit calculation rules for the 100-metre radius saturation test as published on the GCC planning guidance page",
+          "items": {
+            "type": "object",
+            "properties": {
+              "verbatimText": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "documentLocation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": [
+            {
+              "verbatimText": "The map generates a list of all properties and uses. Only those with a residential element are counted.",
+              "source": "SRC-03",
+              "documentLocation": "Section: Instructions for using the saturation map"
+            },
+            {
+              "verbatimText": "Dwellings that are either within purpose-built blocks of flats, or within houses that have been sub-divided into separate flats, are all counted as one single property, and only the first address point is counted.",
+              "source": "SRC-03",
+              "documentLocation": "Section: Instructions for using the saturation map"
+            },
+            {
+              "verbatimText": "Where a property is in mixed use, the first residential address point is counted.",
+              "source": "SRC-03",
+              "documentLocation": "Section: Instructions for using the saturation map"
+            },
+            {
+              "verbatimText": "When calculating the percentage of HMO properties within the radius the application site is also included as a HMO. Where the percentage is not a whole number, such as 10.3% or 10.9% this shall be rounded down.",
+              "source": "SRC-03",
+              "documentLocation": "Section: Instructions for using the saturation map"
+            }
+          ]
+        },
+        "policyA1": {
+          "type": "object",
+          "description": "Policy A1 as cited in the GCC HMO guide for applicants",
+          "properties": {
+            "policyTitle": {
+              "type": "string",
+              "const": "Policy A1: Effective and efficient use of housing, land and buildings"
+            },
+            "verbatimText": {
+              "type": "string",
+              "const": "Development will be permitted where it makes effective and efficient use of land and buildings. Development proposals should: 1. Result in overall improvements to the built and natural environment; and 2. Be of a suitable scale for the site and not have a significant adverse impact on the character of the locality, the appearance of the street scene and the living conditions of neighbouring occupiers or future residents; and 3. Provide adequate off-street parking, access, covered and secure cycle storage which provides for the existing and proposed use; and 4. Not prejudice the potential for the comprehensive development of adjacent land; and 5. Provide outdoor amenity space and garden space at a level that reflects the character of the area and the scale of the development; and 6. Provide adequate, well designed, appropriately located and accessible bin storage areas; and 7. Be well-designed to create and support healthy living conditions."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-04"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 5, Policy A1: Effective and efficient use of housing, land and buildings"
+            }
+          }
+        },
+        "guidanceDocumentReference": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "For further details of how to use this policy, and to see other policy considerations, please refer to Houses in Multiple Occupation \u2013 A guide for applicants and decision takers."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-03"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Policy A2: Houses in Multiple Occupation"
+            }
+          }
+        },
+        "guidanceDocumentPurpose": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "This guide primarily provides guidance to support the use of Policy A2: Houses in Multiple Occupation from the adopted Gloucester City Plan (2011-2031). It is intended to be used by prospective planning applicants, property developers and land owners, as well as decision takers such as planning officers and elected planning committee members."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-04"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 1, paragraph 1.4"
+            }
+          }
+        },
+        "guidanceDocumentScope": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "The guide sets out definitions, details when an application for planning permission is required, what information needs to be provided, and how the council as Local Planning Authority (LPA) will assess applications for HMOs."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-04"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 1, paragraph 1.5"
+            }
+          }
+        },
+        "guidanceDocumentNote": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "The guide does not introduce any new policies or requirements. It simply sets out how the policy is interpreted by the council and how the requirements could be met."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-04"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 5, paragraph 5.3"
+            }
+          }
+        },
+        "article4Direction": {
+          "type": "object",
+          "properties": {
+            "todo": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "const": "TODO"
+                },
+                "reason": {
+                  "type": "string",
+                  "const": "SRC-09 (Article 4 Direction) does not exist as a confirmed published document. A public consultation ran from 2 March 2026 to 11 May 2026 but no confirmed direction has been published at time of schema creation."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "Once Gloucester City Council publishes the confirmed Article 4 Direction document, extract verbatim content and populate this section. Monitor gloucester.gov.uk for publication."
+                }
+              }
+            }
+          }
+        },
+        "policyC1_todo": {
+          "type": "object",
+          "properties": {
+            "todo": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "const": "TODO"
+                },
+                "reason": {
+                  "type": "string",
+                  "const": "Policy C1: Active Design and Accessibility is listed in SRC-04 Section 5.1 as a policy against which large HMO applications are assessed. The full verbatim policy text from the Gloucester City Plan 2011\u20132031 has not been retrieved and extracted into this schema."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "Extract verbatim Policy C1 text from the adopted Gloucester City Plan 2011\u20132031 and populate this field."
+                },
+                "referencedIn": {
+                  "type": "string",
+                  "const": "SRC-04 Section 5.1: listed as 'Policy C1: Active Design and Accessibility/ JCS SD4: Design'"
+                }
+              }
+            }
+          }
+        },
+        "policyE6_todo": {
+          "type": "object",
+          "properties": {
+            "todo": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "const": "TODO"
+                },
+                "reason": {
+                  "type": "string",
+                  "const": "Policy E6: Development Affecting Cotswold Beechwoods Special Area of Conservation is listed in SRC-04 Section 5.1 as a policy against which large HMO applications are assessed. The full verbatim policy text has not been retrieved and extracted."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "Extract verbatim Policy E6 text from the adopted Gloucester City Plan 2011\u20132031 and populate this field."
+                },
+                "referencedIn": {
+                  "type": "string",
+                  "const": "SRC-04 Section 5.1: listed as 'Policy E6: Development Affecting Cotswold Beechwoods Special Area of Conservation'"
+                }
+              }
+            }
+          }
+        },
+        "policyF6_todo": {
+          "type": "object",
+          "properties": {
+            "todo": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "const": "TODO"
+                },
+                "reason": {
+                  "type": "string",
+                  "const": "Policy F6: Nationally Described Space Standards is listed in SRC-04 Section 5.1 as a policy against which large HMO applications are assessed. The full verbatim policy text has not been retrieved and extracted."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "Extract verbatim Policy F6 text from the adopted Gloucester City Plan 2011\u20132031 and populate this field."
+                },
+                "referencedIn": {
+                  "type": "string",
+                  "const": "SRC-04 Section 5.1: listed as 'Policy F6: Nationally Described Space Standards'"
+                }
+              }
+            }
+          }
+        },
+        "policyG1_todo": {
+          "type": "object",
+          "properties": {
+            "todo": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "const": "TODO"
+                },
+                "reason": {
+                  "type": "string",
+                  "const": "Policy G1: Sustainable Transport and Parking is listed in SRC-04 Section 5.1 as a policy against which large HMO applications are assessed. The full verbatim policy text has not been retrieved and extracted."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "Extract verbatim Policy G1 text from the adopted Gloucester City Plan 2011\u20132031 and populate this field."
+                },
+                "referencedIn": {
+                  "type": "string",
+                  "const": "SRC-04 Section 5.1: listed as 'Policy G1: Sustainable transport and parking'"
+                }
+              }
+            }
+          }
+        },
+        "jcsPolices_todo": {
+          "type": "object",
+          "properties": {
+            "todo": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "const": "TODO"
+                },
+                "reason": {
+                  "type": "string",
+                  "const": "Joint Core Strategy policies SD3, SD4 and SD11 are listed in SRC-04 Section 5.1 as policies against which large HMO applications are assessed. The full verbatim policy texts have not been retrieved and extracted."
+                },
+                "action": {
+                  "type": "string",
+                  "const": "Extract verbatim policy texts for JCS SD3 (Sustainable Design and Construction), SD4 (Design Requirements) and SD11 (Housing Mix and Standards) from the adopted Joint Core Strategy 2011\u20132031 and populate this field."
+                },
+                "referencedIn": {
+                  "type": "string",
+                  "const": "SRC-04 Section 5.1: listed as 'JCS SD3: Sustainable Design and Construction', 'SD4: Design Requirements', 'SD11: Housing Mix and Standards'"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "hhsrsPolicy": {
+      "type": "object",
+      "description": "GCC's published approach to HHSRS as stated in SRC-02",
+      "properties": {
+        "generalStatement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "All HMO accommodation should be free from serious health and safety hazards and this is assessed using the housing health and safety rating system or HHSRS."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 3.0 \u2013 Health and Safety and the HHSRS"
+            }
+          }
+        },
+        "hazardCategories": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "The system requires the assessment of 29 hazards grouped as: Damp and mould, excess cold / heat; Pollutants e.g. asbestos, carbon monoxide, lead; Overcrowding, security or lighting, or excessive noise; Poor hygiene, sanitation, water supply; Accidents \u2013 falls, electric shocks, fires, burns, scalds; Collisions, explosions, structural collapse."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 3.0 \u2013 Health and Safety and the HHSRS"
+            }
+          }
+        },
+        "enforcementApproach": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Prior to an inspection the landlord/owner/manager of a property will be invited to visit the property with an officer from the Residential Services Team. This is to allow the landlord/manager to remedy any defects prior to enforcement action and to promote informal discussions."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 3.1 \u2013 How will the system be used in enforcement?"
+            }
+          }
+        },
+        "formalEnforcementStatement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "If informal action fails to remedy the situation the council is likely to move to formal action by serving an improvement notice on the owner, or agent as appropriate, requiring that hazards be reduced to a safe level within a set time. In more serious cases the council may serve a prohibition order prohibiting the use of all or part of a dwelling. Failure to comply with an enforcement notice is an offence and may lead to further legal action being taken."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 3.1 \u2013 How will the system be used in enforcement?"
+            }
+          }
+        },
+        "hazardAwarenessNotice": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "For minor hazards, the council may serve a hazard awareness notice informing the landlord of the hazards and identifying works to be undertaken to address these hazards. This type of notice is for information only."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 3.1 \u2013 How will the system be used in enforcement?"
+            }
+          }
+        },
+        "regulatingPolicyReference": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "For more information please refer to the Councils Regulating Housing Standards Policy."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 3.1 \u2013 How will the system be used in enforcement?"
+            }
+          }
+        }
+      }
+    },
+    "fireSafetyPolicy": {
+      "type": "object",
+      "description": "GCC's published fire safety standards and requirements for HMOs as stated in SRC-02",
+      "properties": {
+        "generalConsiderations": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Fire Safety measures in HMOs are designed to alert tenants and occupiers to an occurrence of a fire and to prevent smoke and fire spreading to other parts of the property before residents have a chance to escape. In general, the following matters are considered when reviewing fire safety; Automatic fire detection systems. Protected routes for the occupiers to escape. Fire separation and compartmentalisation. Fire Doors. Emergency lighting. Fire fighting equipment. Fire safety compliant furniture and fittings. Fire risk assessments and property management."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.0 \u2013 Fire Safety"
+            }
+          }
+        },
+        "individualAssessmentStatement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "This information is generic in its content and its recommendations and each property must be assessed and judged individually as each property is unique."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.0 \u2013 Fire Safety"
+            }
+          }
+        },
+        "fireDetectionMinimumStandard": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "As a minimum in HMO's it is necessary to provide interlinked smoke detectors in the hallways and landings of the property and a heat detector in the kitchen and high risk rooms which are mains wired with battery back up. The detectors should be interlinked and comply with BS 5839:2019 part 6 - Grade D:LD2 type system. As the number of storeys in a HMO increases and the number of kitchens increases the level of fire safety detection will also increase."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.1 \u2013 Automatic fire detection"
+            }
+          }
+        },
+        "fireRiskAssessmentRequirement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "If you own or manage a property it is vital that you carry out an adequate fire safety risk assessment (FRA) and contact the Residential Services Team to discuss your current and proposed fire safety measures."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.1 \u2013 Automatic fire detection"
+            }
+          }
+        },
+        "protectedRouteStandard": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "All doors, walls, floors, and ceilings onto the escape route and the underneath and sides of all staircases on the route must be constructed to resist the passage and damage of fire, smoke and fumes for at least half an hour. Any electric or gas meters in the route must be enclosed in half-hour fire resisting construction and there must not be any storage or obstructions in the route. Any doors that open on the to means of escape and protected route including the final exit door from the property must be operable without a key."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.2 \u2013 Protected Route/Fire Separation"
+            }
+          }
+        },
+        "fireDoorsThreeOrMoreStoreys": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "In a property with three or more storeys, all bedrooms, kitchens, and living room doors that open onto the protected route must be 30 minute fire doors and maintained in proper working order. Bathroom doors are only required to be a fire door if there is a fire hazard in the room i.e. a gas boiler."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.3 \u2013 Fire Doors"
+            }
+          }
+        },
+        "fireDoorsFewerThanThreeStoreys": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "In properties with less than 3 storeys, a fire door is only required on high risk rooms which contain kitchen facilities."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.3 \u2013 Fire Doors"
+            }
+          }
+        },
+        "fireDoorRequirements": {
+          "type": "array",
+          "description": "Verbatim fire door requirements as listed in Section 4.3 of SRC-02",
+          "items": {
+            "type": "object",
+            "properties": {
+              "verbatimText": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "documentLocation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": [
+            {
+              "verbatimText": "Be half-hour (30 minutes) fire resisting (or one hour between commercial and residential accommodation).",
+              "source": "SRC-02",
+              "documentLocation": "Section 4.3 \u2013 Fire Doors"
+            },
+            {
+              "verbatimText": "Be operable from inside the room without the use of a key.",
+              "source": "SRC-02",
+              "documentLocation": "Section 4.3 \u2013 Fire Doors"
+            },
+            {
+              "verbatimText": "Be fitted with a self-closing device \u2013 which is regularly tested to ensure it fully closes the door.",
+              "source": "SRC-02",
+              "documentLocation": "Section 4.3 \u2013 Fire Doors"
+            },
+            {
+              "verbatimText": "Be fitted with an intumescent strip and cold smoke seal to the top and all side edges of the door or alternatively installed into all internal sides of the door frame.",
+              "source": "SRC-02",
+              "documentLocation": "Section 4.3 \u2013 Fire Doors"
+            },
+            {
+              "verbatimText": "Be fitted such that there is no more than a 3mm gap between the door and frame.",
+              "source": "SRC-02",
+              "documentLocation": "Section 4.3 \u2013 Fire Doors"
+            }
+          ]
+        },
+        "emergencyLightingRequirement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Emergency lighting may be required in HMOs with three or more storeys and, in smaller properties where the layout and escape route is long or complex. The emergency lighting system should be mains wired with battery back up in the escape route designed to operate if the mains electrical supply fails. Emergency lighting will also need to be tested annually."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.4 \u2013 Emergency Lighting"
+            }
+          }
+        },
+        "fireBlanketRequirement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "All rooms containing cooking facilities should have a fire blanket. Suitably located on a wall near the cooking facilities and at a height of 1.2 -m 1.5 m from the floor. They must not be kept in a drawer or cupboard."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.5 \u2013 Fire Fighting Equipment"
+            }
+          }
+        },
+        "furnitureAndFurnishingsRequirement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "All upholstered furniture including chairs, sofas, mattresses, headboards, cushions and seat pads should comply with The Furniture and Furnishings (Fire Safety) Regulations 1988 as amended (2010)."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.6 \u2013 Fire Safety Compliant Furniture and Furnishings"
+            }
+          }
+        },
+        "competentContractorsRequirement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "All fire doors, emergency lighting and fire detection equipment must be fitted and maintained by competent contractors in compliance with all relevant codes of practice and British Standards."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 4.7 \u2013 General"
+            }
+          }
+        }
+      }
+    },
+    "managementRegulationsPolicy": {
+      "type": "object",
+      "description": "GCC's published duties under HMO Management Regulations as stated in SRC-02",
+      "properties": {
+        "regulationsIntroduction": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Managers of HMOs are required to meet the requirements of the HMO Management Regulations which place specific duties on them. The manager means the person who has overall management responsibility for the premises which may be the landlord, HMO licence holder or their agent. Failure to comply with any of the Regulations is an offence and may lead to enforcement action being taken."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 5.0 \u2013 Management of Houses in Multiple Occupation (England) Regulations 2006 (as amended)"
+            }
+          }
+        },
+        "regulationDuties": {
+          "type": "array",
+          "description": "Individual regulation duties as published verbatim in SRC-02",
+          "items": {
+            "type": "object",
+            "properties": {
+              "regulationRef": {
+                "type": "string"
+              },
+              "regulationTitle": {
+                "type": "string"
+              },
+              "verbatimText": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "documentLocation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": [
+            {
+              "regulationRef": "Reg 3",
+              "regulationTitle": "Duty of manager to provide information to occupiers",
+              "verbatimText": "The manager's name, address and telephone contact must be made available to each household and be clearly displayed in the HMO.",
+              "source": "SRC-02",
+              "documentLocation": "Section 5.0 \u2013 Reg 3"
+            },
+            {
+              "regulationRef": "Reg 4",
+              "regulationTitle": "Duty of manager to take safety measures",
+              "verbatimText": "The manager must ensure all means of escape from fire are free from obstruction, well maintained and signed. All fire alarms and fire fighting equipment must be maintained in good working order. The manager must ensure the design and structural condition of the property including roofs; balconies, windows and means of escape do not put the occupiers at risk of injury.",
+              "source": "SRC-02",
+              "documentLocation": "Section 5.0 \u2013 Reg 4"
+            },
+            {
+              "regulationRef": "Reg 5",
+              "regulationTitle": "Duty of manager to maintain water supply and drainage",
+              "verbatimText": "The manager must ensure that any tank, cistern or similar receptacle used for the storage of water for drinking or other domestic purpose is kept in a good, clean working condition and where necessary protected from frost. The manager must not unreasonably cause or permit the water or drainage supply that is used by any occupier of the HMO to be interrupted.",
+              "source": "SRC-02",
+              "documentLocation": "Section 5.0 \u2013 Reg 5"
+            },
+            {
+              "regulationRef": "Reg 6",
+              "regulationTitle": "Duty of manager to maintain gas and electricity",
+              "verbatimText": "Under the Gas Safety (Installation and Use) Regulations 1998 all gas appliances including cookers, heaters and boilers must have an annual safety inspection from a gas engineer registered with the Gas Safety Register. Any repairs identified must be completed without delay. Tenants should be shown a copy of the certificate. The manager must ensure that every fixed electric installation is inspected and tested at intervals not exceeding 5 years by a person qualified to undertake such inspection and obtain a certificate specifying the results of the test. On written request the manager must supply a current gas safety certificate issued by a Gas Safety Registered engineer to the local authority. The manager must not unreasonably cause the gas or electricity supply used by any occupier of the HMO to be interrupted.",
+              "source": "SRC-02",
+              "documentLocation": "Section 5.0 \u2013 Reg 6"
+            },
+            {
+              "regulationRef": "Reg 7",
+              "regulationTitle": "Duty of manager to maintain common parts, fixtures, fittings and appliances",
+              "verbatimText": "The manager must ensure all common parts of the HMO are in good and clean decorative repair, maintained in a safe working condition and kept free from obstruction. Particular attention should be paid to shared kitchens, bathrooms, WC's, handrails and banisters, stair coverings, windows and means of ventilation and light fittings. This duty also covers outdoor areas including gardens, outbuildings, yards, boundary walls and fences.",
+              "source": "SRC-02",
+              "documentLocation": "Section 5.0 \u2013 Reg 7"
+            },
+            {
+              "regulationRef": "Reg 8",
+              "regulationTitle": "Duty of manager to maintain living accommodation",
+              "verbatimText": "The manager must ensure that each unit of living accommodation within the HMO are maintained in good repair and fixtures, fittings and appliances provided as part of the tenancy are maintained in good repair and in clean working order.",
+              "source": "SRC-02",
+              "documentLocation": "Section 5.0 \u2013 Reg 8"
+            },
+            {
+              "regulationRef": "Reg 9",
+              "regulationTitle": "Duty to provide waste disposal facilities",
+              "verbatimText": "The manager must ensure that sufficient bins are provided for each household for the storage of refuse prior to collection. All tenants must be provided with the correct recycling and waste management information for the local authorities collections days and how to present waste for collection.",
+              "source": "SRC-02",
+              "documentLocation": "Section 5.0 \u2013 Reg 9"
+            }
+          ]
+        },
+        "tenantDuties": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "The management regulations also place a duty on tenants not to hinder managers in complying with these duties and to provide necessary information to help comply with these duties. To take reasonable care not to cause any damage to anything the manager has a duty to provide, to store and dispose of refuse appropriately and to comply with reasonable instructions regarding fire safety and means of escape."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 5.0 \u2013 Duties of the tenant"
+            }
+          }
+        }
+      }
+    },
+    "washingFacilitiesStandards": {
+      "type": "object",
+      "description": "GCC's published washing facilities standards for HMOs as stated in SRC-02 Section 6.0",
+      "properties": {
+        "verbatimText": {
+          "type": "string",
+          "const": "Where households are sharing a toilet and washing facilities the following must be provided: Up to five people may share a bathroom containing a toilet, wash hand basin and bath or shower. Up to six people may share these facilities if there is an additional WC and wash hand basin outside of the shared bathroom. If there are two bathrooms containing a toilet, wash hand basin and bath or shower then this is suitable for ten people to share. All baths, showers and wash hand basins must be equipped with taps providing a supply of cold and constant hot water. All bathrooms must be suitably and adequately ventilated. All bathrooms and toilets must be of an adequate size and layout. A wash hand basin must be provided in any rooms with a toilet and must be supplied with adequate supplies of hot and cold water."
+        },
+        "source": {
+          "type": "string",
+          "const": "SRC-02"
+        },
+        "documentLocation": {
+          "type": "string",
+          "const": "Section 6.0 \u2013 Washing Facilities"
+        }
+      }
+    },
+    "spaceStandards": {
+      "type": "object",
+      "description": "GCC's published space standards for HMOs as stated in SRC-02 Section 8.0",
+      "properties": {
+        "generalStatement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "The number of persons permitted in each letting is determined by the useable space within the room and available communal space in the rest of the HMO. The whole space in a room may not be usable due to an unusual shape, low ceiling height or staircase bulkhead."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 8.0 \u2013 Space Standards"
+            }
+          }
+        },
+        "bedroomSizesSharedFacilities": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Rooms being used as sleeping accommodation with shared facilities by the occupiers must be minimum of: 6.5 square meters if occupied by one person, and 10.2 square meters if occupied by two persons. This size does not include any ensuite bath/shower rooms as this cannot be counted as bedroom floor area."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 8.0.1 \u2013 Bedrooms"
+            }
+          }
+        },
+        "bedroomSizesWithCookingFacilities": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "If the room being used as sleeping accommodation also contains cooking facilities for the exclusive use occupier(s), rooms must be: 12.5 square meters if occupied by one person; 15.5 square meters if occupied by two persons. This size does not include any ensuite bath/shower rooms as this cannot be counted as bedroom floor area."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 8.0.1 \u2013 Bedrooms"
+            }
+          }
+        },
+        "roomsNotSuitableForSleeping": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Rooms located off kitchens where the only means of escape is through the kitchen are not suitable for being used as sleeping accommodation."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 8.0.1 \u2013 Bedrooms"
+            }
+          }
+        },
+        "communalSpaceTable": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Room Use / Number of Persons: Kitchen \u2013 3 persons: 5m2, 4 persons: 6m2, 5 persons: 7m2, 6 persons: 8m2, 7 persons: 9m2, 8 persons: 10m2, 9 persons: 11m2, 10 persons: 12m2. Total communal living space \u2013 3 persons: 16m2, 4 persons: 17m2, 5 persons: 18m2, 6 persons: 19m2, 7 persons: 20m2, 8 persons: 22m2, 9 persons: 24m2, 10 persons: 26m2."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 8.0.2 \u2013 Shared Kitchen and Communal Living/Dining room sizes"
+            }
+          }
+        },
+        "communalSpaceDiscretion": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "Discretion may be applied on the communal space that is available if the bedrooms are larger than the minimum sizes set out above."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section 8.0.2 \u2013 Shared Kitchen and Communal Living/Dining room sizes"
+            }
+          }
+        }
+      }
+    },
+    "tenantEnforcementContact": {
+      "type": "object",
+      "description": "GCC's published tenant enforcement contact details and responsibilities",
+      "properties": {
+        "councilResponsibility": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "The council is responsible for enforcing HMO standards, so if you are a tenant living in a HMO and feel there are any unreasonable hazards which your private landlord is not dealing with, please report it."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-01"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Information for tenants"
+            }
+          }
+        },
+        "contactPhone": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "01452 396 396"
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-01"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Information for tenants"
+            }
+          }
+        },
+        "contactEmail": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "heretohelp@gloucester.gov.uk"
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-01"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Information for tenants"
+            }
+          }
+        },
+        "publicRegisterStatement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": {
+              "type": "string",
+              "const": "The council must maintain a public register of all the premises licensed as a house in multiple occupation."
+            },
+            "source": {
+              "type": "string",
+              "const": "SRC-01"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Section: Information for tenants"
+            }
+          }
+        }
+      }
+    },
+    "omissions": {
+      "type": "object",
+      "description": "Consolidated record of all schema sections that could not be populated. Each entry has been converted to a structured TODO item elsewhere in the schema. This section provides a summary index.",
+      "properties": {
+        "summaryIndex": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "schemaSection": {
+                "type": "string"
+              },
+              "sourceRef": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          },
+          "default": [
+            {
+              "schemaSection": "licensingPolicy.fitAndProperPersonPolicy",
+              "sourceRef": "SRC-07",
+              "status": "TODO \u2013 source document not located"
+            },
+            {
+              "schemaSection": "licensingPolicy.regulatingHousingStandardsPolicy",
+              "sourceRef": "SRC-06",
+              "status": "TODO \u2013 source document inaccessible (HTTP 403)"
+            },
+            {
+              "schemaSection": "licensingPolicy.additionalLicensing",
+              "sourceRef": "SRC-08",
+              "status": "TODO \u2013 designation not yet published"
+            },
+            {
+              "schemaSection": "planningPolicy.article4Direction",
+              "sourceRef": "SRC-09",
+              "status": "TODO \u2013 direction not yet confirmed or published"
+            },
+            {
+              "schemaSection": "planningPolicy.policyC1_todo",
+              "sourceRef": "SRC-04 ref / Gloucester City Plan",
+              "status": "TODO \u2013 verbatim policy text not yet extracted"
+            },
+            {
+              "schemaSection": "planningPolicy.policyE6_todo",
+              "sourceRef": "SRC-04 ref / Gloucester City Plan",
+              "status": "TODO \u2013 verbatim policy text not yet extracted"
+            },
+            {
+              "schemaSection": "planningPolicy.policyF6_todo",
+              "sourceRef": "SRC-04 ref / Gloucester City Plan",
+              "status": "TODO \u2013 verbatim policy text not yet extracted"
+            },
+            {
+              "schemaSection": "planningPolicy.policyG1_todo",
+              "sourceRef": "SRC-04 ref / Gloucester City Plan",
+              "status": "TODO \u2013 verbatim policy text not yet extracted"
+            },
+            {
+              "schemaSection": "planningPolicy.jcsPolices_todo",
+              "sourceRef": "SRC-04 ref / Joint Core Strategy",
+              "status": "TODO \u2013 verbatim policy texts not yet extracted"
+            },
+            {
+              "schemaSection": "kitchenFacilitiesStandards",
+              "sourceRef": "SRC-02 Sections 7.0\u20137.0.4",
+              "status": "TODO \u2013 content exists in SRC-02, verbatim extraction pending"
+            },
+            {
+              "schemaSection": "housingStrategy",
+              "sourceRef": "SRC-10",
+              "status": "TODO \u2013 document not yet published"
+            }
+          ]
+        }
+      }
+    },
+    "kitchenFacilitiesStandards": {
+      "type": "object",
+      "description": "GCC kitchen facilities standards as published in SRC-02 Sections 7.0\u20137.0.4",
+      "properties": {
+        "todo": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "const": "TODO"
+            },
+            "reason": {
+              "type": "string",
+              "const": "The full kitchen facilities standards are contained in SRC-02 Sections 7.0\u20137.0.4 (pages 8\u201310). These sections were retrieved but not yet extracted verbatim into the schema due to their length and tabular structure. The content exists in SRC-02 and is accessible."
+            },
+            "action": {
+              "type": "string",
+              "const": "Extract verbatim kitchen standard requirements from SRC-02 Sections 7.0, 7.0.1, 7.0.2, 7.0.3 and 7.0.4 and populate this section. Each sub-section covers a different occupancy level (up to 5 persons, 6\u20137 persons, 8\u201310 persons, 11 or more persons) and individual bedroom cooking facilities."
+            },
+            "sourceRef": {
+              "type": "string",
+              "const": "SRC-02"
+            },
+            "documentLocation": {
+              "type": "string",
+              "const": "Sections 7.0\u20137.0.4 \u2013 Kitchen facilities (pages 8\u201310)"
+            }
+          }
+        }
+      }
+    },
+    "housingStrategy": {
+      "type": "object",
+      "properties": {
+        "todo": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "const": "TODO"
+            },
+            "reason": {
+              "type": "string",
+              "const": "SRC-10 (10-Year Housing Strategy) is referenced in the Corporate Plan 2025\u20132028 as a document to be adopted. It has not been published at time of schema creation."
+            },
+            "action": {
+              "type": "string",
+              "const": "Once Gloucester City Council publishes the 10-Year Housing Strategy, extract all verbatim HMO-related content and populate this section. Monitor gloucester.gov.uk for publication."
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "metadata",
+    "hmoDefinitions",
+    "licensingPolicy",
+    "planningPolicy",
+    "hhsrsPolicy",
+    "fireSafetyPolicy",
+    "managementRegulationsPolicy",
+    "washingFacilitiesStandards",
+    "spaceStandards",
+    "kitchenFacilitiesStandards",
+    "tenantEnforcementContact",
+    "housingStrategy",
+    "omissions"
+  ]
+}

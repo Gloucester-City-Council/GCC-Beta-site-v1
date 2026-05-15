@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gloucester.gov.uk/schemas/hmo-strategy/v2.0",
+  "title": "Gloucester City Council – HMO Council Strategy Schema",
+  "description": "A structured schema representing Gloucester City Council's stated strategic commitments relating to Houses in Multiple Occupation (HMOs), derived exclusively from the verbatim text of the Corporate Plan 2025–2028 'Putting the Heart Back into Gloucester'. Every field value is a direct quotation or a direct reference to the source document. Nothing has been inferred, interpreted or added beyond what is explicitly written in the plan.",
+  "version": "2.0.0",
+  "lastUpdated": "2026-05-14",
+  "type": "object",
+
+  "properties": {
+
+    "metadata": {
+      "type": "object",
+      "description": "Schema identity and source document reference",
+      "properties": {
+        "schemaVersion": { "type": "string", "const": "2.0.0" },
+        "schemaLayer": {
+          "type": "string",
+          "const": "strategy"
+        },
+        "issuingAuthority": { "type": "string", "const": "Gloucester City Council" },
+        "sourceDocument": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string", "const": "Corporate Plan 2025–2028: Putting the Heart Back into Gloucester" },
+            "adoptedBy": { "type": "string", "const": "Gloucester City Council" },
+            "period": { "type": "string", "const": "2025–2028" },
+            "url": { "type": "string", "const": "https://www.gloucester.gov.uk/media/gobgo2px/corporate-plan-2025-to-2028.pdf" }
+          },
+          "required": ["title", "adoptedBy", "period", "url"]
+        },
+        "extractionRule": {
+          "type": "string",
+          "const": "All values in this schema are verbatim quotations from the source document or direct structural references to it. No interpretation, inference or supplementary content has been added."
+        }
+      },
+      "required": ["schemaVersion", "schemaLayer", "issuingAuthority", "sourceDocument", "extractionRule"]
+    },
+
+    "corporatePlan": {
+      "type": "object",
+      "description": "The corporate plan structure as explicitly stated in the document",
+      "properties": {
+        "tagline": {
+          "type": "string",
+          "const": "Putting the Heart Back into Gloucester",
+          "corporatePlanQuotation": "CORPORATE PLAN 2025-28 'PUTTING THE HEART BACK INTO GLOUCESTER'"
+        },
+        "pillars": {
+          "type": "array",
+          "description": "The three pillars of the Corporate Plan as titled in the document",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pillarRef": { "type": "string" },
+              "title": { "type": "string", "description": "Verbatim pillar title from the Corporate Plan" }
+            }
+          },
+          "default": [
+            {
+              "pillarRef": "PILLAR-1",
+              "title": "A Vibrant and Attractive City that Celebrates Gloucester's Unique Heritage"
+            },
+            {
+              "pillarRef": "PILLAR-2",
+              "title": "Inclusive, Thriving Communities and Residents that Feel Safe, Supported and Valued"
+            },
+            {
+              "pillarRef": "PILLAR-3",
+              "title": "An Innovative and Accountable Council Focused on Providing Sustainable, High-Quality, Accessible Services and Facilities"
+            }
+          ]
+        }
+      },
+      "required": ["tagline", "pillars"]
+    },
+
+    "hmoExplicitCommitments": {
+      "type": "array",
+      "description": "Every commitment in the Corporate Plan that explicitly names or directly concerns Houses in Multiple Occupation. Each entry contains only the verbatim text from the plan and its structural location within it. No interpretation has been added.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "commitmentRef": { "type": "string" },
+          "pillar": { "type": "string" },
+          "pillarObjectiveTitle": { "type": "string", "description": "Verbatim title of the objective within the Corporate Plan under which this commitment appears" },
+          "verbatimText": { "type": "string", "description": "The exact wording from the Corporate Plan" },
+          "documentLocation": { "type": "string", "description": "Location in the document structure" }
+        },
+        "required": ["commitmentRef", "pillar", "pillarObjectiveTitle", "verbatimText", "documentLocation"]
+      },
+      "default": [
+        {
+          "commitmentRef": "HMO-C1",
+          "pillar": "PILLAR-2",
+          "pillarObjectiveTitle": "Ensure that all our residents have somewhere to call home by providing more affordable housing, working closely with private and registered social landlords and providing improved support and accommodation to tackle homelessness.",
+          "verbatimText": "Introduce stronger mechanisms and regulatory powers, such as an Article 4 Direction, to control the proliferation of Houses in Multiple Occupation and improve standards in the private rented sector.",
+          "documentLocation": "Pillar 2, Objective 1, Actions"
+        }
+      ]
+    },
+
+    "housingObjectiveContext": {
+      "type": "object",
+      "description": "The verbatim text of the Corporate Plan housing objective within which the HMO commitment sits, and the explicitly named partners and actions stated alongside it. No interpretation added.",
+      "properties": {
+        "objectiveTitle": {
+          "type": "string",
+          "const": "Ensure that all our residents have somewhere to call home by providing more affordable housing, working closely with private and registered social landlords and providing improved support and accommodation to tackle homelessness."
+        },
+        "objectiveNarrative": {
+          "type": "string",
+          "const": "Provision of suitable, affordable, energy efficient housing is one of the UK's biggest challenges and, like many local authorities, we are focused on finding solutions that help local people. We will continue our important work safeguarding households threatened with homelessness and supporting those who find themselves without accommodation, while developing a new long-term strategy that brings together our plans to work with stakeholders to ensure all our residents have suitable housing. We will work with registered social landlords and developers to progress delivery of new housing schemes across the city and pursue other initiatives, such as converting vacant or underutilised properties and using the powers available to us to increase housing supply."
+        },
+        "explicitlyNamedPartners": {
+          "type": "array",
+          "description": "Partners explicitly named in the verbatim text of this objective and its actions",
+          "items": {
+            "type": "object",
+            "properties": {
+              "partnerName": { "type": "string" },
+              "verbatimQuotation": { "type": "string" }
+            }
+          },
+          "default": [
+            {
+              "partnerName": "Private landlords",
+              "verbatimQuotation": "working closely with private and registered social landlords"
+            },
+            {
+              "partnerName": "Registered social landlords",
+              "verbatimQuotation": "working closely with private and registered social landlords"
+            },
+            {
+              "partnerName": "Registered social landlords and developers",
+              "verbatimQuotation": "We will work with registered social landlords and developers to progress delivery of new housing schemes across the city"
+            },
+            {
+              "partnerName": "Stakeholders",
+              "verbatimQuotation": "work with stakeholders to ensure all our residents have suitable housing"
+            },
+            {
+              "partnerName": "Property owners",
+              "verbatimQuotation": "Work with property owners to bring empty homes back into use and review the landlord incentive scheme to increase the number of private rented homes available."
+            }
+          ]
+        },
+        "allActionsInObjective": {
+          "type": "array",
+          "description": "All verbatim actions listed under this objective in the Corporate Plan",
+          "items": { "type": "string" },
+          "default": [
+            "Adopt a new 10-year Housing Strategy.",
+            "Explore through the emerging Strategic and Local Plan, the possibility of increasing the requirement for affordable housing on all new major developments in the city from 20% to 30%.",
+            "Work with partners to support neighbourhood regeneration across the city, including the regeneration of Matson and Podsmead.",
+            "Deliver new council homes and invest in existing council homes, ensuring high energy efficiency standards to reduce running costs and emissions.",
+            "Explore options for the council to deliver social housing, including a social housing development company.",
+            "Secure more funding to tackle homelessness to ensure that good quality support and accommodation is available for those in need.",
+            "Work with property owners to bring empty homes back into use and review the landlord incentive scheme to increase the number of private rented homes available.",
+            "Introduce stronger mechanisms and regulatory powers, such as an Article 4 Direction, to control the proliferation of Houses in Multiple Occupation and improve standards in the private rented sector."
+          ]
+        }
+      },
+      "required": ["objectiveTitle", "objectiveNarrative", "explicitlyNamedPartners", "allActionsInObjective"]
+    }
+
+  },
+
+  "required": [
+    "metadata",
+    "corporatePlan",
+    "hmoExplicitCommitments",
+    "housingObjectiveContext"
+  ]
+}

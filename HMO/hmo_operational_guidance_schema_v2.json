@@ -1,0 +1,923 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gloucester.gov.uk/schemas/hmo-operational-guidance/v2.0",
+  "title": "Gloucester City Council – HMO Operational Guidance Schema",
+  "description": "A structured schema covering the operational processes, systems, handoffs between teams, workflows, and partner/contractor arrangements that turn HMO policy into delivery for Gloucester City Council. Operational guidance is defined as: the processes, systems, handoffs between teams, and workflows that turn policy into delivery, including arrangements with partners, contractors, and third-party providers. All GCC-populated fields are verbatim quotations from published GCC sources with traceable references. All gaps identified through best practice review of other council publications are recorded as structured TODO items. No other council content has been used as GCC content.",
+  "version": "2.0.0",
+  "lastUpdated": "2026-05-14",
+  "type": "object",
+
+  "properties": {
+
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": { "type": "string", "const": "2.0.0" },
+        "schemaLayer": { "type": "string", "const": "operational-guidance" },
+        "operationalGuidanceDefinition": {
+          "type": "string",
+          "const": "Operational guidance covers the processes, systems, handoffs between teams, and workflows that turn policy into delivery, including arrangements with partners, contractors, and third-party providers."
+        },
+        "issuingAuthority": { "type": "string", "const": "Gloucester City Council" },
+        "extractionRule": {
+          "type": "string",
+          "const": "All GCC fields are verbatim quotations from published GCC sources only. TODO items identify operational gaps evidenced by best practice published by other councils. No other council content is reproduced as GCC content."
+        },
+        "gccSources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ref": { "type": "string" },
+              "title": { "type": "string" },
+              "url": { "type": "string" },
+              "accessStatus": { "type": "string", "enum": ["retrieved", "retrieved-not-yet-extracted", "inaccessible", "not-located"] }
+            }
+          },
+          "default": [
+            { "ref": "GCC-01", "title": "Housing in Multiple Occupancy (HMO) – GCC web page", "url": "https://www.gloucester.gov.uk/housing/hmo-licences/housing-in-multiple-occupancy-hmo/", "accessStatus": "retrieved" },
+            { "ref": "GCC-02", "title": "Planning guidance – HMO Licences – GCC web page", "url": "https://www.gloucester.gov.uk/housing/hmo-licences/planning-guidance/", "accessStatus": "retrieved" },
+            { "ref": "GCC-03", "title": "Energy Efficiency Home – GCC web page", "url": "https://www.gloucester.gov.uk/housing/hmo-licences/energy-efficiency-home/", "accessStatus": "retrieved" },
+            { "ref": "GCC-04", "title": "Advice for Landlords – GCC web page", "url": "https://www.gloucester.gov.uk/housing/private-housing/advice-for-landlords/", "accessStatus": "retrieved" },
+            { "ref": "GCC-05", "title": "Regulating Housing Standards Policy (February 2024)", "url": "https://www.gloucester.gov.uk/media/3pocizie/regulating-housing-standards-policy.pdf", "accessStatus": "retrieved" },
+            { "ref": "GCC-06", "title": "Appendix 1 – General Summary of Regulatory Options", "url": "https://www.gloucester.gov.uk/media/k4hntj5q/appendix-1-general-summary-of-regulatory-options.pdf", "accessStatus": "retrieved" },
+            { "ref": "GCC-07", "title": "Appendix 2 – Delegated Powers of Authorisation – Private Sector Housing", "url": "https://www.gloucester.gov.uk/media/weffnwtx/appendix-2-delegated-powers-of-authorisation-private-sector-housing.pdf", "accessStatus": "retrieved" },
+            { "ref": "GCC-08", "title": "Appendix 3 – Civil Penalties Policy – Statement of Principles (revised December 2024)", "url": "https://www.gloucester.gov.uk/media/jc1oraxu/appendix-3-civil-penalties-policy-statement-of-principles-revised-december-2024.pdf", "accessStatus": "retrieved" },
+            { "ref": "GCC-09", "title": "Appendix 4 – Statement of Principles for Prosecutions and Simple Cautions", "url": "https://www.gloucester.gov.uk/media/bd3hqtyp/appendix-4-statement-of-principles-for-prosecutions-and-simple-cautions.pdf", "accessStatus": "retrieved" },
+            { "ref": "GCC-10", "title": "Appendix 5 – Statement of Principles – Fit and Proper Person and Cause for Concern", "url": "https://www.gloucester.gov.uk/media/lv2n0dch/appendix-5-statement-of-principles-fit-and-proper-person-and-cause-for-concern.pdf", "accessStatus": "retrieved" },
+            { "ref": "GCC-11", "title": "Appendix 6 – Statement of Principles for Energy Efficiency in the PRS", "url": "https://www.gloucester.gov.uk/media/4qocc4bs/appendix-6-statement-of-principles-for-the-energy-efficiency-private-rented-property-england-and-wales-regulations-2015.pdf", "accessStatus": "retrieved-not-yet-extracted" },
+            { "ref": "GCC-12", "title": "Appendix 7 – Statement of Principles for Electrical Safety in the PRS", "url": "https://www.gloucester.gov.uk/media/rlddmbfp/appendix-7-statement-of-principles-for-electrical-safety-in-the-private-rented-sector.pdf", "accessStatus": "retrieved-not-yet-extracted" },
+            { "ref": "GCC-13", "title": "Appendix 8 – Statement of Principles for Smoke and Carbon Monoxide Regulations", "url": "https://www.gloucester.gov.uk/media/1h4h2ynt/appendix-8-statement-of-principles-for-smoke-and-carbon-monoxide-regulations.pdf", "accessStatus": "retrieved-not-yet-extracted" },
+            { "ref": "GCC-14", "title": "HMO Licence Application Form 2025–26", "url": "https://www.gloucester.gov.uk/media/mgffobi5/hmo-licence-application-form-2025-26.pdf", "accessStatus": "retrieved-not-yet-extracted" },
+            { "ref": "GCC-15", "title": "Guidance Notes for HMO Licence Application (2020, revised)", "url": "https://www.gloucester.gov.uk/media/of4hvdn1/2020-revised-guidance-notes-for-hmo-application.pdf", "accessStatus": "retrieved" }
+          ]
+        },
+        "bestPracticeCouncils": {
+          "type": "array",
+          "description": "Council sources consulted solely for operational best practice gap analysis. Content used only to define TODO items.",
+          "items": { "type": "object", "properties": { "ref": {"type":"string"}, "council": {"type":"string"}, "url": {"type":"string"} } },
+          "default": [
+            { "ref": "BP-NNC", "council": "North Northamptonshire Council – HMO Inspections and Enforcement", "url": "https://www.northnorthants.gov.uk/hmo/hmo-licence-conditions-inspections-and-enforcement" },
+            { "ref": "BP-COV", "council": "Coventry City Council – HMO Licensing", "url": "https://www.coventry.gov.uk/housing-enforcement/hmo-licensing/print" },
+            { "ref": "BP-HAR", "council": "Haringey Council – HMOs and Planning Permission", "url": "https://haringey.gov.uk/housing/private-sector-renting/property-licensing/house-multiple-occupation-hmo-licensing/hmos-planning-permission" },
+            { "ref": "BP-MAN", "council": "Manchester City Council – Fire Safety Protocol", "url": "https://www.manchester.gov.uk/info/10084/private_landlords_information/7398/houses_in_multiple_occupation_hmo/8" },
+            { "ref": "BP-WAR", "council": "Warwickshire County Council – HMO Fire Risk Assessments", "url": "https://www.warwickshire.gov.uk/hmo" },
+            { "ref": "BP-SPE", "council": "Spelthorne Borough Council – HMO Licensing", "url": "https://www.spelthorne.gov.uk/page/1375/houses-multiple-occupation-hmo" }
+          ]
+        }
+      },
+      "required": ["schemaVersion", "schemaLayer", "operationalGuidanceDefinition", "issuingAuthority", "extractionRule", "gccSources"]
+    },
+
+    "serviceStructure": {
+      "type": "object",
+      "description": "The team structure and named roles responsible for HMO operational delivery as published by GCC",
+      "properties": {
+
+        "responsibleService": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Gloucester City Councils Private Sector Housing service (PSH)" },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Summary" }
+          }
+        },
+
+        "responsibleRole": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Housing Regulation, Resettlement and Projects Manager" },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Responsibility of" }
+          }
+        },
+
+        "delegatedAuthorityHolder": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "OFFICER AUTHORISATION – PRIVATE SECTOR HOUSING – DELEGATED AUTHORITY – CORPORATE DIRECTOR" },
+            "source": { "type": "string", "const": "GCC-07" },
+            "documentLocation": { "type": "string", "const": "Appendix 2 – Delegated Powers of Authorisation – header" }
+          }
+        },
+
+        "prosecutionAdmininingRole": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "The person administering the Caution will be an appropriate Service Manager employed within Gloucester City Council." },
+            "source": { "type": "string", "const": "GCC-09" },
+            "documentLocation": { "type": "string", "const": "Appendix 4 – Statement of Principles for Prosecutions and Simple Cautions – Simple Cautions" }
+          }
+        },
+
+        "todo_teamSizeAndComposition": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish the size or composition of the Private Sector Housing team responsible for HMO licensing and enforcement. The number of officers, business support staff, or specialist roles is not stated on any published GCC page." },
+            "bestPracticeEvidence": { "type": "string", "const": "North Northamptonshire Council (BP-NNC) publishes: 'our Private Sector Housing Operations team (made up of 5 Private Sector Housing officers and 1 Business Support officer)'. GCC publishes no equivalent information." },
+            "action": { "type": "string", "const": "GCC to publish the composition of the Private Sector Housing team responsible for HMO delivery, including officer numbers and roles, to support accountability and public understanding of service capacity." }
+          }
+        },
+
+        "todo_teamContactDetails": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish a dedicated contact channel (email address, phone number, or online form) for HMO licensing enquiries separate from the general 'heretohelp' contact. No named team email or direct line for the Private Sector Housing HMO team is published." },
+            "bestPracticeEvidence": { "type": "string", "const": "Spelthorne Borough Council (BP-SPE) publishes: 'You can report it by completing the report an HMO form or contacting the Residential Team in Environmental Health.' Multiple councils publish dedicated HMO team contact details distinct from general council contact numbers." },
+            "action": { "type": "string", "const": "GCC to publish a dedicated contact route (email and/or phone) for HMO licensing, enforcement and compliance enquiries on the HMO Licences web page (GCC-01)." }
+          }
+        }
+      }
+    },
+
+    "applicationReceiptAndTriage": {
+      "type": "object",
+      "description": "The process by which HMO licence applications are received, validated and triaged",
+      "properties": {
+
+        "applicationMethod": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "HMO Licence application form 2025-26" },
+            "url": { "type": "string", "const": "https://www.gloucester.gov.uk/media/mgffobi5/hmo-licence-application-form-2025-26.pdf" },
+            "format": { "type": "string", "const": "PDF download – paper/postal submission" },
+            "source": { "type": "string", "const": "GCC-01" },
+            "documentLocation": { "type": "string", "const": "Housing in Multiple Occupancy (HMO) – Information for landlords" }
+          }
+        },
+
+        "applicationGuidanceReference": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "A Guidance Note to assist in the completion of the application" },
+            "url": { "type": "string", "const": "https://www.gloucester.gov.uk/media/of4hvdn1/2020-revised-guidance-notes-for-hmo-application.pdf" },
+            "source": { "type": "string", "const": "GCC-01" },
+            "documentLocation": { "type": "string", "const": "Housing in Multiple Occupancy (HMO) – Information for landlords" }
+          }
+        },
+
+        "completenessRequirement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "The application form must be completed thoroughly and clearly – all names, addresses and details will need to be completed in full including post codes etc. Any incomplete fields may delay acceptance of the form and may affect the fee that you pay and the term you receive for the licence. The Council will not spend resources and time trying to make sense of your application. It is the responsibility of the applicant to ensure the Council receives a fully completed form with all relevant attachments." },
+            "source": { "type": "string", "const": "GCC-15" },
+            "documentLocation": { "type": "string", "const": "Guidance Notes for HMO Licence Application – Introduction" }
+          }
+        },
+
+        "namedPersonRequirement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Gloucester City Council will only accept licence applications with a named person as the licence holder. If a company wishes to Licence a property the licence holder must be a named person within the company who will be responsible on behalf of the company for all obligations in relation to the licence." },
+            "source": { "type": "string", "const": "GCC-15" },
+            "documentLocation": { "type": "string", "const": "Guidance Notes for HMO Licence Application – Section 1.1.3" }
+          }
+        },
+
+        "todo_onlineApplicationSystem": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not operate an online HMO licence application portal. Applications are submitted via a PDF form. No digital submission route, application tracking portal, or online payment system for HMO licensing is published on the GCC website." },
+            "bestPracticeEvidence": { "type": "string", "const": "Coventry City Council (BP-COV) publishes: 'An online portal which stores all application history, with separate sections for pending applications and licences issued. Customers will be able to view the status of each application and any outstanding fees that need to be paid.' Coventry also describes 'A triage system to help establish which licence you need to apply for' and 'An improved licence register that allows you to search licensed properties, and will be updated live rather than monthly.'" },
+            "action": { "type": "string", "const": "GCC to assess and, if appropriate, implement an online HMO licence application portal with application tracking, status visibility, and online payment. Publish details on GCC-01 when available." }
+          }
+        },
+
+        "todo_applicationValidationProcess": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish the internal process by which an application is validated on receipt — who validates it, what the validation checklist covers, what happens to incomplete applications, or the trigger point at which the application is 'duly made' and the licence period clock starts." },
+            "bestPracticeEvidence": { "type": "string", "const": "GCC-15 references the concept of an application being 'deemed valid (\"duly made\")' but does not describe the validation process. North Northamptonshire Council (BP-NNC) describes a 'license consultation inspection' that takes place once an application is being validated. No equivalent GCC internal validation workflow is published." },
+            "action": { "type": "string", "const": "GCC to develop and publish the internal application validation workflow including checklist, handling of incomplete applications, and the point at which an application is treated as duly made." }
+          }
+        },
+
+        "todo_processingTimescale": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish a target processing timescale for HMO licence applications. No service standard for the period from receipt of a completed application to issue of the draft or final licence is published on GCC-01 or GCC-15." },
+            "bestPracticeEvidence": { "type": "string", "const": "Spelthorne Borough Council (BP-SPE) states: 'The Council will process your application as soon as possible, and in the interim you can continue to operate your property as an HMO.' Multiple other councils publish explicit timescales (e.g. 8 weeks, 12 weeks, 20 weeks). GCC publishes no equivalent." },
+            "action": { "type": "string", "const": "GCC to establish and publish a target processing timescale for HMO licence applications and publish this on GCC-01 and GCC-15." }
+          }
+        },
+
+        "todo_feePaymentProcess": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC publishes the fee amounts for HMO licences (GCC-01) but does not publish the payment method, payment timing within the process (single stage vs two stage), or what happens if payment is not made. The internal process step at which payment is due and how payment failure is handled is not described." },
+            "bestPracticeEvidence": { "type": "string", "const": "GCC-15 refers to fees in the introduction but as a 2020 revised document the fee amounts are outdated and no payment process is described. Other councils publish two-stage fee structures with explicit payment points in the workflow." },
+            "action": { "type": "string", "const": "GCC to publish the HMO licence fee payment process including payment method, timing within the application workflow, and consequences of non-payment." }
+          }
+        }
+      }
+    },
+
+    "caseAllocationAndManagement": {
+      "type": "object",
+      "description": "How HMO cases are allocated to officers and managed through the PSH service workflow",
+      "properties": {
+
+        "complaintTriageTimescale": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "When a service request has been received, it will normally be triaged and responded to within 3 working days, no matter what the tenure or occupancy status, by an officer in the team unless the case requires immediate investigation." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Scope and application of the policy" }
+          }
+        },
+
+        "caseOfficerAllocation": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "The case will be allocated a case officer and they will be responsible for keeping the complainant up to date with progress and contacting and engaging with all other interested parties (landlords, residential providers, etc). They will follow all reasonable lines of enquiry and investigation to obtain accurate and reliable information and evidence, to inform decision making and enable them to progress the case to conclusion." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Scope and application of the policy" }
+          }
+        },
+
+        "immediateCaseThreshold": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "In the first instance service users are expected to take their own action to resolve the problem by contacting their landlord and allowing them adequate time to respond unless there is imminent risk to health where we will intervene immediately. If the landlord fails to take action in 14 days, the PSH service will investigate." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Scope and application of the policy" }
+          }
+        },
+
+        "macacApproach": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "In deciding to take formal action and, if so, what type of action to take, Officers will use a risk and most appropriate course of action (MACA) impact-based approach." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – General Principles" }
+          }
+        },
+
+        "multiAgencyConsultation": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "This policy and supporting appendices are specific to the enforcement action taken by the Private Sector Housing service supported by multi agency consultations and decisions (where applicable) and takes precedence." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Summary" }
+          }
+        },
+
+        "todo_caseManagementSystem": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish what case management system or software platform is used to track HMO licence applications, complaints, inspections and enforcement cases. No information on IT systems supporting HMO delivery is published." },
+            "bestPracticeEvidence": { "type": "string", "const": "Coventry City Council (BP-COV) states: 'The Property Licensing and Housing Enforcement team have been working on the implementation of new software, which should streamline the HMO licensing process.' The system improvements described include application tracking, status visibility, and live register updates. GCC publishes no equivalent information." },
+            "action": { "type": "string", "const": "GCC to publish what system(s) are used to manage HMO licence applications and enforcement cases, and any planned system improvements." }
+          }
+        },
+
+        "todo_internalHandoffLicensingToEnforcement": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish the internal handoff process between the licensing function and the enforcement function within the PSH service — for example, how a licensing case that reveals an enforcement issue is transferred, or how an enforcement case that reveals an unlicensed HMO triggers a licensing process." },
+            "bestPracticeEvidence": { "type": "string", "const": "GCC-05 references both licensing and enforcement functions within PSH but does not describe the handoff between them. GCC-06 describes enforcement options but not triggers for handoff from licensing to enforcement." },
+            "action": { "type": "string", "const": "GCC to document and publish the internal process for handoffs between the HMO licensing and enforcement functions within PSH, including triggers, responsible roles, and timescales." }
+          }
+        },
+
+        "todo_internalHandoffHousingToPlanning": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish the process by which cases involving both HMO licensing (a housing function) and planning consent (a planning function) are co-ordinated internally. GCC-01 and GCC-02 state that planning and licensing are separate matters but do not describe any internal referral or co-ordination workflow between the PSH team and the Planning team." },
+            "bestPracticeEvidence": { "type": "string", "const": "Haringey Council (BP-HAR) publishes: 'We will take into account the planning status of an HMO as part of the licence application process. In the case of unauthorised use, we will grant a licence with a shorter term, usually 1 year.' This implies a defined cross-team check at the point of licence application. GCC-15 asks applicants for planning consent details but does not describe how the PSH team verifies or acts on this with the Planning team." },
+            "action": { "type": "string", "const": "GCC to document and publish the internal process for co-ordination between the PSH (housing) and Planning teams on HMO cases where planning consent status is relevant to the licence application or enforcement decision." }
+          }
+        }
+      }
+    },
+
+    "inspectionWorkflow": {
+      "type": "object",
+      "description": "The operational inspection workflows for HMO licensing and compliance",
+      "properties": {
+
+        "priorToInspectionApproach": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Prior to an inspection the landlord/owner/manager of a property will be invited to visit the property with an officer from the Residential Services Team. This is to allow the landlord/manager to remedy any defects prior to enforcement action and to promote informal discussions." },
+            "source": { "type": "string", "const": "GCC-05 (referencing process described in Guide for Landlords, Managers and Tenants 2024, Section 3.1)" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy and Guide for Landlords, Managers and Tenants 2024 – Section 3.1" }
+          }
+        },
+
+        "warrantEntryCircumstances": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Where there is a duty to inspect a property as part of an investigation and access has been previously refused by the owner or occupier. Seeking informal access to the property would negatively impact the evidence gathering for an offence, for example – inspecting a HMO, unlicensed HMO's, illegal conversion of a property." },
+            "source": { "type": "string", "const": "GCC-06" },
+            "documentLocation": { "type": "string", "const": "Appendix 1 – General Summary of Regulatory Options – Action 15: Warrant to Enter a Premises" }
+          }
+        },
+
+        "todo_preApplicationAdvisoryVisit": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish whether a pre-application advisory inspection visit is available to prospective HMO landlords before they apply for a licence. No advisory visit service is described on GCC-01, GCC-02 or GCC-15." },
+            "bestPracticeEvidence": { "type": "string", "const": "North Northamptonshire Council (BP-NNC) publishes: 'Advisory inspections – usually requested before a property is converted into an HMO. A joint visit takes place with the fire service to give advice on fire safety requirements and suitability of: the property layout; room and kitchen sizes; the amenities available for the proposed number of tenants.' GCC publishes no equivalent." },
+            "action": { "type": "string", "const": "GCC to confirm whether a pre-application advisory visit service exists for prospective HMO landlords and, if so, publish the referral and booking process. If it does not exist, consider whether to establish one." }
+          }
+        },
+
+        "todo_licenceConsultationInspectionWorkflow": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish the workflow for the inspection that takes place as part of validating a new HMO licence application — who carries it out, what is inspected, what checklist is used, what triggers grant of the licence, and what happens if deficiencies are found." },
+            "bestPracticeEvidence": { "type": "string", "const": "North Northamptonshire Council (BP-NNC) publishes: 'A full inspection for a new licensable HMO takes place where the landlord has applied for a license and their application is being validated. Inspections check that the property fully complies with our amenity standards and all other legislative requirements, including ensuring there are no hazards present under the HHSRS. Following the inspection, the license can be approved if all requirements are met. If any issues are identified, the landlord is issued with a schedule of works to remedy them.' GCC publishes no equivalent process description." },
+            "action": { "type": "string", "const": "GCC to document and publish the licence consultation inspection workflow including checklist, schedule of works process, and grant/conditional grant/refusal decision pathway." }
+          }
+        },
+
+        "todo_ongoingComplianceInspectionFrequency": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish a frequency for routine compliance inspections of licensed HMOs during the licence period, nor a programme for proactive inspection of the licensed HMO stock." },
+            "bestPracticeEvidence": { "type": "string", "const": "North Northamptonshire Council (BP-NNC) publishes: 'Annual inspections – these take place in licensed HMOs only. All bedrooms and communal areas are inspected, to identify any hazards or breaches of the license conditions.' and 'we carry out annual inspections to all licensable HMOs.' GCC publishes no equivalent." },
+            "action": { "type": "string", "const": "GCC to establish and publish a stated frequency for compliance inspections of licensed HMOs during the licence period, and any programme for proactive inspection of the wider HMO stock." }
+          }
+        },
+
+        "todo_suspectHMOInspectionWorkflow": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish the step-by-step workflow for investigating a suspected unlicensed HMO — how intelligence is received, triaged, assigned, and progressed through to inspection and enforcement. The general MACA approach is referenced in GCC-05 but no specific unlicensed HMO investigation workflow is published." },
+            "bestPracticeEvidence": { "type": "string", "const": "North Northamptonshire Council (BP-NNC) publishes: 'Suspect HMO inspections – suspect HMOs are usually reported to us by residents or other council departments. These inspections are unannounced (under the Housing Act 2004) and we do not need to provide notice to the landlord. If we cannot gain access, a Section 239 (power of entry notice) is served on the landlord at least 24 hours before our next attempt. Inspections look at whether the property is being used as an HMO by: gathering evidence of the number of occupants; fire safety measures; any HHSRS hazards. The landlord then needs to obtain an HMO license for the property (if needed) or reduce the number of occupants. Failure to comply can result in a Civil Penalty Notice being served.' GCC publishes no equivalent workflow." },
+            "action": { "type": "string", "const": "GCC to document and publish the step-by-step workflow for investigating suspected unlicensed HMOs, including how intelligence is received and triaged, inspection powers used, and the pathway to enforcement." }
+          }
+        },
+
+        "todo_warrantExecutionWorkflow": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC-06 states that GCC may apply for a warrant to enter premises but does not describe the operational process for warrant execution — which agencies attend, how the property is left secure, or the post-entry workflow." },
+            "bestPracticeEvidence": { "type": "string", "const": "North Northamptonshire Council (BP-NNC) publishes: 'After several attempts, if we are still unable to gain access to a suspect HMO, we will apply to the Magistrates Court for a warrant of entry. We will then attend with the police and a locksmith to ensure access and to ensure the property is left secure.' GCC-06 references warrants but describes no equivalent operational process." },
+            "action": { "type": "string", "const": "GCC to document and publish the warrant execution process for HMO inspections, including which agencies attend (e.g. police), how the property is secured after entry, and post-entry evidence handling." }
+          }
+        }
+      }
+    },
+
+    "enforcementDecisionWorkflow": {
+      "type": "object",
+      "description": "The workflow by which GCC moves from inspection findings to enforcement decisions",
+      "properties": {
+
+        "regulatoryOptionsMenu": {
+          "type": "array",
+          "description": "GCC's published menu of regulatory options and the circumstances for each, verbatim from Appendix 1 (GCC-06)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "actionRef": { "type": "string" },
+              "actionTitle": { "type": "string" },
+              "verbatimCircumstances": { "type": "string" },
+              "source": { "type": "string" },
+              "documentLocation": { "type": "string" }
+            }
+          },
+          "default": [
+            {
+              "actionRef": "1",
+              "actionTitle": "No action",
+              "verbatimCircumstances": "Complaints or allegations of housing legislation breaches or statutory nuisances are of minor or low risk to health and the landlord has not been informed by the complainant, or allegations are unsubstantiated and unwitnessed. Formal action is inappropriate in the circumstances. Referral to partner service/agency with more appropriate regulatory function.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "2",
+              "actionTitle": "Advisory warnings, letters and Consultation",
+              "verbatimCircumstances": "Where conditions are evidenced to justify action and investigation and it is appropriate to give opportunity to landlords and tenants to make representations, provide information or effect change to meet compliance. No health impacts are present which poses a risk to health or nuisance. Landlords and individuals will be presented with an opportunity to engage with the case officer before and during and visits to inform what enforcement options are taken.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "3",
+              "actionTitle": "Formal notices or orders",
+              "verbatimCircumstances": "The defect/conditions/behaviour presents a public health risk and/or a nuisance. Informal/advisory option not appropriate. The 'offence' is a strict offence. There are previous failures of statutory requirements. Previous advisory notices/letters ignored or action was not taken in a timely manner or to the correct standard. The landlord or agent has failed to take action following a complaint from their tenant. There is a lack of confidence in the individual, business or management i.e. the willingness to respond to an informal approach. The Council is legally required to serve a statutory notice. There is aggravating and contributory factors and culpability. Enforcement notices will be registered as a land charge.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "4",
+              "actionTitle": "Financial Penalties",
+              "verbatimCircumstances": "For certain Housing Act 2004 breaches, amount of penalty decided by civil financial penalty Matrix (Appendix 3). Used as alternative to a prosecution. Offences include: Non-compliance with an improvement or overcrowding notice; Failure to obtain a property licence (Both parts 2 and 3 Housing Act 2004); Breaches of HMO management regulations; Breaches of the conditions of the property licence; The Electrical Safety Standards in the Private Rented Sector (England) Regulations 2020: We will issue a penalty charges of up to £30,000 (Appendix 7); Smoke & Carbon Monoxide Regulations 2015: We will issue a penalty charges of up to £5,000 (Appendix 8); Energy Efficiency (Private Rented Property) (England and Wales) Regulations 2015 (MEES regs): We may issue a penalty charges of up to £5,000 (Appendix 6). Financial penalties will be registered as a land charge.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "5",
+              "actionTitle": "Emergency Action",
+              "verbatimCircumstances": "There is an imminent risk to health and safety to the occupant and/or public. Examples include but are not exclusive to: collapsing ceiling, sewerage and water leaks, dangerous electrics, no heating cases. Awaiting the service of a notice would not adequately protect the public interest. Emergency action may include: Emergency remedial action to remedy immediate risk hazards; Emergency prohibition action restricting the use of a premises. Emergency action will be registered as a land charge.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "6",
+              "actionTitle": "Works in Default",
+              "verbatimCircumstances": "We may choose to carry out works in default required by a notice if they have not been completed within the permitted time or are not likely to be completed within the permitted time. Fees and charges will apply. We may choose to carry out works with agreement with the consent of the recipient of a Notice if they are unable to comply with the notice and want the Council to carry out the works on their behalf. Fees and charges will apply. Works in default will be registered as a land charge.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "7",
+              "actionTitle": "Reduce Licence Duration",
+              "verbatimCircumstances": "When assessing a Licence application, where appropriate and in conjunction with the Council's Fit and Proper and Cause for Concern policy, we may reduce the duration of the licence. (Appendix 5)",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "8",
+              "actionTitle": "Varying Licence Conditions",
+              "verbatimCircumstances": "When assessing a Licence application or varying an existing licence, where appropriate and in conjunction with the Council's Fit and Proper and Cause for Concern policy, we may add further conditions to a licence to remedy poor landlord behaviour or management standards. (Appendix 5)",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "9",
+              "actionTitle": "Refusal to Grant a Licence",
+              "verbatimCircumstances": "When assessing a Licence application, where appropriate and in conjunction with the Council's Fit and Proper and Cause for Concern policy we may refuse to grant a licence. (Appendix 5)",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "10",
+              "actionTitle": "Revoke a Licence",
+              "verbatimCircumstances": "When assessing a Licence, where appropriate and in conjunction with the Council's Fit and Proper and Cause for Concern policy we may revoke a licence. (Appendix 5)",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "11",
+              "actionTitle": "Formal (Simple) Caution",
+              "verbatimCircumstances": "Where a prosecution or Financial Penalty is determined not to be in the public interest and it is the individuals first offence and admits guilt. (Appendix 4)",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "12",
+              "actionTitle": "Prosecution",
+              "verbatimCircumstances": "Where the offence is serious enough to justify prosecution. Where it is a serious offence and or another consideration justifies prosecution. Where there is sufficient evidence to prove that an offence has been committed. Where there is a realistic prospect of conviction. Where the public Interest test is met. Where a landlord has committed the offence of illegal eviction or harassment. (Appendix 4)",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "13",
+              "actionTitle": "Banning Order",
+              "verbatimCircumstances": "Where the relevant offences, convictions and/or contraventions are serious enough to warrant the Council to seek a Banning Order following the breach of 'banning order offences' by landlords and agents. A banning order last for a minimum of 12 months and prevent landlords or agents from letting properties or being involved in the lettings and property management industry across England.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "14",
+              "actionTitle": "Proceeds of Crime",
+              "verbatimCircumstances": "To be considered where, upon successful conviction, landlords or others have financially benefited from the proceeds of a criminal activity a Proceeds of Crime Order application may be made.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "15",
+              "actionTitle": "Warrant to Enter a Premises",
+              "verbatimCircumstances": "Where there is a duty to inspect a property as part of an investigation and access has been previously refused by the owner or occupier. Seeking informal access to the property would negatively impact the evidence gathering for an offence, for example – inspecting a HMO, unlicensed HMO's, illegal conversion of a property. To carry out works in default to safeguard and protect the health and wellbeing of a resident and to remove any imminent risk hazards.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "16",
+              "actionTitle": "Rent Repayment Order",
+              "verbatimCircumstances": "Rent Repayment Orders can be made in the First Tier Tribunal where landlords have committed certain offences. The landlord may be required to repay up to 12-months rent back to a tenant or local authority for housing benefit or universal credit. The offences are: Violence for securing entry into a property; Illegal eviction or harassment of tenants; Failure to comply with an Improvement Notice or Prohibition Order (HA04); Failure to licence a property that requires a licence; Breach of a Banning Order.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "17",
+              "actionTitle": "Management Orders",
+              "verbatimCircumstances": "The decision to apply for a Management Order as set out in Part 4 of the Housing Act 2004. It is a complex decision that may only be considered on a case by case basis. They can be applied in circumstances to bring Empty Properties back into use (EDMO), take management control of HMO's that require to be licensed or properties where there are significant hazards and there is no likelihood of the HMO being licensed or repairs carried out.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "18",
+              "actionTitle": "Community Protection Notices (CPN)",
+              "verbatimCircumstances": "A CPN can only be issued where the Council is satisfied on reasonable grounds that the conduct of an individual (aged 16 or over), a business or an organisation is: having a detrimental effect on the quality of life of those in the locality; persistent or continuing in nature, and; unreasonable. A warning letter is issued as a first step. A community protection notice is issued as a final step. Failure to comply with a CPN is a criminal offence.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            },
+            {
+              "actionRef": "19",
+              "actionTitle": "Injunctions and Closure Orders",
+              "verbatimCircumstances": "Injunctions and closure orders may be sought in consultation with wider multi agency partners when the behaviour/conduct of an individual is negatively impacting on the amenity of an area or resulting in ASB complaints from a premises.",
+              "source": "GCC-06",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options"
+            }
+          ]
+        },
+
+        "hmoStrictOffenceProcess": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Offences relating to HMO management regulations, failing to licence a HMO and/or breach of the conditions of a HMO licence will lead to enforcement action being taken as they are strict offences." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Scope and application of the policy" }
+          }
+        },
+
+        "noticeServingProcess": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "The person on whom a formal notice or order is served will be informed of the reason that this action is being taken, the timescale for completion of any works, the works that are legally required, representations that may be made, relevant appeal periods, details of any fees and charges and the consequences of noncompliance." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – General Principles" }
+          }
+        },
+
+        "evidentialTestForProsecution": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "There must be enough evidence to provide a realistic prospect of conviction and the evidence must be admissible and reliable. In determining the sufficiency of evidence, consideration should be given to the following factors: Availability of Essential Evidence; Credibility of witnesses – are they likely to be credible witnesses and whether they are likely to be consistent and fail under cross-examination? – are they willing to attend as witnesses? Could they be 'hostile' witnesses? Where the case depends in part on admissions or confessions, regard should be had to their admissibility; Where two or more defendants are summonsed together, the sufficiency and admissibility of evidence available against each defendant, if separate trials are ordered." },
+            "source": { "type": "string", "const": "GCC-09" },
+            "documentLocation": { "type": "string", "const": "Appendix 4 – Statement of Principles for Prosecutions and Simple Cautions – The Evidential Test" }
+          }
+        },
+
+        "simpleCautionProcess": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Following the offer of a Simple Caution, the individual or company concerned will be required to confirm acceptance within 14 days." },
+            "source": { "type": "string", "const": "GCC-09" },
+            "documentLocation": { "type": "string", "const": "Appendix 4 – Statement of Principles for Prosecutions and Simple Cautions – Simple Cautions" }
+          }
+        },
+
+        "todo_civilPenaltyDecisionWorkflow": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC-08 sets out the civil penalty policy and factors but does not publish the internal step-by-step decision workflow — who authorises a civil penalty, what approval levels are required, how the Notice of Intent is issued and handled, how Written Representations are processed, and the appeal pathway." },
+            "bestPracticeEvidence": { "type": "string", "const": "GCC-08 references a 'Civil Penalty Matrix (Appendix A)' and 'Notice of Intent' but these internal process steps are not described as a sequential workflow. The full process from offence identification to penalty payment or appeal is not mapped." },
+            "action": { "type": "string", "const": "GCC to document and publish the step-by-step civil penalty decision workflow from offence identification through Notice of Intent, Written Representations, final notice, payment, and appeal processes." }
+          }
+        },
+
+        "todo_landChargeRegistrationProcess": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC-06 states that financial penalties, emergency action, and works in default 'will be registered as a land charge' but does not publish the internal process for registering enforcement actions as land charges — who submits to the Land Charges register, at what point in the enforcement workflow, or how this is communicated to the property owner." },
+            "action": { "type": "string", "const": "GCC to document and publish the internal process for registering HMO enforcement actions as land charges, including responsible role, timing, and notification to property owners." }
+          }
+        }
+      }
+    },
+
+    "partnerAndThirdPartyArrangements": {
+      "type": "object",
+      "description": "Published arrangements between GCC and external partners, contractors or third-party providers in HMO delivery",
+      "properties": {
+
+        "multiAgencyFramework": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Gloucester City Council, along with our partnership agencies, will adopt the shared principals of Engagement, Education and Enforcement in a holistic multi-agency framework to ensure that resources are delivered through an effective and efficient model with supporting individuals, residents and businesses in Gloucester City at its core." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – General Principles" }
+          }
+        },
+
+        "primaryAuthorityPrinciple": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "The Council acknowledges that the primary authority principles as set out in the Regulatory and Sanctions Act 2008 and administered by the Better Regulation Delivery Officer (BRDO) apply to areas of housing standards enforcement. Where there is a primary authority in place the Council will comply with the appropriate primary authority requirements." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Primary authority principles" }
+          }
+        },
+
+        "residentProviderComplaints": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "The PSH team will deal with, and enforce, Residential Providers (Housing Associations) complaints in the same way as any normal private sector housing disrepair complaints. Where the complaint is concerning the RP act or conduct outside of our delegated powers we will try to assist wherever possible. However, in these circumstances outside of PSH powers we would advise the complainant to contact the Housing Ombudsman Service (HOS) after using the RPs own internal complaints process." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Residential Providers (RP) (Housing Associations) complaints" }
+          }
+        },
+
+        "housingOmbudsmanReferral": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "The HOS details are (https://www.housing-ombudsman.org.uk/) on 0300 111 3000 or email to info@housing-ombudsman.org.uk written enquires to Housing Ombudsman Service, Exchange Tower, Harbour Exchange Square, London E14 9GE." },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Residential Providers (RP) (Housing Associations) complaints" }
+          }
+        },
+
+        "leaseholdAdvisoryServiceReferral": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Leaseholders are advised to contact; The Leasehold Advisory Service - Fleetbank House, 2-6 Salisbury Square, London, EC4Y 8JX. Telephone: 020 7832 2500. http://www.lease-advice.org" },
+            "source": { "type": "string", "const": "GCC-05" },
+            "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Leaseholder/Freeholder complaints" }
+          }
+        },
+
+        "energyPartnershipArrangement": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Gloucester City Council, along with the other six councils in Gloucestershire and South Gloucestershire, is working in partnership with the Severn Wye Energy Agency to provide householders and businesses in Gloucester with advice on how save energy and reduce their fuel bills." },
+            "partner": { "type": "string", "const": "Severn Wye Energy Agency" },
+            "source": { "type": "string", "const": "GCC-03" },
+            "documentLocation": { "type": "string", "const": "Energy Efficiency Home – Energy Efficiency" }
+          }
+        },
+
+        "warmAndWellScheme": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "The Warm and Well scheme is the local authority approved home energy efficiency scheme and can help householders access grant funding through the Energy Company Obligation (ECO). Contact the Warm and Well advice line to find out what funding is currently available and if you qualify." },
+            "phone": { "type": "string", "const": "0800 500 30 76" },
+            "website": { "type": "string", "const": "www.warmandwell.co.uk" },
+            "source": { "type": "string", "const": "GCC-03" },
+            "documentLocation": { "type": "string", "const": "Energy Efficiency Home – Energy Efficiency" }
+          }
+        },
+
+        "todo_fireAndRescueServiceProtocol": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish any formal protocol or working arrangement with Gloucestershire Fire and Rescue Service (GFRS) for HMO fire safety enforcement and inspection. No joint working protocol, lead authority arrangement, or referral process between GCC PSH and GFRS is published on the GCC website." },
+            "bestPracticeEvidence": { "type": "string", "const": "Manchester City Council (BP-MAN) publishes: 'By law, both local housing and fire and rescue authorities must enforce reasonable fire safety provisions within multiple occupied housing. To promote the efficient use of resources, the fire safety protocol sets down a framework within which both authorities can establish effective working arrangements. The protocol contains guidance on which authority should normally take the lead inspection and enforcement role in different types of properties.' Warwickshire County Council (BP-WAR) references the May 2007 national Protocol between Local Housing Authorities and Fire and Rescue Authorities. North Northamptonshire Council (BP-NNC) describes joint advisory visits with the fire service for pre-application inspections. GCC publishes no equivalent arrangement with GFRS." },
+            "action": { "type": "string", "const": "GCC to establish and publish a formal joint working protocol with Gloucestershire Fire and Rescue Service covering HMO fire safety inspection roles, lead authority arrangements, referral processes, and information sharing." }
+          }
+        },
+
+        "todo_policeReferralProtocol": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC-06 states that injunctions and closure orders 'may be sought in consultation with wider multi agency partners' and references warrant execution but does not publish any formal protocol or working arrangement with Gloucestershire Constabulary for HMO-related investigations, warrant executions, or anti-social behaviour linked to HMOs." },
+            "action": { "type": "string", "const": "GCC to document and publish the working arrangement with Gloucestershire Constabulary for HMO cases including warrant execution, ASB referrals, and intelligence sharing." }
+          }
+        },
+
+        "todo_worksInDefaultContractorArrangement": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC-06 states that GCC may carry out works in default where a notice has not been complied with. GCC does not publish how contractors are sourced, appointed, or managed for works in default on HMOs — whether through a framework contract, approved contractor list, or ad hoc procurement." },
+            "action": { "type": "string", "const": "GCC to document and publish its contractor arrangement for works in default on HMOs, including how contractors are sourced, procured, and managed, and how costs are recovered from property owners." }
+          }
+        },
+
+        "todo_legalServicesHandoff": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC-05 and GCC-09 reference the involvement of legal services in prosecution decisions but do not publish the internal process for the handoff between the PSH team and GCC's Legal Services team when a case progresses to prosecution, banning order application, or proceeds of crime proceedings." },
+            "bestPracticeEvidence": { "type": "string", "const": "GCC-09 states that 'Legal advice will be taken to ensure that only those cases presenting a realistic prospect of conviction will be pursued.' GCC-08 references consulting the Crown Prosecution Service Code for Crown Prosecutors. The internal process for engaging Legal Services is not described." },
+            "action": { "type": "string", "const": "GCC to document and publish the internal process for the handoff between the PSH team and Legal Services for HMO prosecution, banning order, and proceeds of crime cases, including referral criteria, responsible roles, and timescales." }
+          }
+        },
+
+        "todo_consultationReferralToExternalAgencies": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC-05 references 'referral to partner service/agency with more appropriate regulatory function' as a no-action outcome, and 'multi agency consultations and decisions (where applicable)' as part of the enforcement framework, but does not publish which specific partner agencies HMO cases may be referred to, under what circumstances, or the referral process." },
+            "action": { "type": "string", "const": "GCC to document and publish the referral processes to external partner agencies for HMO cases including but not limited to Gloucestershire County Council (adult social care, public health), voluntary sector organisations, and national regulators." }
+          }
+        }
+      }
+    },
+
+    "licenceDraftingAndIssuingWorkflow": {
+      "type": "object",
+      "description": "The workflow for drafting and issuing HMO licences following inspection and assessment",
+      "properties": {
+
+        "licenceDurationMatrix": {
+          "type": "array",
+          "description": "Published GCC licence duration decision rules",
+          "items": { "type": "object", "properties": { "scenario": {"type":"string"}, "verbatimText": {"type":"string"}, "source": {"type":"string"}, "documentLocation": {"type":"string"} } },
+          "default": [
+            {
+              "scenario": "Initial licence – new HMO or new owner",
+              "verbatimText": "Up to 5 years from the date the application is deemed valid (\"duly made\")",
+              "source": "GCC-15",
+              "documentLocation": "Guidance Notes for HMO Licence Application – Length of the HMO Licence"
+            },
+            {
+              "scenario": "Initial licence – HMO under development",
+              "verbatimText": "Up to 5 years from the date the applicant anticipates the HMO will be ready for occupation",
+              "source": "GCC-15",
+              "documentLocation": "Guidance Notes for HMO Licence Application – Length of the HMO Licence"
+            },
+            {
+              "scenario": "HMO already operating without a licence",
+              "verbatimText": "Up to 5 years from the date the Council became aware the HMO was operating without a licence",
+              "source": "GCC-15",
+              "documentLocation": "Guidance Notes for HMO Licence Application – Length of the HMO Licence"
+            },
+            {
+              "scenario": "Renewal from same licence holder",
+              "verbatimText": "Up to 5 years from the expiry date of the previous licence.",
+              "source": "GCC-15",
+              "documentLocation": "Guidance Notes for HMO Licence Application – Length of the HMO Licence"
+            },
+            {
+              "scenario": "Person of concern – reduced term",
+              "verbatimText": "Where the authority is not satisfied that suitable management arrangements are in place and that the proposed licence holder or manager is a 'person of concern' then a licence will only be granted for 1 year.",
+              "source": "GCC-10",
+              "documentLocation": "Appendix 5 – Fit and Proper Person – Licence Duration"
+            },
+            {
+              "scenario": "Lapsed licence – failed to renew in time",
+              "verbatimText": "If a landlord or agent has let a Licence expire and has failed to submit a valid renewal application and fee in time, then, upon receipt of a valid new application and fee, a new licence will only be granted for 3 years.",
+              "source": "GCC-10",
+              "documentLocation": "Appendix 5 – Fit and Proper Person – Licence Duration"
+            },
+            {
+              "scenario": "Non-compliance history",
+              "verbatimText": "The Council reserves the right, where it deems fit, to reduce the term awarded to an individual applicant where there is a history of non-compliance with licence conditions or HMO management regulations or of failure to co-operate with the Council.",
+              "source": "GCC-15",
+              "documentLocation": "Guidance Notes for HMO Licence Application – Length of the HMO Licence"
+            }
+          ]
+        },
+
+        "todo_draftLicenceConsultationProcess": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish the process for consulting relevant persons on the draft licence before it is issued — who is notified, what the representation period is, how representations are considered, or what happens when representations are received." },
+            "bestPracticeEvidence": { "type": "string", "const": "Bexley Council publishes: 'The draft licence and copies will be sent to all relevant persons and an invoice will be sent to the licence holder covering the enforcement fee. The relevant persons will be given a minimum of 14 days to make representations to the Council about the draft licence. If no representations are made then the Council will issue the full licence.' GCC-10 references the process at a high level but GCC does not publish the step-by-step consultation process." },
+            "action": { "type": "string", "const": "GCC to publish the draft licence consultation process including notification of relevant persons, representation period, how representations are handled, and the final licence issue step." }
+          }
+        },
+
+        "todo_licenceConditionScheduleProcess": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish the process for attaching specific conditions or schedules of works to individual licences — who decides what conditions are added, what the standard mandatory conditions are, how discretionary conditions are selected, and how the conditions are communicated to the licence holder." },
+            "action": { "type": "string", "const": "GCC to document and publish the licence conditions drafting process, including the standard mandatory conditions, the discretionary conditions framework, and how schedules of works are added and communicated." }
+          }
+        },
+
+        "todo_licenceAppealProcess": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish the operational process for handling appeals against licence decisions — how an appeal is lodged, to which tribunal, the timescales involved, and GCC's internal process for responding to tribunal appeals." },
+            "bestPracticeEvidence": { "type": "string", "const": "GCC-10 states that 'a number of enforcement options can be considered' following licence issues but the First-tier Tribunal appeal process is not described operationally. Bexley Council publishes: 'Where agreement cannot be reached the licence will not be issued and you will have the opportunity to make an appeal to a Residential Property Tribunal. You will be advised of your rights of appeal.'" },
+            "action": { "type": "string", "const": "GCC to publish the operational process for licence decision appeals including the First-tier Tribunal process, GCC's response procedure, and timescales." }
+          }
+        }
+      }
+    },
+
+    "registerManagement": {
+      "type": "object",
+      "description": "GCC's published approach to maintaining and publishing the HMO register",
+      "properties": {
+
+        "publicRegisterObligation": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "The council must maintain a public register of all the premises licensed as a house in multiple occupation. A basic copy of the register is available to download below." },
+            "source": { "type": "string", "const": "GCC-01" },
+            "documentLocation": { "type": "string", "const": "Housing in Multiple Occupancy (HMO) – Information for tenants" }
+          }
+        },
+
+        "registerDownloadUrl": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "HMO Licensed Property Register" },
+            "url": { "type": "string", "const": "https://www.gloucester.gov.uk/media/yg5l1ndz/hmo-licence-register-december-2025.xlsx" },
+            "format": { "type": "string", "const": "XLSX spreadsheet download" },
+            "source": { "type": "string", "const": "GCC-01" },
+            "documentLocation": { "type": "string", "const": "Housing in Multiple Occupancy (HMO) – Information for tenants" }
+          }
+        },
+
+        "planningMapDataCurrency": {
+          "type": "object",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "This data is from September 2024 relating to HMO licensing. For Planning HMO data please search via Public Access." },
+            "source": { "type": "string", "const": "GCC-02" },
+            "documentLocation": { "type": "string", "const": "Planning guidance – Instructions for using the saturation map" }
+          }
+        },
+
+        "todo_registerUpdateFrequencyAndProcess": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish a stated frequency for updating the public HMO register or the internal process for updating it — who is responsible, what triggers an update (new licence, renewal, revocation), or what the lag is between a licensing decision and the register being updated. The most recent register available is December 2025; the planning map data is from September 2024." },
+            "bestPracticeEvidence": { "type": "string", "const": "Coventry City Council (BP-COV) describes 'An improved licence register that allows you to search licensed properties, and will be updated live rather than monthly. The register also includes details of properties for which a licence application has been received, but the licence not yet issued.' GCC publishes no equivalent." },
+            "action": { "type": "string", "const": "GCC to establish and publish a stated register update frequency and the internal process for maintaining the public HMO register, including the responsible role, update triggers, and target currency." }
+          }
+        },
+
+        "todo_unlicensedHmoIntelligenceProcess": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "reason": { "type": "string", "const": "GCC does not publish a process for identifying unlicensed HMOs — how the PSH team proactively identifies properties operating as HMOs without a licence, what intelligence sources are used, or how members of the public can report a suspected unlicensed HMO through a defined channel." },
+            "bestPracticeEvidence": { "type": "string", "const": "Spelthorne Borough Council (BP-SPE) publishes: 'Do you know of an HMO without a licence? You can report it by completing the report an HMO form or contacting the Residential Team in Environmental Health.' North Northamptonshire Council (BP-NNC) states: 'At any one time, our team is investigating between 200 to 300 suspect HMOs' and describes suspect HMOs being 'usually reported to us by residents or other council departments.' GCC publishes no equivalent reporting mechanism." },
+            "action": { "type": "string", "const": "GCC to publish a dedicated reporting mechanism for members of the public to report suspected unlicensed HMOs, and document the internal process for acting on such intelligence." }
+          }
+        }
+      }
+    },
+
+    "todoSummaryIndex": {
+      "type": "array",
+      "description": "Consolidated index of all TODO items in this schema — operational processes, systems, handoffs, workflows and partner arrangements not yet published by GCC",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": { "type": "string" },
+          "section": { "type": "string" },
+          "operationalGap": { "type": "string" },
+          "gapType": {
+            "type": "string",
+            "enum": [
+              "process-not-published",
+              "workflow-not-published",
+              "handoff-not-published",
+              "system-not-published",
+              "partner-arrangement-not-published",
+              "document-not-yet-extracted"
+            ]
+          },
+          "bestPracticeRef": { "type": "string" },
+          "action": { "type": "string" }
+        }
+      },
+      "default": [
+        { "ref": "T-01", "section": "serviceStructure", "operationalGap": "Team size and composition not published", "gapType": "process-not-published", "bestPracticeRef": "BP-NNC", "action": "GCC to publish the composition of the PSH HMO team including officer numbers and roles" },
+        { "ref": "T-02", "section": "serviceStructure", "operationalGap": "Dedicated HMO team contact channel not published", "gapType": "process-not-published", "bestPracticeRef": "BP-SPE", "action": "GCC to publish a dedicated HMO team contact route separate from general council contact" },
+        { "ref": "T-03", "section": "applicationReceiptAndTriage", "operationalGap": "Online application system not available", "gapType": "system-not-published", "bestPracticeRef": "BP-COV", "action": "GCC to assess and implement an online HMO licence application portal" },
+        { "ref": "T-04", "section": "applicationReceiptAndTriage", "operationalGap": "Internal application validation workflow not published", "gapType": "workflow-not-published", "bestPracticeRef": "BP-NNC", "action": "GCC to develop and publish the application validation workflow" },
+        { "ref": "T-05", "section": "applicationReceiptAndTriage", "operationalGap": "Processing timescale not published", "gapType": "process-not-published", "bestPracticeRef": "BP-SPE", "action": "GCC to establish and publish a target processing timescale for HMO licence applications" },
+        { "ref": "T-06", "section": "applicationReceiptAndTriage", "operationalGap": "Fee payment process not published", "gapType": "process-not-published", "bestPracticeRef": "GCC-15 (incomplete)", "action": "GCC to publish the HMO licence fee payment process including method, timing and consequences of non-payment" },
+        { "ref": "T-07", "section": "caseAllocationAndManagement", "operationalGap": "Case management system not published", "gapType": "system-not-published", "bestPracticeRef": "BP-COV", "action": "GCC to publish what system(s) are used to manage HMO cases and any planned improvements" },
+        { "ref": "T-08", "section": "caseAllocationAndManagement", "operationalGap": "Internal handoff between licensing and enforcement not published", "gapType": "handoff-not-published", "bestPracticeRef": "GCC internal (GCC-05/GCC-06)", "action": "GCC to document and publish the internal handoff process between HMO licensing and enforcement functions within PSH" },
+        { "ref": "T-09", "section": "caseAllocationAndManagement", "operationalGap": "Internal handoff between Housing and Planning not published", "gapType": "handoff-not-published", "bestPracticeRef": "BP-HAR", "action": "GCC to document and publish the internal co-ordination process between PSH and Planning for HMO cases involving planning consent" },
+        { "ref": "T-10", "section": "inspectionWorkflow", "operationalGap": "Pre-application advisory visit service not published", "gapType": "process-not-published", "bestPracticeRef": "BP-NNC", "action": "GCC to confirm and publish whether a pre-application advisory visit service exists" },
+        { "ref": "T-11", "section": "inspectionWorkflow", "operationalGap": "Licence consultation inspection workflow not published", "gapType": "workflow-not-published", "bestPracticeRef": "BP-NNC", "action": "GCC to document and publish the licence consultation inspection workflow including checklist and schedule of works process" },
+        { "ref": "T-12", "section": "inspectionWorkflow", "operationalGap": "Ongoing compliance inspection frequency and programme not published", "gapType": "process-not-published", "bestPracticeRef": "BP-NNC", "action": "GCC to establish and publish inspection frequency for licensed HMOs during the licence period" },
+        { "ref": "T-13", "section": "inspectionWorkflow", "operationalGap": "Suspect HMO investigation workflow not published", "gapType": "workflow-not-published", "bestPracticeRef": "BP-NNC", "action": "GCC to document and publish the step-by-step workflow for investigating suspected unlicensed HMOs" },
+        { "ref": "T-14", "section": "inspectionWorkflow", "operationalGap": "Warrant execution workflow not published", "gapType": "workflow-not-published", "bestPracticeRef": "BP-NNC", "action": "GCC to document and publish the warrant execution process for HMO inspections including attending agencies" },
+        { "ref": "T-15", "section": "enforcementDecisionWorkflow", "operationalGap": "Civil penalty decision workflow not published", "gapType": "workflow-not-published", "bestPracticeRef": "GCC-08 (incomplete)", "action": "GCC to document and publish the step-by-step civil penalty decision workflow from identification through to payment or appeal" },
+        { "ref": "T-16", "section": "enforcementDecisionWorkflow", "operationalGap": "Land charge registration process not published", "gapType": "process-not-published", "bestPracticeRef": "GCC-06 (referenced but not described)", "action": "GCC to document and publish the internal process for registering enforcement actions as land charges" },
+        { "ref": "T-17", "section": "partnerAndThirdPartyArrangements", "operationalGap": "No joint working protocol with Gloucestershire Fire and Rescue Service published", "gapType": "partner-arrangement-not-published", "bestPracticeRef": "BP-MAN, BP-WAR, BP-NNC", "action": "GCC to establish and publish a joint working protocol with Gloucestershire Fire and Rescue Service for HMO fire safety inspection and enforcement" },
+        { "ref": "T-18", "section": "partnerAndThirdPartyArrangements", "operationalGap": "No published protocol with Gloucestershire Constabulary for HMO investigations", "gapType": "partner-arrangement-not-published", "bestPracticeRef": "GCC-06 (referenced but not described)", "action": "GCC to document and publish the working arrangement with Gloucestershire Constabulary for HMO warrant executions, ASB referrals and intelligence sharing" },
+        { "ref": "T-19", "section": "partnerAndThirdPartyArrangements", "operationalGap": "Works in default contractor arrangement not published", "gapType": "partner-arrangement-not-published", "bestPracticeRef": "GCC-06 (referenced but not described)", "action": "GCC to document and publish its contractor arrangement for works in default on HMOs" },
+        { "ref": "T-20", "section": "partnerAndThirdPartyArrangements", "operationalGap": "Internal handoff to Legal Services not published", "gapType": "handoff-not-published", "bestPracticeRef": "GCC-09 (referenced but not described)", "action": "GCC to document and publish the handoff process between PSH and Legal Services for HMO prosecution and related legal proceedings" },
+        { "ref": "T-21", "section": "partnerAndThirdPartyArrangements", "operationalGap": "Multi-agency referral processes to named partner agencies not published", "gapType": "partner-arrangement-not-published", "bestPracticeRef": "GCC-05 (referenced generically)", "action": "GCC to document and publish referral processes to named external partner agencies for HMO cases" },
+        { "ref": "T-22", "section": "licenceDraftingAndIssuingWorkflow", "operationalGap": "Draft licence consultation process not published", "gapType": "workflow-not-published", "bestPracticeRef": "Bexley Council", "action": "GCC to publish the draft licence consultation process including notification, representation period and handling" },
+        { "ref": "T-23", "section": "licenceDraftingAndIssuingWorkflow", "operationalGap": "Licence conditions and schedule of works drafting process not published", "gapType": "workflow-not-published", "bestPracticeRef": "GCC internal", "action": "GCC to document and publish the licence conditions drafting and communication process" },
+        { "ref": "T-24", "section": "licenceDraftingAndIssuingWorkflow", "operationalGap": "Licence appeal process not published operationally", "gapType": "process-not-published", "bestPracticeRef": "GCC-10 (referenced but not described)", "action": "GCC to publish the operational process for First-tier Tribunal appeals against licence decisions" },
+        { "ref": "T-25", "section": "registerManagement", "operationalGap": "Register update frequency and internal process not published", "gapType": "process-not-published", "bestPracticeRef": "BP-COV", "action": "GCC to publish stated register update frequency and internal maintenance process" },
+        { "ref": "T-26", "section": "registerManagement", "operationalGap": "Unlicensed HMO intelligence-gathering and reporting process not published", "gapType": "process-not-published", "bestPracticeRef": "BP-SPE, BP-NNC", "action": "GCC to publish a dedicated public reporting mechanism for suspected unlicensed HMOs and the internal process for acting on intelligence" },
+        { "ref": "T-27", "section": "metadata.gccSources", "operationalGap": "GCC-11 (Energy Efficiency PRS Principles) content not yet extracted", "gapType": "document-not-yet-extracted", "bestPracticeRef": "GCC-11", "action": "Extract verbatim content from GCC-11 and populate an energyEfficiencyPrinciples section" },
+        { "ref": "T-28", "section": "metadata.gccSources", "operationalGap": "GCC-12 (Electrical Safety PRS Principles) content not yet extracted", "gapType": "document-not-yet-extracted", "bestPracticeRef": "GCC-12", "action": "Extract verbatim content from GCC-12 and populate an electricalSafetyPrinciples section" },
+        { "ref": "T-29", "section": "metadata.gccSources", "operationalGap": "GCC-13 (Smoke and CO Regulations Principles) content not yet extracted", "gapType": "document-not-yet-extracted", "bestPracticeRef": "GCC-13", "action": "Extract verbatim content from GCC-13 and populate a smokeCoPrinciples section" },
+        { "ref": "T-30", "section": "metadata.gccSources", "operationalGap": "GCC-14 (HMO Licence Application Form 2025–26) field structure not yet extracted", "gapType": "document-not-yet-extracted", "bestPracticeRef": "GCC-14", "action": "Extract application form field structure from GCC-14 and populate an applicationFormStructure section" }
+      ]
+    }
+  },
+
+  "required": [
+    "metadata",
+    "serviceStructure",
+    "applicationReceiptAndTriage",
+    "caseAllocationAndManagement",
+    "inspectionWorkflow",
+    "enforcementDecisionWorkflow",
+    "partnerAndThirdPartyArrangements",
+    "licenceDraftingAndIssuingWorkflow",
+    "registerManagement",
+    "todoSummaryIndex"
+  ]
+}

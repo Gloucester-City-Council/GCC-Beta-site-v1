@@ -1,0 +1,1228 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gloucester.gov.uk/schemas/hmo-guidance/v2.0",
+  "title": "HMO Legislation & Central Government Guidance Schema",
+  "description": "A structured schema capturing all primary UK Acts of Parliament, Statutory Instruments and central government guidance governing Houses in Multiple Occupation (HMOs) in England. Intended as the legislative foundation for Gloucester City Council's HMO advice system. Local authority policy is handled in a separate schema layer. Current as of May 2026.",
+  "version": "2.0.0",
+  "lastUpdated": "2026-05-14",
+  "type": "object",
+
+  "properties": {
+
+    "metadata": {
+      "type": "object",
+      "description": "Schema versioning and ownership information",
+      "properties": {
+        "schemaVersion": { "type": "string", "example": "2.0.0" },
+        "issuingAuthority": { "type": "string", "example": "Gloucester City Council – Housing & Planning" },
+        "schemaScope": {
+          "type": "string",
+          "const": "Central government primary legislation, secondary legislation (statutory instruments) and national guidance only. Local authority policy, local plans and supplementary planning documents are excluded from this schema version."
+        },
+        "jurisdiction": { "type": "string", "const": "England" },
+        "lastReviewed": { "type": "string", "format": "date" },
+        "nextReviewDate": { "type": "string", "format": "date" },
+        "contactEmail": { "type": "string", "format": "email" }
+      },
+      "required": ["schemaVersion", "issuingAuthority", "jurisdiction", "lastReviewed"]
+    },
+
+    "hmoDefinitions": {
+      "type": "object",
+      "description": "Statutory definitions of HMO types derived solely from primary and secondary central government legislation",
+      "properties": {
+
+        "generalDefinition": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "const": "A property occupied by 3 or more people forming 2 or more households who share amenities such as a kitchen, bathroom or toilet."
+            },
+            "legislativeSource": { "type": "string", "const": "Housing Act 2004, sections 254–260" },
+            "legislationUrl": { "type": "string", "const": "https://www.legislation.gov.uk/ukpga/2004/34/section/254" }
+          }
+        },
+
+        "standardHMO": {
+          "type": "object",
+          "description": "The standard HMO definition under the Housing Act 2004 – occupied as main or only residence by persons forming more than one household, sharing basic amenities",
+          "properties": {
+            "minOccupants": { "type": "integer", "const": 3 },
+            "minHouseholds": { "type": "integer", "const": 2 },
+            "sharedAmenityRequired": { "type": "boolean", "const": true },
+            "occupiedAsMainResidence": { "type": "boolean", "const": true },
+            "legislativeSource": { "type": "string", "const": "Housing Act 2004, section 254(2) – the 'standard test'" },
+            "legislationUrl": { "type": "string", "const": "https://www.legislation.gov.uk/ukpga/2004/34/section/254" }
+          }
+        },
+
+        "selfContainedFlatHMO": {
+          "type": "object",
+          "description": "HMO where a self-contained flat is occupied by persons forming more than one household and the building was converted before 1991 regulations",
+          "properties": {
+            "legislativeSource": { "type": "string", "const": "Housing Act 2004, section 254(3) – 'self-contained flat test'" },
+            "legislationUrl": { "type": "string", "const": "https://www.legislation.gov.uk/ukpga/2004/34/section/254" }
+          }
+        },
+
+        "section257HMO": {
+          "type": "object",
+          "description": "A converted block of self-contained flats where the conversion did not comply with 1991 Building Regulations and fewer than two-thirds of the flats are owner-occupied",
+          "properties": {
+            "buildingRegulationsTest": {
+              "type": "string",
+              "const": "Conversion did not comply with Building Regulations 1991 (or later)"
+            },
+            "ownerOccupationTest": {
+              "type": "object",
+              "properties": {
+                "description": { "type": "string", "const": "Less than two-thirds of self-contained flats are owner-occupied" },
+                "maxOwnerOccupiedProportion": { "type": "number", "const": 0.666 }
+              }
+            },
+            "legislativeSource": { "type": "string", "const": "Housing Act 2004, section 257" },
+            "legislationUrl": { "type": "string", "const": "https://www.legislation.gov.uk/ukpga/2004/34/section/257" }
+          }
+        },
+
+        "smallHMO_C4": {
+          "type": "object",
+          "description": "Planning use class for small HMOs. Defined in planning law as 3 to 6 unrelated individuals sharing as their only or main residence.",
+          "properties": {
+            "useClass": { "type": "string", "const": "C4" },
+            "minOccupants": { "type": "integer", "const": 3 },
+            "maxOccupants": { "type": "integer", "const": 6 },
+            "permittedDevelopmentRight": {
+              "type": "object",
+              "description": "Change of use from C3 dwelling house to C4 HMO is permitted development and does not normally require planning permission",
+              "properties": {
+                "rightExists": { "type": "boolean", "const": true },
+                "canBeRemovedByArticle4": { "type": "boolean", "const": true },
+                "legislativeSource": { "type": "string", "const": "Town and Country Planning (General Permitted Development) (England) Order 2015, Schedule 2, Part 3, Class L" },
+                "legislationUrl": { "type": "string", "const": "https://www.legislation.gov.uk/uksi/2015/596/schedule/2" }
+              }
+            },
+            "legislativeSource": { "type": "string", "const": "Town and Country Planning (Use Classes) Order 1987 (as amended)" },
+            "legislationUrl": { "type": "string", "const": "https://www.legislation.gov.uk/uksi/1987/764" }
+          }
+        },
+
+        "largeHMO_SuiGeneris": {
+          "type": "object",
+          "description": "Planning use for HMOs with 7 or more occupants. Classified as Sui Generis – outside any use class. Always requires planning permission for change of use.",
+          "properties": {
+            "useClass": { "type": "string", "const": "SuiGeneris" },
+            "minOccupants": { "type": "integer", "const": 7 },
+            "planningPermissionAlwaysRequired": { "type": "boolean", "const": true },
+            "noPermittedDevelopmentRight": { "type": "boolean", "const": true },
+            "mandatoryLicensingThreshold": {
+              "type": "object",
+              "description": "Note: the mandatory licensing threshold under housing law is 5+ occupants, distinct from the 7+ planning threshold",
+              "properties": {
+                "minOccupants": { "type": "integer", "const": 5 },
+                "legislativeSource": { "type": "string", "const": "Licensing of Houses in Multiple Occupation (Prescribed Description) (England) Order 2018, SI 2018/221" },
+                "legislationUrl": { "type": "string", "const": "https://www.legislation.gov.uk/uksi/2018/221" }
+              }
+            },
+            "legislativeSource": { "type": "string", "const": "Town and Country Planning (Use Classes) Order 1987 (as amended); not within any prescribed use class" },
+            "legislationUrl": { "type": "string", "const": "https://www.legislation.gov.uk/uksi/1987/764" }
+          }
+        },
+
+        "householdDefinition": {
+          "type": "object",
+          "description": "Statutory definition of 'household' for HMO purposes",
+          "properties": {
+            "description": {
+              "type": "string",
+              "const": "A household consists of: a single person; or members of the same family living together (including couples, parents and children, grandparents, siblings, and half-relatives). Persons living together as a couple are treated as members of the same household."
+            },
+            "legislativeSource": { "type": "string", "const": "Housing Act 2004, section 258" },
+            "legislationUrl": { "type": "string", "const": "https://www.legislation.gov.uk/ukpga/2004/34/section/258" }
+          }
+        },
+
+        "statutoryExemptions": {
+          "type": "array",
+          "description": "Categories of property or occupation that are NOT classed as HMOs under Schedule 14 of the Housing Act 2004",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": { "type": "string" },
+              "description": { "type": "string" },
+              "legislativeSource": { "type": "string" },
+              "legislationUrl": { "type": "string", "format": "uri" }
+            },
+            "required": ["category", "description", "legislativeSource"]
+          },
+          "default": [
+            {
+              "category": "Owner-occupier with lodgers",
+              "description": "Property where owner-occupier lives with no more than two lodgers",
+              "legislativeSource": "Housing Act 2004, Schedule 14, paragraph 2",
+              "legislationUrl": "https://www.legislation.gov.uk/ukpga/2004/34/schedule/14"
+            },
+            {
+              "category": "Buildings managed by public bodies",
+              "description": "Buildings managed or owned by a local housing authority, registered social landlord, police authority, fire and rescue authority, or health service body",
+              "legislativeSource": "Housing Act 2004, Schedule 14, paragraph 4",
+              "legislationUrl": "https://www.legislation.gov.uk/ukpga/2004/34/schedule/14"
+            },
+            {
+              "category": "Higher education halls of residence",
+              "description": "Student halls of residence managed or controlled by a specified educational establishment",
+              "legislativeSource": "Housing Act 2004, Schedule 14, paragraph 5",
+              "legislationUrl": "https://www.legislation.gov.uk/ukpga/2004/34/schedule/14"
+            },
+            {
+              "category": "Religious communities",
+              "description": "Buildings occupied principally by members of a religious community whose principal occupation is prayer, contemplation, education or the relief of suffering",
+              "legislativeSource": "Housing Act 2004, Schedule 14, paragraph 6",
+              "legislationUrl": "https://www.legislation.gov.uk/ukpga/2004/34/schedule/14"
+            },
+            {
+              "category": "Purpose-built block of flats (mandatory licensing exemption)",
+              "description": "Purpose-built flat in a block of 3 or more self-contained flats is excluded from mandatory licensing (though may fall within local additional licensing schemes)",
+              "legislativeSource": "Licensing of Houses in Multiple Occupation (Prescribed Description) (England) Order 2018, SI 2018/221, article 3(2)",
+              "legislationUrl": "https://www.legislation.gov.uk/uksi/2018/221"
+            },
+            {
+              "category": "Buildings with two or fewer occupants",
+              "description": "A property occupied by only two persons does not meet the minimum occupancy threshold to constitute an HMO",
+              "legislativeSource": "Housing Act 2004, section 254",
+              "legislationUrl": "https://www.legislation.gov.uk/ukpga/2004/34/section/254"
+            }
+          ]
+        }
+      },
+      "required": ["generalDefinition", "standardHMO", "section257HMO", "smallHMO_C4", "largeHMO_SuiGeneris", "householdDefinition", "statutoryExemptions"]
+    },
+
+    "primaryLegislation": {
+      "type": "array",
+      "description": "Primary Acts of Parliament enacted by the UK Parliament governing HMOs in England",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "year": { "type": "integer" },
+          "shortTitle": { "type": "string" },
+          "chapterOrNumber": { "type": "string" },
+          "legislationGovUkUrl": { "type": "string", "format": "uri" },
+          "status": {
+            "type": "string",
+            "enum": ["in-force", "in-force-as-amended", "partially-repealed", "commencement-pending"]
+          },
+          "lastSignificantAmendment": { "type": "string" },
+          "keyParts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "reference": { "type": "string", "description": "Section, Part or Schedule reference" },
+                "title": { "type": "string" },
+                "description": { "type": "string" },
+                "hmoRelevance": { "type": "string" }
+              },
+              "required": ["reference", "description"]
+            }
+          },
+          "overallRelevanceToHMO": { "type": "string" }
+        },
+        "required": ["title", "year", "legislationGovUkUrl", "status", "keyParts", "overallRelevanceToHMO"]
+      },
+      "default": [
+        {
+          "title": "Housing Act 2004",
+          "year": 2004,
+          "shortTitle": "HA 2004",
+          "chapterOrNumber": "c.34",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/ukpga/2004/34",
+          "status": "in-force-as-amended",
+          "lastSignificantAmendment": "Renters' Rights Act 2025 (section 104)",
+          "overallRelevanceToHMO": "The primary enabling Act for all HMO regulation in England. Establishes the HHSRS, mandatory HMO licensing, additional and selective licensing, management standards, enforcement powers and the statutory definition of HMO.",
+          "keyParts": [
+            {
+              "reference": "Part 1 (ss.1–54)",
+              "title": "Housing Conditions",
+              "description": "Introduces the Housing Health and Safety Rating System (HHSRS). Replaces the fitness standard with a risk-based framework assessing 29 prescribed hazard categories. Establishes Category 1 (serious) and Category 2 hazards. Mandates council enforcement action for Category 1 hazards.",
+              "hmoRelevance": "Councils are legally obliged to take enforcement action where a Category 1 hazard is identified in an HMO. Provides powers for Improvement Notices, Prohibition Orders, Hazard Awareness Notices and Emergency Remedial Action."
+            },
+            {
+              "reference": "Part 2 (ss.55–78)",
+              "title": "Licensing of Houses in Multiple Occupation",
+              "description": "Establishes mandatory HMO licensing for properties meeting the prescribed description. Sets out the licence application process, fit and proper person test, licence conditions, duration, variation, revocation and appeal rights. Creates the offence of operating an unlicensed HMO.",
+              "hmoRelevance": "Core licensing framework. Mandatory licence required for HMOs meeting the 2018 prescribed description (5+ occupants, 2+ households). Unlimited fine on conviction for unlicensed operation."
+            },
+            {
+              "reference": "Part 2 (ss.55–60)",
+              "title": "Additional Licensing",
+              "description": "Empowers local housing authorities to designate additional licensing schemes covering HMOs not subject to mandatory licensing. Schemes must satisfy a statutory reasonableness and desirability test and require MHCLG approval if covering more than 20% of private rented stock.",
+              "hmoRelevance": "Enables councils to extend licensing to smaller HMOs (3–4 occupants) not captured by mandatory scheme."
+            },
+            {
+              "reference": "Part 3 (ss.79–100)",
+              "title": "Selective Licensing of Other Residential Accommodation",
+              "description": "Enables councils to require licences for all privately rented properties in designated areas experiencing low housing demand, significant anti-social behaviour or poor property conditions.",
+              "hmoRelevance": "Can apply to all rented dwellings in an area, including HMOs, regardless of occupant numbers."
+            },
+            {
+              "reference": "Part 4 (ss.101–131)",
+              "title": "Management Orders",
+              "description": "Provides for Interim and Final Management Orders allowing councils to take over management of a property where an HMO is unlicensed, or licensable conditions cannot be met, or serious management failures exist.",
+              "hmoRelevance": "Backstop enforcement power applicable to persistently non-compliant HMOs."
+            },
+            {
+              "reference": "Part 7 (ss.212–237)",
+              "title": "Supplementary Provisions",
+              "description": "Includes tenancy deposit protection provisions and powers to share information between enforcement authorities.",
+              "hmoRelevance": "Tenancy deposit requirements apply to HMO tenancies."
+            },
+            {
+              "reference": "Section 63",
+              "title": "Licence Application and Decision",
+              "description": "Sets out the procedure for granting licences, including the duty to consult and notification requirements.",
+              "hmoRelevance": "Procedural requirements for all HMO licence applications."
+            },
+            {
+              "reference": "Section 66",
+              "title": "Fit and Proper Person Test",
+              "description": "Sets out criteria for determining whether a proposed licence holder or manager is fit and proper, including criminal convictions, discrimination findings and breaches of housing law.",
+              "hmoRelevance": "Every HMO licence applicant must satisfy this test."
+            },
+            {
+              "reference": "Section 72",
+              "title": "Offences in relation to licensing of HMOs",
+              "description": "Creates the criminal offence of operating an unlicensed HMO and the offence of failing to comply with licence conditions. As amended by the Renters' Rights Act 2025, civil penalties may also be imposed.",
+              "hmoRelevance": "Primary enforcement provision; unlimited fine on conviction."
+            },
+            {
+              "reference": "Section 234",
+              "title": "Management Regulations – Offence of Non-Compliance",
+              "description": "Creates an offence for failure to comply with HMO Management Regulations. Each failure constitutes a separate offence.",
+              "hmoRelevance": "Basis for civil penalties or prosecution where management regulation duties are breached."
+            },
+            {
+              "reference": "Sections 254–260",
+              "title": "Definition of HMO",
+              "description": "Provides the statutory tests for determining whether a property is an HMO: the standard test (s.254(2)), the self-contained flat test (s.254(3)), the converted building test (s.254(4)), and the section 257 converted block test.",
+              "hmoRelevance": "Foundation of the entire regulatory framework."
+            },
+            {
+              "reference": "Section 258",
+              "title": "Definition of Household",
+              "description": "Defines 'household' for HMO purposes.",
+              "hmoRelevance": "Essential for determining whether 2+ household threshold is met."
+            },
+            {
+              "reference": "Section 263",
+              "title": "Person Having Control / Person Managing",
+              "description": "Defines 'person having control' (entitled to receive rack rent) and 'person managing' (receives rent on behalf of another) for enforcement purposes.",
+              "hmoRelevance": "Determines who is legally responsible for HMO compliance and enforcement liability."
+            },
+            {
+              "reference": "Schedule 14",
+              "title": "Exemptions from HMO Definition",
+              "description": "Lists categories of building or occupation that are not classed as HMOs for any purpose under the Act.",
+              "hmoRelevance": "Defines the boundaries of the licensing and management regime."
+            }
+          ]
+        },
+        {
+          "title": "Housing Act 1985",
+          "year": 1985,
+          "shortTitle": "HA 1985",
+          "chapterOrNumber": "c.68",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/ukpga/1985/68",
+          "status": "in-force-as-amended",
+          "overallRelevanceToHMO": "Precursor consolidating legislation. Section 345 contained the original statutory HMO definition derived from the Housing Act 1974. Largely superseded for HMO purposes by the Housing Act 2004.",
+          "keyParts": [
+            {
+              "reference": "Section 345",
+              "title": "Original HMO Definition",
+              "description": "First consolidated statutory definition of a house in multiple occupation.",
+              "hmoRelevance": "Historical basis of modern HMO law; relevant where pre-2004 legal questions arise."
+            }
+          ]
+        },
+        {
+          "title": "Housing and Planning Act 2016",
+          "year": 2016,
+          "shortTitle": "HaPA 2016",
+          "chapterOrNumber": "c.22",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/ukpga/2016/22",
+          "status": "in-force-as-amended",
+          "lastSignificantAmendment": "Renters' Rights Act 2025",
+          "overallRelevanceToHMO": "Significantly strengthened the enforcement toolkit available to local housing authorities dealing with non-compliant HMO landlords.",
+          "keyParts": [
+            {
+              "reference": "Sections 28–31",
+              "title": "Civil Penalties",
+              "description": "Enables local housing authorities to impose civil penalties of up to £30,000 as an alternative to prosecution for housing offences including unlicensed HMO operation, breach of licence conditions and breach of management regulations.",
+              "hmoRelevance": "Primary civil enforcement mechanism. Applies per offence; multiple breaches attract separate penalties."
+            },
+            {
+              "reference": "Sections 40–41",
+              "title": "Rent Repayment Orders",
+              "description": "Enables tenants (and local authorities) to apply to the First-tier Tribunal for a Rent Repayment Order requiring a landlord to repay up to 12 months' rent where specified offences are committed. Tenants may apply directly without waiting for criminal conviction.",
+              "hmoRelevance": "Applicable where HMO operates without a licence. Significant financial deterrent."
+            },
+            {
+              "reference": "Sections 14–27",
+              "title": "Banning Orders",
+              "description": "Empowers courts to make banning orders preventing a person from letting or managing residential property, following conviction for a banning order offence.",
+              "hmoRelevance": "Applicable to rogue HMO landlords convicted of relevant offences."
+            },
+            {
+              "reference": "Section 28",
+              "title": "Database of Rogue Landlords and Property Agents",
+              "description": "Establishes a national database (accessible to local authorities) recording banning orders and persons convicted of relevant offences.",
+              "hmoRelevance": "Relevant to fit and proper person assessments for HMO licence applications."
+            }
+          ]
+        },
+        {
+          "title": "Renters' Rights Act 2025",
+          "year": 2025,
+          "shortTitle": "RRA 2025",
+          "chapterOrNumber": "c.26",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/ukpga/2025/26",
+          "status": "in-force",
+          "commencementNotes": "Core tenancy reforms commenced 1 May 2026. Enforcement and investigation powers commenced 27 December 2025.",
+          "overallRelevanceToHMO": "Wide-ranging reform of the private rented sector including HMOs. Abolishes fixed-term assured shorthold tenancies, introduces PRS database, extends the Decent Homes Standard and Awaab's Law to the private sector, and expands civil penalty powers for HMO licensing offences.",
+          "keyParts": [
+            {
+              "reference": "Sections 1–7",
+              "title": "Abolition of Fixed-Term Assured Shorthold Tenancies",
+              "description": "Abolishes the assured shorthold tenancy. All existing assured shorthold tenancies became assured periodic tenancies on 1 May 2026. Landlords prohibited from creating new fixed-term tenancies.",
+              "hmoRelevance": "Affects all HMO tenancy agreements. Landlords cannot lock tenants into fixed terms."
+            },
+            {
+              "reference": "Section 8 / Schedule 1",
+              "title": "Abolition of Section 21 No-Fault Eviction",
+              "description": "Removes the Section 21 Housing Act 1988 no-fault eviction process. Landlords may only recover possession on specified grounds under Schedule 2 of the Housing Act 1988 (as amended).",
+              "hmoRelevance": "HMO landlords can no longer use Section 21 to recover possession. Must use statutory grounds."
+            },
+            {
+              "reference": "Sections 56–82",
+              "title": "Private Rented Sector (PRS) Database",
+              "description": "Establishes a mandatory national database requiring landlords to register themselves and their properties. Tenants can access information about their landlord. Local authorities can use the database for enforcement targeting.",
+              "hmoRelevance": "HMO landlords and managers must register on the PRS Database. Non-registration is a civil penalty offence."
+            },
+            {
+              "reference": "Sections 83–99",
+              "title": "Landlord Ombudsman",
+              "description": "Establishes a mandatory Landlord Ombudsman scheme. All private landlords must be members. Tenants can bring complaints about management.",
+              "hmoRelevance": "HMO landlords required to join. Relevant to dispute resolution with HMO tenants."
+            },
+            {
+              "reference": "Section 100",
+              "title": "Decent Homes Standard – Extension to Private Rented Sector",
+              "description": "Extends the Decent Homes Standard (previously applicable to social housing only) to private rented properties, including HMOs.",
+              "hmoRelevance": "HMOs must meet the Decent Homes Standard once implementing regulations are in force."
+            },
+            {
+              "reference": "Sections 117–123",
+              "title": "Awaab's Law – Private Rented Sector",
+              "description": "Extends Awaab's Law (mandatory response timescales for damp and mould hazards) to the private rented sector.",
+              "hmoRelevance": "HMO landlords must investigate and remediate damp and mould within prescribed timescales."
+            },
+            {
+              "reference": "Section 104",
+              "title": "Amendment of Housing Act 2004 – Expanded Civil Penalty Powers",
+              "description": "Amends sections 72 and 95 of the Housing Act 2004 to extend the persons against whom civil penalties may be imposed for HMO licensing offences, including superior landlords.",
+              "hmoRelevance": "Widens enforcement net for unlicensed HMO operations."
+            },
+            {
+              "reference": "Sections 124–130",
+              "title": "Rent Increases",
+              "description": "Limits rent increases to once per 12-month period. Abolishes rent review clauses in tenancy agreements.",
+              "hmoRelevance": "Applies to all HMO periodic tenancies."
+            },
+            {
+              "reference": "Sections 131–135",
+              "title": "Prohibitions on Discrimination",
+              "description": "Makes it unlawful for landlords and letting agents to refuse to let to tenants with children or those in receipt of benefits.",
+              "hmoRelevance": "HMO landlords and agents must not discriminate on these grounds."
+            },
+            {
+              "reference": "Sections 142–150",
+              "title": "Local Authority Enforcement Powers",
+              "description": "Grants local authorities new statutory powers to enter business and residential premises to investigate potential offences (with and without warrant). Commenced 27 December 2025.",
+              "hmoRelevance": "Strengthens local authority ability to inspect and investigate unlicensed or non-compliant HMOs."
+            }
+          ]
+        },
+        {
+          "title": "Tenant Fees Act 2019",
+          "year": 2019,
+          "shortTitle": "TFA 2019",
+          "chapterOrNumber": "c.4",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/ukpga/2019/4",
+          "status": "in-force",
+          "overallRelevanceToHMO": "Prohibits most fees charged to tenants by landlords and letting agents. Applies to HMO tenancies in England.",
+          "keyParts": [
+            {
+              "reference": "Section 1–7",
+              "title": "Prohibited Payments",
+              "description": "Prohibits charging fees to tenants other than: rent, refundable tenancy deposit (capped at 5 weeks' rent for annual rent under £50,000), refundable holding deposit (capped at 1 week's rent), payments in default, and certain permitted payments (change of sharer, early termination where requested by tenant).",
+              "hmoRelevance": "HMO landlords and agents must not charge prohibited fees. Breach attracts civil penalty up to £5,000 (first offence) or criminal prosecution (repeat offence)."
+            }
+          ]
+        },
+        {
+          "title": "Town and Country Planning Act 1990",
+          "year": 1990,
+          "shortTitle": "TCPA 1990",
+          "chapterOrNumber": "c.8",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/ukpga/1990/8",
+          "status": "in-force-as-amended",
+          "overallRelevanceToHMO": "Principal planning Act establishing the development control framework, use classes system, and planning enforcement powers. Provides the enabling basis for permitted development rights and Article 4 Directions.",
+          "keyParts": [
+            {
+              "reference": "Section 55",
+              "title": "Definition of Development",
+              "description": "Defines 'development' including material change of use of land or buildings. Change of use from C3 to Sui Generis (large HMO) constitutes development requiring planning permission.",
+              "hmoRelevance": "Change of use to large HMO (7+ occupants) requires planning permission as a material change of use."
+            },
+            {
+              "reference": "Section 59",
+              "title": "Development Orders – Permitted Development",
+              "description": "Enables the Secretary of State to make development orders granting blanket planning permission for specified classes of development (including C3 to C4 conversion).",
+              "hmoRelevance": "Enabling provision for the GPDO 2015 permitted development right for small HMOs."
+            },
+            {
+              "reference": "Section 102 / Schedule 9",
+              "title": "Article 4 Directions",
+              "description": "Empowers local planning authorities to make Article 4 Directions to withdraw specified permitted development rights in defined geographic areas.",
+              "hmoRelevance": "Councils may use Article 4 Directions to require planning permission for C3 to C4 HMO conversions in areas where they wish to manage HMO concentration."
+            },
+            {
+              "reference": "Sections 171A–196C",
+              "title": "Planning Enforcement",
+              "description": "Provides enforcement notice, stop notice, injunction, and breach of condition notice powers where development is undertaken without required permission.",
+              "hmoRelevance": "Enables councils to enforce against unauthorised large HMO use or breaches of planning conditions."
+            }
+          ]
+        },
+        {
+          "title": "Building Act 1984",
+          "year": 1984,
+          "shortTitle": "BA 1984",
+          "chapterOrNumber": "c.55",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/ukpga/1984/55",
+          "status": "in-force-as-amended",
+          "overallRelevanceToHMO": "Provides the statutory framework for Building Regulations. Compliance with Building Regulations is required for conversion and structural works in HMOs, and is relevant to the section 257 HMO definition.",
+          "keyParts": [
+            {
+              "reference": "Section 1",
+              "title": "Power to make Building Regulations",
+              "description": "Enables the Secretary of State to make Building Regulations prescribing standards for building construction and conversion.",
+              "hmoRelevance": "Building Regulations approval required for conversion works creating or modifying HMOs. The 1991 Building Regulations compliance test underpins the section 257 HMO category."
+            }
+          ]
+        },
+        {
+          "title": "Environmental Protection Act 1990",
+          "year": 1990,
+          "shortTitle": "EPA 1990",
+          "chapterOrNumber": "c.43",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/ukpga/1990/43",
+          "status": "in-force-as-amended",
+          "overallRelevanceToHMO": "Statutory nuisance and waste enforcement provisions applicable to HMOs generating noise, pest, or waste-related nuisances.",
+          "keyParts": [
+            {
+              "reference": "Part III (ss.79–82)",
+              "title": "Statutory Nuisances",
+              "description": "Defines statutory nuisances including premises in a state prejudicial to health, smoke, fumes, noise and accumulations of waste. Councils must serve abatement notices where a statutory nuisance exists or is likely to occur.",
+              "hmoRelevance": "HMOs generating noise, pest infestation, waste accumulation or damp conditions prejudicial to health may be subject to statutory nuisance abatement notices."
+            }
+          ]
+        },
+        {
+          "title": "Fire Safety Act 2021",
+          "year": 2021,
+          "shortTitle": "FSA 2021",
+          "chapterOrNumber": "c.24",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/ukpga/2021/24",
+          "status": "in-force",
+          "overallRelevanceToHMO": "Clarifies the scope of fire safety duties under the Regulatory Reform (Fire Safety) Order 2005, particularly for multi-occupied residential buildings.",
+          "keyParts": [
+            {
+              "reference": "Section 1",
+              "title": "Application to Buildings with Common Parts",
+              "description": "Clarifies that the RRO 2005 applies to the structure, external walls (including cladding and balconies), and flat entrance doors of multi-occupied residential buildings.",
+              "hmoRelevance": "Confirms that fire risk assessments for multi-storey HMOs must cover external walls and flat entrance doors, not just common parts."
+            }
+          ]
+        },
+        {
+          "title": "Energy Act 2011",
+          "year": 2011,
+          "shortTitle": "EA 2011",
+          "chapterOrNumber": "c.16",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/ukpga/2011/16",
+          "status": "in-force-as-amended",
+          "overallRelevanceToHMO": "Enabling Act for the Minimum Energy Efficiency Standards (MEES) regulations applicable to privately rented properties including HMOs.",
+          "keyParts": [
+            {
+              "reference": "Sections 43–46",
+              "title": "Energy Efficiency Regulations – Private Rented Sector",
+              "description": "Enables the Secretary of State to make regulations requiring minimum energy efficiency standards for domestic and non-domestic rented property.",
+              "hmoRelevance": "Basis for SI 2015/1825 (MEES Regulations) requiring HMO lettings to meet minimum EPC standard."
+            }
+          ]
+        }
+      ]
+    },
+
+    "secondaryLegislation": {
+      "type": "array",
+      "description": "Statutory Instruments made under primary Acts, directly governing HMOs in England",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "siNumber": { "type": "string" },
+          "year": { "type": "integer" },
+          "enablingAct": { "type": "string" },
+          "legislationGovUkUrl": { "type": "string", "format": "uri" },
+          "status": { "type": "string", "enum": ["in-force", "in-force-as-amended", "revoked"] },
+          "keyRequirements": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "hmoRelevance": { "type": "string" },
+          "penaltiesForBreach": { "type": "string" }
+        },
+        "required": ["title", "siNumber", "year", "enablingAct", "legislationGovUkUrl", "status", "keyRequirements", "hmoRelevance"]
+      },
+      "default": [
+        {
+          "title": "Licensing of Houses in Multiple Occupation (Prescribed Description) (England) Order 2018",
+          "siNumber": "SI 2018/221",
+          "year": 2018,
+          "enablingAct": "Housing Act 2004, section 55(2)(a)",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/2018/221",
+          "status": "in-force",
+          "effectiveDate": "1 October 2018",
+          "keyRequirements": [
+            "Mandatory licence required for any HMO occupied by 5 or more persons forming more than 1 household who share amenities",
+            "Removes the previous requirement that the building must have 3 or more storeys",
+            "Excludes purpose-built flats in a block of 3 or more self-contained flats from mandatory licensing",
+            "Councils remain obliged to licence all HMOs meeting the prescribed description within their area"
+          ],
+          "hmoRelevance": "Defines the precise threshold for mandatory HMO licensing. Most significant post-2004 change to the licensing framework.",
+          "penaltiesForBreach": "Unlimited fine on conviction under Housing Act 2004, s.72; civil penalty up to £30,000"
+        },
+        {
+          "title": "Management of Houses in Multiple Occupation (England) Regulations 2006",
+          "siNumber": "SI 2006/372",
+          "year": 2006,
+          "enablingAct": "Housing Act 2004, section 234",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/2006/372",
+          "status": "in-force",
+          "keyRequirements": [
+            "Manager must display name, address and contact number in a prominent position within the HMO",
+            "Manager must provide contact details to occupiers on request",
+            "Fire escape routes must be kept free of obstruction; fire precautions maintained and tested",
+            "Shared amenities (kitchens, bathrooms, toilets) kept clean, in good repair and safe",
+            "Common parts (hallways, stairs, landings, lobbies, porches) kept clean, in good repair and adequately lit",
+            "Adequate and suitable waste storage provided; refuse collection requirements facilitated",
+            "Gardens and shared outdoor areas kept in safe condition",
+            "Structural elements kept in good repair and working order",
+            "Manager must supply contact information to the local housing authority on request"
+          ],
+          "hmoRelevance": "Sets the day-to-day management standard for all HMOs with shared facilities. Applies regardless of whether the HMO is licensable.",
+          "penaltiesForBreach": "Each failure constitutes a separate offence – civil penalty up to £30,000 per offence or unlimited fine on prosecution (Housing Act 2004, s.234)"
+        },
+        {
+          "title": "Licensing and Management of Houses in Multiple Occupation and Other Houses (Miscellaneous Provisions) (England) Regulations 2006",
+          "siNumber": "SI 2006/373",
+          "year": 2006,
+          "enablingAct": "Housing Act 2004, sections 63, 67, 100, 250",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/2006/373",
+          "status": "in-force",
+          "keyRequirements": [
+            "Prescribed content of HMO licence applications (identity of applicant, managing agent, mortgage lender; declaration of fit and proper status)",
+            "Prescribed period for determining licence applications",
+            "Requirements for interim licences",
+            "Overcrowding notices – minimum room sizes below which a room must not be used as sleeping accommodation: 6.51 sqm (1 adult), 10.22 sqm (2 adults), 4.64 sqm (child aged 10 or over)"
+          ],
+          "hmoRelevance": "Sets the procedural framework for licence applications and prescribes minimum sleeping room sizes enforceable via overcrowding notices.",
+          "penaltiesForBreach": "Overcrowding contrary to notice: unlimited fine on prosecution; civil penalty up to £30,000"
+        },
+        {
+          "title": "Houses in Multiple Occupation (Specified Activities) (England) Regulations 2016",
+          "siNumber": "SI 2016/716",
+          "year": 2016,
+          "enablingAct": "Housing Act 2004, section 263",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/2016/716",
+          "status": "in-force",
+          "keyRequirements": [
+            "Specifies activities which constitute being involved in the management of a HMO for the purposes of the fit and proper person test",
+            "Relevant activities include: collecting rent, arranging or conducting viewings, arranging repairs, managing tenancies"
+          ],
+          "hmoRelevance": "Defines the activities that bring a managing agent within scope of the fit and proper person assessment.",
+          "penaltiesForBreach": "Not directly a penalty provision – relevant to licence eligibility"
+        },
+        {
+          "title": "Town and Country Planning (Use Classes) Order 1987 (as amended)",
+          "siNumber": "SI 1987/764",
+          "year": 1987,
+          "enablingAct": "Town and Country Planning Act 1990, section 55(2)(f)",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/1987/764",
+          "status": "in-force-as-amended",
+          "lastSignificantAmendment": "Town and Country Planning (Use Classes) (Amendment) (England) Regulations 2020",
+          "keyRequirements": [
+            "Class C3: Dwelling houses – single household occupation",
+            "Class C4: Houses in multiple occupation – 3 to 6 residents forming more than one household sharing amenities",
+            "Sui Generis: Large HMOs with 7 or more residents fall outside any use class; every material change of use requires planning permission"
+          ],
+          "hmoRelevance": "Defines the planning use class framework within which HMO conversions are assessed.",
+          "penaltiesForBreach": "Breach of planning control – enforcement notice, stop notice, injunction under TCPA 1990"
+        },
+        {
+          "title": "Town and Country Planning (General Permitted Development) (England) Order 2015 (as amended)",
+          "siNumber": "SI 2015/596",
+          "year": 2015,
+          "enablingAct": "Town and Country Planning Act 1990, section 59",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/2015/596",
+          "status": "in-force-as-amended",
+          "keyRequirements": [
+            "Schedule 2, Part 3, Class L: Grants permitted development right for change of use from C3 (dwelling house) to C4 (small HMO) without planning permission",
+            "The right is removed where a local planning authority has made an Article 4 Direction removing Class L rights in a specific area",
+            "No permitted development right exists for change of use from C3 or C4 to Sui Generis large HMO – planning permission always required"
+          ],
+          "hmoRelevance": "Governs when planning permission is or is not required for HMO conversions. Central to understanding Article 4 Direction implications.",
+          "penaltiesForBreach": "N/A – SI grants rights; breach of planning control where no permission held is addressed under TCPA 1990 enforcement"
+        },
+        {
+          "title": "Housing Health and Safety Rating System (England) Regulations 2005",
+          "siNumber": "SI 2005/3208",
+          "year": 2005,
+          "enablingAct": "Housing Act 2004, section 2",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/2005/3208",
+          "status": "in-force",
+          "keyRequirements": [
+            "Prescribes 29 categories of hazard to be assessed: includes damp and mould growth, excess cold, excess heat, asbestos, biocides, carbon monoxide, fire, falls, crowding and space, entry by intruders, noise, domestic hygiene and sanitation, structural collapse",
+            "Defines the method for calculating hazard scores to determine Category 1 (serious) and Category 2 (other) classifications",
+            "Local authority must take enforcement action for Category 1 hazards",
+            "Local authority has discretionary powers for Category 2 hazards"
+          ],
+          "hmoRelevance": "The operational basis for all HHSRS inspections in HMOs. Determines whether enforcement action is mandatory or discretionary.",
+          "penaltiesForBreach": "Failure to comply with Improvement Notice: civil penalty up to £30,000 or unlimited fine on prosecution (Housing Act 2004, ss.30, 72)"
+        },
+        {
+          "title": "Regulatory Reform (Fire Safety) Order 2005",
+          "siNumber": "SI 2005/1541",
+          "year": 2005,
+          "enablingAct": "Regulatory Reform Act 2001",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/2005/1541",
+          "status": "in-force-as-amended",
+          "lastSignificantAmendment": "Fire Safety Act 2021; Fire Safety (England) Regulations 2022 (SI 2022/547)",
+          "keyRequirements": [
+            "Responsible person must carry out a suitable and sufficient fire risk assessment of common parts of an HMO",
+            "Assessment must identify significant fire risks and implement appropriate preventive and protective measures",
+            "Responsible person must ensure escape routes are kept clear and fire detection/suppression systems are maintained",
+            "For HMOs above 11 metres: additional requirements under SI 2022/547 including sharing safety information with residents and fire service"
+          ],
+          "hmoRelevance": "Applies to the common parts of all HMOs. Licensable HMOs require a formal documented fire risk assessment. Primary fire safety enforcement is by the Fire and Rescue Service.",
+          "penaltiesForBreach": "Unlimited fine and/or up to 2 years' imprisonment for serious breaches; improvement, prohibition and enforcement notices"
+        },
+        {
+          "title": "Smoke and Carbon Monoxide Alarm (Amendment) Regulations 2022",
+          "siNumber": "SI 2022/707",
+          "year": 2022,
+          "enablingAct": "Housing Act 2004, section 150A (inserted by Deregulation Act 2015)",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/2022/707",
+          "status": "in-force",
+          "effectiveDate": "1 October 2022",
+          "keyRequirements": [
+            "At least one smoke alarm on every storey of the property that is used as living accommodation",
+            "At least one carbon monoxide alarm in any room used as living accommodation which contains a fixed combustion appliance (excluding gas cookers)",
+            "Alarms must be in working order at the start of each new tenancy",
+            "Landlord must repair or replace a faulty alarm as soon as reasonably practicable when notified by a tenant",
+            "Applies to all private rented dwellings, including all HMOs"
+          ],
+          "hmoRelevance": "Mandatory requirement for all HMO landlords. Each storey of an HMO requires a smoke alarm. Non-compliance – council may impose civil penalty up to £5,000.",
+          "penaltiesForBreach": "Civil penalty up to £5,000 per breach"
+        },
+        {
+          "title": "Electrical Safety Standards in the Private Rented Sector (England) Regulations 2020",
+          "siNumber": "SI 2020/312",
+          "year": 2020,
+          "enablingAct": "Housing and Planning Act 2016, section 122",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/2020/312",
+          "status": "in-force",
+          "keyRequirements": [
+            "Electrical installations must be inspected and tested by a qualified person at least every 5 years",
+            "Electrical Installation Condition Report (EICR) must satisfy BS 7671 (18th Edition IET Wiring Regulations)",
+            "EICR must be provided to new tenants before they occupy the property; to existing tenants within 28 days of request",
+            "EICR must be supplied to the local housing authority within 7 days of request",
+            "Remedial works identified in the EICR must be completed within 28 days (or shorter if the report specifies)",
+            "Evidence of remedial works must be provided to tenants and the local authority"
+          ],
+          "hmoRelevance": "Directly applies to all HMO landlords. Failure to comply allows the council to arrange remedial works and recover costs, and to impose civil penalties.",
+          "penaltiesForBreach": "Civil penalty up to £30,000"
+        },
+        {
+          "title": "Energy Efficiency (Private Rented Property) (England and Wales) Regulations 2015 – Minimum Energy Efficiency Standards",
+          "siNumber": "SI 2015/1825",
+          "year": 2015,
+          "enablingAct": "Energy Act 2011, sections 43–44",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/2015/1825",
+          "status": "in-force",
+          "keyRequirements": [
+            "Privately rented dwellings must achieve a minimum EPC rating of E before they can be lawfully let",
+            "Landlords must obtain an EPC for each separately let unit in an HMO",
+            "Where a valid EPC is not available, the landlord must commission one",
+            "Exemptions available in limited circumstances (listed building consent refused; devaluation of property; recently installed maximum permitted improvement); exemptions must be registered on the PRS Exemptions Register",
+            "Government consultation ongoing (as of May 2026) on raising the minimum standard to EPC C by 2030"
+          ],
+          "hmoRelevance": "HMO landlords must hold valid EPCs and comply with the minimum E rating. Properties rated F or G cannot lawfully be let.",
+          "penaltiesForBreach": "Civil penalty: up to £5,000 for lettings of less than 3 months; up to £4,000 for lettings of 3 months or more; up to £2,000 for failure to comply with compliance notice; up to £1,000 for providing false/misleading information to the register"
+        },
+        {
+          "title": "Gas Safety (Installation and Use) Regulations 1998",
+          "siNumber": "SI 1998/2451",
+          "year": 1998,
+          "enablingAct": "Health and Safety at Work etc. Act 1974",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/1998/2451",
+          "status": "in-force-as-amended",
+          "keyRequirements": [
+            "Landlords must ensure all gas appliances, fittings and flues are maintained in a safe condition",
+            "Annual gas safety check by a Gas Safe registered engineer required for each gas appliance and flue",
+            "Gas Safety Certificate (CP12) must be provided to existing tenants within 28 days of the check; to new tenants before occupation",
+            "Gas Safety Certificate must be retained for at least 2 years"
+          ],
+          "hmoRelevance": "Applies to all HMOs with gas installations. Annual CP12 certificate is a standard mandatory HMO licence condition.",
+          "penaltiesForBreach": "Criminal offence – unlimited fine and/or up to 6 months' imprisonment"
+        },
+        {
+          "title": "Council Tax (Liability for Owners) Regulations 1992",
+          "siNumber": "SI 1992/551",
+          "year": 1992,
+          "enablingAct": "Local Government Finance Act 1992",
+          "legislationGovUkUrl": "https://www.legislation.gov.uk/uksi/1992/551",
+          "status": "in-force-as-amended",
+          "lastSignificantAmendment": "Council Tax reform for HMO aggregation – guidance updated October 2024",
+          "keyRequirements": [
+            "The owner (not the occupants) is the liable person for Council Tax in respect of properties constituting HMOs as defined in these Regulations",
+            "The Council Tax definition of HMO differs from the Housing Act 2004 definition",
+            "Aggregation changes (December 2023 guidance): licensed or unlicensed HMOs not currently aggregated must submit a proposal for amended banding"
+          ],
+          "hmoRelevance": "HMO landlords are liable for Council Tax, not individual tenants. Important for financial modelling of HMO investment.",
+          "penaltiesForBreach": "Council Tax debt recovery enforcement by the billing authority"
+        }
+      ]
+    },
+
+    "centralGovernmentGuidance": {
+      "type": "array",
+      "description": "Statutory and non-statutory guidance published by central government departments (MHCLG, HSE, DLUHC, DCLG) relevant to HMO regulation. Excludes local authority guidance.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "publishedBy": { "type": "string" },
+          "guidanceType": {
+            "type": "string",
+            "enum": ["statutory", "non-statutory", "approved-code-of-practice", "technical-standard"]
+          },
+          "year": { "type": "integer" },
+          "lastUpdated": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "relatedLegislation": { "type": "string" },
+          "summary": { "type": "string" },
+          "hmoRelevance": { "type": "string" },
+          "mustHaveRegard": {
+            "type": "boolean",
+            "description": "Whether local authorities are under a legal duty to have regard to this guidance"
+          }
+        },
+        "required": ["title", "publishedBy", "guidanceType", "year", "url", "summary", "hmoRelevance"]
+      },
+      "default": [
+        {
+          "title": "Licensing of Houses in Multiple Occupation in England: A Guide for Landlords and Managers",
+          "publishedBy": "Ministry of Housing, Communities and Local Government (MHCLG)",
+          "guidanceType": "statutory",
+          "year": 2018,
+          "lastUpdated": "2018",
+          "url": "https://www.gov.uk/government/publications/licensing-of-houses-in-multiple-occupation-in-england-a-guide-for-landlords-and-managers",
+          "relatedLegislation": "Housing Act 2004; SI 2018/221",
+          "summary": "Statutory guidance explaining mandatory HMO licensing following the October 2018 changes. Covers the prescribed description, exemptions, licence conditions, fit and proper person test, overcrowding standards, and enforcement.",
+          "hmoRelevance": "Local housing authorities must have regard to this guidance when operating mandatory HMO licensing schemes. Sets the national baseline for licence conditions and standards.",
+          "mustHaveRegard": true
+        },
+        {
+          "title": "Houses in Multiple Occupation and Selective Licensing: Guidance for Local Housing Authorities",
+          "publishedBy": "MHCLG",
+          "guidanceType": "statutory",
+          "year": 2015,
+          "url": "https://www.gov.uk/government/publications/houses-in-multiple-occupation-and-selective-licensing",
+          "relatedLegislation": "Housing Act 2004, Part 2 and Part 3",
+          "summary": "Sets out the statutory test local authorities must satisfy to designate additional HMO licensing or selective licensing schemes, including evidence requirements for establishing that a scheme is 'reasonably necessary' and meets the desirability conditions. Schemes covering more than 20% of private rented sector dwellings or where the same type of scheme already covers more than 20% of the area require MHCLG confirmation.",
+          "hmoRelevance": "Governs the legal conditions for implementing an additional licensing scheme. Councils must satisfy this guidance before designation.",
+          "mustHaveRegard": true
+        },
+        {
+          "title": "Housing Health and Safety Rating System: Guidance for Landlords and Property Related Professionals",
+          "publishedBy": "Department for Communities and Local Government (DCLG)",
+          "guidanceType": "statutory",
+          "year": 2006,
+          "url": "https://www.gov.uk/government/publications/housing-health-and-safety-rating-system-guidance-for-landlords-and-property-related-professionals",
+          "relatedLegislation": "Housing Act 2004, Part 1; SI 2005/3208",
+          "summary": "Operational guidance on applying the HHSRS. Explains each of the 29 hazard categories, the scoring and banding methodology, when enforcement action is mandatory or discretionary, the range of enforcement powers available, and the appeals process.",
+          "hmoRelevance": "Primary operational guidance for HHSRS inspections. Councils must follow this framework when assessing and enforcing conditions in HMOs.",
+          "mustHaveRegard": true
+        },
+        {
+          "title": "Civil Penalties under the Renters' Rights Act 2025 and Other Housing Legislation",
+          "publishedBy": "MHCLG",
+          "guidanceType": "statutory",
+          "year": 2025,
+          "url": "https://www.gov.uk/government/publications/civil-penalties-under-the-renters-rights-act-2025-and-other-housing-legislation",
+          "relatedLegislation": "Renters' Rights Act 2025, s.104; Housing and Planning Act 2016, ss.28–31; Housing Act 2004",
+          "summary": "Guidance on the civil penalty regime applicable to landlord offences including unlicensed HMO operation, breach of licence conditions, breach of management regulations, and failure to comply with improvement notices. Sets out relevant factors for determining penalty amounts and the process for imposing and appealing penalties.",
+          "hmoRelevance": "Local authorities must have regard to this guidance when imposing civil penalties for HMO offences. Sets the national framework for enforcement decisions.",
+          "mustHaveRegard": true
+        },
+        {
+          "title": "Nationally Described Space Standard",
+          "publishedBy": "Department for Communities and Local Government (DCLG)",
+          "guidanceType": "technical-standard",
+          "year": 2015,
+          "url": "https://www.gov.uk/government/publications/technical-housing-standards-nationally-described-space-standard",
+          "relatedLegislation": "Town and Country Planning Act 1990 (adopted via local plan policies)",
+          "summary": "Prescribes minimum gross internal floor areas and storage requirements for new dwellings. Not directly mandatory – adopted by local planning authorities through their local plans. Minimum bedroom sizes: 7.5 sqm (1 person, 7 years+); 11.5 sqm (2 persons, 7 years+). Overall dwelling minimum floor areas also prescribed by number of bedspaces.",
+          "hmoRelevance": "Widely adopted by local authorities as the benchmark for HMO bedroom and unit sizes in planning applications for large HMOs.",
+          "mustHaveRegard": false
+        },
+        {
+          "title": "Electrical Safety Standards in the Private Rented Sector – Guidance for Landlords, Tenants and Local Authorities",
+          "publishedBy": "MHCLG",
+          "guidanceType": "statutory",
+          "year": 2020,
+          "lastUpdated": "2021",
+          "url": "https://www.gov.uk/government/publications/electrical-safety-standards-in-the-private-rented-sector-guidance-for-landlords-tenants-and-local-authorities",
+          "relatedLegislation": "Electrical Safety Standards in the Private Rented Sector (England) Regulations 2020, SI 2020/312",
+          "summary": "Explains landlord obligations to commission 5-yearly EICRs, supply them to tenants and councils, and complete remedial works within 28 days. Explains the local authority duty to enforce and the civil penalty regime.",
+          "hmoRelevance": "Directly applicable to all HMO landlords. Councils must have regard when deciding whether and how to enforce EICR requirements.",
+          "mustHaveRegard": true
+        },
+        {
+          "title": "Smoke and Carbon Monoxide Alarm (Amendment) Regulations 2022: Explanatory Booklet for Landlords",
+          "publishedBy": "MHCLG",
+          "guidanceType": "statutory",
+          "year": 2022,
+          "url": "https://www.gov.uk/guidance/smoke-and-carbon-monoxide-alarms-explanatory-booklet-for-landlords",
+          "relatedLegislation": "Smoke and Carbon Monoxide Alarm (Amendment) Regulations 2022, SI 2022/707",
+          "summary": "Explains the requirements for smoke alarms on every storey of living accommodation and carbon monoxide alarms in rooms with fixed combustion appliances (excluding gas cookers). Covers testing, repair obligations and enforcement.",
+          "hmoRelevance": "Directly applicable to all HMOs. Councils must enforce compliance and may issue civil penalties up to £5,000.",
+          "mustHaveRegard": true
+        },
+        {
+          "title": "Energy Performance of Buildings: EPC Requirements and Minimum Energy Efficiency Standards",
+          "publishedBy": "MHCLG",
+          "guidanceType": "statutory",
+          "year": 2018,
+          "lastUpdated": "2024",
+          "url": "https://www.gov.uk/guidance/domestic-private-rented-property-minimum-energy-efficiency-standard-landlord-guidance",
+          "relatedLegislation": "Energy Efficiency (Private Rented Property) (England and Wales) Regulations 2015, SI 2015/1825",
+          "summary": "Explains the MEES requirement for minimum EPC rating of E for all private rented dwellings. Covers exemptions, the exemptions register, enforcement and proposed trajectory toward EPC C by 2030.",
+          "hmoRelevance": "HMO landlords must hold EPCs for let units and comply with the minimum E rating. Councils may enforce and impose civil penalties. Proposed EPC C uplift (2030) will require HMO improvement programmes.",
+          "mustHaveRegard": true
+        },
+        {
+          "title": "Housing – Fire Safety: Guidance on Fire Safety Provisions for Certain Types of Existing Housing (LACORS Guidance)",
+          "publishedBy": "Local Authorities Coordinators of Regulatory Services (LACORS)",
+          "guidanceType": "non-statutory",
+          "year": 2008,
+          "url": "https://www.cieh.org/policy/lacors-housing-fire-safety/",
+          "relatedLegislation": "Regulatory Reform (Fire Safety) Order 2005; Housing Act 2004",
+          "summary": "Risk-based guidance providing a structured approach to fire safety assessment and precaution requirements in houses, HMOs, flats and other residential properties. Sets out appropriate fire detection grades, alarm categories, escape route standards and fire door requirements by property type and risk category.",
+          "hmoRelevance": "The principal operational guidance for fire safety in HMOs used by local housing authorities and fire services. Widely referenced in HMO licence conditions as the standard to be achieved.",
+          "mustHaveRegard": false
+        },
+        {
+          "title": "Private Rented Sector Database: Guidance for Landlords",
+          "publishedBy": "MHCLG",
+          "guidanceType": "statutory",
+          "year": 2025,
+          "url": "https://www.gov.uk/guidance/private-rented-sector-database",
+          "relatedLegislation": "Renters' Rights Act 2025, ss.56–82",
+          "summary": "Guidance on the mandatory PRS Database requiring all private landlords to register themselves and their rental properties. Sets out registration requirements, what information must be provided, tenant access rights and enforcement.",
+          "hmoRelevance": "All HMO landlords must register on the PRS Database. Failure to register is a civil penalty offence. Registration number is required on tenancy agreements.",
+          "mustHaveRegard": true
+        },
+        {
+          "title": "Decent Homes Standard: Technical Guidance",
+          "publishedBy": "MHCLG",
+          "guidanceType": "statutory",
+          "year": 2006,
+          "lastUpdated": "2025 (extension to PRS announced)",
+          "url": "https://www.gov.uk/government/publications/a-decent-home-definition-and-guidance",
+          "relatedLegislation": "Renters' Rights Act 2025, section 100",
+          "summary": "Defines the Decent Homes Standard: a property must meet the current statutory minimum standard (no Category 1 HHSRS hazards); be in a reasonable state of repair; have reasonably modern facilities and services; and provide a reasonable degree of thermal comfort.",
+          "hmoRelevance": "Extension to the private rented sector via the Renters' Rights Act 2025 means HMOs will be required to meet the Decent Homes Standard once implementing regulations come into force.",
+          "mustHaveRegard": false
+        },
+        {
+          "title": "Awaab's Law: Guidance on Hazard Repair Timescales",
+          "publishedBy": "MHCLG",
+          "guidanceType": "statutory",
+          "year": 2025,
+          "url": "https://www.gov.uk/government/publications/awaabs-law",
+          "relatedLegislation": "Renters' Rights Act 2025, ss.117–123",
+          "summary": "Guidance on mandatory response timescales for damp and mould hazards in rented properties: landlords must investigate within a prescribed period and begin remediation within a further prescribed period. Implementing regulations will set the precise timescales for the PRS.",
+          "hmoRelevance": "Will apply to HMO landlords once PRS implementing regulations are made. Damp and mould – a common HMO hazard – will trigger mandatory investigation and remediation timescales.",
+          "mustHaveRegard": false
+        },
+        {
+          "title": "Approved Document B – Fire Safety (Volume 1: Dwellings)",
+          "publishedBy": "HM Government / Building Regulations Advisory Committee",
+          "guidanceType": "approved-code-of-practice",
+          "year": 2019,
+          "lastUpdated": "2022",
+          "url": "https://www.gov.uk/government/publications/fire-safety-approved-document-b",
+          "relatedLegislation": "Building Regulations 2010, SI 2010/2214",
+          "summary": "Sets out methods of meeting Building Regulations requirements for fire safety in dwellings, including means of escape, internal fire spread (linings and structure), external fire spread and access for fire services. Volume 1 applies to dwellinghouses including those converted for HMO use.",
+          "hmoRelevance": "Relevant to Building Regulations compliance for conversion works creating or altering HMOs. Applies alongside LACORS fire safety guidance.",
+          "mustHaveRegard": false
+        },
+        {
+          "title": "Planning Policy Guidance: Housing",
+          "publishedBy": "MHCLG",
+          "guidanceType": "non-statutory",
+          "year": 2014,
+          "lastUpdated": "2024",
+          "url": "https://www.gov.uk/guidance/housing",
+          "relatedLegislation": "Town and Country Planning Act 1990; National Planning Policy Framework",
+          "summary": "National Planning Practice Guidance (NPPG) on housing matters including housing mix, conversions and changes of use. Explains how local planning authorities should use evidence to manage housing mix and the use of Article 4 Directions.",
+          "hmoRelevance": "Provides national guidance on managing the balance of housing types and the conditions under which Article 4 Directions removing C3 to C4 permitted development rights may be made.",
+          "mustHaveRegard": false
+        },
+        {
+          "title": "National Planning Policy Framework (NPPF)",
+          "publishedBy": "MHCLG",
+          "guidanceType": "statutory",
+          "year": 2012,
+          "lastUpdated": "December 2024",
+          "url": "https://www.gov.uk/guidance/national-planning-policy-framework",
+          "relatedLegislation": "Planning and Compulsory Purchase Act 2004, s.19; Levelling-up and Regeneration Act 2023",
+          "summary": "The overarching national planning policy framework. Sets out the government's planning policies and how these should be applied. The 2024 version strengthens the housing delivery duty and confirms that local plans and decisions must be consistent with the NPPF.",
+          "hmoRelevance": "Local planning authorities, including Gloucester City Council, must ensure their planning policies for HMOs are consistent with the NPPF. Relevant to housing mix, design quality and sustainable development objectives.",
+          "mustHaveRegard": true
+        }
+      ]
+    },
+
+    "complianceFramework": {
+      "type": "object",
+      "description": "A structured summary of the key national compliance obligations for HMO landlords derived from central government legislation, cross-referenced to their legislative source",
+      "properties": {
+        "licensing": {
+          "type": "object",
+          "properties": {
+            "mandatoryLicence": {
+              "type": "object",
+              "properties": {
+                "trigger": { "type": "string", "const": "5 or more occupants forming more than 1 household sharing amenities" },
+                "legislativeSource": { "type": "string", "const": "Housing Act 2004, s.55; SI 2018/221" },
+                "maxDuration": { "type": "string", "const": "5 years" },
+                "offenceIfUnlicensed": { "type": "string", "const": "Criminal offence – unlimited fine on conviction; civil penalty up to £30,000" }
+              }
+            },
+            "additionalLicence": {
+              "type": "object",
+              "properties": {
+                "trigger": { "type": "string", "const": "Designation by local housing authority under Housing Act 2004, s.56 – extends to HMOs below the mandatory threshold" },
+                "legislativeSource": { "type": "string", "const": "Housing Act 2004, ss.56–60" },
+                "requiresNationalApproval": { "type": "boolean", "const": true, "description": "Schemes covering more than 20% of PRS stock require MHCLG confirmation" }
+              }
+            }
+          }
+        },
+        "safetyCertificates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "requirement": { "type": "string" },
+              "frequency": { "type": "string" },
+              "legislativeSource": { "type": "string" },
+              "penaltyForNonCompliance": { "type": "string" }
+            }
+          },
+          "default": [
+            {
+              "requirement": "Gas Safety Certificate (CP12)",
+              "frequency": "Annual",
+              "legislativeSource": "Gas Safety (Installation and Use) Regulations 1998, SI 1998/2451, reg.36",
+              "penaltyForNonCompliance": "Criminal offence – unlimited fine; up to 6 months' imprisonment"
+            },
+            {
+              "requirement": "Electrical Installation Condition Report (EICR) to BS 7671",
+              "frequency": "Every 5 years (or as specified in the EICR)",
+              "legislativeSource": "Electrical Safety Standards in the Private Rented Sector (England) Regulations 2020, SI 2020/312",
+              "penaltyForNonCompliance": "Civil penalty up to £30,000"
+            },
+            {
+              "requirement": "Smoke alarm on every storey used as living accommodation",
+              "frequency": "Test at start of each tenancy; repair/replace promptly on notification of fault",
+              "legislativeSource": "Smoke and Carbon Monoxide Alarm (Amendment) Regulations 2022, SI 2022/707",
+              "penaltyForNonCompliance": "Civil penalty up to £5,000"
+            },
+            {
+              "requirement": "Carbon monoxide alarm in every room with a fixed combustion appliance (excluding gas cookers)",
+              "frequency": "Test at start of each tenancy; repair/replace promptly on notification of fault",
+              "legislativeSource": "Smoke and Carbon Monoxide Alarm (Amendment) Regulations 2022, SI 2022/707",
+              "penaltyForNonCompliance": "Civil penalty up to £5,000"
+            },
+            {
+              "requirement": "Fire risk assessment (documented) for common parts",
+              "frequency": "Review periodically and after significant changes to the property or occupancy",
+              "legislativeSource": "Regulatory Reform (Fire Safety) Order 2005, SI 2005/1541, article 9",
+              "penaltyForNonCompliance": "Unlimited fine; up to 2 years' imprisonment"
+            },
+            {
+              "requirement": "Energy Performance Certificate (EPC) – minimum rating E",
+              "frequency": "Valid EPC required before property is let; certificate valid for 10 years",
+              "legislativeSource": "Energy Efficiency (Private Rented Property) (England and Wales) Regulations 2015, SI 2015/1825",
+              "penaltyForNonCompliance": "Civil penalty: up to £4,000 (lettings of 3 months or more)"
+            }
+          ]
+        },
+        "tenantRights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "right": { "type": "string" },
+              "legislativeSource": { "type": "string" }
+            }
+          },
+          "default": [
+            {
+              "right": "Right to a periodic assured tenancy with no fixed-term lock-in (from 1 May 2026)",
+              "legislativeSource": "Renters' Rights Act 2025, ss.1–7"
+            },
+            {
+              "right": "Protection from no-fault eviction – Section 21 abolished",
+              "legislativeSource": "Renters' Rights Act 2025, s.8 / Schedule 1"
+            },
+            {
+              "right": "Rent increases limited to once per 12 months via statutory process",
+              "legislativeSource": "Renters' Rights Act 2025, ss.124–130"
+            },
+            {
+              "right": "Tenancy deposit capped at 5 weeks' rent (annual rent under £50,000)",
+              "legislativeSource": "Tenant Fees Act 2019"
+            },
+            {
+              "right": "Protection from most fees charged by landlords and agents",
+              "legislativeSource": "Tenant Fees Act 2019"
+            },
+            {
+              "right": "Rent Repayment Order – up to 12 months' rent where HMO is unlicensed",
+              "legislativeSource": "Housing and Planning Act 2016, ss.40–41"
+            },
+            {
+              "right": "Access to information about landlord on PRS Database",
+              "legislativeSource": "Renters' Rights Act 2025, ss.56–82"
+            },
+            {
+              "right": "Right to complain to Landlord Ombudsman",
+              "legislativeSource": "Renters' Rights Act 2025, ss.83–99"
+            },
+            {
+              "right": "Protection from discrimination on grounds of children or benefit receipt",
+              "legislativeSource": "Renters' Rights Act 2025, ss.131–135"
+            }
+          ]
+        },
+        "enforcementPowers": {
+          "type": "array",
+          "description": "Powers available to local housing authorities under central government legislation",
+          "items": {
+            "type": "object",
+            "properties": {
+              "power": { "type": "string" },
+              "trigger": { "type": "string" },
+              "legislativeSource": { "type": "string" },
+              "maximumPenalty": { "type": "string" }
+            }
+          },
+          "default": [
+            {
+              "power": "Improvement Notice",
+              "trigger": "Category 1 or Category 2 HHSRS hazard identified; mandatory for Category 1",
+              "legislativeSource": "Housing Act 2004, ss.11–21",
+              "maximumPenalty": "Civil penalty up to £30,000 for failure to comply; unlimited fine on prosecution"
+            },
+            {
+              "power": "Prohibition Order",
+              "trigger": "HHSRS Category 1 hazard where improvement notice insufficient; mandatory for Category 1",
+              "legislativeSource": "Housing Act 2004, ss.20–21",
+              "maximumPenalty": "Breach: unlimited fine"
+            },
+            {
+              "power": "Emergency Remedial Action",
+              "trigger": "Imminent risk of serious harm from Category 1 hazard",
+              "legislativeSource": "Housing Act 2004, s.40",
+              "maximumPenalty": "Costs recoverable from landlord"
+            },
+            {
+              "power": "Civil Penalty",
+              "trigger": "Unlicensed HMO operation; breach of licence conditions; breach of management regulations; failure to comply with improvement notice",
+              "legislativeSource": "Housing and Planning Act 2016, ss.28–31; Housing Act 2004 (as amended by RRA 2025, s.104)",
+              "maximumPenalty": "Up to £30,000 per offence"
+            },
+            {
+              "power": "Prosecution",
+              "trigger": "Unlicensed HMO operation; breach of management regulations; overcrowding notice breach; gas safety offence; fire safety offence",
+              "legislativeSource": "Housing Act 2004, ss.72, 95, 234; SI 2005/1541; SI 1998/2451",
+              "maximumPenalty": "Unlimited fine; imprisonment for fire/gas offences"
+            },
+            {
+              "power": "Banning Order",
+              "trigger": "Conviction for a banning order offence under Housing and Planning Act 2016",
+              "legislativeSource": "Housing and Planning Act 2016, ss.14–27",
+              "maximumPenalty": "Prohibition from letting or managing residential property"
+            },
+            {
+              "power": "Rent Repayment Order",
+              "trigger": "Conviction or finding that HMO was unlicensed; applicable on application by tenant or council",
+              "legislativeSource": "Housing and Planning Act 2016, ss.40–41; Renters' Rights Act 2025",
+              "maximumPenalty": "Up to 12 months' rent ordered to be repaid"
+            },
+            {
+              "power": "Interim or Final Management Order",
+              "trigger": "Unlicensed HMO where suitable licence holder cannot be found; or licensable conditions persistently unmet",
+              "legislativeSource": "Housing Act 2004, ss.101–131",
+              "maximumPenalty": "Council assumes management of the property"
+            },
+            {
+              "power": "Entry and Investigation Powers",
+              "trigger": "Investigation of potential housing offences",
+              "legislativeSource": "Renters' Rights Act 2025, ss.142–150 (commenced 27 December 2025)",
+              "maximumPenalty": "Powers to enter with and without warrant; obstruction is a criminal offence"
+            }
+          ]
+        }
+      }
+    }
+  },
+
+  "required": [
+    "metadata",
+    "hmoDefinitions",
+    "primaryLegislation",
+    "secondaryLegislation",
+    "centralGovernmentGuidance",
+    "complianceFramework"
+  ]
+}

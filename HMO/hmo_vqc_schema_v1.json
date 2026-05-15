@@ -1,0 +1,917 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gloucester.gov.uk/schemas/hmo-vqc/v1.0",
+  "title": "Gloucester City Council – HMO Service: Value, Quality and Consistency Schema",
+  "description": "A single schema consolidating all referenceable information gathered for the Gloucester City Council HMO service, structured around three dimensions: Value (the critical touchpoints that matter to residents and to the council — the outcomes being sought and how they align with strategic objectives); Quality (a clear decision about the level of service to be delivered, including service level agreements and performance metrics for partners and contractors); Consistency (how well the council actually delivers against those expectations, what happens when things go wrong, and how improvement is managed). Every populated field is a verbatim quotation from a published and verified source. All gaps are declared as structured TODO items.",
+  "version": "1.0.0",
+  "lastUpdated": "2026-05-14",
+  "type": "object",
+
+  "properties": {
+
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "schemaVersion":    { "type": "string", "const": "1.0.0" },
+        "schemaTitle":      { "type": "string", "const": "HMO Service: Value, Quality and Consistency Schema" },
+        "issuingAuthority": { "type": "string", "const": "Gloucester City Council" },
+        "jurisdiction":     { "type": "string", "const": "Gloucester City, England" },
+        "lastReviewed":     { "type": "string", "format": "date" },
+        "nextReviewDate":   { "type": "string", "format": "date" },
+        "extractionRule": {
+          "type": "string",
+          "const": "All populated values are verbatim quotations from published, verified sources listed in sourceIndex. No inference, invention or gap-filling. All gaps are declared as TODO items with action required."
+        },
+        "dimensions": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string",
+              "const": "The critical touchpoints that matter to residents and to the council: the outcomes being sought and how they align with strategic objectives."
+            },
+            "quality": {
+              "type": "string",
+              "const": "A clear decision about the level of service to be delivered, including service level agreements and performance metrics for partners and contractors."
+            },
+            "consistency": {
+              "type": "string",
+              "const": "How well the council actually delivers against those expectations, what happens when things go wrong, and how improvement is managed."
+            }
+          }
+        },
+        "sourceIndex": {
+          "type": "array",
+          "description": "Every source document drawn upon in this schema",
+          "items": { "type": "object", "properties": { "ref": {"type":"string"}, "title": {"type":"string"}, "url": {"type":"string"}, "accessStatus": {"type":"string"} } },
+          "default": [
+            { "ref": "S-01", "title": "Corporate Plan 2025–2028: Putting the Heart Back into Gloucester", "url": "https://www.gloucester.gov.uk/media/gobgo2px/corporate-plan-2025-to-2028.pdf", "accessStatus": "retrieved" },
+            { "ref": "S-02", "title": "Housing in Multiple Occupancy (HMO) – GCC web page", "url": "https://www.gloucester.gov.uk/housing/hmo-licences/housing-in-multiple-occupancy-hmo/", "accessStatus": "retrieved" },
+            { "ref": "S-03", "title": "Planning guidance – HMO Licences – GCC web page", "url": "https://www.gloucester.gov.uk/housing/hmo-licences/planning-guidance/", "accessStatus": "retrieved" },
+            { "ref": "S-04", "title": "Energy Efficiency Home – GCC web page", "url": "https://www.gloucester.gov.uk/housing/hmo-licences/energy-efficiency-home/", "accessStatus": "retrieved" },
+            { "ref": "S-05", "title": "Advice for Landlords – GCC web page", "url": "https://www.gloucester.gov.uk/housing/private-housing/advice-for-landlords/", "accessStatus": "retrieved" },
+            { "ref": "S-06", "title": "Regulating Housing Standards Policy (February 2024)", "url": "https://www.gloucester.gov.uk/media/3pocizie/regulating-housing-standards-policy.pdf", "accessStatus": "retrieved" },
+            { "ref": "S-07", "title": "Appendix 1 – General Summary of Regulatory Options", "url": "https://www.gloucester.gov.uk/media/k4hntj5q/appendix-1-general-summary-of-regulatory-options.pdf", "accessStatus": "retrieved" },
+            { "ref": "S-08", "title": "Appendix 2 – Delegated Powers of Authorisation – Private Sector Housing", "url": "https://www.gloucester.gov.uk/media/weffnwtx/appendix-2-delegated-powers-of-authorisation-private-sector-housing.pdf", "accessStatus": "retrieved" },
+            { "ref": "S-09", "title": "Appendix 3 – Civil Penalties Policy – Statement of Principles (revised December 2024)", "url": "https://www.gloucester.gov.uk/media/jc1oraxu/appendix-3-civil-penalties-policy-statement-of-principles-revised-december-2024.pdf", "accessStatus": "retrieved" },
+            { "ref": "S-10", "title": "Appendix 4 – Statement of Principles for Prosecutions and Simple Cautions", "url": "https://www.gloucester.gov.uk/media/bd3hqtyp/appendix-4-statement-of-principles-for-prosecutions-and-simple-cautions.pdf", "accessStatus": "retrieved" },
+            { "ref": "S-11", "title": "Appendix 5 – Statement of Principles – Fit and Proper Person and Cause for Concern", "url": "https://www.gloucester.gov.uk/media/lv2n0dch/appendix-5-statement-of-principles-fit-and-proper-person-and-cause-for-concern.pdf", "accessStatus": "retrieved" },
+            { "ref": "S-12", "title": "Appendix 6 – Statement of Principles for Energy Efficiency in the PRS", "url": "https://www.gloucester.gov.uk/media/4qocc4bs/appendix-6-statement-of-principles-for-the-energy-efficiency-private-rented-property-england-and-wales-regulations-2015.pdf", "accessStatus": "retrieved-not-yet-extracted" },
+            { "ref": "S-13", "title": "Appendix 7 – Statement of Principles for Electrical Safety in the PRS", "url": "https://www.gloucester.gov.uk/media/rlddmbfp/appendix-7-statement-of-principles-for-electrical-safety-in-the-private-rented-sector.pdf", "accessStatus": "retrieved-not-yet-extracted" },
+            { "ref": "S-14", "title": "Appendix 8 – Statement of Principles for Smoke and Carbon Monoxide Regulations", "url": "https://www.gloucester.gov.uk/media/1h4h2ynt/appendix-8-statement-of-principles-for-smoke-and-carbon-monoxide-regulations.pdf", "accessStatus": "retrieved-not-yet-extracted" },
+            { "ref": "S-15", "title": "HMO Licence Application Guidance Notes (2020, revised)", "url": "https://www.gloucester.gov.uk/media/of4hvdn1/2020-revised-guidance-notes-for-hmo-application.pdf", "accessStatus": "retrieved" },
+            { "ref": "S-16", "title": "HMO Licence Application Form 2025–26", "url": "https://www.gloucester.gov.uk/media/mgffobi5/hmo-licence-application-form-2025-26.pdf", "accessStatus": "retrieved-not-yet-extracted" },
+            { "ref": "S-17", "title": "Houses in Multiple Occupation – Guide for Landlords, Managers and Tenants (2024)", "url": "https://www.gloucester.gov.uk/media/ghqhvpgz/houses-in-multiple-occupation-a-guide-for-landlords-managers-and-tenants-2024.pdf", "accessStatus": "retrieved" },
+            { "ref": "S-18", "title": "Houses in Multiple Occupation – Guide for Applicants and Decision Takers (August 2023)", "url": "https://www.gloucester.gov.uk/media/cj1jbtez/hmo-guide-sept-2023.pdf", "accessStatus": "retrieved" }
+          ]
+        }
+      },
+      "required": ["schemaVersion","schemaTitle","issuingAuthority","extractionRule","dimensions","sourceIndex"]
+    },
+
+    "value": {
+      "type": "object",
+      "description": "The critical touchpoints that matter to residents and to the council: the outcomes being sought and how they align with strategic objectives.",
+      "properties": {
+
+        "strategicCommitment": {
+          "type": "object",
+          "description": "The verbatim strategic commitment to HMOs from the Corporate Plan — the single explicit statement of what the Council seeks to achieve",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Introduce stronger mechanisms and regulatory powers, such as an Article 4 Direction, to control the proliferation of Houses in Multiple Occupation and improve standards in the private rented sector." },
+            "source": { "type": "string", "const": "S-01" },
+            "documentLocation": { "type": "string", "const": "Corporate Plan 2025–28, Pillar 2, Objective 1: Actions" }
+          }
+        },
+
+        "strategicPillar": {
+          "type": "object",
+          "description": "The Corporate Plan pillar under which HMO commitment sits",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Inclusive, Thriving Communities and Residents that Feel Safe, Supported and Valued" },
+            "source": { "type": "string", "const": "S-01" },
+            "documentLocation": { "type": "string", "const": "Corporate Plan 2025–28, Pillar 2 heading" }
+          }
+        },
+
+        "housingObjective": {
+          "type": "object",
+          "description": "The verbatim housing objective under which the HMO commitment sits",
+          "properties": {
+            "verbatimText": { "type": "string", "const": "Ensure that all our residents have somewhere to call home by providing more affordable housing, working closely with private and registered social landlords and providing improved support and accommodation to tackle homelessness." },
+            "source": { "type": "string", "const": "S-01" },
+            "documentLocation": { "type": "string", "const": "Corporate Plan 2025–28, Pillar 2, Objective 1 heading" }
+          }
+        },
+
+        "serviceOutcomesForResidents": {
+          "type": "array",
+          "description": "Outcomes the service is designed to deliver for residents, drawn verbatim from published GCC sources",
+          "items": { "type": "object", "properties": { "audience": {"type":"string"}, "verbatimText": {"type":"string"}, "source": {"type":"string"}, "documentLocation": {"type":"string"} } },
+          "default": [
+            {
+              "audience": "Tenants in HMOs",
+              "verbatimText": "The council is responsible for enforcing HMO standards, so if you are a tenant living in a HMO and feel there are any unreasonable hazards which your private landlord is not dealing with, please report it.",
+              "source": "S-02",
+              "documentLocation": "Housing in Multiple Occupancy (HMO) – Information for tenants"
+            },
+            {
+              "audience": "Tenants in HMOs",
+              "verbatimText": "We have produced a HMO licence guide for tenants so that you are aware of the standards and conditions landlords must meet with regards to HMO properties.",
+              "source": "S-02",
+              "documentLocation": "Housing in Multiple Occupancy (HMO) – Information for tenants"
+            },
+            {
+              "audience": "All residents",
+              "verbatimText": "Gloucester City Councils Private Sector Housing service (PSH) aims to reduce health inequalities and safeguard our residents, who are affected by poor housing conditions, poor property management and unprofessional landlords.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Summary"
+            },
+            {
+              "audience": "All residents",
+              "verbatimText": "Promoting the provision of safe, decent and well managed accommodation in the City to improve health outcomes.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Priorities"
+            },
+            {
+              "audience": "Vulnerable residents",
+              "verbatimText": "Provide housing assistance services to support residents with disabilities to remain independent and make shape their own outcomes.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Priorities"
+            },
+            {
+              "audience": "All residents",
+              "verbatimText": "Empower residents to make positive decisions about their housing options and shaping their own outcomes.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Priorities"
+            },
+            {
+              "audience": "HMO residents and neighbouring communities",
+              "verbatimText": "Promote stronger communities to support people's feeling of safety, wellbeing and health.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Priorities"
+            }
+          ]
+        },
+
+        "serviceOutcomesForTheCouncil": {
+          "type": "array",
+          "description": "Outcomes the Council seeks for the wider city and its own regulatory role, drawn verbatim from published GCC sources",
+          "items": { "type": "object", "properties": { "verbatimText": {"type":"string"}, "source": {"type":"string"}, "documentLocation": {"type":"string"} } },
+          "default": [
+            {
+              "verbatimText": "Making a fairer rented housing market by eliminating the financial gain or benefit from those who are non-compliant.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Priorities"
+            },
+            {
+              "verbatimText": "Providing transparent and consistent regulation in the housing market.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Priorities"
+            },
+            {
+              "verbatimText": "Promoting professionalism and resilience within the housing sector.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Priorities"
+            },
+            {
+              "verbatimText": "Actively seek to reduce fuel poverty and carbon footprint impact through targeted assistance and intervention.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Priorities"
+            },
+            {
+              "verbatimText": "Promoting economic growth and a thriving housing sector, whilst making best use of existing stock.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Priorities"
+            },
+            {
+              "verbatimText": "Seeking behaviour change and pursuing regulatory action against those who flout the law and act unprofessionally in the housing sector.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Priorities"
+            }
+          ]
+        },
+
+        "keyTouchpointsForResidents": {
+          "type": "array",
+          "description": "The critical service touchpoints — moments where residents interact with the HMO service — as evidenced by published GCC content",
+          "items": {
+            "type": "object",
+            "properties": {
+              "touchpointRef": { "type": "string" },
+              "touchpoint": { "type": "string" },
+              "audience": { "type": "string" },
+              "gccPublishedContent": { "type": "string" },
+              "source": { "type": "string" },
+              "documentLocation": { "type": "string" }
+            }
+          },
+          "default": [
+            {
+              "touchpointRef": "TP-01",
+              "touchpoint": "Tenant reports a hazard in their HMO",
+              "audience": "HMO tenants",
+              "gccPublishedContent": "You can contact Gloucester City Council on 01452 396 396 or email heretohelp@gloucester.gov.uk",
+              "source": "S-02",
+              "documentLocation": "Housing in Multiple Occupancy (HMO) – Information for tenants"
+            },
+            {
+              "touchpointRef": "TP-02",
+              "touchpoint": "Tenant or resident enquires whether a property is licensed",
+              "audience": "HMO tenants and neighbours",
+              "gccPublishedContent": "If you have any enquiries about a property which has been licensed or which you feel should be licensed and is not, please contact us.",
+              "source": "S-02",
+              "documentLocation": "Housing in Multiple Occupancy (HMO) – Information for tenants"
+            },
+            {
+              "touchpointRef": "TP-03",
+              "touchpoint": "Landlord applies for a new or renewal HMO licence",
+              "audience": "HMO landlords and managing agents",
+              "gccPublishedContent": "HMO Licence application form 2025-26",
+              "source": "S-02",
+              "documentLocation": "Housing in Multiple Occupancy (HMO) – Information for landlords"
+            },
+            {
+              "touchpointRef": "TP-04",
+              "touchpoint": "Landlord seeks guidance on planning permission for an HMO",
+              "audience": "HMO landlords, developers, applicants",
+              "gccPublishedContent": "Planning and licensing are two different matters. You may not need planning permission but could still need a license from the Council to operate. HMOs with five or more people require a license. Please ensure you are familiar with both planning and licensing. Failure to meet the requirements for either planning or licensing can result in enforcement action and fines.",
+              "source": "S-03",
+              "documentLocation": "Planning guidance – HMO Licences"
+            },
+            {
+              "touchpointRef": "TP-05",
+              "touchpoint": "Landlord seeks energy efficiency advice",
+              "audience": "HMO landlords and tenants",
+              "gccPublishedContent": "As a householder you can receive free and impartial energy advice by calling the Warm and Well advice line free on 0800 500 30 76 or text WARM to 83010.",
+              "source": "S-04",
+              "documentLocation": "Energy Efficiency Home – Energy Efficiency"
+            },
+            {
+              "touchpointRef": "TP-06",
+              "touchpoint": "Council receives complaint about an unlicensed HMO or HMO standards",
+              "audience": "PSH service officers",
+              "gccPublishedContent": "When a service request has been received, it will normally be triaged and responded to within 3 working days, no matter what the tenure or occupancy status, by an officer in the team unless the case requires immediate investigation.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Scope and application of the policy"
+            },
+            {
+              "touchpointRef": "TP-07",
+              "touchpoint": "Council serves a formal notice or penalty on a landlord",
+              "audience": "HMO landlords subject to enforcement",
+              "gccPublishedContent": "The person on whom a formal notice or order is served will be informed of the reason that this action is being taken, the timescale for completion of any works, the works that are legally required, representations that may be made, relevant appeal periods, details of any fees and charges and the consequences of noncompliance.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – General Principles"
+            }
+          ]
+        },
+
+        "todo_residentFacingOutcomeMeasures": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Value" },
+            "reason": { "type": "string", "const": "GCC does not publish any resident-facing outcome measures for the HMO service — such as the number of hazardous HMOs made safe, the proportion of complaints resolved, reductions in anti-social behaviour linked to HMOs, or improvements in the licensed HMO stock. No published performance dashboard, annual report or data release quantifying HMO service outcomes for residents has been located." },
+            "action": { "type": "string", "const": "GCC to establish and publish resident-facing outcome measures for the HMO service, linked to the Corporate Plan Pillar 2 commitments, including at minimum: number of licensed HMOs; number of hazards remediated; number of complaints resolved; and proportion of the estimated HMO stock that is licensed." }
+          }
+        },
+
+        "todo_alignmentToHousingStrategy": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Value" },
+            "reason": { "type": "string", "const": "The Corporate Plan commits to adopting a 10-year Housing Strategy. This strategy has not yet been published. Until it is, the HMO service cannot be formally aligned to a published long-term housing outcome framework beyond the single Corporate Plan action sentence." },
+            "action": { "type": "string", "const": "Once the 10-year Housing Strategy is published, extract verbatim HMO-related outcomes and populate a housingStrategyAlignment section in this schema." }
+          }
+        }
+      }
+    },
+
+    "quality": {
+      "type": "object",
+      "description": "A clear decision about the level of service to be delivered, including service level agreements and performance metrics for partners and contractors.",
+      "properties": {
+
+        "publishedServiceLevelAgreements": {
+          "type": "array",
+          "description": "Service level standards explicitly published by GCC for the HMO service",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slaRef": { "type": "string" },
+              "serviceArea": { "type": "string" },
+              "verbatimText": { "type": "string" },
+              "source": { "type": "string" },
+              "documentLocation": { "type": "string" }
+            }
+          },
+          "default": [
+            {
+              "slaRef": "SLA-01",
+              "serviceArea": "Complaint triage and initial response",
+              "verbatimText": "When a service request has been received, it will normally be triaged and responded to within 3 working days, no matter what the tenure or occupancy status, by an officer in the team unless the case requires immediate investigation.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Scope and application of the policy"
+            },
+            {
+              "slaRef": "SLA-02",
+              "serviceArea": "Landlord response window before PSH investigation",
+              "verbatimText": "In the first instance service users are expected to take their own action to resolve the problem by contacting their landlord and allowing them adequate time to respond unless there is imminent risk to health where we will intervene immediately. If the landlord fails to take action in 14 days, the PSH service will investigate.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Scope and application of the policy"
+            },
+            {
+              "slaRef": "SLA-03",
+              "serviceArea": "Emergency intervention threshold",
+              "verbatimText": "Unless there is imminent risk to health where we will intervene immediately.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Scope and application of the policy"
+            },
+            {
+              "slaRef": "SLA-04",
+              "serviceArea": "Simple Caution acceptance period",
+              "verbatimText": "Following the offer of a Simple Caution, the individual or company concerned will be required to confirm acceptance within 14 days.",
+              "source": "S-10",
+              "documentLocation": "Appendix 4 – Statement of Principles for Prosecutions and Simple Cautions – Simple Cautions"
+            },
+            {
+              "slaRef": "SLA-05",
+              "serviceArea": "Licence duration – standard",
+              "verbatimText": "The licence is valid for a period of up to five years.",
+              "source": "S-15",
+              "documentLocation": "Guidance Notes for HMO Licence Application – Length of the HMO Licence"
+            },
+            {
+              "slaRef": "SLA-06",
+              "serviceArea": "Licence duration – person of concern",
+              "verbatimText": "Where the authority is not satisfied that suitable management arrangements are in place and that the proposed licence holder or manager is a 'person of concern' then a licence will only be granted for 1 year. During this period the property management standards will be monitored, and the property inspected to ensure it is compliant with the required standards and licence conditions.",
+              "source": "S-11",
+              "documentLocation": "Appendix 5 – Fit and Proper Person – Licence Duration"
+            },
+            {
+              "slaRef": "SLA-07",
+              "serviceArea": "Licence duration – lapsed licence",
+              "verbatimText": "If a landlord or agent has let a Licence expire and has failed to submit a valid renewal application and fee in time, then, upon receipt of a valid new application and fee, a new licence will only be granted for 3 years.",
+              "source": "S-11",
+              "documentLocation": "Appendix 5 – Fit and Proper Person – Licence Duration"
+            },
+            {
+              "slaRef": "SLA-08",
+              "serviceArea": "Enforcement proportionality",
+              "verbatimText": "All enforcement action, whether informal or formal, will be carried out in accordance with the principles of good regulation set out in this Policy. Each case will be considered on its individual merits and in consultation with other agencies (where applicable).",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – General Principles"
+            }
+          ]
+        },
+
+        "licensingFeeSchedule": {
+          "type": "object",
+          "description": "Published fee schedule for HMO licences — the stated financial terms of the service",
+          "properties": {
+            "feesFrom1April2025": {
+              "type": "array",
+              "items": { "type": "object", "properties": { "type": {"type":"string"}, "duration": {"type":"string"}, "fee": {"type":"string"} } },
+              "default": [
+                { "type": "New", "duration": "up to 5 years", "fee": "£947.00" },
+                { "type": "Renewal", "duration": "up to 5 years", "fee": "£797.00" }
+              ],
+              "source": "S-02",
+              "documentLocation": "Housing in Multiple Occupancy (HMO) – HMO Licensing Fees – effective from April 2025"
+            },
+            "feesFrom1April2026": {
+              "type": "array",
+              "items": { "type": "object", "properties": { "type": {"type":"string"}, "duration": {"type":"string"}, "fee": {"type":"string"} } },
+              "default": [
+                { "type": "New", "duration": "up to 5 years", "fee": "£1260.00" },
+                { "type": "Renewal", "duration": "up to 5 years", "fee": "£900.00" }
+              ],
+              "source": "S-02",
+              "documentLocation": "Housing in Multiple Occupancy (HMO) – HMO Licensing Fees – effective from 1 April 2026"
+            },
+            "feeReviewStatement": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "Following the introduction of the Housing and Planning Act 2016, Gloucester City Council has recently reviewed its application processes and fees." },
+                "source": { "type": "string", "const": "S-02" },
+                "documentLocation": { "type": "string", "const": "Housing in Multiple Occupancy (HMO) – HMO Licensing Fees" }
+              }
+            }
+          }
+        },
+
+        "maximumPenaltySchedule": {
+          "type": "array",
+          "description": "Published maximum financial penalties by offence type — the enforcement quality floor",
+          "items": { "type": "object", "properties": { "offence": {"type":"string"}, "maximumPenalty": {"type":"string"}, "verbatimText": {"type":"string"}, "source": {"type":"string"}, "documentLocation": {"type":"string"} } },
+          "default": [
+            {
+              "offence": "Unlicensed HMO / breach of licence conditions / breach of HMO management regulations / failure to comply with improvement notice / banning order breach",
+              "maximumPenalty": "£30,000 per offence",
+              "verbatimText": "The maximum civil penalty that can be set is £30,000 per offence. A minimum penalty level has not been set and the appropriate amount of penalty is to be determined by the Local Housing Authority. Only one penalty can be imposed in respect of the same offence.",
+              "source": "S-09",
+              "documentLocation": "Appendix 3 – Civil Penalties Policy – Statement of Principles"
+            },
+            {
+              "offence": "Electrical safety (SI 2020/312)",
+              "maximumPenalty": "£30,000",
+              "verbatimText": "The Electrical Safety Standards in the Private Rented Sector (England) Regulations 2020: We will issue a penalty charges of up to £30,000. (Appendix 7)",
+              "source": "S-07",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options – Action 4"
+            },
+            {
+              "offence": "Smoke and Carbon Monoxide Regulations",
+              "maximumPenalty": "£5,000",
+              "verbatimText": "Smoke & Carbon Monoxide Regulations 2015: We will issue a penalty charges of up to £5,000. (Appendix 8)",
+              "source": "S-07",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options – Action 4"
+            },
+            {
+              "offence": "MEES / Energy Efficiency Regulations",
+              "maximumPenalty": "£5,000",
+              "verbatimText": "Energy Efficiency (Private Rented Property) (England and Wales) Regulations 2015 (MEES regs): We may issue a penalty charges of up to £5,000. (Appendix 6)",
+              "source": "S-07",
+              "documentLocation": "Appendix 1 – General Summary of Regulatory Options – Action 4"
+            },
+            {
+              "offence": "Unlicensed operation – criminal prosecution",
+              "maximumPenalty": "Unlimited fine on conviction",
+              "verbatimText": "Landlords who are found to be letting a property in breach of the licensing requirements commits an offence punishable by an unlimited fine upon successful conviction or a financial penalty fine of up to £30,000 per offence as an alternative to prosecution.",
+              "source": "S-11",
+              "documentLocation": "Appendix 5 – Statement of Principles – Fit and Proper Person"
+            }
+          ]
+        },
+
+        "serviceStandardsForLandlords": {
+          "type": "array",
+          "description": "Published minimum standards that landlords must meet as a condition of HMO licensing — the quality floor for the licensed stock",
+          "items": { "type": "object", "properties": { "standardArea": {"type":"string"}, "verbatimText": {"type":"string"}, "source": {"type":"string"}, "documentLocation": {"type":"string"} } },
+          "default": [
+            {
+              "standardArea": "Mandatory licensing threshold",
+              "verbatimText": "A licence is required for all HMOs that are occupied by five or more people belonging to 2 or more households and who share a facility or amenity.",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 2.0"
+            },
+            {
+              "standardArea": "Minimum bedroom size – shared facilities – single occupant",
+              "verbatimText": "6.5 square meters if occupied by one person",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 8.0.1"
+            },
+            {
+              "standardArea": "Minimum bedroom size – shared facilities – two occupants",
+              "verbatimText": "10.2 square meters if occupied by two persons",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 8.0.1"
+            },
+            {
+              "standardArea": "Minimum bedroom size – with exclusive cooking facilities – single occupant",
+              "verbatimText": "12.5 square meters if occupied by one person",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 8.0.1"
+            },
+            {
+              "standardArea": "Shared bathroom standard – up to 5 persons",
+              "verbatimText": "Up to five people may share a bathroom containing a toilet, wash hand basin and bath or shower.",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 6.0"
+            },
+            {
+              "standardArea": "Shared bathroom standard – up to 6 persons",
+              "verbatimText": "Up to six people may share these facilities if there is an additional WC and wash hand basin outside of the shared bathroom.",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 6.0"
+            },
+            {
+              "standardArea": "Fire detection minimum",
+              "verbatimText": "As a minimum in HMO's it is necessary to provide interlinked smoke detectors in the hallways and landings of the property and a heat detector in the kitchen and high risk rooms which are mains wired with battery back up. The detectors should be interlinked and comply with BS 5839:2019 part 6 - Grade D:LD2 type system.",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 4.1"
+            },
+            {
+              "standardArea": "Fire door standard",
+              "verbatimText": "In a property with three or more storeys, all bedrooms, kitchens, and living room doors that open onto the protected route must be 30 minute fire doors and maintained in proper working order.",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 4.3"
+            },
+            {
+              "standardArea": "Gas safety",
+              "verbatimText": "Under the Gas Safety (Installation and Use) Regulations 1998 all gas appliances including cookers, heaters and boilers must have an annual safety inspection from a gas engineer registered with the Gas Safety Register. Any repairs identified must be completed without delay.",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 5.0, Reg 6"
+            },
+            {
+              "standardArea": "Electrical safety",
+              "verbatimText": "The manager must ensure that every fixed electric installation is inspected and tested at intervals not exceeding 5 years by a person qualified to undertake such inspection and obtain a certificate specifying the results of the test.",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 5.0, Reg 6"
+            },
+            {
+              "standardArea": "Manager information display",
+              "verbatimText": "The manager's name, address and telephone contact must be made available to each household and be clearly displayed in the HMO.",
+              "source": "S-17",
+              "documentLocation": "Guide for Landlords, Managers and Tenants 2024 – Section 5.0, Reg 3"
+            },
+            {
+              "standardArea": "Planning saturation test – no more than 10% in 100m radius",
+              "verbatimText": "HMOs, including the proposed development, would represent no more than 10% of properties within a 100-metre radius of the application property.",
+              "source": "S-03",
+              "documentLocation": "Planning guidance – Policy A2: Houses in Multiple Occupation – criterion 3"
+            },
+            {
+              "standardArea": "Planning saturation test – no sandwiching",
+              "verbatimText": "The development would not result in any existing residential property (C3 use) being 'sandwiched' between two HMOs.",
+              "source": "S-03",
+              "documentLocation": "Planning guidance – Policy A2: Houses in Multiple Occupation – criterion 1"
+            },
+            {
+              "standardArea": "Planning saturation test – no more than two adjacent HMOs",
+              "verbatimText": "The development would not result in the creation of more than two adjacent properties in HMO use.",
+              "source": "S-03",
+              "documentLocation": "Planning guidance – Policy A2: Houses in Multiple Occupation – criterion 2"
+            }
+          ]
+        },
+
+        "partnerServiceQualityArrangements": {
+          "type": "array",
+          "description": "Published quality arrangements with named third-party service providers",
+          "items": { "type": "object", "properties": { "partner": {"type":"string"}, "serviceProvided": {"type":"string"}, "verbatimText": {"type":"string"}, "source": {"type":"string"}, "documentLocation": {"type":"string"} } },
+          "default": [
+            {
+              "partner": "Severn Wye Energy Agency / Warm and Well scheme",
+              "serviceProvided": "Free impartial home energy advice and ECO grant access for HMO residents and landlords",
+              "verbatimText": "The Warm and Well advice line has been providing free, impartial and local home energy advice to households in Gloucester for more than 10 years. A team of trained energy advisors can help people with a range of energy issues; from providing advice about simple measures you can take in the home through to helping people access grants to improve their homes.",
+              "source": "S-04",
+              "documentLocation": "Energy Efficiency Home – Energy Efficiency"
+            },
+            {
+              "partner": "Housing Ombudsman Service",
+              "serviceProvided": "Complaints redress for Housing Association matters outside PSH delegated powers",
+              "verbatimText": "The HOS details are (https://www.housing-ombudsman.org.uk/) on 0300 111 3000 or email to info@housing-ombudsman.org.uk",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Residential Providers complaints"
+            },
+            {
+              "partner": "Leasehold Advisory Service",
+              "serviceProvided": "Advisory service for leasehold/freehold disputes outside PSH powers",
+              "verbatimText": "The Leasehold Advisory Service - Fleetbank House, 2-6 Salisbury Square, London, EC4Y 8JX. Telephone: 020 7832 2500. http://www.lease-advice.org",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Leaseholder/Freeholder complaints"
+            }
+          ]
+        },
+
+        "todo_processingTimescaleSLA": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Quality" },
+            "reason": { "type": "string", "const": "GCC does not publish a target timescale for processing HMO licence applications from receipt of completed application to issue of draft or final licence. SLA-01 covers complaint triage (3 working days) but no equivalent SLA exists for the licence application workflow." },
+            "action": { "type": "string", "const": "GCC to establish and publish a target processing timescale for HMO licence applications as a stated SLA on the HMO Licences web page (S-02) and Guidance Notes (S-15)." }
+          }
+        },
+
+        "todo_inspectionFrequencySLA": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Quality" },
+            "reason": { "type": "string", "const": "GCC does not publish a frequency for inspecting licensed HMOs during the licence period. No SLA states how often compliant licensed HMOs will be inspected, nor what the target is for inspecting the suspected unlicensed HMO stock." },
+            "action": { "type": "string", "const": "GCC to establish and publish an inspection frequency SLA for licensed HMOs and a target inspection rate for the suspected unlicensed HMO stock." }
+          }
+        },
+
+        "todo_partnerMetricsForFireAndRescue": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Quality" },
+            "reason": { "type": "string", "const": "GCC does not publish a formal joint working protocol with Gloucestershire Fire and Rescue Service, and consequently publishes no performance metrics or service level expectations for the joint inspection and enforcement function. No response timescales, joint inspection targets, or shared quality standards with GFRS for HMO fire safety are published." },
+            "action": { "type": "string", "const": "GCC to establish a joint working protocol with Gloucestershire Fire and Rescue Service that includes defined quality metrics: joint inspection targets, referral response times, and shared reporting standards." }
+          }
+        },
+
+        "todo_worksInDefaultQualityStandards": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Quality" },
+            "reason": { "type": "string", "const": "GCC-07 (Appendix 1) states that works in default may be carried out on HMOs but no quality standards, contractor specifications, or service level expectations for the works are published. No procurement framework, approved contractor list, or works specification for default works on HMOs is published." },
+            "action": { "type": "string", "const": "GCC to publish quality standards and contractor specifications for works in default on HMOs, including any procurement framework or approved contractor arrangements." }
+          }
+        },
+
+        "todo_energyEfficiencyQualityMetrics": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Quality" },
+            "reason": { "type": "string", "const": "S-12 (Appendix 6 – Statement of Principles for Energy Efficiency in the PRS) is published and accessible but its verbatim content has not yet been extracted. GCC does not publish target EPC ratings for licensed HMOs, a trajectory for improving the energy efficiency profile of the HMO stock, or measurable quality standards for energy efficiency enforcement." },
+            "action": { "type": "string", "const": "Extract verbatim content from S-12 and establish measurable quality standards for energy efficiency in the licensed HMO stock, aligned to the Corporate Plan zero-carbon commitment." }
+          }
+        },
+
+        "todo_electricalAndSmokeSafetyQualityMetrics": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Quality" },
+            "reason": { "type": "string", "const": "S-13 (Appendix 7 – Electrical Safety) and S-14 (Appendix 8 – Smoke and CO Regulations) are published and accessible but their verbatim content has not yet been extracted. No measurable quality metrics for electrical safety or smoke/CO alarm compliance across the HMO stock are published." },
+            "action": { "type": "string", "const": "Extract verbatim content from S-13 and S-14 and publish measurable compliance targets for EICR and smoke/CO alarm standards across the licensed HMO stock." }
+          }
+        }
+      }
+    },
+
+    "consistency": {
+      "type": "object",
+      "description": "How well the council actually delivers against those expectations, what happens when things go wrong, and how improvement is managed.",
+      "properties": {
+
+        "consistencyPrinciples": {
+          "type": "array",
+          "description": "GCC's published principles governing consistent delivery — the framework within which consistency is defined",
+          "items": { "type": "object", "properties": { "principle": {"type":"string"}, "verbatimText": {"type":"string"}, "source": {"type":"string"}, "documentLocation": {"type":"string"} } },
+          "default": [
+            {
+              "principle": "Consistency",
+              "verbatimText": "This means taking a similar approach in similar circumstances to achieve similar outcomes. It does not mean uniformity. Officers will consider many factors such as the level of risk, level of harm to individuals, the culpability of the offender, the history of compliance and the attitude and actions of those involved.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Regulatory activity is guided by three key principles"
+            },
+            {
+              "principle": "Openness",
+              "verbatimText": "We will explain our actions clearly through engagement and education, in appropriate language and discuss compliance failures or problems. A clear distinction will be made between legal requirements and advice or guidance.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Regulatory activity is guided by three key principles"
+            },
+            {
+              "principle": "Proportionality",
+              "verbatimText": "We will endeavour to balance the punishment of an offender against the direct risks to the persons effected, the effect on the wider community and severity of the breach of the law involved, to deter offenders from repeating the offence and discouraging others from committing similar offences.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Regulatory activity is guided by three key principles"
+            },
+            {
+              "principle": "Accountability",
+              "verbatimText": "Gloucester City Council will be accountable for the efficiency and effectiveness of its regulatory activities.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Principles of Good Regulation"
+            },
+            {
+              "principle": "Targeting",
+              "verbatimText": "Gloucester City Council accepts that its enforcement resources are limited and, where appropriate, they should be focused on those persons or companies whose activities give rise to the risks which are most serious. Enforcement is informed through intelligence arising from an investigation or complaints, planned projects, special surveys, enforcement initiatives or as a requirement from a Government Department.",
+              "source": "S-06",
+              "documentLocation": "Regulating Housing Standards Policy – Principles of Good Regulation"
+            }
+          ]
+        },
+
+        "whenThingsGoWrong": {
+          "type": "object",
+          "description": "Published GCC processes for what happens when HMO compliance or management fails",
+          "properties": {
+
+            "escalationFromInformalToFormal": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "In some cases, informal resolution cannot be achieved, or the matter being enforced is serious enough to warrant that the informal stage is not appropriate. Where property defects and evidence of poor management are likely to significantly impact on health, the PSH Team will take action. Certain breaches of legislation will require urgent and immediate regulatory responses, either because the time period for action is limited or because the effect of the activity causes significant harm to the public interest." },
+                "source": { "type": "string", "const": "S-06" },
+                "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Scope and application of the policy" }
+              }
+            },
+
+            "strictOffencesNoInformalOption": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "Offences relating to HMO management regulations, failing to licence a HMO and/or breach of the conditions of a HMO licence will lead to enforcement action being taken as they are strict offences." },
+                "source": { "type": "string", "const": "S-06" },
+                "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Scope and application of the policy" }
+              }
+            },
+
+            "misleadingInformationConsequence": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "Where a request for information or documents is not complied or misleading information is given or fraud is uncovered, this will be considered as aggravating factors in the investigation and further enforcement action may be appropriate." },
+                "source": { "type": "string", "const": "S-06" },
+                "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – General Principles" }
+              }
+            },
+
+            "misleadingLicenceApplication": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "The supplying of misleading information to obtain a licence is an offence punishable by an unlimited fine upon successful conviction." },
+                "source": { "type": "string", "const": "S-11" },
+                "documentLocation": { "type": "string", "const": "Appendix 5 – Refusal/Revocation/Variation of a licence" }
+              }
+            },
+
+            "licenceRevocationProcess": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "The most important sanction available to authorities is the refusal or revocation of a licence. This prevents the landlord from letting the property unless the authority is satisfied that suitable management arrangements are in place and that the proposed licence holder/managing agent is a fit and proper person and 'not of concern' (has had no previous convictions and contraventions of relevant legislation)." },
+                "source": { "type": "string", "const": "S-11" },
+                "documentLocation": { "type": "string", "const": "Appendix 5 – Refusal/Revocation/Variation of a licence" }
+              }
+            },
+
+            "managementOrderTrigger": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "Where no alternative management arrangements can be found and the property is occupied and there is no likelihood of it becoming licensed, the authority is required to consider making a Management Order." },
+                "source": { "type": "string", "const": "S-11" },
+                "documentLocation": { "type": "string", "const": "Appendix 5 – Refusal/Revocation/Variation of a licence" }
+              }
+            },
+
+            "nonComplianceLicenceReduction": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "The Council reserves the right, where it deems fit, to reduce the term awarded to an individual applicant where there is a history of non-compliance with licence conditions or HMO management regulations or of failure to co-operate with the Council." },
+                "source": { "type": "string", "const": "S-15" },
+                "documentLocation": { "type": "string", "const": "Guidance Notes for HMO Licence Application – Length of the HMO Licence" }
+              }
+            },
+
+            "prosecutionPrincipleStatement": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "Gloucester City Council will only normally prosecute in circumstances where an offence is severe, where there are multiple offences witnessed, where there is no other recourse to alternative sanction or where the offender has committed similar offences, and where the offender is an individual or business that fails the fit and proper person and cause for concern tests. Each case will be based on its merits and if it is reasonable and proportionate to do so." },
+                "source": { "type": "string", "const": "S-09" },
+                "documentLocation": { "type": "string", "const": "Appendix 3 – Civil Penalties Policy – Decision making" }
+              }
+            },
+
+            "proceedsOfCrime": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "To be considered where, upon successful conviction, landlords or others have financially benefited from the proceeds of a criminal activity a Proceeds of Crime Order application may be made." },
+                "source": { "type": "string", "const": "S-07" },
+                "documentLocation": { "type": "string", "const": "Appendix 1 – General Summary of Regulatory Options – Action 14" }
+              }
+            },
+
+            "rpComplaintsEscalation": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "The PSH team will deal with, and enforce, Residential Providers (Housing Associations) complaints in the same way as any normal private sector housing disrepair complaints. Where the complaint is concerning the RP act or conduct outside of our delegated powers we will try to assist wherever possible. However, in these circumstances outside of PSH powers we would advise the complainant to contact the Housing Ombudsman Service (HOS) after using the RPs own internal complaints process." },
+                "source": { "type": "string", "const": "S-06" },
+                "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Residential Providers (RP) (Housing Associations) complaints" }
+              }
+            }
+          }
+        },
+
+        "improvementManagement": {
+          "type": "object",
+          "description": "Published GCC mechanisms for managing improvement in the HMO service",
+          "properties": {
+
+            "policyReviewStatement": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "The policy replaces the 2009 Enforcement Policy, compliments the Councils existing Enforcement Policies and is drawn up in line with the principles of good enforcement and better regulation." },
+                "source": { "type": "string", "const": "S-06" },
+                "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Summary" }
+              }
+            },
+
+            "regulatorsCodeCompliance": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "The Regulators' Code is a statutory code of practice introduced under section 23 of the Legislative and Regulatory Reform Act 2006 and came into force on 6 April 2014. Regulators covered by the code should have an adopted enforcement policy in place that incorporates the requirements of the code. While there is no explicit requirement to have a Housing focused enforcement policy, without one it would be difficult for the Council to effectively demonstrate compliance with the Regulators' Code (or its predecessors) and exposes us to legal challenges and appeals in the delivery of our statutory functions and duties." },
+                "source": { "type": "string", "const": "S-06" },
+                "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Summary" }
+              }
+            },
+
+            "paceAndCPIAGuidance": {
+              "type": "object",
+              "properties": {
+                "verbatimText": { "type": "string", "const": "Whenever a regulatory officer is carrying out an investigation they will be guided by the codes of practice of the Police and Criminal Evidence Act 1984 (PACE) and the Criminal Procedure and Investigations Act 1996." },
+                "source": { "type": "string", "const": "S-06" },
+                "documentLocation": { "type": "string", "const": "Regulating Housing Standards Policy – Summary" }
+              }
+            },
+
+            "supportingPoliciesAndStrategies": {
+              "type": "array",
+              "description": "The named supporting strategies and policies that the Regulating Housing Standards Policy sits alongside, as published verbatim",
+              "items": { "type": "object", "properties": { "verbatimText": {"type":"string"}, "source": {"type":"string"}, "documentLocation": {"type":"string"} } },
+              "default": [
+                { "verbatimText": "Housing and Homelessness Strategy 2024", "source": "S-06", "documentLocation": "Regulating Housing Standards Policy – Supporting Strategies and Policies" },
+                { "verbatimText": "Gloucester City Council – Council Plan 2022-2024", "source": "S-06", "documentLocation": "Regulating Housing Standards Policy – Supporting Strategies and Policies" },
+                { "verbatimText": "Gloucester City Council Civil Penalties Policy – 2018", "source": "S-06", "documentLocation": "Regulating Housing Standards Policy – Supporting Strategies and Policies" },
+                { "verbatimText": "Gloucester City Council ABCD Policy - 2020", "source": "S-06", "documentLocation": "Regulating Housing Standards Policy – Supporting Strategies and Policies" },
+                { "verbatimText": "Gloucester City Council Community Engagement & Regulatory Policy – 2020", "source": "S-06", "documentLocation": "Regulating Housing Standards Policy – Supporting Strategies and Policies" },
+                { "verbatimText": "Gloucester City Council Community Protection Notices Policy and Procedure.", "source": "S-06", "documentLocation": "Regulating Housing Standards Policy – Supporting Strategies and Policies" }
+              ]
+            }
+          }
+        },
+
+        "todo_publicPerformanceReporting": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Consistency" },
+            "reason": { "type": "string", "const": "GCC does not publish any performance data for the HMO service — no annual statistics on licences issued, inspections carried out, civil penalties imposed, prosecutions brought, management orders made, or complaints resolved. There is no published performance dashboard, annual report section, or data release enabling assessment of whether the service is delivering consistently against its stated priorities and SLAs." },
+            "action": { "type": "string", "const": "GCC to publish annual HMO service performance data including: number of licences issued and renewed; number of inspections carried out; number of civil penalties imposed and total value; number of prosecutions; number of management orders; number of complaints received and resolved within SLA; and proportion of estimated HMO stock that is licensed." }
+          }
+        },
+
+        "todo_complaintHandlingProcessForResidents": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Consistency" },
+            "reason": { "type": "string", "const": "GCC does not publish a defined complaint handling process for residents who are dissatisfied with how the PSH team has handled their HMO complaint — including how to escalate, what timescales apply to a complaint review, and what remedy is available. The published contact route (phone and email on S-02) is for reporting HMO concerns, not for complaints about the Council's own service delivery." },
+            "action": { "type": "string", "const": "GCC to publish a defined complaint handling process for residents dissatisfied with PSH HMO service delivery, including escalation route, timescales, and available remedies, linked from the HMO Licences web page." }
+          }
+        },
+
+        "todo_serviceImprovementMechanism": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Consistency" },
+            "reason": { "type": "string", "const": "GCC does not publish a formal service improvement mechanism for the HMO function — no published review cycle for the Regulating Housing Standards Policy, no stated process for learning from enforcement cases, and no published mechanism for incorporating resident or landlord feedback into service improvement. S-06 (dated February 2024) replaced a 2009 policy — a 15-year gap — but no review frequency is stated." },
+            "action": { "type": "string", "const": "GCC to publish a stated review cycle for the Regulating Housing Standards Policy and supporting appendices, and a mechanism for incorporating learning from cases and stakeholder feedback into service improvement." }
+          }
+        },
+
+        "todo_partnerConsistencyMonitoring": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Consistency" },
+            "reason": { "type": "string", "const": "GCC does not publish any mechanism for monitoring the consistency of third-party service providers operating alongside the HMO function — including Severn Wye Energy Agency (Warm and Well) and the Housing Ombudsman referral route. No published monitoring process, performance review cadence, or quality assurance framework for these partner arrangements is described." },
+            "action": { "type": "string", "const": "GCC to establish and publish a monitoring framework for partner service providers in the HMO function, including performance review arrangements with Severn Wye Energy Agency and any future fire service protocol partner." }
+          }
+        },
+
+        "todo_enforcementConsistencyAudit": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Consistency" },
+            "reason": { "type": "string", "const": "GCC states that enforcement will be carried out consistently ('Duties to be carried out in a fair, equitable and consistent manner and with arrangements in place to promote consistency' — S-06) but does not publish any mechanism for auditing whether officers are applying the MACA framework and regulatory options menu (S-07) consistently across cases. No internal audit, peer review or quality assurance process for enforcement decisions is published." },
+            "action": { "type": "string", "const": "GCC to establish and publish a quality assurance process for HMO enforcement decisions, including how consistency of officer decision-making against the MACA framework is monitored and reviewed." }
+          }
+        },
+
+        "todo_antiDiscriminationConsistency": {
+          "type": "object",
+          "properties": {
+            "status": { "type": "string", "const": "TODO" },
+            "dimension": { "type": "string", "const": "Consistency" },
+            "reason": { "type": "string", "const": "S-10 states that each prosecution case 'will be treated as unique and considered on its own facts and merits with due consideration to the Equalities Act 2010 and the Human Rights Act 1998.' However, GCC does not publish an equality impact assessment for the HMO licensing and enforcement service, nor a published process for ensuring enforcement action is applied consistently regardless of the ethnicity, nationality or protected characteristics of landlords or tenants." },
+            "action": { "type": "string", "const": "GCC to publish an equality impact assessment for the HMO licensing and enforcement service and a mechanism for monitoring whether the service is applied consistently across different communities and demographic groups." }
+          }
+        }
+      }
+    },
+
+    "todoSummaryIndex": {
+      "type": "array",
+      "description": "Consolidated index of all TODO items across all three dimensions",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref":       { "type": "string" },
+          "dimension": { "type": "string", "enum": ["Value","Quality","Consistency"] },
+          "gap":       { "type": "string" },
+          "action":    { "type": "string" }
+        }
+      },
+      "default": [
+        { "ref": "V-01", "dimension": "Value",       "gap": "No published resident-facing outcome measures for the HMO service", "action": "GCC to establish and publish outcome measures linked to Corporate Plan Pillar 2 commitments" },
+        { "ref": "V-02", "dimension": "Value",       "gap": "10-year Housing Strategy not yet published — HMO service cannot be aligned to it", "action": "Populate this schema once the Housing Strategy is published" },
+        { "ref": "Q-01", "dimension": "Quality",     "gap": "No SLA for licence application processing timescale", "action": "GCC to establish and publish a target processing timescale as a stated SLA" },
+        { "ref": "Q-02", "dimension": "Quality",     "gap": "No SLA for inspection frequency of licensed HMOs", "action": "GCC to establish and publish an inspection frequency SLA" },
+        { "ref": "Q-03", "dimension": "Quality",     "gap": "No quality metrics or SLAs for Gloucestershire Fire and Rescue Service joint working", "action": "GCC to establish a joint working protocol with GFRS including performance metrics" },
+        { "ref": "Q-04", "dimension": "Quality",     "gap": "No quality standards or contractor specifications for works in default on HMOs", "action": "GCC to publish works-in-default quality standards and contractor framework" },
+        { "ref": "Q-05", "dimension": "Quality",     "gap": "S-12 (Energy Efficiency PRS Principles) not yet extracted; no target EPC metrics for HMO stock", "action": "Extract S-12 and publish measurable energy efficiency quality standards for HMOs" },
+        { "ref": "Q-06", "dimension": "Quality",     "gap": "S-13 and S-14 (Electrical Safety; Smoke and CO Principles) not yet extracted; no compliance metrics published", "action": "Extract S-13 and S-14 and publish measurable compliance targets for EICR and smoke/CO standards" },
+        { "ref": "C-01", "dimension": "Consistency", "gap": "No published performance data for the HMO service", "action": "GCC to publish annual HMO service performance data across all key activity areas" },
+        { "ref": "C-02", "dimension": "Consistency", "gap": "No published complaint handling process for residents dissatisfied with PSH HMO service delivery", "action": "GCC to publish a complaint handling process with escalation route and timescales" },
+        { "ref": "C-03", "dimension": "Consistency", "gap": "No published review cycle for the Regulating Housing Standards Policy or service improvement mechanism", "action": "GCC to publish a stated review cycle and stakeholder feedback mechanism for the HMO service" },
+        { "ref": "C-04", "dimension": "Consistency", "gap": "No published monitoring framework for partner service providers in the HMO function", "action": "GCC to establish and publish monitoring arrangements for Warm and Well and any future partner" },
+        { "ref": "C-05", "dimension": "Consistency", "gap": "No published quality assurance process for consistency of officer enforcement decisions", "action": "GCC to publish a QA process for HMO enforcement decision-making against the MACA framework" },
+        { "ref": "C-06", "dimension": "Consistency", "gap": "No published equality impact assessment for the HMO licensing and enforcement service", "action": "GCC to publish an EIA for the HMO service and a mechanism for monitoring equitable application" }
+      ]
+    }
+  },
+
+  "required": [
+    "metadata",
+    "value",
+    "quality",
+    "consistency",
+    "todoSummaryIndex"
+  ]
+}
