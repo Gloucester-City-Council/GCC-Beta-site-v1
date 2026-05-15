@@ -1,0 +1,206 @@
+/* Accessibility widget styles */
+.a11y-widget { font-family: inherit; }
+
+.a11y-toggle {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 18px;
+  background: var(--primary-base);
+  color: #fff;
+  border: 3px solid var(--primary-base);
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  transition: background var(--transition);
+}
+.a11y-toggle:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+.a11y-toggle:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+[data-contrast="high"] .a11y-toggle { background: #000; border-color: #000; }
+
+.a11y-panel {
+  position: fixed;
+  right: 16px;
+  bottom: 80px;
+  z-index: 901;
+  width: min(380px, calc(100vw - 32px));
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--text-strong);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+}
+[data-theme="dark"] .a11y-panel { background: var(--bg-card); }
+
+.a11y-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.a11y-panel h2 { margin: 0; font-size: 1.25rem; }
+.a11y-intro { font-size: .9375rem; color: var(--text-muted); margin: 0 0 16px; }
+
+.a11y-close {
+  width: 40px; height: 40px;
+  background: var(--bg);
+  border: 2px solid var(--text-strong);
+  border-radius: 4px;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text);
+}
+.a11y-close:hover { background: var(--neutral-100); }
+.a11y-close:focus-visible { outline: 3px solid var(--focus); outline-offset: 0; }
+
+.a11y-group {
+  border: 0;
+  padding: 0;
+  margin: 0 0 16px;
+}
+.a11y-group legend {
+  font-weight: 700;
+  color: var(--text-strong);
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: .9375rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.a11y-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.a11y-opt {
+  flex: 1 1 calc(50% - 6px);
+  min-height: 44px;
+  padding: 8px 12px;
+  background: var(--bg);
+  color: var(--text-strong);
+  border: 2px solid var(--border-strong);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: .9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background var(--transition), border-color var(--transition);
+}
+.a11y-opt:hover { background: var(--neutral-100); border-color: var(--text-strong); }
+[data-theme="dark"] .a11y-opt:hover { background: var(--bg-alt); }
+.a11y-opt[aria-pressed="true"] {
+  background: var(--primary-base);
+  color: #fff;
+  border-color: var(--primary-base);
+}
+[data-contrast="high"] .a11y-opt[aria-pressed="true"] { background: #000; border-color: #000; }
+.a11y-opt:focus-visible { outline: 3px solid var(--focus); outline-offset: 0; }
+
+.a11y-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.a11y-reset {
+  background: none;
+  border: 2px solid var(--text-strong);
+  color: var(--text-strong);
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: .9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 40px;
+}
+.a11y-reset:hover { background: var(--neutral-100); }
+.a11y-reset:focus-visible { outline: 3px solid var(--focus); outline-offset: 0; }
+
+@media (max-width: 480px) {
+  .a11y-toggle span:not(.visually-hidden) { display: none; }
+  .a11y-toggle { padding: 12px; }
+}
+
+/* ============================================================
+   Reading Ruler
+   - Overlay that follows the mouse / keyboard caret to help users
+     track lines of text. Three modes:
+       off    — disabled
+       line   — a single horizontal highlighted bar across the page
+       strip  — clear band with everything above/below dimmed
+   - Implemented as fixed-position elements so it tracks the viewport.
+   - Hidden from assistive tech (aria-hidden) — it is a *visual* aid only.
+   - Respects "reduce motion": no smooth-follow transition when reduced.
+   ============================================================ */
+.reading-ruler-band,
+.reading-ruler-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  pointer-events: none; /* never block clicks */
+  z-index: 800;         /* below a11y panel (900) so settings stay usable */
+  transition: top var(--transition);
+}
+[data-motion="reduced"] .reading-ruler-band,
+[data-motion="reduced"] .reading-ruler-mask { transition: none; }
+
+/* The visible coloured band itself */
+.reading-ruler-band {
+  height: 44px;
+  background: rgba(255, 221, 0, 0.28); /* GOV.UK focus yellow at low opacity */
+  border-top: 2px solid #ffdd00;
+  border-bottom: 2px solid #ffdd00;
+  display: none;
+}
+[data-theme="dark"] .reading-ruler-band {
+  background: rgba(255, 221, 0, 0.18);
+}
+[data-contrast="high"] .reading-ruler-band {
+  background: rgba(255, 255, 0, 0.35);
+  border-color: #000;
+}
+
+/* The two darkening masks (above + below) used in "strip" mode */
+.reading-ruler-mask {
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+}
+[data-theme="dark"] .reading-ruler-mask {
+  background: rgba(0, 0, 0, 0.72);
+}
+.reading-ruler-mask.top    { top: 0; }
+.reading-ruler-mask.bottom { bottom: 0; }
+
+/* Activate by ruler mode set on <html> */
+[data-ruler="line"]  .reading-ruler-band { display: block; }
+[data-ruler="strip"] .reading-ruler-band { display: block; }
+[data-ruler="strip"] .reading-ruler-mask { display: block; }
+
+/* Don't show ruler when printing */
+@media print {
+  .reading-ruler-band,
+  .reading-ruler-mask { display: none !important; }
+}
