@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--
+  Templates landing — preview all four blank templates in one place.
+  This is NOT a template itself, it is an internal index for editors.
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page templates — Gloucester City Council</title>
+  <meta name="description" content="Four blank page templates for the Gloucester City Council website.">
+  <meta name="theme-color" content="#0054a4">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/a11y.css">
+  <style>
+    .tpl-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-4); margin-top: var(--s-4); }
+    @media (max-width: 800px) { .tpl-grid { grid-template-columns: 1fr; } }
+    .tpl-card { background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--primary-base); border-radius: var(--radius-lg); padding: var(--s-4); }
+    .tpl-card h2 { margin: 0 0 var(--s-2); font-size: 1.25rem; }
+    .tpl-card p  { margin: 0 0 var(--s-3); color: var(--text); }
+    .tpl-meta { font-size: .875rem; color: var(--text-muted); display: flex; gap: var(--s-3); flex-wrap: wrap; margin-bottom: var(--s-3); }
+    .tpl-meta span { display: inline-flex; align-items: center; gap: 4px; }
+    .tpl-card .btn-row { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+    /* Make the page lede stretch full width on the templates index */
+    main > .container > p.lede { max-width: none; }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="#" class="brand" aria-label="Gloucester City Council home">
+      <img src="assets/GCC_logo.svg" alt="Gloucester City Council" class="brand-logo">
+    </a>
+    <form class="header-search" role="search" action="#" onsubmit="event.preventDefault();">
+      <label for="site-search" class="visually-hidden">Search the site</label>
+      <input type="search" id="site-search" placeholder="Search Gloucester.gov.uk" autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../index.html">Home</a></li>
+      <li><span aria-current="page">Page templates</span></li>
+    </ol>
+  </nav>
+</div>
+
+<main id="main" role="main" tabindex="-1" data-screen-label="00 Templates index">
+  <div class="container">
+    <h1>Page templates</h1>
+    <p class="lede">Four blank starting points for Gloucester City Council web pages. Each is fully accessible, includes the breadcrumb, and uses the same brand styling. Open one to preview, then duplicate the file to start a new page.</p>
+
+    <div class="inset-panel info">
+      <p>The floating <strong>Accessibility</strong> button (bottom right) gives every template controls for text size, contrast, dark theme, reading aids, motion, and the new <strong>Reading ruler</strong>.</p>
+    </div>
+
+    <div class="tpl-grid">
+
+      <article class="tpl-card">
+        <div class="tpl-meta">
+          <span aria-hidden="true">①</span><span>Template 1</span>
+          <span>·</span><span>Service landing</span>
+        </div>
+        <h2><a href="service-landing.html">Service landing page</a></h2>
+        <p>For the top of a service area. Hero, service-card grid, popular tasks, contact strip.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="service-landing.html">Open template</a>
+          <a class="btn btn-secondary" href="README.md">Docs</a>
+        </div>
+      </article>
+
+      <article class="tpl-card">
+        <div class="tpl-meta">
+          <span aria-hidden="true">②</span><span>Template 2</span>
+          <span>·</span><span>Transaction</span>
+        </div>
+        <h2><a href="transaction.html">Transaction page</a></h2>
+        <p>For "do something" pages. Includes a Start-now CTA pattern and an inline form with error summary, inline errors and a success state.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="transaction.html">Open template</a>
+          <a class="btn btn-secondary" href="README.md">Docs</a>
+        </div>
+      </article>
+
+      <article class="tpl-card">
+        <div class="tpl-meta">
+          <span aria-hidden="true">③</span><span>Template 3</span>
+          <span>·</span><span>Information</span>
+        </div>
+        <h2><a href="information.html">Information page</a></h2>
+        <p>For explaining a topic. Two columns, on-page tab nav, step list, table, definition list, inset panels, sidebar.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="information.html">Open template</a>
+          <a class="btn btn-secondary" href="README.md">Docs</a>
+        </div>
+      </article>
+
+      <article class="tpl-card">
+        <div class="tpl-meta">
+          <span aria-hidden="true">④</span><span>Template 4</span>
+          <span>·</span><span>FAQ</span>
+        </div>
+        <h2><a href="faq.html">FAQ page</a></h2>
+        <p>Categorised questions using native &lt;details&gt;/&lt;summary&gt; accordions — works without JavaScript.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="faq.html">Open template</a>
+          <a class="btn btn-secondary" href="README.md">Docs</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h2>Templates</h2><ul>
+        <li><a href="service-landing.html">Service landing</a></li>
+        <li><a href="transaction.html">Transaction</a></li>
+        <li><a href="information.html">Information</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul></div>
+      <div><h2>Documentation</h2><ul><li><a href="README.md">README</a></li></ul></div>
+      <div><h2>Help</h2><ul><li><a href="#">Accessibility statement</a></li><li><a href="#">Cookies</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+      <div>
+        <h2>Get in touch</h2>
+        <p style="margin: 0 0 8px;"><strong>Our opening hours are:</strong></p>
+        <ul>
+          <li>Mon, Tue, Thu, Fri: 9am to 5pm</li>
+          <li>Wednesday: 10am to 5pm</li>
+        </ul>
+        <p style="margin: 8px 0 4px;"><a href="tel:01452396396">01452 396 396</a></p>
+        <p style="margin: 0;"><a href="mailto:heretohelp@gloucester.gov.uk">heretohelp@gloucester.gov.uk</a></p>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© Gloucester City Council 2026</span>
+      <span>All content available under the Open Government Licence v3.0, except where otherwise stated.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

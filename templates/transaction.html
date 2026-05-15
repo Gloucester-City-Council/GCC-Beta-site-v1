@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  Gloucester City Council — TEMPLATE 2 of 4
+  Transaction Page
+  ------------------------------------------------------------
+  Use this for any page where a user needs to DO something:
+  pay, report, apply, register, book.
+
+  Two patterns are included so you can pick one and delete the
+  other:
+    A. "Start now" — sends users to an external transactional
+       service via a green button (the GOV.UK pattern).
+    B. Inline form — a simple form with proper labels, hints,
+       inline errors and an error summary, wired in site.js.
+
+  Replace every [PLACEHOLDER] before publishing.
+  ============================================================
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>[Task name] — Gloucester City Council</title>
+  <meta name="description" content="[What the user can do on this page, in one sentence.]">
+  <meta name="theme-color" content="#0054a4">
+
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/a11y.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- SHARED HEADER (see service-landing.html for documentation) -->
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="Gloucester City Council home">
+      <img src="assets/GCC_logo.svg" alt="Gloucester City Council" class="brand-logo">
+    </a>
+    <form class="header-search" role="search" action="#" onsubmit="event.preventDefault();">
+      <label for="site-search" class="visually-hidden">Search the site</label>
+      <input type="search" id="site-search" placeholder="Search Gloucester.gov.uk" autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+</header>
+
+<!-- Breadcrumb — 3 levels for a transaction page -->
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="service-landing.html">[Service name]</a></li>
+      <li><span aria-current="page">[Task name]</span></li>
+    </ol>
+  </nav>
+</div>
+
+<main id="main" role="main" tabindex="-1" data-screen-label="02 Transaction">
+  <div class="container">
+
+    <!-- Optional back link for users who got here from a deeper page -->
+    <a href="service-landing.html" class="back-link">Back to [Service name]</a>
+
+    <h1>[Task name]</h1>
+    <p class="lede">[One sentence that explains what this task does. Keep under 25 words.]</p>
+
+    <div class="page-layout">
+      <div class="main-content">
+
+        <!-- ============================================================
+             PATTERN A — "Start now" call to action
+             Use when the transaction itself lives on an external
+             service. Delete this block if using Pattern B.
+             ============================================================ -->
+        <section aria-labelledby="start-now-h">
+          <h2 id="start-now-h">Before you start</h2>
+          <p>You will need:</p>
+          <ul>
+            <li>[the user's reference number]</li>
+            <li>[a debit or credit card / supporting document]</li>
+            <li>[another required item]</li>
+          </ul>
+          <p>Most people complete this in about [N] minutes.</p>
+
+          <div class="cta-block">
+            <h2 style="margin-top:0;">Ready to [verb]?</h2>
+            <p>You will be taken to our secure [provider name] service.</p>
+            <a class="btn btn-primary" href="#" rel="external">
+              Start now
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M13 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             PATTERN B — Inline form
+             Wired by site.js via form[data-validate]. Each question
+             lives in a .form-group. Required fields use [required].
+
+             Accessibility notes:
+             - Every <input> has a <label for="…">.
+             - Hints use aria-describedby pointing at .form-hint.
+             - Errors are surfaced inline AND in the error summary
+               at the top of the form (focused on submit).
+             - The success panel (.success-panel) is hidden by
+               default and focused after a successful submit.
+             ============================================================ -->
+        <section aria-labelledby="form-h" style="margin-top: var(--s-6);">
+          <h2 id="form-h">Or fill in the form below</h2>
+          <p>[Short explanation of what the user is about to do.]</p>
+
+          <!-- Success message — shown after a clean submit -->
+          <div class="success-panel" data-success hidden>
+            <h2>Thank you</h2>
+            <p>Your [request type] has been received. We will contact you within [N working days].</p>
+            <p style="margin-top: var(--s-2);"><strong>Reference:</strong> GCC-XXXX-XXXX</p>
+          </div>
+
+          <!-- Error summary — focused on failed submit -->
+          <div class="error-summary" data-error-summary role="alert" hidden>
+            <h2>There is a problem</h2>
+            <ul></ul>
+          </div>
+
+          <form action="#" method="post" data-validate>
+
+            <!-- Text input -->
+            <div class="form-group">
+              <label for="f-name">Full name</label>
+              <span class="form-hint" id="f-name-hint">As it appears on your ID</span>
+              <span class="form-error" id="f-name-err" hidden>Enter your full name</span>
+              <input type="text" id="f-name" name="name"
+                     autocomplete="name" required
+                     aria-describedby="f-name-hint f-name-err">
+            </div>
+
+            <!-- Email input -->
+            <div class="form-group">
+              <label for="f-email">Email address</label>
+              <span class="form-hint" id="f-email-hint">We'll send a confirmation to this address</span>
+              <span class="form-error" id="f-email-err" hidden>Enter a valid email address</span>
+              <input type="email" id="f-email" name="email"
+                     autocomplete="email" required
+                     aria-describedby="f-email-hint f-email-err">
+            </div>
+
+            <!-- Phone (optional) -->
+            <div class="form-group">
+              <label for="f-phone">Phone number <span style="font-weight:400;color:var(--text-muted);">(optional)</span></label>
+              <input type="tel" id="f-phone" name="phone" autocomplete="tel">
+            </div>
+
+            <!-- Radio group inside a fieldset.
+                 aria-describedby on the fieldset wires the error
+                 message to the whole group for screen readers. -->
+            <fieldset class="form-group" aria-describedby="f-contact-err">
+              <legend>How would you like us to contact you?</legend>
+              <span class="form-error" id="f-contact-err" hidden>Choose how we should contact you</span>
+              <ul class="option-list">
+                <li><label class="option">
+                  <input type="radio" name="contact" value="email" required>
+                  <span><span class="opt-label">Email</span><span class="opt-hint">Usually within 2 working days</span></span>
+                </label></li>
+                <li><label class="option">
+                  <input type="radio" name="contact" value="phone">
+                  <span><span class="opt-label">Phone</span><span class="opt-hint">Mon–Fri, 9am–4pm</span></span>
+                </label></li>
+                <li><label class="option">
+                  <input type="radio" name="contact" value="post">
+                  <span><span class="opt-label">Post</span><span class="opt-hint">Allow up to 10 working days</span></span>
+                </label></li>
+              </ul>
+            </fieldset>
+
+            <!-- Long-form textarea -->
+            <div class="form-group">
+              <label for="f-detail">Tell us about your [request]</label>
+              <span class="form-hint" id="f-detail-hint">Include as much detail as you can — what, where and when</span>
+              <span class="form-error" id="f-detail-err" hidden>Tell us about your request</span>
+              <textarea id="f-detail" name="detail" required
+                        aria-describedby="f-detail-hint f-detail-err"></textarea>
+            </div>
+
+            <!-- Checkbox — consent -->
+            <fieldset class="form-group">
+              <legend class="visually-hidden">Confirmation</legend>
+              <label class="option" style="max-width:40em;">
+                <input type="checkbox" name="confirm" required>
+                <span class="opt-label">I confirm the information I have provided is accurate</span>
+              </label>
+            </fieldset>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary">
+              Submit request
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M13 5l7 7-7 7"/>
+              </svg>
+            </button>
+            <p style="font-size:.9375rem;color:var(--text-muted);margin-top:var(--s-3);">
+              By submitting this form you agree to our <a href="#">privacy policy</a>.
+            </p>
+          </form>
+        </section>
+
+      </div>
+
+      <!-- ============================================================
+           SIDEBAR — replace with content relevant to the task
+           ============================================================ -->
+      <aside class="sidebar" aria-label="Related information">
+        <div class="sidebar-card contact">
+          <h2>Need help?</h2>
+          <p>If you cannot complete this online, call us:</p>
+          <p style="font-weight:700;font-size:1.125rem;margin:0 0 8px;">
+            <a href="tel:01452396396">01452 396 396</a>
+          </p>
+          <p style="font-size:.9375rem;margin:0;">Monday to Friday, 9am to 4pm</p>
+        </div>
+
+        <div class="sidebar-card">
+          <h2>Other ways to do this</h2>
+          <ul>
+            <li><a href="#">By post</a></li>
+            <li><a href="#">In person at the Customer Service Centre</a></li>
+            <li><a href="#">By phone (24-hour line)</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h2>Service standard</h2>
+          <p style="margin:0;font-size:.9375rem;">We aim to respond within <strong>[N] working days</strong>.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- SHARED FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="#">[Sub-service A]</a></li>
+          <li><a href="#">[Sub-service B]</a></li>
+          <li><a href="#">[Sub-service C]</a></li>
+          <li><a href="#">[Sub-service D]</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>About</h2>
+        <ul>
+          <li><a href="#">About the council</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Help</h2>
+        <ul>
+          <li><a href="#">Accessibility statement</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Get in touch</h2>
+        <p style="margin: 0 0 8px;"><strong>Our opening hours are:</strong></p>
+        <ul>
+          <li>Mon, Tue, Thu, Fri: 9am to 5pm</li>
+          <li>Wednesday: 10am to 5pm</li>
+        </ul>
+        <p style="margin: 8px 0 4px;"><a href="tel:01452396396">01452 396 396</a></p>
+        <p style="margin: 0;"><a href="mailto:heretohelp@gloucester.gov.uk">heretohelp@gloucester.gov.uk</a></p>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© Gloucester City Council 2026</span>
+      <span>All content available under the Open Government Licence v3.0, except where otherwise stated.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

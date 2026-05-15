@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  Gloucester City Council — TEMPLATE 4 of 4
+  FAQ Page
+  ------------------------------------------------------------
+  Uses native <details>/<summary> for the accordion — no JS
+  required. Screen readers announce expand/collapse state
+  natively, and the page still works without JavaScript.
+
+  Structure:
+    - Category section (.faq-cat) groups related questions
+    - .faq is the accordion container
+    - Each <details> is one question; the <summary> is the
+      question, and the .faq-body inside holds the answer.
+
+  Replace every [PLACEHOLDER] before publishing.
+  ============================================================
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Frequently asked questions — [Service name] — Gloucester City Council</title>
+  <meta name="description" content="Answers to the most common questions about [service area].">
+  <meta name="theme-color" content="#0054a4">
+
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/a11y.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- SHARED HEADER -->
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="Gloucester City Council home">
+      <img src="assets/GCC_logo.svg" alt="Gloucester City Council" class="brand-logo">
+    </a>
+    <form class="header-search" role="search" action="#" onsubmit="event.preventDefault();">
+      <label for="site-search" class="visually-hidden">Search the site</label>
+      <input type="search" id="site-search" placeholder="Search Gloucester.gov.uk" autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+</header>
+
+<!-- Breadcrumb — 3 levels for an FAQ page -->
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="service-landing.html">[Service name]</a></li>
+      <li><span aria-current="page">Frequently asked questions</span></li>
+    </ol>
+  </nav>
+</div>
+
+<main id="main" role="main" tabindex="-1" data-screen-label="04 FAQ">
+  <div class="container">
+    <h1>Frequently asked questions</h1>
+    <p class="lede">Answers to the most common questions about [service area]. Cannot find what you are looking for? <a href="#contact">Contact us</a>.</p>
+
+    <div class="page-layout">
+      <div class="main-content">
+
+        <!-- ============================================================
+             CATEGORY 1
+             ============================================================ -->
+        <section class="faq-cat" aria-labelledby="cat-1">
+          <h2 id="cat-1">[Category 1 — e.g. Charges and payment]</h2>
+          <p>[One-line intro for this group of questions.]</p>
+        </section>
+
+        <div class="faq">
+          <details>
+            <summary>[Question 1 in category 1]</summary>
+            <div class="faq-body">
+              <p>[Answer paragraph. Keep it short — link to the information page for detail.]</p>
+              <p>See also: <a href="information.html">[Related guidance]</a>.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>[Question 2 in category 1]</summary>
+            <div class="faq-body">
+              <p>[Answer paragraph.]</p>
+              <ul>
+                <li>[List item if helpful]</li>
+                <li>[List item if helpful]</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>[Question 3 in category 1]</summary>
+            <div class="faq-body">
+              <p>[Answer paragraph.]</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- ============================================================
+             CATEGORY 2
+             ============================================================ -->
+        <section class="faq-cat" aria-labelledby="cat-2">
+          <h2 id="cat-2">[Category 2 — e.g. Permits and exemptions]</h2>
+          <p>[One-line intro for this group of questions.]</p>
+        </section>
+
+        <div class="faq">
+          <details>
+            <summary>[Question 1 in category 2]</summary>
+            <div class="faq-body">
+              <p>[Answer paragraph.]</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>[Question 2 in category 2]</summary>
+            <div class="faq-body">
+              <p>[Answer paragraph.]</p>
+              <div class="inset-panel info">
+                <p><strong>Note:</strong> [You can embed inset panels inside an answer when something needs to stand out.]</p>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary>[Question 3 in category 2]</summary>
+            <div class="faq-body">
+              <p>[Answer paragraph.]</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- ============================================================
+             CATEGORY 3
+             ============================================================ -->
+        <section class="faq-cat" aria-labelledby="cat-3">
+          <h2 id="cat-3">[Category 3 — e.g. Problems and complaints]</h2>
+          <p>[One-line intro for this group of questions.]</p>
+        </section>
+
+        <div class="faq">
+          <details>
+            <summary>[Question 1 in category 3]</summary>
+            <div class="faq-body">
+              <p>[Answer paragraph.]</p>
+              <p><a class="btn btn-secondary" href="transaction.html">[Action you can take]</a></p>
+            </div>
+          </details>
+
+          <details>
+            <summary>[Question 2 in category 3]</summary>
+            <div class="faq-body">
+              <p>[Answer paragraph.]</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- ============================================================
+             STILL NEED HELP — bottom-of-page contact CTA
+             ============================================================ -->
+        <section id="contact" aria-labelledby="contact-h" style="margin-top: var(--s-6);">
+          <h2 id="contact-h">Still need help?</h2>
+          <p>If your question is not answered here, please get in touch:</p>
+          <ul>
+            <li><strong>Phone:</strong> <a href="tel:01452396396">01452 396 396</a> (Monday to Friday, 9am to 4pm)</li>
+            <li><strong>Email:</strong> <a href="mailto:[email]">[email]</a></li>
+            <li><strong>In person:</strong> Customer Service Centre, [address]</li>
+          </ul>
+        </section>
+
+      </div>
+
+      <!-- ============================================================
+           SIDEBAR — categories index for quick jumping
+           ============================================================ -->
+      <aside class="sidebar" aria-label="Related information">
+        <div class="sidebar-card">
+          <h2>Categories</h2>
+          <ul>
+            <li><a href="#cat-1">[Category 1]</a></li>
+            <li><a href="#cat-2">[Category 2]</a></li>
+            <li><a href="#cat-3">[Category 3]</a></li>
+            <li><a href="#contact">Still need help?</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card contact">
+          <h2>Quick contact</h2>
+          <p style="font-weight:700;font-size:1.125rem;margin:0 0 8px;">
+            <a href="tel:01452396396">01452 396 396</a>
+          </p>
+          <p style="font-size:.9375rem;margin:0;">Monday to Friday, 9am to 4pm</p>
+        </div>
+
+        <div class="sidebar-card">
+          <h2>Related</h2>
+          <ul>
+            <li><a href="service-landing.html">[Service home]</a></li>
+            <li><a href="information.html">[Detailed guidance]</a></li>
+            <li><a href="transaction.html">[Take action]</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- SHARED FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="#">[Sub-service A]</a></li>
+          <li><a href="#">[Sub-service B]</a></li>
+          <li><a href="#">[Sub-service C]</a></li>
+          <li><a href="#">[Sub-service D]</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>About</h2>
+        <ul>
+          <li><a href="#">About the council</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Help</h2>
+        <ul>
+          <li><a href="#">Accessibility statement</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Get in touch</h2>
+        <p style="margin: 0 0 8px;"><strong>Our opening hours are:</strong></p>
+        <ul>
+          <li>Mon, Tue, Thu, Fri: 9am to 5pm</li>
+          <li>Wednesday: 10am to 5pm</li>
+        </ul>
+        <p style="margin: 8px 0 4px;"><a href="tel:01452396396">01452 396 396</a></p>
+        <p style="margin: 0;"><a href="mailto:heretohelp@gloucester.gov.uk">heretohelp@gloucester.gov.uk</a></p>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© Gloucester City Council 2026</span>
+      <span>All content available under the Open Government Licence v3.0, except where otherwise stated.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

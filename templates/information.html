@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  Gloucester City Council — TEMPLATE 3 of 4
+  Information Page
+  ------------------------------------------------------------
+  Use this when explaining a topic, policy or process. It has
+  a two-column layout (main content + sidebar) with helpful
+  building blocks already wired up:
+
+    - Tab-bar style on-page nav (anchor links)
+    - Inset panels: info / warning / success / error
+    - Numbered "steps" list
+    - Key-value definition list (dl.kv)
+    - Data table (.gov-table)
+    - Sidebar contact card
+
+  Pick the blocks you need and delete the rest.
+  ============================================================
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>[Topic] — Gloucester City Council</title>
+  <meta name="description" content="[One sentence describing what this page explains.]">
+  <meta name="theme-color" content="#0054a4">
+
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/a11y.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- SHARED HEADER -->
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="Gloucester City Council home">
+      <img src="assets/GCC_logo.svg" alt="Gloucester City Council" class="brand-logo">
+    </a>
+    <form class="header-search" role="search" action="#" onsubmit="event.preventDefault();">
+      <label for="site-search" class="visually-hidden">Search the site</label>
+      <input type="search" id="site-search" placeholder="Search Gloucester.gov.uk" autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+</header>
+
+<!-- Breadcrumb — 3 levels for an information page -->
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="service-landing.html">[Service name]</a></li>
+      <li><span aria-current="page">[Topic]</span></li>
+    </ol>
+  </nav>
+</div>
+
+<main id="main" role="main" tabindex="-1" data-screen-label="03 Information">
+  <div class="container">
+    <h1>[Topic title]</h1>
+    <p class="lede">[Two-sentence summary of what this page covers and who it is for.]</p>
+
+    <!-- ============================================================
+         ON-PAGE TAB-NAV
+         Pure anchor links — no JS required. Update the .active
+         class via your own logic if you want it to track scroll.
+         ============================================================ -->
+    <nav class="tab-bar" aria-label="Sections on this page">
+      <a href="#section-1" class="active" aria-current="true">[Section 1]</a>
+      <a href="#section-2">[Section 2]</a>
+      <a href="#section-3">[Section 3]</a>
+      <a href="#section-4">[Section 4]</a>
+    </nav>
+
+    <div class="page-layout">
+      <div class="main-content">
+
+        <!-- ============================================================
+             SECTION 1 — narrative content
+             ============================================================ -->
+        <h2 id="section-1">[Section 1 heading]</h2>
+        <p>[Body paragraph. Keep paragraphs short — 3 sentences max — to stay readable.]</p>
+        <p>[Optional second paragraph.]</p>
+
+        <!-- Info panel — neutral context -->
+        <div class="inset-panel info">
+          <p><strong>[Tip:]</strong> [Helpful but non-critical context goes here.]</p>
+        </div>
+
+        <!-- ============================================================
+             SECTION 2 — numbered process
+             ============================================================ -->
+        <h2 id="section-2">[How the process works]</h2>
+        <ol class="steps">
+          <li>
+            <h3>[Step 1 title]</h3>
+            <p>[What happens at this step and roughly how long it takes.]</p>
+          </li>
+          <li>
+            <h3>[Step 2 title]</h3>
+            <p>[What happens at this step.]</p>
+          </li>
+          <li>
+            <h3>[Step 3 title]</h3>
+            <p>[What happens at this step.]</p>
+          </li>
+        </ol>
+
+        <!-- ============================================================
+             SECTION 3 — key facts / data
+             ============================================================ -->
+        <h2 id="section-3">[Key facts]</h2>
+
+        <!-- Definition list pattern -->
+        <dl class="kv">
+          <dt>[Label]</dt><dd>[Value]</dd>
+          <dt>[Label]</dt><dd>[Value]</dd>
+          <dt>[Label]</dt><dd>[Value]</dd>
+        </dl>
+
+        <!-- Table pattern — always include a <caption> and <th scope=…> -->
+        <table class="gov-table">
+          <caption>[Brief table caption — required for screen readers]</caption>
+          <thead>
+            <tr>
+              <th scope="col">[Column 1]</th>
+              <th scope="col">[Column 2]</th>
+              <th scope="col" class="num">[Number column]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">[Row label 1]</th>
+              <td>[Value]</td>
+              <td class="num">[Value]</td>
+            </tr>
+            <tr>
+              <th scope="row">[Row label 2]</th>
+              <td>[Value]</td>
+              <td class="num">[Value]</td>
+            </tr>
+            <tr>
+              <th scope="row">[Row label 3]</th>
+              <td>[Value]</td>
+              <td class="num">[Value]</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Warning panel — important things the user must know -->
+        <div class="inset-panel warning">
+          <p><strong>[Important:]</strong> [Surface anything the user must not miss — deadlines, legal requirements, common mistakes.]</p>
+        </div>
+
+        <!-- ============================================================
+             SECTION 4 — related links / next steps
+             ============================================================ -->
+        <h2 id="section-4">[Related information]</h2>
+        <p>You can find related guidance here:</p>
+        <ul>
+          <li><a href="#">[Related page 1]</a></li>
+          <li><a href="#">[Related page 2]</a></li>
+          <li><a href="#" rel="external">[External resource — opens GOV.UK]</a></li>
+        </ul>
+
+        <!-- Optional CTA at the end -->
+        <div class="cta-block">
+          <h2 style="margin-top:0;">Ready to [take action]?</h2>
+          <p>[Short prompt explaining what the user can do next.]</p>
+          <a class="btn btn-primary" href="transaction.html">
+            Start now
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- ============================================================
+           SIDEBAR
+           ============================================================ -->
+      <aside class="sidebar" aria-label="Related information">
+        <div class="sidebar-card contact">
+          <h2>Contact</h2>
+          <p style="margin:0 0 4px;"><strong>Phone</strong></p>
+          <p style="font-weight:700;font-size:1.125rem;margin:0 0 var(--s-2);">
+            <a href="tel:01452396396">01452 396 396</a>
+          </p>
+          <p style="font-size:.9375rem;margin:0;">Monday to Friday, 9am to 4pm</p>
+        </div>
+
+        <div class="sidebar-card">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#section-1">[Section 1]</a></li>
+            <li><a href="#section-2">[Section 2]</a></li>
+            <li><a href="#section-3">[Section 3]</a></li>
+            <li><a href="#section-4">[Section 4]</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h2>Related</h2>
+          <ul>
+            <li><a href="faq.html">Frequently asked questions</a></li>
+            <li><a href="transaction.html">[Take action]</a></li>
+            <li><a href="#">[Related guidance]</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- SHARED FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="#">[Sub-service A]</a></li>
+          <li><a href="#">[Sub-service B]</a></li>
+          <li><a href="#">[Sub-service C]</a></li>
+          <li><a href="#">[Sub-service D]</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>About</h2>
+        <ul>
+          <li><a href="#">About the council</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Help</h2>
+        <ul>
+          <li><a href="#">Accessibility statement</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Get in touch</h2>
+        <p style="margin: 0 0 8px;"><strong>Our opening hours are:</strong></p>
+        <ul>
+          <li>Mon, Tue, Thu, Fri: 9am to 5pm</li>
+          <li>Wednesday: 10am to 5pm</li>
+        </ul>
+        <p style="margin: 8px 0 4px;"><a href="tel:01452396396">01452 396 396</a></p>
+        <p style="margin: 0;"><a href="mailto:heretohelp@gloucester.gov.uk">heretohelp@gloucester.gov.uk</a></p>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© Gloucester City Council 2026</span>
+      <span>All content available under the Open Government Licence v3.0, except where otherwise stated.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
