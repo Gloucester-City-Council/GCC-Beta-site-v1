@@ -2,32 +2,51 @@
 .a11y-widget { font-family: inherit; }
 
 /* Toggle button — lives inside .header-inner in the top bar.
-   Styled to sit on the blue header background. */
+   Yellow (#ffdd00) gives 5.56:1 button-vs-header (SC 1.4.11 ≥3:1)
+   and 14.55:1 text contrast (SC 1.4.3 ≥4.5:1) in all three palettes. */
 .a11y-toggle {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-height: 44px;
-  padding: 8px 14px;
-  background: rgba(255,255,255,0.12);
-  color: #fff;
-  border: 2px solid rgba(255,255,255,0.4);
+  padding: 8px 16px;
+  background: #ffdd00;
+  color: #0b0c0c;
+  border: 2px solid #0b0c0c;
   border-radius: var(--radius, 4px);
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9375rem;
   cursor: pointer;
   flex-shrink: 0;
   white-space: nowrap;
-  transition: background var(--transition), border-color var(--transition);
+  transition: background var(--transition), box-shadow var(--transition);
 }
 .a11y-toggle:hover {
-  background: rgba(255,255,255,0.22);
-  border-color: rgba(255,255,255,0.65);
+  background: #e6c800;
+  box-shadow: 0 2px 0 #0b0c0c;
 }
-.a11y-toggle:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-[data-contrast="high"] .a11y-toggle { background: transparent; border-color: #fff; color: #fff; }
-[data-contrast="high"] .a11y-toggle:hover { background: rgba(255,255,255,0.12); }
+/* Button is yellow — dark outline avoids invisible yellow-on-yellow ring */
+.a11y-toggle:focus-visible {
+  outline: 3px solid #0b0c0c;
+  outline-offset: 2px;
+}
+
+/* Dark mode: yellow on dark navy (#0a1a30) — button-vs-header 12.96:1 */
+[data-theme="dark"] .a11y-toggle {
+  background: #ffdd00;
+  color: #0b0c0c;
+  border-color: #0b0c0c;
+}
+[data-theme="dark"] .a11y-toggle:hover { background: #e6c800; }
+
+/* High contrast: yellow on black header — button-vs-header 15.59:1 */
+[data-contrast="high"] .a11y-toggle {
+  background: #ffdd00;
+  color: #000;
+  border: 3px solid #000;
+}
+[data-contrast="high"] .a11y-toggle:hover { background: #e6c800; }
 
 /* Panel — drops down from the top bar; top value set by JS. */
 .a11y-panel {
@@ -145,7 +164,7 @@
 
 @media (max-width: 480px) {
   .a11y-toggle span:not(.visually-hidden) { display: none; }
-  .a11y-toggle { padding: 8px 10px; }
+  .a11y-toggle { padding: 8px 12px; }
 }
 
 /* ============================================================

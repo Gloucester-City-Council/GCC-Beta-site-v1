@@ -49,7 +49,7 @@
   --border-strong: #adb5bd;
   --text: var(--neutral-700);
   --text-strong: var(--neutral-900);
-  --text-muted: var(--neutral-500);
+  --text-muted: #636874; /* darkened from #6C757D: 5.02:1 on neutral-100, 5.53:1 on white */
   --link: var(--primary-base);
   --link-hover: var(--primary-dark);
   --focus: #ffdd00; /* GOV.UK yellow focus */
