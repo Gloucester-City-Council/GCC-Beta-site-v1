@@ -312,7 +312,7 @@ a:focus-visible {
   text-decoration: underline;
   border: 3px solid var(--focus-text);
 }
-.skip-link:focus { top: var(--s-2); }
+.skip-link:focus-visible { top: var(--s-2); }
 
 /* Container */
 .container {
@@ -555,11 +555,135 @@ main[tabindex="-1"]:focus-visible { outline: none; }
 }
 @media (max-width: 768px) { .hero-decoration { display: none; } }
 
+/* ============== Section titles ============== */
+.section-title { margin-bottom: var(--s-4); }
+.section-title h2 { margin-top: 0; }
+
+/* ============== Tasks strip ============== */
+.tasks-strip {
+  background: var(--neutral-100);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: var(--s-5) 0;
+  margin-top: var(--s-6);
+}
+[data-theme="dark"] .tasks-strip { background: var(--bg-card); border-color: var(--border); }
+[data-contrast="high"] .tasks-strip { background: #fff; border-color: #000; }
+
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+}
+
+.task-link {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 12px var(--s-3);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary-base);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text-strong);
+  font-weight: 600;
+  font-size: var(--fs-body);
+  min-height: 48px;
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+.task-link svg { flex-shrink: 0; color: var(--primary-base); transition: transform var(--transition); }
+.task-link:hover {
+  text-decoration: none;
+  border-left-color: var(--secondary-base);
+  background: var(--primary-light);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  color: var(--text-strong);
+}
+.task-link:hover svg { transform: translateX(3px); }
+.task-link:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 0;
+  background: var(--focus);
+  color: var(--focus-text);
+  text-decoration: none;
+}
+.task-link:focus-visible svg { color: var(--focus-text); }
+[data-contrast="high"] .task-link { border: 2px solid #000; border-left: 4px solid #000; }
+[data-contrast="high"] .task-link:hover { background: #f0f0f0; }
+
+/* ============== On-page tab navigation (.tab-bar) ============== */
+.tab-bar {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0;
+  border-bottom: 3px solid var(--border);
+  margin: var(--s-3) 0 0;
+  padding: 0;
+  /* Smooth horizontal scroll on touch devices */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.tab-bar a {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 10px var(--s-3);
+  color: var(--link);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--fs-body);
+  border-bottom: 4px solid transparent;
+  margin-bottom: -3px; /* overlap the container border */
+  white-space: nowrap;
+  min-height: 44px;
+  transition: border-color var(--transition), color var(--transition);
+}
+.tab-bar a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+  border-bottom-color: var(--border-strong);
+}
+.tab-bar a.active,
+.tab-bar a[aria-current="location"] {
+  color: var(--text-strong);
+  border-bottom-color: var(--primary-base);
+  font-weight: 700;
+}
+.tab-bar a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 0;
+  background: var(--focus);
+  color: var(--focus-text);
+  text-decoration: none;
+}
+[data-theme="dark"] .tab-bar { border-bottom-color: var(--border); }
+[data-theme="dark"] .tab-bar a { color: var(--link); }
+[data-theme="dark"] .tab-bar a.active,
+[data-theme="dark"] .tab-bar a[aria-current="location"] { color: var(--text-strong); border-bottom-color: var(--primary-dark); }
+[data-contrast="high"] .tab-bar { border-bottom-color: #000; }
+[data-contrast="high"] .tab-bar a.active,
+[data-contrast="high"] .tab-bar a[aria-current="location"] { border-bottom-color: #000; color: #000; }
+
 /* ============== Cards / Service grid ============== */
 .service-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: var(--s-4);
+  /* Reset when used as <ul> */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* Each <li> in a <ul class="service-grid"> must be a flex container
+   so the .service-card anchor fills the grid cell fully. */
+.service-grid li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
 }
 .service-grid > * { grid-column: span 4; }
 @media (max-width: 1024px) { .service-grid > * { grid-column: span 6; } }
@@ -881,10 +1005,22 @@ body.modal-open { overflow: hidden; }
 
 /* Print */
 @media print {
-  .a11y-toggle, .a11y-panel, .primary-nav, .header-search, .skip-link, .site-footer .footer-grid + * { display: none !important; }
+  .a11y-toggle, .a11y-panel, .primary-nav, .header-search, .skip-link,
+  .tasks-strip, .site-footer .footer-grid + * { display: none !important; }
   .hero { background: #fff !important; color: #000 !important; padding: 16px 0; }
   .hero h1, .hero p.lede { color: #000 !important; }
   body { color: #000; }
+  /* Tab bar: suppress navigation links but keep the active-section marker
+     so printed pages show which section was current. The full tab bar is not
+     hidden because the ::after indicator lives on a child of .tab-bar. */
+  .tab-bar a:not([aria-current="location"]) { display: none !important; }
+  .tab-bar a[aria-current="location"] {
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+    color: #000;
+  }
+  .tab-bar a[aria-current="location"]::after { content: " (current section)"; }
 }
 
 /* ============================================================

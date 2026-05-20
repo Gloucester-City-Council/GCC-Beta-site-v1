@@ -407,11 +407,61 @@
   }
 
   /* --------------------------------------------------------
-     6. Init
+     6. In-page anchor target focus — WCAG 2.4.3
+        When users click a same-page anchor link (e.g. from a
+        .tab-bar) the browser scrolls but may not move focus to
+        the target if the element is not natively focusable.
+        This adds tabindex="-1" to any element that is the
+        destination of a same-page link, so the browser can
+        move focus there on activation.
+     -------------------------------------------------------- */
+  function makeAnchorTargetsFocusable() {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      const id = link.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (target && !target.hasAttribute('tabindex')) {
+        target.setAttribute('tabindex', '-1');
+      }
+    });
+  }
+
+  /* --------------------------------------------------------
+     7. Primary navigation — keyboard enhancement
+        Arrow Left / Right moves focus between sibling links
+        inside .primary-nav so power-keyboard users can scan
+        the nav quickly without repeatedly pressing Tab.
+        Tab / Shift-Tab still exit the nav normally.
+     -------------------------------------------------------- */
+  function wirePrimaryNav() {
+    const nav = document.querySelector('.primary-nav');
+    if (!nav) return;
+    const links = Array.from(nav.querySelectorAll('a'));
+    links.forEach((link, i) => {
+      link.addEventListener('keydown', e => {
+        let target = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          target = links[(i + 1) % links.length];
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          target = links[(i - 1 + links.length) % links.length];
+        } else if (e.key === 'Home') {
+          target = links[0];
+        } else if (e.key === 'End') {
+          target = links[links.length - 1];
+        }
+        if (target) { e.preventDefault(); target.focus(); }
+      });
+    });
+  }
+
+  /* --------------------------------------------------------
+     8. Init
      -------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', () => {
     buildWidget();
     notificationDismiss();
     wireForms();
+    makeAnchorTargetsFocusable();
+    wirePrimaryNav();
   });
 })();
