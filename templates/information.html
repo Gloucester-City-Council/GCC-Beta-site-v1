@@ -50,6 +50,14 @@
       </button>
     </form>
   </div>
+  <nav class="primary-nav" aria-label="Primary navigation">
+    <div class="container">
+      <a href="service-landing.html">[Service home]</a>
+      <a href="information.html" aria-current="page">[Information]</a>
+      <a href="transaction.html">[Apply]</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </nav>
 </header>
 
 <!-- Breadcrumb — 3 levels for an information page -->
@@ -73,8 +81,13 @@
          Pure anchor links — no JS required. Update the .active
          class via your own logic if you want it to track scroll.
          ============================================================ -->
+    <!--
+      aria-current="location" identifies the visible section within the page.
+      site.js ensures the target headings have tabindex="-1" so focus moves
+      correctly when a user activates one of these links.
+    -->
     <nav class="tab-bar" aria-label="Sections on this page">
-      <a href="#section-1" class="active" aria-current="true">[Section 1]</a>
+      <a href="#section-1" class="active" aria-current="location">[Section 1]</a>
       <a href="#section-2">[Section 2]</a>
       <a href="#section-3">[Section 3]</a>
       <a href="#section-4">[Section 4]</a>

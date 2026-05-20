@@ -33,6 +33,16 @@
       </button>
     </form>
   </div>
+  <nav class="primary-nav" aria-label="Primary navigation">
+    <div class="container">
+      <a href="index.html">HMO home</a>
+      <a href="residents.html">Residents</a>
+      <a href="landlords.html" aria-current="page">Landlords</a>
+      <a href="apply.html">Apply for a licence</a>
+      <a href="standards.html">Standards &amp; safety</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </nav>
 </header>
 
 <div class="container">
@@ -75,45 +85,53 @@
     </div>
     <p class="lede">Choose the service you need.</p>
 
-    <div class="service-grid" role="list">
+    <ul class="service-grid">
 
       <!-- schema-source: localPolicy.licensingPolicy.fees.feesFrom1April2026 | SRC-01 -->
-      <a href="apply.html" class="service-card" role="listitem" data-schema-source="localPolicy.licensingPolicy.fees.feesFrom1April2026">
-        <span class="icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M7 10h10M7 14h6"/></svg>
-        </span>
-        <h3>Apply for or renew an HMO licence</h3>
-        <p>Apply for a new licence or renew an existing one. Fees apply.</p>
-      </a>
+      <li>
+        <a href="apply.html" class="service-card" data-schema-source="localPolicy.licensingPolicy.fees.feesFrom1April2026">
+          <span class="icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M7 10h10M7 14h6"/></svg>
+          </span>
+          <h3>Apply for or renew an HMO licence</h3>
+          <p>Apply for a new licence or renew an existing one. Fees apply.</p>
+        </a>
+      </li>
 
       <!-- schema-source: localPolicy.fireSafetyPolicy | SRC-02 -->
-      <a href="standards.html" class="service-card" role="listitem" data-schema-source="localPolicy.fireSafetyPolicy">
-        <span class="icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </span>
-        <h3>HMO standards and safety requirements</h3>
-        <p>Minimum standards for fire safety, space, washing facilities and property management.</p>
-      </a>
+      <li>
+        <a href="standards.html" class="service-card" data-schema-source="localPolicy.fireSafetyPolicy">
+          <span class="icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <h3>HMO standards and safety requirements</h3>
+          <p>Minimum standards for fire safety, space, washing facilities and property management.</p>
+        </a>
+      </li>
 
       <!-- schema-source: localPolicy.planningPolicy.policyA2 | SRC-03 -->
-      <a href="planning.html" class="service-card" role="listitem" data-schema-source="localPolicy.planningPolicy.policyA2">
-        <span class="icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
-        </span>
-        <h3>Planning permission for HMOs</h3>
-        <p>When you need planning permission and how local planning policy applies.</p>
-      </a>
+      <li>
+        <a href="planning.html" class="service-card" data-schema-source="localPolicy.planningPolicy.policyA2">
+          <span class="icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+          </span>
+          <h3>Planning permission for HMOs</h3>
+          <p>When you need planning permission and how local planning policy applies.</p>
+        </a>
+      </li>
 
       <!-- schema-source: localPolicy.hmoDefinitions.generalDefinition | SRC-01 -->
-      <a href="faq.html" class="service-card" role="listitem" data-schema-source="localPolicy.hmoDefinitions.generalDefinition">
-        <span class="icon" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 116 0c0 2-3 2-3 5"/><path d="M12 17h.01"/></svg>
-        </span>
-        <h3>Frequently asked questions</h3>
-        <p>Quick answers to the most common questions from landlords and managers.</p>
-      </a>
+      <li>
+        <a href="faq.html" class="service-card" data-schema-source="localPolicy.hmoDefinitions.generalDefinition">
+          <span class="icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 116 0c0 2-3 2-3 5"/><path d="M12 17h.01"/></svg>
+          </span>
+          <h3>Frequently asked questions</h3>
+          <p>Quick answers to the most common questions from landlords and managers.</p>
+        </a>
+      </li>
 
-    </div>
+    </ul>
   </div>
 
   <!-- schema-source: localPolicy.licensingPolicy.tenantLicensingStatement | SRC-01 -->
