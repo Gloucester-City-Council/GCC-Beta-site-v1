@@ -1006,11 +1006,20 @@ body.modal-open { overflow: hidden; }
 /* Print */
 @media print {
   .a11y-toggle, .a11y-panel, .primary-nav, .header-search, .skip-link,
-  .tab-bar, .tasks-strip, .site-footer .footer-grid + * { display: none !important; }
+  .tasks-strip, .site-footer .footer-grid + * { display: none !important; }
   .hero { background: #fff !important; color: #000 !important; padding: 16px 0; }
   .hero h1, .hero p.lede { color: #000 !important; }
   body { color: #000; }
-  /* Show which tab section is active when printing */
+  /* Tab bar: suppress navigation links but keep the active-section marker
+     so printed pages show which section was current. The full tab bar is not
+     hidden because the ::after indicator lives on a child of .tab-bar. */
+  .tab-bar a:not([aria-current="location"]) { display: none !important; }
+  .tab-bar a[aria-current="location"] {
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+    color: #000;
+  }
   .tab-bar a[aria-current="location"]::after { content: " (current section)"; }
 }
 
