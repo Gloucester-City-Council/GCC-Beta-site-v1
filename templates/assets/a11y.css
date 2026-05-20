@@ -1,38 +1,42 @@
 /* Accessibility widget styles */
 .a11y-widget { font-family: inherit; }
 
+/* Toggle button — lives inside .header-inner in the top bar.
+   Styled to sit on the blue header background. */
 .a11y-toggle {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 900;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 48px;
-  padding: 12px 18px;
-  background: var(--primary-base);
+  min-height: 44px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.12);
   color: #fff;
-  border: 3px solid var(--primary-base);
-  border-radius: 999px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: var(--radius, 4px);
   font-family: inherit;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-  transition: background var(--transition);
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: background var(--transition), border-color var(--transition);
 }
-.a11y-toggle:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+.a11y-toggle:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.65);
+}
 .a11y-toggle:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-[data-contrast="high"] .a11y-toggle { background: #000; border-color: #000; }
+[data-contrast="high"] .a11y-toggle { background: transparent; border-color: #fff; color: #fff; }
+[data-contrast="high"] .a11y-toggle:hover { background: rgba(255,255,255,0.12); }
 
+/* Panel — drops down from the top bar; top value set by JS. */
 .a11y-panel {
   position: fixed;
   right: 16px;
-  bottom: 80px;
+  top: 100px; /* overridden by positionPanel() in site.js */
   z-index: 901;
   width: min(380px, calc(100vw - 32px));
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 120px); /* overridden by positionPanel() */
   overflow: auto;
   background: var(--bg);
   color: var(--text);
@@ -141,7 +145,7 @@
 
 @media (max-width: 480px) {
   .a11y-toggle span:not(.visually-hidden) { display: none; }
-  .a11y-toggle { padding: 12px; }
+  .a11y-toggle { padding: 8px 10px; }
 }
 
 /* ============================================================

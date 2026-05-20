@@ -134,13 +134,15 @@
   function buildWidget() {
     if (document.getElementById('a11y-toggle')) return;
 
-    const wrap = document.createElement('div');
-    wrap.className = 'a11y-widget';
-    wrap.innerHTML = `
+    // The toggle button is injected into .header-inner so it sits in the top bar.
+    // The panel is appended to <body> separately so stacking context is never clipped.
+    const toggleWrap = document.createElement('div');
+    toggleWrap.className = 'a11y-widget';
+    toggleWrap.innerHTML = `
       <button type="button" id="a11y-toggle" class="a11y-toggle"
         aria-expanded="false" aria-controls="a11y-panel"
         aria-label="Accessibility tools">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="4" r="2"/>
           <path d="M19 13c-2.5.6-4.5 1-7 1s-4.5-.4-7-1"/>
           <path d="M12 5v9"/>
@@ -148,6 +150,10 @@
         </svg>
         <span>Accessibility</span>
       </button>
+    `;
+
+    const panelWrap = document.createElement('div');
+    panelWrap.innerHTML = `
       <div id="a11y-panel" class="a11y-panel" role="dialog" aria-labelledby="a11y-title" hidden>
         <div class="a11y-panel-head">
           <h2 id="a11y-title">Accessibility tools</h2>
@@ -219,17 +225,35 @@
         </div>
       </div>
     `;
-    document.body.appendChild(wrap);
 
-    const toggle = wrap.querySelector('#a11y-toggle');
-    const panel  = wrap.querySelector('#a11y-panel');
-    const close  = wrap.querySelector('.a11y-close');
+    // Inject toggle into the header's inner flex row; fall back to body.
+    const headerInner = document.querySelector('.header-inner');
+    if (headerInner) {
+      headerInner.appendChild(toggleWrap);
+    } else {
+      document.body.appendChild(toggleWrap);
+    }
+    document.body.appendChild(panelWrap);
+
+    const toggle = document.getElementById('a11y-toggle');
+    const panel  = document.getElementById('a11y-panel');
+    const close  = panelWrap.querySelector('.a11y-close');
+
+    // Position the panel directly below the site header.
+    function positionPanel() {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      const bottom = header.getBoundingClientRect().bottom;
+      panel.style.top = Math.round(bottom + 8) + 'px';
+      panel.style.maxHeight = Math.round(window.innerHeight - bottom - 24) + 'px';
+    }
 
     // Focus management — when the panel opens, move focus into it,
     // and when it closes, return focus to the toggle button.
     function openPanel() {
       panel.hidden = false;
       toggle.setAttribute('aria-expanded', 'true');
+      positionPanel();
       panel.querySelector('.a11y-close').focus();
     }
     function closePanel() {
@@ -239,6 +263,7 @@
     }
     toggle.addEventListener('click', () => panel.hidden ? openPanel() : closePanel());
     close.addEventListener('click', closePanel);
+    window.addEventListener('resize', () => { if (!panel.hidden) positionPanel(); });
 
     // Escape closes the panel from anywhere on the page.
     document.addEventListener('keydown', e => {
@@ -253,11 +278,11 @@
     });
 
     // Wire each option button.
-    wrap.querySelectorAll('[data-a11y-key]').forEach(btn => {
+    panelWrap.querySelectorAll('[data-a11y-key]').forEach(btn => {
       btn.addEventListener('click',
         () => setPref(btn.dataset.a11yKey, btn.dataset.a11yValue));
     });
-    wrap.querySelector('.a11y-reset').addEventListener('click', reset);
+    panelWrap.querySelector('.a11y-reset').addEventListener('click', reset);
 
     syncPanel();
   }
