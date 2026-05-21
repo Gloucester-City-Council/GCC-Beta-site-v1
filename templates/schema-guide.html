@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  Gloucester City Council — Template Usage Guide
+  How to build a council service from a content schema
+  ------------------------------------------------------------
+  This guide is for content designers and developers who are
+  creating new service pages for the Gloucester City Council
+  website. It explains:
+
+    1. Where to find the HTML page templates
+    2. How to read a service content schema (JSON)
+    3. How to map schema sections to template blocks
+    4. How to annotate pages with schema source metadata
+    5. A worked example — the HMO service (8 pages, 2 journeys)
+
+  The guide itself uses the information.html template as its
+  structural base. References throughout link to the HMO pages
+  in HMO/web/ as live, published examples of this workflow.
+  ============================================================
+-->
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to build a service from a schema — GCC template guide</title>
+  <meta name="description" content="Step-by-step guide for content designers and developers: how to pick a template, read a content schema, and build an accessible council service page.">
+  <meta name="theme-color" content="#0054a4">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/a11y.css">
+
+  <style>
+    /* Guide-specific: code and snippet blocks */
+    .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary-base);
+      border-radius: 0 var(--radius-base) var(--radius-base) 0;
+      padding: var(--s-3) var(--s-4);
+      margin: var(--s-3) 0;
+      overflow-x: auto;
+    }
+    .code-block pre {
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      white-space: pre;
+    }
+    .mapping-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-3);
+      margin: var(--s-3) 0;
+    }
+    @media (max-width: 640px) {
+      .mapping-grid { grid-template-columns: 1fr; }
+    }
+    .mapping-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-base);
+      padding: var(--s-3);
+    }
+    .mapping-card h4 {
+      margin: 0 0 var(--s-1);
+      font-size: 0.9375rem;
+      color: var(--primary-base);
+    }
+    .mapping-card p {
+      margin: 0;
+      font-size: 0.875rem;
+    }
+    .schema-path {
+      display: inline-block;
+      background: #eef4fb;
+      border: 1px solid #b8d0ea;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.8125rem;
+      color: #003a70;
+      word-break: break-all;
+    }
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--primary-base);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      flex-shrink: 0;
+      margin-right: var(--s-2);
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--s-2);
+    }
+    .step-header h3 {
+      margin: 0;
+    }
+    .page-inventory {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--s-3) 0;
+      font-size: 0.9375rem;
+    }
+    .page-inventory th,
+    .page-inventory td {
+      border: 1px solid var(--border);
+      padding: var(--s-2) var(--s-3);
+      text-align: left;
+      vertical-align: top;
+    }
+    .page-inventory th {
+      background: var(--bg-card);
+      font-weight: 600;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+    .tag-resident { background: #d4edda; color: #155724; }
+    .tag-landlord { background: #cce5ff; color: #004085; }
+    .tag-shared   { background: #fff3cd; color: #856404; }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="Gloucester City Council home">
+      <img src="assets/GCC_logo.svg" alt="Gloucester City Council" class="brand-logo">
+    </a>
+    <form class="header-search" role="search" action="#" onsubmit="event.preventDefault();">
+      <label for="site-search" class="visually-hidden">Search the site</label>
+      <input type="search" id="site-search" placeholder="Search Gloucester.gov.uk" autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="index.html">Templates</a></li>
+      <li><span aria-current="page">How to build a service from a schema</span></li>
+    </ol>
+  </nav>
+</div>
+
+<main id="main" role="main" tabindex="-1" data-screen-label="03 Information">
+  <div class="container">
+    <h1>How to build a council service from a content schema</h1>
+    <p class="lede">A step-by-step guide for content designers and developers: how to pick the right template, read a content schema, populate pages from authorised data only, and annotate each section so content can be traced back to its source.</p>
+
+    <nav class="tab-bar" aria-label="Sections on this page">
+      <a href="#before-you-start" class="active" aria-current="location">Before you start</a>
+      <a href="#choosing-a-template">Choose a template</a>
+      <a href="#reading-the-schema">Read the schema</a>
+      <a href="#populating-the-template">Populate the template</a>
+      <a href="#schema-source-metadata">Schema source metadata</a>
+      <a href="#hmo-worked-example">HMO worked example</a>
+      <a href="#checklist">Checklist</a>
+    </nav>
+
+    <div class="page-layout">
+      <div class="main-content">
+
+        <!-- ============================================================
+             SECTION 1 — Before you start
+             ============================================================ -->
+        <h2 id="before-you-start">Before you start</h2>
+
+        <p>Before you can build any service page you need two things:</p>
+        <ol>
+          <li><strong>A content schema</strong> — a JSON file that captures all the authorised content for the service. This is your single source of truth. Every sentence on your pages must trace back to a specific path in the schema. If it is not in the schema, it must not appear on the page.</li>
+          <li><strong>An HTML template</strong> — a blank, accessible page scaffold from the <code>templates/</code> folder. Copy the right one for the type of page you are building.</li>
+        </ol>
+
+        <div class="inset-panel info">
+          <p><strong>Why use a schema?</strong> A content schema separates the <em>what</em> (authorised information, policy text, contact details) from the <em>how</em> (the HTML layout). It makes it straightforward for a reviewer to check that a page contains only approved content — they can compare the schema against the page section by section without reading HTML.</p>
+        </div>
+
+        <h3>Where to find the templates</h3>
+        <p>Templates live in the <code>templates/</code> folder at the root of this repository. The folder contains:</p>
+        <ul>
+          <li><strong>service-landing.html</strong> — Template 1. Hero, service card grid, popular tasks strip.</li>
+          <li><strong>transaction.html</strong> — Template 2. "Start now" call to action or inline form.</li>
+          <li><strong>information.html</strong> — Template 3. Two-column layout with on-page navigation and sidebar.</li>
+          <li><strong>faq.html</strong> — Template 4. Accordion of questions grouped by category.</li>
+          <li><strong>assets/</strong> — Shared CSS and JavaScript. Link to these from every page using a relative path.</li>
+        </ul>
+        <p>Open <code>templates/index.html</code> in a browser to preview all four templates side by side before choosing one.</p>
+
+        <!-- ============================================================
+             SECTION 2 — Choosing a template
+             ============================================================ -->
+        <h2 id="choosing-a-template">Choose a template</h2>
+
+        <p>Each template serves a specific purpose. Pick the one that matches what the user is trying to do on that page.</p>
+
+        <table class="gov-table">
+          <caption>Template selection guide</caption>
+          <thead>
+            <tr>
+              <th scope="col">Template</th>
+              <th scope="col">Use it when…</th>
+              <th scope="col">HMO example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Service landing</th>
+              <td>You are introducing a whole service area or a user-type hub that fans out to related pages.</td>
+              <td><code>HMO/web/index.html</code> and <code>HMO/web/landlords.html</code></td>
+            </tr>
+            <tr>
+              <th scope="row">Transaction</th>
+              <td>The user needs to <em>do</em> something — apply, pay, report, register.</td>
+              <td><code>HMO/web/apply.html</code></td>
+            </tr>
+            <tr>
+              <th scope="row">Information</th>
+              <td>You are <em>explaining</em> something — policy, eligibility, standards, process.</td>
+              <td><code>HMO/web/residents.html</code>, <code>licensing.html</code>, <code>standards.html</code>, <code>planning.html</code></td>
+            </tr>
+            <tr>
+              <th scope="row">FAQ</th>
+              <td>You are answering the most common questions for a service area.</td>
+              <td><code>HMO/web/faq.html</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="inset-panel info">
+          <p><strong>Tip:</strong> A user journey through a service typically starts at a service-landing page, branches into information pages, and ends at a transaction page. Map your user journeys before you start building so you know how many pages you need and which template each one uses.</p>
+        </div>
+
+        <!-- ============================================================
+             SECTION 3 — Reading the schema
+             ============================================================ -->
+        <h2 id="reading-the-schema">Read the schema</h2>
+
+        <p>A content schema is a JSON file with a hierarchical structure. Each branch of the tree represents a topic area; each leaf node represents a specific piece of content — typically a verbatim text string, a source reference and a document location.</p>
+
+        <h3>Schema anatomy</h3>
+        <p>A typical leaf node looks like this:</p>
+
+        <div class="code-block" aria-label="Example schema leaf node in JSON">
+          <pre>{
+  "licensingRequirement": {
+    "type": "object",
+    "properties": {
+      "verbatimText": {
+        "type": "string",
+        "const": "A licence is required for all HMOs that are
+                  occupied by five or more people belonging to
+                  2 or more households and who share a facility
+                  or amenity."
+      },
+      "source": { "type": "string", "const": "SRC-02" },
+      "documentLocation": {
+        "type": "string",
+        "const": "Section 2.0 – HMO Licensing"
+      }
+    }
+  }
+}</pre>
+        </div>
+
+        <p>Three fields appear on nearly every node:</p>
+        <dl class="kv">
+          <dt><code>verbatimText</code></dt>
+          <dd>The exact approved wording. Use this text on the page — do not paraphrase unless the schema explicitly allows it.</dd>
+          <dt><code>source</code></dt>
+          <dd>A short reference code (e.g. <code>SRC-02</code>) that identifies which source document the content comes from.</dd>
+          <dt><code>documentLocation</code></dt>
+          <dd>The specific section or page within that source document so the content can be verified.</dd>
+        </dl>
+
+        <h3>Navigating the schema tree</h3>
+        <p>Large schemas are organised into top-level sections that mirror the content topics. For HMO the top-level sections are:</p>
+        <ul>
+          <li><code>centralGovernmentLegislationAndGuidance</code> — national law and guidance</li>
+          <li><code>councilStrategy</code> — corporate plan commitments</li>
+          <li><code>localPolicy</code> — local licensing policy, fire safety, space standards, planning</li>
+          <li><code>operationalGuidance</code> — how the council processes applications</li>
+          <li><code>valueQualityConsistency</code> — quality assurance framework</li>
+        </ul>
+        <p>When building resident-facing pages, most of your content will come from <code>localPolicy</code>. When building landlord-facing pages you will also draw from <code>centralGovernmentLegislationAndGuidance</code> for legislative references.</p>
+
+        <div class="inset-panel warning">
+          <p><strong>Important:</strong> If a schema node is marked <code>"status": "TODO"</code>, that content has not yet been captured. Do not fill in the gap with text you have written yourself — leave a visible placeholder or omit the section and note the gap in your implementation log.</p>
+        </div>
+
+        <!-- ============================================================
+             SECTION 4 — Populating the template
+             ============================================================ -->
+        <h2 id="populating-the-template">Populate the template</h2>
+
+        <p>Follow these steps once you have chosen a template and identified the relevant schema sections.</p>
+
+        <ol class="steps">
+          <li>
+            <div class="step-header">
+              <span class="step-badge" aria-hidden="true">1</span>
+              <h3>Copy the template file</h3>
+            </div>
+            <p>Copy the template you need into your service folder and rename it. For example:</p>
+            <div class="code-block"><pre>cp templates/information.html HMO/web/licensing.html</pre></div>
+            <p>Never edit the original template files — they are the blank scaffolds that future services will also use.</p>
+          </li>
+          <li>
+            <div class="step-header">
+              <span class="step-badge" aria-hidden="true">2</span>
+              <h3>Fix the asset paths</h3>
+            </div>
+            <p>The templates link to assets using relative paths (<code>assets/styles.css</code>). If your page is in a sub-folder, update these paths to point back to the shared assets:</p>
+            <div class="code-block"><pre>&lt;link rel="stylesheet" href="../../templates/assets/styles.css"&gt;
+&lt;link rel="stylesheet" href="../../templates/assets/a11y.css"&gt;
+…
+&lt;script src="../../templates/assets/site.js"&gt;&lt;/script&gt;</pre></div>
+          </li>
+          <li>
+            <div class="step-header">
+              <span class="step-badge" aria-hidden="true">3</span>
+              <h3>Search for [PLACEHOLDER] and replace</h3>
+            </div>
+            <p>Every bracketed string in the template is a content placeholder. Use your editor's find-and-replace (<kbd>Ctrl+H</kbd> or <kbd>Cmd+H</kbd>) to find <code>[PLACEHOLDER]</code> as a pattern, then work through each one and replace it with text from the schema.</p>
+            <p>Common placeholders in every template:</p>
+            <ul>
+              <li><code>[Service name]</code> — used in the breadcrumb, hero and footer. Example: <em>Houses in Multiple Occupation (HMO)</em></li>
+              <li><code>[Topic title]</code> — the page <code>&lt;h1&gt;</code>. Example: <em>HMO licensing in Gloucester</em></li>
+              <li><code>[One sentence describing…]</code> — the <code>&lt;meta name="description"&gt;</code> content</li>
+            </ul>
+          </li>
+          <li>
+            <div class="step-header">
+              <span class="step-badge" aria-hidden="true">4</span>
+              <h3>Map schema sections to page sections</h3>
+            </div>
+            <p>Go through the template block by block and identify which schema path provides the content for each block. The information template has four section blocks by default — rename and populate each one with verbatim text from the schema.</p>
+            <p>Example mapping for <code>HMO/web/licensing.html</code>:</p>
+            <div class="mapping-grid">
+              <div class="mapping-card">
+                <h4>Template block</h4>
+                <p>Section 1 — general overview paragraph</p>
+              </div>
+              <div class="mapping-card">
+                <h4>Schema path</h4>
+                <p><span class="schema-path">localPolicy.licensingPolicy.licensingRequirement.verbatimText</span></p>
+              </div>
+              <div class="mapping-card">
+                <h4>Template block</h4>
+                <p>Key facts definition list — fees</p>
+              </div>
+              <div class="mapping-card">
+                <h4>Schema path</h4>
+                <p><span class="schema-path">localPolicy.licensingPolicy.fees.feesFrom1April2026.default</span></p>
+              </div>
+              <div class="mapping-card">
+                <h4>Template block</h4>
+                <p>Warning panel — licence conditions</p>
+              </div>
+              <div class="mapping-card">
+                <h4>Schema path</h4>
+                <p><span class="schema-path">localPolicy.licensingPolicy.licenceConditionsStatement.verbatimText</span></p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="step-header">
+              <span class="step-badge" aria-hidden="true">5</span>
+              <h3>Delete blocks you do not need</h3>
+            </div>
+            <p>The templates include more building blocks than most pages will use. Once you have populated the blocks you need, delete any that are empty or not required. Common blocks that are sometimes removed: the data table, the numbered steps list, the CTA block at the bottom.</p>
+          </li>
+          <li>
+            <div class="step-header">
+              <span class="step-badge" aria-hidden="true">6</span>
+              <h3>Update the breadcrumb and navigation</h3>
+            </div>
+            <p>Update the breadcrumb so the final item matches the page's <code>&lt;h1&gt;</code> and carries <code>aria-current="page"</code>. Update the sidebar "On this page" list to match the actual section headings you used.</p>
+          </li>
+        </ol>
+
+        <!-- ============================================================
+             SECTION 5 — Schema source metadata
+             ============================================================ -->
+        <h2 id="schema-source-metadata">Schema source metadata</h2>
+
+        <p>Every content block on a page must be annotated with the schema path that provided its content. This creates a traceable link between the page and its authorised source, so editors and reviewers can verify content without reading HTML.</p>
+
+        <h3>The two-part annotation pattern</h3>
+        <p>Use both an HTML attribute and an HTML comment on every block:</p>
+
+        <div class="code-block" aria-label="Schema source annotation pattern">
+          <pre>&lt;!-- schema-source: localPolicy.licensingPolicy.licensingRequirement | SRC-02 --&gt;
+&lt;section id="do-you-need"
+         data-schema-source="localPolicy.licensingPolicy.licensingRequirement"&gt;
+  &lt;h2&gt;Do you need a licence?&lt;/h2&gt;
+  &lt;p&gt;A licence is required for all HMOs that are occupied by
+     five or more people belonging to 2 or more households
+     and who share a facility or amenity.&lt;/p&gt;
+&lt;/section&gt;</pre>
+        </div>
+
+        <p>The two parts serve different audiences:</p>
+        <dl class="kv">
+          <dt>HTML attribute <code>data-schema-source</code></dt>
+          <dd>Machine-readable. Can be queried by scripts to audit page coverage, or by browser DevTools to inspect content traceability. The value is the dot-notation path to the schema node.</dd>
+          <dt>HTML comment <code>&lt;!-- schema-source: … --&gt;</code></dt>
+          <dd>Human-readable in the source code. The comment includes both the schema path and the original source document reference code (e.g. <code>SRC-02</code>), making it easy for a developer editing the file to see where content came from without opening the schema.</dd>
+        </dl>
+
+        <h3>Annotation granularity</h3>
+        <p>Annotate at the block level — each <code>&lt;section&gt;</code>, <code>&lt;div&gt;</code> or <code>&lt;table&gt;</code> that contains schema-driven content should carry the attribute. You do not need to annotate individual <code>&lt;p&gt;</code> or <code>&lt;li&gt;</code> elements unless a single block draws from two different schema paths, in which case annotate the inner elements separately.</p>
+
+        <div class="code-block" aria-label="Nested annotation example">
+          <pre>&lt;!-- schema-source: localPolicy.licensingPolicy.preGrantConditions | SRC-02 --&gt;
+&lt;section id="what-council-checks"
+         data-schema-source="localPolicy.licensingPolicy.preGrantConditions"&gt;
+  &lt;h2&gt;What the council checks&lt;/h2&gt;
+  &lt;p&gt;Before granting a licence the Council will determine…&lt;/p&gt;
+
+  &lt;!-- schema-source: localPolicy.licensingPolicy.licenceApplicationGuidanceNotes
+                      .namedPersonRequirement | SRC-05 --&gt;
+  &lt;div data-schema-source="localPolicy.licensingPolicy
+                           .licenceApplicationGuidanceNotes
+                           .namedPersonRequirement"&gt;
+    &lt;div class="inset-panel info"&gt;
+      &lt;p&gt;&lt;strong&gt;Named person requirement:&lt;/strong&gt;
+         Gloucester City Council will only accept licence applications
+         with a named person as the licence holder.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
+        </div>
+
+        <h3>What if content comes from no schema node?</h3>
+        <p>Navigation elements, breadcrumbs, footers, and boilerplate UI text (button labels, skip links) do not originate from a content schema and need no annotation. Structural HTML added for layout purposes is also unannotated. If you find yourself writing content text that has no schema source, stop — either find the correct schema node or add the content to the schema first.</p>
+
+        <!-- ============================================================
+             SECTION 6 — HMO worked example
+             ============================================================ -->
+        <h2 id="hmo-worked-example">HMO worked example</h2>
+
+        <p>The HMO (Houses in Multiple Occupation) service demonstrates this workflow end-to-end. All eight pages in <code>HMO/web/</code> were built directly from <code>HMO/hmo_master_schema_v1.json</code>. No content was written by hand — every sentence, fee, standard and policy reference is traceable to a schema node.</p>
+
+        <h3>The schema used</h3>
+
+        <div class="inset-panel info">
+          <p><strong>Schema file:</strong> <code>HMO/hmo_master_schema_v1.json</code></p>
+          <p>This is the master schema — a 383 KB JSON file that aggregates five constituent sub-schemas (central government legislation, council strategy, local policy, operational guidance and value/quality/consistency). Each top-level section maps to a different layer of authoritative content.</p>
+        </div>
+
+        <h3>The two user journeys</h3>
+
+        <p>Before building any pages, the service team mapped two primary user journeys:</p>
+
+        <div class="mapping-grid">
+          <div class="mapping-card">
+            <h4><span class="tag tag-resident">Resident journey</span></h4>
+            <p>Users who already live in an HMO or are considering renting one. Their needs: understand what an HMO is, know their rights, find out if their property should be licensed, and report a problem.</p>
+          </div>
+          <div class="mapping-card">
+            <h4><span class="tag tag-landlord">Landlord journey</span></h4>
+            <p>Property owners and managers who run or want to run an HMO. Their needs: find out if they need a licence, understand what standards apply, know the planning rules, and submit an application.</p>
+          </div>
+        </div>
+
+        <h3>Page inventory</h3>
+
+        <table class="page-inventory">
+          <thead>
+            <tr>
+              <th scope="col">File</th>
+              <th scope="col">Template used</th>
+              <th scope="col">Journey</th>
+              <th scope="col">Primary schema section(s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>index.html</code></td>
+              <td>service-landing.html</td>
+              <td><span class="tag tag-shared">Both</span></td>
+              <td><span class="schema-path">localPolicy.hmoDefinitions.generalDefinition</span></td>
+            </tr>
+            <tr>
+              <td><code>residents.html</code></td>
+              <td>information.html</td>
+              <td><span class="tag tag-resident">Resident</span></td>
+              <td>
+                <span class="schema-path">localPolicy.tenantEnforcementContact</span><br>
+                <span class="schema-path">localPolicy.licensingPolicy.tenantLicensingStatement</span><br>
+                <span class="schema-path">localPolicy.managementRegulationsPolicy.tenantDuties</span>
+              </td>
+            </tr>
+            <tr>
+              <td><code>landlords.html</code></td>
+              <td>service-landing.html</td>
+              <td><span class="tag tag-landlord">Landlord</span></td>
+              <td>
+                <span class="schema-path">localPolicy.licensingPolicy.planningAndLicensingDistinction</span><br>
+                <span class="schema-path">localPolicy.licensingPolicy.fees.feesFrom1April2026</span>
+              </td>
+            </tr>
+            <tr>
+              <td><code>licensing.html</code></td>
+              <td>information.html</td>
+              <td><span class="tag tag-landlord">Landlord</span></td>
+              <td>
+                <span class="schema-path">localPolicy.licensingPolicy.licensingRequirement</span><br>
+                <span class="schema-path">localPolicy.licensingPolicy.preGrantConditions</span><br>
+                <span class="schema-path">localPolicy.licensingPolicy.fees</span><br>
+                <span class="schema-path">localPolicy.licensingPolicy.licenceConditionsStatement</span>
+              </td>
+            </tr>
+            <tr>
+              <td><code>standards.html</code></td>
+              <td>information.html</td>
+              <td><span class="tag tag-shared">Both</span></td>
+              <td>
+                <span class="schema-path">localPolicy.fireSafetyPolicy</span><br>
+                <span class="schema-path">localPolicy.spaceStandards</span><br>
+                <span class="schema-path">localPolicy.hhsrsPolicy</span><br>
+                <span class="schema-path">localPolicy.managementRegulationsPolicy</span>
+              </td>
+            </tr>
+            <tr>
+              <td><code>planning.html</code></td>
+              <td>information.html</td>
+              <td><span class="tag tag-landlord">Landlord</span></td>
+              <td>
+                <span class="schema-path">localPolicy.planningPolicy.policyA2</span><br>
+                <span class="schema-path">localPolicy.planningPolicy.policyA1</span><br>
+                <span class="schema-path">localPolicy.licensingPolicy.planningAndLicensingDistinction</span>
+              </td>
+            </tr>
+            <tr>
+              <td><code>faq.html</code></td>
+              <td>faq.html</td>
+              <td><span class="tag tag-shared">Both</span></td>
+              <td>
+                <span class="schema-path">localPolicy.licensingPolicy</span><br>
+                <span class="schema-path">localPolicy.fireSafetyPolicy</span><br>
+                <span class="schema-path">localPolicy.tenantEnforcementContact</span>
+              </td>
+            </tr>
+            <tr>
+              <td><code>apply.html</code></td>
+              <td>transaction.html</td>
+              <td><span class="tag tag-landlord">Landlord</span></td>
+              <td>
+                <span class="schema-path">operationalGuidance.applicationReceiptAndTriage</span><br>
+                <span class="schema-path">localPolicy.licensingPolicy.fees</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>How the content was mapped — a step-by-step trace</h3>
+
+        <p>The following example traces exactly how the fee table in <code>licensing.html</code> was built from the schema.</p>
+
+        <p><strong>Step 1 — Find the schema node for fees.</strong></p>
+        <p>Navigate to <code>properties → localPolicy → properties → licensingPolicy → properties → fees → properties → feesFrom1April2026</code> in the schema. The node contains a <code>default</code> array with two rows:</p>
+
+        <div class="code-block" aria-label="Schema fee node">
+          <pre>"feesFrom1April2026": {
+  "type": "array",
+  "description": "Fees effective from 1 April 2026 as published on SRC-01",
+  "default": [
+    { "type": "New",     "duration": "up to 5 years", "fee": "£1260.00" },
+    { "type": "Renewal", "duration": "up to 5 years", "fee": "£900.00"  }
+  ],
+  "source": "SRC-01",
+  "documentLocation": "Section: HMO Licensing Fees – table effective from 1 April 2026"
+}</pre>
+        </div>
+
+        <p><strong>Step 2 — Choose the right template block.</strong> Tabular data maps to the <code>&lt;table class="gov-table"&gt;</code> block in <code>information.html</code>. The table needs a caption (from the schema's <code>description</code> field), column headers (from the <code>default</code> array's property names) and rows (one per array entry).</p>
+
+        <p><strong>Step 3 — Write the HTML and annotate it.</strong></p>
+
+        <div class="code-block" aria-label="Resulting HTML for the fee table">
+          <pre>&lt;!-- schema-source: localPolicy.licensingPolicy.fees | SRC-01 --&gt;
+&lt;section id="fees" data-schema-source="localPolicy.licensingPolicy.fees"&gt;
+  &lt;h2&gt;Fees&lt;/h2&gt;
+  &lt;table class="gov-table"&gt;
+    &lt;caption&gt;HMO licence fees from 1 April 2026&lt;/caption&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th scope="col"&gt;Licence type&lt;/th&gt;
+        &lt;th scope="col"&gt;Duration&lt;/th&gt;
+        &lt;th scope="col" class="num"&gt;Fee&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;th scope="row"&gt;New licence&lt;/th&gt;
+        &lt;td&gt;Up to 5 years&lt;/td&gt;
+        &lt;td class="num"&gt;£1,260.00&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th scope="row"&gt;Renewal&lt;/th&gt;
+        &lt;td&gt;Up to 5 years&lt;/td&gt;
+        &lt;td class="num"&gt;£900.00&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/section&gt;</pre>
+        </div>
+
+        <p>This pattern — find schema node → identify template block → write HTML → add annotation — is repeated for every section of every page.</p>
+
+        <h3>Resident vs landlord: splitting the same schema into two journeys</h3>
+
+        <p>The HMO schema contains information relevant to both residents and landlords. The key design decision was: <em>do not show landlord information to residents and vice versa</em>. Content was sorted into three buckets:</p>
+
+        <ul>
+          <li><strong>Resident-only</strong> — rights as a tenant, how to report problems, what your landlord must do. Drawn from <span class="schema-path">localPolicy.tenantEnforcementContact</span> and <span class="schema-path">localPolicy.licensingPolicy.tenantLicensingStatement</span>.</li>
+          <li><strong>Landlord-only</strong> — how to apply, fees, fit-and-proper person test, planning requirements. Drawn from <span class="schema-path">localPolicy.licensingPolicy</span>, <span class="schema-path">localPolicy.planningPolicy</span> and <span class="schema-path">operationalGuidance.applicationReceiptAndTriage</span>.</li>
+          <li><strong>Shared</strong> — what an HMO is, safety standards, FAQ. These appear on pages accessible from both journeys.</li>
+        </ul>
+
+        <p>The service landing page (<code>index.html</code>) presents two clear entry points — "I'm a resident" and "I'm a landlord" — so the user self-selects into the right journey from the start.</p>
+
+        <!-- ============================================================
+             SECTION 7 — Checklist
+             ============================================================ -->
+        <h2 id="checklist">Checklist before you publish</h2>
+
+        <p>Run through this list before merging or publishing any schema-driven page.</p>
+
+        <h3>Content</h3>
+        <ul>
+          <li>Every piece of body text traces back to a <code>verbatimText</code> or <code>default</code> value in the schema.</li>
+          <li>No content has been written that does not appear in the schema — no paraphrasing, no invented examples, no bridging sentences drawn from general knowledge.</li>
+          <li>Any <code>TODO</code> nodes in the schema are either omitted from the page or flagged with a visible placeholder (e.g. an inset panel saying "this section will be updated when the policy is confirmed").</li>
+          <li>Contact details (phone, email, opening hours) match the values in <span class="schema-path">localPolicy.tenantEnforcementContact</span> exactly.</li>
+          <li>Fees match the correct year's fee table in the schema — check which <code>feesFrom…</code> node is current.</li>
+        </ul>
+
+        <h3>Schema source annotations</h3>
+        <ul>
+          <li>Every content block has a <code>data-schema-source</code> attribute with a dot-notation path to the schema node.</li>
+          <li>Every content block has a corresponding <code>&lt;!-- schema-source: … | SOURCE-REF --&gt;</code> HTML comment above it.</li>
+          <li>Navigation, footer, breadcrumb and UI chrome have no <code>data-schema-source</code> annotation (correct — they are structural, not content).</li>
+        </ul>
+
+        <h3>Template requirements</h3>
+        <ul>
+          <li>No <code>[PLACEHOLDER]</code> strings remain anywhere in the file.</li>
+          <li>The <code>&lt;title&gt;</code> is under 60 characters and follows the pattern <em>Page title — Gloucester City Council</em>.</li>
+          <li>The <code>&lt;meta name="description"&gt;</code> is under 160 characters.</li>
+          <li>The breadcrumb's last item carries <code>aria-current="page"</code> and matches the <code>&lt;h1&gt;</code>.</li>
+          <li>Asset paths point to <code>../../templates/assets/</code> (or the correct relative path for the file's location).</li>
+        </ul>
+
+        <h3>Accessibility</h3>
+        <ul>
+          <li>Tab through the page — every interactive element shows a visible focus ring.</li>
+          <li>There is exactly one <code>&lt;h1&gt;</code> on the page and headings do not skip levels.</li>
+          <li>Every <code>&lt;table&gt;</code> has a <code>&lt;caption&gt;</code> and all header cells use <code>scope="col"</code> or <code>scope="row"</code>.</li>
+          <li>All images have meaningful <code>alt</code> text; decorative images use <code>alt=""</code>.</li>
+          <li>The page is readable at 320 px wide with no horizontal scrolling.</li>
+          <li>Run an automated check using axe DevTools, Lighthouse or WAVE.</li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar" aria-label="Related information">
+        <div class="sidebar-card contact">
+          <h2>Questions?</h2>
+          <p>For questions about the template system or service design approach, contact the Digital team:</p>
+          <p style="margin:0;"><a href="mailto:heretohelp@gloucester.gov.uk">heretohelp@gloucester.gov.uk</a></p>
+        </div>
+
+        <div class="sidebar-card">
+          <h2>On this page</h2>
+          <ul>
+            <li><a href="#before-you-start">Before you start</a></li>
+            <li><a href="#choosing-a-template">Choose a template</a></li>
+            <li><a href="#reading-the-schema">Read the schema</a></li>
+            <li><a href="#populating-the-template">Populate the template</a></li>
+            <li><a href="#schema-source-metadata">Schema source metadata</a></li>
+            <li><a href="#hmo-worked-example">HMO worked example</a></li>
+            <li><a href="#checklist">Checklist</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h2>Related</h2>
+          <ul>
+            <li><a href="README.md">Templates README</a></li>
+            <li><a href="index.html">Preview all templates</a></li>
+            <li><a href="../HMO/web/index.html">HMO service (live example)</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h2>Templates</h2>
+          <ul>
+            <li><a href="service-landing.html">Service landing (Template 1)</a></li>
+            <li><a href="transaction.html">Transaction (Template 2)</a></li>
+            <li><a href="information.html">Information (Template 3)</a></li>
+            <li><a href="faq.html">FAQ (Template 4)</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h2>HMO pages</h2>
+          <ul>
+            <li><a href="../HMO/web/index.html">HMO service home</a></li>
+            <li><a href="../HMO/web/residents.html">Residents</a></li>
+            <li><a href="../HMO/web/landlords.html">Landlords</a></li>
+            <li><a href="../HMO/web/licensing.html">Licensing</a></li>
+            <li><a href="../HMO/web/standards.html">Standards</a></li>
+            <li><a href="../HMO/web/planning.html">Planning</a></li>
+            <li><a href="../HMO/web/faq.html">FAQ</a></li>
+            <li><a href="../HMO/web/apply.html">Apply</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2>Templates</h2>
+        <ul>
+          <li><a href="service-landing.html">Service landing</a></li>
+          <li><a href="transaction.html">Transaction</a></li>
+          <li><a href="information.html">Information</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>About</h2>
+        <ul>
+          <li><a href="#">About the council</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Help</h2>
+        <ul>
+          <li><a href="#">Accessibility statement</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Get in touch</h2>
+        <p style="margin: 0 0 8px;"><strong>Our opening hours are:</strong></p>
+        <ul>
+          <li>Mon, Tue, Thu, Fri: 9am to 5pm</li>
+          <li>Wednesday: 10am to 5pm</li>
+        </ul>
+        <p style="margin: 8px 0 4px;"><a href="tel:01452396396">01452 396 396</a></p>
+        <p style="margin: 0;"><a href="mailto:heretohelp@gloucester.gov.uk">heretohelp@gloucester.gov.uk</a></p>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© Gloucester City Council 2026</span>
+      <span>All content available under the Open Government Licence v3.0, except where otherwise stated.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
