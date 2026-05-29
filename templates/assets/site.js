@@ -143,10 +143,9 @@
         aria-expanded="false" aria-controls="a11y-panel"
         aria-label="Accessibility tools">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="4" r="2"/>
-          <path d="M19 13c-2.5.6-4.5 1-7 1s-4.5-.4-7-1"/>
-          <path d="M12 5v9"/>
-          <path d="M9 22l3-8 3 8"/>
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/>
+          <path d="M12 5v-2M12 21v-2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12H4M20 12h2"/>
         </svg>
         <span>Accessibility</span>
       </button>
@@ -351,7 +350,15 @@
     rulerEls.maskBot.style.height = (window.innerHeight - bottom) + 'px';
   }
 
-  function onMouseMove(e) { positionRuler(e.clientY - RULER_HEIGHT / 2); }
+  let rulerRafId = null;
+  function onMouseMove(e) {
+    const y = e.clientY - RULER_HEIGHT / 2;
+    if (rulerRafId) return;
+    rulerRafId = requestAnimationFrame(() => {
+      positionRuler(y);
+      rulerRafId = null;
+    });
+  }
   function onFocusChange(e) {
     const r = e.target.getBoundingClientRect && e.target.getBoundingClientRect();
     if (r && r.height < window.innerHeight) {
@@ -480,7 +487,23 @@
   }
 
   /* --------------------------------------------------------
-     8. Init
+     8. FAQ accordion — only one open at a time per container
+     -------------------------------------------------------- */
+  function wireAccordions() {
+    document.querySelectorAll('.faq').forEach(container => {
+      container.querySelectorAll('details').forEach(detail => {
+        detail.addEventListener('toggle', () => {
+          if (!detail.open) return;
+          container.querySelectorAll('details').forEach(other => {
+            if (other !== detail && other.open) other.open = false;
+          });
+        });
+      });
+    });
+  }
+
+  /* --------------------------------------------------------
+     9. Init
      -------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', () => {
     buildWidget();
@@ -488,5 +511,6 @@
     wireForms();
     makeAnchorTargetsFocusable();
     wirePrimaryNav();
+    wireAccordions();
   });
 })();
