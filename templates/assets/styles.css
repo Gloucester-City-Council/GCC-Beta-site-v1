@@ -622,10 +622,11 @@ main[tabindex="-1"]:focus-visible { outline: none; }
   border-bottom: 3px solid var(--border);
   margin: var(--s-3) 0 0;
   padding: 0;
-  /* Smooth horizontal scroll on touch devices */
+  /* Smooth horizontal scroll on touch devices; hide decorative scrollbar */
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
+  scrollbar-width: none;
 }
+.tab-bar::-webkit-scrollbar { display: none; }
 .tab-bar a {
   display: inline-flex;
   align-items: center;
@@ -894,6 +895,44 @@ dl.kv {
 dl.kv dt { font-weight: 700; color: var(--text-strong); }
 dl.kv dd { margin: 0; }
 @media (max-width: 600px) { dl.kv { grid-template-columns: 1fr; gap: var(--s-1); } dl.kv dd { margin-bottom: var(--s-2); } }
+
+/* ============== Back to top ============== */
+.back-to-top-wrap {
+  padding: var(--s-4) 0 var(--s-5);
+  border-top: 1px solid var(--border);
+  margin-top: var(--s-5);
+}
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--link);
+  font-weight: 600;
+  text-decoration: underline;
+  font-size: 0.9375rem;
+}
+.back-to-top:hover { color: var(--link-hover); }
+.back-to-top:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  background: var(--focus);
+  color: var(--focus-text);
+}
+
+/* ============== Regulations list (no auto-counter) ============== */
+ol.regs-list {
+  list-style: none;
+  padding: 0;
+  counter-reset: none;
+}
+ol.regs-list > li {
+  border-top: 1px solid var(--border);
+  padding: var(--s-3) 0;
+  margin-bottom: 0;
+}
+ol.regs-list > li:first-child { border-top: 0; padding-top: 0; }
+ol.regs-list > li h3 { margin: 0 0 var(--s-1); font-size: 1.0625rem; }
+ol.regs-list > li p { margin: 0; color: var(--text-muted); }
 
 /* Footer */
 .site-footer {
@@ -1217,3 +1256,77 @@ textarea:focus-visible {
 }
 .faq-cat h2 { margin: 0 0 var(--s-1); }
 .faq-cat p  { color: var(--text-muted); margin: 0; }
+
+/* ============================================================
+   Dark theme + accessibility contrast fixes
+   ============================================================ */
+
+/* Search box — dark theme: input becomes near-invisible without override */
+[data-theme="dark"] .header-search input[type="search"] {
+  background: #ffffff;
+  color: #0d1320;
+  border-color: #ffffff;
+}
+[data-theme="dark"][data-contrast="high"] .header-search input[type="search"] {
+  background: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Popular tasks title — dark theme heading colour */
+[data-theme="dark"] .tasks-strip h2,
+[data-theme="dark"] .tasks-strip .section-title h2 {
+  color: var(--text-strong) !important;
+}
+[data-contrast="high"] .tasks-strip h2,
+[data-contrast="high"] .tasks-strip .section-title h2 {
+  color: #000000 !important;
+}
+[data-theme="dark"][data-contrast="high"] .tasks-strip h2,
+[data-theme="dark"][data-contrast="high"] .tasks-strip .section-title h2 {
+  color: #ffffff !important;
+}
+[data-theme="dark"][data-contrast="high"] .tasks-strip {
+  background: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+/* "What is an HMO?" and general body text in dark + high contrast */
+[data-theme="dark"][data-contrast="high"] .main-content h2,
+[data-theme="dark"][data-contrast="high"] .main-content h3,
+[data-theme="dark"][data-contrast="high"] .main-content p,
+[data-theme="dark"][data-contrast="high"] .main-content li {
+  color: #ffffff !important;
+}
+[data-theme="dark"][data-contrast="high"] .hero h1,
+[data-theme="dark"][data-contrast="high"] .hero p {
+  color: #ffffff !important;
+}
+
+/* Table text — dark theme */
+[data-theme="dark"] .gov-table td,
+[data-theme="dark"] .gov-table caption {
+  color: var(--text);
+}
+[data-theme="dark"][data-contrast="high"] .gov-table th,
+[data-theme="dark"][data-contrast="high"] .gov-table td,
+[data-theme="dark"][data-contrast="high"] .gov-table caption {
+  color: #ffffff !important;
+  background: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+/* Button text — dark + high contrast: dark theme sets color to #0b1626 which
+   becomes invisible when high-contrast also forces background to black */
+[data-theme="dark"][data-contrast="high"] .btn-primary,
+[data-theme="dark"][data-contrast="high"] .btn-primary:hover,
+[data-theme="dark"][data-contrast="high"] .btn-primary:focus-visible {
+  color: #ffffff !important;
+  background: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+/* Button hover — ensure text never disappears in any theme */
+.btn-primary:hover { color: #ffffff; }
+[data-theme="dark"] .btn-primary:hover { color: #0b1626 !important; }
+[data-theme="dark"][data-contrast="high"] .btn-primary:hover { color: #ffffff !important; }
