@@ -25,4 +25,4 @@ jobs:
           action: "upload"
           app_location: "/" # Your app source code
           api_location: "" # Leave blank if no API
-          output_location: "dist" # Build output folder
+          output_location: "" # Static site — no build step, serve from app_location
