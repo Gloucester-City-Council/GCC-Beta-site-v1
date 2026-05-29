@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true
       - name: Build And Deploy
@@ -25,4 +25,4 @@ jobs:
           action: "upload"
           app_location: "/" # Your app source code
           api_location: "" # Leave blank if no API
-          output_location: "dist" # Build output folder
+          output_location: "" # Static site — no build step, serve from app_location
