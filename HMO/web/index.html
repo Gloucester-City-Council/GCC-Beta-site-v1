@@ -156,35 +156,37 @@
 
     /* Mobile footer styling */
     @media (max-width: 767px) {
-      footer[role="contentinfo"] > div {
-        padding: 0 var(--s-3);
+      .site-footer {
+        padding: var(--s-4) 0 !important;
       }
-      footer[role="contentinfo"] h2 {
+      .site-footer .container {
+        padding-left: var(--s-3) !important;
+        padding-right: var(--s-3) !important;
+      }
+      .site-footer h2 {
         padding-top: var(--s-2) !important;
-        margin-bottom: var(--s-4) !important;
+        margin-bottom: var(--s-3) !important;
       }
-      footer[role="contentinfo"] > div > div:nth-of-type(2) {
+      .site-footer > .container > div:nth-child(2) {
         grid-template-columns: 1fr !important;
+        gap: var(--s-4) !important;
       }
-      footer[role="contentinfo"] a {
-        word-break: break-word;
-      }
-      footer[role="contentinfo"] button,
-      footer[role="contentinfo"] a[style*="background"] {
+      .site-footer a[href*="achieveservice"],
+      .site-footer a[style*="background"] {
         width: 100% !important;
-        text-align: center;
+        display: block !important;
+        text-align: center !important;
+        padding: 12px 16px !important;
       }
-      footer[role="contentinfo"] > div > div:last-of-type {
+      .site-footer > .container > div:last-child {
         flex-direction: column !important;
         align-items: flex-start !important;
         gap: var(--s-3) !important;
       }
-      footer[role="contentinfo"] > div > div:last-of-type > div {
+      .site-footer > .container > div:last-child > div {
         flex-direction: column !important;
         align-items: flex-start !important;
-      }
-      footer[role="contentinfo"] > div > div:last-of-type > span {
-        align-self: flex-start;
+        width: 100%;
       }
     }
   </style>
