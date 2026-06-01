@@ -353,7 +353,7 @@ main[tabindex="-1"]:focus-visible { outline: none; }
   align-items: center;
   justify-content: space-between;
   gap: var(--s-4);
-  padding: var(--s-3) 0;
+  padding: var(--s-4) 0;
 }
 .brand {
   display: flex;
