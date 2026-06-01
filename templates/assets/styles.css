@@ -542,7 +542,7 @@ main[tabindex="-1"]:focus-visible { outline: none; }
 [data-theme="dark"] .landing-stats .stat span { color: #d6e4f4 !important; }
 
 .hero h1 { color: #fff; font-size: clamp(2rem, 4vw, var(--fs-display)); margin-bottom: var(--s-3); }
-.hero p.lede { color: #e8f0fb; font-size: clamp(1.0625rem, 1.6vw, 1.375rem); max-width: 55ch; }
+.hero p.lede { color: #e8f0fb; font-size: clamp(1.0625rem, 1.6vw, 1.375rem); max-width: 75ch; }
 [data-contrast="high"] .hero p.lede { color: #fff; }
 
 .hero-decoration {
