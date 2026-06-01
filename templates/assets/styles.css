@@ -319,7 +319,7 @@ a:focus-visible {
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--s-4);
+  padding: 0 var(--s-5);
 }
 .container-narrow { max-width: var(--container-narrow); }
 
@@ -353,7 +353,7 @@ main[tabindex="-1"]:focus-visible { outline: none; }
   align-items: center;
   justify-content: space-between;
   gap: var(--s-4);
-  padding: var(--s-4) 0;
+  padding: var(--s-4) var(--s-4);
 }
 .brand {
   display: flex;
