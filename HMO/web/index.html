@@ -135,12 +135,16 @@
     @media (max-width: 767px) {
       .licence-register-card {
         flex-direction: column !important;
-        align-items: flex-start !important;
+        align-items: stretch !important;
         gap: var(--s-3) !important;
         padding: var(--s-4) var(--s-3) !important;
       }
+      .licence-register-card > div:nth-child(2) {
+        width: 100% !important;
+      }
       .licence-register-card .jc-icon {
         margin-bottom: 0 !important;
+        flex-shrink: 0 !important;
       }
       .licence-register-card h2 {
         font-size: 1.125rem;
