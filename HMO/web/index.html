@@ -163,11 +163,7 @@
         padding-left: var(--s-3) !important;
         padding-right: var(--s-3) !important;
       }
-      .site-footer h2 {
-        padding-top: var(--s-2) !important;
-        margin-bottom: var(--s-3) !important;
-      }
-      .site-footer > .container > div:nth-child(2) {
+      .site-footer > .container > div:first-child {
         grid-template-columns: 1fr !important;
         gap: var(--s-4) !important;
       }
@@ -287,27 +283,30 @@
 
 <footer class="site-footer" role="contentinfo" style="background: #003D7A; color: #fff;">
   <div class="container">
-    <h2 style="margin: 0 0 var(--s-3) 0; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.7); padding-top: var(--s-2);">Contact and Support</h2>
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); padding: 0 0 var(--s-3) 0;">
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); padding: 0 0 var(--s-3) 0;">
       <!-- Phone Column -->
       <div>
         <h3 style="margin: 0 0 var(--s-3) 0; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.7);">Phone</h3>
-        <p style="margin: 0 0 var(--s-3) 0; font-size: 1.0625rem; font-weight: 600; color: #fff;"><a href="tel:01452396396" style="color: #fff; text-decoration: none;">01452 396 396</a></p>
-        <p style="margin: 0 0 var(--s-2) 0; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.7);">Get Help</p>
+        <p style="margin: 0; font-size: 1.0625rem; font-weight: 600; color: #fff;"><a href="tel:01452396396" style="color: #fff; text-decoration: none;">01452 396 396</a></p>
+      </div>
+
+      <!-- Get Help Column -->
+      <div>
+        <h3 style="margin: 0 0 var(--s-3) 0; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.7);">Get Help</h3>
         <a href="https://gloucester-self.achieveservice.com/service/Contact_us" style="display: inline-block; background: #00BCD4; color: #003D7A; font-weight: 600; font-size: 1rem; padding: 10px 20px; border-radius: 4px; text-decoration: none; min-height: 48px; line-height: 1.5; transition: background 0.15s ease;">Contact Us Online</a>
       </div>
 
-      <!-- Address Column -->
+      <!-- Office Address Column -->
       <div>
         <h3 style="margin: 0 0 var(--s-3) 0; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.7);">Office Address</h3>
-        <p style="margin: 0 0 var(--s-3) 0; font-size: 1rem; line-height: 1.6; color: #fff;">
+        <p style="margin: 0 0 var(--s-3) 0; font-size: 0.9375rem; line-height: 1.6; color: #fff;">
           Gloucester City Council<br>
           Eastgate Management Suite<br>
           Eastgate Street<br>
           Gloucester GL1 1PA
         </p>
-        <h3 style="margin: 0 0 var(--s-3) 0; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.7);">Opening Hours</h3>
-        <p style="margin: 0; font-size: 1rem; line-height: 1.6; color: #fff;">
+        <p style="margin: 0 0 var(--s-2) 0; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.7);">Opening Hours</p>
+        <p style="margin: 0; font-size: 0.9375rem; line-height: 1.6; color: #fff;">
           Monday to Friday, 9am to 5pm<br>
           (Wednesday: 10am to 5pm)
         </p>
