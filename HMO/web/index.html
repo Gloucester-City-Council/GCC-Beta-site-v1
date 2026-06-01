@@ -122,12 +122,20 @@
     }
     .contact-details a { font-size: 1.0625rem; font-weight: 600; }
 
+    /* Full-width licence register card */
+    .licence-register-card {
+      width: calc(100vw - 4px);
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+
     /* Mobile optimizations for licence register card */
     @media (max-width: 767px) {
       .licence-register-card {
         flex-direction: column !important;
         margin-left: var(--s-3);
         margin-right: var(--s-3);
+        width: auto;
       }
       .licence-register-card .jc-icon {
         margin-bottom: var(--s-3) !important;
