@@ -151,25 +151,15 @@
     /* Mobile optimizations for licence register card */
     @media (max-width: 767px) {
       .licence-register-card {
-        margin-left: 0;
-        margin-right: 0;
         flex-direction: column !important;
         align-items: flex-start !important;
       }
       .licence-register-card .jc-icon {
         margin-bottom: var(--s-3) !important;
       }
-      .licence-content {
-        width: 100%;
-        margin-bottom: var(--s-3);
-      }
-      .licence-register-card h2 {
-        font-size: 1.125rem;
-      }
       .licence-register-card .jc-btn {
         width: 100% !important;
-        text-align: center;
-        padding: 12px 16px !important;
+        text-align: center !important;
       }
     }
   </style>
@@ -251,15 +241,16 @@
     <div class="journey-grid" style="margin-top:var(--s-4);">
       <a href="https://www.gloucester.gov.uk/media/yg5l1ndz/hmo-licence-register-december-2025.xlsx"
          rel="external"
-         class="journey-card licence-register-card">
-        <div class="jc-icon" aria-hidden="true">
+         class="journey-card licence-register-card"
+         style="display: flex; flex-direction: row; align-items: center; gap: var(--s-4); padding: var(--s-5) var(--s-4);">
+        <div class="jc-icon" aria-hidden="true" style="margin-bottom: 0; flex-shrink: 0;">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         </div>
-        <div class="licence-content">
-          <h2>Check if a Property is Licensed</h2>
-          <p>Search the HMO licence register to verify if a property requires licensing.</p>
+        <div class="licence-content" style="flex: 1;">
+          <h2 style="margin: 0 0 var(--s-1) 0;">Check if a Property is Licensed</h2>
+          <p style="margin: 0;">Search the HMO licence register to verify if a property requires licensing.</p>
         </div>
-        <span class="jc-btn" style="padding: 12px 24px !important; font-size: 1rem !important;">View HMO Licence Register (Excel)</span>
+        <span class="jc-btn" style="padding: 12px 24px !important; font-size: 1rem !important; flex-shrink: 0; display: inline-block;">View HMO Licence Register (Excel)</span>
       </a>
     </div>
 
