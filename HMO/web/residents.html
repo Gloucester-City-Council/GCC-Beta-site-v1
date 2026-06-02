@@ -148,6 +148,114 @@
         height: 200px;
       }
     }
+
+    /* License comparison cards */
+    .license-comparison {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--s-4);
+      margin-top: var(--s-4);
+    }
+
+    .license-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--s-5) var(--s-4);
+      border: 1px solid var(--border, #d1dce9);
+      border-top: 4px solid var(--primary-base, #0054a4);
+      border-radius: 4px;
+      background: var(--bg-card, #fff);
+      text-align: center;
+      transition: box-shadow 0.15s ease, border-top-color 0.15s ease;
+    }
+
+    .license-card:hover {
+      box-shadow: 0 4px 16px rgba(0, 84, 164, 0.15);
+      border-top-color: var(--primary-dark, #003D7A);
+    }
+
+    [data-theme="dark"] .license-card {
+      background: var(--bg-card);
+      border-color: var(--border);
+    }
+
+    .license-card.required {
+      border-top-color: #d9534f;
+    }
+
+    .license-card.required:hover {
+      border-top-color: #ac2925;
+    }
+
+    .license-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      background: var(--primary-light, #EBF3FB);
+      border-radius: 50%;
+      margin-bottom: var(--s-3);
+      color: var(--primary-base, #0054a4);
+      flex-shrink: 0;
+      font-size: 1.75rem;
+    }
+
+    .license-card.required .license-icon {
+      background: rgba(217, 83, 79, 0.15);
+      color: #d9534f;
+    }
+
+    [data-theme="dark"] .license-icon {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    [data-theme="dark"] .license-card.required .license-icon {
+      background: rgba(217, 83, 79, 0.15);
+    }
+
+    .license-card h4 {
+      font-size: 1.125rem;
+      color: var(--primary-base, #0054a4);
+      margin: 0 0 var(--s-2);
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .license-card.required h4 {
+      color: #d9534f;
+    }
+
+    [data-theme="dark"] .license-card h4 {
+      color: var(--link, #7ab3e8);
+    }
+
+    [data-theme="dark"] .license-card.required h4 {
+      color: #ff6b63;
+    }
+
+    .license-card p {
+      font-size: 1rem;
+      margin: 0;
+      color: var(--text, #1a2332);
+      line-height: 1.4;
+    }
+
+    [data-theme="dark"] .license-card p {
+      color: var(--text);
+    }
+
+    [data-contrast="high"] .license-card {
+      border: 2px solid #000;
+      border-top: 4px solid #000;
+    }
+
+    @media (max-width: 767px) {
+      .license-comparison {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -285,14 +393,26 @@
           <h3>Licensing requirements</h3>
 
           <p><strong>Does your property need a licence?</strong></p>
-          <ul>
-            <li>✓ <strong>5+ people from 2+ separate households</strong> = Licence required</li>
-            <li>✗ <strong>Fewer than 5 people or 1 household</strong> = No licence needed</li>
-          </ul>
 
-          <p><strong>Not sure if you count as separate households?</strong> A household is people who share cooking facilities and meals together. Partners sharing a room = 1 household. Unrelated people = separate households.</p>
+          <div class="license-comparison">
+            <!-- Licence required card -->
+            <div class="license-card required">
+              <div class="license-icon" aria-hidden="true">⚠️</div>
+              <h4>Licence required</h4>
+              <p>5+ people from 2+ separate households</p>
+            </div>
 
-          <div class="inset-panel warning">
+            <!-- No licence needed card -->
+            <div class="license-card">
+              <div class="license-icon" aria-hidden="true">✓</div>
+              <h4>No licence needed</h4>
+              <p>Fewer than 5 people or 1 household</p>
+            </div>
+          </div>
+
+          <p style="margin-top: var(--s-4);"><strong>Not sure if you count as separate households?</strong> A household is people who share cooking facilities and meals together. Partners sharing a room = 1 household. Unrelated people = separate households.</p>
+
+          <div class="inset-panel warning" style="margin-top: var(--s-4);">
             <p><strong>If your HMO is unlicensed:</strong> You may be able to apply to the First-tier Tribunal for a Rent Repayment Order (up to 12 months' rent). (Housing and Planning Act 2016, ss.40–41)</p>
           </div>
         </div>
