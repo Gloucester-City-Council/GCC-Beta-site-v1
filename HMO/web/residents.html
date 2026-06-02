@@ -371,19 +371,6 @@
       font-weight: normal !important;
     }
 
-    .license-action-row {
-      display: flex;
-      align-items: center;
-      gap: var(--s-4);
-      flex-wrap: wrap;
-    }
-
-    .license-action-row p {
-      flex: 1;
-      min-width: 250px;
-      margin: 0;
-    }
-
     .license-cta-btn {
       display: inline-flex;
       align-items: center;
@@ -400,6 +387,7 @@
       min-height: 48px;
       line-height: 1.5;
       white-space: nowrap;
+      margin-top: var(--s-3);
       transition: background 0.15s ease;
       cursor: pointer;
     }
@@ -610,10 +598,8 @@
               <span>What should I do if a licence is required?</span>
             </button>
             <div id="license-actions" class="license-content" aria-hidden="true">
-              <div class="license-action-row">
-                <p>Search the HMO licence register to verify if a property requires licensing.</p>
-                <a href="https://www.gloucester.gov.uk/media/yg5l1ndz/hmo-licence-register-december-2025.xlsx" rel="external" class="license-cta-btn">View HMO Licence Register (Excel)</a>
-              </div>
+              <p>Search the HMO licence register to verify if a property requires licensing.</p>
+              <a href="https://www.gloucester.gov.uk/media/yg5l1ndz/hmo-licence-register-december-2025.xlsx" rel="external" class="license-cta-btn">View HMO Licence Register (Excel)</a>
 
               <p style="margin-top: var(--s-4);">If your property should be licensed but is not, you can claim up to 12 months' rent from your landlord through the First-tier Tribunal. This right is set out in the <a href="https://www.legislation.gov.uk/ukpga/2016/22/part/5/chapter/2" rel="external">Housing and Planning Act 2016, sections 40–41</a>.</p>
             </div>
