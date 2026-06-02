@@ -371,20 +371,37 @@
       font-weight: normal !important;
     }
 
+    .license-action-row {
+      display: flex;
+      align-items: center;
+      gap: var(--s-4);
+      flex-wrap: wrap;
+    }
+
+    .license-action-row p {
+      flex: 1;
+      min-width: 250px;
+      margin: 0;
+    }
+
     .license-cta-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       background: var(--primary-base, #0054a4);
       color: #fff;
       font-weight: 600;
       font-size: 1rem;
       padding: 12px var(--s-4);
       border-radius: 4px;
+      border: none;
       text-decoration: none;
       text-align: center;
       min-height: 48px;
       line-height: 1.5;
-      margin-top: var(--s-3);
+      white-space: nowrap;
       transition: background 0.15s ease;
+      cursor: pointer;
     }
 
     .license-cta-btn:hover {
@@ -590,9 +607,10 @@
               <span>What should I do if a licence is required?</span>
             </button>
             <div id="license-actions" class="license-content" aria-hidden="true">
-              <p>Search the <a href="https://www.gloucester.gov.uk/media/yg5l1ndz/hmo-licence-register-december-2025.xlsx" rel="external" class="license-register-link">HMO licence register</a> to verify if a property requires licensing.</p>
-
-              <a href="https://www.gloucester.gov.uk/media/yg5l1ndz/hmo-licence-register-december-2025.xlsx" rel="external" class="license-cta-btn">View HMO Licence Register (Excel)</a>
+              <div class="license-action-row">
+                <p>Search the HMO licence register to verify if a property requires licensing.</p>
+                <a href="https://www.gloucester.gov.uk/media/yg5l1ndz/hmo-licence-register-december-2025.xlsx" rel="external" class="license-cta-btn">View HMO Licence Register (Excel)</a>
+              </div>
 
               <p style="margin-top: var(--s-4);"><strong>If your property should be licensed but isn't:</strong></p>
               <p>You can claim up to 12 months' rent from your landlord through the First-tier Tribunal. This right is set out in the <a href="https://www.legislation.gov.uk/ukpga/2016/22/part/5/chapter/2" rel="external">Housing and Planning Act 2016, sections 40–41</a>.</p>
