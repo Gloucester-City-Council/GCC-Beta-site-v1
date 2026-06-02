@@ -346,17 +346,17 @@
     }
 
     .license-content p strong {
-      color: var(--primary-base, #0054a4);
+      font-weight: 600;
+      color: var(--text, #1a2332);
     }
 
     [data-theme="dark"] .license-content p strong {
-      color: var(--link, #7ab3e8);
+      color: var(--text);
     }
 
     .license-content a {
       color: var(--primary-base, #0054a4);
       text-decoration: underline;
-      font-weight: 600;
     }
 
     [data-theme="dark"] .license-content a {
@@ -365,6 +365,48 @@
 
     .license-content a:hover {
       text-decoration: none;
+    }
+
+    .license-register-link {
+      font-weight: normal !important;
+    }
+
+    .license-cta-btn {
+      display: inline-block;
+      background: var(--primary-base, #0054a4);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 12px var(--s-4);
+      border-radius: 4px;
+      text-decoration: none;
+      text-align: center;
+      min-height: 48px;
+      line-height: 1.5;
+      margin-top: var(--s-3);
+      transition: background 0.15s ease;
+    }
+
+    .license-cta-btn:hover {
+      background: var(--primary-dark, #003D7A);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .license-cta-btn {
+      background: var(--primary-base, #0054a4);
+    }
+
+    [data-theme="dark"] .license-cta-btn:hover {
+      background: var(--primary-dark, #003D7A);
+    }
+
+    [data-contrast="high"] .license-cta-btn {
+      background: #000;
+      color: #fff;
+    }
+
+    [data-contrast="high"] .license-cta-btn:hover {
+      background: #000;
     }
 
     .license-content ul {
@@ -548,11 +590,11 @@
               <span>What should I do if a licence is required?</span>
             </button>
             <div id="license-actions" class="license-content" aria-hidden="true">
-              <p><strong>Check if your property is licensed:</strong></p>
-              <ul>
-                <li><a href="https://www.gloucester.gov.uk/media/yg5l1ndz/hmo-licence-register-december-2025.xlsx" rel="external">Search the HMO licence register</a></li>
-              </ul>
-              <p style="margin-top: var(--s-3);"><strong>If your property should be licensed but isn't:</strong></p>
+              <p>Search the <a href="https://www.gloucester.gov.uk/media/yg5l1ndz/hmo-licence-register-december-2025.xlsx" rel="external" class="license-register-link">HMO licence register</a> to verify if a property requires licensing.</p>
+
+              <a href="https://www.gloucester.gov.uk/media/yg5l1ndz/hmo-licence-register-december-2025.xlsx" rel="external" class="license-cta-btn">View HMO Licence Register (Excel)</a>
+
+              <p style="margin-top: var(--s-4);"><strong>If your property should be licensed but isn't:</strong></p>
               <p>You can claim up to 12 months' rent from your landlord through the First-tier Tribunal. This right is set out in the <a href="https://www.legislation.gov.uk/ukpga/2016/22/part/5/chapter/2" rel="external">Housing and Planning Act 2016, sections 40–41</a>.</p>
             </div>
           </div>
