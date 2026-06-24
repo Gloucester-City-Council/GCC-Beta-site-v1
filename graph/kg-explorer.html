@@ -445,6 +445,12 @@ function renderDetail() {
 
   if (n.detail) { const d = el('div','node-detail'); d.textContent = n.detail; pane.appendChild(d); }
 
+  const dbg = el('div','node-detail');
+  dbg.style.fontSize = '10px';
+  dbg.style.color = 'var(--dim)';
+  dbg.textContent = 'out:' + (outE[sel]?.length||0) + ' in:' + (inE[sel]?.length||0);
+  pane.appendChild(dbg);
+
   function connSection(edges, heading, isInbound) {
     if (!edges.length) return;
     const sec = el('div','conn-section');
