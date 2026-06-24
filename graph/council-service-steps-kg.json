@@ -35,13 +35,13 @@
     { "id": "tech_notification",        "label": "Notification",        "type": "component" },
     { "id": "tech_resource_management", "label": "Resource management", "type": "component" },
 
-    { "id": "pat_find_and_report",       "label": "Find and report",          "type": "pattern", "description": "User locates the relevant service or place, then submits a report. Common in environmental and highways services." },
-    { "id": "pat_prove_and_apply",       "label": "Prove and apply",          "type": "pattern", "description": "User establishes their identity and eligibility before submitting a formal application." },
-    { "id": "pat_pay_and_confirm",       "label": "Pay and confirm",          "type": "pattern", "description": "User makes a payment and receives confirmation. Applies wherever a transaction closes a service interaction." },
-    { "id": "pat_apply_check_notify",    "label": "Apply, check and notify",  "type": "pattern", "description": "User applies, the Council checks eligibility, and the outcome is communicated back. The core pattern for entitlement services." },
-    { "id": "pat_book_and_confirm",      "label": "Book and confirm",         "type": "pattern", "description": "User selects and reserves a resource, pays if required, and receives confirmation." },
-    { "id": "pat_track_and_update",      "label": "Track and update",         "type": "pattern", "description": "User monitors case progress and can push new information back to the Council. Keeps long-running cases current." },
-    { "id": "pat_order_and_deliver",     "label": "Order and deliver",        "type": "pattern", "description": "User orders a physical item or document, pays if required, and the Council fulfils the order." }
+    { "id": "pat_find_and_report",    "label": "Find and report",         "type": "pattern", "description": "User locates the relevant service or place, then submits a report. Common in environmental and highways services." },
+    { "id": "pat_prove_and_apply",    "label": "Prove and apply",         "type": "pattern", "description": "User establishes their identity and eligibility before submitting a formal application." },
+    { "id": "pat_pay_and_confirm",    "label": "Pay and confirm",         "type": "pattern", "description": "User makes a payment and receives confirmation. Applies wherever a transaction closes a service interaction." },
+    { "id": "pat_apply_check_notify", "label": "Apply, check and notify", "type": "pattern", "description": "User applies, the Council checks eligibility, and the outcome is communicated back. The core pattern for entitlement services." },
+    { "id": "pat_book_and_confirm",   "label": "Book and confirm",        "type": "pattern", "description": "User selects and reserves a resource, pays if required, and receives confirmation." },
+    { "id": "pat_track_and_update",   "label": "Track and update",        "type": "pattern", "description": "User monitors case progress and can push new information back to the Council. Keeps long-running cases current." },
+    { "id": "pat_order_and_deliver",  "label": "Order and deliver",       "type": "pattern", "description": "User orders a physical item or document, pays if required, and the Council fulfils the order." }
   ],
   "edges": [
     { "source": "svc_report_it",     "target": "step_find",     "relation": "comprises" },
@@ -88,6 +88,24 @@
     { "source": "svc_stay_informed", "target": "step_identify", "relation": "comprises" },
     { "source": "svc_stay_informed", "target": "step_track",    "relation": "comprises" },
     { "source": "svc_stay_informed", "target": "step_notify",   "relation": "comprises" },
+
+    { "source": "svc_report_it",     "target": "pat_find_and_report",    "relation": "uses" },
+    { "source": "svc_report_it",     "target": "pat_track_and_update",   "relation": "uses" },
+
+    { "source": "svc_apply_for",     "target": "pat_prove_and_apply",    "relation": "uses" },
+    { "source": "svc_apply_for",     "target": "pat_apply_check_notify", "relation": "uses" },
+    { "source": "svc_apply_for",     "target": "pat_pay_and_confirm",    "relation": "uses" },
+
+    { "source": "svc_pay_for",       "target": "pat_pay_and_confirm",    "relation": "uses" },
+
+    { "source": "svc_book_it",       "target": "pat_book_and_confirm",   "relation": "uses" },
+
+    { "source": "svc_get_support",   "target": "pat_apply_check_notify", "relation": "uses" },
+    { "source": "svc_get_support",   "target": "pat_track_and_update",   "relation": "uses" },
+
+    { "source": "svc_order_it",      "target": "pat_order_and_deliver",  "relation": "uses" },
+
+    { "source": "svc_stay_informed", "target": "pat_track_and_update",   "relation": "uses" },
 
     { "source": "step_find",     "target": "tech_publishing",          "relation": "requires" },
     { "source": "step_find",     "target": "tech_search",              "relation": "requires" },
