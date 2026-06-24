@@ -407,7 +407,7 @@ let inEdges = {};  // id -> [{source, label}]
 function buildIndex() {
   graph.nodes.forEach(n => { outEdges[n.id] = []; inEdges[n.id] = []; });
   graph.edges.forEach(e => {
-    const lbl = e.label || '?';
+    const lbl = e.label && e.label !== '?' ? e.label : 'part of';
     if (outEdges[e.source]) outEdges[e.source].push({ target: e.target, label: lbl });
     if (inEdges[e.target])  inEdges[e.target].push({ source: e.source, label: lbl });
   });
