@@ -1,0 +1,3033 @@
+{
+  "nodes": [
+    {
+      "id": "layer_customer",
+      "label": "Customer",
+      "type": "layer",
+      "layer": 0,
+      "rank": 0,
+      "detail": "Customers have needs. The architecture captures them, routes them to the right place, and returns an outcome. This layer defines what customers arrive with and what they leave with."
+    },
+    {
+      "id": "customer_needs",
+      "label": "Customer Needs",
+      "type": "component",
+      "layer": 0,
+      "rank": 0
+    },
+    {
+      "id": "need_information",
+      "label": "Information Need",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer needs to know something \u2014 eligibility, status, process",
+      "rank": 0
+    },
+    {
+      "id": "need_transactional",
+      "label": "Transactional Need",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer needs to do something \u2014 apply, pay, book, report",
+      "rank": 0
+    },
+    {
+      "id": "need_support",
+      "label": "Support Need",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer needs intervention, assessment, or ongoing provision",
+      "rank": 0
+    },
+    {
+      "id": "need_notification",
+      "label": "Reporting or Notification Need",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer needs to tell the council something, or be told something",
+      "rank": 0
+    },
+    {
+      "id": "need_referral",
+      "label": "Referral Need",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer or third party initiates a referral into a service",
+      "rank": 0
+    },
+    {
+      "id": "customer_outcomes",
+      "label": "Customer Outcomes",
+      "type": "component",
+      "layer": 0,
+      "detail": "What the customer leaves with",
+      "rank": 0
+    },
+    {
+      "id": "outcome_resolved",
+      "label": "Resolved",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Need fully met \u2014 decision made, transaction complete, provision allocated",
+      "rank": 0
+    },
+    {
+      "id": "outcome_partial",
+      "label": "Partially Resolved",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Progress made but case loops back for further information or action",
+      "rank": 0
+    },
+    {
+      "id": "outcome_referred",
+      "label": "Referred",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Case passed to another service area, team, or external body",
+      "rank": 0
+    },
+    {
+      "id": "outcome_informed",
+      "label": "Informed",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Need met at information layer \u2014 no case raised",
+      "rank": 0
+    },
+    {
+      "id": "outcome_appealed",
+      "label": "Appealed",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer contests the determination \u2014 internal review or tribunal route",
+      "rank": 0
+    },
+    {
+      "id": "layer_access",
+      "label": "Access",
+      "type": "layer",
+      "layer": 1,
+      "rank": 1,
+      "detail": "The channels through which customers reach the council \u2014 in person, phone, online, email, letter, messaging, social media, or third-party referral \u2014 and the interfaces through which the council presents itself on each channel. Resolution outcomes and status notifications return to the customer through this same layer. AI operates across all layers, including here."
+    },
+    {
+      "id": "channels",
+      "label": "Channels",
+      "type": "component",
+      "layer": 1,
+      "detail": "How customers reach the council",
+      "rank": 1
+    },
+    {
+      "id": "ch_in_person",
+      "label": "In Person",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_phone",
+      "label": "Phone",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_online",
+      "label": "Online",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_email",
+      "label": "Email",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_letter",
+      "label": "Letter",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_messaging",
+      "label": "Messaging",
+      "type": "subnode",
+      "layer": 1,
+      "detail": "WhatsApp, SMS",
+      "rank": 1
+    },
+    {
+      "id": "ch_social",
+      "label": "Social Media",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_third_party_referral",
+      "label": "Third-Party Referral",
+      "type": "subnode",
+      "layer": 1,
+      "detail": "Inbound referral from another agency, GP, social care, voluntary sector, or partner organisation on behalf of a customer",
+      "rank": 1
+    },
+    {
+      "id": "interfaces",
+      "label": "Interfaces",
+      "type": "component",
+      "layer": 1,
+      "detail": "How the council presents itself on each channel",
+      "rank": 1
+    },
+    {
+      "id": "if_website_app",
+      "label": "Website / App",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "if_ivr",
+      "label": "Automated Phone IVR",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "if_chatbot",
+      "label": "Chatbot",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "if_human",
+      "label": "Human",
+      "type": "subnode",
+      "layer": 1,
+      "detail": "Officer, agent, or volunteer",
+      "rank": 1
+    },
+    {
+      "id": "if_api",
+      "label": "APIs",
+      "type": "subnode",
+      "layer": 1,
+      "detail": "Machine-to-machine, partner access",
+      "rank": 1
+    },
+    {
+      "id": "if_assisted_digital",
+      "label": "Assisted Digital",
+      "type": "subnode",
+      "layer": 1,
+      "detail": "Officer completes digital process on behalf of customer",
+      "rank": 1
+    },
+    {
+      "id": "layer_information",
+      "label": "Information",
+      "type": "layer",
+      "layer": 2,
+      "rank": 2,
+      "detail": "What the customer needs to know, and where things stand. This layer holds guidance content, a knowledge base, and case status. It covers eligibility and what to expect, policies and service rules, and updates on where a case is and what happens next. Some needs are fully resolved here \u2014 the customer gets the answer they came for without a case being raised."
+    },
+    {
+      "id": "guidance_content",
+      "label": "Guidance Content",
+      "type": "component",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "gc_eligibility",
+      "label": "Eligibility Criteria",
+      "type": "subnode",
+      "layer": 2,
+      "detail": "Who qualifies, conditions, thresholds",
+      "rank": 2
+    },
+    {
+      "id": "gc_process_guides",
+      "label": "Process Guides",
+      "type": "subnode",
+      "layer": 2,
+      "detail": "Step-by-step what to expect",
+      "rank": 2
+    },
+    {
+      "id": "gc_plain_language",
+      "label": "Plain Language Summaries",
+      "type": "subnode",
+      "layer": 2,
+      "detail": "Simplified versions of policy",
+      "rank": 2
+    },
+    {
+      "id": "gc_multilingual",
+      "label": "Multilingual Content",
+      "type": "subnode",
+      "layer": 2,
+      "detail": "Translated and easy-read versions",
+      "rank": 2
+    },
+    {
+      "id": "knowledge_base",
+      "label": "Knowledge Base",
+      "type": "component",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "kb_policies",
+      "label": "Policy Documents",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "kb_faqs",
+      "label": "FAQs",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "kb_service_rules",
+      "label": "Service Rules",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "kb_legislation",
+      "label": "Legislation References",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "kb_precedents",
+      "label": "Decision Precedents",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "status_updates",
+      "label": "Status and Case Updates",
+      "type": "component",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "su_case_tracker",
+      "label": "Case Tracker",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "su_milestones",
+      "label": "Milestone Notifications",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "su_expected_timelines",
+      "label": "Expected Timelines",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "su_decision_letters",
+      "label": "Decision Letters",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "info_self_resolution",
+      "label": "Self-Resolution",
+      "type": "subnode",
+      "layer": 2,
+      "detail": "Need fully resolved at information layer \u2014 customer gets answer without a case being raised",
+      "rank": 2
+    },
+    {
+      "id": "layer_capabilities",
+      "label": "Capabilities",
+      "type": "layer",
+      "layer": 3,
+      "rank": 3,
+      "detail": "Where transactions happen in both directions. Customers submit forms and evidence. The council sends notifications. Payments and bookings are handled through shared components available across all service areas. Shared components are built once and used across all service areas \u2014 payments, bookings, and notifications are not rebuilt per service."
+    },
+    {
+      "id": "online_services",
+      "label": "Online Services",
+      "type": "component",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "os_forms",
+      "label": "Digital Forms",
+      "type": "subnode",
+      "layer": 3,
+      "detail": "Structured data capture, conditional logic",
+      "rank": 3
+    },
+    {
+      "id": "os_uploads",
+      "label": "Document Uploads",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "os_save_resume",
+      "label": "Save and Resume",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "os_declarations",
+      "label": "Declarations and Consents",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "shared_components",
+      "label": "Shared Components",
+      "type": "component",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "sc_payments",
+      "label": "Payment Engine",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "sc_bookings",
+      "label": "Appointment Booking",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "sc_address_lookup",
+      "label": "Address Lookup",
+      "type": "subnode",
+      "layer": 3,
+      "detail": "PAF / LLPG integration",
+      "rank": 3
+    },
+    {
+      "id": "sc_map",
+      "label": "Map Component",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notifications",
+      "label": "Notifications",
+      "type": "component",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notif_sms",
+      "label": "SMS",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notif_email",
+      "label": "Email",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notif_push",
+      "label": "Push Notification",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notif_letter",
+      "label": "Automated Letter",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notif_preferences",
+      "label": "Channel Preferences",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "layer_orchestration",
+      "label": "Orchestration",
+      "type": "layer",
+      "layer": 4,
+      "rank": 4,
+      "detail": "Where the need is routed, tracked, and managed. This layer applies rules to assign cases to the right service area, holds a single view of the customer across all services, and manages service level agreements and contact history. The central customer record means every service area sees the same customer \u2014 not separate records held by separate teams."
+    },
+    {
+      "id": "rules_routing",
+      "label": "Rules and Routing",
+      "type": "component",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "rr_triage",
+      "label": "Triage Engine",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "rr_assignment",
+      "label": "Assignment Rules",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "rr_escalation",
+      "label": "Escalation Logic",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "rr_priority",
+      "label": "Priority Scoring",
+      "type": "subnode",
+      "layer": 4,
+      "detail": "Vulnerability flags, urgency weighting",
+      "rank": 4
+    },
+    {
+      "id": "rr_workflow",
+      "label": "Workflow Engine",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "central_customer_record",
+      "label": "Central Customer Record",
+      "type": "component",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "ccr_profile",
+      "label": "Customer Profile",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "ccr_interaction_history",
+      "label": "Interaction History",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "ccr_case_links",
+      "label": "Linked Cases",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "ccr_vulnerability",
+      "label": "Vulnerability Indicators",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "ccr_consent",
+      "label": "Consent and Preferences",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "slas_customer_care",
+      "label": "SLAs and Customer Care",
+      "type": "component",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "sla_commitments",
+      "label": "Service Commitments",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "sla_breach_alerts",
+      "label": "Breach Alerts",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "sla_surveys",
+      "label": "Satisfaction Surveys",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "sla_complaints",
+      "label": "Complaints Handling",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "sla_performance",
+      "label": "Performance Reporting",
+      "type": "subnode",
+      "layer": 4,
+      "detail": "Operational performance metrics against SLA commitments",
+      "rank": 4
+    },
+    {
+      "id": "layer_determination",
+      "label": "Determination",
+      "type": "layer",
+      "layer": 5,
+      "rank": 5,
+      "detail": "Where cases are assessed, decided, and resolved. Each service area has its own line of business solution \u2014 shared or dedicated. Officer decisions are made and recorded here: applications, approvals, refusals, allocations, assessments, and referrals. Outcomes return to the customer through the access layer. A determination does not always close a case \u2014 a partial resolution or a request for further information loops back through the architecture."
+    },
+    {
+      "id": "service_area_1",
+      "label": "Service Area A",
+      "type": "component",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa1_application",
+      "label": "Application Processing",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa1_assessment",
+      "label": "Officer Assessment",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa1_decision",
+      "label": "Decision Record",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa1_appeal",
+      "label": "Appeal / Review Path",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "service_area_2",
+      "label": "Service Area B",
+      "type": "component",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa2_application",
+      "label": "Application Processing",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa2_assessment",
+      "label": "Officer Assessment",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa2_decision",
+      "label": "Decision Record",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa2_appeal",
+      "label": "Appeal / Review Path",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "service_area_3",
+      "label": "Service Area C",
+      "type": "component",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa3_referral",
+      "label": "Referral Intake",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa3_assessment",
+      "label": "Needs Assessment",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa3_allocation",
+      "label": "Resource Allocation",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa3_review",
+      "label": "Periodic Review",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "line_of_business_1",
+      "label": "Line of Business Solution A",
+      "type": "system",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob1_case_mgmt",
+      "label": "Case Management Module",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob1_document_store",
+      "label": "Document Store",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob1_reporting",
+      "label": "Operational Reporting",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "line_of_business_2",
+      "label": "Line of Business Solution B",
+      "type": "system",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob2_case_mgmt",
+      "label": "Case Management Module",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob2_document_store",
+      "label": "Document Store",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob2_reporting",
+      "label": "Operational Reporting",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "line_of_business_3",
+      "label": "Line of Business Solution C",
+      "type": "system",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob3_case_mgmt",
+      "label": "Case Management Module",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob3_document_store",
+      "label": "Document Store",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob3_reporting",
+      "label": "Operational Reporting",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "det_partial_resolution",
+      "label": "Partial Resolution",
+      "type": "subnode",
+      "layer": 5,
+      "detail": "Determination does not always close a case \u2014 partial outcome or further information request loops back through the architecture",
+      "rank": 5
+    },
+    {
+      "id": "det_referral_out",
+      "label": "Referral Out",
+      "type": "subnode",
+      "layer": 5,
+      "detail": "Case referred to another service area, team, or external body",
+      "rank": 5
+    },
+    {
+      "id": "technology_foundations",
+      "label": "Technology Foundations",
+      "type": "layer",
+      "layer": null,
+      "rank": 6,
+      "detail": "The infrastructure and standards that underpin all layers. Cloud hosting, security and identity, integration, data standards, observability, and verification \u2014 including identity, evidence, residency checks and fraud signals. These capabilities are not rebuilt per service; they gate and support the entire architecture."
+    },
+    {
+      "id": "tf_cloud",
+      "label": "Cloud Infrastructure",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_security",
+      "label": "Security and Identity",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_integration",
+      "label": "Integration Layer",
+      "type": "subnode",
+      "layer": null,
+      "detail": "API gateway, event bus, middleware",
+      "rank": 6
+    },
+    {
+      "id": "tf_data_standards",
+      "label": "Data Standards",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_monitoring_infra",
+      "label": "Observability Platform",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_verification",
+      "label": "Verification",
+      "type": "subnode",
+      "layer": 3,
+      "detail": "Identity, evidence, residency, fraud signals \u2014 gates multiple layers",
+      "rank": 6
+    },
+    {
+      "id": "tf_ver_identity",
+      "label": "Verify Identity",
+      "type": "component",
+      "layer": 3,
+      "detail": "Document check, biometric, GOV.UK One Login",
+      "rank": 6
+    },
+    {
+      "id": "tf_ver_evidence",
+      "label": "Evidence Validation",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_ver_residency",
+      "label": "Residency Check",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_ver_fraud",
+      "label": "Fraud Signals",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "cross_ai",
+      "label": "AI \u2014 Reasoning, Retrieval, Drafting, Routing",
+      "type": "cross_cutting",
+      "layer": null,
+      "rank": 7
+    },
+    {
+      "id": "cross_digital_cx",
+      "label": "Digital and Customer Experience",
+      "type": "cross_cutting",
+      "layer": null,
+      "rank": 7
+    },
+    {
+      "id": "cross_monitoring",
+      "label": "Monitoring and Reporting",
+      "type": "cross_cutting",
+      "layer": null,
+      "rank": 7
+    },
+    {
+      "id": "cross_automation",
+      "label": "Automation",
+      "type": "cross_cutting",
+      "layer": null,
+      "rank": 7
+    },
+    {
+      "id": "cross_resolution_feedback",
+      "label": "Resolution Feedback to Customer",
+      "type": "cross_cutting",
+      "layer": null,
+      "rank": 7
+    },
+    {
+      "id": "cross_accessibility",
+      "label": "Accessibility",
+      "type": "cross_cutting",
+      "layer": null,
+      "detail": "Applies to channels, content, capabilities, and notifications equally",
+      "rank": 7
+    },
+    {
+      "id": "cap_doc_mgmt",
+      "label": "Document Management",
+      "type": "component",
+      "layer": 3,
+      "detail": "Shared capability for storing, retrieving and managing documents across services"
+    },
+    {
+      "id": "cap_resource_mgmt",
+      "label": "Resource Management",
+      "type": "component",
+      "layer": 3,
+      "detail": "Inventory of bookable resources \u2014 staff, slots, physical assets \u2014 consumed by Appointment Booking"
+    },
+    {
+      "id": "pat_find_report",
+      "label": "Find and Report",
+      "type": "pattern",
+      "detail": "User locates the relevant service or place, then submits a report. Common in environmental and highways services."
+    },
+    {
+      "id": "pat_prove_apply",
+      "label": "Prove and Apply",
+      "type": "pattern",
+      "detail": "User establishes their identity and eligibility before submitting a formal application."
+    },
+    {
+      "id": "pat_pay_confirm",
+      "label": "Pay and Confirm",
+      "type": "pattern",
+      "detail": "User makes a payment and receives confirmation. Applies wherever a transaction closes a service interaction."
+    },
+    {
+      "id": "pat_apply_check_notify",
+      "label": "Apply, Check and Notify",
+      "type": "pattern",
+      "detail": "User applies, the Council checks eligibility, and the outcome is communicated back. Core pattern for entitlement services."
+    },
+    {
+      "id": "pat_book_confirm",
+      "label": "Book and Confirm",
+      "type": "pattern",
+      "detail": "User selects and reserves a resource, pays if required, and receives confirmation."
+    },
+    {
+      "id": "pat_track_update",
+      "label": "Track and Update",
+      "type": "pattern",
+      "detail": "User monitors case progress and can push new information back to the Council."
+    },
+    {
+      "id": "pat_order_deliver",
+      "label": "Order and Deliver",
+      "type": "pattern",
+      "detail": "User orders a physical item or document, pays if required, and the Council fulfils the order."
+    },
+    {
+      "id": "svc_report_it",
+      "label": "Report it",
+      "type": "service",
+      "detail": "A resident reports a problem \u2014 a pothole, a missed bin, fly-tipping \u2014 and expects it to be acted on."
+    },
+    {
+      "id": "svc_apply_for",
+      "label": "Apply for something",
+      "type": "service",
+      "detail": "A resident applies for a permit, licence, exemption or entitlement from the Council."
+    },
+    {
+      "id": "svc_pay_for",
+      "label": "Pay for something",
+      "type": "service",
+      "detail": "A resident pays money owed to the Council \u2014 a bill, penalty, or charge."
+    },
+    {
+      "id": "svc_book_it",
+      "label": "Book something",
+      "type": "service",
+      "detail": "A resident books a Council resource \u2014 a room, appointment, or collection."
+    },
+    {
+      "id": "svc_get_support",
+      "label": "Get support",
+      "type": "service",
+      "detail": "A resident establishes eligibility for and receives ongoing Council support."
+    },
+    {
+      "id": "svc_order_it",
+      "label": "Order something",
+      "type": "service",
+      "detail": "A resident orders a physical item from the Council \u2014 a bin, badge, or document."
+    },
+    {
+      "id": "svc_stay_informed",
+      "label": "Stay informed",
+      "type": "service",
+      "detail": "A resident finds information and tracks progress on something that matters to them."
+    },
+    {
+      "id": "layer_integration",
+      "label": "Integration",
+      "type": "layer",
+      "layer": "cross_cutting",
+      "detail": "Cross-cutting integration layer mediating between Capabilities and Orchestration, and between Orchestration and Determination. Not a discrete tier \u2014 present at both seams."
+    },
+    {
+      "id": "int_api_gateway",
+      "label": "API Gateway",
+      "type": "component",
+      "layer": "cross_cutting",
+      "detail": "Unified entry point for service-to-service calls. Handles routing, auth, rate limiting, and versioning."
+    },
+    {
+      "id": "int_event_bus",
+      "label": "Event Bus",
+      "type": "component",
+      "layer": "cross_cutting",
+      "detail": "Async message passing between capabilities, orchestration, and determination layers. Decouples producers from consumers."
+    },
+    {
+      "id": "int_data_exchange",
+      "label": "Data Exchange",
+      "type": "component",
+      "layer": "cross_cutting",
+      "detail": "Canonical data formats and transformation. Ensures consistent data contracts across layer boundaries."
+    },
+    {
+      "id": "int_webhooks",
+      "label": "Webhooks and Callbacks",
+      "type": "component",
+      "layer": "cross_cutting",
+      "detail": "Outbound event notifications to third-party systems and back-office applications."
+    },
+    {
+      "id": "int_idempotency",
+      "label": "Idempotency and Retry",
+      "type": "component",
+      "layer": "cross_cutting",
+      "detail": "Guarantees safe re-delivery of messages and prevents duplicate processing across seams."
+    }
+  ],
+  "edges": [
+    {
+      "source": "customer_needs",
+      "target": "layer_access",
+      "relation": "enters_via",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_access",
+      "target": "channels",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_in_person",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_phone",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_online",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_email",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_letter",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_messaging",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_social",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_access",
+      "target": "interfaces",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_website_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_ivr",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_chatbot",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_human",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_api",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "ch_online",
+      "target": "if_website_app",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ch_phone",
+      "target": "if_ivr",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ch_phone",
+      "target": "if_human",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ch_in_person",
+      "target": "if_human",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ch_messaging",
+      "target": "if_chatbot",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ch_email",
+      "target": "if_human",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "layer_access",
+      "target": "layer_information",
+      "relation": "flows_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_information",
+      "target": "guidance_content",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "guidance_content",
+      "target": "gc_eligibility",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "guidance_content",
+      "target": "gc_process_guides",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "guidance_content",
+      "target": "gc_plain_language",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "guidance_content",
+      "target": "gc_multilingual",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_information",
+      "target": "knowledge_base",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "kb_policies",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "kb_faqs",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "kb_service_rules",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "kb_legislation",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "kb_precedents",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_information",
+      "target": "status_updates",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "status_updates",
+      "target": "su_case_tracker",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "status_updates",
+      "target": "su_milestones",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "status_updates",
+      "target": "su_expected_timelines",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "status_updates",
+      "target": "su_decision_letters",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_information",
+      "target": "layer_capabilities",
+      "relation": "flows_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_capabilities",
+      "target": "online_services",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "online_services",
+      "target": "os_forms",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "online_services",
+      "target": "os_uploads",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "online_services",
+      "target": "os_save_resume",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "online_services",
+      "target": "os_declarations",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_capabilities",
+      "target": "shared_components",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "sc_payments",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "sc_bookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "sc_address_lookup",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "sc_map",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_capabilities",
+      "target": "notifications",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "notifications",
+      "target": "notif_sms",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "notifications",
+      "target": "notif_email",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "notifications",
+      "target": "notif_push",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "notifications",
+      "target": "notif_letter",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "notifications",
+      "target": "notif_preferences",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_capabilities",
+      "target": "layer_orchestration",
+      "relation": "flows_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "rules_routing",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rules_routing",
+      "target": "rr_triage",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rules_routing",
+      "target": "rr_assignment",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rules_routing",
+      "target": "rr_escalation",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rules_routing",
+      "target": "rr_priority",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rules_routing",
+      "target": "rr_workflow",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "central_customer_record",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "ccr_profile",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "ccr_interaction_history",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "ccr_case_links",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "ccr_vulnerability",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "ccr_consent",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "slas_customer_care",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "sla_commitments",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "sla_breach_alerts",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "sla_surveys",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "sla_complaints",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "layer_determination",
+      "relation": "flows_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "service_area_1",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_1",
+      "target": "sa1_application",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_1",
+      "target": "sa1_assessment",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_1",
+      "target": "sa1_decision",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_1",
+      "target": "sa1_appeal",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "service_area_2",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_2",
+      "target": "sa2_application",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_2",
+      "target": "sa2_assessment",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_2",
+      "target": "sa2_decision",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_2",
+      "target": "sa2_appeal",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "service_area_3",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_3",
+      "target": "sa3_referral",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_3",
+      "target": "sa3_assessment",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_3",
+      "target": "sa3_allocation",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_3",
+      "target": "sa3_review",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_1",
+      "target": "line_of_business_1",
+      "relation": "supported_by",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_1",
+      "target": "lob1_case_mgmt",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_1",
+      "target": "lob1_document_store",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_1",
+      "target": "lob1_reporting",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_2",
+      "target": "line_of_business_2",
+      "relation": "supported_by",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_2",
+      "target": "lob2_case_mgmt",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_2",
+      "target": "lob2_document_store",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_2",
+      "target": "lob2_reporting",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_3",
+      "target": "line_of_business_3",
+      "relation": "supported_by",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_3",
+      "target": "lob3_case_mgmt",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_3",
+      "target": "lob3_document_store",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_3",
+      "target": "lob3_reporting",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "technology_foundations",
+      "relation": "flows_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_cloud",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_security",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_integration",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_data_standards",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_monitoring_infra",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_verification",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "tf_ver_identity",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "tf_ver_evidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "tf_ver_residency",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "tf_ver_fraud",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "layer_access",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "layer_information",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "layer_capabilities",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "layer_orchestration",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "layer_determination",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "cross_resolution_feedback",
+      "relation": "triggers",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_resolution_feedback",
+      "target": "layer_access",
+      "relation": "returns_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_monitoring",
+      "target": "layer_access",
+      "relation": "monitors",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_monitoring",
+      "target": "layer_capabilities",
+      "relation": "monitors",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_monitoring",
+      "target": "layer_orchestration",
+      "relation": "monitors",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_monitoring",
+      "target": "layer_determination",
+      "relation": "monitors",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_automation",
+      "target": "layer_orchestration",
+      "relation": "automates",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_automation",
+      "target": "layer_determination",
+      "relation": "automates",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_access",
+      "relation": "operates_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_information",
+      "relation": "operates_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_capabilities",
+      "relation": "operates_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_orchestration",
+      "relation": "operates_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_determination",
+      "relation": "operates_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_digital_cx",
+      "target": "layer_access",
+      "relation": "shapes",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_digital_cx",
+      "target": "layer_information",
+      "relation": "shapes",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_digital_cx",
+      "target": "layer_capabilities",
+      "relation": "shapes",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_digital_cx",
+      "target": "layer_orchestration",
+      "relation": "shapes",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_digital_cx",
+      "target": "layer_determination",
+      "relation": "shapes",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "layer_access",
+      "relation": "applies_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "layer_information",
+      "relation": "applies_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "layer_capabilities",
+      "relation": "applies_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "notifications",
+      "relation": "applies_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "if_website_app",
+      "relation": "applies_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "if_ivr",
+      "relation": "applies_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "if_chatbot",
+      "relation": "applies_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "gc_plain_language",
+      "relation": "requires",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "gc_multilingual",
+      "relation": "requires",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "kb_policies",
+      "target": "gc_eligibility",
+      "relation": "defines",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "kb_legislation",
+      "target": "kb_service_rules",
+      "relation": "grounds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "kb_precedents",
+      "target": "sa1_decision",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "kb_precedents",
+      "target": "sa2_decision",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "kb_precedents",
+      "target": "sa3_assessment",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "if_chatbot",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "gc_eligibility",
+      "target": "rr_triage",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_ver_identity",
+      "target": "rr_triage",
+      "relation": "gates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_ver_fraud",
+      "target": "rr_escalation",
+      "relation": "triggers",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "layer_access",
+      "relation": "gates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "layer_capabilities",
+      "relation": "gates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "layer_determination",
+      "relation": "gates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ccr_vulnerability",
+      "target": "rr_priority",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "os_uploads",
+      "target": "tf_ver_evidence",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "os_forms",
+      "target": "sa1_application",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "os_forms",
+      "target": "sa2_application",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "os_forms",
+      "target": "sa3_referral",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_workflow",
+      "target": "sa1_assessment",
+      "relation": "drives",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_workflow",
+      "target": "sa2_assessment",
+      "relation": "drives",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_workflow",
+      "target": "sa3_assessment",
+      "relation": "drives",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_assignment",
+      "target": "service_area_1",
+      "relation": "routes_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_assignment",
+      "target": "service_area_2",
+      "relation": "routes_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_assignment",
+      "target": "service_area_3",
+      "relation": "routes_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa1_decision",
+      "target": "su_decision_letters",
+      "relation": "generates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa2_decision",
+      "target": "su_decision_letters",
+      "relation": "generates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa3_allocation",
+      "target": "su_decision_letters",
+      "relation": "generates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "su_milestones",
+      "target": "notif_sms",
+      "relation": "triggers",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "su_milestones",
+      "target": "notif_email",
+      "relation": "triggers",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sla_breach_alerts",
+      "target": "rr_escalation",
+      "relation": "triggers",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ccr_interaction_history",
+      "target": "sla_surveys",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ccr_case_links",
+      "target": "su_case_tracker",
+      "relation": "populates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "slas_customer_care",
+      "relation": "supports",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ccr_consent",
+      "target": "notif_preferences",
+      "relation": "governs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "lob1_case_mgmt",
+      "target": "ccr_case_links",
+      "relation": "syncs_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "lob2_case_mgmt",
+      "target": "ccr_case_links",
+      "relation": "syncs_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "lob3_case_mgmt",
+      "target": "ccr_case_links",
+      "relation": "syncs_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_integration",
+      "target": "lob1_case_mgmt",
+      "relation": "connects",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_integration",
+      "target": "lob2_case_mgmt",
+      "relation": "connects",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_integration",
+      "target": "lob3_case_mgmt",
+      "relation": "connects",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_integration",
+      "target": "central_customer_record",
+      "relation": "connects",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_security",
+      "target": "tf_ver_identity",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_data_standards",
+      "target": "central_customer_record",
+      "relation": "governs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_monitoring_infra",
+      "target": "cross_monitoring",
+      "relation": "enables",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "status_updates",
+      "target": "cross_resolution_feedback",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa1_appeal",
+      "target": "rr_escalation",
+      "relation": "re-enters_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa2_appeal",
+      "target": "rr_escalation",
+      "relation": "re-enters_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_assisted_digital",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "if_human",
+      "target": "if_assisted_digital",
+      "relation": "enables",
+      "confidence": "INFERRED",
+      "note": "Human officer mediates digital process on customer's behalf"
+    },
+    {
+      "source": "guidance_content",
+      "target": "info_self_resolution",
+      "relation": "enables",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "info_self_resolution",
+      "relation": "enables",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "info_self_resolution",
+      "target": "cross_resolution_feedback",
+      "relation": "triggers",
+      "confidence": "EXTRACTED",
+      "note": "Customer gets answer and exits without a case being raised"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "sla_performance",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "sla_performance",
+      "target": "cross_monitoring",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "det_partial_resolution",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "det_partial_resolution",
+      "target": "layer_capabilities",
+      "relation": "loops_back_to",
+      "confidence": "EXTRACTED",
+      "note": "Further information request re-enters at capabilities layer"
+    },
+    {
+      "source": "det_partial_resolution",
+      "target": "layer_information",
+      "relation": "loops_back_to",
+      "confidence": "EXTRACTED",
+      "note": "Partial resolution may return additional status/guidance"
+    },
+    {
+      "source": "layer_determination",
+      "target": "det_referral_out",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "det_referral_out",
+      "target": "cross_resolution_feedback",
+      "relation": "triggers",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "det_referral_out",
+      "target": "rr_assignment",
+      "relation": "re-enters_via",
+      "confidence": "INFERRED",
+      "note": "Internal referral routes back through orchestration assignment"
+    },
+    {
+      "source": "shared_components",
+      "target": "service_area_1",
+      "relation": "shared_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "service_area_2",
+      "relation": "shared_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "service_area_3",
+      "relation": "shared_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_third_party_referral",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "ch_third_party_referral",
+      "target": "if_api",
+      "relation": "delivered_via",
+      "confidence": "INFERRED",
+      "note": "Structured referrals via partner portal or system-to-system API"
+    },
+    {
+      "source": "ch_third_party_referral",
+      "target": "if_human",
+      "relation": "delivered_via",
+      "confidence": "INFERRED",
+      "note": "Unstructured referrals via phone or email from a professional"
+    },
+    {
+      "source": "ch_third_party_referral",
+      "target": "rr_triage",
+      "relation": "enters_via",
+      "confidence": "INFERRED",
+      "note": "Referral enters orchestration triage rather than self-service interaction path"
+    },
+    {
+      "source": "layer_customer",
+      "target": "customer_needs",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_customer",
+      "target": "customer_outcomes",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "need_information",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "need_transactional",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "need_support",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "need_notification",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "need_referral",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_outcomes",
+      "target": "outcome_resolved",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_outcomes",
+      "target": "outcome_partial",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_outcomes",
+      "target": "outcome_referred",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_outcomes",
+      "target": "outcome_informed",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_outcomes",
+      "target": "outcome_appealed",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "layer_access",
+      "relation": "enters_via",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "need_information",
+      "target": "layer_information",
+      "relation": "primarily_served_by",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "need_transactional",
+      "target": "layer_capabilities",
+      "relation": "primarily_served_by",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "need_support",
+      "target": "layer_determination",
+      "relation": "primarily_served_by",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "need_referral",
+      "target": "ch_third_party_referral",
+      "relation": "primarily_served_by",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "need_notification",
+      "target": "notifications",
+      "relation": "primarily_served_by",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "cross_resolution_feedback",
+      "target": "customer_outcomes",
+      "relation": "delivers",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "info_self_resolution",
+      "target": "outcome_informed",
+      "relation": "produces",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "det_partial_resolution",
+      "target": "outcome_partial",
+      "relation": "produces",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "det_referral_out",
+      "target": "outcome_referred",
+      "relation": "produces",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "sa1_decision",
+      "target": "outcome_resolved",
+      "relation": "produces",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa2_decision",
+      "target": "outcome_resolved",
+      "relation": "produces",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa3_allocation",
+      "target": "outcome_resolved",
+      "relation": "produces",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa1_appeal",
+      "target": "outcome_appealed",
+      "relation": "produces",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa2_appeal",
+      "target": "outcome_appealed",
+      "relation": "produces",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "layer_capabilities",
+      "target": "cap_doc_mgmt",
+      "label": "contains"
+    },
+    {
+      "source": "layer_capabilities",
+      "target": "cap_resource_mgmt",
+      "label": "contains"
+    },
+    {
+      "source": "cap_resource_mgmt",
+      "target": "sc_bookings",
+      "label": "feeds"
+    },
+    {
+      "source": "pat_find_report",
+      "target": "sc_map",
+      "label": "requires"
+    },
+    {
+      "source": "pat_find_report",
+      "target": "sc_address_lookup",
+      "label": "requires"
+    },
+    {
+      "source": "pat_find_report",
+      "target": "notif_email",
+      "label": "requires"
+    },
+    {
+      "source": "pat_find_report",
+      "target": "notif_sms",
+      "label": "requires"
+    },
+    {
+      "source": "pat_find_report",
+      "target": "notif_push",
+      "label": "requires"
+    },
+    {
+      "source": "pat_prove_apply",
+      "target": "tf_ver_identity",
+      "label": "requires"
+    },
+    {
+      "source": "pat_prove_apply",
+      "target": "cap_doc_mgmt",
+      "label": "requires"
+    },
+    {
+      "source": "pat_prove_apply",
+      "target": "os_forms",
+      "label": "requires"
+    },
+    {
+      "source": "pat_prove_apply",
+      "target": "os_uploads",
+      "label": "requires"
+    },
+    {
+      "source": "pat_prove_apply",
+      "target": "rr_workflow",
+      "label": "requires"
+    },
+    {
+      "source": "pat_pay_confirm",
+      "target": "sc_payments",
+      "label": "requires"
+    },
+    {
+      "source": "pat_pay_confirm",
+      "target": "notif_email",
+      "label": "requires"
+    },
+    {
+      "source": "pat_pay_confirm",
+      "target": "notif_sms",
+      "label": "requires"
+    },
+    {
+      "source": "pat_pay_confirm",
+      "target": "notif_letter",
+      "label": "requires"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "os_forms",
+      "label": "requires"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "os_uploads",
+      "label": "requires"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "rr_workflow",
+      "label": "requires"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "rr_triage",
+      "label": "requires"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "notif_email",
+      "label": "requires"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "notif_sms",
+      "label": "requires"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "notif_letter",
+      "label": "requires"
+    },
+    {
+      "source": "pat_book_confirm",
+      "target": "sc_bookings",
+      "label": "requires"
+    },
+    {
+      "source": "pat_book_confirm",
+      "target": "cap_resource_mgmt",
+      "label": "requires"
+    },
+    {
+      "source": "pat_book_confirm",
+      "target": "sc_payments",
+      "label": "requires"
+    },
+    {
+      "source": "pat_book_confirm",
+      "target": "notif_email",
+      "label": "requires"
+    },
+    {
+      "source": "pat_book_confirm",
+      "target": "notif_sms",
+      "label": "requires"
+    },
+    {
+      "source": "pat_track_update",
+      "target": "su_case_tracker",
+      "label": "requires"
+    },
+    {
+      "source": "pat_track_update",
+      "target": "status_updates",
+      "label": "requires"
+    },
+    {
+      "source": "pat_track_update",
+      "target": "notif_email",
+      "label": "requires"
+    },
+    {
+      "source": "pat_track_update",
+      "target": "notif_sms",
+      "label": "requires"
+    },
+    {
+      "source": "pat_track_update",
+      "target": "notif_push",
+      "label": "requires"
+    },
+    {
+      "source": "pat_order_deliver",
+      "target": "os_forms",
+      "label": "requires"
+    },
+    {
+      "source": "pat_order_deliver",
+      "target": "sc_payments",
+      "label": "requires"
+    },
+    {
+      "source": "pat_order_deliver",
+      "target": "cap_doc_mgmt",
+      "label": "requires"
+    },
+    {
+      "source": "pat_order_deliver",
+      "target": "notif_email",
+      "label": "requires"
+    },
+    {
+      "source": "pat_order_deliver",
+      "target": "notif_letter",
+      "label": "requires"
+    },
+    {
+      "source": "pat_find_report",
+      "target": "guidance_content",
+      "label": "requires"
+    },
+    {
+      "source": "pat_find_report",
+      "target": "gc_process_guides",
+      "label": "requires"
+    },
+    {
+      "source": "pat_prove_apply",
+      "target": "gc_eligibility",
+      "label": "requires"
+    },
+    {
+      "source": "pat_prove_apply",
+      "target": "gc_process_guides",
+      "label": "requires"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "gc_eligibility",
+      "label": "requires"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "kb_service_rules",
+      "label": "requires"
+    },
+    {
+      "source": "pat_track_update",
+      "target": "su_case_tracker",
+      "label": "requires"
+    },
+    {
+      "source": "pat_track_update",
+      "target": "status_updates",
+      "label": "requires"
+    },
+    {
+      "source": "pat_track_update",
+      "target": "su_milestones",
+      "label": "requires"
+    },
+    {
+      "source": "pat_track_update",
+      "target": "su_decision_letters",
+      "label": "requires"
+    },
+    {
+      "source": "pat_order_deliver",
+      "target": "gc_process_guides",
+      "label": "requires"
+    },
+    {
+      "source": "pat_book_confirm",
+      "target": "gc_eligibility",
+      "label": "requires"
+    },
+    {
+      "source": "pat_book_confirm",
+      "target": "gc_process_guides",
+      "label": "requires"
+    },
+    {
+      "source": "pat_pay_confirm",
+      "target": "gc_process_guides",
+      "label": "requires"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "pat_find_report",
+      "label": "uses"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "pat_track_update",
+      "label": "uses"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "pat_prove_apply",
+      "label": "uses"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "pat_apply_check_notify",
+      "label": "uses"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "pat_pay_confirm",
+      "label": "uses"
+    },
+    {
+      "source": "svc_pay_for",
+      "target": "pat_pay_confirm",
+      "label": "uses"
+    },
+    {
+      "source": "svc_book_it",
+      "target": "pat_book_confirm",
+      "label": "uses"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "pat_apply_check_notify",
+      "label": "uses"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "pat_track_update",
+      "label": "uses"
+    },
+    {
+      "source": "svc_order_it",
+      "target": "pat_order_deliver",
+      "label": "uses"
+    },
+    {
+      "source": "svc_stay_informed",
+      "target": "pat_track_update",
+      "label": "uses"
+    },
+    {
+      "source": "layer_integration",
+      "target": "int_api_gateway",
+      "label": "contains"
+    },
+    {
+      "source": "layer_integration",
+      "target": "int_event_bus",
+      "label": "contains"
+    },
+    {
+      "source": "layer_integration",
+      "target": "int_data_exchange",
+      "label": "contains"
+    },
+    {
+      "source": "layer_integration",
+      "target": "int_webhooks",
+      "label": "contains"
+    },
+    {
+      "source": "layer_integration",
+      "target": "int_idempotency",
+      "label": "contains"
+    },
+    {
+      "source": "online_services",
+      "target": "layer_integration",
+      "label": "integrates_via"
+    },
+    {
+      "source": "shared_components",
+      "target": "layer_integration",
+      "label": "integrates_via"
+    },
+    {
+      "source": "notifications",
+      "target": "layer_integration",
+      "label": "integrates_via"
+    },
+    {
+      "source": "tf_ver_identity",
+      "target": "layer_integration",
+      "label": "integrates_via"
+    },
+    {
+      "source": "cap_doc_mgmt",
+      "target": "layer_integration",
+      "label": "integrates_via"
+    },
+    {
+      "source": "cap_resource_mgmt",
+      "target": "layer_integration",
+      "label": "integrates_via"
+    },
+    {
+      "source": "layer_integration",
+      "target": "rules_routing",
+      "label": "integrates_via"
+    },
+    {
+      "source": "layer_integration",
+      "target": "central_customer_record",
+      "label": "integrates_via"
+    },
+    {
+      "source": "layer_integration",
+      "target": "slas_customer_care",
+      "label": "integrates_via"
+    },
+    {
+      "source": "rules_routing",
+      "target": "layer_integration",
+      "label": "integrates_via"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "layer_integration",
+      "label": "integrates_via"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "layer_integration",
+      "label": "integrates_via"
+    },
+    {
+      "source": "layer_integration",
+      "target": "service_area_1",
+      "label": "integrates_via"
+    },
+    {
+      "source": "layer_integration",
+      "target": "service_area_2",
+      "label": "integrates_via"
+    },
+    {
+      "source": "layer_integration",
+      "target": "service_area_3",
+      "label": "integrates_via"
+    }
+  ],
+  "metadata": {
+    "source": "council-architecture-v12.svg",
+    "version": "v10",
+    "changes_from_v1": [
+      "Renamed layer 1 from Presentation to Access",
+      "Replaced Direct Digital / AI-Assisted / Person-Assisted components with Channels and Interfaces",
+      "Removed AI-Assisted as a structural component \u2014 AI retained as cross-cutting concern only",
+      "Renamed layer 3 from Interaction to Capabilities",
+      "Moved Verification from Capabilities layer into Technology Foundations",
+      "Added Accessibility as an explicit cross-cutting concern"
+    ],
+    "node_count": 131,
+    "edge_count": 237,
+    "node_types": [
+      "entry_point",
+      "layer",
+      "component",
+      "subnode",
+      "system",
+      "foundation",
+      "cross_cutting"
+    ],
+    "edge_confidence_levels": [
+      "EXTRACTED",
+      "INFERRED"
+    ],
+    "layers": {
+      "1": "Access",
+      "2": "Information",
+      "3": "Capabilities",
+      "4": "Orchestration",
+      "5": "Determination",
+      "0": "Customer"
+    },
+    "cross_cutting_concerns": [
+      "AI \u2014 Reasoning, Retrieval, Drafting, Routing",
+      "Digital and Customer Experience",
+      "Monitoring and Reporting",
+      "Automation",
+      "Resolution Feedback to Customer",
+      "Accessibility"
+    ],
+    "changes_from_v2": [
+      "Added Assisted Digital as Interface subnode (confirmed in PPTX, flagged from v1 diff)",
+      "Added Self-Resolution subnode on Information layer \u2014 need fully resolved without a case being raised (PPTX slide 3)",
+      "Added Performance Reporting as SLA subnode (PPTX slide 5 explicitly lists: service commitments, satisfaction, performance)",
+      "Added Partial Resolution subnode on Determination layer with loop-back edges to Capabilities and Information (PPTX slide 6: determination does not always close a case)",
+      "Added Referral Out subnode on Determination (PPTX slide 6: referrals are a distinct outcome alongside approvals/refusals/allocations)",
+      "Added shared_across edges from Shared Components to all three service areas (PPTX slide 4: built once, used across all service areas)"
+    ],
+    "changes_from_v3": [
+      "Added Third-Party Referral as a Channel subnode in the Access layer",
+      "Delivered via API (structured partner/portal referrals) or Human (phone/email from professionals)",
+      "Enters orchestration at triage rather than the customer self-service path"
+    ],
+    "changes_from_v4": [
+      "Replaced all instances of 'resident' / 'Resident' with 'customer' / 'Customer'"
+    ],
+    "changes_from_v5": [
+      "Replaced single resident_needs entry_point with a Customer Needs and Outcomes cluster",
+      "Customer Needs: Information, Transactional, Support, Reporting/Notification, Referral",
+      "Customer Outcomes: Resolved, Partially Resolved, Referred, Informed (no case), Appealed",
+      "Need types mapped to their primary serving layer",
+      "Outcome nodes wired to resolution feedback, determination subnodes, and self-resolution"
+    ],
+    "changes_from_v6": [
+      "Nodes reordered top-to-bottom matching SVG layout: Customer theme \u2192 Access \u2192 Information \u2192 Capabilities \u2192 Orchestration \u2192 Determination \u2192 Foundations \u2192 Cross-cutting",
+      "rank property added to every node (0=customer theme, 1=access, 2=information, 3=capabilities, 4=orchestration, 5=determination, 6=foundations, 7=cross-cutting)"
+    ],
+    "changes_from_v7": [
+      "Renamed customer_theme to layer_customer \u2014 Customer is now a proper layer (rank 0) alongside Access, Information, Capabilities, Orchestration, Determination",
+      "layer property set to 0 for all Customer layer nodes"
+    ],
+    "changes_from_v8": [
+      "Added detail descriptions to all layer nodes and foundations, drawn from PPTX slides and conversation context"
+    ],
+    "changes_from_v9": [
+      "Fixed technology_foundations node type from 'foundation' to 'layer' for consistency"
+    ]
+  }
+}

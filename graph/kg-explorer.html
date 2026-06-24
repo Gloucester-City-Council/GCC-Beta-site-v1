@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Council Architecture — Graph Explorer</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181c27;
+    --surface2: #1f2436;
+    --border: #2a3050;
+    --text: #e2e8f0;
+    --text-dim: #7a86a1;
+    --text-muted: #4a5470;
+
+    --service:    #7c6af7;
+    --pattern:    #3eb8d4;
+    --layer:      #f0a04b;
+    --component:  #4caf8a;
+    --subnode:    #3d7abf;
+    --cross:      #e05c7a;
+    --system:     #a0b0c0;
+
+    --requires:   #3eb8d4;
+    --uses:       #7c6af7;
+    --contains:   #4caf8a;
+    --integrates: #e05c7a;
+    --feeds:      #f0a04b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+  }
+
+  header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: var(--surface);
+  }
+
+  header h1 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  .filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  .filter-chip {
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.05em;
+  }
+  .filter-chip:hover { border-color: var(--text-dim); color: var(--text); }
+  .filter-chip.active { color: var(--bg); border-color: transparent; }
+  .filter-chip[data-type="service"].active    { background: var(--service); }
+  .filter-chip[data-type="pattern"].active    { background: var(--pattern); }
+  .filter-chip[data-type="layer"].active      { background: var(--layer); }
+  .filter-chip[data-type="component"].active  { background: var(--component); }
+  .filter-chip[data-type="subnode"].active    { background: var(--subnode); }
+  .filter-chip[data-type="cross_cutting"].active { background: var(--cross); }
+  .filter-chip[data-type="system"].active     { background: var(--system); }
+  .filter-chip[data-type="all"].active        { background: var(--text-dim); }
+
+  #search {
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    width: 180px;
+    outline: none;
+  }
+  #search:focus { border-color: var(--text-dim); }
+  #search::placeholder { color: var(--text-muted); }
+
+  .main {
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    overflow: hidden;
+  }
+
+  /* LEFT — node list */
+  .node-list {
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    background: var(--surface);
+  }
+
+  .node-list-item {
+    padding: 9px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.1s;
+  }
+  .node-list-item:hover { background: var(--surface2); }
+  .node-list-item.selected { background: var(--surface2); outline: 1px solid var(--border); }
+
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .node-label { flex: 1; line-height: 1.3; }
+  .node-type-tag {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* CENTRE — detail panel */
+  .detail {
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .detail-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .detail-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .detail-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .detail-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-family: system-ui, sans-serif;
+  }
+
+  .detail-meta {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .detail-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    font-family: system-ui, sans-serif;
+  }
+
+  .connections-section h3 {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .conn-group { margin-bottom: 16px; }
+
+  .conn-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+  .conn-label.requires    { background: rgba(62,184,212,0.15); color: var(--requires); }
+  .conn-label.uses        { background: rgba(124,106,247,0.15); color: var(--uses); }
+  .conn-label.contains    { background: rgba(76,175,138,0.15); color: var(--contains); }
+  .conn-label.integrates_via { background: rgba(224,92,122,0.15); color: var(--integrates); }
+  .conn-label.feeds       { background: rgba(240,160,75,0.15); color: var(--feeds); }
+  .conn-label.other       { background: rgba(122,134,161,0.15); color: var(--text-dim); }
+  .conn-label.inbound     { opacity: 0.7; }
+
+  .conn-node {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 3px;
+    border: 1px solid transparent;
+    transition: border-color 0.1s, background 0.1s;
+  }
+  .conn-node:hover { background: var(--surface2); border-color: var(--border); }
+  .conn-node-label { font-family: system-ui, sans-serif; font-size: 13px; }
+  .conn-node-type { font-size: 10px; color: var(--text-muted); margin-left: auto; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* RIGHT — breadcrumb trail */
+  .trail {
+    border-left: 1px solid var(--border);
+    background: var(--surface);
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .trail-header {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .trail-clear {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 10px;
+    font-family: inherit;
+    padding: 0;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .trail-clear:hover { color: var(--text); }
+
+  .trail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border-color 0.1s;
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+  }
+  .trail-item:hover { border-color: var(--border); background: var(--surface2); }
+  .trail-item.current { border-color: var(--border); background: var(--surface2); }
+
+  .trail-connector {
+    padding-left: 18px;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .trail-empty {
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 8px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .count-badge {
+    font-size: 10px;
+    color: var(--text-muted);
+    padding: 0 6px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    margin-left: auto;
+  }
+
+  .layer-badge {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: var(--surface2);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    grid-column: 1 / -1;
+  }
+
+  .error-msg {
+    color: var(--cross);
+    padding: 20px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Architecture KG</h1>
+  <div class="filters" id="filters">
+    <button class="filter-chip active" data-type="all">All</button>
+    <button class="filter-chip" data-type="service">Service</button>
+    <button class="filter-chip" data-type="pattern">Pattern</button>
+    <button class="filter-chip" data-type="layer">Layer</button>
+    <button class="filter-chip" data-type="component">Component</button>
+    <button class="filter-chip" data-type="subnode">Subnode</button>
+    <button class="filter-chip" data-type="cross_cutting">Integration</button>
+    <button class="filter-chip" data-type="system">System</button>
+  </div>
+  <input id="search" type="text" placeholder="Search nodes…">
+</header>
+
+<div class="main" id="main">
+  <div class="loading" id="loading">Loading graph…</div>
+</div>
+
+<script>
+const TYPE_COLORS = {
+  service:      '#7c6af7',
+  pattern:      '#3eb8d4',
+  layer:        '#f0a04b',
+  component:    '#4caf8a',
+  subnode:      '#3d7abf',
+  cross_cutting:'#e05c7a',
+  system:       '#a0b0c0',
+};
+
+const LAYER_LABELS = {
+  0: 'L0 Customer',
+  1: 'L1 Access',
+  2: 'L2 Information',
+  3: 'L3 Capabilities',
+  4: 'L4 Orchestration',
+  5: 'L5 Determination',
+  cross_cutting: 'Cross-cutting',
+};
+
+let graph = null;
+let selectedId = null;
+let activeFilter = 'all';
+let searchTerm = '';
+let trail = []; // [{id, via}]
+
+// Build adjacency
+let outEdges = {}; // id -> [{target, label}]
+let inEdges = {};  // id -> [{source, label}]
+
+function buildIndex() {
+  graph.nodes.forEach(n => { outEdges[n.id] = []; inEdges[n.id] = []; });
+  graph.edges.forEach(e => {
+    const lbl = e.label || '?';
+    if (outEdges[e.source]) outEdges[e.source].push({ target: e.target, label: lbl });
+    if (inEdges[e.target])  inEdges[e.target].push({ source: e.source, label: lbl });
+  });
+}
+
+function nodeById(id) {
+  return graph.nodes.find(n => n.id === id);
+}
+
+function colorFor(type) {
+  return TYPE_COLORS[type] || '#888';
+}
+
+function layerLabel(layer) {
+  if (layer === null || layer === undefined || layer === 'none' || layer === 'None') return '';
+  return LAYER_LABELS[layer] || String(layer);
+}
+
+function filteredNodes() {
+  return graph.nodes.filter(n => {
+    const typeMatch = activeFilter === 'all' || n.type === activeFilter;
+    const searchMatch = !searchTerm || n.label.toLowerCase().includes(searchTerm);
+    return typeMatch && searchMatch;
+  });
+}
+
+// ---- Render ----
+
+function renderAll() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+
+  // Left
+  const listEl = document.createElement('div');
+  listEl.className = 'node-list';
+  listEl.id = 'node-list';
+  main.appendChild(listEl);
+
+  // Centre
+  const detailEl = document.createElement('div');
+  detailEl.className = 'detail';
+  detailEl.id = 'detail';
+  main.appendChild(detailEl);
+
+  // Right
+  const trailEl = document.createElement('div');
+  trailEl.className = 'trail';
+  trailEl.id = 'trail';
+  main.appendChild(trailEl);
+
+  renderList();
+  renderDetail();
+  renderTrail();
+}
+
+function renderList() {
+  const listEl = document.getElementById('node-list');
+  if (!listEl) return;
+  const nodes = filteredNodes();
+  listEl.innerHTML = '';
+
+  nodes.forEach(n => {
+    const item = document.createElement('div');
+    item.className = 'node-list-item' + (n.id === selectedId ? ' selected' : '');
+    item.dataset.id = n.id;
+
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.style.background = colorFor(n.type);
+
+    const labelWrap = document.createElement('div');
+    labelWrap.className = 'node-label';
+    labelWrap.textContent = n.label;
+
+    const typeTag = document.createElement('div');
+    typeTag.className = 'node-type-tag';
+    const ll = layerLabel(n.layer);
+    typeTag.textContent = ll ? ll : n.type;
+
+    item.appendChild(dot);
+    item.appendChild(labelWrap);
+    item.appendChild(typeTag);
+
+    item.addEventListener('click', () => selectNode(n.id, null));
+    listEl.appendChild(item);
+  });
+
+  if (nodes.length === 0) {
+    listEl.innerHTML = '<div style="padding:16px;color:var(--text-muted);font-size:11px;text-transform:uppercase;letter-spacing:0.08em;">No nodes match</div>';
+  }
+}
+
+function renderDetail() {
+  const el = document.getElementById('detail');
+  if (!el) return;
+
+  if (!selectedId) {
+    el.innerHTML = '<div class="detail-empty">Select a node to explore</div>';
+    return;
+  }
+
+  const node = nodeById(selectedId);
+  if (!node) { el.innerHTML = '<div class="detail-empty">Node not found</div>'; return; }
+
+  const color = colorFor(node.type);
+  const ll = layerLabel(node.layer);
+  const meta = [node.type, ll].filter(Boolean).join(' · ').toUpperCase();
+
+  // Group outbound edges by label
+  const outs = outEdges[node.id] || [];
+  const ins  = inEdges[node.id]  || [];
+
+  const groupBy = (arr, key) => arr.reduce((acc, item) => {
+    const k = item[key] || '?';
+    if (!acc[k]) acc[k] = [];
+    acc[k].push(item);
+    return acc;
+  }, {});
+
+  const outGroups = groupBy(outs, 'label');
+  const inGroups  = groupBy(ins,  'label');
+
+  let html = `
+    <div class="detail-header">
+      <div class="detail-dot" style="background:${color}"></div>
+      <div>
+        <div class="detail-title">${node.label}</div>
+        <div class="detail-meta">${meta}</div>
+      </div>
+    </div>`;
+
+  if (node.detail) {
+    html += `<div class="detail-desc">${node.detail}</div>`;
+  }
+
+  // Outbound connections
+  if (outs.length > 0) {
+    html += `<div class="connections-section"><h3>Connects to</h3>`;
+    Object.entries(outGroups).forEach(([label, edges]) => {
+      const cls = label.replace(/[^a-z_]/gi,'').toLowerCase();
+      html += `<div class="conn-group"><div class="conn-label ${cls}">${label}</div>`;
+      edges.forEach(e => {
+        const t = nodeById(e.target);
+        if (!t) return;
+        html += `<div class="conn-node" data-id="${t.id}">
+          <div class="dot" style="background:${colorFor(t.type)}"></div>
+          <div class="conn-node-label">${t.label}</div>
+          <div class="conn-node-type">${t.type}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Inbound connections
+  if (ins.length > 0) {
+    html += `<div class="connections-section"><h3>Referenced by</h3>`;
+    Object.entries(inGroups).forEach(([label, edges]) => {
+      const cls = label.replace(/[^a-z_]/gi,'').toLowerCase();
+      html += `<div class="conn-group"><div class="conn-label ${cls} inbound">← ${label}</div>`;
+      edges.forEach(e => {
+        const s = nodeById(e.source);
+        if (!s) return;
+        html += `<div class="conn-node" data-id="${s.id}">
+          <div class="dot" style="background:${colorFor(s.type)}"></div>
+          <div class="conn-node-label">${s.label}</div>
+          <div class="conn-node-type">${s.type}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+  }
+
+  el.innerHTML = html;
+
+  // Attach click handlers for conn-nodes
+  el.querySelectorAll('.conn-node').forEach(el2 => {
+    el2.addEventListener('click', () => {
+      const id = el2.dataset.id;
+      // Find the edge label between current and this node
+      const edge = outs.find(e => e.target === id) || ins.find(e => e.source === id);
+      const via = edge ? edge.label : null;
+      selectNode(id, via);
+    });
+  });
+}
+
+function renderTrail() {
+  const el = document.getElementById('trail');
+  if (!el) return;
+
+  el.innerHTML = `<div class="trail-header">
+    <span>Walk history</span>
+    <button class="trail-clear" id="trail-clear">Clear</button>
+  </div>`;
+
+  if (trail.length === 0) {
+    el.innerHTML += `<div class="trail-empty">Walk the graph by clicking connections</div>`;
+  } else {
+    trail.forEach((step, i) => {
+      const node = nodeById(step.id);
+      if (!node) return;
+      const isCurrent = i === trail.length - 1;
+
+      if (i > 0 && step.via) {
+        const connector = document.createElement('div');
+        connector.className = 'trail-connector';
+        connector.textContent = `↓ ${step.via}`;
+        el.appendChild(connector);
+      }
+
+      const item = document.createElement('div');
+      item.className = 'trail-item' + (isCurrent ? ' current' : '');
+
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.style.background = colorFor(node.type);
+      dot.style.flexShrink = '0';
+
+      const label = document.createElement('div');
+      label.textContent = node.label;
+
+      item.appendChild(dot);
+      item.appendChild(label);
+      item.addEventListener('click', () => {
+        // Jump back to this point in trail
+        trail = trail.slice(0, i + 1);
+        selectedId = step.id;
+        renderList();
+        renderDetail();
+        renderTrail();
+        scrollToSelected();
+      });
+
+      el.appendChild(item);
+    });
+  }
+
+  document.getElementById('trail-clear')?.addEventListener('click', () => {
+    trail = [];
+    renderTrail();
+  });
+}
+
+function selectNode(id, via) {
+  selectedId = id;
+
+  // Add to trail — if already in trail truncate to that point, else append
+  const existingIdx = trail.findIndex(t => t.id === id);
+  if (existingIdx >= 0) {
+    trail = trail.slice(0, existingIdx + 1);
+  } else {
+    trail.push({ id, via });
+  }
+
+  renderList();
+  renderDetail();
+  renderTrail();
+  scrollToSelected();
+}
+
+function scrollToSelected() {
+  const listEl = document.getElementById('node-list');
+  const selected = listEl?.querySelector('.selected');
+  if (selected) selected.scrollIntoView({ block: 'nearest' });
+}
+
+// ---- Load ----
+
+async function loadGraph() {
+  try {
+    const res = await fetch('council-architecture-v12-kg-v13.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    graph = await res.json();
+    buildIndex();
+    document.getElementById('loading')?.remove();
+    renderAll();
+    setupControls();
+  } catch(err) {
+    document.getElementById('loading').innerHTML = `<div class="error-msg">
+      Could not load graph file.<br><br>
+      Make sure <code>council-architecture-v12-kg-v13.json</code> is in the same directory as this HTML file.<br><br>
+      Error: ${err.message}
+    </div>`;
+  }
+}
+
+function setupControls() {
+  // Filters
+  document.getElementById('filters').addEventListener('click', e => {
+    const chip = e.target.closest('.filter-chip');
+    if (!chip) return;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.dataset.type;
+    renderList();
+  });
+
+  // Search
+  document.getElementById('search').addEventListener('input', e => {
+    searchTerm = e.target.value.toLowerCase().trim();
+    renderList();
+  });
+}
+
+loadGraph();
+</script>
+</body>
+</html>
