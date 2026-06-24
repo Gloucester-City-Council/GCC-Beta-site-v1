@@ -1,0 +1,89 @@
+{
+  "nodes": [
+    { "id": "step_find",    "label": "Find",     "type": "step", "description": "The user wishes to find information, advice or guidance to help them achieve their goal." },
+    { "id": "step_identify","label": "Identify", "type": "step", "description": "To achieve their goal, the user needs to identify who they are." },
+    { "id": "step_report",  "label": "Report",   "type": "step", "description": "The user wishes to report something that is wrong to the Council." },
+    { "id": "step_request", "label": "Request",  "type": "step", "description": "The user wants to request something from the Council." },
+    { "id": "step_check",   "label": "Check",    "type": "step", "description": "The council needs to check whether a person is eligible for the service they are requesting." },
+    { "id": "step_book",    "label": "Book",     "type": "step", "description": "The user needs to book a meeting, a room, or some other asset from the Council." },
+    { "id": "step_apply",   "label": "Apply",    "type": "step", "description": "The user needs to apply for something from the Council, such as a permit or a licence." },
+    { "id": "step_order",   "label": "Order",    "type": "step", "description": "The user wishes to order something from the Council." },
+    { "id": "step_notify",  "label": "Notify",   "type": "step", "description": "The user needs to be notified about the status of their interaction with the Council." },
+    { "id": "step_track",   "label": "Track",    "type": "step", "description": "The user wants to proactively track where things are at with their interaction with the Council." },
+    { "id": "step_update",  "label": "Update",   "type": "step", "description": "The user wishes to update the Council with new information." },
+    { "id": "step_pay",     "label": "Pay",      "type": "step", "description": "The user wants to pay some money they owe to the Council." },
+    { "id": "step_feedback","label": "Feedback", "type": "step", "description": "The user wants to let the Council know what they think." },
+
+    { "id": "tech_publishing",          "label": "Publishing",          "type": "tech_component" },
+    { "id": "tech_search",              "label": "Search",              "type": "tech_component" },
+    { "id": "tech_directory",           "label": "Directory",           "type": "tech_component" },
+    { "id": "tech_map",                 "label": "Map",                 "type": "tech_component" },
+    { "id": "tech_verify_identity",     "label": "Verify identity",     "type": "tech_component" },
+    { "id": "tech_document_management", "label": "Document management", "type": "tech_component" },
+    { "id": "tech_data_capture",        "label": "Data capture",        "type": "tech_component" },
+    { "id": "tech_case_management",     "label": "Case management",     "type": "tech_component" },
+    { "id": "tech_integration",         "label": "Integration",         "type": "tech_component" },
+    { "id": "tech_payment",             "label": "Payment",             "type": "tech_component" },
+    { "id": "tech_notification",        "label": "Notification",        "type": "tech_component" },
+    { "id": "tech_resource_management", "label": "Resource management", "type": "tech_component" }
+  ],
+  "edges": [
+    { "source": "step_find",     "target": "tech_publishing",          "relation": "requires" },
+    { "source": "step_find",     "target": "tech_search",              "relation": "requires" },
+    { "source": "step_find",     "target": "tech_directory",           "relation": "requires" },
+    { "source": "step_find",     "target": "tech_map",                 "relation": "requires" },
+
+    { "source": "step_identify", "target": "tech_verify_identity",     "relation": "requires" },
+    { "source": "step_identify", "target": "tech_document_management", "relation": "requires" },
+
+    { "source": "step_report",   "target": "tech_data_capture",        "relation": "requires" },
+    { "source": "step_report",   "target": "tech_document_management", "relation": "requires" },
+    { "source": "step_report",   "target": "tech_case_management",     "relation": "requires" },
+    { "source": "step_report",   "target": "tech_integration",         "relation": "requires" },
+    { "source": "step_report",   "target": "tech_map",                 "relation": "requires" },
+
+    { "source": "step_request",  "target": "tech_data_capture",        "relation": "requires" },
+    { "source": "step_request",  "target": "tech_document_management", "relation": "requires" },
+    { "source": "step_request",  "target": "tech_payment",             "relation": "requires" },
+    { "source": "step_request",  "target": "tech_case_management",     "relation": "requires" },
+    { "source": "step_request",  "target": "tech_integration",         "relation": "requires" },
+
+    { "source": "step_check",    "target": "tech_case_management",     "relation": "requires" },
+    { "source": "step_check",    "target": "tech_integration",         "relation": "requires" },
+
+    { "source": "step_book",     "target": "tech_data_capture",        "relation": "requires" },
+    { "source": "step_book",     "target": "tech_resource_management", "relation": "requires" },
+    { "source": "step_book",     "target": "tech_payment",             "relation": "requires" },
+    { "source": "step_book",     "target": "tech_case_management",     "relation": "requires" },
+    { "source": "step_book",     "target": "tech_integration",         "relation": "requires" },
+
+    { "source": "step_apply",    "target": "tech_data_capture",        "relation": "requires" },
+    { "source": "step_apply",    "target": "tech_document_management", "relation": "requires" },
+    { "source": "step_apply",    "target": "tech_payment",             "relation": "requires" },
+    { "source": "step_apply",    "target": "tech_case_management",     "relation": "requires" },
+    { "source": "step_apply",    "target": "tech_integration",         "relation": "requires" },
+
+    { "source": "step_order",    "target": "tech_data_capture",        "relation": "requires" },
+    { "source": "step_order",    "target": "tech_payment",             "relation": "requires" },
+    { "source": "step_order",    "target": "tech_case_management",     "relation": "requires" },
+    { "source": "step_order",    "target": "tech_integration",         "relation": "requires" },
+
+    { "source": "step_notify",   "target": "tech_notification",        "relation": "requires" },
+
+    { "source": "step_track",    "target": "tech_verify_identity",     "relation": "requires" },
+    { "source": "step_track",    "target": "tech_case_management",     "relation": "requires" },
+    { "source": "step_track",    "target": "tech_integration",         "relation": "requires" },
+
+    { "source": "step_update",   "target": "tech_data_capture",        "relation": "requires" },
+    { "source": "step_update",   "target": "tech_case_management",     "relation": "requires" },
+    { "source": "step_update",   "target": "tech_document_management", "relation": "requires" },
+    { "source": "step_update",   "target": "tech_notification",        "relation": "requires" },
+
+    { "source": "step_pay",      "target": "tech_payment",             "relation": "requires" },
+    { "source": "step_pay",      "target": "tech_integration",         "relation": "requires" },
+
+    { "source": "step_feedback", "target": "tech_data_capture",        "relation": "requires" },
+    { "source": "step_feedback", "target": "tech_case_management",     "relation": "requires" },
+    { "source": "step_feedback", "target": "tech_document_management", "relation": "requires" }
+  ]
+}
