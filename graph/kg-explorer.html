@@ -580,6 +580,7 @@ function el(tag, cls) {
 /* ── CONTROLS ── */
 
 document.getElementById('chips').addEventListener('click', ev => {
+  if (!G) return;
   const c = ev.target.closest('.chip'); if (!c) return;
   document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
   c.classList.add('on');
@@ -588,6 +589,7 @@ document.getElementById('chips').addEventListener('click', ev => {
 });
 
 document.getElementById('q').addEventListener('input', ev => {
+  if (!G) return;
   q = ev.target.value.toLowerCase().trim();
   renderList(document.querySelector('.list-pane'));
 });
@@ -602,9 +604,6 @@ fetch('council-architecture-v12-kg-v14.json')
     const lp = el('div','list-pane'), dp = el('div','detail-pane'), tp = el('div','trail-pane');
     document.getElementById('panes').append(lp, dp, tp);
     renderList(lp); renderDetail(dp); renderTrail(tp);
-
-    document.getElementById('chips').addEventListener('click', () => renderList(document.querySelector('.list-pane')));
-    document.getElementById('q').addEventListener('input', () => renderList(document.querySelector('.list-pane')));
   })
   .catch(err => {
     document.getElementById('panes').innerHTML =
