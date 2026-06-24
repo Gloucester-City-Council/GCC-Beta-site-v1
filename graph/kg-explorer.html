@@ -445,40 +445,38 @@ function renderDetail() {
 
   if (n.detail) { const d = el('div','node-detail'); d.textContent = n.detail; pane.appendChild(d); }
 
-  const dbg = el('div','node-detail');
-  dbg.style.fontSize = '10px';
-  dbg.style.color = 'var(--dim)';
-  dbg.textContent = 'out:' + (outE[sel]?.length||0) + ' in:' + (inE[sel]?.length||0);
-  pane.appendChild(dbg);
+  renderConnSection(pane, outE[sel]||[], 'Connects to', false);
+  renderConnSection(pane, inE[sel]||[], 'Referenced by', true);
+}
 
-  function connSection(edges, heading, isInbound) {
-    if (!edges.length) return;
-    const sec = el('div','conn-section');
-    const h = el('div','conn-head'); h.textContent = heading; sec.appendChild(h);
-    const groups = {};
-    edges.forEach(e => { if (!groups[e.label]) groups[e.label]=[]; groups[e.label].push(e.id); });
-    Object.entries(groups).forEach(([lbl, ids]) => {
-      const g = el('div','rel-group');
-      const tag = el('div','rel-tag '+relClass(lbl));
-      tag.textContent = isInbound ? '← '+lbl : lbl;
-      g.appendChild(tag);
-      ids.forEach(id => {
-        const t = nodeMap[id]; if (!t) return;
-        const row = el('div','conn-node');
-        const dot = el('div','conn-dot'); dot.style.background = color(t.type);
-        const l = el('div','conn-label'); l.textContent = t.label;
-        const ty = el('div','conn-type'); ty.textContent = t.type.replace('_',' ');
-        row.appendChild(dot); row.appendChild(l); row.appendChild(ty);
-        row.addEventListener('click', () => pick(id, lbl));
-        g.appendChild(row);
-      });
-      sec.appendChild(g);
+function renderConnSection(pane, edges, heading, isInbound) {
+  if (!edges.length) return;
+  const sec = el('div','conn-section');
+  const h = el('div','conn-head'); h.textContent = heading; sec.appendChild(h);
+  const groups = {};
+  edges.forEach(e => {
+    const lbl = e.label || 'part of';
+    if (!groups[lbl]) groups[lbl] = [];
+    groups[lbl].push(e.id);
+  });
+  Object.entries(groups).forEach(([lbl, ids]) => {
+    const g = el('div','rel-group');
+    const tag = el('div','rel-tag '+relClass(lbl));
+    tag.textContent = isInbound ? '← '+lbl : lbl;
+    g.appendChild(tag);
+    ids.forEach(id => {
+      const t = nodeMap[id]; if (!t) return;
+      const row = el('div','conn-node');
+      const dot = el('div','conn-dot'); dot.style.background = color(t.type);
+      const l = el('div','conn-label'); l.textContent = t.label;
+      const ty = el('div','conn-type'); ty.textContent = t.type.replace('_',' ');
+      row.appendChild(dot); row.appendChild(l); row.appendChild(ty);
+      row.addEventListener('click', () => pick(id, lbl));
+      g.appendChild(row);
     });
-    pane.appendChild(sec);
-  }
-
-  connSection(outE[sel]||[], 'Connects to', false);
-  connSection(inE[sel]||[], 'Referenced by', true);
+    sec.appendChild(g);
+  });
+  pane.appendChild(sec);
 }
 
 function renderTrail() {
