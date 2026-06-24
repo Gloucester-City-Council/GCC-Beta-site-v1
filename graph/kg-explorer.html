@@ -129,11 +129,12 @@ header {
 /* ── LEFT LIST ── */
 .list-pane {
   border-right: 1px solid var(--border);
-  overflow-y: auto;
+  overflow-y: scroll;
   background: var(--surface);
 }
 .list-pane::-webkit-scrollbar { width: 3px; }
 .list-pane::-webkit-scrollbar-thumb { background: var(--border2); }
+.list-pane { scrollbar-gutter: stable; }
 
 .list-empty {
   padding: 20px 14px;
@@ -170,6 +171,7 @@ header {
 }
 .detail-pane::-webkit-scrollbar { width: 3px; }
 .detail-pane::-webkit-scrollbar-thumb { background: var(--border2); }
+.detail-pane { scrollbar-gutter: stable; }
 
 .detail-empty {
   display: flex;
@@ -254,6 +256,7 @@ header {
 }
 .trail-pane::-webkit-scrollbar { width: 3px; }
 .trail-pane::-webkit-scrollbar-thumb { background: var(--border2); }
+.trail-pane { scrollbar-gutter: stable; }
 
 .trail-head {
   display: flex;
@@ -542,7 +545,7 @@ document.getElementById('q').addEventListener('input', ev => {
   renderList();
 });
 
-fetch('council-architecture-v12-kg-v14.json')
+fetch('council-architecture-v12-kg-v15.json')
   .then(r => { if (!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
   .then(data => {
     G = data; build();
@@ -550,7 +553,7 @@ fetch('council-architecture-v12-kg-v14.json')
   })
   .catch(err => {
     document.getElementById('detail-pane').innerHTML =
-      '<div style="padding:32px;color:#c45080;font-size:12px;line-height:1.8">Could not load <code>council-architecture-v12-kg-v14.json</code><br>Error: '+err.message+'</div>';
+      '<div style="padding:32px;color:#c45080;font-size:12px;line-height:1.8">Could not load <code>council-architecture-v12-kg-v15.json</code><br>Error: '+err.message+'</div>';
   });
 </script>
 </body>
