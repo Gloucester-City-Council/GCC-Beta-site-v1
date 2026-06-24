@@ -339,89 +339,65 @@ header {
 </header>
 
 <div class="panes" id="panes">
-  <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">
-    Loading…
-  </div>
+  <div class="list-pane" id="list-pane"><div class="list-empty">Loading…</div></div>
+  <div class="detail-pane" id="detail-pane"><div class="detail-empty">Loading…</div></div>
+  <div class="trail-pane" id="trail-pane"></div>
 </div>
+
 
 <script>
 const TYPE_COLOR = {
-  service:      '#7c6af7',
-  pattern:      '#27a8c4',
-  layer:        '#e09a3a',
-  component:    '#3ea87a',
-  subnode:      '#3d72b8',
-  cross_cutting:'#c45080',
-  system:       '#7a8899',
-};
-
-const TYPE_BG = {
-  service:      '#2a1f5a',
-  pattern:      '#0f3a45',
-  layer:        '#3d2a0a',
-  component:    '#0f3020',
-  subnode:      '#0f2040',
-  cross_cutting:'#3a1025',
-  system:       '#202830',
+  service:'#7c6af7', pattern:'#27a8c4', layer:'#e09a3a',
+  component:'#3ea87a', subnode:'#3d72b8', cross_cutting:'#c45080', system:'#7a8899'
 };
 
 function relClass(label) {
-  if (!label) return 'rel-other';
-  const l = label.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z-]/g,'');
   const map = {
     'comprises':'rel-comprises','requires':'rel-requires','feeds':'rel-feeds',
     'governs':'rel-governs','integrates':'rel-integrates','produces':'rel-produces',
-    'informs':'rel-informs','uses':'rel-uses','depends-on':'rel-depends',
-    'resolved-by':'rel-resolved','contains':'rel-contains',
-    'implemented-by':'rel-implemented','enters-via':'rel-enters',
+    'informs':'rel-informs','uses':'rel-uses','depends on':'rel-depends',
+    'resolved by':'rel-resolved','contains':'rel-contains',
+    'implemented by':'rel-implemented','enters via':'rel-enters','part of':'rel-other'
   };
-  return map[l] || 'rel-other';
+  return map[label] || 'rel-other';
 }
 
 function layerTag(layer) {
-  if (layer === null || layer === undefined) return '';
-  const m = { 0:'L0 Customer', 1:'L1 Access', 2:'L2 Information', 3:'L3 Capabilities', 4:'L4 Orchestration', 5:'L5 Determination', cross_cutting:'Cross-cutting' };
-  return m[layer] || String(layer);
+  const m = {0:'L0 Customer',1:'L1 Access',2:'L2 Information',3:'L3 Capabilities',4:'L4 Orchestration',5:'L5 Determination',cross_cutting:'Cross-cutting'};
+  return (layer !== null && layer !== undefined) ? (m[layer] || String(layer)) : '';
 }
 
-let G = null, out = {}, inn = {}, nodeMap = {};
-let sel = null, filter = 'all', q = '', trail = [];
+function color(type) { return TYPE_COLOR[type] || '#888'; }
+
+function el(tag, cls) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  return e;
+}
+
+let G = null, nodeMap = {}, outE = {}, inE = {};
+let sel = null, activeFilter = 'all', searchQ = '', trail = [];
 
 function build() {
-  G.nodes.forEach(n => { out[n.id] = []; inn[n.id] = []; nodeMap[n.id] = n; });
+  nodeMap = {}; outE = {}; inE = {};
+  G.nodes.forEach(n => { nodeMap[n.id] = n; outE[n.id] = []; inE[n.id] = []; });
   G.edges.forEach(e => {
     const lbl = e.label || 'part of';
-    out[e.source]?.push({ id: e.target, label: lbl });
-    inn[e.target]?.push({ id: e.source, label: lbl });
+    if (outE[e.source]) outE[e.source].push({ id: e.target, label: lbl });
+    if (inE[e.target])  inE[e.target].push({ id: e.source, label: lbl });
   });
 }
 
 function visible() {
   return G.nodes.filter(n => {
-    if (filter !== 'all' && n.type !== filter) return false;
-    if (q && !n.label.toLowerCase().includes(q)) return false;
+    if (activeFilter !== 'all' && n.type !== activeFilter) return false;
+    if (searchQ && !n.label.toLowerCase().includes(searchQ)) return false;
     return true;
   });
 }
 
-function color(type) { return TYPE_COLOR[type] || '#888'; }
-
-/* ── RENDER ── */
-
-function render() {
-  const panes = document.getElementById('panes');
-  panes.innerHTML = '';
-
-  const lp = el('div','list-pane'); panes.appendChild(lp);
-  const dp = el('div','detail-pane'); panes.appendChild(dp);
-  const tp = el('div','trail-pane'); panes.appendChild(tp);
-
-  renderList(lp);
-  renderDetail(dp);
-  renderTrail(tp);
-}
-
-function renderList(pane) {
+function renderList() {
+  const pane = document.getElementById('list-pane');
   pane.innerHTML = '';
   const nodes = visible();
   if (!nodes.length) {
@@ -430,13 +406,11 @@ function renderList(pane) {
   }
   nodes.forEach(n => {
     const item = el('div', 'list-item' + (n.id === sel ? ' sel' : ''));
-    const dot = el('div','list-dot');
-    dot.style.background = color(n.type);
+    const dot = el('div','list-dot'); dot.style.background = color(n.type);
     const text = el('div','list-text');
     const lbl = el('div','list-label'); lbl.textContent = n.label;
     const meta = el('div','list-meta');
-    const lt = layerTag(n.layer);
-    meta.textContent = lt || n.type;
+    meta.textContent = layerTag(n.layer) || n.type;
     text.appendChild(lbl); text.appendChild(meta);
     item.appendChild(dot); item.appendChild(text);
     item.addEventListener('click', () => pick(n.id, null));
@@ -444,7 +418,9 @@ function renderList(pane) {
   });
 }
 
-function renderDetail(pane) {
+function renderDetail() {
+  const pane = document.getElementById('detail-pane');
+  pane.innerHTML = '';
   if (!sel) {
     pane.innerHTML = '<div class="detail-empty">Select a node</div>';
     return;
@@ -452,164 +428,119 @@ function renderDetail(pane) {
   const n = nodeMap[sel];
   if (!n) return;
 
-  // Header
   const header = el('div','node-header');
-  const bigdot = el('div','node-bigdot');
-  bigdot.style.background = color(n.type);
+  const bigdot = el('div','node-bigdot'); bigdot.style.background = color(n.type);
   const htext = el('div');
   const title = el('div','node-title'); title.textContent = n.label;
   const badges = el('div','node-badges');
-  const tb = el('span','badge type');
-  tb.style.background = color(n.type);
-  tb.textContent = n.type.replace('_',' ');
+  const tb = el('span','badge type'); tb.style.background = color(n.type); tb.textContent = n.type.replace('_',' ');
   badges.appendChild(tb);
   const lt = layerTag(n.layer);
-  if (lt) {
-    const lb = el('span','badge'); lb.textContent = lt; badges.appendChild(lb);
-  }
-  const deg = el('span','badge');
-  deg.textContent = ((out[sel]?.length||0) + (inn[sel]?.length||0)) + ' connections';
+  if (lt) { const lb = el('span','badge'); lb.textContent = lt; badges.appendChild(lb); }
+  const deg = el('span','badge'); deg.textContent = ((outE[sel]?.length||0)+(inE[sel]?.length||0))+' connections';
   badges.appendChild(deg);
   htext.appendChild(title); htext.appendChild(badges);
   header.appendChild(bigdot); header.appendChild(htext);
   pane.appendChild(header);
 
-  if (n.detail) {
-    const d = el('div','node-detail'); d.textContent = n.detail; pane.appendChild(d);
-  }
+  if (n.detail) { const d = el('div','node-detail'); d.textContent = n.detail; pane.appendChild(d); }
 
-  // Outbound
-  if (out[sel]?.length) {
+  function connSection(edges, heading, isInbound) {
+    if (!edges.length) return;
     const sec = el('div','conn-section');
-    const h = el('div','conn-head'); h.textContent = 'Connects to'; sec.appendChild(h);
-    renderConnGroups(sec, out[sel], 'target');
-    pane.appendChild(sec);
-  }
-
-  // Inbound
-  if (inn[sel]?.length) {
-    const sec = el('div','conn-section');
-    const h = el('div','conn-head'); h.textContent = 'Referenced by'; sec.appendChild(h);
-    renderConnGroups(sec, inn[sel], 'source');
-    pane.appendChild(sec);
-  }
-}
-
-function renderConnGroups(sec, edges, dir) {
-  const groups = {};
-  edges.forEach(e => {
-    const lbl = e.label || 'part of';
-    if (!groups[lbl]) groups[lbl] = [];
-    groups[lbl].push(e.id);
-  });
-  Object.entries(groups).forEach(([lbl, ids]) => {
-    const g = el('div','rel-group');
-    const tag = el('div','rel-tag ' + relClass(lbl));
-    tag.textContent = lbl + (dir === 'source' ? ' ←' : '');
-    g.appendChild(tag);
-    ids.forEach(id => {
-      const t = nodeMap[id]; if (!t) return;
-      const row = el('div','conn-node');
-      const dot = el('div','conn-dot'); dot.style.background = color(t.type);
-      const lbl2 = el('div','conn-label'); lbl2.textContent = t.label;
-      const typ = el('div','conn-type'); typ.textContent = t.type.replace('_',' ');
-      row.appendChild(dot); row.appendChild(lbl2); row.appendChild(typ);
-      row.addEventListener('click', () => pick(id, lbl));
-      g.appendChild(row);
+    const h = el('div','conn-head'); h.textContent = heading; sec.appendChild(h);
+    const groups = {};
+    edges.forEach(e => { if (!groups[e.label]) groups[e.label]=[]; groups[e.label].push(e.id); });
+    Object.entries(groups).forEach(([lbl, ids]) => {
+      const g = el('div','rel-group');
+      const tag = el('div','rel-tag '+relClass(lbl));
+      tag.textContent = isInbound ? '← '+lbl : lbl;
+      g.appendChild(tag);
+      ids.forEach(id => {
+        const t = nodeMap[id]; if (!t) return;
+        const row = el('div','conn-node');
+        const dot = el('div','conn-dot'); dot.style.background = color(t.type);
+        const l = el('div','conn-label'); l.textContent = t.label;
+        const ty = el('div','conn-type'); ty.textContent = t.type.replace('_',' ');
+        row.appendChild(dot); row.appendChild(l); row.appendChild(ty);
+        row.addEventListener('click', () => pick(id, lbl));
+        g.appendChild(row);
+      });
+      sec.appendChild(g);
     });
-    sec.appendChild(g);
-  });
+    pane.appendChild(sec);
+  }
+
+  connSection(outE[sel]||[], 'Connects to', false);
+  connSection(inE[sel]||[], 'Referenced by', true);
 }
 
-function renderTrail(pane) {
+function renderTrail() {
+  const pane = document.getElementById('trail-pane');
+  pane.innerHTML = '';
   const head = el('div','trail-head');
   head.innerHTML = '<span>Walk</span>';
   const clr = el('button','trail-clear'); clr.textContent = 'Clear';
-  clr.addEventListener('click', () => { trail = []; renderTrail(document.querySelector('.trail-pane')); });
-  head.appendChild(clr);
-  pane.appendChild(head);
+  clr.addEventListener('click', () => { trail = []; renderTrail(); });
+  head.appendChild(clr); pane.appendChild(head);
 
   if (!trail.length) {
-    const e = el('div','trail-empty'); e.textContent = 'Click connections to walk the graph';
-    pane.appendChild(e);
+    const e = el('div','trail-empty'); e.textContent = 'Click connections to walk the graph'; pane.appendChild(e);
     return;
   }
-
   trail.forEach((step, i) => {
     const n = nodeMap[step.id]; if (!n) return;
     const isCur = i === trail.length - 1;
     const s = el('div','trail-step');
-    if (i > 0 && step.via) {
-      const via = el('div','trail-via'); via.textContent = '↓ ' + step.via; s.appendChild(via);
-    }
-    const row = el('div','trail-node' + (isCur ? ' cur' : ''));
-    const dot = el('div','list-dot'); dot.style.background = color(n.type); dot.style.flexShrink = '0';
-    const lbl = el('div'); lbl.textContent = n.label; lbl.style.flex = '1'; lbl.style.fontSize = '11px';
+    if (i > 0 && step.via) { const via = el('div','trail-via'); via.textContent = '↓ '+step.via; s.appendChild(via); }
+    const row = el('div','trail-node'+(isCur?' cur':''));
+    const dot = el('div','list-dot'); dot.style.background = color(n.type); dot.style.flexShrink='0';
+    const lbl = el('div'); lbl.textContent = n.label; lbl.style.flex='1'; lbl.style.fontSize='11px';
     row.appendChild(dot); row.appendChild(lbl);
-    row.addEventListener('click', () => {
-      trail = trail.slice(0, i + 1);
-      sel = step.id;
-      render();
-      scrollToSel();
-    });
-    s.appendChild(row);
-    pane.appendChild(s);
+    row.addEventListener('click', () => { trail = trail.slice(0,i+1); sel = step.id; renderAll(); scrollToSel(); });
+    s.appendChild(row); pane.appendChild(s);
   });
 }
 
-/* ── INTERACTION ── */
+function renderAll() { renderList(); renderDetail(); renderTrail(); }
 
 function pick(id, via) {
   sel = id;
   const idx = trail.findIndex(t => t.id === id);
-  if (idx >= 0) trail = trail.slice(0, idx + 1);
+  if (idx >= 0) trail = trail.slice(0, idx+1);
   else trail.push({ id, via });
-  render();
+  renderAll();
   scrollToSel();
 }
 
 function scrollToSel() {
-  document.querySelector('.list-item.sel')?.scrollIntoView({ block: 'nearest' });
+  document.querySelector('.list-item.sel')?.scrollIntoView({ block:'nearest' });
 }
-
-function el(tag, cls) {
-  const e = document.createElement(tag);
-  if (cls) e.className = cls;
-  return e;
-}
-
-/* ── CONTROLS ── */
 
 document.getElementById('chips').addEventListener('click', ev => {
   if (!G) return;
   const c = ev.target.closest('.chip'); if (!c) return;
   document.querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
   c.classList.add('on');
-  filter = c.dataset.t;
-  renderList(document.querySelector('.list-pane'));
+  activeFilter = c.dataset.t;
+  renderList();
 });
 
 document.getElementById('q').addEventListener('input', ev => {
   if (!G) return;
-  q = ev.target.value.toLowerCase().trim();
-  renderList(document.querySelector('.list-pane'));
+  searchQ = ev.target.value.toLowerCase().trim();
+  renderList();
 });
 
-/* ── LOAD ── */
-
 fetch('council-architecture-v12-kg-v14.json')
-  .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  .then(r => { if (!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
   .then(data => {
     G = data; build();
-    document.getElementById('panes').innerHTML = '';
-    const lp = el('div','list-pane'), dp = el('div','detail-pane'), tp = el('div','trail-pane');
-    document.getElementById('panes').append(lp, dp, tp);
-    renderList(lp); renderDetail(dp); renderTrail(tp);
+    renderAll();
   })
   .catch(err => {
-    document.getElementById('panes').innerHTML =
-      '<div style="grid-column:1/-1;padding:32px;color:#c45080;font-size:12px;line-height:1.8">' +
-      'Could not load <code>council-architecture-v12-kg-v14.json</code> — make sure it is in the same directory.<br>Error: ' + err.message + '</div>';
+    document.getElementById('detail-pane').innerHTML =
+      '<div style="padding:32px;color:#c45080;font-size:12px;line-height:1.8">Could not load <code>council-architecture-v12-kg-v14.json</code><br>Error: '+err.message+'</div>';
   });
 </script>
 </body>
