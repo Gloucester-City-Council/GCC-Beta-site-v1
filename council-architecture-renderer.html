@@ -1,0 +1,3180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Digital Architecture</title>
+<style>
+:root {
+  --bg:      #0d1321;
+  --surface: #131c30;
+  --border:  #1e2d4a;
+  --text:    #e8edf5;
+  --muted:   #6b7fa3;
+  --accent:  #3d7fff;
+  --c0: #7c5cbf;
+  --c1: #2a8f7f;
+  --c2: #5a7fbf;
+  --c3: #3a9e6e;
+  --c4: #4a78c4;
+  --c5: #c4883a;
+  --c6: #5a5a7a;
+  --c7: #8a3a3a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* ── HEADER ── */
+header {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 50;
+}
+header h1 {
+  font-size: 16px;
+  font-weight: 700;
+  flex: 1;
+}
+.stat-pills {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.stat-pill {
+  font-size: 11px;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+.stat-pill strong { color: var(--text); }
+
+/* ── SEARCH ── */
+.search-wrap {
+  padding: 12px 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 53px;
+  z-index: 49;
+}
+.search-wrap input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search-wrap input:focus { border-color: var(--accent); }
+.search-wrap input::placeholder { color: var(--muted); }
+
+/* ── CROSS-CUTTING STRIP ── */
+.cross-strip {
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(138,58,58,0.06);
+}
+.cross-chip {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--c7);
+  border: 1px solid rgba(138,58,58,0.4);
+  border-radius: 4px;
+  padding: 4px 9px;
+  cursor: pointer;
+  transition: background 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.cross-chip:active, .cross-chip.selected {
+  background: rgba(138,58,58,0.2);
+}
+
+/* ── LAYERS ── */
+.layers {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+}
+
+.layer {
+  background: var(--bg);
+  --c-layer: #444;
+}
+
+.layer-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 52px;
+  border-left: 4px solid var(--c-layer);
+  transition: background 0.1s;
+}
+.layer-header:active { background: rgba(255,255,255,0.04); }
+
+.layer-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-layer);
+  flex: 1;
+}
+.layer-meta {
+  font-size: 11px;
+  color: var(--muted);
+}
+.chevron {
+  font-size: 12px;
+  color: var(--muted);
+  transition: transform 0.2s;
+  width: 16px;
+  text-align: center;
+}
+.layer.open .chevron { transform: rotate(90deg); }
+
+/* ── LAYER BODY ── */
+.layer-body {
+  display: none;
+  border-top: 1px solid var(--border);
+  border-left: 4px solid var(--c-layer);
+}
+.layer.open .layer-body { display: block; }
+
+/* ── COMPONENTS ── */
+.component {
+  border-bottom: 1px solid var(--border);
+}
+.component:last-child { border-bottom: none; }
+
+.component-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-height: 48px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.1s;
+}
+.component-header:active { background: rgba(255,255,255,0.04); }
+.component.selected .component-header { background: rgba(255,255,255,0.05); }
+
+.component-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-layer);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+.component-name {
+  font-size: 13px;
+  font-weight: 600;
+  flex: 1;
+}
+.component-badge {
+  font-size: 10px;
+  color: var(--c-layer);
+  opacity: 0.7;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.comp-chevron {
+  font-size: 10px;
+  color: var(--muted);
+  transition: transform 0.2s;
+}
+.component.open .comp-chevron { transform: rotate(90deg); }
+
+/* ── SUBNODES ── */
+.subnodes {
+  display: none;
+  background: rgba(0,0,0,0.15);
+  border-top: 1px solid var(--border);
+}
+.component.open .subnodes { display: block; }
+
+.subnode {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px 11px 32px;
+  border-bottom: 1px solid rgba(30,45,74,0.5);
+  cursor: pointer;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.1s;
+}
+.subnode:last-child { border-bottom: none; }
+.subnode:active { background: rgba(255,255,255,0.04); }
+.subnode.selected { background: rgba(255,255,255,0.06); }
+
+.subnode-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--c-layer);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.subnode-label {
+  font-size: 13px;
+  color: var(--muted);
+  flex: 1;
+  line-height: 1.4;
+}
+.subnode:active .subnode-label,
+.subnode.selected .subnode-label {
+  color: var(--text);
+}
+
+/* ── FOUNDATIONS ── */
+.foundations-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 16px;
+}
+.foundation-chip {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--c6);
+  color: var(--muted);
+  cursor: pointer;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.1s, color 0.1s;
+}
+.foundation-chip:active, .foundation-chip.selected {
+  background: rgba(90,90,122,0.25);
+  color: var(--text);
+}
+
+/* ── DETAIL SHEET ── */
+#detail {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #0a1020;
+  border-top: 2px solid var(--accent);
+  z-index: 100;
+  transform: translateY(100%);
+  transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+  max-height: 60vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#detail.visible {
+  transform: translateY(0);
+}
+
+.detail-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 12px auto 0;
+}
+
+.detail-inner {
+  padding: 12px 16px 24px;
+}
+
+.detail-close-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.detail-close {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  min-height: 36px;
+  min-width: 60px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.detail-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.detail-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.detail-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.detail-edges-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 480px) {
+  .detail-edges-wrap { grid-template-columns: 1fr; }
+}
+
+.detail-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.edge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.edge-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.edge-item.inferred { opacity: 0.55; font-style: italic; }
+.edge-rel {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(61,127,255,0.12);
+  padding: 2px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── SEARCH HIGHLIGHT ── */
+.match { box-shadow: 0 0 0 2px var(--accent) inset !important; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Digital Architecture</h1>
+  <div class="stat-pills">
+    <div class="stat-pill"><strong id="stat-nodes">—</strong> nodes</div>
+    <div class="stat-pill"><strong id="stat-edges">—</strong> edges</div>
+  </div>
+</header>
+
+<div class="search-wrap">
+  <input type="search" id="search" placeholder="Search…" autocomplete="off" autocorrect="off" spellcheck="false">
+</div>
+
+<div class="cross-strip" id="cross-strip"></div>
+
+<div class="layers" id="layers"></div>
+
+<div id="detail">
+  <div class="detail-handle"></div>
+  <div class="detail-inner">
+    <div class="detail-close-row">
+      <div id="detail-title-area"></div>
+      <button class="detail-close" id="detail-close">Close</button>
+    </div>
+    <div id="detail-desc"></div>
+    <div class="detail-edges-wrap">
+      <div>
+        <div class="detail-section-title" id="out-title">Outgoing</div>
+        <div class="edge-list" id="detail-out"></div>
+      </div>
+      <div>
+        <div class="detail-section-title" id="in-title">Incoming</div>
+        <div class="edge-list" id="detail-in"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const LAYER_COLORS = {
+  0:'var(--c0)',1:'var(--c1)',2:'var(--c2)',3:'var(--c3)',
+  4:'var(--c4)',5:'var(--c5)',6:'var(--c6)',7:'var(--c7)'
+};
+const LAYER_NAMES = {
+  0:'Customer',1:'Access',2:'Information',3:'Capabilities',
+  4:'Orchestration',5:'Determination',6:'Foundations',7:'Cross-cutting'
+};
+
+let graph = null;
+let nodeMap = {}, outEdges = {}, inEdges = {};
+
+function loadGraph() {
+  graph = {
+  "nodes": [
+    {
+      "id": "layer_customer",
+      "label": "Customer",
+      "type": "layer",
+      "layer": 0,
+      "rank": 0
+    },
+    {
+      "id": "customer_needs",
+      "label": "Customer Needs",
+      "type": "component",
+      "layer": 0,
+      "rank": 0
+    },
+    {
+      "id": "need_information",
+      "label": "Information Need",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer needs to know something \u2014 eligibility, status, process",
+      "rank": 0
+    },
+    {
+      "id": "need_transactional",
+      "label": "Transactional Need",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer needs to do something \u2014 apply, pay, book, report",
+      "rank": 0
+    },
+    {
+      "id": "need_support",
+      "label": "Support Need",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer needs intervention, assessment, or ongoing provision",
+      "rank": 0
+    },
+    {
+      "id": "need_notification",
+      "label": "Reporting or Notification Need",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer needs to tell the council something, or be told something",
+      "rank": 0
+    },
+    {
+      "id": "need_referral",
+      "label": "Referral Need",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer or third party initiates a referral into a service",
+      "rank": 0
+    },
+    {
+      "id": "customer_outcomes",
+      "label": "Customer Outcomes",
+      "type": "component",
+      "layer": 0,
+      "detail": "What the customer leaves with",
+      "rank": 0
+    },
+    {
+      "id": "outcome_resolved",
+      "label": "Resolved",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Need fully met \u2014 decision made, transaction complete, provision allocated",
+      "rank": 0
+    },
+    {
+      "id": "outcome_partial",
+      "label": "Partially Resolved",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Progress made but case loops back for further information or action",
+      "rank": 0
+    },
+    {
+      "id": "outcome_referred",
+      "label": "Referred",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Case passed to another service area, team, or external body",
+      "rank": 0
+    },
+    {
+      "id": "outcome_informed",
+      "label": "Informed",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Need met at information layer \u2014 no case raised",
+      "rank": 0
+    },
+    {
+      "id": "outcome_appealed",
+      "label": "Appealed",
+      "type": "subnode",
+      "layer": 0,
+      "detail": "Customer contests the determination \u2014 internal review or tribunal route",
+      "rank": 0
+    },
+    {
+      "id": "layer_access",
+      "label": "Access",
+      "type": "layer",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "channels",
+      "label": "Channels",
+      "type": "component",
+      "layer": 1,
+      "detail": "How customers reach the council",
+      "rank": 1
+    },
+    {
+      "id": "ch_in_person",
+      "label": "In Person",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_phone",
+      "label": "Phone",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_online",
+      "label": "Online",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_email",
+      "label": "Email",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_letter",
+      "label": "Letter",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_messaging",
+      "label": "Messaging",
+      "type": "subnode",
+      "layer": 1,
+      "detail": "WhatsApp, SMS",
+      "rank": 1
+    },
+    {
+      "id": "ch_social",
+      "label": "Social Media",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "ch_third_party_referral",
+      "label": "Third-Party Referral",
+      "type": "subnode",
+      "layer": 1,
+      "detail": "Inbound referral from another agency, GP, social care, voluntary sector, or partner organisation on behalf of a customer",
+      "rank": 1
+    },
+    {
+      "id": "interfaces",
+      "label": "Interfaces",
+      "type": "component",
+      "layer": 1,
+      "detail": "How the council presents itself on each channel",
+      "rank": 1
+    },
+    {
+      "id": "if_website_app",
+      "label": "Website / App",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "if_ivr",
+      "label": "Automated Phone IVR",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "if_chatbot",
+      "label": "Chatbot",
+      "type": "subnode",
+      "layer": 1,
+      "rank": 1
+    },
+    {
+      "id": "if_human",
+      "label": "Human",
+      "type": "subnode",
+      "layer": 1,
+      "detail": "Officer, agent, or volunteer",
+      "rank": 1
+    },
+    {
+      "id": "if_api",
+      "label": "APIs",
+      "type": "subnode",
+      "layer": 1,
+      "detail": "Machine-to-machine, partner access",
+      "rank": 1
+    },
+    {
+      "id": "if_assisted_digital",
+      "label": "Assisted Digital",
+      "type": "subnode",
+      "layer": 1,
+      "detail": "Officer completes digital process on behalf of customer",
+      "rank": 1
+    },
+    {
+      "id": "layer_information",
+      "label": "Information",
+      "type": "layer",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "guidance_content",
+      "label": "Guidance Content",
+      "type": "component",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "gc_eligibility",
+      "label": "Eligibility Criteria",
+      "type": "subnode",
+      "layer": 2,
+      "detail": "Who qualifies, conditions, thresholds",
+      "rank": 2
+    },
+    {
+      "id": "gc_process_guides",
+      "label": "Process Guides",
+      "type": "subnode",
+      "layer": 2,
+      "detail": "Step-by-step what to expect",
+      "rank": 2
+    },
+    {
+      "id": "gc_plain_language",
+      "label": "Plain Language Summaries",
+      "type": "subnode",
+      "layer": 2,
+      "detail": "Simplified versions of policy",
+      "rank": 2
+    },
+    {
+      "id": "gc_multilingual",
+      "label": "Multilingual Content",
+      "type": "subnode",
+      "layer": 2,
+      "detail": "Translated and easy-read versions",
+      "rank": 2
+    },
+    {
+      "id": "knowledge_base",
+      "label": "Knowledge Base",
+      "type": "component",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "kb_policies",
+      "label": "Policy Documents",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "kb_faqs",
+      "label": "FAQs",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "kb_service_rules",
+      "label": "Service Rules",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "kb_legislation",
+      "label": "Legislation References",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "kb_precedents",
+      "label": "Decision Precedents",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "status_updates",
+      "label": "Status and Case Updates",
+      "type": "component",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "su_case_tracker",
+      "label": "Case Tracker",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "su_milestones",
+      "label": "Milestone Notifications",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "su_expected_timelines",
+      "label": "Expected Timelines",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "su_decision_letters",
+      "label": "Decision Letters",
+      "type": "subnode",
+      "layer": 2,
+      "rank": 2
+    },
+    {
+      "id": "info_self_resolution",
+      "label": "Self-Resolution",
+      "type": "subnode",
+      "layer": 2,
+      "detail": "Need fully resolved at information layer \u2014 customer gets answer without a case being raised",
+      "rank": 2
+    },
+    {
+      "id": "layer_capabilities",
+      "label": "Capabilities",
+      "type": "layer",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "online_services",
+      "label": "Online Services",
+      "type": "component",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "os_forms",
+      "label": "Digital Forms",
+      "type": "subnode",
+      "layer": 3,
+      "detail": "Structured data capture, conditional logic",
+      "rank": 3
+    },
+    {
+      "id": "os_uploads",
+      "label": "Document Uploads",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "os_save_resume",
+      "label": "Save and Resume",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "os_declarations",
+      "label": "Declarations and Consents",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "shared_components",
+      "label": "Shared Components",
+      "type": "component",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "sc_payments",
+      "label": "Payment Engine",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "sc_bookings",
+      "label": "Appointment Booking",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "sc_address_lookup",
+      "label": "Address Lookup",
+      "type": "subnode",
+      "layer": 3,
+      "detail": "PAF / LLPG integration",
+      "rank": 3
+    },
+    {
+      "id": "sc_map",
+      "label": "Map Component",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notifications",
+      "label": "Notifications",
+      "type": "component",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notif_sms",
+      "label": "SMS",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notif_email",
+      "label": "Email",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notif_push",
+      "label": "Push Notification",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notif_letter",
+      "label": "Automated Letter",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "notif_preferences",
+      "label": "Channel Preferences",
+      "type": "subnode",
+      "layer": 3,
+      "rank": 3
+    },
+    {
+      "id": "layer_orchestration",
+      "label": "Orchestration",
+      "type": "layer",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "rules_routing",
+      "label": "Rules and Routing",
+      "type": "component",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "rr_triage",
+      "label": "Triage Engine",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "rr_assignment",
+      "label": "Assignment Rules",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "rr_escalation",
+      "label": "Escalation Logic",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "rr_priority",
+      "label": "Priority Scoring",
+      "type": "subnode",
+      "layer": 4,
+      "detail": "Vulnerability flags, urgency weighting",
+      "rank": 4
+    },
+    {
+      "id": "rr_workflow",
+      "label": "Workflow Engine",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "central_customer_record",
+      "label": "Central Customer Record",
+      "type": "component",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "ccr_profile",
+      "label": "Customer Profile",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "ccr_interaction_history",
+      "label": "Interaction History",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "ccr_case_links",
+      "label": "Linked Cases",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "ccr_vulnerability",
+      "label": "Vulnerability Indicators",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "ccr_consent",
+      "label": "Consent and Preferences",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "slas_customer_care",
+      "label": "SLAs and Customer Care",
+      "type": "component",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "sla_commitments",
+      "label": "Service Commitments",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "sla_breach_alerts",
+      "label": "Breach Alerts",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "sla_surveys",
+      "label": "Satisfaction Surveys",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "sla_complaints",
+      "label": "Complaints Handling",
+      "type": "subnode",
+      "layer": 4,
+      "rank": 4
+    },
+    {
+      "id": "sla_performance",
+      "label": "Performance Reporting",
+      "type": "subnode",
+      "layer": 4,
+      "detail": "Operational performance metrics against SLA commitments",
+      "rank": 4
+    },
+    {
+      "id": "layer_determination",
+      "label": "Determination",
+      "type": "layer",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "service_area_1",
+      "label": "Service Area A",
+      "type": "component",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa1_application",
+      "label": "Application Processing",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa1_assessment",
+      "label": "Officer Assessment",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa1_decision",
+      "label": "Decision Record",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa1_appeal",
+      "label": "Appeal / Review Path",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "service_area_2",
+      "label": "Service Area B",
+      "type": "component",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa2_application",
+      "label": "Application Processing",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa2_assessment",
+      "label": "Officer Assessment",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa2_decision",
+      "label": "Decision Record",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa2_appeal",
+      "label": "Appeal / Review Path",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "service_area_3",
+      "label": "Service Area C",
+      "type": "component",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa3_referral",
+      "label": "Referral Intake",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa3_assessment",
+      "label": "Needs Assessment",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa3_allocation",
+      "label": "Resource Allocation",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "sa3_review",
+      "label": "Periodic Review",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "line_of_business_1",
+      "label": "Line of Business Solution A",
+      "type": "system",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob1_case_mgmt",
+      "label": "Case Management Module",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob1_document_store",
+      "label": "Document Store",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob1_reporting",
+      "label": "Operational Reporting",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "line_of_business_2",
+      "label": "Line of Business Solution B",
+      "type": "system",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob2_case_mgmt",
+      "label": "Case Management Module",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob2_document_store",
+      "label": "Document Store",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob2_reporting",
+      "label": "Operational Reporting",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "line_of_business_3",
+      "label": "Line of Business Solution C",
+      "type": "system",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob3_case_mgmt",
+      "label": "Case Management Module",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob3_document_store",
+      "label": "Document Store",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "lob3_reporting",
+      "label": "Operational Reporting",
+      "type": "subnode",
+      "layer": 5,
+      "rank": 5
+    },
+    {
+      "id": "det_partial_resolution",
+      "label": "Partial Resolution",
+      "type": "subnode",
+      "layer": 5,
+      "detail": "Determination does not always close a case \u2014 partial outcome or further information request loops back through the architecture",
+      "rank": 5
+    },
+    {
+      "id": "det_referral_out",
+      "label": "Referral Out",
+      "type": "subnode",
+      "layer": 5,
+      "detail": "Case referred to another service area, team, or external body",
+      "rank": 5
+    },
+    {
+      "id": "technology_foundations",
+      "label": "Technology Foundations",
+      "type": "foundation",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_cloud",
+      "label": "Cloud Infrastructure",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_security",
+      "label": "Security and Identity",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_integration",
+      "label": "Integration Layer",
+      "type": "subnode",
+      "layer": null,
+      "detail": "API gateway, event bus, middleware",
+      "rank": 6
+    },
+    {
+      "id": "tf_data_standards",
+      "label": "Data Standards",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_monitoring_infra",
+      "label": "Observability Platform",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_verification",
+      "label": "Verification",
+      "type": "subnode",
+      "layer": null,
+      "detail": "Identity, evidence, residency, fraud signals \u2014 gates multiple layers",
+      "rank": 6
+    },
+    {
+      "id": "tf_ver_identity",
+      "label": "Identity Verification",
+      "type": "subnode",
+      "layer": null,
+      "detail": "Document check, biometric, GOV.UK One Login",
+      "rank": 6
+    },
+    {
+      "id": "tf_ver_evidence",
+      "label": "Evidence Validation",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_ver_residency",
+      "label": "Residency Check",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "tf_ver_fraud",
+      "label": "Fraud Signals",
+      "type": "subnode",
+      "layer": null,
+      "rank": 6
+    },
+    {
+      "id": "cross_ai",
+      "label": "AI \u2014 Reasoning, Retrieval, Drafting, Routing",
+      "type": "cross_cutting",
+      "layer": null,
+      "rank": 7
+    },
+    {
+      "id": "cross_digital_cx",
+      "label": "Digital and Customer Experience",
+      "type": "cross_cutting",
+      "layer": null,
+      "rank": 7
+    },
+    {
+      "id": "cross_monitoring",
+      "label": "Monitoring and Reporting",
+      "type": "cross_cutting",
+      "layer": null,
+      "rank": 7
+    },
+    {
+      "id": "cross_automation",
+      "label": "Automation",
+      "type": "cross_cutting",
+      "layer": null,
+      "rank": 7
+    },
+    {
+      "id": "cross_resolution_feedback",
+      "label": "Resolution Feedback to Customer",
+      "type": "cross_cutting",
+      "layer": null,
+      "rank": 7
+    },
+    {
+      "id": "cross_accessibility",
+      "label": "Accessibility",
+      "type": "cross_cutting",
+      "layer": null,
+      "detail": "Applies to channels, content, capabilities, and notifications equally",
+      "rank": 7
+    }
+  ],
+  "edges": [
+    {
+      "source": "customer_needs",
+      "target": "layer_access",
+      "relation": "enters_via",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_access",
+      "target": "channels",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_in_person",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_phone",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_online",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_email",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_letter",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_messaging",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_social",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_access",
+      "target": "interfaces",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_website_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_ivr",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_chatbot",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_human",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_api",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "ch_online",
+      "target": "if_website_app",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ch_phone",
+      "target": "if_ivr",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ch_phone",
+      "target": "if_human",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ch_in_person",
+      "target": "if_human",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ch_messaging",
+      "target": "if_chatbot",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ch_email",
+      "target": "if_human",
+      "relation": "delivered_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "layer_access",
+      "target": "layer_information",
+      "relation": "flows_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_information",
+      "target": "guidance_content",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "guidance_content",
+      "target": "gc_eligibility",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "guidance_content",
+      "target": "gc_process_guides",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "guidance_content",
+      "target": "gc_plain_language",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "guidance_content",
+      "target": "gc_multilingual",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_information",
+      "target": "knowledge_base",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "kb_policies",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "kb_faqs",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "kb_service_rules",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "kb_legislation",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "kb_precedents",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_information",
+      "target": "status_updates",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "status_updates",
+      "target": "su_case_tracker",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "status_updates",
+      "target": "su_milestones",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "status_updates",
+      "target": "su_expected_timelines",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "status_updates",
+      "target": "su_decision_letters",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_information",
+      "target": "layer_capabilities",
+      "relation": "flows_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_capabilities",
+      "target": "online_services",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "online_services",
+      "target": "os_forms",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "online_services",
+      "target": "os_uploads",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "online_services",
+      "target": "os_save_resume",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "online_services",
+      "target": "os_declarations",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_capabilities",
+      "target": "shared_components",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "sc_payments",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "sc_bookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "sc_address_lookup",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "sc_map",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_capabilities",
+      "target": "notifications",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "notifications",
+      "target": "notif_sms",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "notifications",
+      "target": "notif_email",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "notifications",
+      "target": "notif_push",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "notifications",
+      "target": "notif_letter",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "notifications",
+      "target": "notif_preferences",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_capabilities",
+      "target": "layer_orchestration",
+      "relation": "flows_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "rules_routing",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rules_routing",
+      "target": "rr_triage",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rules_routing",
+      "target": "rr_assignment",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rules_routing",
+      "target": "rr_escalation",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rules_routing",
+      "target": "rr_priority",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "rules_routing",
+      "target": "rr_workflow",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "central_customer_record",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "ccr_profile",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "ccr_interaction_history",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "ccr_case_links",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "ccr_vulnerability",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "ccr_consent",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "slas_customer_care",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "sla_commitments",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "sla_breach_alerts",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "sla_surveys",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "sla_complaints",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_orchestration",
+      "target": "layer_determination",
+      "relation": "flows_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "service_area_1",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_1",
+      "target": "sa1_application",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_1",
+      "target": "sa1_assessment",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_1",
+      "target": "sa1_decision",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_1",
+      "target": "sa1_appeal",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "service_area_2",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_2",
+      "target": "sa2_application",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_2",
+      "target": "sa2_assessment",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_2",
+      "target": "sa2_decision",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_2",
+      "target": "sa2_appeal",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "service_area_3",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_3",
+      "target": "sa3_referral",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_3",
+      "target": "sa3_assessment",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_3",
+      "target": "sa3_allocation",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_3",
+      "target": "sa3_review",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_1",
+      "target": "line_of_business_1",
+      "relation": "supported_by",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_1",
+      "target": "lob1_case_mgmt",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_1",
+      "target": "lob1_document_store",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_1",
+      "target": "lob1_reporting",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_2",
+      "target": "line_of_business_2",
+      "relation": "supported_by",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_2",
+      "target": "lob2_case_mgmt",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_2",
+      "target": "lob2_document_store",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_2",
+      "target": "lob2_reporting",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "service_area_3",
+      "target": "line_of_business_3",
+      "relation": "supported_by",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_3",
+      "target": "lob3_case_mgmt",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_3",
+      "target": "lob3_document_store",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "line_of_business_3",
+      "target": "lob3_reporting",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "technology_foundations",
+      "relation": "flows_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_cloud",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_security",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_integration",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_data_standards",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_monitoring_infra",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "tf_verification",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "tf_ver_identity",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "tf_ver_evidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "tf_ver_residency",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "tf_ver_fraud",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "layer_access",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "layer_information",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "layer_capabilities",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "layer_orchestration",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "technology_foundations",
+      "target": "layer_determination",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "cross_resolution_feedback",
+      "relation": "triggers",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_resolution_feedback",
+      "target": "layer_access",
+      "relation": "returns_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_monitoring",
+      "target": "layer_access",
+      "relation": "monitors",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_monitoring",
+      "target": "layer_capabilities",
+      "relation": "monitors",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_monitoring",
+      "target": "layer_orchestration",
+      "relation": "monitors",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_monitoring",
+      "target": "layer_determination",
+      "relation": "monitors",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_automation",
+      "target": "layer_orchestration",
+      "relation": "automates",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_automation",
+      "target": "layer_determination",
+      "relation": "automates",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_access",
+      "relation": "operates_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_information",
+      "relation": "operates_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_capabilities",
+      "relation": "operates_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_orchestration",
+      "relation": "operates_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_determination",
+      "relation": "operates_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_digital_cx",
+      "target": "layer_access",
+      "relation": "shapes",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_digital_cx",
+      "target": "layer_information",
+      "relation": "shapes",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_digital_cx",
+      "target": "layer_capabilities",
+      "relation": "shapes",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_digital_cx",
+      "target": "layer_orchestration",
+      "relation": "shapes",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_digital_cx",
+      "target": "layer_determination",
+      "relation": "shapes",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "layer_access",
+      "relation": "applies_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "layer_information",
+      "relation": "applies_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "layer_capabilities",
+      "relation": "applies_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "notifications",
+      "relation": "applies_to",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "if_website_app",
+      "relation": "applies_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "if_ivr",
+      "relation": "applies_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "if_chatbot",
+      "relation": "applies_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "gc_plain_language",
+      "relation": "requires",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "cross_accessibility",
+      "target": "gc_multilingual",
+      "relation": "requires",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "kb_policies",
+      "target": "gc_eligibility",
+      "relation": "defines",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "kb_legislation",
+      "target": "kb_service_rules",
+      "relation": "grounds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "kb_precedents",
+      "target": "sa1_decision",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "kb_precedents",
+      "target": "sa2_decision",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "kb_precedents",
+      "target": "sa3_assessment",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "if_chatbot",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "gc_eligibility",
+      "target": "rr_triage",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_ver_identity",
+      "target": "rr_triage",
+      "relation": "gates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_ver_fraud",
+      "target": "rr_escalation",
+      "relation": "triggers",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "layer_access",
+      "relation": "gates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "layer_capabilities",
+      "relation": "gates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_verification",
+      "target": "layer_determination",
+      "relation": "gates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ccr_vulnerability",
+      "target": "rr_priority",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "os_uploads",
+      "target": "tf_ver_evidence",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "os_forms",
+      "target": "sa1_application",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "os_forms",
+      "target": "sa2_application",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "os_forms",
+      "target": "sa3_referral",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_workflow",
+      "target": "sa1_assessment",
+      "relation": "drives",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_workflow",
+      "target": "sa2_assessment",
+      "relation": "drives",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_workflow",
+      "target": "sa3_assessment",
+      "relation": "drives",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_assignment",
+      "target": "service_area_1",
+      "relation": "routes_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_assignment",
+      "target": "service_area_2",
+      "relation": "routes_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "rr_assignment",
+      "target": "service_area_3",
+      "relation": "routes_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa1_decision",
+      "target": "su_decision_letters",
+      "relation": "generates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa2_decision",
+      "target": "su_decision_letters",
+      "relation": "generates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa3_allocation",
+      "target": "su_decision_letters",
+      "relation": "generates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "su_milestones",
+      "target": "notif_sms",
+      "relation": "triggers",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "su_milestones",
+      "target": "notif_email",
+      "relation": "triggers",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sla_breach_alerts",
+      "target": "rr_escalation",
+      "relation": "triggers",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ccr_interaction_history",
+      "target": "sla_surveys",
+      "relation": "informs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ccr_case_links",
+      "target": "su_case_tracker",
+      "relation": "populates",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "central_customer_record",
+      "target": "slas_customer_care",
+      "relation": "supports",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "ccr_consent",
+      "target": "notif_preferences",
+      "relation": "governs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "lob1_case_mgmt",
+      "target": "ccr_case_links",
+      "relation": "syncs_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "lob2_case_mgmt",
+      "target": "ccr_case_links",
+      "relation": "syncs_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "lob3_case_mgmt",
+      "target": "ccr_case_links",
+      "relation": "syncs_to",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_integration",
+      "target": "lob1_case_mgmt",
+      "relation": "connects",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_integration",
+      "target": "lob2_case_mgmt",
+      "relation": "connects",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_integration",
+      "target": "lob3_case_mgmt",
+      "relation": "connects",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_integration",
+      "target": "central_customer_record",
+      "relation": "connects",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_security",
+      "target": "tf_ver_identity",
+      "relation": "underpins",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_data_standards",
+      "target": "central_customer_record",
+      "relation": "governs",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "tf_monitoring_infra",
+      "target": "cross_monitoring",
+      "relation": "enables",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "status_updates",
+      "target": "cross_resolution_feedback",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa1_appeal",
+      "target": "rr_escalation",
+      "relation": "re-enters_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa2_appeal",
+      "target": "rr_escalation",
+      "relation": "re-enters_via",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "interfaces",
+      "target": "if_assisted_digital",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "if_human",
+      "target": "if_assisted_digital",
+      "relation": "enables",
+      "confidence": "INFERRED",
+      "note": "Human officer mediates digital process on customer's behalf"
+    },
+    {
+      "source": "guidance_content",
+      "target": "info_self_resolution",
+      "relation": "enables",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "knowledge_base",
+      "target": "info_self_resolution",
+      "relation": "enables",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "info_self_resolution",
+      "target": "cross_resolution_feedback",
+      "relation": "triggers",
+      "confidence": "EXTRACTED",
+      "note": "Customer gets answer and exits without a case being raised"
+    },
+    {
+      "source": "slas_customer_care",
+      "target": "sla_performance",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "sla_performance",
+      "target": "cross_monitoring",
+      "relation": "feeds",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "layer_determination",
+      "target": "det_partial_resolution",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "det_partial_resolution",
+      "target": "layer_capabilities",
+      "relation": "loops_back_to",
+      "confidence": "EXTRACTED",
+      "note": "Further information request re-enters at capabilities layer"
+    },
+    {
+      "source": "det_partial_resolution",
+      "target": "layer_information",
+      "relation": "loops_back_to",
+      "confidence": "EXTRACTED",
+      "note": "Partial resolution may return additional status/guidance"
+    },
+    {
+      "source": "layer_determination",
+      "target": "det_referral_out",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "det_referral_out",
+      "target": "cross_resolution_feedback",
+      "relation": "triggers",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "det_referral_out",
+      "target": "rr_assignment",
+      "relation": "re-enters_via",
+      "confidence": "INFERRED",
+      "note": "Internal referral routes back through orchestration assignment"
+    },
+    {
+      "source": "shared_components",
+      "target": "service_area_1",
+      "relation": "shared_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "service_area_2",
+      "relation": "shared_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "shared_components",
+      "target": "service_area_3",
+      "relation": "shared_across",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "channels",
+      "target": "ch_third_party_referral",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "ch_third_party_referral",
+      "target": "if_api",
+      "relation": "delivered_via",
+      "confidence": "INFERRED",
+      "note": "Structured referrals via partner portal or system-to-system API"
+    },
+    {
+      "source": "ch_third_party_referral",
+      "target": "if_human",
+      "relation": "delivered_via",
+      "confidence": "INFERRED",
+      "note": "Unstructured referrals via phone or email from a professional"
+    },
+    {
+      "source": "ch_third_party_referral",
+      "target": "rr_triage",
+      "relation": "enters_via",
+      "confidence": "INFERRED",
+      "note": "Referral enters orchestration triage rather than self-service interaction path"
+    },
+    {
+      "source": "layer_customer",
+      "target": "customer_needs",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "layer_customer",
+      "target": "customer_outcomes",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "need_information",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "need_transactional",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "need_support",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "need_notification",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "need_referral",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_outcomes",
+      "target": "outcome_resolved",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_outcomes",
+      "target": "outcome_partial",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_outcomes",
+      "target": "outcome_referred",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_outcomes",
+      "target": "outcome_informed",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_outcomes",
+      "target": "outcome_appealed",
+      "relation": "contains",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "customer_needs",
+      "target": "layer_access",
+      "relation": "enters_via",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "need_information",
+      "target": "layer_information",
+      "relation": "primarily_served_by",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "need_transactional",
+      "target": "layer_capabilities",
+      "relation": "primarily_served_by",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "need_support",
+      "target": "layer_determination",
+      "relation": "primarily_served_by",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "need_referral",
+      "target": "ch_third_party_referral",
+      "relation": "primarily_served_by",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "need_notification",
+      "target": "notifications",
+      "relation": "primarily_served_by",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "cross_resolution_feedback",
+      "target": "customer_outcomes",
+      "relation": "delivers",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "info_self_resolution",
+      "target": "outcome_informed",
+      "relation": "produces",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "det_partial_resolution",
+      "target": "outcome_partial",
+      "relation": "produces",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "det_referral_out",
+      "target": "outcome_referred",
+      "relation": "produces",
+      "confidence": "EXTRACTED"
+    },
+    {
+      "source": "sa1_decision",
+      "target": "outcome_resolved",
+      "relation": "produces",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa2_decision",
+      "target": "outcome_resolved",
+      "relation": "produces",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa3_allocation",
+      "target": "outcome_resolved",
+      "relation": "produces",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa1_appeal",
+      "target": "outcome_appealed",
+      "relation": "produces",
+      "confidence": "INFERRED"
+    },
+    {
+      "source": "sa2_appeal",
+      "target": "outcome_appealed",
+      "relation": "produces",
+      "confidence": "INFERRED"
+    }
+  ],
+  "metadata": {
+    "source": "council-architecture-v12.svg",
+    "version": "v8",
+    "changes_from_v1": [
+      "Renamed layer 1 from Presentation to Access",
+      "Replaced Direct Digital / AI-Assisted / Person-Assisted components with Channels and Interfaces",
+      "Removed AI-Assisted as a structural component \u2014 AI retained as cross-cutting concern only",
+      "Renamed layer 3 from Interaction to Capabilities",
+      "Moved Verification from Capabilities layer into Technology Foundations",
+      "Added Accessibility as an explicit cross-cutting concern"
+    ],
+    "node_count": 131,
+    "edge_count": 237,
+    "node_types": [
+      "entry_point",
+      "layer",
+      "component",
+      "subnode",
+      "system",
+      "foundation",
+      "cross_cutting"
+    ],
+    "edge_confidence_levels": [
+      "EXTRACTED",
+      "INFERRED"
+    ],
+    "layers": {
+      "1": "Access",
+      "2": "Information",
+      "3": "Capabilities",
+      "4": "Orchestration",
+      "5": "Determination",
+      "0": "Customer"
+    },
+    "cross_cutting_concerns": [
+      "AI \u2014 Reasoning, Retrieval, Drafting, Routing",
+      "Digital and Customer Experience",
+      "Monitoring and Reporting",
+      "Automation",
+      "Resolution Feedback to Customer",
+      "Accessibility"
+    ],
+    "changes_from_v2": [
+      "Added Assisted Digital as Interface subnode (confirmed in PPTX, flagged from v1 diff)",
+      "Added Self-Resolution subnode on Information layer \u2014 need fully resolved without a case being raised (PPTX slide 3)",
+      "Added Performance Reporting as SLA subnode (PPTX slide 5 explicitly lists: service commitments, satisfaction, performance)",
+      "Added Partial Resolution subnode on Determination layer with loop-back edges to Capabilities and Information (PPTX slide 6: determination does not always close a case)",
+      "Added Referral Out subnode on Determination (PPTX slide 6: referrals are a distinct outcome alongside approvals/refusals/allocations)",
+      "Added shared_across edges from Shared Components to all three service areas (PPTX slide 4: built once, used across all service areas)"
+    ],
+    "changes_from_v3": [
+      "Added Third-Party Referral as a Channel subnode in the Access layer",
+      "Delivered via API (structured partner/portal referrals) or Human (phone/email from professionals)",
+      "Enters orchestration at triage rather than the customer self-service path"
+    ],
+    "changes_from_v4": [
+      "Replaced all instances of 'resident' / 'Resident' with 'customer' / 'Customer'"
+    ],
+    "changes_from_v5": [
+      "Replaced single resident_needs entry_point with a Customer Needs and Outcomes cluster",
+      "Customer Needs: Information, Transactional, Support, Reporting/Notification, Referral",
+      "Customer Outcomes: Resolved, Partially Resolved, Referred, Informed (no case), Appealed",
+      "Need types mapped to their primary serving layer",
+      "Outcome nodes wired to resolution feedback, determination subnodes, and self-resolution"
+    ],
+    "changes_from_v6": [
+      "Nodes reordered top-to-bottom matching SVG layout: Customer theme \u2192 Access \u2192 Information \u2192 Capabilities \u2192 Orchestration \u2192 Determination \u2192 Foundations \u2192 Cross-cutting",
+      "rank property added to every node (0=customer theme, 1=access, 2=information, 3=capabilities, 4=orchestration, 5=determination, 6=foundations, 7=cross-cutting)"
+    ],
+    "changes_from_v7": [
+      "Renamed customer_theme to layer_customer \u2014 Customer is now a proper layer (rank 0) alongside Access, Information, Capabilities, Orchestration, Determination",
+      "layer property set to 0 for all Customer layer nodes"
+    ]
+  }
+};
+  render();
+}
+
+function buildIndex() {
+  nodeMap = {};
+  outEdges = {};
+  inEdges = {};
+  graph.nodes.forEach(n => nodeMap[n.id] = n);
+  graph.edges.forEach(e => {
+    if (!outEdges[e.source]) outEdges[e.source] = [];
+    if (!inEdges[e.target])  inEdges[e.target]  = [];
+    outEdges[e.source].push(e);
+    inEdges[e.target].push(e);
+  });
+}
+
+function render() {
+  buildIndex();
+
+  document.getElementById('stat-nodes').textContent = graph.nodes.length;
+  document.getElementById('stat-edges').textContent = graph.edges.length;
+
+  // Group by rank
+  const byRank = {};
+  graph.nodes.forEach(n => {
+    const r = n.rank ?? 99;
+    if (!byRank[r]) byRank[r] = [];
+    byRank[r].push(n);
+  });
+
+  // Cross-cutting strip
+  const crossStrip = document.getElementById('cross-strip');
+  const crossNodes = byRank[7] || [];
+  crossNodes.forEach(n => {
+    const chip = document.createElement('div');
+    chip.className = 'cross-chip';
+    chip.textContent = n.label;
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.cross-chip').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+      showDetail(n.id);
+    });
+    crossStrip.appendChild(chip);
+  });
+
+  // Layer stack 0–6
+  const layersEl = document.getElementById('layers');
+  [0,1,2,3,4,5,6].forEach(rank => {
+    const nodes = byRank[rank] || [];
+    if (!nodes.length) return;
+
+    const layerNode = nodes.find(n => n.type === 'layer' || n.type === 'foundation');
+    const color = LAYER_COLORS[rank];
+    const name  = LAYER_NAMES[rank];
+    const components = nodes.filter(n => n.type === 'component' || n.type === 'system');
+    const allSubs = nodes.filter(n => n.type === 'subnode');
+    const count = components.length + allSubs.length;
+
+    const layerEl = document.createElement('div');
+    layerEl.className = 'layer';
+    layerEl.style.setProperty('--c-layer', color);
+    layerEl.dataset.rank = rank;
+
+    // Layer header
+    const hdr = document.createElement('div');
+    hdr.className = 'layer-header';
+    hdr.innerHTML = `
+      <span class="layer-name">${name}</span>
+      <span class="layer-meta">${count} elements</span>
+      <span class="chevron">▶</span>
+    `;
+    hdr.addEventListener('click', () => {
+      const wasOpen = layerEl.classList.contains('open');
+      layerEl.classList.toggle('open');
+      if (layerNode && !wasOpen) showDetail(layerNode.id);
+    });
+    layerEl.appendChild(hdr);
+
+    // Layer body
+    const body = document.createElement('div');
+    body.className = 'layer-body';
+
+    if (rank === 6) {
+      // Foundations: chip strip
+      const strip = document.createElement('div');
+      strip.className = 'foundations-strip';
+      allSubs.concat(components).forEach(n => {
+        const chip = document.createElement('div');
+        chip.className = 'foundation-chip';
+        chip.dataset.id = n.id;
+        chip.textContent = n.label;
+        chip.addEventListener('click', e => {
+          e.stopPropagation();
+          document.querySelectorAll('.foundation-chip').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          showDetail(n.id);
+        });
+        strip.appendChild(chip);
+      });
+      body.appendChild(strip);
+    } else {
+      // Components with collapsible subnodes
+      components.forEach(comp => {
+        const childIds = (outEdges[comp.id] || [])
+          .filter(e => e.relation === 'contains')
+          .map(e => e.target);
+        const children = childIds.map(id => nodeMap[id]).filter(n => n && n.type === 'subnode');
+
+        const compEl = document.createElement('div');
+        compEl.className = 'component';
+
+        const compHdr = document.createElement('div');
+        compHdr.className = 'component-header';
+        compHdr.dataset.id = comp.id;
+        compHdr.innerHTML = `
+          <div class="component-dot"></div>
+          <div class="component-name">${comp.label}</div>
+          <div class="component-badge">${comp.type}</div>
+          ${children.length ? '<span class="comp-chevron">▶</span>' : ''}
+        `;
+        compHdr.addEventListener('click', e => {
+          e.stopPropagation();
+          document.querySelectorAll('.component').forEach(c => c.classList.remove('selected'));
+          compEl.classList.add('selected');
+          if (children.length) compEl.classList.toggle('open');
+          showDetail(comp.id);
+        });
+        compEl.appendChild(compHdr);
+
+        if (children.length) {
+          const subsEl = document.createElement('div');
+          subsEl.className = 'subnodes';
+          children.forEach(sub => {
+            const subEl = document.createElement('div');
+            subEl.className = 'subnode';
+            subEl.dataset.id = sub.id;
+            subEl.innerHTML = `
+              <div class="subnode-dot"></div>
+              <div class="subnode-label">${sub.label}</div>
+            `;
+            subEl.addEventListener('click', e => {
+              e.stopPropagation();
+              document.querySelectorAll('.subnode').forEach(s => s.classList.remove('selected'));
+              subEl.classList.add('selected');
+              showDetail(sub.id);
+            });
+            subsEl.appendChild(subEl);
+          });
+          compEl.appendChild(subsEl);
+        }
+
+        body.appendChild(compEl);
+      });
+    }
+
+    layerEl.appendChild(body);
+
+    // Auto-open top two layers
+    if (rank === 0 || rank === 1) layerEl.classList.add('open');
+
+    layersEl.appendChild(layerEl);
+  });
+
+  // Search
+  document.getElementById('search').addEventListener('input', e => doSearch(e.target.value.trim().toLowerCase()));
+
+  // Detail close
+  document.getElementById('detail-close').addEventListener('click', closeDetail);
+
+  // Swipe down to close detail
+  let touchStartY = 0;
+  const detailEl = document.getElementById('detail');
+  detailEl.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, {passive:true});
+  detailEl.addEventListener('touchend', e => {
+    if (e.changedTouches[0].clientY - touchStartY > 60) closeDetail();
+  }, {passive:true});
+}
+
+function showDetail(id) {
+  const node = nodeMap[id];
+  if (!node) return;
+
+  const color = LAYER_COLORS[node.rank ?? node.layer ?? 7];
+  const layerName = LAYER_NAMES[node.rank ?? node.layer ?? 7] || '';
+
+  document.getElementById('detail-title-area').innerHTML = `
+    <div class="detail-title">${node.label}</div>
+    <span class="detail-badge" style="background:${color}20;color:${color}">${layerName} · ${node.type}</span>
+  `;
+
+  document.getElementById('detail-desc').innerHTML = node.detail
+    ? `<div class="detail-desc">${node.detail}</div>` : '';
+
+  const outs = (outEdges[id] || []).slice(0,12);
+  const ins  = (inEdges[id]  || []).slice(0,12);
+
+  document.getElementById('out-title').textContent = `Outgoing (${outs.length})`;
+  document.getElementById('in-title').textContent  = `Incoming (${ins.length})`;
+
+  document.getElementById('detail-out').innerHTML = outs.length
+    ? outs.map(e => {
+        const t = nodeMap[e.target];
+        return `<div class="edge-item ${e.confidence==='INFERRED'?'inferred':''}">
+          <span class="edge-rel">${e.relation}</span>
+          ${t ? t.label : e.target}
+        </div>`;
+      }).join('')
+    : '<span style="font-size:12px;color:var(--muted)">None</span>';
+
+  document.getElementById('detail-in').innerHTML = ins.length
+    ? ins.map(e => {
+        const s = nodeMap[e.source];
+        return `<div class="edge-item ${e.confidence==='INFERRED'?'inferred':''}">
+          <span class="edge-rel">${e.relation}</span>
+          ${s ? s.label : e.source}
+        </div>`;
+      }).join('')
+    : '<span style="font-size:12px;color:var(--muted)">None</span>';
+
+  document.getElementById('detail').classList.add('visible');
+}
+
+function closeDetail() {
+  document.getElementById('detail').classList.remove('visible');
+  document.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+}
+
+function doSearch(q) {
+  document.querySelectorAll('[data-id], [data-rank]').forEach(el => el.classList.remove('match'));
+  if (!q) return;
+
+  graph.nodes.forEach(node => {
+    if (!node.label.toLowerCase().includes(q)) return;
+
+    // Open parent layer
+    const rank = node.rank ?? node.layer;
+    const layerEl = document.querySelector(`.layer[data-rank="${rank}"]`);
+    if (layerEl) {
+      layerEl.classList.add('open');
+      // Also open parent component
+      const compIds = (inEdges[node.id]||[])
+        .filter(e => e.relation==='contains')
+        .map(e => e.source);
+      compIds.forEach(cid => {
+        const compEl = document.querySelector(`.component-header[data-id="${cid}"]`);
+        if (compEl) compEl.closest('.component').classList.add('open');
+      });
+    }
+
+    // Highlight
+    const el = document.querySelector(`[data-id="${node.id}"]`);
+    if (el) el.classList.add('match');
+  });
+}
+
+loadGraph();
+</script>
+</body>
+</html>
