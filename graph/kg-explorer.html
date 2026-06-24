@@ -422,6 +422,7 @@ function render() {
 }
 
 function renderList(pane) {
+  pane.innerHTML = '';
   const nodes = visible();
   if (!nodes.length) {
     pane.innerHTML = '<div class="list-empty">No nodes match</div>';
