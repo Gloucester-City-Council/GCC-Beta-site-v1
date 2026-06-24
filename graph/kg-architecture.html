@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Council Architecture — Overview</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0d0f14;
+  color: #dce3f0;
+  font-family: system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #252b3b;
+}
+
+header h1 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b7a99;
+  font-family: 'SF Mono', monospace;
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.leg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #6b7a99;
+  font-family: 'SF Mono', monospace;
+  letter-spacing: 0.06em;
+}
+
+.leg-dot {
+  width: 8px; height: 8px;
+  border-radius: 2px;
+}
+
+.canvas {
+  display: grid;
+  grid-template-columns: 28px 1fr 28px;
+  grid-template-rows: auto;
+  gap: 0;
+  min-width: 900px;
+}
+
+/* ── SERVICE + PATTERN ROW ── */
+.row-top {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.service-band, .pattern-band {
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.service-band {
+  background: #1a1730;
+  border: 1px solid #3a2e70;
+}
+
+.pattern-band {
+  background: #0e2430;
+  border: 1px solid #1e4a60;
+}
+
+.band-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-family: 'SF Mono', monospace;
+}
+
+.service-band .band-label { color: #7c6af7; }
+.pattern-band .band-label { color: #27a8c4; }
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.pill {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.pill-service {
+  background: #2a1f5a;
+  color: #a89ef7;
+  border: 1px solid #3a2e80;
+}
+
+.pill-pattern {
+  background: #0a2535;
+  color: #5bc8e0;
+  border: 1px solid #1a4a60;
+}
+
+/* ── CROSS-CUTTING BANDS ── */
+.cc-left {
+  grid-column: 1;
+  grid-row: 2 / span 8;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 6px;
+}
+
+.cc-right {
+  grid-column: 3;
+  grid-row: 2 / span 8;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 6px;
+}
+
+.cc-band {
+  flex: 1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'SF Mono', monospace;
+  padding: 8px 0;
+  cursor: default;
+}
+
+.cc-ai       { background: #0f1e35; color: #4a90d4; border: 1px solid #1a3a60; }
+.cc-dcx      { background: #1a1020; color: #a06ad4; border: 1px solid #3a1a60; }
+.cc-mon      { background: #0f1e15; color: #4ab870; border: 1px solid #1a4a28; }
+.cc-auto     { background: #1e1a0f; color: #c4a030; border: 1px solid #4a3a10; }
+.cc-feedback { background: #1e0f10; color: #c45060; border: 1px solid #4a1a20; }
+.cc-access   { background: #0f1a1e; color: #30b4c4; border: 1px solid #1a4050; }
+
+/* ── MAIN STACK ── */
+.stack {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── LAYER ── */
+.layer {
+  border-radius: 6px;
+  overflow: hidden;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.layer-header {
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'SF Mono', monospace;
+}
+
+.layer-body {
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+}
+
+/* Layer colours */
+.l0 { background: #0f1220; border-color: #2a3060; }
+.l0 .layer-header { background: #1a1f40; color: #7080d0; }
+.l0 .layer-body { grid-template-columns: 1fr 1fr; }
+
+.l1 { background: #0f1e20; border-color: #1a4a50; }
+.l1 .layer-header { background: #0f2a30; color: #30b4c4; }
+.l1 .layer-body { grid-template-columns: 1fr 1fr 1fr; }
+
+.l2 { background: #150f20; border-color: #3a1a60; }
+.l2 .layer-header { background: #200f30; color: #a06ad4; }
+.l2 .layer-body { grid-template-columns: 1fr 1fr 1fr; }
+
+.l3 { background: #0f201a; border-color: #1a5040; }
+.l3 .layer-header { background: #0f2820; color: #3ea87a; }
+.l3 .layer-body { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+.l4 { background: #0f1a25; border-color: #1a3a5a; }
+.l4 .layer-header { background: #0f2035; color: #4a90d4; }
+.l4 .layer-body { grid-template-columns: 1fr 1fr 1fr; }
+
+.l5 { background: #201a0f; border-color: #4a3a10; }
+.l5 .layer-header { background: #281e0a; color: #c4a030; }
+.l5 .layer-body { grid-template-columns: 1fr 1fr 1fr; }
+
+.tf { background: #141414; border-color: #2a2a2a; }
+.tf .layer-header { background: #1e1e1e; color: #6b7a99; }
+.tf .layer-body { grid-template-columns: repeat(6, 1fr); }
+
+/* ── COMPONENT CARD ── */
+.comp {
+  border-radius: 4px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+}
+
+.l0 .comp { background: #1a2050; border-color: #2a3070; }
+.l1 .comp { background: #0f2a35; border-color: #1a4a58; }
+.l2 .comp { background: #200f35; border-color: #3a1a58; }
+.l3 .comp { background: #0f2820; border-color: #1a4838; }
+.l4 .comp { background: #0f2035; border-color: #1a3858; }
+.l5 .comp { background: #282010; border-color: #483810; }
+.tf .comp  { background: #1a1a1a; border-color: #2a2a2a; }
+
+.comp-name {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.l0 .comp-name { color: #9ab0f0; }
+.l1 .comp-name { color: #5bc8d8; }
+.l2 .comp-name { color: #b888e8; }
+.l3 .comp-name { color: #5ac898; }
+.l4 .comp-name { color: #5aa8e8; }
+.l5 .comp-name { color: #d8b848; }
+.tf  .comp-name { color: #8898b8; }
+
+.comp-subs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.sub {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.l0 .sub { background: #141840; color: #7080c0; }
+.l1 .sub { background: #0a2030; color: #2a9ab0; }
+.l2 .sub { background: #180a2e; color: #8858c0; }
+.l3 .sub { background: #0a2018; color: #2a9870; }
+.l4 .sub { background: #0a1828; color: #2a78b8; }
+.l5 .sub { background: #201808; color: #b09038; }
+.tf  .sub { background: #101010; color: #5a6878; }
+
+/* ── FLOW ARROW ── */
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 14px;
+  color: #3a4360;
+  font-size: 12px;
+}
+
+/* ── REFERRAL NOTE ── */
+.referral-note {
+  font-size: 9px;
+  color: #4a90d4;
+  font-family: 'SF Mono', monospace;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-left: 2px solid #1a3a60;
+  margin: 0 8px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>GCC — Digital Architecture</h1>
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:#7c6af7"></div>Service</div>
+    <div class="leg"><div class="leg-dot" style="background:#27a8c4"></div>Pattern</div>
+    <div class="leg"><div class="leg-dot" style="background:#3ea87a"></div>Capability</div>
+    <div class="leg"><div class="leg-dot" style="background:#4a90d4"></div>Orchestration</div>
+    <div class="leg"><div class="leg-dot" style="background:#c4a030"></div>Determination</div>
+  </div>
+</header>
+
+<div id="canvas" class="canvas">
+  <div style="grid-column:1/-1;color:#3a4360;font-size:11px;font-family:monospace;padding:20px;text-align:center">Loading…</div>
+</div>
+
+<script>
+fetch('council-architecture-v12-kg-v15.json')
+  .then(r => r.json())
+  .then(g => {
+    const nmap = {};
+    g.nodes.forEach(n => nmap[n.id] = n);
+    const outE = {};
+    g.edges.forEach(e => {
+      if (!outE[e.source]) outE[e.source] = [];
+      outE[e.source].push(e);
+    });
+
+    function compsOf(id, rel) {
+      return (outE[id]||[]).filter(e => e.label === rel).map(e => nmap[e.target]).filter(Boolean);
+    }
+
+    function subsOf(id) {
+      return compsOf(id, 'comprises').filter(n => n.type === 'subnode');
+    }
+
+    const canvas = document.getElementById('canvas');
+    canvas.innerHTML = '';
+
+    // ── TOP: Services + Patterns ──
+    const topRow = div('row-top');
+    topRow.style.gridColumn = '2';
+
+    const svcBand = div('service-band');
+    svcBand.innerHTML = '<div class="band-label">Services</div>';
+    const svcPills = div('pills');
+    g.nodes.filter(n => n.type === 'service').forEach(n => {
+      const p = div('pill pill-service');
+      p.textContent = n.label;
+      svcPills.appendChild(p);
+    });
+    svcBand.appendChild(svcPills);
+
+    const patBand = div('pattern-band');
+    patBand.innerHTML = '<div class="band-label">Journey patterns</div>';
+    const patPills = div('pills');
+    g.nodes.filter(n => n.type === 'pattern').forEach(n => {
+      const p = div('pill pill-pattern');
+      p.textContent = n.label;
+      patPills.appendChild(p);
+    });
+    patBand.appendChild(patPills);
+
+    topRow.appendChild(svcBand);
+    topRow.appendChild(patBand);
+    canvas.appendChild(topRow);
+
+    // ── LEFT BAND: cross-cutting ──
+    const ccLeft = div('cc-left');
+    ccLeft.style.gridColumn = '1';
+    ccLeft.style.gridRow = '2 / span 20';
+
+    const ccRight = div('cc-right');
+    ccRight.style.gridColumn = '3';
+    ccRight.style.gridRow = '2 / span 20';
+
+    const ccNodes = g.nodes.filter(n => n.type === 'cross_cutting');
+    const ccLeft3 = ccNodes.slice(0, 3);
+    const ccRight3 = ccNodes.slice(3);
+
+    const ccClasses = {
+      'AI — Reasoning, Retrieval, Drafting, Routing': 'cc-ai',
+      'Digital and Customer Experience': 'cc-dcx',
+      'Monitoring and Reporting': 'cc-mon',
+      'Automation': 'cc-auto',
+      'Resolution Feedback to Customer': 'cc-feedback',
+      'Accessibility': 'cc-access',
+    };
+
+    ccLeft3.forEach(n => {
+      const b = div('cc-band ' + (ccClasses[n.label]||'cc-ai'));
+      b.textContent = n.label;
+      b.title = n.detail || n.label;
+      ccLeft.appendChild(b);
+    });
+
+    ccRight3.forEach(n => {
+      const b = div('cc-band ' + (ccClasses[n.label]||'cc-mon'));
+      b.textContent = n.label;
+      b.title = n.detail || n.label;
+      ccRight.appendChild(b);
+    });
+
+    canvas.appendChild(ccLeft);
+    canvas.appendChild(ccRight);
+
+    // ── MAIN STACK ──
+    const stack = div('stack');
+    stack.style.gridColumn = '2';
+    stack.style.gridRow = '2';
+
+    const layerDefs = [
+      { id: 'layer_customer',      cls: 'l0', label: 'Customer' },
+      { id: 'layer_access',        cls: 'l1', label: 'Access' },
+      { id: 'layer_information',   cls: 'l2', label: 'Information' },
+      { id: 'layer_capabilities',  cls: 'l3', label: 'Capabilities' },
+      { id: 'layer_orchestration', cls: 'l4', label: 'Orchestration' },
+      { id: 'layer_determination', cls: 'l5', label: 'Determination' },
+    ];
+
+    layerDefs.forEach((ld, i) => {
+      if (i > 0) {
+        const arr = div('arrow'); arr.textContent = '↓'; stack.appendChild(arr);
+      }
+
+      const layer = div('layer ' + ld.cls);
+      const hdr = div('layer-header');
+      hdr.textContent = ld.label;
+      layer.appendChild(hdr);
+
+      const body = div('layer-body');
+      const components = compsOf(ld.id, 'comprises').filter(n => n.type === 'component');
+
+      components.forEach(c => {
+        const card = div('comp');
+        const name = div('comp-name'); name.textContent = c.label;
+        card.appendChild(name);
+        const subs = subsOf(c.id);
+        if (subs.length) {
+          const subsDiv = div('comp-subs');
+          subs.slice(0,4).forEach(s => {
+            const sub = div('sub'); sub.textContent = s.label; sub.title = s.label;
+            subsDiv.appendChild(sub);
+          });
+          card.appendChild(subsDiv);
+        }
+        body.appendChild(card);
+      });
+
+      // Special: Access layer — show referral route-in note
+      if (ld.id === 'layer_access') {
+        const note = div('referral-note');
+        note.textContent = '↘ Inbound referral enters here → Triage Engine';
+        note.style.gridColumn = '1 / -1';
+        body.appendChild(note);
+      }
+
+      layer.appendChild(body);
+      stack.appendChild(layer);
+    });
+
+    // Arrow before TF
+    const arr = div('arrow'); arr.textContent = '↓'; stack.appendChild(arr);
+
+    // Technology Foundations
+    const tf = nmap['technology_foundations'];
+    if (tf) {
+      const layer = div('layer tf');
+      const hdr = div('layer-header'); hdr.textContent = 'Technology foundations';
+      layer.appendChild(hdr);
+      const body = div('layer-body');
+      const subs = subsOf('technology_foundations');
+      subs.forEach(s => {
+        const card = div('comp');
+        const name = div('comp-name'); name.textContent = s.label;
+        card.appendChild(name);
+        body.appendChild(card);
+      });
+      layer.appendChild(body);
+      stack.appendChild(layer);
+    }
+
+    canvas.appendChild(stack);
+  });
+
+function div(cls) {
+  const el = document.createElement('div');
+  if (cls) el.className = cls;
+  return el;
+}
+</script>
+</body>
+</html>
