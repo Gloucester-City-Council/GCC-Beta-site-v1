@@ -12,565 +12,239 @@
   --text:    #e8edf5;
   --muted:   #6b7fa3;
   --accent:  #3d7fff;
-  --c0: #7c5cbf;
-  --c1: #2a8f7f;
-  --c2: #5a7fbf;
-  --c3: #3a9e6e;
-  --c4: #4a78c4;
-  --c5: #c4883a;
-  --c6: #5a5a7a;
-  --c7: #8a3a3a;
+  --c0: #7c5cbf; --c1: #2a8f7f; --c2: #5a7fbf; --c3: #3a9e6e;
+  --c4: #4a78c4; --c5: #c4883a; --c6: #5a5a7a; --c7: #8a3a3a;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-/* ── HEADER ── */
-header {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  position: sticky;
-  top: 0;
-  background: var(--bg);
-  z-index: 10;
-}
+body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; font-size: 15px; line-height: 1.5; }
+header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; position: sticky; top: 0; background: var(--bg); z-index: 10; }
 header h1 { font-size: 16px; font-weight: 700; flex: 1; }
-.pill {
-  font-size: 11px;
-  color: var(--muted);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2px 8px;
-}
+.pill { font-size: 11px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2px 8px; }
 .pill strong { color: var(--text); }
-
-/* ── SEARCH ── */
-.search-wrap {
-  padding: 10px 16px;
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 49px;
-  background: var(--bg);
-  z-index: 9;
-}
-.search-wrap input {
-  width: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 14px;
-  color: var(--text);
-  font-size: 15px;
-  outline: none;
-  -webkit-appearance: none;
-}
+.search-wrap { padding: 10px 16px; border-bottom: 1px solid var(--border); position: sticky; top: 49px; background: var(--bg); z-index: 9; }
+.search-wrap input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 15px; outline: none; -webkit-appearance: none; }
 .search-wrap input:focus { border-color: var(--accent); }
 .search-wrap input::placeholder { color: var(--muted); }
-
-/* ── CROSS-CUTTING ── */
-.cross-strip {
-  padding: 10px 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  border-bottom: 1px solid var(--border);
-  background: rgba(138,58,58,0.05);
-}
-.cross-chip {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--c7);
-  border: 1px solid rgba(138,58,58,0.35);
-  border-radius: 4px;
-  padding: 5px 9px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
+.cross-strip { padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid var(--border); background: rgba(138,58,58,0.05); }
+.cross-chip { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--c7); border: 1px solid rgba(138,58,58,0.35); border-radius: 4px; padding: 5px 9px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .cross-chip.active { background: rgba(138,58,58,0.2); }
-
-/* ── LAYER ── */
+.cross-detail { display: none; width: 100%; padding: 10px 16px; background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); }
+.cross-detail.open { display: block; }
 .layers { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
 .layer { background: var(--bg); --cl: #444; }
-
-.layer-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  cursor: pointer;
-  min-height: 52px;
-  border-left: 4px solid var(--cl);
-  -webkit-tap-highlight-color: transparent;
-}
-.layer-name {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--cl);
-  flex: 1;
-}
+.layer-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; min-height: 52px; border-left: 4px solid var(--cl); -webkit-tap-highlight-color: transparent; }
+.layer-name { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cl); flex: 1; }
 .layer-count { font-size: 11px; color: var(--muted); }
-.chevron {
-  font-size: 11px;
-  color: var(--muted);
-  transition: transform 0.18s;
-  flex-shrink: 0;
-}
+.chevron { font-size: 11px; color: var(--muted); transition: transform .18s; flex-shrink: 0; }
 .layer.open > .layer-header .chevron { transform: rotate(90deg); }
-
-.layer-body {
-  display: none;
-  border-left: 4px solid var(--cl);
-  border-top: 1px solid var(--border);
-}
+.layer-body { display: none; border-left: 4px solid var(--cl); border-top: 1px solid var(--border); }
 .layer.open > .layer-body { display: block; }
-
-/* ── LAYER INFO (inline detail for layer node) ── */
-.layer-info {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  background: rgba(0,0,0,0.2);
-  display: none;
-}
-.layer.open > .layer-body > .layer-info { display: block; }
-.layer-info-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--cl);
-  margin-bottom: 6px;
-}
-.layer-info-edges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-.info-edge {
-  font-size: 11px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--muted);
-}
-
-/* ── COMPONENT ── */
+.layer-info { padding: 12px 16px; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.2); }
+.layer-info-title { font-size: 12px; font-weight: 600; color: var(--cl); margin-bottom: 6px; }
 .component { border-bottom: 1px solid var(--border); }
 .component:last-child { border-bottom: none; }
-
-.comp-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  cursor: pointer;
-  min-height: 48px;
-  -webkit-tap-highlight-color: transparent;
-}
-.comp-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--cl);
-  opacity: 0.7;
-  flex-shrink: 0;
-}
+.comp-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; cursor: pointer; min-height: 48px; -webkit-tap-highlight-color: transparent; }
+.comp-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cl); opacity: .7; flex-shrink: 0; }
 .comp-name { font-size: 13px; font-weight: 600; flex: 1; }
-.comp-type {
-  font-size: 10px;
-  color: var(--cl);
-  opacity: 0.7;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.comp-chevron {
-  font-size: 10px;
-  color: var(--muted);
-  transition: transform 0.18s;
-  flex-shrink: 0;
-  margin-left: 6px;
-}
+.comp-type { font-size: 10px; color: var(--cl); opacity: .7; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.comp-chevron { font-size: 10px; color: var(--muted); transition: transform .18s; flex-shrink: 0; margin-left: 6px; }
 .component.open > .comp-header .comp-chevron { transform: rotate(90deg); }
-
-/* ── COMPONENT DETAIL (inline) ── */
-.comp-detail {
-  display: none;
-  background: rgba(0,0,0,0.15);
-  border-top: 1px solid var(--border);
-  padding: 10px 16px 10px 36px;
-}
+.comp-detail { display: none; background: rgba(0,0,0,0.15); border-top: 1px solid var(--border); padding: 10px 16px 10px 36px; }
 .component.open > .comp-detail { display: block; }
-.comp-desc {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 8px;
-}
+.comp-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 8px; }
+.edge-section-title { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 8px 0 4px; }
+.edge-section-title:first-child { margin-top: 0; }
 .edge-rows { display: flex; flex-direction: column; gap: 4px; }
-.edge-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.4;
-}
-.edge-row.inferred { opacity: 0.5; font-style: italic; }
-.rel-tag {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(61,127,255,0.12);
-  padding: 2px 5px;
-  border-radius: 3px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-/* ── SUBNODES ── */
-.subnodes {
-  display: none;
-  border-top: 1px solid rgba(30,45,74,0.6);
-}
+.edge-row { display: flex; align-items: flex-start; gap: 6px; font-size: 12px; color: var(--muted); line-height: 1.4; }
+.edge-row.inferred { opacity: .5; font-style: italic; }
+.rel-tag { font-size: 9px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--accent); background: rgba(61,127,255,0.12); padding: 2px 5px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.subnodes { display: none; border-top: 1px solid rgba(30,45,74,0.6); }
 .component.open > .subnodes { display: block; }
-
-.subnode {
-  border-bottom: 1px solid rgba(30,45,74,0.4);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
+.subnode { border-bottom: 1px solid rgba(30,45,74,0.4); cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .subnode:last-child { border-bottom: none; }
-
-.subnode-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px 10px 34px;
-  min-height: 44px;
-}
-.sub-dot {
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--cl);
-  opacity: 0.5;
-  flex-shrink: 0;
-}
+.subnode-header { display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 34px; min-height: 44px; }
+.sub-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--cl); opacity: .5; flex-shrink: 0; }
 .sub-label { font-size: 13px; color: var(--muted); flex: 1; line-height: 1.4; }
-.sub-chevron {
-  font-size: 10px;
-  color: var(--muted);
-  opacity: 0.5;
-  transition: transform 0.18s;
-  flex-shrink: 0;
-}
+.sub-chevron { font-size: 10px; color: var(--muted); opacity: .5; transition: transform .18s; flex-shrink: 0; }
 .subnode.open > .subnode-header .sub-chevron { transform: rotate(90deg); }
 .subnode.open > .subnode-header .sub-label { color: var(--text); }
-
-/* ── SUBNODE DETAIL (inline) ── */
-.sub-detail {
-  display: none;
-  background: rgba(0,0,0,0.2);
-  border-top: 1px solid rgba(30,45,74,0.4);
-  padding: 10px 16px 10px 48px;
-}
+.sub-detail { display: none; background: rgba(0,0,0,0.2); border-top: 1px solid rgba(30,45,74,0.4); padding: 10px 16px 10px 48px; }
 .subnode.open > .sub-detail { display: block; }
-
-/* ── SEARCH MATCH ── */
+.gc-row { font-size: 12px; color: var(--muted); padding: 4px 0; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.gc-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--cl); opacity: .4; flex-shrink: 0; display: inline-block; }
+.gc-detail { font-size: 12px; padding: 6px 0 6px 14px; border-left: 2px solid var(--cl); margin: 2px 0 4px; opacity: .7; }
 .match { box-shadow: 0 0 0 2px var(--accent) inset; }
+#loading { padding: 40px 16px; text-align: center; color: var(--muted); font-size: 13px; }
 </style>
 </head>
 <body>
-
 <header>
   <h1>Digital Architecture</h1>
   <div class="pill"><strong id="sn">—</strong> nodes</div>
   <div class="pill"><strong id="se">—</strong> edges</div>
 </header>
-
 <div class="search-wrap">
   <input type="search" id="search" placeholder="Search…" autocomplete="off" autocorrect="off" spellcheck="false">
 </div>
-
 <div class="cross-strip" id="cross-strip"></div>
+<div id="loading">Loading…</div>
 <div class="layers" id="layers"></div>
-
 <script>
-const LAYER_COLORS = {0:'var(--c0)',1:'var(--c1)',2:'var(--c2)',3:'var(--c3)',4:'var(--c4)',5:'var(--c5)',6:'var(--c6)',7:'var(--c7)'};
-const LAYER_NAMES  = {0:'Customer',1:'Access',2:'Information',3:'Capabilities',4:'Orchestration',5:'Determination',6:'Foundations',7:'Cross-cutting'};
+const LC={'0':'var(--c0)','1':'var(--c1)','2':'var(--c2)','3':'var(--c3)','4':'var(--c4)','5':'var(--c5)','6':'var(--c6)','7':'var(--c7)'};
+const LN={'0':'Customer','1':'Access','2':'Information','3':'Capabilities','4':'Orchestration','5':'Determination','6':'Foundations','7':'Cross-cutting'};
+let graph,nodeMap={},outEdges={},inEdges={};
 
-let graph, nodeMap={}, outEdges={}, inEdges={};
-
-function init() {
-  fetch('council-architecture-v12-kg-v9.json')
-    .then(r => r.json())
-    .then(data => {
-      graph = data;
-      document.getElementById('sn').textContent = graph.nodes.length;
-      document.getElementById('se').textContent = graph.edges.length;
-      graph.nodes.forEach(n => nodeMap[n.id] = n);
-      graph.edges.forEach(e => {
-        (outEdges[e.source] = outEdges[e.source]||[]).push(e);
-        (inEdges[e.target]  = inEdges[e.target] ||[]).push(e);
-      });
-      renderCross();
-      renderLayers();
-      document.getElementById('search').addEventListener('input', e => search(e.target.value.trim().toLowerCase()));
-    });
-  return;
-  document.getElementById('sn').textContent = graph.nodes.length;
-  document.getElementById('se').textContent = graph.edges.length;
-  graph.nodes.forEach(n => nodeMap[n.id] = n);
-  graph.edges.forEach(e => {
-    (outEdges[e.source] = outEdges[e.source]||[]).push(e);
-    (inEdges[e.target]  = inEdges[e.target] ||[]).push(e);
-  });
-  renderCross();
-  renderLayers();
-
-
-/* ── EDGE HTML ── */
-function edgeHtml(edges, direction) {
-  if (!edges.length) return '<div class="edge-row" style="color:var(--muted);font-size:11px">None</div>';
-  return edges.slice(0,12).map(e => {
-    const other = direction==='out' ? nodeMap[e.target] : nodeMap[e.source];
-    return `<div class="edge-row ${e.confidence==='INFERRED'?'inferred':''}">
-      <span class="rel-tag">${e.relation}</span>
-      ${other ? other.label : (direction==='out' ? e.target : e.source)}
-    </div>`;
+function edgeHtml(edges,dir){
+  return edges.slice(0,12).map(e=>{
+    const o=dir==='out'?nodeMap[e.target]:nodeMap[e.source];
+    const l=o?o.label:(dir==='out'?e.target:e.source);
+    return `<div class="edge-row ${e.confidence==='INFERRED'?'inferred':''}"><span class="rel-tag">${e.relation}</span>${l}</div>`;
   }).join('');
 }
 
-/* ── NODE DETAIL BODY ── */
-function detailBody(id) {
-  const outs = outEdges[id]||[];
-  const ins  = inEdges[id] ||[];
-  const node = nodeMap[id];
-  return `
-    ${node.detail ? `<div class="comp-desc">${node.detail}</div>` : ''}
-    ${outs.length ? `<div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Outgoing (${outs.length})</div><div class="edge-rows">${edgeHtml(outs,'out')}</div>` : ''}
-    ${ins.length  ? `<div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:8px 0 4px">Incoming (${ins.length})</div><div class="edge-rows">${edgeHtml(ins,'in')}</div>` : ''}
-  `;
+function detailBody(id){
+  const n=nodeMap[id]; if(!n) return '';
+  const outs=outEdges[id]||[], ins=inEdges[id]||[];
+  let h='';
+  if(n.detail) h+=`<div class="comp-desc">${n.detail}</div>`;
+  if(outs.length) h+=`<div class="edge-section-title">Outgoing (${outs.length})</div><div class="edge-rows">${edgeHtml(outs,'out')}</div>`;
+  if(ins.length)  h+=`<div class="edge-section-title">Incoming (${ins.length})</div><div class="edge-rows">${edgeHtml(ins,'in')}</div>`;
+  return h;
 }
 
-/* ── CROSS-CUTTING ── */
-function renderCross() {
-  const strip = document.getElementById('cross-strip');
-  (graph.nodes.filter(n => n.rank===7)||[]).forEach(n => {
-    const chip = document.createElement('div');
-    chip.className = 'cross-chip';
-    chip.textContent = n.label;
-    chip.dataset.id = n.id;
-
-    // Inline detail expands below the strip
-    const detail = document.createElement('div');
-    detail.className = 'comp-detail';
-    detail.style.cssText = 'display:none;padding:10px 16px;border-top:1px solid var(--border);background:rgba(0,0,0,0.2)';
-    detail.innerHTML = detailBody(n.id);
-
-    chip.addEventListener('click', () => {
-      const isOpen = chip.classList.contains('active');
-      // Close all cross chips
-      strip.querySelectorAll('.cross-chip').forEach(c => {
-        c.classList.remove('active');
-        c.nextElementSibling && (c.nextElementSibling.style.display = 'none');
-      });
-      if (!isOpen) {
-        chip.classList.add('active');
-        detail.style.display = 'block';
-      }
+function renderCross(){
+  const strip=document.getElementById('cross-strip');
+  graph.nodes.filter(n=>n.rank===7).forEach(n=>{
+    const chip=document.createElement('div');
+    chip.className='cross-chip'; chip.textContent=n.label;
+    const detail=document.createElement('div');
+    detail.className='cross-detail'; detail.innerHTML=detailBody(n.id);
+    chip.addEventListener('click',()=>{
+      const open=chip.classList.contains('active');
+      strip.querySelectorAll('.cross-chip').forEach(c=>c.classList.remove('active'));
+      strip.querySelectorAll('.cross-detail').forEach(d=>d.classList.remove('open'));
+      if(!open){chip.classList.add('active');detail.classList.add('open');}
     });
-
-    strip.appendChild(chip);
-    strip.appendChild(detail);
+    strip.appendChild(chip); strip.appendChild(detail);
   });
 }
 
-/* ── LAYERS ── */
-function renderLayers() {
-  const layersEl = document.getElementById('layers');
-  const byRank = {};
-  graph.nodes.forEach(n => {
-    const r = n.rank??99;
-    (byRank[r]=byRank[r]||[]).push(n);
-  });
-
-  [0,1,2,3,4,5,6].forEach(rank => {
-    const nodes = byRank[rank]||[];
-    if (!nodes.length) return;
-
-    const color = LAYER_COLORS[rank];
-    const name  = LAYER_NAMES[rank];
-    const layerNode = nodes.find(n => n.type==='layer'||n.type==='foundation');
-    const components = nodes.filter(n => ['component','system','foundation'].includes(n.type));
-    const allSubs = nodes.filter(n => n.type==='subnode');
-
-    const layerEl = document.createElement('div');
-    layerEl.className = 'layer';
-    layerEl.style.setProperty('--cl', color);
-    layerEl.dataset.rank = rank;
-
-    /* Layer header — expand only, no detail */
-    const hdr = document.createElement('div');
-    hdr.className = 'layer-header';
-    hdr.innerHTML = `<span class="layer-name">${name}</span><span class="layer-count">${components.length + allSubs.length} elements</span><span class="chevron">▶</span>`;
-    hdr.addEventListener('click', () => layerEl.classList.toggle('open'));
+function renderLayers(){
+  const layersEl=document.getElementById('layers');
+  const byRank={};
+  graph.nodes.forEach(n=>{const r=n.rank??99;(byRank[r]=byRank[r]||[]).push(n);});
+  [0,1,2,3,4,5,6].forEach(rank=>{
+    const nodes=byRank[rank]||[]; if(!nodes.length) return;
+    const color=LC[rank], name=LN[rank];
+    const layerNode=nodes.find(n=>n.type==='layer'||n.type==='foundation');
+    const components=nodes.filter(n=>['component','system','foundation'].includes(n.type));
+    const allSubs=nodes.filter(n=>n.type==='subnode');
+    const layerEl=document.createElement('div');
+    layerEl.className='layer'; layerEl.style.setProperty('--cl',color); layerEl.dataset.rank=rank;
+    const hdr=document.createElement('div');
+    hdr.className='layer-header';
+    hdr.innerHTML=`<span class="layer-name">${name}</span><span class="layer-count">${components.length+allSubs.length} elements</span><span class="chevron">▶</span>`;
+    hdr.addEventListener('click',()=>layerEl.classList.toggle('open'));
     layerEl.appendChild(hdr);
-
-    /* Layer body */
-    const body = document.createElement('div');
-    body.className = 'layer-body';
-
-    /* Layer-level info (edges on the layer node itself) */
-    if (layerNode) {
-      const layerInfo = document.createElement('div');
-      layerInfo.className = 'layer-info';
-      layerInfo.innerHTML = `<div class="layer-info-title">${layerNode.label}</div>${detailBody(layerNode.id)}`;
-      body.appendChild(layerInfo);
+    const body=document.createElement('div'); body.className='layer-body';
+    if(layerNode){
+      const info=document.createElement('div'); info.className='layer-info';
+      info.innerHTML=`<div class="layer-info-title">${layerNode.label}</div>${detailBody(layerNode.id)}`;
+      body.appendChild(info);
     }
-
-    /* Components */
-    components.forEach(comp => {
-      const childIds = (outEdges[comp.id]||[]).filter(e=>e.relation==='contains').map(e=>e.target);
-      const children = childIds.map(id=>nodeMap[id]).filter(n=>n&&n.type==='subnode');
-
-      const compEl = document.createElement('div');
-      compEl.className = 'component';
-      compEl.dataset.id = comp.id;
-
-      const compHdr = document.createElement('div');
-      compHdr.className = 'comp-header';
-      compHdr.innerHTML = `
-        <div class="comp-dot"></div>
-        <div class="comp-name">${comp.label}</div>
-        <div class="comp-type">${comp.type}</div>
-        <span class="comp-chevron">▶</span>
-      `;
-      compHdr.addEventListener('click', e => {
+    components.forEach(comp=>{
+      const childIds=(outEdges[comp.id]||[]).filter(e=>e.relation==='contains').map(e=>e.target);
+      const children=childIds.map(id=>nodeMap[id]).filter(n=>n&&n.type==='subnode');
+      const compEl=document.createElement('div'); compEl.className='component'; compEl.dataset.id=comp.id;
+      const compHdr=document.createElement('div'); compHdr.className='comp-header';
+      compHdr.innerHTML=`<div class="comp-dot"></div><div class="comp-name">${comp.label}</div><div class="comp-type">${comp.type}</div><span class="comp-chevron">▶</span>`;
+      compHdr.addEventListener('click',e=>{
         e.stopPropagation();
-        const wasOpen = compEl.classList.contains('open');
-        // Close siblings
-        compEl.parentElement.querySelectorAll('.component').forEach(c => c.classList.remove('open'));
-        if (!wasOpen) compEl.classList.add('open');
+        const was=compEl.classList.contains('open');
+        compEl.closest('.layer-body').querySelectorAll('.component').forEach(c=>c.classList.remove('open'));
+        if(!was) compEl.classList.add('open');
       });
       compEl.appendChild(compHdr);
-
-      /* Inline component detail */
-      const compDetail = document.createElement('div');
-      compDetail.className = 'comp-detail';
-      compDetail.innerHTML = detailBody(comp.id);
-      compEl.appendChild(compDetail);
-
-      /* Subnodes */
-      if (children.length) {
-        const subsEl = document.createElement('div');
-        subsEl.className = 'subnodes';
-
-        children.forEach(sub => {
-          const grandchildIds = (outEdges[sub.id]||[]).filter(e=>e.relation==='contains').map(e=>e.target);
-          const grandchildren = grandchildIds.map(id=>nodeMap[id]).filter(n=>n&&n.type==='subnode');
-
-          const subEl = document.createElement('div');
-          subEl.className = 'subnode';
-          subEl.dataset.id = sub.id;
-
-          const subHdr = document.createElement('div');
-          subHdr.className = 'subnode-header';
-          subHdr.innerHTML = `
-            <div class="sub-dot"></div>
-            <div class="sub-label">${sub.label}</div>
-            <span class="sub-chevron">▶</span>
-          `;
-          subHdr.addEventListener('click', e => {
+      const compDetail=document.createElement('div'); compDetail.className='comp-detail';
+      compDetail.innerHTML=detailBody(comp.id); compEl.appendChild(compDetail);
+      if(children.length){
+        const subsEl=document.createElement('div'); subsEl.className='subnodes';
+        children.forEach(sub=>{
+          const gcIds=(outEdges[sub.id]||[]).filter(e=>e.relation==='contains').map(e=>e.target);
+          const gcs=gcIds.map(id=>nodeMap[id]).filter(n=>n&&n.type==='subnode');
+          const subEl=document.createElement('div'); subEl.className='subnode'; subEl.dataset.id=sub.id;
+          const subHdr=document.createElement('div'); subHdr.className='subnode-header';
+          subHdr.innerHTML=`<div class="sub-dot"></div><div class="sub-label">${sub.label}</div><span class="sub-chevron">▶</span>`;
+          subHdr.addEventListener('click',e=>{
             e.stopPropagation();
-            const wasOpen = subEl.classList.contains('open');
-            subEl.closest('.subnodes').querySelectorAll('.subnode').forEach(s => s.classList.remove('open'));
-            if (!wasOpen) subEl.classList.add('open');
+            const was=subEl.classList.contains('open');
+            subEl.closest('.subnodes').querySelectorAll('.subnode').forEach(s=>s.classList.remove('open'));
+            if(!was) subEl.classList.add('open');
           });
           subEl.appendChild(subHdr);
-
-          /* Inline subnode detail */
-          const subDetail = document.createElement('div');
-          subDetail.className = 'sub-detail';
-          subDetail.innerHTML = detailBody(sub.id);
-
-          /* Grandchildren (e.g. tf_verification -> identity/evidence/etc) */
-          if (grandchildren.length) {
-            const gcList = document.createElement('div');
-            gcList.style.cssText = 'margin-top:8px;display:flex;flex-direction:column;gap:3px;';
-            grandchildren.forEach(gc => {
-              const gcEl = document.createElement('div');
-              gcEl.style.cssText = 'font-size:12px;color:var(--muted);padding:4px 0;display:flex;align-items:center;gap:6px;cursor:pointer;';
-              gcEl.dataset.id = gc.id;
-              gcEl.innerHTML = `<span style="width:3px;height:3px;border-radius:50%;background:var(--cl);opacity:.4;flex-shrink:0;display:inline-block"></span>${gc.label}`;
-              gcEl.addEventListener('click', e => {
+          const subDetail=document.createElement('div'); subDetail.className='sub-detail';
+          subDetail.innerHTML=detailBody(sub.id);
+          if(gcs.length){
+            const gcList=document.createElement('div'); gcList.style.marginTop='8px';
+            gcs.forEach(gc=>{
+              const gcRow=document.createElement('div'); gcRow.className='gc-row'; gcRow.dataset.id=gc.id;
+              gcRow.innerHTML=`<span class="gc-dot"></span>${gc.label}`;
+              gcRow.addEventListener('click',e=>{
                 e.stopPropagation();
-                // Toggle inline detail after gc row
-                let existing = gcEl.nextElementSibling;
-                if (existing && existing.dataset.gcDetail) {
-                  existing.remove();
-                } else {
-                  const gcDetail = document.createElement('div');
-                  gcDetail.dataset.gcDetail = '1';
-                  gcDetail.style.cssText = 'font-size:12px;padding:6px 0 6px 14px;border-left:2px solid var(--cl);margin:2px 0 4px;opacity:.7;';
-                  gcDetail.innerHTML = detailBody(gc.id);
-                  gcEl.after(gcDetail);
-                }
+                const ex=gcRow.nextElementSibling;
+                if(ex&&ex.classList.contains('gc-detail')){ex.remove();}
+                else{const d=document.createElement('div');d.className='gc-detail';d.innerHTML=detailBody(gc.id);gcRow.after(d);}
               });
-              gcList.appendChild(gcEl);
+              gcList.appendChild(gcRow);
             });
             subDetail.appendChild(gcList);
           }
-
-          subEl.appendChild(subDetail);
-          subsEl.appendChild(subEl);
+          subEl.appendChild(subDetail); subsEl.appendChild(subEl);
         });
-
         compEl.appendChild(subsEl);
       }
-
       body.appendChild(compEl);
     });
-
-    layerEl.appendChild(body);
-    layersEl.appendChild(layerEl);
+    layerEl.appendChild(body); layersEl.appendChild(layerEl);
   });
 }
 
-/* ── SEARCH ── */
-function search(q) {
-  document.querySelectorAll('.match').forEach(el => el.classList.remove('match'));
-  if (!q) return;
-  graph.nodes.forEach(node => {
-    if (!node.label.toLowerCase().includes(q)) return;
-    const rank = node.rank??node.layer;
-    // Open layer
-    const layerEl = document.querySelector(`.layer[data-rank="${rank}"]`);
-    if (layerEl) layerEl.classList.add('open');
-    // Open parent component
-    (inEdges[node.id]||[]).filter(e=>e.relation==='contains').forEach(e => {
-      const compEl = document.querySelector(`.component[data-id="${e.source}"]`);
-      if (compEl) compEl.classList.add('open');
+function search(q){
+  document.querySelectorAll('.match').forEach(el=>el.classList.remove('match'));
+  if(!q) return;
+  graph.nodes.forEach(node=>{
+    if(!node.label.toLowerCase().includes(q)) return;
+    const rank=node.rank??node.layer;
+    const layerEl=document.querySelector(`.layer[data-rank="${rank}"]`);
+    if(layerEl) layerEl.classList.add('open');
+    (inEdges[node.id]||[]).filter(e=>e.relation==='contains').forEach(e=>{
+      const compEl=document.querySelector(`.component[data-id="${e.source}"]`);
+      if(compEl) compEl.classList.add('open');
     });
-    // Highlight
-    const el = document.querySelector(`[data-id="${node.id}"]`);
-    if (el) el.classList.add('match');
+    const el=document.querySelector(`[data-id="${node.id}"]`);
+    if(el) el.classList.add('match');
   });
 }
 
-init();
+fetch('council-architecture-v12-kg-v9.json')
+  .then(r=>r.json())
+  .then(data=>{
+    graph=data;
+    document.getElementById('sn').textContent=graph.nodes.length;
+    document.getElementById('se').textContent=graph.edges.length;
+    graph.nodes.forEach(n=>nodeMap[n.id]=n);
+    graph.edges.forEach(e=>{
+      (outEdges[e.source]=outEdges[e.source]||[]).push(e);
+      (inEdges[e.target]=inEdges[e.target]||[]).push(e);
+    });
+    document.getElementById('loading').remove();
+    renderCross();
+    renderLayers();
+    document.getElementById('search').addEventListener('input',e=>search(e.target.value.trim().toLowerCase()));
+  })
+  .catch(()=>{
+    document.getElementById('loading').textContent='Failed to load graph data. Ensure council-architecture-v12-kg-v9.json is in the same directory.';
+  });
 </script>
 </body>
 </html>
