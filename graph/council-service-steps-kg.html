@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Council Service Steps</title>
+<title>Council Service Architecture</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -16,60 +16,77 @@
   }
 
   header {
-    padding: 20px 24px 16px;
+    padding: 14px 20px;
     border-bottom: 1px solid #e0ddd8;
     background: #fff;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
-  header h1 { font-size: 16px; font-weight: 600; }
+  header h1 { font-size: 15px; font-weight: 600; margin-right: auto; }
 
-  .toggle-group {
+  .layer-tabs {
     display: flex;
     gap: 0;
     border: 1px solid #d0cdc8;
     border-radius: 6px;
     overflow: hidden;
-    margin-left: auto;
   }
 
-  .toggle-group button {
+  .layer-tabs button {
     padding: 6px 14px;
     border: none;
     background: #fff;
     cursor: pointer;
     font-size: 13px;
     color: #555;
-    transition: background 0.15s, color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.1s, color 0.1s;
+    white-space: nowrap;
   }
 
-  .toggle-group button:not(:last-child) { border-right: 1px solid #d0cdc8; }
-  .toggle-group button.active { background: #1a1a1a; color: #fff; }
+  .layer-tabs button:not(:last-child) { border-right: 1px solid #d0cdc8; }
+
+  .layer-tabs button.active { color: #fff; }
+  .layer-tabs button[data-layer="service"].active  { background: #5c3fbe; }
+  .layer-tabs button[data-layer="pattern"].active  { background: #0f7b6c; }
+  .layer-tabs button[data-layer="step"].active     { background: #1d4ed8; }
+  .layer-tabs button[data-layer="component"].active { background: #b45309; }
+
+  .pip {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .pip.service   { background: #5c3fbe; }
+  .pip.pattern   { background: #0f7b6c; }
+  .pip.step      { background: #1d4ed8; }
+  .pip.component { background: #b45309; }
 
   .layout {
     display: grid;
-    grid-template-columns: 260px 1fr;
-    height: calc(100vh - 57px);
+    grid-template-columns: 240px 1fr;
+    height: calc(100vh - 53px);
   }
 
   .sidebar {
     background: #fff;
     border-right: 1px solid #e0ddd8;
     overflow-y: auto;
-    padding: 12px 0;
+    padding: 8px 0;
   }
 
-  .sidebar-section { margin-bottom: 4px; }
-
-  .sidebar-section-label {
+  .sidebar-label {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #888;
-    padding: 8px 16px 4px;
+    color: #999;
+    padding: 10px 16px 4px;
   }
 
   .sidebar-item {
@@ -80,24 +97,14 @@
     cursor: pointer;
     border-left: 3px solid transparent;
     transition: background 0.1s;
-    user-select: none;
   }
 
   .sidebar-item:hover { background: #f5f5f3; }
-
-  .sidebar-item.active {
-    background: #f0eeea;
-    border-left-color: #1a1a1a;
-  }
-
-  .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .dot.step { background: #3b5bdb; }
-  .dot.tech { background: #e67700; }
+  .sidebar-item.active { background: #f0eeea; }
+  .sidebar-item.active.service   { border-left-color: #5c3fbe; }
+  .sidebar-item.active.pattern   { border-left-color: #0f7b6c; }
+  .sidebar-item.active.step      { border-left-color: #1d4ed8; }
+  .sidebar-item.active.component { border-left-color: #b45309; }
 
   .main {
     overflow-y: auto;
@@ -105,19 +112,12 @@
   }
 
   .empty-state {
+    height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    color: #999;
-    gap: 8px;
-  }
-
-  .empty-state p { font-size: 14px; }
-
-  .detail-header {
-    margin-bottom: 20px;
+    color: #aaa;
+    font-size: 13px;
   }
 
   .detail-type {
@@ -127,151 +127,121 @@
     text-transform: uppercase;
     margin-bottom: 6px;
   }
+  .detail-type.service   { color: #5c3fbe; }
+  .detail-type.pattern   { color: #0f7b6c; }
+  .detail-type.step      { color: #1d4ed8; }
+  .detail-type.component { color: #b45309; }
 
-  .detail-type.step { color: #3b5bdb; }
-  .detail-type.tech { color: #e67700; }
+  h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
 
-  .detail-header h2 { font-size: 22px; font-weight: 600; line-height: 1.2; }
-
-  .detail-description {
-    margin-top: 8px;
-    color: #555;
-    line-height: 1.6;
-    max-width: 560px;
-  }
+  .description { color: #555; line-height: 1.6; max-width: 560px; margin-bottom: 20px; }
 
   .section-label {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #888;
-    margin-bottom: 10px;
-    margin-top: 24px;
+    color: #999;
+    margin: 20px 0 8px;
   }
 
-  .chip-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
+  .chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
 
   .chip {
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 12px;
+    padding: 5px 12px;
     border-radius: 20px;
     font-size: 13px;
     cursor: pointer;
     border: 1px solid transparent;
     transition: opacity 0.1s, transform 0.1s;
   }
+  .chip:hover { opacity: 0.75; transform: translateY(-1px); }
 
-  .chip:hover { opacity: 0.8; transform: translateY(-1px); }
+  .chip.service   { background: #ede9fc; color: #3b1fa0; border-color: #c4b8f0; }
+  .chip.pattern   { background: #d1faf3; color: #0a4f43; border-color: #7de8d4; }
+  .chip.step      { background: #dbeafe; color: #1e3a8a; border-color: #93c5fd; }
+  .chip.component { background: #fef3c7; color: #78350f; border-color: #fcd34d; }
 
-  .chip.step {
-    background: #eef1ff;
-    color: #2a3fa0;
-    border-color: #c5cdf5;
-  }
-
-  .chip.tech {
-    background: #fff3e0;
-    color: #994400;
-    border-color: #ffd8a8;
-  }
-
-  .stat-row {
-    display: flex;
-    gap: 16px;
-    margin-top: 24px;
-  }
-
-  .stat {
-    background: #f5f5f3;
-    border-radius: 8px;
-    padding: 12px 16px;
-    min-width: 80px;
-  }
-
-  .stat-number { font-size: 24px; font-weight: 600; line-height: 1; }
-  .stat-label { font-size: 12px; color: #777; margin-top: 4px; }
-  .stat-number.step-color { color: #3b5bdb; }
-  .stat-number.tech-color { color: #e67700; }
-
-  .error {
-    padding: 20px;
-    color: #c00;
-    font-size: 13px;
-  }
+  .stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .stat { background: #f5f5f3; border-radius: 8px; padding: 10px 16px; }
+  .stat-n { font-size: 22px; font-weight: 600; }
+  .stat-n.service   { color: #5c3fbe; }
+  .stat-n.pattern   { color: #0f7b6c; }
+  .stat-n.step      { color: #1d4ed8; }
+  .stat-n.component { color: #b45309; }
+  .stat-lbl { font-size: 11px; color: #888; margin-top: 2px; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Council Service Steps</h1>
-  <div class="toggle-group">
-    <button id="btn-steps" class="active" onclick="setFocus('steps')">Steps</button>
-    <button id="btn-tech" onclick="setFocus('tech')">Tech components</button>
+  <h1>Council Service Architecture</h1>
+  <div class="layer-tabs">
+    <button data-layer="service"   onclick="setLayer('service')"  ><span class="pip service"></span>  Services</button>
+    <button data-layer="pattern"   onclick="setLayer('pattern')"  ><span class="pip pattern"></span>  Patterns</button>
+    <button data-layer="step"      onclick="setLayer('step')"     ><span class="pip step"></span>     Steps</button>
+    <button data-layer="component" onclick="setLayer('component')"><span class="pip component"></span>Components</button>
   </div>
 </header>
 
 <div class="layout">
   <nav class="sidebar" id="sidebar"></nav>
-  <main class="main" id="main">
-    <div class="empty-state">
-      <p>Select an item from the list to explore its connections.</p>
-    </div>
-  </main>
+  <main class="main" id="main"><div class="empty-state">Select an item to explore its connections.</div></main>
 </div>
 
 <script>
 let graph = null;
-let focus = 'steps';
+let layer = 'service';
 let selected = null;
+
+const LAYER_LABELS = {
+  service:   'Services',
+  pattern:   'Patterns',
+  step:      'Steps',
+  component: 'Components'
+};
+
+const RELATION_UP = {
+  service:   null,
+  pattern:   null,
+  step:      ['service', 'pattern'],
+  component: ['step']
+};
+
+const RELATION_DOWN = {
+  service:   ['step'],
+  pattern:   ['step'],
+  step:      ['component'],
+  component: null
+};
+
+const EDGE_RELATION = {
+  service:  { step: 'comprises' },
+  pattern:  { step: 'bundles'   },
+  step:     { component: 'requires' }
+};
 
 async function load() {
   try {
     const res = await fetch('council-service-steps-kg.json');
     if (!res.ok) throw new Error(res.statusText);
     graph = await res.json();
-    render();
+    setLayer('service');
   } catch(e) {
-    document.getElementById('sidebar').innerHTML = '';
-    document.getElementById('main').innerHTML = `<div class="error">Could not load council-service-steps-kg.json: ${e.message}</div>`;
+    document.getElementById('main').innerHTML = `<div style="padding:20px;color:#c00">Could not load JSON: ${e.message}</div>`;
   }
 }
 
-function setFocus(f) {
-  focus = f;
+function setLayer(l) {
+  layer = l;
   selected = null;
-  document.getElementById('btn-steps').classList.toggle('active', f === 'steps');
-  document.getElementById('btn-tech').classList.toggle('active', f === 'tech');
-  render();
-}
-
-function render() {
-  renderSidebar();
-  renderMain();
-}
-
-function renderSidebar() {
-  const type = focus === 'steps' ? 'step' : 'tech_component';
-  const nodes = graph.nodes.filter(n => n.type === type);
-  const sidebar = document.getElementById('sidebar');
-  const label = focus === 'steps' ? 'Service steps' : 'Tech components';
-  const dotClass = focus === 'steps' ? 'step' : 'tech';
-
-  sidebar.innerHTML = `<div class="sidebar-section">
-    <div class="sidebar-section-label">${label}</div>
-    ${nodes.map(n => `
-      <div class="sidebar-item ${selected === n.id ? 'active' : ''}" onclick="select('${n.id}')">
-        <span class="dot ${dotClass}"></span>
-        <span>${n.label}</span>
-      </div>
-    `).join('')}
-  </div>`;
+  document.querySelectorAll('.layer-tabs button').forEach(b => {
+    b.classList.toggle('active', b.dataset.layer === l);
+  });
+  if (graph) { renderSidebar(); renderMain(); }
 }
 
 function select(id) {
@@ -280,93 +250,109 @@ function select(id) {
   renderMain();
 }
 
+function renderSidebar() {
+  const nodes = graph.nodes.filter(n => n.type === layer);
+  document.getElementById('sidebar').innerHTML = `
+    <div class="sidebar-label">${LAYER_LABELS[layer]}</div>
+    ${nodes.map(n => `
+      <div class="sidebar-item ${layer} ${selected === n.id ? 'active ' + layer : ''}" onclick="select('${n.id}')">
+        <span class="pip ${layer}"></span>
+        <span>${n.label}</span>
+      </div>
+    `).join('')}
+  `;
+}
+
 function renderMain() {
   const main = document.getElementById('main');
-
   if (!selected) {
-    main.innerHTML = `<div class="empty-state"><p>Select an item from the list to explore its connections.</p></div>`;
+    main.innerHTML = `<div class="empty-state">Select an item to explore its connections.</div>`;
     return;
   }
 
   const node = graph.nodes.find(n => n.id === selected);
-  const isStep = node.type === 'step';
-  const isTech = node.type === 'tech_component';
 
-  // Find connected nodes via edges
-  const connectedIds = new Set();
+  // Nodes this node points DOWN to
+  const downTargets = {};
+  const downTypes = RELATION_DOWN[layer] || [];
+  downTypes.forEach(t => downTargets[t] = []);
+
   graph.edges.forEach(e => {
-    if (isStep && e.source === selected) connectedIds.add(e.target);
-    if (isTech && e.target === selected) connectedIds.add(e.source);
+    if (e.source === selected) {
+      const target = graph.nodes.find(n => n.id === e.target);
+      if (target && downTargets[target.type] !== undefined) {
+        downTargets[target.type].push(target);
+      }
+    }
   });
 
-  const connected = graph.nodes.filter(n => connectedIds.has(n.id));
+  // Nodes that point UP to this node
+  const upSources = {};
+  const upTypes = RELATION_UP[layer] || [];
+  upTypes.forEach(t => upSources[t] = []);
 
-  // For steps: connected nodes are tech components
-  // For tech: connected nodes are steps
-  const connectedType = isStep ? 'tech' : 'step';
-  const connectedLabel = isStep ? 'Tech components required' : 'Steps that use this';
+  graph.edges.forEach(e => {
+    if (e.target === selected) {
+      const source = graph.nodes.find(n => n.id === e.source);
+      if (source && upSources[source.type] !== undefined) {
+        upSources[source.type].push(source);
+      }
+    }
+  });
 
-  // Also find peer nodes (steps sharing tech, or techs sharing steps)
-  const peerIds = new Set();
-  if (isStep) {
-    // Other steps that share at least one tech component with this step
-    graph.nodes.filter(n => n.type === 'step' && n.id !== selected).forEach(otherStep => {
-      const otherTechs = new Set(graph.edges.filter(e => e.source === otherStep.id).map(e => e.target));
-      const hasShard = [...connectedIds].some(t => otherTechs.has(t));
-      if (hasShard) peerIds.add(otherStep.id);
-    });
-  } else {
-    // Other tech components used by the same steps
-    graph.nodes.filter(n => n.type === 'tech_component' && n.id !== selected).forEach(otherTech => {
-      const otherSteps = new Set(graph.edges.filter(e => e.target === otherTech.id).map(e => e.source));
-      const hasShared = [...connectedIds].some(s => otherSteps.has(s));
-      if (hasShared) peerIds.add(otherTech.id);
-    });
-  }
+  // Stats
+  const allConnected = [
+    ...Object.values(downTargets).flat(),
+    ...Object.values(upSources).flat()
+  ];
 
-  const peers = graph.nodes.filter(n => peerIds.has(n.id));
-  const peerLabel = isStep ? 'Steps sharing at least one tech component' : 'Other components used by the same steps';
+  const statCounts = {};
+  allConnected.forEach(n => {
+    statCounts[n.type] = (statCounts[n.type] || 0) + 1;
+  });
 
-  const typeLabel = isStep ? 'Step' : 'Tech component';
-  const typeClass = isStep ? 'step' : 'tech';
+  const statsHtml = Object.entries(statCounts).map(([t, c]) => `
+    <div class="stat">
+      <div class="stat-n ${t}">${c}</div>
+      <div class="stat-lbl">${LAYER_LABELS[t]}</div>
+    </div>
+  `).join('');
+
+  // Sections
+  const sections = [];
+
+  upTypes.forEach(t => {
+    if (upSources[t] && upSources[t].length) {
+      const rel = Object.keys(EDGE_RELATION).find(k => EDGE_RELATION[k][layer] !== undefined && k === t);
+      const label = rel ? `${LAYER_LABELS[t]} that ${EDGE_RELATION[t]?.[layer] || 'include'} this` : `Used by — ${LAYER_LABELS[t]}`;
+      sections.push({ label, nodes: upSources[t], type: t });
+    }
+  });
+
+  downTypes.forEach(t => {
+    if (downTargets[t] && downTargets[t].length) {
+      const relKey = layer;
+      const rel = EDGE_RELATION[relKey]?.[t];
+      const label = rel ? `${LAYER_LABELS[t]} — ${rel}` : LAYER_LABELS[t];
+      sections.push({ label, nodes: downTargets[t], type: t });
+    }
+  });
 
   main.innerHTML = `
-    <div class="detail-header">
-      <div class="detail-type ${typeClass}">${typeLabel}</div>
-      <h2>${node.label}</h2>
-      ${node.description ? `<p class="detail-description">${node.description}</p>` : ''}
-    </div>
-
-    <div class="stat-row">
-      <div class="stat">
-        <div class="stat-number ${typeClass === 'step' ? 'tech-color' : 'step-color'}">${connected.length}</div>
-        <div class="stat-label">${isStep ? 'Tech components' : 'Steps'}</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">${peers.length}</div>
-        <div class="stat-label">${isStep ? 'Related steps' : 'Related components'}</div>
-      </div>
-    </div>
-
-    <div class="section-label" style="margin-top:28px">${connectedLabel}</div>
-    <div class="chip-grid">
-      ${connected.map(n => `
-        <div class="chip ${connectedType}" onclick="select('${n.id}')">
-          ${n.label}
-        </div>
-      `).join('')}
-    </div>
-
-    ${peers.length ? `
-      <div class="section-label">${peerLabel}</div>
+    <div class="detail-type ${layer}">${LAYER_LABELS[layer].replace(/s$/, '')}</div>
+    <h2>${node.label}</h2>
+    ${node.description ? `<p class="description">${node.description}</p>` : ''}
+    ${statsHtml ? `<div class="stat-row">${statsHtml}</div>` : ''}
+    ${sections.map(s => `
+      <div class="section-label">${s.label}</div>
       <div class="chip-grid">
-        ${peers.map(n => `
-          <div class="chip ${isStep ? 'step' : 'tech'}" onclick="select('${n.id}')">
+        ${s.nodes.map(n => `
+          <div class="chip ${n.type}" onclick="select('${n.id}'); setLayer('${n.type}')">
             ${n.label}
           </div>
         `).join('')}
       </div>
-    ` : ''}
+    `).join('')}
   `;
 }
 
