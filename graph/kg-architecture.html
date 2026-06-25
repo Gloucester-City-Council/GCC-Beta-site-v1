@@ -49,22 +49,34 @@ header h1 {
   letter-spacing: 0.06em;
 }
 
-.leg-dot {
-  width: 8px; height: 8px;
-  border-radius: 2px;
+.leg-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+/* ── OUTER WRAPPER ── */
+.outer {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
+  gap: 0;
+  align-items: start;
+  position: relative;
 }
 
-.canvas {
-  display: grid;
-  grid-template-columns: 28px 1fr 28px;
-  grid-template-rows: auto;
-  gap: 0;
-  min-width: 900px;
+/* ── SIDE ARC PANELS ── */
+.arc-panel {
+  position: relative;
+}
+
+.arc-panel svg {
+  display: block;
+  width: 100%;
+}
+
+/* ── CENTRE COLUMN ── */
+.centre {
+  min-width: 0;
 }
 
 /* ── SERVICE + PATTERN ROW ── */
 .row-top {
-  grid-column: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
@@ -76,15 +88,8 @@ header h1 {
   padding: 10px 12px;
 }
 
-.service-band {
-  background: #1a1730;
-  border: 1px solid #3a2e70;
-}
-
-.pattern-band {
-  background: #0e2430;
-  border: 1px solid #1e4a60;
-}
+.service-band { background: #1a1730; border: 1px solid #3a2e70; }
+.pattern-band { background: #0e2430; border: 1px solid #1e4a60; }
 
 .band-label {
   font-size: 9px;
@@ -98,11 +103,7 @@ header h1 {
 .service-band .band-label { color: #7c6af7; }
 .pattern-band .band-label { color: #27a8c4; }
 
-.pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
+.pills { display: flex; flex-wrap: wrap; gap: 5px; }
 
 .pill {
   font-size: 10px;
@@ -111,76 +112,23 @@ header h1 {
   white-space: nowrap;
 }
 
-.pill-service {
-  background: #2a1f5a;
-  color: #a89ef7;
-  border: 1px solid #3a2e80;
-}
+.pill-service { background: #2a1f5a; color: #a89ef7; border: 1px solid #3a2e80; }
+.pill-pattern { background: #0a2535; color: #5bc8e0; border: 1px solid #1a4a60; }
 
-.pill-pattern {
-  background: #0a2535;
-  color: #5bc8e0;
-  border: 1px solid #1a4a60;
-}
+/* ── STACK ── */
+.stack { display: flex; flex-direction: column; gap: 6px; }
 
-/* ── CROSS-CUTTING BANDS ── */
-.cc-left {
-  grid-column: 1;
-  grid-row: 2 / span 8;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-right: 6px;
-}
-
-.cc-right {
-  grid-column: 3;
-  grid-row: 2 / span 8;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-left: 6px;
-}
-
-.cc-band {
-  flex: 1;
-  border-radius: 4px;
+.arrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  writing-mode: vertical-rl;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-family: 'SF Mono', monospace;
-  padding: 8px 0;
-  cursor: default;
-}
-
-.cc-ai       { background: #0f1e35; color: #4a90d4; border: 1px solid #1a3a60; }
-.cc-dcx      { background: #1a1020; color: #a06ad4; border: 1px solid #3a1a60; }
-.cc-mon      { background: #0f1e15; color: #4ab870; border: 1px solid #1a4a28; }
-.cc-auto     { background: #1e1a0f; color: #c4a030; border: 1px solid #4a3a10; }
-.cc-feedback { background: #1e0f10; color: #c45060; border: 1px solid #4a1a20; }
-.cc-access   { background: #0f1a1e; color: #30b4c4; border: 1px solid #1a4050; }
-
-/* ── MAIN STACK ── */
-.stack {
-  grid-column: 2;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  height: 14px;
+  color: #3a4360;
+  font-size: 12px;
 }
 
 /* ── LAYER ── */
-.layer {
-  border-radius: 6px;
-  overflow: hidden;
-  border-width: 1px;
-  border-style: solid;
-}
+.layer { border-radius: 6px; overflow: hidden; border-width: 1px; border-style: solid; }
 
 .layer-header {
   padding: 6px 12px;
@@ -191,13 +139,8 @@ header h1 {
   font-family: 'SF Mono', monospace;
 }
 
-.layer-body {
-  display: grid;
-  gap: 6px;
-  padding: 8px;
-}
+.layer-body { display: grid; gap: 6px; padding: 8px; }
 
-/* Layer colours */
 .l0 { background: #0f1220; border-color: #2a3060; }
 .l0 .layer-header { background: #1a1f40; color: #7080d0; }
 .l0 .layer-body { grid-template-columns: 1fr 1fr; }
@@ -227,11 +170,7 @@ header h1 {
 .tf .layer-body { grid-template-columns: repeat(6, 1fr); }
 
 /* ── COMPONENT CARD ── */
-.comp {
-  border-radius: 4px;
-  padding: 8px 10px;
-  border: 1px solid transparent;
-}
+.comp { border-radius: 4px; padding: 8px 10px; border: 1px solid transparent; }
 
 .l0 .comp { background: #1a2050; border-color: #2a3070; }
 .l1 .comp { background: #0f2a35; border-color: #1a4a58; }
@@ -239,14 +178,9 @@ header h1 {
 .l3 .comp { background: #0f2820; border-color: #1a4838; }
 .l4 .comp { background: #0f2035; border-color: #1a3858; }
 .l5 .comp { background: #282010; border-color: #483810; }
-.tf .comp  { background: #1a1a1a; border-color: #2a2a2a; }
+.tf  .comp { background: #1a1a1a; border-color: #2a2a2a; }
 
-.comp-name {
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 1.3;
-  margin-bottom: 4px;
-}
+.comp-name { font-size: 10px; font-weight: 600; line-height: 1.3; margin-bottom: 4px; }
 
 .l0 .comp-name { color: #9ab0f0; }
 .l1 .comp-name { color: #5bc8d8; }
@@ -256,11 +190,7 @@ header h1 {
 .l5 .comp-name { color: #d8b848; }
 .tf  .comp-name { color: #8898b8; }
 
-.comp-subs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-}
+.comp-subs { display: flex; flex-wrap: wrap; gap: 3px; }
 
 .sub {
   font-size: 9px;
@@ -280,17 +210,6 @@ header h1 {
 .l5 .sub { background: #201808; color: #b09038; }
 .tf  .sub { background: #101010; color: #5a6878; }
 
-/* ── FLOW ARROW ── */
-.arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 14px;
-  color: #3a4360;
-  font-size: 12px;
-}
-
-/* ── REFERRAL NOTE ── */
 .referral-note {
   font-size: 9px;
   color: #4a90d4;
@@ -298,7 +217,7 @@ header h1 {
   letter-spacing: 0.06em;
   padding: 4px 10px;
   border-left: 2px solid #1a3a60;
-  margin: 0 8px;
+  margin: 0 2px;
 }
 </style>
 </head>
@@ -315,11 +234,39 @@ header h1 {
   </div>
 </header>
 
-<div id="canvas" class="canvas">
-  <div style="grid-column:1/-1;color:#3a4360;font-size:11px;font-family:monospace;padding:20px;text-align:center">Loading…</div>
+<div class="outer" id="outer">
+  <div style="color:#3a4360;font-size:11px;font-family:monospace;padding:20px;grid-column:1/-1;text-align:center">Loading…</div>
 </div>
 
 <script>
+const LAYER_ORDER = ['layer_customer','layer_access','layer_information','layer_capabilities','layer_orchestration','layer_determination'];
+
+const LAYER_DEFS = [
+  { id: 'layer_customer',      cls: 'l0', label: 'Customer' },
+  { id: 'layer_access',        cls: 'l1', label: 'Access' },
+  { id: 'layer_information',   cls: 'l2', label: 'Information' },
+  { id: 'layer_capabilities',  cls: 'l3', label: 'Capabilities' },
+  { id: 'layer_orchestration', cls: 'l4', label: 'Orchestration' },
+  { id: 'layer_determination', cls: 'l5', label: 'Determination' },
+];
+
+const CC_CONFIG = [
+  { id: 'cross_ai',        label: 'AI', color: '#4a90d4', side: 'left' },
+  { id: 'cross_digital_cx',label: 'Digital & CX', color: '#a06ad4', side: 'left' },
+  { id: 'cross_mon',       label: 'Monitoring', color: '#4ab870', side: 'left' },  
+  { id: 'cross_monitoring', label: 'Monitoring', color: '#4ab870', side: 'left' },
+  { id: 'cross_auto',      label: 'Automation', color: '#c4a030', side: 'right' },
+  { id: 'cross_automation',label: 'Automation', color: '#c4a030', side: 'right' },
+  { id: 'cross_resolution_feedback', label: 'Resolution feedback', color: '#c45060', side: 'right' },
+  { id: 'cross_accessibility', label: 'Accessibility', color: '#30b4c4', side: 'right' },
+];
+
+function el(tag, cls) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  return e;
+}
+
 fetch('council-architecture-v12-kg-v15.json')
   .then(r => r.json())
   .then(g => {
@@ -332,166 +279,270 @@ fetch('council-architecture-v12-kg-v15.json')
     });
 
     function compsOf(id, rel) {
-      return (outE[id]||[]).filter(e => e.label === rel).map(e => nmap[e.target]).filter(Boolean);
+      return (outE[id]||[]).filter(e => e.label===rel).map(e => nmap[e.target]).filter(Boolean);
     }
-
     function subsOf(id) {
-      return compsOf(id, 'comprises').filter(n => n.type === 'subnode');
+      return compsOf(id,'comprises').filter(n => n.type==='subnode');
     }
 
-    const canvas = document.getElementById('canvas');
-    canvas.innerHTML = '';
+    // ── Build centre ──
+    const outer = document.getElementById('outer');
+    outer.innerHTML = '';
 
-    // ── TOP: Services + Patterns ──
-    const topRow = div('row-top');
-    topRow.style.gridColumn = '2';
+    // Left arc panel placeholder
+    const leftPanel = el('div','arc-panel');
+    leftPanel.id = 'left-panel';
+    outer.appendChild(leftPanel);
 
-    const svcBand = div('service-band');
+    // Centre
+    const centre = el('div','centre');
+
+    // Top row
+    const topRow = el('div','row-top');
+
+    const svcBand = el('div','service-band');
     svcBand.innerHTML = '<div class="band-label">Services</div>';
-    const svcPills = div('pills');
-    g.nodes.filter(n => n.type === 'service').forEach(n => {
-      const p = div('pill pill-service');
-      p.textContent = n.label;
-      svcPills.appendChild(p);
+    const svcPills = el('div','pills');
+    g.nodes.filter(n => n.type==='service').forEach(n => {
+      const p = el('div','pill pill-service'); p.textContent = n.label; svcPills.appendChild(p);
     });
     svcBand.appendChild(svcPills);
 
-    const patBand = div('pattern-band');
+    const patBand = el('div','pattern-band');
     patBand.innerHTML = '<div class="band-label">Journey patterns</div>';
-    const patPills = div('pills');
-    g.nodes.filter(n => n.type === 'pattern').forEach(n => {
-      const p = div('pill pill-pattern');
-      p.textContent = n.label;
-      patPills.appendChild(p);
+    const patPills = el('div','pills');
+    g.nodes.filter(n => n.type==='pattern').forEach(n => {
+      const p = el('div','pill pill-pattern'); p.textContent = n.label; patPills.appendChild(p);
     });
     patBand.appendChild(patPills);
 
     topRow.appendChild(svcBand);
     topRow.appendChild(patBand);
-    canvas.appendChild(topRow);
+    centre.appendChild(topRow);
 
-    // ── LEFT BAND: cross-cutting ──
-    const ccLeft = div('cc-left');
-    ccLeft.style.gridColumn = '1';
-    ccLeft.style.gridRow = '2 / span 20';
+    // Stack
+    const stack = el('div','stack');
+    stack.id = 'stack';
 
-    const ccRight = div('cc-right');
-    ccRight.style.gridColumn = '3';
-    ccRight.style.gridRow = '2 / span 20';
-
-    const ccNodes = g.nodes.filter(n => n.type === 'cross_cutting');
-    const ccLeft3 = ccNodes.slice(0, 3);
-    const ccRight3 = ccNodes.slice(3);
-
-    const ccClasses = {
-      'AI — Reasoning, Retrieval, Drafting, Routing': 'cc-ai',
-      'Digital and Customer Experience': 'cc-dcx',
-      'Monitoring and Reporting': 'cc-mon',
-      'Automation': 'cc-auto',
-      'Resolution Feedback to Customer': 'cc-feedback',
-      'Accessibility': 'cc-access',
-    };
-
-    ccLeft3.forEach(n => {
-      const b = div('cc-band ' + (ccClasses[n.label]||'cc-ai'));
-      b.textContent = n.label;
-      b.title = n.detail || n.label;
-      ccLeft.appendChild(b);
-    });
-
-    ccRight3.forEach(n => {
-      const b = div('cc-band ' + (ccClasses[n.label]||'cc-mon'));
-      b.textContent = n.label;
-      b.title = n.detail || n.label;
-      ccRight.appendChild(b);
-    });
-
-    canvas.appendChild(ccLeft);
-    canvas.appendChild(ccRight);
-
-    // ── MAIN STACK ──
-    const stack = div('stack');
-    stack.style.gridColumn = '2';
-    stack.style.gridRow = '2';
-
-    const layerDefs = [
-      { id: 'layer_customer',      cls: 'l0', label: 'Customer' },
-      { id: 'layer_access',        cls: 'l1', label: 'Access' },
-      { id: 'layer_information',   cls: 'l2', label: 'Information' },
-      { id: 'layer_capabilities',  cls: 'l3', label: 'Capabilities' },
-      { id: 'layer_orchestration', cls: 'l4', label: 'Orchestration' },
-      { id: 'layer_determination', cls: 'l5', label: 'Determination' },
-    ];
-
-    layerDefs.forEach((ld, i) => {
-      if (i > 0) {
-        const arr = div('arrow'); arr.textContent = '↓'; stack.appendChild(arr);
-      }
-
-      const layer = div('layer ' + ld.cls);
-      const hdr = div('layer-header');
-      hdr.textContent = ld.label;
+    LAYER_DEFS.forEach((ld, i) => {
+      if (i > 0) { const a = el('div','arrow'); a.textContent = '↓'; stack.appendChild(a); }
+      const layer = el('div','layer '+ld.cls);
+      layer.dataset.layerId = ld.id;
+      layer.dataset.layerIdx = i;
+      const hdr = el('div','layer-header'); hdr.textContent = ld.label;
       layer.appendChild(hdr);
-
-      const body = div('layer-body');
-      const components = compsOf(ld.id, 'comprises').filter(n => n.type === 'component');
-
-      components.forEach(c => {
-        const card = div('comp');
-        const name = div('comp-name'); name.textContent = c.label;
+      const body = el('div','layer-body');
+      compsOf(ld.id,'comprises').filter(n=>n.type==='component').forEach(c => {
+        const card = el('div','comp');
+        const name = el('div','comp-name'); name.textContent = c.label;
         card.appendChild(name);
         const subs = subsOf(c.id);
         if (subs.length) {
-          const subsDiv = div('comp-subs');
+          const sd = el('div','comp-subs');
           subs.slice(0,4).forEach(s => {
-            const sub = div('sub'); sub.textContent = s.label; sub.title = s.label;
-            subsDiv.appendChild(sub);
+            const sub = el('div','sub'); sub.textContent = s.label; sub.title = s.label; sd.appendChild(sub);
           });
-          card.appendChild(subsDiv);
+          card.appendChild(sd);
         }
         body.appendChild(card);
       });
-
-      // Special: Access layer — show referral route-in note
       if (ld.id === 'layer_access') {
-        const note = div('referral-note');
+        const note = el('div','referral-note');
         note.textContent = '↘ Inbound referral enters here → Triage Engine';
         note.style.gridColumn = '1 / -1';
         body.appendChild(note);
       }
-
       layer.appendChild(body);
       stack.appendChild(layer);
     });
 
-    // Arrow before TF
-    const arr = div('arrow'); arr.textContent = '↓'; stack.appendChild(arr);
+    // TF
+    const tfarr = el('div','arrow'); tfarr.textContent = '↓'; stack.appendChild(tfarr);
+    const tfLayer = el('div','layer tf');
+    tfLayer.dataset.layerId = 'technology_foundations';
+    tfLayer.dataset.layerIdx = 6;
+    const tfHdr = el('div','layer-header'); tfHdr.textContent = 'Technology foundations';
+    tfLayer.appendChild(tfHdr);
+    const tfBody = el('div','layer-body');
+    subsOf('technology_foundations').forEach(s => {
+      const card = el('div','comp');
+      const name = el('div','comp-name'); name.textContent = s.label;
+      card.appendChild(name);
+      tfBody.appendChild(card);
+    });
+    tfLayer.appendChild(tfBody);
+    stack.appendChild(tfLayer);
 
-    // Technology Foundations
-    const tf = nmap['technology_foundations'];
-    if (tf) {
-      const layer = div('layer tf');
-      const hdr = div('layer-header'); hdr.textContent = 'Technology foundations';
-      layer.appendChild(hdr);
-      const body = div('layer-body');
-      const subs = subsOf('technology_foundations');
-      subs.forEach(s => {
-        const card = div('comp');
-        const name = div('comp-name'); name.textContent = s.label;
-        card.appendChild(name);
-        body.appendChild(card);
-      });
-      layer.appendChild(body);
-      stack.appendChild(layer);
-    }
+    centre.appendChild(stack);
+    outer.appendChild(centre);
 
-    canvas.appendChild(stack);
+    // Right arc panel placeholder
+    const rightPanel = el('div','arc-panel');
+    rightPanel.id = 'right-panel';
+    outer.appendChild(rightPanel);
+
+    // ── Draw arcs after layout ──
+    requestAnimationFrame(() => drawArcs(g, nmap, outE));
   });
 
-function div(cls) {
-  const el = document.createElement('div');
-  if (cls) el.className = cls;
-  return el;
+function drawArcs(g, nmap, outE) {
+  const stackEl = document.getElementById('stack');
+  const outerEl = document.getElementById('outer');
+  const leftPanel = document.getElementById('left-panel');
+  const rightPanel = document.getElementById('right-panel');
+
+  // Measure each layer's vertical position relative to stack
+  const layerEls = stackEl.querySelectorAll('.layer');
+  const stackRect = stackEl.getBoundingClientRect();
+  const outerRect = outerEl.getBoundingClientRect();
+
+  // Build layer id -> {top, bottom} in outer-relative coords
+  const layerPos = {};
+  layerEls.forEach(lel => {
+    const r = lel.getBoundingClientRect();
+    layerPos[lel.dataset.layerId] = {
+      top: r.top - outerRect.top,
+      bottom: r.bottom - outerRect.top,
+      mid: (r.top + r.bottom) / 2 - outerRect.top
+    };
+  });
+
+  const totalH = outerRect.height;
+
+  // ── Determine span for each CC node ──
+  const cc_nodes = g.nodes.filter(n => n.type === 'cross_cutting');
+
+  const leftCCs = [];
+  const rightCCs = [];
+
+  // Assign sides
+  const rightIds = new Set(['cross_automation','cross_resolution_feedback','cross_accessibility']);
+
+  cc_nodes.forEach(cc => {
+    // Get governed layers
+    const governed = (outE[cc.id]||[]).filter(e => e.label==='governs').map(e => e.target);
+    const layerIdxs = governed
+      .map(id => LAYER_ORDER.indexOf(id))
+      .filter(i => i >= 0);
+    // Also check component-level governs
+    governed.forEach(id => {
+      const n = nmap[id];
+      if (n && typeof n.layer === 'number') layerIdxs.push(n.layer);
+    });
+
+    if (!layerIdxs.length) return;
+    const minL = Math.min(...layerIdxs);
+    const maxL = Math.max(...layerIdxs);
+    const minId = LAYER_ORDER[minL];
+    const maxId = LAYER_ORDER[maxL];
+
+    const pos = layerPos[minId] && layerPos[maxId] ? {
+      top: layerPos[minId].top,
+      bottom: layerPos[maxId].bottom
+    } : null;
+
+    if (!pos) return;
+
+    const cfg = { label: cc.label, top: pos.top, bottom: pos.bottom };
+
+    // Colour lookup
+    const colMap = {
+      'AI — Reasoning, Retrieval, Drafting, Routing': '#4a90d4',
+      'Digital and Customer Experience': '#a06ad4',
+      'Monitoring and Reporting': '#4ab870',
+      'Automation': '#c4a030',
+      'Resolution Feedback to Customer': '#c45060',
+      'Accessibility': '#30b4c4',
+    };
+    cfg.color = colMap[cc.label] || '#6b7a99';
+    cfg.isFeedback = cc.id === 'cross_resolution_feedback';
+
+    if (rightIds.has(cc.id)) rightCCs.push(cfg);
+    else leftCCs.push(cfg);
+  });
+
+  // ── Draw SVG for a side ──
+  function drawSide(panel, ccs, side) {
+    const W = 96;
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('width', W);
+    svg.setAttribute('height', totalH);
+    svg.setAttribute('viewBox', `0 0 ${W} ${totalH}`);
+    svg.style.overflow = 'visible';
+
+    const count = ccs.length;
+    const arcStep = Math.floor((W - 20) / count);
+
+    ccs.forEach((cc, i) => {
+      const depth = side === 'left'
+        ? W - 10 - i * arcStep
+        : 10 + i * arcStep;
+
+      const x0 = side === 'left' ? W : 0;
+      const topY = cc.top + 8;
+      const botY = cc.bottom - 8;
+      const midY = (topY + botY) / 2;
+
+      // Draw bracket arc
+      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+
+      let d;
+      if (cc.isFeedback) {
+        // Feedback arc goes upward — dashed return arrow
+        const cx = side === 'left' ? depth : depth;
+        d = `M ${x0} ${botY} C ${cx} ${botY} ${cx} ${topY} ${x0} ${topY}`;
+        path.setAttribute('stroke-dasharray','5 3');
+      } else {
+        d = `M ${x0} ${topY} C ${depth} ${topY} ${depth} ${botY} ${x0} ${botY}`;
+      }
+
+      path.setAttribute('d', d);
+      path.setAttribute('fill','none');
+      path.setAttribute('stroke', cc.color);
+      path.setAttribute('stroke-width','1.5');
+      path.setAttribute('opacity','0.7');
+      svg.appendChild(path);
+
+      // End caps (short horizontal ticks)
+      [[topY, false],[botY, true]].forEach(([y, isBottom]) => {
+        const tick = document.createElementNS('http://www.w3.org/2000/svg','line');
+        const tickLen = 8;
+        if (side === 'left') {
+          tick.setAttribute('x1', x0 - tickLen); tick.setAttribute('x2', x0);
+        } else {
+          tick.setAttribute('x1', x0); tick.setAttribute('x2', x0 + tickLen);
+        }
+        tick.setAttribute('y1', y); tick.setAttribute('y2', y);
+        tick.setAttribute('stroke', cc.color);
+        tick.setAttribute('stroke-width','1.5');
+        tick.setAttribute('opacity','0.7');
+        svg.appendChild(tick);
+      });
+
+      // Label at midpoint
+      const txt = document.createElementNS('http://www.w3.org/2000/svg','text');
+      const labelX = side === 'left' ? depth - 4 : depth + 4;
+      txt.setAttribute('x', labelX);
+      txt.setAttribute('y', midY);
+      txt.setAttribute('text-anchor','middle');
+      txt.setAttribute('dominant-baseline','central');
+      txt.setAttribute('transform', `rotate(-90, ${labelX}, ${midY})`);
+      txt.setAttribute('font-size','9');
+      txt.setAttribute('font-family','SF Mono, Fira Code, monospace');
+      txt.setAttribute('font-weight','600');
+      txt.setAttribute('letter-spacing','0.06em');
+      txt.setAttribute('fill', cc.color);
+      txt.setAttribute('opacity','0.9');
+      txt.textContent = cc.label.toUpperCase();
+      svg.appendChild(txt);
+    });
+
+    panel.appendChild(svg);
+    panel.style.height = totalH + 'px';
+  }
+
+  drawSide(leftPanel, leftCCs, 'left');
+  drawSide(rightPanel, rightCCs, 'right');
 }
 </script>
 </body>
