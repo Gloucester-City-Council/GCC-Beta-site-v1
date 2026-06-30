@@ -645,7 +645,6 @@ details[open] summary::before { transform: rotate(90deg); }
    ===================== */
 @media (max-width: 860px) {
   .main-grid { grid-template-columns: 1fr; }
-  .sidebar { order: -1; }
   .hero__stats { justify-content: flex-start; }
 }
 
@@ -658,7 +657,6 @@ details[open] summary::before { transform: rotate(90deg); }
 @media (max-width: 640px) {
   .utility-bar { display: none; }
   .main-grid { grid-template-columns: 1fr; }
-  .sidebar { order: -1; }
 }
 
 @media (max-width: 540px) {
