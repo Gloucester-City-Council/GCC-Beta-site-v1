@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newstershire Council</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="logo-lockup">
+        <svg class="logo-icon" aria-hidden="true" focusable="false" width="48" height="48" viewBox="0 0 48 48">
+          <circle cx="24" cy="24" r="24" fill="#1d4477"/>
+          <path d="M12 30 L24 14 L36 30 Z" fill="#ffffff" opacity="0.9"/>
+          <rect x="20" y="30" width="8" height="6" fill="#ffffff" opacity="0.7"/>
+        </svg>
+        <div>
+          <span class="org-name">Newstershire Council</span>
+          <span class="org-tagline">Your new unitary council</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="container">
+
+      <!-- New council notice -->
+      <div class="notice-banner" role="note" aria-label="Important: This is a new council">
+        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="9" stroke="#1d4477" stroke-width="2"/>
+          <path d="M10 6v4M10 14v.5" stroke="#1d4477" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <p>
+          <strong>Newstershire Council is a new unitary authority</strong> created from the reorganisation of local government in Gloucestershire.
+          It brings together services previously delivered by the county council and the district and borough councils into one organisation.
+        </p>
+      </div>
+
+      <h1 class="page-title">Find your local council service</h1>
+      <p class="page-intro">Answer the questions below and we'll direct you to the right place.</p>
+
+      <!-- === STEP 1: area === -->
+      <section id="step-area" class="step" aria-labelledby="step-area-heading">
+        <h2 id="step-area-heading" class="step-heading">
+          <span class="step-number" aria-hidden="true">1</span>
+          Which area do you live in?
+        </h2>
+        <fieldset>
+          <legend class="sr-only">Select your district or borough</legend>
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="area" value="cheltenham">
+              <span class="radio-label">Cheltenham</span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="area" value="cotswold">
+              <span class="radio-label">Cotswold</span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="area" value="forest-of-dean">
+              <span class="radio-label">Forest of Dean</span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="area" value="gloucester">
+              <span class="radio-label">Gloucester</span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="area" value="stroud">
+              <span class="radio-label">Stroud</span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="area" value="tewkesbury">
+              <span class="radio-label">Tewkesbury</span>
+            </label>
+          </div>
+        </fieldset>
+      </section>
+
+      <!-- === STEP 2: service tier === -->
+      <section id="step-tier" class="step step--hidden" aria-labelledby="step-tier-heading" aria-hidden="true">
+        <h2 id="step-tier-heading" class="step-heading">
+          <span class="step-number" aria-hidden="true">2</span>
+          Is it a county-level or district-level service?
+        </h2>
+
+        <div class="help-text">
+          <details>
+            <summary>Not sure which one?</summary>
+            <div class="details-body">
+              <p><strong>County-level services</strong> (previously Gloucestershire County Council) include:</p>
+              <ul>
+                <li>Schools, education and libraries</li>
+                <li>Adult social care</li>
+                <li>Children's services</li>
+                <li>Roads, highways and transport</li>
+                <li>Waste disposal (tips/recycling centres)</li>
+                <li>Fire &amp; rescue</li>
+              </ul>
+              <p><strong>District-level services</strong> (previously your district or borough council) include:</p>
+              <ul>
+                <li>Bins and waste collection</li>
+                <li>Council tax and housing benefit</li>
+                <li>Planning and building control</li>
+                <li>Housing</li>
+                <li>Leisure and parks</li>
+                <li>Environmental health</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <fieldset>
+          <legend class="sr-only">Select service type</legend>
+          <div class="radio-group">
+            <label class="radio-card">
+              <input type="radio" name="tier" value="county">
+              <span class="radio-label">County service</span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="tier" value="district">
+              <span class="radio-label">District / borough service</span>
+            </label>
+          </div>
+        </fieldset>
+      </section>
+
+      <!-- === STEP 3: result === -->
+      <section id="step-result" class="step step--hidden" aria-labelledby="step-result-heading" aria-live="polite" aria-atomic="true" aria-hidden="true">
+        <h2 id="step-result-heading" class="step-heading">
+          <span class="step-number" aria-hidden="true">3</span>
+          Go to the right service
+        </h2>
+        <div id="result-content" class="result-links">
+          <!-- filled by JS -->
+        </div>
+      </section>
+
+      <!-- === NO-JS FALLBACK === -->
+      <noscript>
+        <section class="nojs-fallback" aria-label="Find your service without JavaScript">
+          <h2>Find your service</h2>
+          <p>JavaScript is not available in your browser. Use the direct links below to find the right service for your area.</p>
+
+          <h3>Cheltenham</h3>
+          <ul>
+            <li><a href="https://www.gloucestershire.gov.uk/">County services (Gloucestershire County Council)</a></li>
+            <li><a href="https://www.cheltenham.gov.uk/">District services (Cheltenham Borough Council)</a></li>
+          </ul>
+
+          <h3>Cotswold</h3>
+          <ul>
+            <li><a href="https://www.gloucestershire.gov.uk/">County services (Gloucestershire County Council)</a></li>
+            <li><a href="https://www.cotswold.gov.uk/">District services (Cotswold District Council)</a></li>
+          </ul>
+
+          <h3>Forest of Dean</h3>
+          <ul>
+            <li><a href="https://www.gloucestershire.gov.uk/">County services (Gloucestershire County Council)</a></li>
+            <li><a href="https://www.fdean.gov.uk/">District services (Forest of Dean District Council)</a></li>
+          </ul>
+
+          <h3>Gloucester</h3>
+          <ul>
+            <li><a href="https://www.gloucestershire.gov.uk/">County services (Gloucestershire County Council)</a></li>
+            <li><a href="https://www.gloucester.gov.uk/">District services (Gloucester City Council)</a></li>
+          </ul>
+
+          <h3>Stroud</h3>
+          <ul>
+            <li><a href="https://www.gloucestershire.gov.uk/">County services (Gloucestershire County Council)</a></li>
+            <li><a href="https://www.stroud.gov.uk/">District services (Stroud District Council)</a></li>
+          </ul>
+
+          <h3>Tewkesbury</h3>
+          <ul>
+            <li><a href="https://www.gloucestershire.gov.uk/">County services (Gloucestershire County Council)</a></li>
+            <li><a href="https://www.tewkesbury.gov.uk/">District services (Tewkesbury Borough Council)</a></li>
+          </ul>
+        </section>
+      </noscript>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Newstershire Council &mdash; A new unitary authority for Gloucestershire</p>
+      <p class="footer-note">This is a proof-of-concept website produced as part of local government reorganisation planning.</p>
+    </div>
+  </footer>
+
+  <script src="veneer.js"></script>
+</body>
+</html>
