@@ -288,29 +288,30 @@
 @media (max-width: 600px) {
   .ct-layout { padding: 1rem 0 2rem; }
 
-  /* Compact picker — just label above select, no heavy box */
+  /* Compact picker — label + select, single border, no nesting */
+  .ct-picker-wrap {
+    margin-bottom: 1rem;
+  }
   .ct-picker {
     background: none;
     border: none;
     padding: 0;
-    gap: 0.4rem;
+    gap: 0.35rem;
     flex-direction: column;
     align-items: stretch;
   }
-  .ct-picker__label { font-size: 0.9375rem; }
+  .ct-picker__label {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+  }
   .ct-picker__select {
     width: 100%;
     font-size: 1rem;
-    padding: 0.65rem 0.75rem;
+    padding: 0.55rem 0.75rem;
     border: 2px solid var(--blue-dark);
     border-radius: var(--radius);
-  }
-  .ct-picker-wrap {
-    background: var(--white);
-    border: 2px solid var(--blue-dark);
-    border-radius: var(--radius);
-    padding: 0.875rem 1rem;
-    margin-bottom: 1rem;
+    min-height: 0;
   }
 
   /* Pill-style tabs that scroll sideways — avoids the bottom:-3px clipping issue */
@@ -347,4 +348,7 @@
   .ct-hero { padding: 1.25rem 0; }
   .ct-hero__title { font-size: 1.5rem; }
   .ct-panel > h2 { font-size: 1.125rem; }
+  .ct-block p,
+  .ct-block li { font-size: 0.9375rem; line-height: 1.65; }
+  .ct-block ul { padding-left: 1.1rem; }
 }
