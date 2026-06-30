@@ -41,8 +41,8 @@ body {
 /* Skip link */
 .skip-link {
   position: absolute;
-  top: -3rem;
-  left: 0;
+  left: -999px;
+  top: 0;
   padding: 0.75rem 1rem;
   background: var(--focus);
   color: var(--text);
@@ -50,9 +50,8 @@ body {
   font-size: 0.9375rem;
   z-index: 9999;
   text-decoration: none;
-  transition: top 0.1s;
 }
-.skip-link:focus { top: 0; }
+.skip-link:focus { left: 0; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px;
