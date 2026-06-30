@@ -67,8 +67,10 @@
     var area = select.value;
     if (!area) {
       hideContent();
+      if (typeof LGRArea !== 'undefined') LGRArea.clear();
       return;
     }
+    if (typeof LGRArea !== 'undefined') LGRArea.set(area);
     showContent();
     applyArea(area);
   });
@@ -94,12 +96,14 @@
     });
   });
 
-  // Pre-select from URL hash, e.g. council-tax.html#gloucester
+  // Pre-select from URL hash (takes priority) or cookie
   var hash = window.location.hash.replace('#', '');
-  if (hash && AREA_NAMES[hash]) {
-    select.value = hash;
+  var cookieArea = typeof LGRArea !== 'undefined' && LGRArea.get();
+  var preselect = (hash && AREA_NAMES[hash]) ? hash : (cookieArea && AREA_NAMES[cookieArea] ? cookieArea : null);
+  if (preselect) {
+    select.value = preselect;
     showContent();
-    applyArea(hash);
+    applyArea(preselect);
   }
 
 }());
