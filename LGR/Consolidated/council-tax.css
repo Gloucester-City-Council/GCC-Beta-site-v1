@@ -56,6 +56,7 @@
 .ct-layout {
   padding: 2rem 0 3rem;
   max-width: 860px;
+  width: 100%;
 }
 
 /* ---- Area picker ---- */
@@ -112,15 +113,7 @@
 .ct-tabs-wrap {
   position: relative;
   margin-bottom: 1.5rem;
-}
-
-.ct-tabs-wrap::after {
-  content: '';
-  position: absolute;
-  right: 0; top: 0; bottom: 3px;
-  width: 2rem;
-  background: linear-gradient(to right, transparent, var(--bg));
-  pointer-events: none;
+  /* scroll lives here on mobile so overflow doesn't clip bottom:-3px on tabs */
 }
 
 /* ---- No-area prompt ---- */
@@ -142,15 +135,10 @@
 .ct-tabs {
   display: flex;
   gap: 0.25rem;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  flex-wrap: wrap;
   border-bottom: 3px solid var(--blue-dark);
   margin-bottom: 0;
-  padding-right: 2rem;
 }
-.ct-tabs::-webkit-scrollbar { display: none; }
 
 .ct-tab {
   padding: 0.6rem 1.1rem;
@@ -162,8 +150,6 @@
   font-weight: 600;
   color: var(--blue-mid);
   cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
   transition: background var(--transition), color var(--transition);
   position: relative;
   bottom: -3px;
@@ -300,12 +286,65 @@
 
 /* ---- Responsive ---- */
 @media (max-width: 600px) {
-  .ct-layout { padding: 1.25rem 0 2rem; }
-  .ct-picker { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-  .ct-picker__select { width: 100%; font-size: 1rem; padding: 0.65rem 0.75rem; }
-  .ct-picker__label { font-size: 1rem; }
-  .ct-tab { font-size: 0.875rem; padding: 0.55rem 0.9rem; }
+  .ct-layout { padding: 1rem 0 2rem; }
+
+  /* Compact picker — just label above select, no heavy box */
+  .ct-picker {
+    background: none;
+    border: none;
+    padding: 0;
+    gap: 0.4rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .ct-picker__label { font-size: 0.9375rem; }
+  .ct-picker__select {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.65rem 0.75rem;
+    border: 2px solid var(--blue-dark);
+    border-radius: var(--radius);
+  }
+  .ct-picker-wrap {
+    background: var(--white);
+    border: 2px solid var(--blue-dark);
+    border-radius: var(--radius);
+    padding: 0.875rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Pill-style tabs that scroll sideways — avoids the bottom:-3px clipping issue */
+  .ct-tabs-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-bottom: 1.25rem;
+  }
+  .ct-tabs-wrap::-webkit-scrollbar { display: none; }
+  .ct-tabs {
+    flex-wrap: nowrap;
+    border-bottom: none;
+    gap: 0.4rem;
+    padding-bottom: 0.1rem;
+  }
+  .ct-tab {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 2rem;
+    bottom: 0;
+    padding: 0.45rem 0.875rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .ct-tab--active {
+    background: var(--blue-dark);
+    border-color: var(--blue-dark);
+    color: var(--white);
+  }
+
   .ct-prompt { flex-direction: column; text-align: center; padding: 1.25rem; }
   .ct-hero { padding: 1.25rem 0; }
   .ct-hero__title { font-size: 1.5rem; }
+  .ct-panel > h2 { font-size: 1.125rem; }
 }
