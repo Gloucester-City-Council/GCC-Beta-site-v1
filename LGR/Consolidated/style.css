@@ -628,11 +628,17 @@ details[open] summary::before { transform: rotate(90deg); }
   transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
-a.service-tile:hover {
-  background: var(--blue-xlight);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(29,68,119,0.12);
+.service-tile__link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--blue-mid);
+  text-decoration: none;
+  align-self: flex-start;
 }
+
+.service-tile__link:hover { color: var(--blue-dark); text-decoration: underline; }
 
 .service-tile--coming-soon {
   border-color: var(--border);
