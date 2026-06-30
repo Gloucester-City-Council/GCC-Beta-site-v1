@@ -62,7 +62,7 @@
       var tier = getCheckedValue(tierRadios);
       if (!area || !tier) return;
       var service = SERVICES[area] && SERVICES[area][tier];
-      if (service) window.location.href = service.url;
+      if (service) window.open(service.url, '_blank', 'noopener,noreferrer');
     });
   });
 
