@@ -46,9 +46,21 @@
     return null;
   }
 
+  // Restore area from cookie on load
+  var saved = typeof LGRArea !== 'undefined' && LGRArea.get();
+  if (saved) {
+    areaRadios.forEach(function (r) {
+      if (r.value === saved) {
+        r.checked = true;
+        showStep(stepTier);
+      }
+    });
+  }
+
   // Step 1 → Step 2
   areaRadios.forEach(function (radio) {
     radio.addEventListener('change', function () {
+      if (typeof LGRArea !== 'undefined') LGRArea.set(radio.value);
       tierRadios.forEach(function (r) { r.checked = false; });
       showStep(stepTier);
       stepTier.scrollIntoView({ behavior: 'smooth', block: 'start' });
