@@ -281,3 +281,18 @@
   .ct-tab { font-size: 0.8125rem; padding: 0.5rem 0.7rem; }
   .ct-prompt { flex-direction: column; text-align: center; }
 }
+
+@media (max-width: 400px) {
+  .ct-tabs { flex-direction: column; border-bottom: none; gap: 0.25rem; }
+  .ct-tab {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    bottom: 0;
+    font-size: 0.9375rem;
+    padding: 0.6rem 1rem;
+  }
+  .ct-tab--active {
+    border-color: var(--blue-dark);
+    border-bottom-color: var(--blue-dark);
+  }
+}

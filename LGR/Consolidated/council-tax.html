@@ -9,6 +9,8 @@
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Top utility bar -->
   <div class="utility-bar">
     <div class="container utility-bar__inner">
@@ -40,7 +42,10 @@
           </div>
         </a>
       </div>
-      <nav class="header-nav" aria-label="Site navigation">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="header-nav" aria-label="Open menu">
+        <svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <nav id="header-nav" class="header-nav" aria-label="Site navigation">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="#" class="nav-link">News</a></li>
@@ -103,19 +108,19 @@
       <div id="ct-content" class="ct-content" hidden>
 
         <!-- Tab nav -->
-        <nav class="ct-tabs" aria-label="Council tax topics">
-          <button class="ct-tab ct-tab--active" data-tab="exemptions"    aria-selected="true"  role="tab">Exemptions</button>
-          <button class="ct-tab"                data-tab="discounts"     aria-selected="false" role="tab">Discounts</button>
-          <button class="ct-tab"                data-tab="empty-homes"   aria-selected="false" role="tab">Empty homes</button>
-          <button class="ct-tab"                data-tab="second-homes"  aria-selected="false" role="tab">Second homes</button>
-          <button class="ct-tab"                data-tab="reduction"     aria-selected="false" role="tab">Reduction (CTR)</button>
-        </nav>
+        <div class="ct-tabs" role="tablist" aria-label="Council tax topics">
+          <button class="ct-tab ct-tab--active" data-tab="exemptions"   id="tab-btn-exemptions"  aria-selected="true"  role="tab" aria-controls="tab-exemptions">Exemptions</button>
+          <button class="ct-tab"               data-tab="discounts"     id="tab-btn-discounts"   aria-selected="false" role="tab" aria-controls="tab-discounts">Discounts</button>
+          <button class="ct-tab"               data-tab="empty-homes"   id="tab-btn-empty-homes" aria-selected="false" role="tab" aria-controls="tab-empty-homes">Empty homes</button>
+          <button class="ct-tab"               data-tab="second-homes"  id="tab-btn-second-homes" aria-selected="false" role="tab" aria-controls="tab-second-homes">Second homes</button>
+          <button class="ct-tab"               data-tab="reduction"     id="tab-btn-reduction"   aria-selected="false" role="tab" aria-controls="tab-reduction">Reduction (CTR)</button>
+        </div>
 
         <!-- ==============================
              TAB: EXEMPTIONS (01)
              All content is common
              ============================== -->
-        <div id="tab-exemptions" class="ct-panel" role="tabpanel">
+        <div id="tab-exemptions" class="ct-panel" role="tabpanel" aria-labelledby="tab-btn-exemptions">
           <h2>Council tax exemptions</h2>
 
           <div class="ct-block ct-block--common">
@@ -160,7 +165,7 @@
         <!-- ==============================
              TAB: DISCOUNTS (02)
              ============================== -->
-        <div id="tab-discounts" class="ct-panel ct-panel--hidden" role="tabpanel">
+        <div id="tab-discounts" class="ct-panel ct-panel--hidden" role="tabpanel" aria-labelledby="tab-btn-discounts">
           <h2>Council tax discounts</h2>
 
           <!-- Single person: common -->
@@ -227,7 +232,7 @@
         <!-- ==============================
              TAB: EMPTY HOMES (03)
              ============================== -->
-        <div id="tab-empty-homes" class="ct-panel ct-panel--hidden" role="tabpanel">
+        <div id="tab-empty-homes" class="ct-panel ct-panel--hidden" role="tabpanel" aria-labelledby="tab-btn-empty-homes">
           <h2>Long-term empty homes premium</h2>
 
           <!-- Common intro -->
@@ -319,7 +324,7 @@
         <!-- ==============================
              TAB: SECOND HOMES (04)
              ============================== -->
-        <div id="tab-second-homes" class="ct-panel ct-panel--hidden" role="tabpanel">
+        <div id="tab-second-homes" class="ct-panel ct-panel--hidden" role="tabpanel" aria-labelledby="tab-btn-second-homes">
           <h2>Second homes</h2>
 
           <!-- Common intro -->
@@ -395,7 +400,7 @@
         <!-- ==============================
              TAB: CTR (05)
              ============================== -->
-        <div id="tab-reduction" class="ct-panel ct-panel--hidden" role="tabpanel">
+        <div id="tab-reduction" class="ct-panel ct-panel--hidden" role="tabpanel" aria-labelledby="tab-btn-reduction">
           <h2>Council Tax Reduction (CTR)</h2>
 
           <!-- Common: pensioner route -->
@@ -561,5 +566,17 @@
 
   <script src="../area-cookie.js"></script>
   <script src="council-tax.js"></script>
+  <script>
+    (function () {
+      var btn = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('header-nav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('header-nav--open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+    }());
+  </script>
 </body>
 </html>
