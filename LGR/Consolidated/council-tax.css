@@ -54,7 +54,7 @@
 
 /* ---- Layout ---- */
 .ct-layout {
-  padding: 2rem 0 3rem;
+  padding: 2rem 1.25rem 3rem;
   max-width: 860px;
   width: 100%;
 }
@@ -109,14 +109,10 @@
   margin-top: 0.5rem;
 }
 
-/* ---- Tab scroll wrapper ---- */
+/* ---- Tab wrapper ---- */
 .ct-tabs-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
   margin-bottom: 1.25rem;
 }
-.ct-tabs-wrap::-webkit-scrollbar { display: none; }
 
 /* ---- No-area prompt ---- */
 .ct-prompt {
@@ -133,26 +129,24 @@
 .ct-prompt svg { flex-shrink: 0; color: var(--blue-dark); opacity: 0.5; }
 .ct-prompt p { font-size: 1rem; }
 
-/* ---- Tabs — pill+scroll by default, border style at wide widths ---- */
+/* ---- Tabs — wrapping pills by default, border style at wide widths ---- */
 .ct-tabs {
   display: flex;
   gap: 0.4rem;
-  flex-wrap: nowrap;
-  padding-bottom: 0.1rem;
-  border-bottom: 2px solid var(--border);
+  flex-wrap: wrap;
 }
 
 .ct-tab {
   padding: 0.45rem 0.9rem;
   background: var(--white);
   border: 2px solid var(--border);
-  border-radius: 2rem;
+  border-radius: var(--radius);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--blue-mid);
   cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
+  white-space: normal;
+  text-align: center;
   transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
 
@@ -170,12 +164,9 @@
 
 /* Wide screens: traditional underline tab style */
 @media (min-width: 700px) {
-  .ct-tabs-wrap { overflow: visible; }
   .ct-tabs {
     gap: 0.25rem;
-    flex-wrap: wrap;
     border-bottom: 3px solid var(--blue-dark);
-    padding-bottom: 0;
   }
   .ct-tab {
     padding: 0.6rem 1.1rem;
@@ -184,8 +175,6 @@
     border-bottom: none;
     border-radius: var(--radius) var(--radius) 0 0;
     font-size: 0.9rem;
-    white-space: normal;
-    flex-shrink: 1;
     position: relative;
     bottom: -3px;
   }
@@ -316,7 +305,7 @@
 
 /* ---- Responsive ---- */
 @media (max-width: 600px) {
-  .ct-layout { padding: 1rem 0 2rem; }
+  .ct-layout { padding: 1rem 1.25rem 2rem; }
 
   /* Compact picker — label + select, single border, no nesting */
   .ct-picker-wrap {
@@ -336,12 +325,15 @@
     color: var(--blue-dark);
   }
   .ct-picker__select {
+    /* reset flex: in a column flexbox flex-basis sizes HEIGHT, which made
+       the select a giant 220px-tall box */
+    flex: 0 0 auto;
     width: 100%;
+    height: auto;
     font-size: 1rem;
     padding: 0.55rem 0.75rem;
     border: 2px solid var(--blue-dark);
     border-radius: var(--radius);
-    min-height: 0;
   }
 
   .ct-prompt { flex-direction: column; text-align: center; padding: 1.25rem; }
