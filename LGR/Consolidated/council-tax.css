@@ -47,7 +47,7 @@
 }
 
 .ct-hero__sub {
-  color: #c5d8f0;
+  color: var(--blue-light);
   font-size: 1rem;
   max-width: 600px;
 }
@@ -264,7 +264,7 @@
 
 .ct-todo {
   font-size: 0.875rem !important;
-  color: #6b5a2a;
+  color: #54461c;
   background: var(--gold-light);
   border: 1px solid #d4b460;
   border-radius: var(--radius);

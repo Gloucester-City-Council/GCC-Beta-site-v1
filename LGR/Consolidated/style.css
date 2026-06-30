@@ -5,13 +5,14 @@
 
 :root {
   --blue-dark:   #1d4477;
-  --blue-mid:    #2b5eac;
+  --blue-mid:    #1f4e8f;  /* AAA: 8.25:1 on white */
   --blue-light:  #d6e4f7;
   --blue-xlight: #eef4fb;
-  --gold:        #c8a951;
+  --gold:        #c8a951;  /* brand gold — borders / button backgrounds only */
+  --gold-text:   #f9e08f;  /* AAA: 7.5:1 gold text on navy */
   --gold-light:  #f5ecd0;
   --text:        #0b0c0c;
-  --text-muted:  #505a5f;
+  --text-muted:  #3d4448;  /* AAA: 8.86:1 on grey, 7.69:1 on blue-light */
   --bg:          #f3f2f1;
   --white:       #ffffff;
   --border:      #b1b4b6;
@@ -24,6 +25,17 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 100%; scroll-behavior: smooth; }
+
+/* WCAG 2.3.3 / 2.2.2 — honour reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 body {
   font-family: "GDS Transport", Arial, sans-serif;
   font-size: 1rem;
@@ -174,7 +186,7 @@ a:hover { color: var(--blue-dark); }
    Hero
    ===================== */
 .hero {
-  background: linear-gradient(135deg, var(--blue-dark) 0%, #2a5298 100%);
+  background: var(--blue-dark);
   color: var(--white);
   padding: 2.5rem 0;
   border-bottom: 3px solid var(--gold);
@@ -198,7 +210,7 @@ a:hover { color: var(--blue-dark); }
 
 .hero__sub {
   font-size: 1rem;
-  color: #c5d8f0;
+  color: var(--blue-light);
   max-width: 560px;
 }
 
@@ -221,14 +233,14 @@ a:hover { color: var(--blue-dark); }
   display: block;
   font-size: 1.75rem;
   font-weight: 700;
-  color: var(--gold);
+  color: var(--gold-text);
   line-height: 1;
   margin-bottom: 0.25rem;
 }
 
 .stat-label {
   font-size: 0.8125rem;
-  color: #c5d8f0;
+  color: var(--blue-light);
 }
 
 /* =====================
@@ -538,7 +550,7 @@ details[open] summary::before { transform: rotate(90deg); }
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 0.875rem;
-  color: var(--gold);
+  color: var(--gold-text);
 }
 
 .social-links { display: flex; gap: 0.625rem; flex-wrap: wrap; }
@@ -560,7 +572,7 @@ details[open] summary::before { transform: rotate(90deg); }
 
 .prefooter__newsletter p {
   font-size: 0.9rem;
-  color: #c5d8f0;
+  color: var(--blue-light);
   margin-bottom: 0.75rem;
 }
 
@@ -580,12 +592,12 @@ details[open] summary::before { transform: rotate(90deg); }
   font-size: 0.9375rem;
 }
 
-.newsletter-form input::placeholder { color: #a0b8d8; }
+.newsletter-form input::placeholder { color: var(--blue-light); }
 
 .newsletter-form button {
   padding: 0.55rem 1.1rem;
   background: var(--gold);
-  color: var(--blue-dark);
+  color: var(--text);
   border: none;
   border-radius: var(--radius);
   font-size: 0.9375rem;
@@ -637,7 +649,7 @@ details[open] summary::before { transform: rotate(90deg); }
 }
 
 .footer-bottom p + p { margin-top: 0.2rem; }
-.footer-note { color: #5a7a9e; font-style: italic; }
+.footer-note { color: #9fb6dc; font-style: italic; }
 
 /* =====================
    Service tiles
