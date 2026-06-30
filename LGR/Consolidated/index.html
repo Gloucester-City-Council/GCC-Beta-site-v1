@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newstershire Council</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top utility bar -->
+  <div class="utility-bar">
+    <div class="container utility-bar__inner">
+      <span class="utility-bar__item">
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.13 1 .37 1.97.72 2.9a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.18-1.18a2 2 0 012.11-.45c.93.35 1.9.59 2.9.72A2 2 0 0122 14.92v2z"/></svg>
+        0800 123 4567
+      </span>
+      <span class="utility-bar__item">
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@newstershire.gov.uk
+      </span>
+      <span class="utility-bar__item">Mon–Fri 8:30am–5pm</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div class="logo-lockup">
+        <svg class="logo-icon" aria-hidden="true" focusable="false" width="52" height="52" viewBox="0 0 52 52">
+          <circle cx="26" cy="26" r="26" fill="#1d4477"/>
+          <!-- stylised hills / crown shape -->
+          <path d="M10 36 Q18 18 26 22 Q34 18 42 36 Z" fill="#c8a951" opacity="0.9"/>
+          <path d="M18 36 Q22 26 26 28 Q30 26 34 36 Z" fill="#ffffff" opacity="0.85"/>
+          <rect x="23" y="36" width="6" height="5" rx="1" fill="#ffffff" opacity="0.7"/>
+        </svg>
+        <div>
+          <span class="org-name">Newstershire Council</span>
+          <span class="org-tagline">Serving Gloucestershire together</span>
+        </div>
+      </div>
+      <nav class="header-nav" aria-label="Site navigation">
+        <ul>
+          <li><a href="#" class="nav-link nav-link--active">Home</a></li>
+          <li><a href="#" class="nav-link">News</a></li>
+          <li><a href="#" class="nav-link">About us</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Welcome">
+    <div class="container hero__inner">
+      <div class="hero__text">
+        <h1 class="hero__title">Welcome to Newstershire Council</h1>
+        <p class="hero__sub">We're the new unitary authority for Gloucestershire, bringing county and district services together under one roof. Use the tool below to find the right service for where you live.</p>
+      </div>
+      <div class="hero__stats" aria-label="Key figures">
+        <div class="stat-card">
+          <span class="stat-num">650k</span>
+          <span class="stat-label">Residents served</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">6</span>
+          <span class="stat-label">Districts &amp; boroughs</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">300+</span>
+          <span class="stat-label">Council services</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <div class="container main-grid">
+
+      <!-- Left: router tool -->
+      <div class="router-col">
+
+        <!-- New council notice -->
+        <div class="notice-banner" role="note" aria-label="Important: This is a new council">
+          <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="9" stroke="#1d4477" stroke-width="2"/>
+            <path d="M10 6v4M10 14v.5" stroke="#1d4477" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <p>
+            <strong>Newstershire Council is a new unitary authority</strong> formed from the reorganisation of local government in Gloucestershire.
+            It brings together services previously delivered by the county council and the district and borough councils.
+          </p>
+        </div>
+
+        <h2 class="section-title">Find your local service</h2>
+        <p class="page-intro">Answer two quick questions and we'll take you straight to the right place.</p>
+
+        <!-- === STEP 1: area === -->
+        <section id="step-area" class="step" aria-labelledby="step-area-heading">
+          <h3 id="step-area-heading" class="step-heading">
+            <span class="step-number" aria-hidden="true">1</span>
+            Which area do you live in?
+          </h3>
+          <fieldset>
+            <legend class="sr-only">Select your district or borough</legend>
+            <div class="radio-group">
+              <label class="radio-card">
+                <input type="radio" name="area" value="cheltenham">
+                <span class="radio-label">Cheltenham</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="area" value="cotswold">
+                <span class="radio-label">Cotswold</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="area" value="forest-of-dean">
+                <span class="radio-label">Forest of Dean</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="area" value="gloucester">
+                <span class="radio-label">Gloucester</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="area" value="stroud">
+                <span class="radio-label">Stroud</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="area" value="tewkesbury">
+                <span class="radio-label">Tewkesbury</span>
+              </label>
+            </div>
+          </fieldset>
+        </section>
+
+        <!-- === STEP 2: service tier === -->
+        <section id="step-tier" class="step step--hidden" aria-labelledby="step-tier-heading" aria-hidden="true">
+          <h3 id="step-tier-heading" class="step-heading">
+            <span class="step-number" aria-hidden="true">2</span>
+            Is it a county or district service?
+          </h3>
+
+          <div class="help-text">
+            <details>
+              <summary>Not sure which one?</summary>
+              <div class="details-body">
+                <p><strong>County-level services</strong> (previously Gloucestershire County Council) include:</p>
+                <ul>
+                  <li>Schools, education and libraries</li>
+                  <li>Adult social care</li>
+                  <li>Children's services</li>
+                  <li>Roads, highways and transport</li>
+                  <li>Waste disposal (tips / recycling centres)</li>
+                  <li>Fire &amp; rescue</li>
+                </ul>
+                <p><strong>District-level services</strong> (previously your district or borough council) include:</p>
+                <ul>
+                  <li>Bins and waste collection</li>
+                  <li>Council tax and housing benefit</li>
+                  <li>Planning and building control</li>
+                  <li>Housing</li>
+                  <li>Leisure and parks</li>
+                  <li>Environmental health</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+
+          <fieldset>
+            <legend class="sr-only">Select service type</legend>
+            <div class="radio-group radio-group--two">
+              <label class="radio-card radio-card--large">
+                <input type="radio" name="tier" value="county">
+                <span class="radio-card__icon" aria-hidden="true">🏛️</span>
+                <span class="radio-label">County service</span>
+                <span class="radio-hint">Education, roads, social care&hellip;</span>
+              </label>
+              <label class="radio-card radio-card--large">
+                <input type="radio" name="tier" value="district">
+                <span class="radio-card__icon" aria-hidden="true">🏘️</span>
+                <span class="radio-label">District / borough service</span>
+                <span class="radio-hint">Bins, planning, council tax&hellip;</span>
+              </label>
+            </div>
+          </fieldset>
+        </section>
+
+        <!-- === NO-JS FALLBACK === -->
+        <noscript>
+          <section class="nojs-fallback" aria-label="Find your service without JavaScript">
+            <h3>Find your service</h3>
+            <p>JavaScript is not available in your browser. Use the direct links below.</p>
+            <h4>Cheltenham</h4>
+            <ul>
+              <li><a href="https://www.gloucestershire.gov.uk/">County services (Gloucestershire County Council)</a></li>
+              <li><a href="https://www.cheltenham.gov.uk/">District services (Cheltenham Borough Council)</a></li>
+            </ul>
+            <h4>Cotswold</h4>
+            <ul>
+              <li><a href="https://www.gloucestershire.gov.uk/">County services</a></li>
+              <li><a href="https://www.cotswold.gov.uk/">District services (Cotswold District Council)</a></li>
+            </ul>
+            <h4>Forest of Dean</h4>
+            <ul>
+              <li><a href="https://www.gloucestershire.gov.uk/">County services</a></li>
+              <li><a href="https://www.fdean.gov.uk/">District services (Forest of Dean District Council)</a></li>
+            </ul>
+            <h4>Gloucester</h4>
+            <ul>
+              <li><a href="https://www.gloucestershire.gov.uk/">County services</a></li>
+              <li><a href="https://www.gloucester.gov.uk/">District services (Gloucester City Council)</a></li>
+            </ul>
+            <h4>Stroud</h4>
+            <ul>
+              <li><a href="https://www.gloucestershire.gov.uk/">County services</a></li>
+              <li><a href="https://www.stroud.gov.uk/">District services (Stroud District Council)</a></li>
+            </ul>
+            <h4>Tewkesbury</h4>
+            <ul>
+              <li><a href="https://www.gloucestershire.gov.uk/">County services</a></li>
+              <li><a href="https://www.tewkesbury.gov.uk/">District services (Tewkesbury Borough Council)</a></li>
+            </ul>
+          </section>
+        </noscript>
+
+      </div><!-- /router-col -->
+
+      <!-- Right: sidebar -->
+      <aside class="sidebar" aria-label="Quick links and news">
+
+        <!-- Quick links -->
+        <div class="sidebar-card">
+          <h2 class="sidebar-card__title">Popular services</h2>
+          <ul class="quick-links">
+            <li><a href="#" class="quick-link">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              Pay your council tax
+            </a></li>
+            <li><a href="#" class="quick-link">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 9 12 2 21 9"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              Report a missed bin
+            </a></li>
+            <li><a href="#" class="quick-link">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Apply for planning permission
+            </a></li>
+            <li><a href="#" class="quick-link">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Book a bulky waste collection
+            </a></li>
+            <li><a href="#" class="quick-link">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              Housing benefit claim
+            </a></li>
+            <li><a href="#" class="quick-link">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              Find my nearest recycling centre
+            </a></li>
+          </ul>
+        </div>
+
+        <!-- News -->
+        <div class="sidebar-card">
+          <h2 class="sidebar-card__title">Latest news</h2>
+          <ul class="news-list">
+            <li class="news-item">
+              <span class="news-date">27 Jun 2026</span>
+              <a href="#" class="news-title">Newstershire Council officially launches on 1 April 2027</a>
+            </li>
+            <li class="news-item">
+              <span class="news-date">20 Jun 2026</span>
+              <a href="#" class="news-title">New recycling centres confirmed for all six districts</a>
+            </li>
+            <li class="news-item">
+              <span class="news-date">14 Jun 2026</span>
+              <a href="#" class="news-title">Residents invited to have their say on future council services</a>
+            </li>
+            <li class="news-item">
+              <span class="news-date">5 Jun 2026</span>
+              <a href="#" class="news-title">Transition board appoints interim chief executive</a>
+            </li>
+          </ul>
+          <a href="#" class="view-all-link">View all news →</a>
+        </div>
+
+        <!-- Contact -->
+        <div class="sidebar-card sidebar-card--contact">
+          <h2 class="sidebar-card__title">Contact us</h2>
+          <ul class="contact-list">
+            <li>
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.13 1 .37 1.97.72 2.9a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.18-1.18a2 2 0 012.11-.45c.93.35 1.9.59 2.9.72A2 2 0 0122 14.92v2z"/></svg>
+              <span><strong>0800 123 4567</strong><br><small>Mon–Fri 8:30am–5pm</small></span>
+            </li>
+            <li>
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="#">info@newstershire.gov.uk</a>
+            </li>
+            <li>
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Newstershire House<br>1 Shire Way, Gloucester GL1 1AA</span>
+            </li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div><!-- /main-grid -->
+  </main>
+
+  <!-- Pre-footer social / newsletter strip -->
+  <section class="prefooter" aria-label="Stay connected">
+    <div class="container prefooter__inner">
+      <div class="prefooter__social">
+        <h2 class="prefooter__heading">Follow us</h2>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Newstershire Council on X (Twitter)">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Newstershire Council on Facebook">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Newstershire Council on Instagram">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Newstershire Council on YouTube">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="prefooter__newsletter">
+        <h2 class="prefooter__heading">Stay informed</h2>
+        <p>Get council news and service updates straight to your inbox.</p>
+        <form class="newsletter-form" action="#" method="post" aria-label="Newsletter sign-up">
+          <label for="newsletter-email" class="sr-only">Email address</label>
+          <input type="email" id="newsletter-email" name="email" placeholder="Your email address" autocomplete="email">
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3 class="footer-col__title">About Newstershire</h3>
+          <ul>
+            <li><a href="#">About the council</a></li>
+            <li><a href="#">Councillors and committees</a></li>
+            <li><a href="#">Council meetings</a></li>
+            <li><a href="#">Budget and spending</a></li>
+            <li><a href="#">LGR transition</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Residents</h3>
+          <ul>
+            <li><a href="#">Council tax</a></li>
+            <li><a href="#">Bins and recycling</a></li>
+            <li><a href="#">Planning</a></li>
+            <li><a href="#">Housing</a></li>
+            <li><a href="#">Roads and transport</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Business</h3>
+          <ul>
+            <li><a href="#">Business rates</a></li>
+            <li><a href="#">Licences and permits</a></li>
+            <li><a href="#">Trading standards</a></li>
+            <li><a href="#">Economic development</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Help &amp; legal</h3>
+          <ul>
+            <li><a href="#">Accessibility statement</a></li>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">Freedom of information</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Newstershire Council &mdash; A new unitary authority for Gloucestershire</p>
+        <p class="footer-note">This is a proof-of-concept website produced as part of local government reorganisation planning. It is not a live service.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="veneer.js"></script>
+</body>
+</html>
