@@ -1,0 +1,283 @@
+/* =============================================
+   Council tax page — supplemental styles
+   Builds on top of style.css
+   ============================================= */
+
+/* ---- Breadcrumb ---- */
+.breadcrumb {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0;
+  font-size: 0.8125rem;
+}
+
+.breadcrumb ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.breadcrumb li + li::before {
+  content: "›";
+  margin-right: 0.25rem;
+  color: var(--text-muted);
+}
+
+.breadcrumb a { color: var(--blue-mid); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb [aria-current] { color: var(--text-muted); }
+
+/* ---- CT hero ---- */
+.ct-hero {
+  background: var(--blue-dark);
+  padding: 1.75rem 0;
+  border-bottom: 3px solid var(--gold);
+}
+
+.ct-hero__title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+
+.ct-hero__sub {
+  color: #c5d8f0;
+  font-size: 1rem;
+  max-width: 600px;
+}
+
+/* ---- Layout ---- */
+.ct-layout {
+  padding: 2rem 0 3rem;
+  max-width: 860px;
+}
+
+/* ---- Area picker ---- */
+.ct-picker-wrap {
+  margin-bottom: 1.75rem;
+}
+
+.ct-picker {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: var(--white);
+  border: 2px solid var(--blue-dark);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+
+.ct-picker__label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--blue-dark);
+  white-space: nowrap;
+}
+
+.ct-picker__select {
+  flex: 1 1 220px;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  color: var(--text);
+  background: var(--white);
+  cursor: pointer;
+}
+
+.ct-picker__select:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-color: var(--blue-dark);
+}
+
+.ct-area-label {
+  font-size: 0.9rem;
+  color: var(--blue-dark);
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* ---- No-area prompt ---- */
+.ct-prompt {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--blue-xlight);
+  border: 1px solid var(--blue-light);
+  border-radius: var(--radius);
+  padding: 2rem;
+  color: var(--text-muted);
+}
+
+.ct-prompt svg { flex-shrink: 0; color: var(--blue-dark); opacity: 0.5; }
+.ct-prompt p { font-size: 1rem; }
+
+/* ---- Tabs ---- */
+.ct-tabs {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  border-bottom: 3px solid var(--blue-dark);
+  margin-bottom: 1.5rem;
+}
+
+.ct-tab {
+  padding: 0.6rem 1.1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--blue-mid);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  position: relative;
+  bottom: -3px;
+}
+
+.ct-tab:hover {
+  background: var(--blue-xlight);
+  color: var(--blue-dark);
+}
+
+.ct-tab--active {
+  background: var(--white);
+  border-color: var(--blue-dark);
+  border-bottom-color: var(--white);
+  color: var(--blue-dark);
+  z-index: 1;
+}
+
+/* ---- Panels ---- */
+.ct-panel { animation: fadeIn 0.15s ease; }
+.ct-panel--hidden { display: none; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+.ct-panel > h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--blue-light);
+}
+
+/* ---- Content blocks ---- */
+.ct-block {
+  margin-bottom: 1.5rem;
+}
+
+.ct-block--council { display: none; }
+.ct-block--council.ct-block--visible { display: block; }
+
+.ct-block h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin: 1.25rem 0 0.5rem;
+}
+
+.ct-block h3:first-child { margin-top: 0; }
+
+.ct-block p { margin-bottom: 0.75rem; font-size: 0.9375rem; }
+.ct-block p:last-child { margin-bottom: 0; }
+
+.ct-block ul {
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9375rem;
+}
+
+.ct-block li { margin-bottom: 0.35rem; }
+
+/* ---- Authority card ---- */
+.ct-authority-card {
+  background: var(--blue-xlight);
+  border: 1px solid var(--blue-light);
+  border-left: 4px solid var(--blue-dark);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+
+.ct-authority-card h3 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin: 0 0 0.625rem;
+}
+
+.ct-authority-card p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+.ct-authority-card ul { font-size: 0.9rem; padding-left: 1.25rem; margin-bottom: 0.5rem; }
+.ct-authority-card li { margin-bottom: 0.25rem; }
+
+.ct-authority-card__meta {
+  font-size: 0.8125rem !important;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ---- TODO indicator ---- */
+.ct-block--todo .ct-authority-card {
+  border-left-color: var(--gold);
+  background: var(--gold-light);
+}
+
+.ct-todo {
+  font-size: 0.875rem !important;
+  color: #6b5a2a;
+  background: var(--gold-light);
+  border: 1px solid #d4b460;
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.ct-todo::before {
+  content: "⚠ ";
+}
+
+/* ---- Info note ---- */
+.ct-note {
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  margin-top: 1rem;
+}
+
+.ct-note--info {
+  background: var(--blue-xlight);
+  border-left: 4px solid var(--blue-mid);
+  color: var(--text);
+}
+
+/* ---- No-JS fallback ---- */
+.ct-nojs {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.ct-nojs h2 { font-size: 1.125rem; color: var(--blue-dark); margin-bottom: 0.75rem; }
+.ct-nojs ul { padding-left: 1.25rem; }
+.ct-nojs li { margin-bottom: 0.35rem; font-size: 0.9375rem; }
+
+/* ---- Responsive ---- */
+@media (max-width: 540px) {
+  .ct-picker { flex-direction: column; align-items: flex-start; }
+  .ct-picker__select { width: 100%; }
+  .ct-tabs { gap: 0.15rem; }
+  .ct-tab { font-size: 0.8125rem; padding: 0.5rem 0.7rem; }
+  .ct-prompt { flex-direction: column; text-align: center; }
+}
