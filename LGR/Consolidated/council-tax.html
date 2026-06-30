@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Council tax – Newstershire Council</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="council-tax.css">
+</head>
+<body>
+
+  <!-- Top utility bar -->
+  <div class="utility-bar">
+    <div class="container utility-bar__inner">
+      <span class="utility-bar__item">
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.13 1 .37 1.97.72 2.9a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.18-1.18a2 2 0 012.11-.45c.93.35 1.9.59 2.9.72A2 2 0 0122 14.92v2z"/></svg>
+        0800 123 4567
+      </span>
+      <span class="utility-bar__item">
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@newstershire.gov.uk
+      </span>
+      <span class="utility-bar__item">Mon–Fri 8:30am–5pm</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div class="logo-lockup">
+        <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:0.75rem;">
+          <svg class="logo-icon" aria-hidden="true" focusable="false" width="52" height="52" viewBox="0 0 52 52">
+            <circle cx="26" cy="26" r="26" fill="#1d4477"/>
+            <path d="M10 36 Q18 18 26 22 Q34 18 42 36 Z" fill="#c8a951" opacity="0.9"/>
+            <path d="M18 36 Q22 26 26 28 Q30 26 34 36 Z" fill="#ffffff" opacity="0.85"/>
+            <rect x="23" y="36" width="6" height="5" rx="1" fill="#ffffff" opacity="0.7"/>
+          </svg>
+          <div>
+            <span class="org-name">Newstershire Council</span>
+            <span class="org-tagline">Serving Gloucestershire together</span>
+          </div>
+        </a>
+      </div>
+      <nav class="header-nav" aria-label="Site navigation">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="#" class="nav-link">News</a></li>
+          <li><a href="#" class="nav-link">About us</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Residents</a></li>
+        <li aria-current="page">Council tax</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Page hero -->
+  <section class="ct-hero" aria-label="Council tax">
+    <div class="container">
+      <h1 class="ct-hero__title">Council tax</h1>
+      <p class="ct-hero__sub">Exemptions, discounts, premiums and reductions — select your area to see the rules that apply where you live.</p>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <div class="container ct-layout">
+
+      <!-- Area picker -->
+      <div class="ct-picker-wrap">
+        <div class="ct-picker">
+          <label for="ct-area-select" class="ct-picker__label">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Select your area
+          </label>
+          <select id="ct-area-select" class="ct-picker__select">
+            <option value="">-- Choose your district or borough --</option>
+            <option value="cheltenham">Cheltenham</option>
+            <option value="cotswold">Cotswold</option>
+            <option value="forest-of-dean">Forest of Dean</option>
+            <option value="gloucester">Gloucester</option>
+            <option value="stroud">Stroud</option>
+            <option value="tewkesbury">Tewkesbury</option>
+          </select>
+        </div>
+        <p id="ct-area-label" class="ct-area-label" aria-live="polite" hidden></p>
+      </div>
+
+      <!-- No-area prompt -->
+      <div id="ct-no-area" class="ct-prompt">
+        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <p>Select your area above to see the council tax information that applies to you.</p>
+      </div>
+
+      <!-- Content (shown once area selected) -->
+      <div id="ct-content" class="ct-content" hidden>
+
+        <!-- Tab nav -->
+        <nav class="ct-tabs" aria-label="Council tax topics">
+          <button class="ct-tab ct-tab--active" data-tab="exemptions"    aria-selected="true"  role="tab">Exemptions</button>
+          <button class="ct-tab"                data-tab="discounts"     aria-selected="false" role="tab">Discounts</button>
+          <button class="ct-tab"                data-tab="empty-homes"   aria-selected="false" role="tab">Empty homes</button>
+          <button class="ct-tab"                data-tab="second-homes"  aria-selected="false" role="tab">Second homes</button>
+          <button class="ct-tab"                data-tab="reduction"     aria-selected="false" role="tab">Reduction (CTR)</button>
+        </nav>
+
+        <!-- ==============================
+             TAB: EXEMPTIONS (01)
+             All content is common
+             ============================== -->
+        <div id="tab-exemptions" class="ct-panel" role="tabpanel">
+          <h2>Council tax exemptions</h2>
+
+          <div class="ct-block ct-block--common">
+            <p>Some properties are exempt from council tax altogether — no charge, not a discount. If a property meets one of the conditions below, the bill is nil while that condition applies.</p>
+            <p>This list is set in national legislation. It is the same in every council area; nobody locally chooses which classes apply.</p>
+
+            <h3>Unoccupied properties</h3>
+            <ul>
+              <li><strong>Owned by a charity</strong> — empty for less than 6 months since the last occupation, and was last occupied for the charity's purposes.</li>
+              <li><strong>Left empty by someone now in prison or detained elsewhere</strong> — would otherwise be their home.</li>
+              <li><strong>Left empty by someone now in a hospital, care home or hostel</strong> — was previously their main home.</li>
+              <li><strong>Awaiting probate</strong> — empty since the owner's death, no executor or administrator liable other than in that capacity, and (where probate-dependent) less than 6 months since probate or letters of administration were granted.</li>
+              <li><strong>Occupation prohibited by law</strong> — a planning condition or other legal restriction prevents anyone living there.</li>
+              <li><strong>Held for a minister of religion</strong> — kept as a future residence for clergy.</li>
+              <li><strong>Owner now receiving personal care elsewhere</strong> — for example due to old age, illness, or disability, and was previously their main home.</li>
+              <li><strong>Owner now living elsewhere to provide personal care to someone else.</strong></li>
+              <li><strong>Left empty by a student</strong> — was last occupied by someone who has since become a student, or who was already a student.</li>
+              <li><strong>Mortgagee in possession.</strong></li>
+              <li><strong>Student hall of residence.</strong></li>
+              <li><strong>Armed forces accommodation</strong> (excluding visiting forces accommodation, which has its own rule).</li>
+              <li><strong>Visiting forces members.</strong></li>
+              <li><strong>Trustee in bankruptcy holds the property.</strong></li>
+              <li><strong>Unoccupied caravan pitch or boat mooring.</strong></li>
+              <li><strong>Unoccupied annexe</strong> that can't legally be let separately from the main house.</li>
+            </ul>
+
+            <h3>Occupied properties</h3>
+            <ul>
+              <li><strong>Everyone living there is under 18.</strong></li>
+              <li><strong>Everyone living there is a student</strong>, or a student's qualifying dependant, or a school/college leaver, plus some Ukraine-scheme arrangements.</li>
+              <li><strong>Everyone living there is severely mentally impaired</strong> (or SMI residents plus students/qualifying dependants).</li>
+              <li><strong>A diplomat or someone with equivalent immunity lives there</strong>, and it isn't their main UK residence, and they're not a British national or permanent resident.</li>
+              <li><strong>A dependent relative's annexe</strong>, where the relative lives in the annexe and a family member lives in the main house.</li>
+            </ul>
+
+            <div class="ct-note ct-note--info">
+              <strong>Note:</strong> Classes A and C (short-term empty-and-unfurnished, and empty-undergoing-repair) were removed in England from 1 April 2013. The long-term empty premium rules now cover that ground instead.
+            </div>
+          </div>
+        </div><!-- /tab-exemptions -->
+
+        <!-- ==============================
+             TAB: DISCOUNTS (02)
+             ============================== -->
+        <div id="tab-discounts" class="ct-panel ct-panel--hidden" role="tabpanel">
+          <h2>Council tax discounts</h2>
+
+          <!-- Single person: common -->
+          <div class="ct-block ct-block--common">
+            <h3>Single person discount</h3>
+            <p>If you're the only adult living in the property, the bill is reduced by 25%. This is a national entitlement, set the same way everywhere — it isn't a local decision.</p>
+          </div>
+
+          <!-- Unoccupied/unfurnished: common intro -->
+          <div class="ct-block ct-block--common">
+            <h3>Properties left empty and unfurnished</h3>
+            <p>The default position in law is a 50% discount when nobody lives in a property. Councils have the power to reduce that discount, including down to nothing, for furnished-but-unoccupied and unfurnished-and-unoccupied properties (the s.11A power). Most councils have used that power. What's below is what your council has actually set.</p>
+          </div>
+
+          <!-- Council-specific: unoccupied/unfurnished -->
+          <div class="ct-block ct-block--council" data-council="gloucester">
+            <p>Unoccupied and unfurnished: 25% discount for up to 6 months from when the furniture was removed. After 6 months, full charge applies — no discount.</p>
+          </div>
+          <div class="ct-block ct-block--council" data-council="stroud">
+            <p>Unoccupied and unfurnished: 25% discount for up to 6 months. Full charge applies after that.</p>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="cotswold">
+            <p class="ct-todo">Details for Cotswold's unoccupied/unfurnished discount period and rate are being confirmed with the council.</p>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="forest-of-dean">
+            <p class="ct-todo">Details for Forest of Dean's unoccupied/unfurnished discount period and rate are being confirmed with the council.</p>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="tewkesbury">
+            <p class="ct-todo">Details for Tewkesbury's unoccupied/unfurnished discount period and rate are being confirmed with the council.</p>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cheltenham">
+            <p class="ct-todo">Cheltenham-specific discount details are being confirmed. In the meantime, contact Cheltenham Borough Council directly.</p>
+          </div>
+
+          <!-- Major repair: common intro -->
+          <div class="ct-block ct-block--common">
+            <h3>Major repair or structural work</h3>
+            <p>A property that needs major repair or structural alteration to be habitable can qualify for a discount for up to 12 months while uninhabitable. What counts as "major" is set in law — roof structure repairs, rebuilding external walls or chimney stacks, foundation repair, replacing defective floor or ceiling joists, gutting most internal walls, or repairs after flood, fire or subsidence.</p>
+            <p>Kitchen/bathroom refurbishment, general repairs, redecoration, rewiring on its own, and damp-proofing do not qualify.</p>
+          </div>
+
+          <!-- Council-specific: major repair -->
+          <div class="ct-block ct-block--council" data-council="gloucester">
+            <p>Gloucester's major repair discount is <strong>25%</strong>, for up to 12 months.</p>
+          </div>
+          <div class="ct-block ct-block--council" data-council="stroud">
+            <p>Stroud's major repair discount (Class D) is <strong>25%</strong>, for up to 12 months.</p>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="cotswold">
+            <p class="ct-todo">Cotswold's major repair discount rate is being confirmed with the council.</p>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="forest-of-dean">
+            <p class="ct-todo">Forest of Dean's major repair discount rate is being confirmed with the council.</p>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="tewkesbury">
+            <p class="ct-todo">Tewkesbury's major repair discount rate is being confirmed with the council.</p>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cheltenham">
+            <p class="ct-todo">Cheltenham-specific major repair discount details are being confirmed.</p>
+          </div>
+
+        </div><!-- /tab-discounts -->
+
+        <!-- ==============================
+             TAB: EMPTY HOMES (03)
+             ============================== -->
+        <div id="tab-empty-homes" class="ct-panel ct-panel--hidden" role="tabpanel">
+          <h2>Long-term empty homes premium</h2>
+
+          <!-- Common intro -->
+          <div class="ct-block ct-block--common">
+            <p>A property that's been empty and substantially unfurnished for a long time can be charged an extra premium on top of the normal bill, to push owners toward bringing it back into use. The premium is attached to the property, not the owner — if you buy or rent a property that's already attracted the premium, you inherit the charge.</p>
+
+            <h3>Maximum premiums allowed in law</h3>
+            <ul>
+              <li>Empty <strong>1–5 years</strong>: up to 100% extra (double the normal bill)</li>
+              <li>Empty <strong>5–10 years</strong>: up to 200% extra (triple)</li>
+              <li>Empty <strong>10+ years</strong>: up to 300% extra (quadruple)</li>
+            </ul>
+            <p>Whether a council has adopted these maximums, and from what date, is a local decision.</p>
+          </div>
+
+          <!-- Council-specific: rates and dates -->
+          <div class="ct-block ct-block--council" data-council="gloucester">
+            <div class="ct-authority-card">
+              <h3>Gloucester City Council</h3>
+              <ul>
+                <li>From <strong>1 April 2025</strong>: 100% premium once empty 1 year or more (previously the threshold was 2 years, set from 1 April 2020)</li>
+                <li>200% once empty 5 years or more (from 1 April 2020)</li>
+                <li>300% once empty 10 years or more (from 1 April 2021)</li>
+              </ul>
+              <p class="ct-authority-card__meta">Decision taken at full council, 7 February 2024.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="stroud">
+            <div class="ct-authority-card">
+              <h3>Stroud District Council</h3>
+              <ul>
+                <li>From <strong>1 April 2025</strong>: 100% premium once empty 1 year or more (previously 2 years, set from 1 April 2020)</li>
+                <li>200% once empty 5 years or more</li>
+                <li>300% once empty 10 years or more</li>
+              </ul>
+              <p class="ct-authority-card__meta">Decision taken at full council, 22 February 2024. Note: the premium clock attaches to the property — it does not reset on a change of owner or tenant.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cotswold">
+            <div class="ct-authority-card">
+              <h3>Cotswold District Council</h3>
+              <ul>
+                <li>From <strong>1 April 2024</strong>: 100% premium for 1–5 years empty</li>
+                <li>200% for 5–10 years</li>
+                <li>300% for 10+ years</li>
+              </ul>
+              <p class="ct-authority-card__meta">Cotswold moved to the 1-year threshold a year earlier than the other councils.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="forest-of-dean">
+            <div class="ct-authority-card">
+              <h3>Forest of Dean District Council</h3>
+              <p class="ct-todo">Exact threshold dates and decision date are being confirmed with the council. The 100%/200%/300% rate pattern is expected to match the other councils.</p>
+              <p>For empty homes exceptions contact: <a href="mailto:emptyhomes@publicagroup.uk">emptyhomes@publicagroup.uk</a> (shared service with Cotswold).</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="tewkesbury">
+            <div class="ct-authority-card">
+              <h3>Tewkesbury Borough Council</h3>
+              <p>100% premium from <strong>1 April 2021</strong>; 200% at 5 years, 300% at 10 years.</p>
+              <p class="ct-todo">The exact date the 1-year threshold took effect is being confirmed with the council.</p>
+              <p>To apply for an exception: email <a href="mailto:revenues@tewkesbury.gov.uk">revenues@tewkesbury.gov.uk</a> with your account reference and "exception to premium" in the subject line, with supporting evidence.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cheltenham">
+            <div class="ct-authority-card">
+              <h3>Cheltenham Borough Council</h3>
+              <p class="ct-todo">Cheltenham-specific empty homes premium details are being confirmed. Please contact Cheltenham Borough Council directly.</p>
+            </div>
+          </div>
+
+          <!-- Common: exceptions -->
+          <div class="ct-block ct-block--common">
+            <h3>Exceptions — these properties don't get the premium</h3>
+            <p>The same exception classes apply in every council area:</p>
+            <ul>
+              <li><strong>Class E</strong> — would be someone's main home if they weren't living in job-related armed forces accommodation</li>
+              <li><strong>Class F</strong> — an annexe forming part of the main dwelling</li>
+              <li><strong>Class G</strong> — actively marketed for sale (12-month limit)</li>
+              <li><strong>Class H</strong> — actively marketed for let (12-month limit; from 1 May 2026 this expressly includes assured tenancies)</li>
+              <li><strong>Class I</strong> — probate recently granted on a previously-exempt property (12 months from grant)</li>
+              <li><strong>Class M</strong> — undergoing major repair or structural alteration (12-month limit)</li>
+            </ul>
+            <p>After the exception period ends, the property falls back into the premium unless a fresh qualifying transaction resets the clock.</p>
+          </div>
+
+        </div><!-- /tab-empty-homes -->
+
+        <!-- ==============================
+             TAB: SECOND HOMES (04)
+             ============================== -->
+        <div id="tab-second-homes" class="ct-panel ct-panel--hidden" role="tabpanel">
+          <h2>Second homes</h2>
+
+          <!-- Common intro -->
+          <div class="ct-block ct-block--common">
+            <p>A property that's furnished but isn't anyone's main home — used for weekends, holidays, or occasionally — is a second home. No discount applies to a second home; full council tax is payable as a baseline.</p>
+            <p>The Levelling-up and Regeneration Act 2023 gave councils the power to charge an additional premium on second homes, on top of the full charge. All five Gloucestershire councils have adopted a 100% premium from 1 April 2025; the difference is the date each resolved to do so.</p>
+          </div>
+
+          <!-- Council-specific: decision dates -->
+          <div class="ct-block ct-block--council ct-block--todo" data-council="gloucester">
+            <div class="ct-authority-card">
+              <h3>Gloucester City Council</h3>
+              <p>100% premium from <strong>1 April 2025</strong>.</p>
+              <p class="ct-todo">The council resolution date is being confirmed.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="stroud">
+            <div class="ct-authority-card">
+              <h3>Stroud District Council</h3>
+              <p>100% premium from <strong>1 April 2025</strong>.</p>
+              <p class="ct-todo">The council resolution date is being confirmed.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cotswold">
+            <div class="ct-authority-card">
+              <h3>Cotswold District Council</h3>
+              <p>100% premium from <strong>1 April 2025</strong>.</p>
+              <p class="ct-authority-card__meta">Decision taken at full council, 20 March 2024.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="forest-of-dean">
+            <div class="ct-authority-card">
+              <h3>Forest of Dean District Council</h3>
+              <p>100% premium from <strong>1 April 2025</strong>.</p>
+              <p class="ct-authority-card__meta">Decision taken at full council, 14 September 2023 — the earliest of the five councils to resolve this.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="tewkesbury">
+            <div class="ct-authority-card">
+              <h3>Tewkesbury Borough Council</h3>
+              <p>100% premium from <strong>1 April 2025</strong>.</p>
+              <p class="ct-authority-card__meta">Decision taken at full council, 27 February 2024.</p>
+              <p>To apply for an exception: email <a href="mailto:revenues@tewkesbury.gov.uk">revenues@tewkesbury.gov.uk</a> with your account reference and "exception to premium" in the subject line, with supporting evidence.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cheltenham">
+            <div class="ct-authority-card">
+              <h3>Cheltenham Borough Council</h3>
+              <p class="ct-todo">Cheltenham-specific second homes premium details are being confirmed. Please contact Cheltenham Borough Council directly.</p>
+            </div>
+          </div>
+
+          <!-- Common: exceptions -->
+          <div class="ct-block ct-block--common">
+            <h3>Exceptions — these don't get the second homes premium</h3>
+            <ul>
+              <li><strong>Class E</strong> — armed forces accommodation</li>
+              <li><strong>Class F</strong> — occupied annexe</li>
+              <li><strong>Class G</strong> — marketed for sale (12-month limit)</li>
+              <li><strong>Class H</strong> — marketed for let (12-month limit; includes assured tenancies from 1 May 2026)</li>
+              <li><strong>Class I</strong> — probate recently granted (12 months from grant)</li>
+              <li><strong>Class J</strong> — job-related second home</li>
+              <li><strong>Class K</strong> — caravan pitch or boat mooring</li>
+              <li><strong>Class L</strong> — planning condition preventing occupation for 28+ continuous days, or restricting use to holiday letting, or barring use as a sole/main residence</li>
+            </ul>
+            <div class="ct-note ct-note--info">
+              If you believe a property is actually a holiday let rather than a second home, council tax still applies at the normal rate until the Valuation Office Agency agrees to move it onto the business rates list.
+            </div>
+          </div>
+
+        </div><!-- /tab-second-homes -->
+
+        <!-- ==============================
+             TAB: CTR (05)
+             ============================== -->
+        <div id="tab-reduction" class="ct-panel ct-panel--hidden" role="tabpanel">
+          <h2>Council Tax Reduction (CTR)</h2>
+
+          <!-- Common: pensioner route -->
+          <div class="ct-block ct-block--common">
+            <p>Council Tax Reduction lowers the bill for people on a low income. It's deducted after any discounts and premiums have already been applied — it's the last adjustment before the demand notice is issued.</p>
+
+            <h3>Pensioner route</h3>
+            <p>If you've reached state pension credit qualifying age, you're assessed under the national pensioner scheme. This is set centrally — there's no local variation. Personal allowances, premiums (severe disability, carer, disabled child, enhanced disability) and the capital limit (£16,000) are fixed in regulations and identical across every council in England.</p>
+            <p>The calculation: if your income is below your applicable amount, you get maximum reduction. If it's above, the reduction tapers off — maximum reduction minus 20% of the daily excess. There's also an "alternative maximum" route based on a second adult's circumstances in the household, which is used if it produces a higher reduction than the income-based calculation.</p>
+
+            <h3>Working-age route</h3>
+            <p>Working-age applicants are assessed under each council's local scheme. The structure is built on a national Default Scheme template, but councils can vary the parameters within it — the taper rate, income bands, minimum payment requirements, and so on.</p>
+          </div>
+
+          <!-- Council-specific: working-age scheme -->
+          <div class="ct-block ct-block--council ct-block--todo" data-council="gloucester">
+            <div class="ct-authority-card">
+              <h3>Gloucester City Council — working-age scheme</h3>
+              <p class="ct-todo">Gloucester's current working-age CTR scheme parameters (taper rate, income bands, local variations) are being confirmed with Revenues &amp; Benefits before publishing.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="stroud">
+            <div class="ct-authority-card">
+              <h3>Stroud District Council — working-age scheme</h3>
+              <p class="ct-todo">Stroud's working-age CTR scheme parameters are being confirmed with the council.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="cotswold">
+            <div class="ct-authority-card">
+              <h3>Cotswold District Council — working-age scheme</h3>
+              <p class="ct-todo">Cotswold's working-age CTR scheme parameters are being confirmed with the council.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="forest-of-dean">
+            <div class="ct-authority-card">
+              <h3>Forest of Dean District Council — working-age scheme</h3>
+              <p class="ct-todo">Forest of Dean's working-age CTR scheme parameters are being confirmed with the council.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="tewkesbury">
+            <div class="ct-authority-card">
+              <h3>Tewkesbury Borough Council — working-age scheme</h3>
+              <p class="ct-todo">Tewkesbury's working-age CTR scheme parameters are being confirmed with the council.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cheltenham">
+            <div class="ct-authority-card">
+              <h3>Cheltenham Borough Council — working-age scheme</h3>
+              <p class="ct-todo">Cheltenham-specific CTR scheme details are being confirmed. Please contact Cheltenham Borough Council directly.</p>
+            </div>
+          </div>
+
+          <!-- Common: applying -->
+          <div class="ct-block ct-block--common">
+            <h3>Applying and reporting changes</h3>
+            <p>A change of circumstances that might affect your entitlement has to be reported within <strong>21 days</strong> of it happening — this is a national rule (SI 2012/2885 Schedule 8 paragraph 9), not a local one. Failing to report can lead to a civil penalty.</p>
+          </div>
+
+        </div><!-- /tab-reduction -->
+
+      </div><!-- /ct-content -->
+
+      <!-- No-JS fallback -->
+      <noscript>
+        <div class="ct-nojs">
+          <h2>Council tax information</h2>
+          <p>JavaScript is not available. The interactive area selector requires JavaScript. Use the links below to go directly to your council's council tax pages.</p>
+          <ul>
+            <li><a href="https://www.cheltenham.gov.uk/council-tax">Cheltenham Borough Council — council tax</a></li>
+            <li><a href="https://www.cotswold.gov.uk/council-tax">Cotswold District Council — council tax</a></li>
+            <li><a href="https://www.fdean.gov.uk/council-tax">Forest of Dean District Council — council tax</a></li>
+            <li><a href="https://www.gloucester.gov.uk/council-tax">Gloucester City Council — council tax</a></li>
+            <li><a href="https://www.stroud.gov.uk/council-tax">Stroud District Council — council tax</a></li>
+            <li><a href="https://www.tewkesbury.gov.uk/council-tax">Tewkesbury Borough Council — council tax</a></li>
+          </ul>
+        </div>
+      </noscript>
+
+    </div><!-- /ct-layout -->
+  </main>
+
+  <!-- Pre-footer social / newsletter strip -->
+  <section class="prefooter" aria-label="Stay connected">
+    <div class="container prefooter__inner">
+      <div class="prefooter__social">
+        <h2 class="prefooter__heading">Follow us</h2>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Newstershire Council on X (Twitter)">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Newstershire Council on Facebook">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Newstershire Council on Instagram">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Newstershire Council on YouTube">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="prefooter__newsletter">
+        <h2 class="prefooter__heading">Stay informed</h2>
+        <p>Get council news and service updates straight to your inbox.</p>
+        <form class="newsletter-form" action="#" method="post" aria-label="Newsletter sign-up">
+          <label for="newsletter-email" class="sr-only">Email address</label>
+          <input type="email" id="newsletter-email" name="email" placeholder="Your email address" autocomplete="email">
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3 class="footer-col__title">About Newstershire</h3>
+          <ul>
+            <li><a href="#">About the council</a></li>
+            <li><a href="#">Councillors and committees</a></li>
+            <li><a href="#">Council meetings</a></li>
+            <li><a href="#">Budget and spending</a></li>
+            <li><a href="#">LGR transition</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Residents</h3>
+          <ul>
+            <li><a href="council-tax.html">Council tax</a></li>
+            <li><a href="#">Bins and recycling</a></li>
+            <li><a href="#">Planning</a></li>
+            <li><a href="#">Housing</a></li>
+            <li><a href="#">Roads and transport</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Business</h3>
+          <ul>
+            <li><a href="#">Business rates</a></li>
+            <li><a href="#">Licences and permits</a></li>
+            <li><a href="#">Trading standards</a></li>
+            <li><a href="#">Economic development</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Help &amp; legal</h3>
+          <ul>
+            <li><a href="#">Accessibility statement</a></li>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">Freedom of information</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Newstershire Council &mdash; A new unitary authority for Gloucestershire</p>
+        <p class="footer-note">This is a proof-of-concept website produced as part of local government reorganisation planning. It is not a live service.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="council-tax.js"></script>
+</body>
+</html>
