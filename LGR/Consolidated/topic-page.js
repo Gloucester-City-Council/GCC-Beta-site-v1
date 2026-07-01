@@ -1,4 +1,5 @@
-/* Council tax page — area selector + tab logic */
+/* Consolidated topic page — area selector + tab logic.
+   Shared by council-tax.html and waste.html (both use the ct- markup). */
 (function () {
   'use strict';
 
@@ -8,6 +9,8 @@
   var areaLabel  = document.getElementById('ct-area-label');
   var tabs       = document.querySelectorAll('.ct-tab');
   var panels     = document.querySelectorAll('.ct-panel');
+
+  if (!select) return;
 
   var AREA_NAMES = {
     'cheltenham':    'Cheltenham Borough Council',
@@ -19,7 +22,6 @@
   };
 
   function applyArea(area) {
-    // Show/hide all council blocks
     var councilBlocks = document.querySelectorAll('.ct-block--council');
     councilBlocks.forEach(function (block) {
       if (block.getAttribute('data-council') === area) {
@@ -29,7 +31,6 @@
       }
     });
 
-    // Update the label
     if (area && AREA_NAMES[area]) {
       areaLabel.textContent = 'Showing information for: ' + AREA_NAMES[area];
       areaLabel.hidden = false;

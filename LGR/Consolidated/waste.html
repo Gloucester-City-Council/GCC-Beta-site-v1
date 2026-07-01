@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bins and recycling – Newstershire Council</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="council-tax.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Top utility bar -->
+  <div class="utility-bar">
+    <div class="container utility-bar__inner">
+      <span class="utility-bar__item">
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.13 1 .37 1.97.72 2.9a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.18-1.18a2 2 0 012.11-.45c.93.35 1.9.59 2.9.72A2 2 0 0122 14.92v2z"/></svg>
+        0800 123 4567
+      </span>
+      <span class="utility-bar__item">
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@newstershire.gov.uk
+      </span>
+      <span class="utility-bar__item">Mon–Fri 8:30am–5pm</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <div class="logo-lockup">
+        <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:0.75rem;">
+          <svg class="logo-icon" aria-hidden="true" focusable="false" width="52" height="52" viewBox="0 0 52 52">
+            <circle cx="26" cy="26" r="26" fill="#1d4477"/>
+            <path d="M10 36 Q18 18 26 22 Q34 18 42 36 Z" fill="#c8a951" opacity="0.9"/>
+            <path d="M18 36 Q22 26 26 28 Q30 26 34 36 Z" fill="#ffffff" opacity="0.85"/>
+            <rect x="23" y="36" width="6" height="5" rx="1" fill="#ffffff" opacity="0.7"/>
+          </svg>
+          <div>
+            <span class="org-name">Newstershire Council</span>
+            <span class="org-tagline">Serving Gloucestershire together</span>
+          </div>
+        </a>
+      </div>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="header-nav" aria-label="Open menu">
+        <svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <nav id="header-nav" class="header-nav" aria-label="Site navigation">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="#" class="nav-link">News</a></li>
+          <li><a href="#" class="nav-link">About us</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <ol>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Residents</a></li>
+        <li aria-current="page">Bins and recycling</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Page hero -->
+  <section class="ct-hero" aria-label="Bins and recycling">
+    <div class="container">
+      <h1 class="ct-hero__title">Bins and recycling</h1>
+      <p class="ct-hero__sub">Bin colours, collection days and what goes where are set locally and still differ across the county. Select your area to see the arrangements that apply where you live.</p>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <div class="container ct-layout">
+
+      <!-- Area picker -->
+      <div class="ct-picker-wrap">
+        <div class="ct-picker">
+          <label for="ct-area-select" class="ct-picker__label">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Select your area
+          </label>
+          <select id="ct-area-select" class="ct-picker__select">
+            <option value="">-- Choose your district or borough --</option>
+            <option value="cheltenham">Cheltenham</option>
+            <option value="cotswold">Cotswold</option>
+            <option value="forest-of-dean">Forest of Dean</option>
+            <option value="gloucester">Gloucester</option>
+            <option value="stroud">Stroud</option>
+            <option value="tewkesbury">Tewkesbury</option>
+          </select>
+        </div>
+        <p id="ct-area-label" class="ct-area-label" aria-live="polite" hidden></p>
+      </div>
+
+      <!-- No-area prompt -->
+      <div id="ct-no-area" class="ct-prompt">
+        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <p>Select your area above to see the bin colours, collection days and rules that apply to you.</p>
+      </div>
+
+      <!-- Content (shown once area selected) -->
+      <div id="ct-content" class="ct-content" hidden>
+
+        <!-- Tab nav -->
+        <div class="ct-tabs-wrap">
+        <div class="ct-tabs" role="tablist" aria-label="Bins and recycling topics">
+          <button class="ct-tab ct-tab--active" data-tab="general-waste" id="tab-btn-general-waste" aria-selected="true"  role="tab" aria-controls="tab-general-waste">General waste</button>
+          <button class="ct-tab"                data-tab="recycling"     id="tab-btn-recycling"     aria-selected="false" role="tab" aria-controls="tab-recycling">Recycling</button>
+          <button class="ct-tab"                data-tab="food-waste"    id="tab-btn-food-waste"    aria-selected="false" role="tab" aria-controls="tab-food-waste">Food waste</button>
+          <button class="ct-tab"                data-tab="garden-waste"  id="tab-btn-garden-waste"  aria-selected="false" role="tab" aria-controls="tab-garden-waste">Garden waste</button>
+          <button class="ct-tab"                data-tab="bulky"         id="tab-btn-bulky"         aria-selected="false" role="tab" aria-controls="tab-bulky">Bulky waste &amp; centres</button>
+        </div><!-- /ct-tabs -->
+        </div><!-- /ct-tabs-wrap -->
+
+        <!-- ==============================
+             TAB: GENERAL WASTE (01)
+             ============================== -->
+        <div id="tab-general-waste" class="ct-panel" role="tabpanel" aria-labelledby="tab-btn-general-waste">
+          <h2>General waste (refuse)</h2>
+
+          <div class="ct-block ct-block--common">
+            <p>General waste is for rubbish that can't be recycled or composted. It's collected every two weeks everywhere in Gloucestershire, on the opposite week to recycling.</p>
+            <p>The same things are kept out of general waste everywhere, for the same reasons:</p>
+            <ul>
+              <li>Garden waste and anything recyclable at the kerbside — it belongs in the other bins</li>
+              <li>Liquids like paint and oil — illegal to bin, and costly to clean up if spilled</li>
+              <li>Building or DIY waste, rubble, soil, plasterboard — take these to a Household Recycling Centre (plasterboard specifically can't go to landfill)</li>
+              <li>Trade waste, even if you run a business from home</li>
+              <li>Hot ashes (let them cool first) and sharp objects (double-wrap and use a rigid container)</li>
+            </ul>
+            <p>If a property can't take a wheeled bin — flats, mainly — councils issue refuse sacks instead, usually after an assessment. Extra capacity beyond the standard bin is generally only available for larger households (commonly five or more people) or on medical grounds, assessed case by case.</p>
+          </div>
+
+          <div class="ct-block ct-block--council" data-council="gloucester">
+            <div class="ct-authority-card">
+              <h3>Gloucester City Council</h3>
+              <p>Black bin or council-issued domestic sack. Out by <strong>7am</strong> on collection day; remove from the highway by end of day.</p>
+              <ul>
+                <li>Replacement refuse sack £5, small bin £16.50, standard bin £25, large bin (where authorised) £55</li>
+                <li>Flats without communal facilities (typically 6 or fewer) get a 140L bin per flat</li>
+              </ul>
+              <p class="ct-authority-card__meta">Contact: 01452 396 396.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="stroud">
+            <div class="ct-authority-card">
+              <h3>Stroud District Council</h3>
+              <p>Grey wheelie bin or beige bags, collected every two weeks, opposite week to recycling. Present by <strong>6am</strong>.</p>
+              <p>There's no smaller or bigger grey bin option — the council decided that swapping bins as household sizes change isn't sustainable. Not accepted: cling film, bubble wrap, polystyrene, crisp packets, sanitary products, nappies, bagged pet waste, vacuum dust, rubble, garden waste/soil, batteries/vapes (these go weekly with food waste), clinical/hazardous waste, DIY materials, electricals, business waste, car parts, furniture. Residual waste goes to the Javelin Park Waste to Energy facility.</p>
+              <p class="ct-authority-card__meta">Replacement bin: customer.services@stroud.gov.uk or 01453 766321.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cotswold">
+            <div class="ct-authority-card">
+              <h3>Cotswold District Council</h3>
+              <p>Grey wheelie bin, collected every two weeks. Out by <strong>7am</strong> (6am during exceptional hot-weather early starts).</p>
+              <p>Not accepted: stones/gravel/rubble, garden waste/soil, sharp objects, hot ashes, DIY waste, carpet and underlay, trade or building waste. Extra rubbish: beige sacks, 84p each, from council offices. An extra bin or sacks are possible for households of more than five, or with children in nappies.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="forest-of-dean">
+            <div class="ct-authority-card">
+              <h3>Forest of Dean District Council</h3>
+              <p>Black wheelie bin, collected every two weeks, out by <strong>7am</strong>, lid closed; rubbish can be loose or bagged inside the bin, but no sacks left beside it.</p>
+              <p>Unusually, general waste here <em>accepts</em> several things not recyclable elsewhere: nappies and sanitary products, polystyrene, crisp/sweet packets, bagged dog/cat waste, foil-lined food pouches and plastic films. Not accepted: garden waste, anything kerbside-recyclable (including food waste), liquids, trade waste, building/DIY waste/rubble/soil/plasterboard, household asbestos (book the Recycling Centre instead), hot ashes.</p>
+              <p>Flats unsuited to a wheelie bin get 80 beige refuse sacks a year, or a communal bin, following assessment. Extra beige sacks £10 a roll. Extra bin: household of 6+, medical reasons, or a large household with children in nappies.</p>
+              <p class="ct-authority-card__meta">Apply via 01594 810000.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="tewkesbury">
+            <div class="ct-authority-card">
+              <h3>Tewkesbury Borough Council</h3>
+              <p>Green refuse bin, collected every two weeks, out by <strong>7am</strong>. From mid-September 2025, new and replacement bins are <strong>140 litres</strong> (down from 180L) — part of a "small on waste, big on recycling" policy, after county-wide analysis found roughly a quarter of household waste was food and another 23% recyclable plastic, paper and card.</p>
+              <p>Not accepted: batteries, vapes (supermarkets/HRCs instead), stones/gravel/rubble, garden waste/soil, sharp objects, DIY waste, carpet/underlay, commercial waste, paint/chemicals, clinical waste. Extra 140L bin: chargeable for households of 5+ who've maximised recycling; free on medical grounds. No extra bins for nappy waste — the Gloucestershire Real Nappy Project offers a £30 voucher towards reusable nappies instead.</p>
+              <p>On the narrow-access round (smaller vehicles), general waste goes in a reusable black sack — rubbish must be bagged inside it, not loose, as crews pull it out by hand.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="cheltenham">
+            <div class="ct-authority-card">
+              <h3>Cheltenham Borough Council</h3>
+              <p class="ct-todo">Cheltenham's bin and collection details are being confirmed. In the meantime, please contact Cheltenham Borough Council directly.</p>
+            </div>
+          </div>
+        </div><!-- /tab-general-waste -->
+
+        <!-- ==============================
+             TAB: RECYCLING (02)
+             ============================== -->
+        <div id="tab-recycling" class="ct-panel ct-panel--hidden" role="tabpanel" aria-labelledby="tab-btn-recycling">
+          <h2>Recycling</h2>
+
+          <div class="ct-block ct-block--common">
+            <p>Every council separates recycling into glass, paper/card, and plastics/tins/cans/foil at the point of collection — but the container types, colours and exact frequency are set locally, so check your area's section below rather than assuming.</p>
+            <p>A few things hold everywhere:</p>
+            <ul>
+              <li>Recycling generally needs to be loose, not bagged in plastic, when it goes in a box — bagged recycling usually isn't picked up because it can't be sorted</li>
+              <li>Aerosols must be empty before recycling, for fire safety at the sorting facility</li>
+              <li>Small electrical items are increasingly collected at the kerbside (in a bag, separate from the main recycling), but large electricals, light bulbs and fluorescent tubes still need a Household Recycling Centre</li>
+            </ul>
+          </div>
+
+          <div class="ct-block ct-block--council" data-council="gloucester">
+            <div class="ct-authority-card">
+              <h3>Gloucester City Council</h3>
+              <p>Two green recycling boxes (one for glass only; one for plastic, cans, tins, aerosols, foil and cartons together), plus a blue sack for all paper and card. Collected opposite week to general waste.</p>
+              <p>Since December 2019, glass must be kept separate — broken glass was spoiling otherwise-good bales. Textiles, batteries and anything in a carrier bag are no longer collected at the kerbside (batteries go to supermarkets). Small electricals go loose on the lid of the green box. New and replacement containers are chargeable.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="stroud">
+            <div class="ct-authority-card">
+              <h3>Stroud District Council</h3>
+              <p>Green wheelie bin or green bag for cans, glass bottles/jars, plastic bottles, aerosols, foil and drinks cartons together; a separate green box for paper and card. Collected every two weeks, opposite week to general waste, out by <strong>6am</strong>.</p>
+              <p>Batteries and vapes are now collected weekly alongside food waste, not in the fortnightly recycling. Not accepted: carrier bags/cling film, plastic toys, polystyrene, large plastic items, foil or glittered wrapping paper, kitchen roll, tissue paper, and glass other than bottles and jars (Pyrex, window glass, drinking glasses, light bulbs).</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cotswold">
+            <div class="ct-authority-card">
+              <h3>Cotswold District Council</h3>
+              <p>The most subdivided scheme of the five: two black boxes, a white bag and a blue bag. Box one for glass bottles and jars; box two for paper; white bag for plastic bottles, tubs, pots, trays, tins, cans, aerosols, foil and cartons; blue bag for all cardboard. Small electricals, textiles and batteries each go in a separate old carrier bag tucked inside a box.</p>
+              <p>Collected every two weeks, out by <strong>7am</strong> (6am during hot-weather early starts). Not accepted: broken glass, drinking glasses, Pyrex, sheet/toughened glass, light bulbs; crisp packets, pet food pouches, cling film, bubble wrap, plastic film, coat hangers, takeaway coffee cups; car or motorbike batteries.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="forest-of-dean">
+            <div class="ct-authority-card">
+              <h3>Forest of Dean District Council</h3>
+              <p>Two green boxes plus a blue bag. Green box one for plastic bottles/pots/tubs/trays/punnets, plant pots (except black), tins, cans, metal lids, empty aerosols and clean foil; green box two for glass bottles and jars (lids go in the tins-and-cans box) plus textiles in a tied carrier bag; blue bag for paper and card, including clean pizza boxes.</p>
+              <p>Collected <strong>weekly</strong> — the only one of the five councils collecting general recycling weekly rather than fortnightly. Out by 7am. Not accepted: hard plastics (toys, hangers, DVD cases), black plastics (the sorting lasers can't detect them), soft plastics/film, pet/baby food pouches, cartons such as Tetra Pak (notably different from Gloucester and Stroud, who do accept cartons), polystyrene.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="tewkesbury">
+            <div class="ct-authority-card">
+              <h3>Tewkesbury Borough Council</h3>
+              <p>Blue bin for card/cardboard, cartons, metal packaging (tins, cans, foil, aerosols), glass and mixed paper together, plus plastic containers and packaging (bottles, pots, tubs, trays) in the same collection. Fortnightly, out by <strong>7am</strong>. Accepts black plastic packaging, unlike Forest of Dean.</p>
+              <p>Does not accept plastic bags/film, crisp packets, pre-prepared salad bags, polystyrene trays, or batteries/vapes (supermarkets or HRCs). Small electricals go loose in an untied old carrier bag beside the blue bin — not available on the narrow-access round.</p>
+              <p>On the narrow-access round: four reusable blue sacks, presented loose (not bagged inside another bag) — the opposite convention to the boxed schemes elsewhere.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="cheltenham">
+            <div class="ct-authority-card">
+              <h3>Cheltenham Borough Council</h3>
+              <p class="ct-todo">Cheltenham's recycling details are being confirmed. In the meantime, please contact Cheltenham Borough Council directly.</p>
+            </div>
+          </div>
+        </div><!-- /tab-recycling -->
+
+        <!-- ==============================
+             TAB: FOOD WASTE (03)
+             ============================== -->
+        <div id="tab-food-waste" class="ct-panel ct-panel--hidden" role="tabpanel" aria-labelledby="tab-btn-food-waste">
+          <h2>Food waste</h2>
+
+          <div class="ct-block ct-block--common">
+            <p>Food waste is collected <strong>weekly everywhere</strong> — this is the one collection where all five councils run the same frequency, even though recycling and general waste cycles differ. A small kitchen caddy is for day-to-day use indoors; it gets emptied into a larger outdoor caddy or bin for collection.</p>
+            <p>Food waste must <strong>never</strong> go in the garden waste bin. Garden waste is composted in the open air, and contamination from food or animal waste risks spreading bacteria behind outbreaks like BSE and foot-and-mouth — open windrow composting can't safely process it the way an anaerobic digester can. Collected food waste is generally sent to anaerobic digestion, producing biogas and a fertiliser by-product.</p>
+            <p>Pet waste, animal bedding, animal carcasses, nappies, packaging, metal and glass are excluded everywhere.</p>
+          </div>
+
+          <div class="ct-block ct-block--council ct-block--todo" data-council="gloucester">
+            <div class="ct-authority-card">
+              <h3>Gloucester City Council</h3>
+              <p>Large outdoor food caddy plus a small indoor caddy.</p>
+              <p class="ct-todo">Gloucester's specific accepted / not-accepted list is being confirmed — the dedicated food waste page wasn't fully captured in the current source set.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="stroud">
+            <div class="ct-authority-card">
+              <h3>Stroud District Council</h3>
+              <p>Grey food bin (sealed) plus an indoor kitchen caddy; collected weekly on the same day as refuse or recycling. Can be lined with plastic bags, bin liners, biodegradable bags or newspaper. Small batteries and vapes are now also collected weekly alongside food waste.</p>
+              <p>Accepted: all cooked and raw food, meat and fish bones, pet food, tea bags, coffee grounds, food packaging. Not accepted: animal waste, pet bedding, nappies, garden waste.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cotswold">
+            <div class="ct-authority-card">
+              <h3>Cotswold District Council</h3>
+              <p>Kitchen caddy, emptied weekly. Accepted: uneaten food and plate scrapings, mouldy or out-of-date food, eggshells, small amounts of liquid/oil/fat including solid fats, tea bags, coffee grounds, newspaper or approved compostable liners, cat and dog food, animal hair, used kitchen roll and tissues.</p>
+              <p>Not accepted: plastic (except carrier/food/sandwich bags used as liners), packaging, metal, glass, other household waste, animal faeces, animal bedding, pet litter, pet/animal carcasses, cardboard, nappies.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="forest-of-dean">
+            <div class="ct-authority-card">
+              <h3>Forest of Dean District Council</h3>
+              <p>Two containers: a 7-litre kitchen caddy and a 23-litre lidded outdoor bin — the largest outdoor capacity of the five councils' published figures. Collected weekly, out by 7am. Can be lined with plastic bags, compostable liners or newspaper.</p>
+              <p>Accepted: fish, meat and bones (raw or cooked), dairy, hard fats and lard, tea bags, coffee grounds, fruit and veg peelings, cereals, bread, pastries, rice, pasta, stale/out-of-date food (packaging removed), uneaten pet food, plate scrapings, kitchen towels. Not accepted: packaging/pots/punnets/film, large quantities of oil, dead animals, garden waste, animal bedding and litter, animal/pet faeces.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="tewkesbury">
+            <div class="ct-authority-card">
+              <h3>Tewkesbury Borough Council</h3>
+              <p>Kitchen caddy lined with compostable liners, paper, or old carrier/bread/sandwich bags; emptied weekly, dishwasher-proof. Accepted: all uneaten food and plate scrapings, mouldy or out-of-date food, eggs and eggshells, small amounts of liquids/oil/fat including solid fats, tea bags, coffee grounds, cat and dog food, used kitchen roll and tissues, meat and fish bones, fruit stones.</p>
+              <p>Not accepted: plastic other than the bag types used as liners, packaging (including foil trays), metal and glass, other household waste, animal faeces, animal bedding, pet litter, pet/animal carcasses, cardboard, nappies.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="cheltenham">
+            <div class="ct-authority-card">
+              <h3>Cheltenham Borough Council</h3>
+              <p class="ct-todo">Cheltenham's food waste details are being confirmed. In the meantime, please contact Cheltenham Borough Council directly.</p>
+            </div>
+          </div>
+        </div><!-- /tab-food-waste -->
+
+        <!-- ==============================
+             TAB: GARDEN WASTE (04)
+             ============================== -->
+        <div id="tab-garden-waste" class="ct-panel ct-panel--hidden" role="tabpanel" aria-labelledby="tab-btn-garden-waste">
+          <h2>Garden waste</h2>
+
+          <div class="ct-block ct-block--common">
+            <p>Garden waste collection is an <strong>opt-in, paid subscription</strong> everywhere in Gloucestershire — it isn't part of the standard council tax-funded service. Subscriptions typically run on an annual cycle (commonly 1 April to 31 March), collected fortnightly through the growing season, and councils generally state there's no refund for cancelling partway through, or for individual missed collections.</p>
+            <p>Accepted material is broadly consistent: grass cuttings, hedge/shrub clippings, plants, leaves, twigs and small branches, weeds. It's generally composted by open windrow, with some compost used to restore old landfill sites and the rest sold to farmers.</p>
+            <p>Universally excluded: food waste, soil and rubble in any quantity, plastic bags/pots/seed trays, animal faeces and bedding, chemicals/pesticides/herbicides, and invasive weeds like Japanese knotweed and ragwort.</p>
+          </div>
+
+          <div class="ct-block ct-block--council ct-block--todo" data-council="gloucester">
+            <div class="ct-authority-card">
+              <h3>Gloucester City Council</h3>
+              <p class="ct-todo">Gloucester's garden waste subscription price, container type and collection season are being confirmed — the content wasn't captured in the current source set.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="stroud">
+            <div class="ct-authority-card">
+              <h3>Stroud District Council</h3>
+              <p>Two options: a 180-litre brown wheeled bin at <strong>£58.50</strong>, or a bag subscription (for narrow-access properties) at <strong>£48</strong> for 2026 — a reduced rate reflecting the later start date. Bag subscribers get 50 compostable sacks total (25 upfront, 25 more once down to six), can present up to two sacks per collection, and must pre-book each slot.</p>
+              <p>Season February to end of November, fortnightly; renewal each February. Crew-applied bin tags are a visual aid only — collections continue even if a bin isn't yet tagged. Lost or stolen bins aren't replaced free of charge.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="cotswold">
+            <div class="ct-authority-card">
+              <h3>Cotswold District Council</h3>
+              <p>Annual licence required, displayed on the bin; non-transferable if you move (leave it at the property). Council Tax and Housing Benefit claimants get a <strong>50% licence fee reduction</strong> if they provide their benefit reference at sign-up. Service paused two weeks over Christmas/New Year.</p>
+              <p class="ct-todo">The exact subscription price is being confirmed — it wasn't captured separately from Forest of Dean's near-identical shared-service terms.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="forest-of-dean">
+            <div class="ct-authority-card">
+              <h3>Forest of Dean District Council</h3>
+              <p>Annual licence, 1 April to 31 March, displayed beneath the bin handles. Sacks available (50 per licence) where a bin can't be accommodated, following assessment. The service can't be used by a gardener or grounds-maintenance company on a householder's behalf. Bins remain council property. Suspended over Christmas/New Year.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="tewkesbury">
+            <div class="ct-authority-card">
+              <h3>Tewkesbury Borough Council</h3>
+              <p>"Garden waste club" — membership year runs 1 April to 31 March, brown wheelie bin, fortnightly. No branded stickers any more; residents write their address on the bin in marker pen so crews can identify it. 14-day cooling-off period; refunds outside that window are at the council's discretion. No collections over the two-week Christmas/New Year period.</p>
+              <p>Processed by open windrow composting at the Enovert site next to Wingmoor Farm HRC near Bishop's Cleeve — about a third of the compost restores old landfill on site, the rest is sold to farmers.</p>
+              <p class="ct-authority-card__meta">Contact: recycling@tewkesbury.gov.uk, 01684 295010.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="cheltenham">
+            <div class="ct-authority-card">
+              <h3>Cheltenham Borough Council</h3>
+              <p class="ct-todo">Cheltenham's garden waste details are being confirmed. In the meantime, please contact Cheltenham Borough Council directly.</p>
+            </div>
+          </div>
+        </div><!-- /tab-garden-waste -->
+
+        <!-- ==============================
+             TAB: BULKY WASTE & HRC (05)
+             ============================== -->
+        <div id="tab-bulky" class="ct-panel ct-panel--hidden" role="tabpanel" aria-labelledby="tab-btn-bulky">
+          <h2>Bulky waste and recycling centres</h2>
+
+          <div class="ct-block ct-block--common">
+            <h3>Bulky waste collections</h3>
+            <p>For items too big for the normal bin — furniture, white goods, large electricals — councils run a separate, chargeable, bookable collection. Across the board: book in advance, present items at the kerbside by <strong>7am</strong> on the agreed day, payment is non-refundable once made, and the service covers household items only — no DIY, commercial, industrial or trade waste, and no house clearances.</p>
+            <p>Housing Benefit and Council Tax Support claimants generally get a discounted rate if they give their benefit claim reference when booking. Commonly excluded everywhere: building/DIY materials, kitchen units, bathroom suites, plasterboard, windows, bricks, radiators, sheds, fencing.</p>
+          </div>
+
+          <div class="ct-block ct-block--council ct-block--todo" data-council="gloucester">
+            <div class="ct-authority-card">
+              <h3>Gloucester City Council</h3>
+              <p>Book via "Book a Bulky Waste Collection" on the council's site. Nearest HRC: Hempsted.</p>
+              <p class="ct-todo">Current price per item and maximum item count are being confirmed — not captured in the source set for Gloucester.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="stroud">
+            <div class="ct-authority-card">
+              <h3>Stroud District Council</h3>
+              <p><strong>£25 for up to 3 items</strong>, £5 per additional item, paid by card at booking. Housing Benefit / Council Tax Support discount: £5 total for the first 3 items, £5 each additional. Only where a 3.5-tonne vehicle can access the property.</p>
+              <p>Excluded: builders waste, garage doors, commercial fridges/cookers, sheds/greenhouses, fixtures and fittings, fencing, fitted wardrobes, DIY waste, kitchen units, car parts, bathroom suites, asbestos, gas bottles, garden waste, guttering, radiators, decking, storage heaters.</p>
+              <p class="ct-authority-card__meta">Contact: recycling@stroud.gov.uk or 01453 766321 option 2.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council" data-council="cotswold">
+            <div class="ct-authority-card">
+              <h3>Cotswold District Council</h3>
+              <p><strong>£29 for up to 3 items</strong>, £5.50 per additional item, maximum 6 items. 50% reduction for Council Tax / Housing Benefit claimants. Not available on bank holidays.</p>
+              <p>Will collect: furniture, white goods, large electricals, outdoor equipment (bikes, non-ride-on lawnmowers, play equipment), one rolled carpet (max 15×13ft). Won't collect: kitchen units, bathroom suites, plasterboard, flooring, windows, bricks/blocks, radiators/storage heaters, sheds, DIY waste. A change in upholstered-seating disposal law means a booking may now be split into two visits.</p>
+              <p class="ct-authority-card__meta">Contact: 01285 623000.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="forest-of-dean">
+            <div class="ct-authority-card">
+              <h3>Forest of Dean District Council</h3>
+              <p>Booking terms match the common pattern (kerbside by 7am, no amendments once booked, no refunds). Terms are near-identical to Cotswold's, suggesting a shared service.</p>
+              <p class="ct-todo">The specific price per item is being confirmed — not captured separately in the current source set.</p>
+              <p class="ct-authority-card__meta">Contact: 01594 810000.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="tewkesbury">
+            <div class="ct-authority-card">
+              <h3>Tewkesbury Borough Council</h3>
+              <p class="ct-todo">Tewkesbury's bulky waste pricing and item list are being confirmed — not captured in the current source set.</p>
+            </div>
+          </div>
+          <div class="ct-block ct-block--council ct-block--todo" data-council="cheltenham">
+            <div class="ct-authority-card">
+              <h3>Cheltenham Borough Council</h3>
+              <p class="ct-todo">Cheltenham's bulky waste details are being confirmed. In the meantime, please contact Cheltenham Borough Council directly.</p>
+            </div>
+          </div>
+
+          <div class="ct-block ct-block--common">
+            <h3>Household Recycling Centres (HRCs)</h3>
+            <p>For anything that doesn't fit a bulky collection — or as a free alternative — Gloucestershire's Household Recycling Centres are run by <strong>Gloucestershire County Council</strong>, not the district or city councils, so the same network serves everyone regardless of who collects their bins:</p>
+            <ul>
+              <li><strong>Hempsted</strong> — serves Gloucester</li>
+              <li><strong>Wingmoor Farm</strong>, near Bishop's Cleeve — serves Tewkesbury; also processes garden waste by open windrow composting</li>
+              <li><strong>Oak Quarry and Hempsted</strong> — Forest of Dean residents are directed to both</li>
+              <li><strong>Pyke Quarry, Horsley, and Hempsted</strong> — Stroud residents</li>
+            </ul>
+            <p>Asbestos in small household quantities can be taken to an HRC but must be booked in advance. Find your nearest site and book where required via gloucestershirerecycles.com.</p>
+          </div>
+
+        </div><!-- /tab-bulky -->
+
+      </div><!-- /ct-content -->
+
+      <!-- No-JS fallback -->
+      <noscript>
+        <div class="ct-nojs">
+          <h2>Bins and recycling</h2>
+          <p>JavaScript is not available. The interactive area selector requires JavaScript. Use the links below to go directly to your council's bins and recycling pages.</p>
+          <ul>
+            <li><a href="https://www.cheltenham.gov.uk/bins-and-recycling">Cheltenham Borough Council — bins and recycling</a></li>
+            <li><a href="https://www.cotswold.gov.uk/bins-and-recycling">Cotswold District Council — bins and recycling</a></li>
+            <li><a href="https://www.fdean.gov.uk/bins-and-recycling">Forest of Dean District Council — bins and recycling</a></li>
+            <li><a href="https://www.gloucester.gov.uk/bins-and-recycling">Gloucester City Council — bins and recycling</a></li>
+            <li><a href="https://www.stroud.gov.uk/bins-and-recycling">Stroud District Council — bins and recycling</a></li>
+            <li><a href="https://www.tewkesbury.gov.uk/bins-and-recycling">Tewkesbury Borough Council — bins and recycling</a></li>
+          </ul>
+        </div>
+      </noscript>
+
+    </div><!-- /ct-layout -->
+  </main>
+
+  <!-- Pre-footer social / newsletter strip -->
+  <section class="prefooter" aria-label="Stay connected">
+    <div class="container prefooter__inner">
+      <div class="prefooter__social">
+        <h2 class="prefooter__heading">Follow us</h2>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Newstershire Council on X (Twitter)">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Newstershire Council on Facebook">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Newstershire Council on Instagram">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Newstershire Council on YouTube">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="prefooter__newsletter">
+        <h2 class="prefooter__heading">Stay informed</h2>
+        <p>Get council news and service updates straight to your inbox.</p>
+        <form class="newsletter-form" action="#" method="post" aria-label="Newsletter sign-up">
+          <label for="newsletter-email" class="sr-only">Email address</label>
+          <input type="email" id="newsletter-email" name="email" placeholder="Your email address" autocomplete="email">
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3 class="footer-col__title">About Newstershire</h3>
+          <ul>
+            <li><a href="#">About the council</a></li>
+            <li><a href="#">Councillors and committees</a></li>
+            <li><a href="#">Council meetings</a></li>
+            <li><a href="#">Budget and spending</a></li>
+            <li><a href="#">LGR transition</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Residents</h3>
+          <ul>
+            <li><a href="council-tax.html">Council tax</a></li>
+            <li><a href="waste.html">Bins and recycling</a></li>
+            <li><a href="#">Planning</a></li>
+            <li><a href="#">Housing</a></li>
+            <li><a href="#">Roads and transport</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Business</h3>
+          <ul>
+            <li><a href="#">Business rates</a></li>
+            <li><a href="#">Licences and permits</a></li>
+            <li><a href="#">Trading standards</a></li>
+            <li><a href="#">Economic development</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Help &amp; legal</h3>
+          <ul>
+            <li><a href="#">Accessibility statement</a></li>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">Freedom of information</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Newstershire Council &mdash; A new unitary authority for Gloucestershire</p>
+        <p class="footer-note">This is a proof-of-concept website produced as part of local government reorganisation planning. It is not a live service.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../area-cookie.js"></script>
+  <script src="topic-page.js"></script>
+  <script>
+    (function () {
+      var btn = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('header-nav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('header-nav--open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+    }());
+  </script>
+</body>
+</html>
