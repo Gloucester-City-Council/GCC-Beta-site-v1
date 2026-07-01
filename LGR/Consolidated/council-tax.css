@@ -302,6 +302,37 @@
   color: var(--text);
 }
 
+/* ---- Related services (county pages) ---- */
+.ct-related {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--border);
+}
+.ct-related h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin-bottom: 0.875rem;
+}
+.ct-related ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.5rem;
+}
+.ct-related a {
+  display: block;
+  padding: 0.6rem 0.875rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--blue-mid);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+.ct-related a:hover { border-color: var(--blue-mid); background: var(--blue-xlight); color: var(--blue-dark); }
+
 /* ---- No-JS fallback ---- */
 .ct-nojs {
   background: var(--white);
