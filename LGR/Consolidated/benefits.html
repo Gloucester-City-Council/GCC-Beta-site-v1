@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Local Plan – Planning – Newstershire Council</title>
+  <title>Benefits and support – Newstershire Council</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="council-tax.css">
 </head>
@@ -11,6 +11,7 @@
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
+  <!-- Top utility bar -->
   <div class="utility-bar">
     <div class="container utility-bar__inner">
       <span class="utility-bar__item">
@@ -55,29 +56,29 @@
     </div>
   </header>
 
+  <!-- Breadcrumb -->
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <div class="container">
       <ol>
         <li><a href="index.html">Home</a></li>
         <li><a href="#">Residents</a></li>
-        <li><a href="planning.html">Planning</a></li>
-        <li aria-current="page">The Local Plan</li>
+        <li aria-current="page">Benefits and support</li>
       </ol>
     </div>
   </nav>
 
-  <section class="ct-hero" aria-label="General waste">
+  <!-- Page hero -->
+  <section class="ct-hero" aria-label="Benefits and support">
     <div class="container">
-      <h1 class="ct-hero__title">The Local Plan</h1>
-      <p class="ct-hero__sub">Every area must plan for housing and development — the process is national, the numbers and policies are local. Select your area.</p>
+      <h1 class="ct-hero__title">Benefits and support</h1>
+      <p class="ct-hero__sub">Universal Credit and Housing Benefit, crisis payments, and wider cost-of-living help. Most of this is national, with local contacts and funds on top. Choose your area, then pick a topic.</p>
     </div>
   </section>
 
   <main id="main-content">
     <div class="container ct-layout">
 
-      <p class="ct-back"><a href="planning.html">&larr; All planning topics</a></p>
-
+      <!-- Area picker -->
       <div class="ct-picker-wrap">
         <div class="ct-picker">
           <label for="ct-area-select" class="ct-picker__label">
@@ -97,64 +98,57 @@
         <p id="ct-area-label" class="ct-area-label" aria-live="polite" hidden></p>
       </div>
 
-      <div class="ct-block ct-block--common">
-        <p>This is the one part of planning content that's genuinely, structurally local — not the same rule with a different number attached.</p>
-        <p>By law, every council must produce a Local Plan covering a minimum 15-year horizon, setting out how development — housing, business, infrastructure — will be delivered in that area. Government sets the national housing delivery targets; the Local Plan is each council's own decision about how its share is best met given local circumstances, land availability and priorities, developed with resident input through public consultation. Without an up-to-date Local Plan, a council has much less ability to resist or shape speculative development — and government can ultimately intervene and write the plan itself if a council fails to keep one current.</p>
-        <p>Because the plan-making process, evidence base (Strategic Housing Market Assessments, housing trajectories, brownfield land registers) and monitoring cycle (Housing Delivery Test, Five Year Housing Land Supply) are broadly standardised in method, this is a case where the <em>process</em> is common but the <em>content and numbers</em> are entirely local.</p>
+      <!-- Topic tiles -->
+      <h2 class="section-title">Choose a topic</h2>
+      <p class="page-intro">Your selected area is remembered as you move between these pages.</p>
+      <div class="service-tiles" aria-label="Benefits and support topics">
+
+        <a href="benefits-universal-credit.html" class="service-tile service-tile--link">
+          <svg class="service-tile__icon" aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+          <span class="service-tile__title">Universal Credit &amp; Housing Benefit</span>
+          <span class="service-tile__desc">How Universal Credit works, Housing Benefit and Local Housing Allowance</span>
+          <span class="service-tile__cta" aria-hidden="true">View →</span>
+        </a>
+
+        <a href="benefits-housing-payments.html" class="service-tile service-tile--link">
+          <svg class="service-tile__icon" aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M12 11v4M10 13h4"/></svg>
+          <span class="service-tile__title">Housing payments &amp; crisis support</span>
+          <span class="service-tile__desc">The Crisis and Resilience Fund and help with a rent shortfall in your area</span>
+          <span class="service-tile__cta" aria-hidden="true">View →</span>
+        </a>
+
+        <a href="benefits-cost-of-living.html" class="service-tile service-tile--link">
+          <svg class="service-tile__icon" aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span class="service-tile__title">Cost of living &amp; extra support</span>
+          <span class="service-tile__desc">Checking entitlement, Pension Credit, disability benefits, debt and crisis help</span>
+          <span class="service-tile__cta" aria-hidden="true">View →</span>
+        </a>
+
       </div>
 
 
-      <div id="ct-no-area" class="ct-prompt">
-        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <p>Select your area above to see the Local Plan position for your area.</p>
-      </div>
+      <!-- No-JS note -->
+      <noscript>
+        <div class="ct-nojs">
+          <h2>Benefits and support</h2>
+          <p>JavaScript is not available, so your area can't be remembered between pages — each topic page lets you choose your area again. You can also go directly to your council's benefits pages:</p>
+          <ul>
+            <li><a href="https://www.cheltenham.gov.uk/benefits">Cheltenham Borough Council — benefits</a></li>
+            <li><a href="https://www.cotswold.gov.uk/benefits">Cotswold District Council — benefits</a></li>
+            <li><a href="https://www.fdean.gov.uk/benefits">Forest of Dean District Council — benefits</a></li>
+            <li><a href="https://www.gloucester.gov.uk/benefits">Gloucester City Council — benefits</a></li>
+            <li><a href="https://www.stroud.gov.uk/benefits">Stroud District Council — benefits</a></li>
+            <li><a href="https://www.tewkesbury.gov.uk/benefits">Tewkesbury Borough Council — benefits</a></li>
+          </ul>
+        </div>
+      </noscript>
 
-      <div id="ct-content" class="ct-content" hidden>
-        <div class="ct-block ct-block--council ct-block--todo" data-council="gloucester">
-          <div class="ct-authority-card">
-            <h3>Gloucester City Council</h3>
-            <p class="ct-todo">Gloucester's current Local Plan status, adopted housing delivery number and plan period are being confirmed. Gloucester works jointly with Cheltenham and Tewkesbury on some strategic housing matters, so numbers may be set through a joint strategic plan rather than a standalone Gloucester document.</p>
-          </div>
-        </div>
-        <div class="ct-block ct-block--council ct-block--todo" data-council="stroud">
-          <div class="ct-authority-card">
-            <h3>Stroud District Council</h3>
-            <p>Publishes annual monitoring reports covering housing land availability, housing land supply and employment land availability, going back to 2012. Tracks a Housing Delivery Test measurement and a rolling Five Year Housing Land Supply position, both updated regularly (most recent captured: January 2025).</p>
-            <p class="ct-todo">Stroud's current adopted housing requirement figure and Local Plan period are being confirmed — the monitoring framework is well evidenced but the headline housing number wasn't captured separately.</p>
-          </div>
-        </div>
-        <div class="ct-block ct-block--council ct-block--todo" data-council="cotswold">
-          <div class="ct-authority-card">
-            <h3>Cotswold District Council</h3>
-            <p>Maintains an extensive housing evidence base, including a district-specific Objectively Assessed Housing Need review (2023) alongside county-wide Strategic Housing Market Assessments shared historically with Stroud and Forest of Dean. Also maintains a Gypsy and Traveller Accommodation Assessment programme, most recently updated October 2023.</p>
-            <p class="ct-todo">Cotswold's current adopted housing requirement figure and Local Plan period are being confirmed.</p>
-          </div>
-        </div>
-        <div class="ct-block ct-block--council" data-council="forest-of-dean">
-          <div class="ct-authority-card">
-            <h3>Forest of Dean District Council</h3>
-            <p>Required by national government to allow a minimum of <strong>372 new homes per year, totalling 7,440 by 2041</strong>. The council has no discretion over the overall number, but retains influence over type and location.</p>
-            <p>The current Local Plan is structured around six objectives: a stronger local economy; regenerating town centres and bringing unused sites back into use; meeting local housing needs; tackling climate change; improving and protecting the environment; and promoting healthy, active travel. The Allocations Plan (adopted June 2018) sits alongside the Core Strategy, setting settlement boundaries and site allocations; it went through a successfully-defended legal challenge in 2013 relating to the Cinderford Northern Quarter Area Action Plan.</p>
-          </div>
-        </div>
-        <div class="ct-block ct-block--council ct-block--todo" data-council="tewkesbury">
-          <div class="ct-authority-card">
-            <h3>Tewkesbury Borough Council</h3>
-            <p class="ct-todo">Tewkesbury's current Local Plan status, adopted housing delivery number and plan period are being confirmed. Given its joint delivery arrangement with Gloucester and Cheltenham on specific sites (Perrybrook, Innsworth, Pirton Fields), some delivery may be coordinated through the joint core strategy area rather than a standalone Tewkesbury document.</p>
-          </div>
-        </div>
-        <div class="ct-block ct-block--council ct-block--todo" data-council="cheltenham">
-          <div class="ct-authority-card">
-            <h3>Cheltenham Borough Council</h3>
-            <p class="ct-todo">Cheltenham's Local Plan details are being confirmed. In the meantime, please contact Cheltenham Borough Council directly.</p>
-          </div>
-        </div>
 
-      </div><!-- /ct-content -->
 
     </div><!-- /ct-layout -->
   </main>
 
+  <!-- Pre-footer social / newsletter strip -->
   <section class="prefooter" aria-label="Stay connected">
     <div class="container prefooter__inner">
       <div class="prefooter__social">
@@ -238,7 +232,7 @@
   </footer>
 
   <script src="../area-cookie.js"></script>
-  <script src="topic-page.js"></script>
+  <script src="hub-landing.js"></script>
   <script>
     (function () {
       var btn = document.querySelector('.nav-toggle');
