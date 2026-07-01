@@ -804,3 +804,16 @@ details[open] summary::before { transform: rotate(90deg); }
 .article-body h2 { font-size: 1.25rem; color: var(--blue-dark); margin: 1.75rem 0 0.6rem; }
 .article-body ul { max-width: 760px; padding-left: 1.25rem; margin-bottom: 1rem; }
 .article-body li { margin-bottom: 0.4rem; }
+
+/* ---- Breadcrumb (interior pages) ---- */
+.breadcrumb {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0;
+  font-size: 0.8125rem;
+}
+.breadcrumb ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem; align-items: center; }
+.breadcrumb li + li::before { content: "›"; margin-right: 0.25rem; color: var(--text-muted); }
+.breadcrumb a { color: var(--blue-mid); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb [aria-current] { color: var(--text-muted); }
