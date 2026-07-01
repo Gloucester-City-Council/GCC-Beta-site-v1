@@ -544,7 +544,7 @@ details[open] summary::before { transform: rotate(90deg); }
   align-items: flex-start;
 }
 
-.prefooter__social,
+.prefooter__follow,
 .prefooter__newsletter { flex: 1 1 240px; }
 
 .prefooter__heading {
@@ -554,9 +554,9 @@ details[open] summary::before { transform: rotate(90deg); }
   color: var(--gold-text);
 }
 
-.social-links { display: flex; gap: 0.625rem; flex-wrap: wrap; }
+.follow-list { display: flex; gap: 0.625rem; flex-wrap: wrap; }
 
-.social-link {
+.follow-item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -569,7 +569,7 @@ details[open] summary::before { transform: rotate(90deg); }
   transition: background var(--transition);
 }
 
-.social-link:hover { background: rgba(255,255,255,0.25); color: var(--white); }
+.follow-item:hover { background: rgba(255,255,255,0.25); color: var(--white); }
 
 .prefooter__newsletter p {
   font-size: 0.9rem;
