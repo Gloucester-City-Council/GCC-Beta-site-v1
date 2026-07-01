@@ -290,38 +290,31 @@ a:hover { color: var(--blue-dark); }
 /* ---- Popular tasks shortcut row ---- */
 .task-bar { background: var(--blue-xlight); border-bottom: 1px solid var(--border); }
 .task-bar__inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 1rem;
-  padding-top: 0.85rem;
-  padding-bottom: 0.85rem;
+  padding-top: 1rem;
+  padding-bottom: 1.1rem;
 }
 .task-bar__title {
-  font-size: 1rem;
+  font-size: 0.8125rem;
   font-weight: 700;
-  color: var(--blue-dark);
-  margin: 0;
-  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin: 0 0 0.6rem;
 }
 .task-bar__list {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 0.75rem;
+  gap: 0.5rem 1.75rem;
 }
 .task-bar__list a {
-  display: inline-block;
-  padding: 0.4rem 0.85rem;
   font-size: 1rem;
   font-weight: 600;
   color: var(--blue-mid);
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
-.task-bar__list a:hover { background: var(--blue-mid); color: var(--white); border-color: var(--blue-mid); }
+.task-bar__list a:hover { color: var(--blue-dark); }
 .task-bar__list a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
 /* =====================
