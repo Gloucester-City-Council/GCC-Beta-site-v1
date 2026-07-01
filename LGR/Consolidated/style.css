@@ -675,6 +675,23 @@ details[open] summary::before { transform: rotate(90deg); }
   transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
+/* Whole-tile link variant (topic hub) */
+.service-tile--link { cursor: pointer; }
+.service-tile--link:hover,
+.service-tile--link:focus-visible {
+  background: var(--blue-xlight);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+.service-tile__cta {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--blue-mid);
+}
+.service-tile--link:hover .service-tile__cta { text-decoration: underline; }
+
 .service-tile__link {
   display: inline-block;
   margin-top: 0.5rem;

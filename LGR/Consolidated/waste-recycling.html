@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bins and recycling – Newstershire Council</title>
+  <title>Recycling – Bins and recycling – Newstershire Council</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="council-tax.css">
 </head>
@@ -11,7 +11,6 @@
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Top utility bar -->
   <div class="utility-bar">
     <div class="container utility-bar__inner">
       <span class="utility-bar__item">
@@ -56,29 +55,29 @@
     </div>
   </header>
 
-  <!-- Breadcrumb -->
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <div class="container">
       <ol>
         <li><a href="index.html">Home</a></li>
         <li><a href="#">Residents</a></li>
-        <li aria-current="page">Bins and recycling</li>
+        <li><a href="waste.html">Bins and recycling</a></li>
+        <li aria-current="page">Recycling</li>
       </ol>
     </div>
   </nav>
 
-  <!-- Page hero -->
-  <section class="ct-hero" aria-label="Bins and recycling">
+  <section class="ct-hero" aria-label="General waste">
     <div class="container">
-      <h1 class="ct-hero__title">Bins and recycling</h1>
-      <p class="ct-hero__sub">Bin colours, collection days and what goes where are set locally and still differ across the county. Choose your area, then pick a topic below.</p>
+      <h1 class="ct-hero__title">Recycling</h1>
+      <p class="ct-hero__sub">Boxes, bags and bins differ by area — select yours to see what each stream accepts and how often it's collected.</p>
     </div>
   </section>
 
   <main id="main-content">
     <div class="container ct-layout">
 
-      <!-- Area picker -->
+      <p class="ct-back"><a href="waste.html">&larr; All bins and recycling topics</a></p>
+
       <div class="ct-picker-wrap">
         <div class="ct-picker">
           <label for="ct-area-select" class="ct-picker__label">
@@ -98,68 +97,71 @@
         <p id="ct-area-label" class="ct-area-label" aria-live="polite" hidden></p>
       </div>
 
-      <!-- Topic tiles -->
-      <h2 class="section-title">Choose a topic</h2>
-      <p class="page-intro">Your selected area is remembered as you move between these pages.</p>
-      <div class="service-tiles" aria-label="Bins and recycling topics">
-
-        <a href="waste-general-waste.html" class="service-tile service-tile--link">
-          <svg class="service-tile__icon" aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-          <span class="service-tile__title">General waste</span>
-          <span class="service-tile__desc">What goes in your refuse bin, collection frequency and extra capacity</span>
-          <span class="service-tile__cta" aria-hidden="true">View →</span>
-        </a>
-
-        <a href="waste-recycling.html" class="service-tile service-tile--link">
-          <svg class="service-tile__icon" aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polyline points="7 4 4 7 7 10"/><path d="M4 7h11a4 4 0 013.5 6"/><polyline points="17 20 20 17 17 14"/><path d="M20 17H9a4 4 0 01-3.5-6"/></svg>
-          <span class="service-tile__title">Recycling</span>
-          <span class="service-tile__desc">Boxes, bags and bins, and what each stream accepts in your area</span>
-          <span class="service-tile__cta" aria-hidden="true">View →</span>
-        </a>
-
-        <a href="waste-food-waste.html" class="service-tile service-tile--link">
-          <svg class="service-tile__icon" aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 2v6a3 3 0 006 0V2"/><path d="M9 2v20"/><path d="M17 2c-1.5 0-3 1.5-3 4v6h3"/><path d="M17 12v10"/></svg>
-          <span class="service-tile__title">Food waste</span>
-          <span class="service-tile__desc">Weekly caddy collection, what's accepted and why it can't go in garden waste</span>
-          <span class="service-tile__cta" aria-hidden="true">View →</span>
-        </a>
-
-        <a href="waste-garden-waste.html" class="service-tile service-tile--link">
-          <svg class="service-tile__icon" aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22V11"/><path d="M12 11c0-4 3-7 8-7 0 4-3 7-8 7z"/><path d="M12 14C12 10 9 8 4 8c0 4 3 6 8 6z"/></svg>
-          <span class="service-tile__title">Garden waste</span>
-          <span class="service-tile__desc">The opt-in paid subscription, prices and season in your area</span>
-          <span class="service-tile__cta" aria-hidden="true">View →</span>
-        </a>
-
-        <a href="waste-bulky.html" class="service-tile service-tile--link">
-          <svg class="service-tile__icon" aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="10" width="18" height="10" rx="1"/><path d="M6 10V7a3 3 0 013-3h6a3 3 0 013 3v3"/><path d="M9 14h6"/></svg>
-          <span class="service-tile__title">Bulky waste &amp; centres</span>
-          <span class="service-tile__desc">Booking a large-item collection and finding your Household Recycling Centre</span>
-          <span class="service-tile__cta" aria-hidden="true">View →</span>
-        </a>
-
+      <div class="ct-block ct-block--common">
+        <p>Every council separates recycling into glass, paper/card, and plastics/tins/cans/foil at the point of collection — but the container types, colours and exact frequency are set locally, so check your area's section below rather than assuming.</p>
+        <p>A few things hold everywhere:</p>
+        <ul>
+          <li>Recycling generally needs to be loose, not bagged in plastic, when it goes in a box — bagged recycling usually isn't picked up because it can't be sorted</li>
+          <li>Aerosols must be empty before recycling, for fire safety at the sorting facility</li>
+          <li>Small electrical items are increasingly collected at the kerbside (in a bag, separate from the main recycling), but large electricals, light bulbs and fluorescent tubes still need a Household Recycling Centre</li>
+        </ul>
       </div>
 
-      <!-- No-JS note -->
-      <noscript>
-        <div class="ct-nojs">
-          <h2>Bins and recycling</h2>
-          <p>JavaScript is not available, so your area can't be remembered between pages — each topic page lets you choose your area again. You can also go directly to your council's bins and recycling pages:</p>
-          <ul>
-            <li><a href="https://www.cheltenham.gov.uk/bins-and-recycling">Cheltenham Borough Council — bins and recycling</a></li>
-            <li><a href="https://www.cotswold.gov.uk/bins-and-recycling">Cotswold District Council — bins and recycling</a></li>
-            <li><a href="https://www.fdean.gov.uk/bins-and-recycling">Forest of Dean District Council — bins and recycling</a></li>
-            <li><a href="https://www.gloucester.gov.uk/bins-and-recycling">Gloucester City Council — bins and recycling</a></li>
-            <li><a href="https://www.stroud.gov.uk/bins-and-recycling">Stroud District Council — bins and recycling</a></li>
-            <li><a href="https://www.tewkesbury.gov.uk/bins-and-recycling">Tewkesbury Borough Council — bins and recycling</a></li>
-          </ul>
+
+      <div id="ct-no-area" class="ct-prompt">
+        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <p>Select your area above to see the recycling arrangements that apply to you.</p>
+      </div>
+
+      <div id="ct-content" class="ct-content" hidden>
+        <div class="ct-block ct-block--council" data-council="gloucester">
+          <div class="ct-authority-card">
+            <h3>Gloucester City Council</h3>
+            <p>Two green recycling boxes (one for glass only; one for plastic, cans, tins, aerosols, foil and cartons together), plus a blue sack for all paper and card. Collected opposite week to general waste.</p>
+            <p>Since December 2019, glass must be kept separate — broken glass was spoiling otherwise-good bales. Textiles, batteries and anything in a carrier bag are no longer collected at the kerbside (batteries go to supermarkets). Small electricals go loose on the lid of the green box. New and replacement containers are chargeable.</p>
+          </div>
         </div>
-      </noscript>
+        <div class="ct-block ct-block--council" data-council="stroud">
+          <div class="ct-authority-card">
+            <h3>Stroud District Council</h3>
+            <p>Green wheelie bin or green bag for cans, glass bottles/jars, plastic bottles, aerosols, foil and drinks cartons together; a separate green box for paper and card. Collected every two weeks, opposite week to general waste, out by <strong>6am</strong>.</p>
+            <p>Batteries and vapes are now collected weekly alongside food waste, not in the fortnightly recycling. Not accepted: carrier bags/cling film, plastic toys, polystyrene, large plastic items, foil or glittered wrapping paper, kitchen roll, tissue paper, and glass other than bottles and jars (Pyrex, window glass, drinking glasses, light bulbs).</p>
+          </div>
+        </div>
+        <div class="ct-block ct-block--council" data-council="cotswold">
+          <div class="ct-authority-card">
+            <h3>Cotswold District Council</h3>
+            <p>The most subdivided scheme of the five: two black boxes, a white bag and a blue bag. Box one for glass bottles and jars; box two for paper; white bag for plastic bottles, tubs, pots, trays, tins, cans, aerosols, foil and cartons; blue bag for all cardboard. Small electricals, textiles and batteries each go in a separate old carrier bag tucked inside a box.</p>
+            <p>Collected every two weeks, out by <strong>7am</strong> (6am during hot-weather early starts). Not accepted: broken glass, drinking glasses, Pyrex, sheet/toughened glass, light bulbs; crisp packets, pet food pouches, cling film, bubble wrap, plastic film, coat hangers, takeaway coffee cups; car or motorbike batteries.</p>
+          </div>
+        </div>
+        <div class="ct-block ct-block--council" data-council="forest-of-dean">
+          <div class="ct-authority-card">
+            <h3>Forest of Dean District Council</h3>
+            <p>Two green boxes plus a blue bag. Green box one for plastic bottles/pots/tubs/trays/punnets, plant pots (except black), tins, cans, metal lids, empty aerosols and clean foil; green box two for glass bottles and jars (lids go in the tins-and-cans box) plus textiles in a tied carrier bag; blue bag for paper and card, including clean pizza boxes.</p>
+            <p>Collected <strong>weekly</strong> — the only one of the five councils collecting general recycling weekly rather than fortnightly. Out by 7am. Not accepted: hard plastics (toys, hangers, DVD cases), black plastics (the sorting lasers can't detect them), soft plastics/film, pet/baby food pouches, cartons such as Tetra Pak (notably different from Gloucester and Stroud, who do accept cartons), polystyrene.</p>
+          </div>
+        </div>
+        <div class="ct-block ct-block--council" data-council="tewkesbury">
+          <div class="ct-authority-card">
+            <h3>Tewkesbury Borough Council</h3>
+            <p>Blue bin for card/cardboard, cartons, metal packaging (tins, cans, foil, aerosols), glass and mixed paper together, plus plastic containers and packaging (bottles, pots, tubs, trays) in the same collection. Fortnightly, out by <strong>7am</strong>. Accepts black plastic packaging, unlike Forest of Dean.</p>
+            <p>Does not accept plastic bags/film, crisp packets, pre-prepared salad bags, polystyrene trays, or batteries/vapes (supermarkets or HRCs). Small electricals go loose in an untied old carrier bag beside the blue bin — not available on the narrow-access round.</p>
+            <p>On the narrow-access round: four reusable blue sacks, presented loose (not bagged inside another bag) — the opposite convention to the boxed schemes elsewhere.</p>
+          </div>
+        </div>
+        <div class="ct-block ct-block--council ct-block--todo" data-council="cheltenham">
+          <div class="ct-authority-card">
+            <h3>Cheltenham Borough Council</h3>
+            <p class="ct-todo">Cheltenham's recycling details are being confirmed. In the meantime, please contact Cheltenham Borough Council directly.</p>
+          </div>
+        </div>
+
+      </div><!-- /ct-content -->
 
     </div><!-- /ct-layout -->
   </main>
 
-  <!-- Pre-footer social / newsletter strip -->
   <section class="prefooter" aria-label="Stay connected">
     <div class="container prefooter__inner">
       <div class="prefooter__social">
@@ -242,7 +244,7 @@
   </footer>
 
   <script src="../area-cookie.js"></script>
-  <script src="waste-landing.js"></script>
+  <script src="topic-page.js"></script>
   <script>
     (function () {
       var btn = document.querySelector('.nav-toggle');

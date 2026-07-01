@@ -59,6 +59,18 @@
   width: 100%;
 }
 
+/* ---- Back link (topic detail pages) ---- */
+.ct-back {
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+}
+.ct-back a {
+  color: var(--blue-mid);
+  text-decoration: none;
+  font-weight: 600;
+}
+.ct-back a:hover { text-decoration: underline; }
+
 /* ---- Area picker ---- */
 .ct-picker-wrap {
   margin-bottom: 1.75rem;
