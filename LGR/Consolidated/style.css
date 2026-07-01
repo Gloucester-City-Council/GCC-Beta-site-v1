@@ -290,16 +290,8 @@ a:hover { color: var(--blue-dark); }
 /* ---- Popular tasks shortcut row ---- */
 .task-bar { background: var(--blue-xlight); border-bottom: 1px solid var(--border); }
 .task-bar__inner {
-  padding-top: 1rem;
-  padding-bottom: 1.1rem;
-}
-.task-bar__title {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
-  margin: 0 0 0.6rem;
+  padding-top: 1.75rem;
+  padding-bottom: 1.25rem;
 }
 .task-bar__list {
   list-style: none;
