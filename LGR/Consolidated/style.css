@@ -923,6 +923,10 @@ details[open] summary::before { transform: rotate(90deg); }
   .container { padding: 0 1.25rem; }
   .section-title { font-size: 1.25rem; }
   .notice-banner { padding: 0.875rem 1rem; }
+  .task-bar__list { display: block; }
+  .task-bar__list li { border-top: 1px solid rgba(29,68,119,0.15); }
+  .task-bar__list li:first-child { border-top: 0; }
+  .task-bar__list a { display: block; padding: 0.65rem 0; font-size: 0.9375rem; }
 }
 
 @media (max-width: 400px) {
