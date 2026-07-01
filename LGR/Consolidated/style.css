@@ -243,6 +243,87 @@ a:hover { color: var(--blue-dark); }
   color: var(--blue-light);
 }
 
+/* ---- Hero search ---- */
+.hero-search { margin-top: 1.5rem; max-width: 560px; }
+.hero-search__label {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.hero-search__row { display: flex; }
+.hero-search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--white);
+  border: 2px solid var(--white);
+  border-right: 0;
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+.hero-search__input::placeholder { color: var(--text-muted); }
+.hero-search__input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 0;
+  z-index: 1;
+}
+.hero-search__btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.75rem 1.15rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--green);
+  border: 2px solid var(--green);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  cursor: pointer;
+}
+.hero-search__btn:hover { background: #005a30; border-color: #005a30; }
+.hero-search__btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+/* ---- Popular tasks shortcut row ---- */
+.task-bar { background: var(--blue-xlight); border-bottom: 1px solid var(--border); }
+.task-bar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+.task-bar__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin: 0;
+  white-space: nowrap;
+}
+.task-bar__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+.task-bar__list a {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--blue-mid);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-decoration: none;
+}
+.task-bar__list a:hover { background: var(--blue-mid); color: var(--white); border-color: var(--blue-mid); }
+.task-bar__list a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
 /* =====================
    Main grid
    ===================== */
