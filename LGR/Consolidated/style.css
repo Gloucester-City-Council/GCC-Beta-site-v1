@@ -895,3 +895,21 @@ details[open] summary::before { transform: rotate(90deg); }
 /* About/Contact: keep intro paragraph line-length readable */
 .page-body > p { max-width: 760px; }
 .page-body > .lead { margin-bottom: 1rem; }
+
+/* =====================================================
+   News listing and articles
+   ===================================================== */
+.news-feed { display: grid; gap: 1rem; margin-top: 1rem; max-width: 760px; }
+.news-article-card { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: var(--radius); padding: 1.1rem 1.25rem; }
+.news-article-card time { display: block; font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+.news-article-card h2 { font-size: 1.125rem; margin-bottom: 0.35rem; }
+.news-article-card h2 a { color: var(--blue-dark); text-decoration: none; }
+.news-article-card h2 a:hover { text-decoration: underline; }
+.news-article-card p { font-size: 0.9375rem; color: var(--text-muted); }
+
+.article-meta { color: var(--text-muted); font-size: 0.9375rem; margin-bottom: 1.25rem; }
+.article-body { max-width: 760px; }
+.article-body p { margin-bottom: 1rem; }
+.article-body h2 { font-size: 1.25rem; color: var(--blue-dark); margin: 1.75rem 0 0.6rem; }
+.article-body ul { max-width: 760px; padding-left: 1.25rem; margin-bottom: 1rem; }
+.article-body li { margin-bottom: 0.4rem; }
