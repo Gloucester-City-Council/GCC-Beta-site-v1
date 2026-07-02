@@ -54,11 +54,13 @@
 
     var service = tier === 'county' ? COUNTY : district;
     var desc    = tier === 'county' ? COUNTY.desc : DISTRICT_DESC;
-    var lead    = tier === 'county' ? 'County' : 'District';
+    var lead    = tier === 'county'
+      ? 'This service hasn’t moved to our website yet. It’s still on the former county council’s website:'
+      : 'This service hasn’t moved to our website yet. For <strong>' + district.label +
+        '</strong>, it’s still on the former district council’s website:';
 
     resultBody.innerHTML =
-      '<p class="result-card__lead">' + lead +
-      ' services for <strong>' + district.label + '</strong> are handled by:</p>' +
+      '<p class="result-card__lead">' + lead + '</p>' +
       '<p class="result-card__name">' + service.name + '</p>' +
       '<p class="result-card__desc">' + desc + '</p>' +
       '<a class="btn" href="' + service.url + '" target="_blank" rel="noopener">' +
