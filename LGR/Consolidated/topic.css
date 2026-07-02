@@ -1,36 +1,12 @@
 /* =============================================
-   Council tax page — supplemental styles
-   Builds on top of style.css
+   Topic pages — supplemental styles
+   Builds on top of ../style.css. Used by every
+   Consolidated service page (hubs, topic details
+   and county-wide pages).
    ============================================= */
 
 /* Ensure [hidden] attribute works even when CSS sets display on the element */
 [hidden] { display: none !important; }
-
-/* ---- Breadcrumb ---- */
-.breadcrumb {
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
-  padding: 0.5rem 0;
-  font-size: 0.8125rem;
-}
-
-.breadcrumb ol {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  align-items: center;
-}
-
-.breadcrumb li + li::before {
-  content: "›";
-  margin-right: 0.25rem;
-  color: var(--text-muted);
-}
-
-.breadcrumb a { color: var(--blue-mid); text-decoration: none; }
-.breadcrumb a:hover { text-decoration: underline; }
-.breadcrumb [aria-current] { color: var(--text-muted); }
 
 /* ---- CT hero ---- */
 .ct-hero {
@@ -58,18 +34,6 @@
   max-width: 860px;
   width: 100%;
 }
-
-/* ---- Back link (topic detail pages) ---- */
-.ct-back {
-  margin-bottom: 1rem;
-  font-size: 0.9375rem;
-}
-.ct-back a {
-  color: var(--blue-mid);
-  text-decoration: none;
-  font-weight: 600;
-}
-.ct-back a:hover { text-decoration: underline; }
 
 /* ---- Area picker ---- */
 .ct-picker-wrap {
@@ -301,6 +265,9 @@
   border-left: 4px solid var(--blue-mid);
   color: var(--text);
 }
+
+/* Note used as a page-top banner (county-wide service pages) */
+.ct-note--top { margin: 0 0 1.5rem; }
 
 /* ---- Related services (county pages) ---- */
 .ct-related {

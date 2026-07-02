@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Children, young people and families – Newstershire Council</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="council-tax.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle cx='26' cy='26' r='26' fill='%231d4477'/><path d='M10 36 Q18 18 26 22 Q34 18 42 36 Z' fill='%23c8a951' opacity='.9'/><path d='M18 36 Q22 26 26 28 Q30 26 34 36 Z' fill='%23ffffff' opacity='.85'/></svg>">
+  <link rel="stylesheet" href="topic.css">
 </head>
 <body>
 
@@ -28,7 +29,7 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <div class="logo-lockup">
-        <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:0.75rem;">
+        <a href="index.html">
           <svg class="logo-icon" aria-hidden="true" focusable="false" width="52" height="52" viewBox="0 0 52 52">
             <circle cx="26" cy="26" r="26" fill="#1d4477"/>
             <path d="M10 36 Q18 18 26 22 Q34 18 42 36 Z" fill="#c8a951" opacity="0.9"/>
@@ -75,7 +76,7 @@
   <main id="main-content">
     <div class="container ct-layout">
 
-      <div class="ct-note ct-note--info" style="margin-bottom:1.5rem;">
+      <div class="ct-note ct-note--info ct-note--top">
         This is a <strong>county-wide service</strong>, run once for the whole of Gloucestershire (previously by Gloucestershire County Council). It works the same wherever you live in the county.
       </div>
 
@@ -118,12 +119,10 @@
         <ul>
           <li><a href="county-adult-social-care.html">Adult social care</a></li>
           <li><a href="county-blue-badges.html">Blue Badges &amp; travel</a></li>
-          <li><a href="county-childrens-services.html">Children, young people &amp; families</a></li>
           <li><a href="county-highways.html">Highways &amp; roads</a></li>
           <li><a href="county-libraries.html">Libraries</a></li>
           <li><a href="county-registrars.html">Registrars</a></li>
           <li><a href="county-school-admissions.html">School admissions</a></li>
-        
         </ul>
       </nav>
 
@@ -182,7 +181,6 @@
           <ul>
             <li><a href="county-adult-social-care.html">Adult social care</a></li>
             <li><a href="county-blue-badges.html">Blue Badges</a></li>
-            <li><a href="county-childrens-services.html">Children &amp; families</a></li>
             <li><a href="county-highways.html">Highways &amp; roads</a></li>
             <li><a href="county-libraries.html">Libraries</a></li>
             <li><a href="county-registrars.html">Registrars</a></li>
@@ -208,17 +206,6 @@
     </div>
   </footer>
 
-  <script>
-    (function () {
-      var btn = document.querySelector('.nav-toggle');
-      var nav = document.getElementById('header-nav');
-      if (!btn || !nav) return;
-      btn.addEventListener('click', function () {
-        var open = nav.classList.toggle('header-nav--open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      });
-    }());
-  </script>
+  <script src="../site.js"></script>
 </body>
 </html>

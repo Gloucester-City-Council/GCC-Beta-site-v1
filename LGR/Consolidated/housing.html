@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Housing – Newstershire Council</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="council-tax.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle cx='26' cy='26' r='26' fill='%231d4477'/><path d='M10 36 Q18 18 26 22 Q34 18 42 36 Z' fill='%23c8a951' opacity='.9'/><path d='M18 36 Q22 26 26 28 Q30 26 34 36 Z' fill='%23ffffff' opacity='.85'/></svg>">
+  <link rel="stylesheet" href="topic.css">
 </head>
 <body>
 
@@ -29,7 +30,7 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <div class="logo-lockup">
-        <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:0.75rem;">
+        <a href="index.html">
           <svg class="logo-icon" aria-hidden="true" focusable="false" width="52" height="52" viewBox="0 0 52 52">
             <circle cx="26" cy="26" r="26" fill="#1d4477"/>
             <path d="M10 36 Q18 18 26 22 Q34 18 42 36 Z" fill="#c8a951" opacity="0.9"/>
@@ -86,7 +87,7 @@
             Select your area
           </label>
           <select id="ct-area-select" class="ct-picker__select">
-            <option value="">-- Choose your district or borough --</option>
+            <option value="">Choose your district or borough</option>
             <option value="cheltenham">Cheltenham</option>
             <option value="cotswold">Cotswold</option>
             <option value="forest-of-dean">Forest of Dean</option>
@@ -238,18 +239,7 @@
   </footer>
 
   <script src="../area-cookie.js"></script>
-  <script src="hub-landing.js"></script>
-  <script>
-    (function () {
-      var btn = document.querySelector('.nav-toggle');
-      var nav = document.getElementById('header-nav');
-      if (!btn || !nav) return;
-      btn.addEventListener('click', function () {
-        var open = nav.classList.toggle('header-nav--open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      });
-    }());
-  </script>
+  <script src="topic-page.js"></script>
+  <script src="../site.js"></script>
 </body>
 </html>

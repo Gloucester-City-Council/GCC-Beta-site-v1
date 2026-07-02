@@ -1,2 +1,0 @@
-Veneer website that is for a proof of concept post local government reorgansiation. That is branded to local goverment useual standards - for now call Newstershire Council
-It needs to be clear somehow that this is a new local unitary governament and ask whether they live in Cheltenham, Cotswold, Forest of Dean, Gloucester, Stroud, Tewkesbury. THen it needs to ask if its a county serivce or a district and then it provides two links. It also needs to fail open if javascript doesn't load.
