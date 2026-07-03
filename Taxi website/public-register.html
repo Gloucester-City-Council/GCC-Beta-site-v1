@@ -188,42 +188,57 @@
   details.about p { margin: var(--space-3) 0 var(--space-1); }
   details.about ul { margin: var(--space-2) 0; padding-left: var(--space-4); }
 
-  .controls {
-    background: var(--color-bg-default);
-    border: 1px solid var(--color-border-default);
-    border-radius: var(--radius);
-    padding: var(--space-4);
+  .category-cards {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--space-3);
-    align-items: end;
+    margin: var(--space-4) 0;
+    padding: 0;
+    list-style: none;
   }
-  .field--search { grid-column: span 6; }
-  .field--type { grid-column: span 3; }
-  .field--status { grid-column: span 3; }
+  .category-cards li { grid-column: span 4; }
   @media (max-width: 720px) {
-    .field--search, .field--type, .field--status { grid-column: span 12; }
+    .category-cards li { grid-column: span 12; }
   }
-  .field label {
-    display: block;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: var(--space-1);
-  }
-  .field input,
-  .field select {
+  .category-card {
     width: 100%;
     min-height: 44px;
-    padding: var(--space-2) var(--space-2);
-    border: 1px solid var(--color-border-default);
-    border-radius: 6px;
-    font-size: 1rem;
+    text-align: left;
     background: var(--color-bg-default);
+    border: 2px solid var(--color-border-default);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    font: inherit;
     color: var(--color-text-primary);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
   }
-  .field input:focus-visible,
-  .field select:focus-visible { border-color: var(--color-border-focus); }
-  .field small { display: block; color: var(--color-text-muted); margin-top: var(--space-1); }
+  .category-card:hover { border-color: var(--color-border-active); }
+  .category-card[aria-pressed="true"] {
+    border-color: var(--color-border-active);
+    background: var(--color-bg-emphasis);
+  }
+  .category-card__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+  .category-card__selected {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  .category-card__desc { color: var(--color-text-secondary); font-size: 0.9rem; }
+  .category-card__count { color: var(--color-text-muted); font-size: 0.85rem; }
+
+  .category-hint {
+    color: var(--color-text-secondary);
+  }
 
   .results-bar {
     display: flex;
@@ -234,17 +249,6 @@
     margin: var(--space-4) 0 var(--space-2);
   }
   .results-count { font-weight: 600; margin: 0; }
-  .reset-btn {
-    background: none;
-    border: 1px solid var(--color-border-default);
-    border-radius: 6px;
-    padding: 0 var(--space-3);
-    min-height: 44px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: var(--color-text-primary);
-  }
-  .reset-btn:hover { background: var(--color-bg-alt); }
 
   .table-wrap {
     background: var(--color-bg-default);
@@ -370,8 +374,7 @@
     <p>
       This register lists all currently and recently licensed hackney carriage
       and private hire drivers, vehicles and operators issued by Gloucester
-      City Council. Use the search and filters below to look up a licence by
-      plate or badge number, vehicle registration, make/model, or trading name.
+      City Council. Choose a category below to view its licensed records.
     </p>
   </div>
 
@@ -385,55 +388,58 @@
     </ul>
   </details>
 
-  <form id="filters" class="controls" role="search" autocomplete="off">
-    <div class="field field--search">
-      <label for="search-input">Search</label>
-      <input type="search" id="search-input" placeholder="Plate ref, vehicle reg, make/model or trading name">
-      <small>Search updates results as you type</small>
-    </div>
-    <div class="field field--type">
-      <label for="type-filter">Licence type</label>
-      <select id="type-filter">
-        <option value="">All types</option>
-      </select>
-    </div>
-    <div class="field field--status">
-      <label for="status-filter">Expiry status</label>
-      <select id="status-filter">
-        <option value="">All licences</option>
-        <option value="active">Active</option>
-        <option value="expiring">Expiring within 30 days</option>
-        <option value="expired">Expired</option>
-      </select>
-    </div>
-  </form>
+  <ul class="category-cards" id="category-cards">
+    <li>
+      <button type="button" class="category-card" id="category-drivers" data-category="drivers" aria-pressed="false">
+        <span class="category-card__title">Drivers <span class="category-card__selected" hidden>Selected</span></span>
+        <span class="category-card__desc">Hackney carriage and private hire drivers</span>
+        <span class="category-card__count" id="count-drivers">Loading&hellip;</span>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="category-card" id="category-vehicles" data-category="vehicles" aria-pressed="false">
+        <span class="category-card__title">Vehicles <span class="category-card__selected" hidden>Selected</span></span>
+        <span class="category-card__desc">Hackney carriage and private hire vehicles</span>
+        <span class="category-card__count" id="count-vehicles">Loading&hellip;</span>
+      </button>
+    </li>
+    <li>
+      <button type="button" class="category-card" id="category-operators" data-category="operators" aria-pressed="false">
+        <span class="category-card__title">Operators <span class="category-card__selected" hidden>Selected</span></span>
+        <span class="category-card__desc">Private hire operators</span>
+        <span class="category-card__count" id="count-operators">Loading&hellip;</span>
+      </button>
+    </li>
+  </ul>
 
-  <div class="results-bar">
-    <p class="results-count" id="results-count" aria-live="polite">Loading register&hellip;</p>
-    <button type="button" class="reset-btn" id="reset-filters">Clear filters</button>
-  </div>
+  <p class="category-hint" id="category-hint">Select a category above to view its licence records.</p>
 
-  <div class="table-wrap">
-    <table id="register-table">
-      <caption>Licensed hackney carriage and private hire drivers, vehicles and operators</caption>
-      <thead>
-        <tr>
-          <th scope="col" data-key="plate_ref"><button type="button">Plate / badge no. <span class="sort-arrow" data-for="plate_ref"></span></button></th>
-          <th scope="col" data-key="licence_type"><button type="button">Licence type <span class="sort-arrow" data-for="licence_type"></span></button></th>
-          <th scope="col" data-key="vehicle_reg_no"><button type="button">Vehicle reg. <span class="sort-arrow" data-for="vehicle_reg_no"></span></button></th>
-          <th scope="col">Make / model</th>
-          <th scope="col" data-key="trading_as"><button type="button">Trading as <span class="sort-arrow" data-for="trading_as"></span></button></th>
-          <th scope="col" data-key="issued_date"><button type="button">Issued <span class="sort-arrow" data-for="issued_date"></span></button></th>
-          <th scope="col" data-key="expiry_date"><button type="button">Expiry <span class="sort-arrow" data-for="expiry_date"></span></button></th>
-        </tr>
-      </thead>
-      <tbody id="register-body">
-        <tr><td colspan="7" class="no-results">Loading register&hellip;</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <section id="register-section" hidden>
+    <div class="results-bar">
+      <p class="results-count" id="results-count" aria-live="polite"></p>
+    </div>
 
-  <nav class="pagination" id="pagination" aria-label="Register results pages"></nav>
+    <div class="table-wrap">
+      <table id="register-table">
+        <caption id="register-caption">Licensed hackney carriage and private hire drivers, vehicles and operators</caption>
+        <thead>
+          <tr>
+            <th scope="col" data-key="plate_ref"><button type="button">Plate / badge no. <span class="sort-arrow" data-for="plate_ref"></span></button></th>
+            <th scope="col" data-key="licence_type"><button type="button">Licence type <span class="sort-arrow" data-for="licence_type"></span></button></th>
+            <th scope="col" data-key="vehicle_reg_no"><button type="button">Vehicle reg. <span class="sort-arrow" data-for="vehicle_reg_no"></span></button></th>
+            <th scope="col">Make / model</th>
+            <th scope="col" data-key="trading_as"><button type="button">Trading as <span class="sort-arrow" data-for="trading_as"></span></button></th>
+            <th scope="col" data-key="issued_date"><button type="button">Issued <span class="sort-arrow" data-for="issued_date"></span></button></th>
+            <th scope="col" data-key="expiry_date"><button type="button">Expiry <span class="sort-arrow" data-for="expiry_date"></span></button></th>
+          </tr>
+        </thead>
+        <tbody id="register-body">
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="pagination" id="pagination" aria-label="Register results pages"></nav>
+  </section>
 </main>
 
 <footer>
@@ -450,22 +456,29 @@
   var PAGE_SIZE = 50;
   var CONTRAST_KEY = 'gcc-contrast-mode';
 
+  var CATEGORIES = {
+    drivers: { label: 'Drivers', types: ['Hackney carriage driver', 'Private hire driver'] },
+    vehicles: { label: 'Vehicles', types: ['Hackney carriage vehicle', 'Private hire vehicle'] },
+    operators: { label: 'Operators', types: ['Private hire operator'] }
+  };
+
   var state = {
     records: [],
     filtered: [],
+    category: null,
     page: 1,
     sortKey: 'plate_ref',
     sortDir: 'asc'
   };
 
   var els = {
-    search: document.getElementById('search-input'),
-    typeFilter: document.getElementById('type-filter'),
-    statusFilter: document.getElementById('status-filter'),
+    cards: document.querySelectorAll('.category-card'),
+    categoryHint: document.getElementById('category-hint'),
+    registerSection: document.getElementById('register-section'),
+    registerCaption: document.getElementById('register-caption'),
     resultsCount: document.getElementById('results-count'),
     body: document.getElementById('register-body'),
     pagination: document.getElementById('pagination'),
-    resetBtn: document.getElementById('reset-filters'),
     sourceFile: document.getElementById('source-file'),
     table: document.getElementById('register-table'),
     contrastToggle: document.getElementById('contrast-toggle')
@@ -503,24 +516,6 @@
     return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
   }
 
-  function daysUntil(iso) {
-    if (!iso) return null;
-    var parts = iso.split('-');
-    if (parts.length !== 3) return null;
-    var target = Date.UTC(+parts[0], +parts[1] - 1, +parts[2]);
-    var now = new Date();
-    var today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
-    return Math.round((target - today) / 86400000);
-  }
-
-  function statusFor(record) {
-    var d = daysUntil(record.expiry_date);
-    if (d === null) return 'active';
-    if (d < 0) return 'expired';
-    if (d <= 30) return 'expiring';
-    return 'active';
-  }
-
   function escapeHtml(value) {
     if (value === null || value === undefined) return '';
     return String(value)
@@ -529,31 +524,33 @@
       .replace(/>/g, '&gt;');
   }
 
-  function populateTypeFilter(records) {
-    var types = Array.from(new Set(records.map(function (r) { return r.licence_type; }).filter(Boolean))).sort();
-    types.forEach(function (type) {
-      var opt = document.createElement('option');
-      opt.value = type;
-      opt.textContent = type;
-      els.typeFilter.appendChild(opt);
+  function updateCategoryCounts() {
+    Object.keys(CATEGORIES).forEach(function (key) {
+      var count = state.records.filter(function (r) {
+        return CATEGORIES[key].types.indexOf(r.licence_type) !== -1;
+      }).length;
+      var countEl = document.getElementById('count-' + key);
+      countEl.textContent = count + ' licence' + (count === 1 ? '' : 's');
     });
   }
 
-  function applyFilters() {
-    var query = els.search.value.trim().toLowerCase();
-    var type = els.typeFilter.value;
-    var status = els.statusFilter.value;
+  function selectCategory(key) {
+    state.category = key;
 
-    state.filtered = state.records.filter(function (r) {
-      if (type && r.licence_type !== type) return false;
-      if (status && statusFor(r) !== status) return false;
-      if (query) {
-        var haystack = [r.plate_ref, r.vehicle_reg_no, r.vehicle_make, r.vehicle_model, r.trading_as]
-          .filter(Boolean).join(' ').toLowerCase();
-        if (haystack.indexOf(query) === -1) return false;
-      }
-      return true;
+    els.cards.forEach(function (card) {
+      var isSelected = card.dataset.category === key;
+      card.setAttribute('aria-pressed', String(isSelected));
+      card.querySelector('.category-card__selected').hidden = !isSelected;
     });
+
+    var types = CATEGORIES[key].types;
+    state.filtered = state.records.filter(function (r) {
+      return types.indexOf(r.licence_type) !== -1;
+    });
+
+    els.registerCaption.textContent = 'Licensed ' + CATEGORIES[key].label.toLowerCase();
+    els.categoryHint.hidden = true;
+    els.registerSection.hidden = false;
 
     sortFiltered();
     state.page = 1;
@@ -593,8 +590,8 @@
     var pageItems = state.filtered.slice(start, start + PAGE_SIZE);
 
     if (total === 0) {
-      els.resultsCount.textContent = 'No licences match your search.';
-      els.body.innerHTML = '<tr><td colspan="7" class="no-results">No matching licences found. Try clearing a filter or checking your spelling.</td></tr>';
+      els.resultsCount.textContent = 'No licences found in this category.';
+      els.body.innerHTML = '<tr><td colspan="7" class="no-results">No licences found in this category.</td></tr>';
       els.pagination.innerHTML = '';
       return;
     }
@@ -651,24 +648,11 @@
     });
   });
 
-  els.search.addEventListener('input', debounce(applyFilters, 200));
-  els.typeFilter.addEventListener('change', applyFilters);
-  els.statusFilter.addEventListener('change', applyFilters);
-  els.resetBtn.addEventListener('click', function () {
-    els.search.value = '';
-    els.typeFilter.value = '';
-    els.statusFilter.value = '';
-    applyFilters();
+  els.cards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      selectCategory(card.dataset.category);
+    });
   });
-
-  function debounce(fn, wait) {
-    var timer;
-    return function () {
-      clearTimeout(timer);
-      var args = arguments;
-      timer = setTimeout(function () { fn.apply(null, args); }, wait);
-    };
-  }
 
   initContrastToggle();
 
@@ -680,16 +664,13 @@
     .then(function (data) {
       state.records = data.records || [];
       if (data.source_file) els.sourceFile.textContent = data.source_file;
-      populateTypeFilter(state.records);
-      state.filtered = state.records.slice();
-      sortFiltered();
-      render();
+      updateCategoryCounts();
     })
     .catch(function (err) {
-      els.resultsCount.textContent = 'Unable to load the register.';
-      els.body.innerHTML = '<tr><td colspan="7" class="load-error">' +
-        'Sorry, the public register could not be loaded (' + escapeHtml(err.message) + '). ' +
-        'Please try again later or contact licensing@gloucester.gov.uk.</td></tr>';
+      els.cards.forEach(function (card) { card.disabled = true; });
+      els.categoryHint.textContent = 'Sorry, the public register could not be loaded (' + err.message + '). ' +
+        'Please try again later or contact licensing@gloucester.gov.uk.';
+      els.categoryHint.classList.add('load-error');
     });
 })();
 </script>
