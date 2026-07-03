@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taxi &amp; Private Hire Public Register | Gloucester City Council</title>
+<meta name="description" content="Search the public register of licensed hackney carriage and private hire drivers, vehicles and operators for Gloucester.">
+<style>
+  :root {
+    --navy: #10263f;
+    --blue: #1d4477;
+    --blue-light: #eef3f9;
+    --gold: #c8a951;
+    --green: #1c7a4d;
+    --red: #b3261e;
+    --grey-50: #f7f8fa;
+    --grey-100: #eceef1;
+    --grey-300: #c7ccd3;
+    --grey-600: #5b6570;
+    --grey-800: #2b323a;
+    --radius: 8px;
+    --focus: 3px solid #ffbf47;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    color: var(--grey-800);
+    background: var(--grey-50);
+    line-height: 1.5;
+  }
+
+  a { color: var(--blue); }
+
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: #fff;
+    padding: 0.75rem 1rem;
+    z-index: 100;
+  }
+  .skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+  *:focus-visible { outline: var(--focus); outline-offset: 2px; }
+
+  header.site-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 1.25rem 1rem;
+  }
+  .site-header__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .site-header__inner svg { flex-shrink: 0; }
+  .site-header__inner h1 {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+  .site-header__inner p {
+    margin: 0.15rem 0 0;
+    font-size: 0.85rem;
+    color: #cfd9e6;
+  }
+
+  .breadcrumb {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem 0;
+    font-size: 0.85rem;
+    color: var(--grey-600);
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .intro { max-width: 70ch; }
+  .intro h2 { margin-top: 0; }
+
+  details.about {
+    background: #fff;
+    border: 1px solid var(--grey-300);
+    border-radius: var(--radius);
+    padding: 0.9rem 1.1rem;
+    margin: 1.25rem 0 1.75rem;
+  }
+  details.about summary { font-weight: 600; cursor: pointer; }
+  details.about p { margin: 0.75rem 0 0.25rem; }
+  details.about ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+
+  .controls {
+    background: #fff;
+    border: 1px solid var(--grey-300);
+    border-radius: var(--radius);
+    padding: 1.1rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 0.9rem;
+    align-items: end;
+  }
+  @media (max-width: 720px) {
+    .controls { grid-template-columns: 1fr; }
+  }
+  .field label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+  .field input,
+  .field select {
+    width: 100%;
+    padding: 0.55rem 0.6rem;
+    border: 1px solid var(--grey-300);
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #fff;
+  }
+  .field small { display: block; color: var(--grey-600); margin-top: 0.3rem; }
+
+  .results-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.1rem 0 0.6rem;
+  }
+  .results-count { font-weight: 600; }
+  .reset-btn {
+    background: none;
+    border: 1px solid var(--grey-300);
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  .reset-btn:hover { background: var(--grey-100); }
+
+  .table-wrap {
+    background: #fff;
+    border: 1px solid var(--grey-300);
+    border-radius: var(--radius);
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    min-width: 780px;
+  }
+  caption { text-align: left; padding: 0.75rem 1rem 0; font-size: 0.85rem; color: var(--grey-600); }
+
+  thead th {
+    text-align: left;
+    background: var(--blue-light);
+    padding: 0.7rem 0.8rem;
+    border-bottom: 2px solid var(--grey-300);
+    white-space: nowrap;
+  }
+  thead th button {
+    background: none;
+    border: none;
+    font: inherit;
+    font-weight: 700;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  thead th button:hover { text-decoration: underline; }
+  .sort-arrow { font-size: 0.7rem; opacity: 0.6; }
+  .sort-arrow.active { opacity: 1; }
+
+  tbody td {
+    padding: 0.65rem 0.8rem;
+    border-bottom: 1px solid var(--grey-100);
+    vertical-align: top;
+  }
+  tbody tr:hover { background: var(--grey-50); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge--active { background: #e4f3ea; color: var(--green); }
+  .badge--expiring { background: #fdf1dc; color: #8a5a00; }
+  .badge--expired { background: #fbe9e8; color: var(--red); }
+
+  .no-results, .load-error {
+    padding: 2rem 1.2rem;
+    text-align: center;
+    color: var(--grey-600);
+  }
+  .load-error { color: var(--red); }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.1rem 0;
+    flex-wrap: wrap;
+  }
+  .pagination button {
+    background: #fff;
+    border: 1px solid var(--grey-300);
+    border-radius: 6px;
+    padding: 0.4rem 0.85rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  .pagination button:disabled { opacity: 0.45; cursor: not-allowed; }
+  .pagination button:not(:disabled):hover { background: var(--grey-100); }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+    color: var(--grey-600);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--blue); }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <svg aria-hidden="true" width="44" height="44" viewBox="0 0 52 52">
+      <circle cx="26" cy="26" r="26" fill="#1d4477"/>
+      <path d="M10 36 Q18 18 26 22 Q34 18 42 36 Z" fill="#c8a951" opacity="0.9"/>
+      <path d="M18 36 Q22 26 26 28 Q30 26 34 36 Z" fill="#ffffff" opacity="0.85"/>
+      <rect x="23" y="36" width="6" height="5" rx="1" fill="#ffffff" opacity="0.7"/>
+    </svg>
+    <div>
+      <h1>Gloucester City Council</h1>
+      <p>Taxi &amp; private hire licensing</p>
+    </div>
+  </div>
+</header>
+
+<p class="breadcrumb">
+  <a href="index.html">Taxi &amp; private hire licensing</a> &rsaquo; Public register
+</p>
+
+<main id="main-content">
+  <div class="intro">
+    <h2>Taxi &amp; private hire public register</h2>
+    <p>
+      This register lists all currently and recently licensed hackney carriage
+      and private hire drivers, vehicles and operators issued by Gloucester
+      City Council. Use the search and filters below to look up a licence by
+      plate or badge number, vehicle registration, make/model, or trading name.
+    </p>
+  </div>
+
+  <details class="about">
+    <summary>About this register</summary>
+    <p>Data source: <code id="source-file">LIC_Public_Register.json</code></p>
+    <ul>
+      <li>Records are provided for information only and may not reflect changes made since the last update.</li>
+      <li>A licence showing as "Expired" may since have been renewed &ndash; contact the licensing team to confirm current status.</li>
+      <li>To report a concern about a licensed driver, vehicle or operator, contact the Licensing Team on 01452 396396 or <a href="mailto:licensing@gloucester.gov.uk">licensing@gloucester.gov.uk</a>.</li>
+    </ul>
+  </details>
+
+  <form id="filters" class="controls" role="search" autocomplete="off">
+    <div class="field">
+      <label for="search-input">Search</label>
+      <input type="search" id="search-input" placeholder="Plate ref, vehicle reg, make/model or trading name">
+      <small>Search updates results as you type</small>
+    </div>
+    <div class="field">
+      <label for="type-filter">Licence type</label>
+      <select id="type-filter">
+        <option value="">All types</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="status-filter">Status</label>
+      <select id="status-filter">
+        <option value="">All statuses</option>
+        <option value="active">Active</option>
+        <option value="expiring">Expiring within 30 days</option>
+        <option value="expired">Expired</option>
+      </select>
+    </div>
+  </form>
+
+  <div class="results-bar">
+    <p class="results-count" id="results-count" aria-live="polite">Loading register&hellip;</p>
+    <button type="button" class="reset-btn" id="reset-filters">Clear filters</button>
+  </div>
+
+  <div class="table-wrap">
+    <table id="register-table">
+      <caption>Licensed hackney carriage and private hire drivers, vehicles and operators</caption>
+      <thead>
+        <tr>
+          <th scope="col" data-key="plate_ref"><button type="button">Plate / badge no. <span class="sort-arrow" data-for="plate_ref"></span></button></th>
+          <th scope="col" data-key="licence_type"><button type="button">Licence type <span class="sort-arrow" data-for="licence_type"></span></button></th>
+          <th scope="col" data-key="vehicle_reg_no"><button type="button">Vehicle reg. <span class="sort-arrow" data-for="vehicle_reg_no"></span></button></th>
+          <th scope="col">Make / model</th>
+          <th scope="col" data-key="trading_as"><button type="button">Trading as <span class="sort-arrow" data-for="trading_as"></span></button></th>
+          <th scope="col" data-key="issued_date"><button type="button">Issued <span class="sort-arrow" data-for="issued_date"></span></button></th>
+          <th scope="col" data-key="expiry_date"><button type="button">Expiry <span class="sort-arrow" data-for="expiry_date"></span></button></th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody id="register-body">
+        <tr><td colspan="8" class="no-results">Loading register&hellip;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <nav class="pagination" id="pagination" aria-label="Register results pages"></nav>
+</main>
+
+<footer>
+  <p>
+    Licensing Team, Gloucester City Council, Eastgate Management Suite,
+    Eastgate Street, Gloucester GL1 1PA &middot; 01452 396396 &middot;
+    <a href="mailto:licensing@gloucester.gov.uk">licensing@gloucester.gov.uk</a>
+  </p>
+</footer>
+
+<script>
+(function () {
+  var DATA_URL = 'PublicRegister/LIC_Public_Register.json';
+  var PAGE_SIZE = 50;
+
+  var state = {
+    records: [],
+    filtered: [],
+    page: 1,
+    sortKey: 'plate_ref',
+    sortDir: 'asc'
+  };
+
+  var els = {
+    search: document.getElementById('search-input'),
+    typeFilter: document.getElementById('type-filter'),
+    statusFilter: document.getElementById('status-filter'),
+    resultsCount: document.getElementById('results-count'),
+    body: document.getElementById('register-body'),
+    pagination: document.getElementById('pagination'),
+    resetBtn: document.getElementById('reset-filters'),
+    sourceFile: document.getElementById('source-file'),
+    table: document.getElementById('register-table')
+  };
+
+  function formatDate(iso) {
+    if (!iso) return '&ndash;';
+    var parts = iso.split('-');
+    if (parts.length !== 3) return iso;
+    var d = new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2]));
+    if (isNaN(d.getTime())) return iso;
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  }
+
+  function daysUntil(iso) {
+    if (!iso) return null;
+    var parts = iso.split('-');
+    if (parts.length !== 3) return null;
+    var target = Date.UTC(+parts[0], +parts[1] - 1, +parts[2]);
+    var now = new Date();
+    var today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.round((target - today) / 86400000);
+  }
+
+  function statusFor(record) {
+    var d = daysUntil(record.expiry_date);
+    if (d === null) return 'active';
+    if (d < 0) return 'expired';
+    if (d <= 30) return 'expiring';
+    return 'active';
+  }
+
+  function statusBadge(status) {
+    var labels = { active: 'Active', expiring: 'Expiring soon', expired: 'Expired' };
+    return '<span class="badge badge--' + status + '">' + labels[status] + '</span>';
+  }
+
+  function escapeHtml(value) {
+    if (value === null || value === undefined) return '';
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function populateTypeFilter(records) {
+    var types = Array.from(new Set(records.map(function (r) { return r.licence_type; }).filter(Boolean))).sort();
+    types.forEach(function (type) {
+      var opt = document.createElement('option');
+      opt.value = type;
+      opt.textContent = type;
+      els.typeFilter.appendChild(opt);
+    });
+  }
+
+  function applyFilters() {
+    var query = els.search.value.trim().toLowerCase();
+    var type = els.typeFilter.value;
+    var status = els.statusFilter.value;
+
+    state.filtered = state.records.filter(function (r) {
+      if (type && r.licence_type !== type) return false;
+      if (status && statusFor(r) !== status) return false;
+      if (query) {
+        var haystack = [r.plate_ref, r.vehicle_reg_no, r.vehicle_make, r.vehicle_model, r.trading_as]
+          .filter(Boolean).join(' ').toLowerCase();
+        if (haystack.indexOf(query) === -1) return false;
+      }
+      return true;
+    });
+
+    sortFiltered();
+    state.page = 1;
+    render();
+  }
+
+  function sortFiltered() {
+    var key = state.sortKey;
+    var dir = state.sortDir === 'asc' ? 1 : -1;
+    state.filtered.sort(function (a, b) {
+      var av = a[key] === null || a[key] === undefined ? '' : a[key];
+      var bv = b[key] === null || b[key] === undefined ? '' : b[key];
+      if (av < bv) return -1 * dir;
+      if (av > bv) return 1 * dir;
+      return 0;
+    });
+  }
+
+  function updateSortIndicators() {
+    document.querySelectorAll('.sort-arrow').forEach(function (span) {
+      span.classList.remove('active');
+      span.textContent = '';
+      if (span.dataset.for === state.sortKey) {
+        span.classList.add('active');
+        span.textContent = state.sortDir === 'asc' ? '▲' : '▼';
+      }
+    });
+  }
+
+  function render() {
+    updateSortIndicators();
+    var total = state.filtered.length;
+    var pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    if (state.page > pageCount) state.page = pageCount;
+
+    var start = (state.page - 1) * PAGE_SIZE;
+    var pageItems = state.filtered.slice(start, start + PAGE_SIZE);
+
+    if (total === 0) {
+      els.resultsCount.textContent = 'No licences match your search.';
+      els.body.innerHTML = '<tr><td colspan="8" class="no-results">No matching licences found. Try clearing a filter or checking your spelling.</td></tr>';
+      els.pagination.innerHTML = '';
+      return;
+    }
+
+    els.resultsCount.textContent = 'Showing ' + (start + 1) + '–' + Math.min(start + PAGE_SIZE, total) + ' of ' + total + ' licences';
+
+    els.body.innerHTML = pageItems.map(function (r) {
+      var makeModel = [r.vehicle_make, r.vehicle_model].filter(Boolean).join(' ');
+      return '<tr>' +
+        '<td>' + escapeHtml(r.plate_ref) + '</td>' +
+        '<td>' + escapeHtml(r.licence_type) + '</td>' +
+        '<td>' + escapeHtml(r.vehicle_reg_no) + '</td>' +
+        '<td>' + escapeHtml(makeModel) + '</td>' +
+        '<td>' + escapeHtml(r.trading_as) + '</td>' +
+        '<td>' + formatDate(r.issued_date) + '</td>' +
+        '<td>' + formatDate(r.expiry_date) + '</td>' +
+        '<td>' + statusBadge(statusFor(r)) + '</td>' +
+        '</tr>';
+    }).join('');
+
+    renderPagination(pageCount);
+  }
+
+  function renderPagination(pageCount) {
+    if (pageCount <= 1) { els.pagination.innerHTML = ''; return; }
+    var html = '';
+    html += '<button type="button" id="page-prev" ' + (state.page === 1 ? 'disabled' : '') + '>Previous</button>';
+    html += '<span>Page ' + state.page + ' of ' + pageCount + '</span>';
+    html += '<button type="button" id="page-next" ' + (state.page === pageCount ? 'disabled' : '') + '>Next</button>';
+    els.pagination.innerHTML = html;
+
+    var prev = document.getElementById('page-prev');
+    var next = document.getElementById('page-next');
+    if (prev) prev.addEventListener('click', function () { state.page--; render(); scrollToTable(); });
+    if (next) next.addEventListener('click', function () { state.page++; render(); scrollToTable(); });
+  }
+
+  function scrollToTable() {
+    document.querySelector('.table-wrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  els.table.querySelectorAll('thead th[data-key] button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var key = btn.closest('th').dataset.key;
+      if (state.sortKey === key) {
+        state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        state.sortKey = key;
+        state.sortDir = 'asc';
+      }
+      sortFiltered();
+      state.page = 1;
+      render();
+    });
+  });
+
+  els.search.addEventListener('input', debounce(applyFilters, 200));
+  els.typeFilter.addEventListener('change', applyFilters);
+  els.statusFilter.addEventListener('change', applyFilters);
+  els.resetBtn.addEventListener('click', function () {
+    els.search.value = '';
+    els.typeFilter.value = '';
+    els.statusFilter.value = '';
+    applyFilters();
+  });
+
+  function debounce(fn, wait) {
+    var timer;
+    return function () {
+      clearTimeout(timer);
+      var args = arguments;
+      timer = setTimeout(function () { fn.apply(null, args); }, wait);
+    };
+  }
+
+  fetch(DATA_URL)
+    .then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      state.records = data.records || [];
+      if (data.source_file) els.sourceFile.textContent = data.source_file;
+      populateTypeFilter(state.records);
+      state.filtered = state.records.slice();
+      sortFiltered();
+      render();
+    })
+    .catch(function (err) {
+      els.resultsCount.textContent = 'Unable to load the register.';
+      els.body.innerHTML = '<tr><td colspan="8" class="load-error">' +
+        'Sorry, the public register could not be loaded (' + escapeHtml(err.message) + '). ' +
+        'Please try again later or contact licensing@gloucester.gov.uk.</td></tr>';
+    });
+})();
+</script>
+
+</body>
+</html>
