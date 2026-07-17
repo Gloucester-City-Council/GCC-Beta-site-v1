@@ -1,5 +1,6 @@
 /* =============================================
-   Newstershire Council – shared stylesheet
+   Gloucestershire Council – shared stylesheet
+   TEST SITE – proofs of concept only, not live.
    Used by both LGR proofs of concept (Veneer and
    Consolidated) so the two sites look identical.
    LGR brand palette / GOV.UK-influenced layout
@@ -80,6 +81,36 @@ a:hover { color: var(--blue-dark); }
   max-width: var(--max-w);
   margin: 0 auto;
   padding: 0 1.25rem;
+}
+
+/* =====================
+   Test-site banner
+   ===================== */
+.test-banner {
+  background: var(--gold-light);
+  border-bottom: 3px solid var(--gold);
+  color: var(--text);
+  font-size: 0.875rem;
+}
+
+.test-banner__inner {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
+.test-banner__tag {
+  flex-shrink: 0;
+  background: var(--blue-dark);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius);
 }
 
 /* =====================

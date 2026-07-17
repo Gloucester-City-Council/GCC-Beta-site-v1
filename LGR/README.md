@@ -1,7 +1,11 @@
 # LGR proofs of concept
 
-Two variations on a post-reorganisation website for a new unitary council
-("Newstershire Council"). They share one brand and look identical — the
+> **Test site** — these are prototypes produced for local government
+> reorganisation planning. They are **not** live Gloucestershire Council
+> websites; content, services and contact details are placeholders.
+
+Two variations on a post-reorganisation website for the new unitary council
+("Gloucestershire Council"). They share one brand and look identical — the
 difference is how much content has moved across:
 
 - **Veneer/** — a thin front door. The home page asks where you live and
