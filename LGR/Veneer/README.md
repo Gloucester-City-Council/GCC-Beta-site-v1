@@ -1,8 +1,9 @@
 # Veneer proof of concept
 
-A proof-of-concept website for a new unitary council after local government
+A proof-of-concept website for the new unitary council after local government
 reorganisation, branded to the usual local government standards — called
-Newstershire Council for now.
+Gloucestershire Council. This is a test site, not a live service; every page
+carries a test-site banner and placeholder contact details.
 
 Requirements:
 
