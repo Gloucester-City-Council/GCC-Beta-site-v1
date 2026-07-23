@@ -50,7 +50,8 @@
       "*.woff2",
       "*.ttf",
       "*.eot",
-      "*.html"
+      "*.html",
+      "/Taxi website/Webpages/*.html"
     ]
   },
   "responseOverrides": {
