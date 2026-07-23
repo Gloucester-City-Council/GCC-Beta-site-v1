@@ -136,7 +136,7 @@ a:focus-visible { color:var(--text) }
 .bc-list { list-style:none; display:flex; flex-wrap:wrap; gap:var(--sp1); font-size:var(--t-sm) }
 .bc-item { display:flex; align-items:center; gap:var(--sp1) }
 .bc-item+.bc-item::before { content:"›"; color:var(--muted) }
-.bc-item a { color:var(--link) }
+.bc-item a { color:var(--link); display:inline-flex; align-items:center; min-height:24px; padding:2px 0 }
 .bc-cur { color:var(--text2); font-weight:700 }
 
 /* ── PAGE LAYOUT ────────────────────────────────────────────── */
@@ -328,7 +328,7 @@ a:focus-visible { color:var(--text) }
 .ftr-bot {
   max-width:var(--max); margin:var(--sp4) auto 0;
   padding-top:var(--sp3); border-top:1px solid rgba(255,255,255,.12);
-  font-size:var(--t-xs); color:rgba(255,255,255,.45);
+  font-size:var(--t-xs); color:rgba(255,255,255,.65);
   display:flex; justify-content:space-between; flex-wrap:wrap; gap:var(--sp2);
 }
 
@@ -359,6 +359,7 @@ a:focus-visible { color:var(--text) }
   font-size:var(--t-section); font-weight:700; color:var(--deep);
   border-left:5px solid var(--blue); padding-left:var(--sp3); margin-bottom:var(--sp4);
 }
+.table-wrap { overflow-x:auto }
 .rank-table {
   width:100%; border-collapse:collapse; font-size:var(--t-body); margin-bottom:var(--sp4);
 }
@@ -426,6 +427,7 @@ a:focus-visible { color:var(--text) }
     <h2>Finding a taxi</h2>
     <p style="font-size:var(--t-body);color:var(--text2);margin-bottom:var(--sp4)">Hackney carriages can be hailed in the street or found at the following ranks. Private hire vehicles must be pre-booked through a licensed operator and cannot be hailed.</p>
 
+    <div class="table-wrap">
     <table class="rank-table" aria-label="Taxi ranks">
       <thead>
         <tr>
@@ -452,6 +454,7 @@ a:focus-visible { color:var(--text) }
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <!-- FARES -->
@@ -496,7 +499,7 @@ a:focus-visible { color:var(--text) }
         </div>
       </div>
 
-      <div style="background:var(--white);border:2px solid var(--blue);padding:var(--sp4)">
+      <div style="background:var(--white);border:2px solid var(--blue);padding:var(--sp4)" aria-live="polite" aria-atomic="true">
         <div style="display:flex;align-items:baseline;gap:var(--sp2);margin-bottom:var(--sp1);flex-wrap:wrap">
           <span style="font-size:2.5rem;font-weight:700;color:var(--deep)" id="total-fare">£5.40</span>
           <span style="font-size:var(--t-body);color:var(--text2)" id="fare-label">Daytime (Rate 1)</span>

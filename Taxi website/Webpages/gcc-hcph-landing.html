@@ -62,7 +62,7 @@ a:focus-visible{color:var(--text)}
 .bc-list{list-style:none;display:flex;flex-wrap:wrap;gap:var(--sp1);font-size:var(--t-sm)}
 .bc-item{display:flex;align-items:center;gap:var(--sp1)}
 .bc-item+.bc-item::before{content:"›";color:var(--muted)}
-.bc-item a{color:var(--link)}
+.bc-item a{color:var(--link);display:inline-flex;align-items:center;min-height:24px;padding:2px 0}
 .bc-cur{color:var(--text2);font-weight:700}
 
 /* PAGE */
@@ -249,7 +249,7 @@ a:focus-visible{color:var(--text)}
 .ftr-ul li{margin-bottom:var(--sp2)}
 .ftr-ul a{color:rgba(255,255,255,.75);font-size:var(--t-sm);text-decoration:underline}
 .ftr-ul a:hover{color:var(--white)}
-.ftr-bot{max-width:var(--max);margin:var(--sp4) auto 0;padding-top:var(--sp3);border-top:1px solid rgba(255,255,255,.12);font-size:var(--t-xs);color:rgba(255,255,255,.45);display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--sp2)}
+.ftr-bot{max-width:var(--max);margin:var(--sp4) auto 0;padding-top:var(--sp3);border-top:1px solid rgba(255,255,255,.12);font-size:var(--t-xs);color:rgba(255,255,255,.65);display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--sp2)}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -309,10 +309,10 @@ a:focus-visible{color:var(--text)}
       <span class="primary-btn-title">Vehicles</span>
       <span class="primary-btn-sub">Apply for or renew your vehicle licence</span>
     </a>
-    <a href="#" class="primary-btn primary-btn--pending">
+    <div class="primary-btn primary-btn--pending" aria-disabled="true">
       <span class="primary-btn-title">Operators</span>
       <span class="primary-btn-sub">Content coming soon</span>
-    </a>
+    </div>
   </nav>
 
   <!-- ROW 2: SECONDARY — OPERATORS, CHANGES, PASSENGERS -->

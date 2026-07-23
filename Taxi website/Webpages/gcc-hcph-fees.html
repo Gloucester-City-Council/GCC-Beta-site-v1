@@ -136,7 +136,7 @@ a:focus-visible { color:var(--text) }
 .bc-list { list-style:none; display:flex; flex-wrap:wrap; gap:var(--sp1); font-size:var(--t-sm) }
 .bc-item { display:flex; align-items:center; gap:var(--sp1) }
 .bc-item+.bc-item::before { content:"›"; color:var(--muted) }
-.bc-item a { color:var(--link) }
+.bc-item a { color:var(--link); display:inline-flex; align-items:center; min-height:24px; padding:2px 0 }
 .bc-cur { color:var(--text2); font-weight:700 }
 
 /* ── PAGE LAYOUT ────────────────────────────────────────────── */
@@ -328,7 +328,7 @@ a:focus-visible { color:var(--text) }
 .ftr-bot {
   max-width:var(--max); margin:var(--sp4) auto 0;
   padding-top:var(--sp3); border-top:1px solid rgba(255,255,255,.12);
-  font-size:var(--t-xs); color:rgba(255,255,255,.45);
+  font-size:var(--t-xs); color:rgba(255,255,255,.65);
   display:flex; justify-content:space-between; flex-wrap:wrap; gap:var(--sp2);
 }
 
@@ -365,6 +365,7 @@ a:focus-visible { color:var(--text) }
   padding-left:var(--sp3);
   margin-bottom:var(--sp4);
 }
+.table-wrap { overflow-x:auto }
 .fee-table {
   width:100%;
   border-collapse:collapse;
@@ -443,6 +444,7 @@ a:focus-visible { color:var(--text) }
   <!-- DRIVER LICENCES -->
   <div class="fee-section">
     <h2>Driver licences</h2>
+    <div class="table-wrap">
     <table class="fee-table" aria-label="Driver licence fees">
       <thead>
         <tr><th scope="col">Licence</th><th scope="col" style="text-align:right">Fee</th></tr>
@@ -455,12 +457,14 @@ a:focus-visible { color:var(--text) }
         <tr><td>Replacement driver badge</td><td>£10.00</td></tr>
       </tbody>
     </table>
+    </div>
     <p class="fee-note">Fees apply to both hackney carriage and private hire driver licences.</p>
   </div>
 
   <!-- DRIVER TESTS -->
   <div class="fee-section">
     <h2>Driver tests and training</h2>
+    <div class="table-wrap">
     <table class="fee-table" aria-label="Driver test and training fees">
       <thead>
         <tr><th scope="col">Test or training</th><th scope="col" style="text-align:right">Fee</th></tr>
@@ -473,12 +477,14 @@ a:focus-visible { color:var(--text) }
         <tr><td>Safeguarding awareness training</td><td>£40.00</td></tr>
       </tbody>
     </table>
+    </div>
     <p class="fee-note">Driving assessment fees are set by the approved provider — contact them directly.</p>
   </div>
 
   <!-- VEHICLE LICENCES -->
   <div class="fee-section">
     <h2>Vehicle licences</h2>
+    <div class="table-wrap">
     <table class="fee-table" aria-label="Vehicle licence fees">
       <thead>
         <tr><th scope="col">Licence or service</th><th scope="col" style="text-align:right">Fee</th></tr>
@@ -494,12 +500,14 @@ a:focus-visible { color:var(--text) }
         <tr><td>Change of address notification</td><td>£12.00</td></tr>
       </tbody>
     </table>
+    </div>
     <p class="fee-note">Vehicle licence fees apply to both hackney carriage and private hire vehicles.</p>
   </div>
 
   <!-- OPERATOR LICENCES -->
   <div class="fee-section">
     <h2>Private hire operator licences</h2>
+    <div class="table-wrap">
     <table class="fee-table" aria-label="Operator licence fees">
       <thead>
         <tr><th scope="col">Fleet size</th><th scope="col" style="text-align:right">1 year</th><th scope="col" style="text-align:right">5 years</th></tr>
@@ -511,6 +519,7 @@ a:focus-visible { color:var(--text) }
         <tr><td>Large — 31 or more vehicles</td><td style="text-align:right;font-weight:700;color:var(--deep)">£1,759.00</td><td style="text-align:right;font-weight:700;color:var(--deep)">£7,038.00</td></tr>
       </tbody>
     </table>
+    </div>
   </div>
 
 

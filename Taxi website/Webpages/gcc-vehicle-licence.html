@@ -136,7 +136,7 @@ a:focus-visible { color:var(--text) }
 .bc-list { list-style:none; display:flex; flex-wrap:wrap; gap:var(--sp1); font-size:var(--t-sm) }
 .bc-item { display:flex; align-items:center; gap:var(--sp1) }
 .bc-item+.bc-item::before { content:"›"; color:var(--muted) }
-.bc-item a { color:var(--link) }
+.bc-item a { color:var(--link); display:inline-flex; align-items:center; min-height:24px; padding:2px 0 }
 .bc-cur { color:var(--text2); font-weight:700 }
 
 /* ── PAGE LAYOUT ────────────────────────────────────────────── */
@@ -165,7 +165,7 @@ a:focus-visible { color:var(--text) }
 .toggles { display:flex; flex-direction:column; gap:var(--sp3); margin-bottom:var(--sp5) }
 .toggle-row { display:grid; grid-template-columns:160px auto; align-items:center; gap:var(--sp3) }
 .toggle-lbl { font-size:var(--t-sm); font-weight:700; color:var(--text2) }
-.toggle { display:inline-flex; border:2px solid var(--border-dk); overflow:hidden; width:fit-content }
+.toggle { display:inline-flex; border:2px solid var(--border-dk); width:fit-content }
 .tog-btn {
   padding:var(--btn-pad-v) var(--sp4);
   background:var(--white); color:var(--text);
@@ -329,7 +329,7 @@ a:focus-visible { color:var(--text) }
 .ftr-bot {
   max-width:var(--max); margin:var(--sp4) auto 0;
   padding-top:var(--sp3); border-top:1px solid rgba(255,255,255,.12);
-  font-size:var(--t-xs); color:rgba(255,255,255,.45);
+  font-size:var(--t-xs); color:rgba(255,255,255,.65);
   display:flex; justify-content:space-between; flex-wrap:wrap; gap:var(--sp2);
 }
 

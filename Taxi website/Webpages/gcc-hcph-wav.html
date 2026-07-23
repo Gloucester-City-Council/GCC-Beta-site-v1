@@ -27,7 +27,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;c
 .bc-in{max-width:var(--max);margin:0 auto;padding:0 var(--sp4)}
 .bc-list{display:flex;flex-wrap:wrap;gap:var(--sp1);list-style:none;font-size:var(--t-sm)}
 .bc-item{display:flex;align-items:center;gap:var(--sp1);color:var(--text2)}
-.bc-item a{color:var(--link)}
+.bc-item a{color:var(--link);display:inline-flex;align-items:center;min-height:24px;padding:2px 0}
 .bc-item+.bc-item::before{content:"›";color:var(--muted)}
 .bc-cur{color:var(--text);font-weight:600}
 .page{max-width:var(--max);margin:0 auto;padding:var(--sp5) var(--sp4) var(--sp7)}
@@ -48,6 +48,7 @@ h1{font-size:var(--t-h1);font-weight:700;color:var(--deep);margin-bottom:var(--s
 .inset p{font-size:var(--t-body);color:var(--text2)}
 .section-caption{font-size:var(--t-section);font-weight:700;color:var(--deep);border-left:5px solid var(--blue);padding-left:var(--sp3);margin-bottom:var(--sp4)}
 /* TABLES */
+.table-wrap{overflow-x:auto}
 .wav-table{width:100%;border-collapse:collapse;font-size:var(--t-body);margin-bottom:var(--sp4)}
 .wav-table th{text-align:left;padding:var(--sp2) var(--sp3);background:var(--deep);color:var(--white);font-weight:700}
 .wav-table td{padding:var(--sp2) var(--sp3);border-bottom:1px solid var(--divider);vertical-align:top}
@@ -161,6 +162,7 @@ h1{font-size:var(--t-h1);font-weight:700;color:var(--deep);margin-bottom:var(--s
     <p class="flag-note" style="font-size:var(--t-body)">This register is reviewed periodically. If you believe information is incorrect please email the Licensing Team at <a href="mailto:licensing@gloucester.gov.uk">licensing@gloucester.gov.uk</a>.</p>
 
     <h3>Hackney carriage</h3>
+    <div class="table-wrap">
     <table class="wav-table" aria-label="Designated wheelchair accessible hackney carriages">
       <thead>
         <tr>
@@ -177,8 +179,10 @@ h1{font-size:var(--t-h1);font-weight:700;color:var(--deep);margin-bottom:var(--s
         <tr><td>HCV537</td><td>SF13 MZE</td><td>Peugeot Partner</td><td>2 + 1 wheelchair</td><td><a href="tel:07860888057">07860 888057</a></td></tr>
       </tbody>
     </table>
+    </div>
 
     <h3>Private hire</h3>
+    <div class="table-wrap">
     <table class="wav-table" aria-label="Designated wheelchair accessible private hire vehicles">
       <thead>
         <tr>
@@ -201,6 +205,7 @@ h1{font-size:var(--t-h1);font-weight:700;color:var(--deep);margin-bottom:var(--s
         <tr><td>PHV612</td><td>NK15 CXW</td><td>Citroen Berlingo</td><td>1 + 1 wheelchair</td><td>Fixat 4 U Ltd <a href="tel:07426984184">07426 984184</a></td></tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <!-- RELATED -->
