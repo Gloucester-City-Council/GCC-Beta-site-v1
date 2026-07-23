@@ -148,9 +148,26 @@ tr:last-child td{border-bottom:none}
 </footer>
 
 <script>
-const JSON_URL = 'https://api.github.com/repos/Gloucester-City-Council/GCC-Beta-site-v1/contents/Taxi%20website/PublicRegister/LIC_Public_Register.json';
+// Always resolves to whatever is currently committed at this path on main —
+// replace the file's contents each month, no code or URL changes needed.
+const JSON_URL = 'https://raw.githubusercontent.com/Gloucester-City-Council/GCC-Beta-site-v1/main/Taxi%20website/PublicRegister/LIC_Public_Register.json';
+
+const COLUMNS = [
+  { label: 'Plate / ref',    get: r => r.plate_ref },
+  { label: 'Licence type',   get: r => r.licence_type },
+  { label: 'Registration',   get: r => r.vehicle_reg_no },
+  { label: 'Vehicle',        get: r => [r.vehicle_make, r.vehicle_model].filter(Boolean).join(' ') || null },
+  { label: 'Trading as',     get: r => r.trading_as },
+  { label: 'Issued',         get: r => fmtDate(r.issued_date) },
+  { label: 'Expiry',         get: r => fmtDate(r.expiry_date) },
+];
 
 let DATA = null;
+let currentView = 'driver';
+
+function esc(v) {
+  return String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
 
 function fmtDate(d) {
   if (!d) return '—';
@@ -161,7 +178,7 @@ function fmtDate(d) {
   return parseInt(parts[2],10) + ' ' + months[parseInt(parts[1],10)-1] + ' ' + parts[0];
 }
 
-function cell(v) { return (v !== null && v !== undefined && v !== '') ? String(v) : '—'; }
+function cell(v) { return esc((v !== null && v !== undefined && v !== '') ? String(v) : '—'); }
 
 function parseData(data) {
   if (data.driver) return data;
@@ -173,14 +190,52 @@ function parseData(data) {
   };
 }
 
-fetch(JSON_URL, { headers: { 'Accept': 'application/vnd.github.v3.raw' } })
+function renderHead() {
+  document.getElementById('thead').innerHTML =
+    '<tr>' + COLUMNS.map(c => '<th scope="col">' + esc(c.label) + '</th>').join('') + '</tr>';
+}
+
+function renderRows(view) {
+  const tbody = document.getElementById('tbody');
+  const count = document.getElementById('count');
+
+  if (!DATA) {
+    tbody.innerHTML = '<tr><td colspan="' + COLUMNS.length + '" class="loading">Loading register…</td></tr>';
+    count.textContent = '';
+    return;
+  }
+
+  const rows = DATA[view] || [];
+  if (!rows.length) {
+    tbody.innerHTML = '<tr><td colspan="' + COLUMNS.length + '" class="loading">No records found.</td></tr>';
+    count.textContent = '0 records';
+    return;
+  }
+
+  count.textContent = rows.length + (rows.length === 1 ? ' record' : ' records');
+  tbody.innerHTML = rows.map(r =>
+    '<tr>' + COLUMNS.map(c => '<td>' + cell(c.get(r)) + '</td>').join('') + '</tr>'
+  ).join('');
+}
+
+function setView(view) {
+  currentView = view;
+  ['driver','vehicle','operator'].forEach(v => {
+    document.getElementById('btn-' + v).setAttribute('aria-pressed', v === view ? 'true' : 'false');
+  });
+  renderRows(view);
+}
+
+renderHead();
+
+fetch(JSON_URL)
   .then(r => { if (!r.ok) throw new Error('Failed'); return r.json(); })
   .then(data => {
     DATA = parseData(data);
-    setView('driver');
+    setView(currentView);
   })
   .catch(() => {
-    document.getElementById('tbody').innerHTML = '<tr><td colspan="7" class="loading">Unable to load the register at this time. Please try again later.</td></tr>';
+    document.getElementById('tbody').innerHTML = '<tr><td colspan="' + COLUMNS.length + '" class="loading">Unable to load the register at this time. Please try again later.</td></tr>';
     document.getElementById('count').textContent = '';
   });
 </script>
