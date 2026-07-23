@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hackney carriage and private hire — Gloucester City Council</title>
+<style>
+:root {
+  --blue:      #0054A4;
+  --hover:     #003E7B;
+  --deep:      #0B2E53;
+  --white:     #FFFFFF;
+  --grey:      #F3F2F1;
+  --border:    #B1B4B6;
+  --border-dk: #0B0C0C;
+  --divider:   #D8D8D8;
+  --text:      #0B0C0C;
+  --text2:     #505A5F;
+  --muted:     #6F777B;
+  --link:      #0054A4;
+  --focus:     #FFDD00;
+  --sp1:4px;--sp2:8px;--sp3:16px;--sp4:24px;--sp5:32px;--sp6:48px;--sp7:64px;
+  --t-xl:2.25rem;--t-xl-m:1.875rem;--t-lg:1.5rem;--t-md:1.125rem;
+  --t-body:1rem;--t-sm:.875rem;--t-xs:.75rem;
+  --lh-heading:1.1;--lh-body:1.5;--lh-tight:1.4;
+  --max:1200px;--touch:44px;--r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:"GDS Transport",Arial,sans-serif;font-size:var(--t-body);line-height:var(--lh-body);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+
+h1{font-size:var(--t-xl);line-height:var(--lh-heading);font-weight:700;margin-bottom:var(--sp2)}
+h2{font-size:var(--t-lg);line-height:var(--lh-heading);font-weight:700;margin:0 0 var(--sp1)}
+p{font-size:var(--t-body);line-height:var(--lh-body);margin-bottom:var(--sp3)}
+p:last-child{margin-bottom:0}
+a{color:var(--link);text-decoration:underline;text-underline-offset:3px}
+a:hover{color:var(--hover)}
+a:visited{color:#4c2c92}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:0;background:var(--focus);color:var(--text);box-shadow:0 -2px var(--focus),0 4px var(--border-dk)}
+a:focus-visible{color:var(--text)}
+
+.skip{position:absolute;top:-100px;left:var(--sp3);background:var(--focus);color:var(--text);padding:var(--sp2) var(--sp3);font-weight:700;z-index:1000;text-decoration:none}
+.skip:focus{top:var(--sp2)}
+
+/* HEADER */
+.hdr{background:var(--deep);border-bottom:4px solid var(--blue)}
+.hdr-in{max-width:var(--max);margin:0 auto;padding:var(--sp3) var(--sp4);display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:var(--sp2);text-decoration:none;color:var(--white)}
+.logo img{height:40px;width:auto}
+.logo-txt{font-size:var(--t-md);font-weight:700}
+.hdr-nav{display:flex;gap:var(--sp3);list-style:none}
+.hdr-nav a{color:rgba(255,255,255,.85);text-decoration:none;font-size:var(--t-sm);padding:var(--sp1) var(--sp2);min-height:var(--touch);display:flex;align-items:center}
+.hdr-nav a:hover{color:var(--white);text-decoration:underline}
+
+/* SERVICE + BC */
+.svc{background:var(--blue);padding:var(--sp2) var(--sp4)}
+.svc-in{max-width:var(--max);margin:0 auto;font-size:var(--t-sm);color:var(--white)}
+.bc{background:var(--grey);border-bottom:1px solid var(--divider)}
+.bc-in{max-width:var(--max);margin:0 auto;padding:var(--sp2) var(--sp4)}
+.bc-list{list-style:none;display:flex;flex-wrap:wrap;gap:var(--sp1);font-size:var(--t-sm)}
+.bc-item{display:flex;align-items:center;gap:var(--sp1)}
+.bc-item+.bc-item::before{content:"›";color:var(--muted)}
+.bc-item a{color:var(--link)}
+.bc-cur{color:var(--text2);font-weight:700}
+
+/* PAGE */
+.page{max-width:var(--max);margin:0 auto;padding:var(--sp5) var(--sp4) var(--sp7)}
+
+/* PAGE HEADER */
+.pg-hdr{margin-bottom:var(--sp5)}
+.pg-lead{font-size:var(--t-md);color:var(--text2);line-height:var(--lh-tight);margin-top:var(--sp2);margin-bottom:0}
+
+/* GRID ROWS */
+/* grid-row-1 removed — replaced by primary-nav */
+/* Row 2: 3 secondary cards */
+
+
+/* CARD */
+.card{
+  border:2px solid var(--border-dk);
+  background:var(--white);
+  display:flex;
+  flex-direction:column;
+}
+/* PRIMARY NAV BUTTONS — row 1 */
+.primary-nav{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:var(--sp4);
+  margin-bottom:var(--sp4);
+  align-items:stretch;
+}
+/* ROW 2 */
+.grid-row-2{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:var(--sp4);
+  margin-bottom:var(--sp6);
+  align-items:stretch;
+}
+.primary-nav .primary-btn,
+.grid-row-2 .primary-btn{
+  min-height:120px;
+  box-sizing:border-box;
+}
+.primary-btn{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:flex-start;  /* text from top, not bottom */
+  background:var(--deep);
+  color:var(--white);
+  font-size:var(--t-lg);
+  font-weight:700;
+  text-decoration:none;
+  padding:var(--sp4);
+  min-height:auto;             /* no forced height — content drives size */
+  border:2px solid var(--deep);
+  text-align:left;
+  transition:background .1s, border-color .1s;
+}
+.primary-btn-title{
+  font-size:var(--t-lg);
+  font-weight:700;
+  line-height:var(--lh-heading);
+  margin-bottom:var(--sp1);
+}
+.primary-btn-sub{
+  font-size:var(--t-body);     /* up from 14px to 16px for readability */
+  font-weight:400;
+  color:rgba(255,255,255,.85); /* higher opacity — passes WCAG AA */
+  line-height:var(--lh-tight);
+}
+.primary-btn:hover{
+  background:var(--blue);
+  border-color:var(--blue);
+  color:var(--white);
+  text-decoration:none;
+}
+.primary-btn:visited{color:var(--white)}
+.primary-btn:focus-visible{
+  outline:3px solid var(--focus);
+  outline-offset:0;
+  background:var(--focus);
+  color:var(--text);
+  border-color:var(--border-dk);
+  box-shadow:0 -2px var(--focus),0 4px var(--border-dk);
+}
+.primary-btn--pending{
+  background:var(--muted);       /* solid colour — no opacity contrast issue */
+  border-color:var(--muted);
+  cursor:default;
+  pointer-events:none;
+}
+.primary-btn--pending .primary-btn-sub{
+  color:rgba(255,255,255,1);     /* full white — passes WCAG AA on #6F777B */
+}
+
+/* CARD HEADER */
+.card-hdr{
+  background:var(--deep);
+  color:var(--white);
+  padding:var(--sp4);
+  border-bottom:4px solid var(--blue);
+}
+.card-hdr h2{color:var(--white);font-size:var(--t-lg)}
+.card-hdr-desc{
+  font-size:var(--t-sm);
+  color:rgba(255,255,255,.7);
+  margin-top:var(--sp1);
+  margin-bottom:0;
+  line-height:var(--lh-tight);
+}
+
+/* PENDING card header variant */
+.card-hdr--pending{border-bottom-color:var(--border)}
+.card-hdr--pending h2{color:rgba(255,255,255,.6)}
+.card-hdr--pending .card-hdr-desc{color:rgba(255,255,255,.45)}
+
+/* CARD BODY */
+.card-body{padding:var(--sp2) 0;flex:1;display:flex;flex-direction:column}
+
+/* LINK GROUP LABEL */
+.link-grp-lbl{
+  display:block;
+  font-size:var(--t-xs);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  color:var(--muted);
+  padding:var(--sp2) var(--sp4) var(--sp1);
+}
+.card-body>.link-grp-lbl:first-child{padding-top:var(--sp3)}
+
+/* CARD LINK */
+/* card-cta removed */
+.card-link{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--sp3);
+  padding:var(--sp2) var(--sp4);
+  font-size:var(--t-body);
+  font-weight:700;
+  color:var(--link);
+  text-decoration:none;
+  border-bottom:1px solid var(--divider);
+  min-height:var(--touch);
+  transition:background .1s;
+}
+.card-link:last-child{border-bottom:none}
+.card-link:hover{background:var(--grey);color:var(--hover);text-decoration:none}
+.card-link:focus-visible{outline:3px solid var(--focus);outline-offset:-3px;background:var(--focus);color:var(--text)}
+.card-link-arr{font-size:var(--t-md);color:var(--border);flex-shrink:0;transition:color .1s}
+.card-link:hover .card-link-arr{color:var(--link)}
+
+/* PENDING card link */
+.card-link--pending{
+  color:var(--muted);
+  font-weight:400;
+  cursor:default;
+  pointer-events:none;
+}
+.card-link--pending .card-link-arr{display:none}
+
+/* PENDING message block */
+.card-pending-msg{
+  padding:var(--sp4);
+  font-size:var(--t-sm);
+  color:var(--text2);
+  line-height:var(--lh-body);
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.card-pending-msg p{margin-bottom:var(--sp2)}
+.card-pending-msg p:last-child{margin-bottom:0}
+
+/* CONTACT STRIP removed */
+
+/* FOOTER */
+.ftr{background:var(--deep);color:var(--white);padding:var(--sp5) var(--sp4)}
+.ftr-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--sp5)}
+.ftr-h{font-size:var(--t-xs);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--sp3)}
+.ftr-ul{list-style:none}
+.ftr-ul li{margin-bottom:var(--sp2)}
+.ftr-ul a{color:rgba(255,255,255,.75);font-size:var(--t-sm);text-decoration:underline}
+.ftr-ul a:hover{color:var(--white)}
+.ftr-bot{max-width:var(--max);margin:var(--sp4) auto 0;padding-top:var(--sp3);border-top:1px solid rgba(255,255,255,.12);font-size:var(--t-xs);color:rgba(255,255,255,.45);display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--sp2)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hdr-in,.bc-in,.svc-in,.page{padding-left:var(--sp3);padding-right:var(--sp3)}
+  .hdr-nav{display:none}
+  .primary-nav{grid-template-columns:1fr}
+  .grid-row-2{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  h1{font-size:var(--t-xl-m)}
+  .grid-row-2{grid-template-columns:1fr}
+  .contact-items{flex-direction:column;align-items:flex-start;gap:var(--sp2)}
+}
+@media(forced-colors:active){
+  .card{border:2px solid ButtonText}
+  .card-hdr{border-bottom:4px solid ButtonText}
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip">Skip to main content</a>
+
+<header class="hdr" role="banner">
+  <div class="hdr-in">
+    <a href="/" class="logo" aria-label="Gloucester City Council — home">
+      <img src="https://raw.githubusercontent.com/Gloucester-City-Council/GCC-Beta-site-v1/main/templates/assets/GCC_logo.svg" alt="Gloucester City Council" style="filter:brightness(0) invert(1)">
+    </a>
+  </div>
+</header>
+
+<div class="svc"><div class="svc-in">Licensing &amp; regulations</div></div>
+
+<nav class="bc" aria-label="Breadcrumb">
+  <div class="bc-in"><ol class="bc-list">
+    <li class="bc-item"><a href="#">Home</a></li>
+    <li class="bc-item"><a href="#">Licensing &amp; regulations</a></li>
+    <li class="bc-item"><span class="bc-cur" aria-current="page">Hackney carriage and private hire</span></li>
+  </ol></div>
+</nav>
+
+<main id="main-content">
+<div class="page">
+
+  <header class="pg-hdr">
+    <h1>Hackney carriage and private hire licensing</h1>
+    <p class="pg-lead">Licences for drivers and vehicles in the Gloucester City Council area. Select what you need below.</p>
+  </header>
+
+  <!-- ROW 1: THREE PRIMARY BUTTONS -->
+  <nav class="primary-nav" aria-label="Licensing sections">
+    <a href="gcc-driver-licence.html" class="primary-btn">
+      <span class="primary-btn-title">Drivers</span>
+      <span class="primary-btn-sub">Apply for or renew your driver licence</span>
+    </a>
+    <a href="gcc-vehicle-licence.html" class="primary-btn">
+      <span class="primary-btn-title">Vehicles</span>
+      <span class="primary-btn-sub">Apply for or renew your vehicle licence</span>
+    </a>
+    <a href="#" class="primary-btn primary-btn--pending">
+      <span class="primary-btn-title">Operators</span>
+      <span class="primary-btn-sub">Content coming soon</span>
+    </a>
+  </nav>
+
+  <!-- ROW 2: SECONDARY — OPERATORS, CHANGES, PASSENGERS -->
+  <div class="grid-row-2" role="list" aria-label="Passengers, changes and useful documents">
+
+    <!-- PASSENGERS -->
+    <a href="gcc-hcph-passengers.html" class="primary-btn">
+      <span class="primary-btn-title">Passengers</span>
+      <span class="primary-btn-sub">Taxi ranks, fares, complaints and accessibility</span>
+    </a>
+
+    <!-- SOMETHING HAS CHANGED -->
+    <a href="gcc-hcph-changes.html" class="primary-btn">
+      <span class="primary-btn-title">Something has changed</span>
+      <span class="primary-btn-sub">Updates to your licence, vehicle or circumstances</span>
+    </a>
+
+    <!-- POLICIES AND DOCUMENTS -->
+    <a href="gcc-hcph-documents.html" class="primary-btn">
+      <span class="primary-btn-title">Licensing information</span>
+      <span class="primary-btn-sub">Rule books, policies, forms and reference documents</span>
+    </a>
+
+  </div><!-- /row 2 -->
+
+</div><!-- /page -->
+
+</main>
+
+<footer class="ftr" role="contentinfo">
+  <div class="ftr-in">
+    <div>
+      <div class="ftr-h">Licensing</div>
+      <ul class="ftr-ul">
+        <li><a href="#">Hackney carriage and private hire</a></li>
+        <li><a href="#">Premises licences</a></li>
+        <li><a href="#">Personal licences</a></li>
+        <li><a href="#">Street trading</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ftr-h">About GCC</div>
+      <ul class="ftr-ul">
+        <li><a href="#">Accessibility statement</a></li>
+        <li><a href="#">Privacy notice</a></li>
+        <li><a href="#">Cookies</a></li>
+        <li><a href="#">Contact us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ftr-bot">
+    <span>© Gloucester City Council</span>
+    <span>Last updated: July 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
