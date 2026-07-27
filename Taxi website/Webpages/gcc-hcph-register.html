@@ -73,7 +73,7 @@ tr:last-child td{border-bottom:none}
 .loading{text-align:center;padding:var(--sp6);color:var(--text2);font-size:var(--t-body)}
 .reg-note{font-size:var(--t-sm);color:var(--text2);margin-top:var(--sp5);padding-top:var(--sp3);border-top:1px solid var(--divider)}
 .ftr{background:var(--deep);color:rgba(255,255,255,.8);padding:var(--sp6) 0 var(--sp4);margin-top:var(--sp7)}
-.ftr-in{max-width:var(--max);margin:0 auto;padding:0 var(--sp4);display:grid;grid-template-columns:1fr 1fr;gap:var(--sp6);margin-bottom:var(--sp5)}
+.ftr-in{max-width:var(--max);margin:0 auto;padding:0 var(--sp4);display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--sp6);margin-bottom:var(--sp5)}
 .ftr-h{font-weight:700;color:var(--white);margin-bottom:var(--sp3);font-size:var(--t-body)}
 .ftr-ul{list-style:none}
 .ftr-ul li{margin-bottom:var(--sp2)}
@@ -157,8 +157,8 @@ tr:last-child td{border-bottom:none}
 
 <nav class="bc" aria-label="Breadcrumb">
   <div class="bc-in"><ol class="bc-list">
-    <li class="bc-item"><a href="#">Home</a></li>
-    <li class="bc-item"><a href="#">Licensing &amp; regulations</a></li>
+    <li class="bc-item"><a href="https://www.gloucester.gov.uk/">Home</a></li>
+    <li class="bc-item"><a href="https://www.gloucester.gov.uk/licensing-regulations/">Licensing &amp; regulations</a></li>
     <li class="bc-item"><a href="gcc-hcph-landing.html">Hackney carriage and private hire</a></li>
     <li class="bc-item"><a href="gcc-hcph-documents.html">Licensing information</a></li>
     <li class="bc-item"><span class="bc-cur" aria-current="page">Public register</span></li>
@@ -208,11 +208,19 @@ tr:last-child td{border-bottom:none}
     <div>
       <div class="ftr-h">About GCC</div>
       <ul class="ftr-ul">
-        <li><a href="#">Accessibility statement</a></li>
+        <li><a href="https://www.gloucester.gov.uk/accessibility/">Accessibility statement</a></li>
         <li><a href="#">Privacy notice</a></li>
-        <li><a href="#">Cookies</a></li>
-        <li><a href="#">Contact us</a></li>
+        <li><a href="https://www.gloucester.gov.uk/cookies/">Cookies</a></li>
+        <li><a href="https://www.gloucester.gov.uk/sitemap/">Site map</a></li>
+        <li><a href="https://www.gloucester.gov.uk/about-the-council/contact-us/">Contact us</a></li>
       </ul>
+    </div>
+    <div>
+      <div class="ftr-h">Follow us</div>
+      <div style="display:flex;gap:12px">
+        <a href="https://www.facebook.com/GloucesterCityCouncil/" target="_blank" rel="noopener" aria-label="Gloucester City Council on Facebook" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:rgba(255,255,255,.85)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>
+        <a href="https://x.com/GloucesterCity" target="_blank" rel="noopener" aria-label="Gloucester City Council on X" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:rgba(255,255,255,.85)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.9 2H22l-7.2 8.3L23.3 22h-6.7l-5.2-6.8L5.4 22H2.2l7.7-8.9L1 2h6.9l4.7 6.2L18.9 2zm-1.2 18h1.9L7.4 4H5.4l12.3 16z"/></svg></a>
+      </div>
     </div>
   </div>
   <div class="ftr-bot">
