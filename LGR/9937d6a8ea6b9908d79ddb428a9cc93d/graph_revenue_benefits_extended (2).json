@@ -1,0 +1,3761 @@
+{
+  "id": "graph_revenue_benefits_lgr",
+  "profile": "project_outline",
+  "default_authority": {
+    "node": "delegated",
+    "edge": "key_decision"
+  },
+  "edge_authority": {
+    "governs": "locked",
+    "derives_from": "locked",
+    "precedes": "key_decision",
+    "blocks": "key_decision",
+    "depends_on": "key_decision",
+    "resolves": "key_decision",
+    "contains": "delegated",
+    "produces": "delegated",
+    "tests": "delegated",
+    "alternative_to": "key_decision",
+    "determines": "key_decision",
+    "uses": "delegated",
+    "for": "delegated",
+    "supports": "locked",
+    "hosted_on": "delegated"
+  },
+  "nodes": [
+    {
+      "id": "council.cheltenham",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cheltenham Borough Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.cotswold",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cotswold District Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.forest_of_dean",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Forest of Dean District Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.stroud",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Stroud District Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.gloucester",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucester City Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.tewkesbury",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Tewkesbury Borough Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.gloucestershire",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council (post-LGR unitary)"
+        },
+        {
+          "path": "council_type",
+          "value": "unitary"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "system.civica_open_revenues",
+      "type": "system",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Civica Open Revenues"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "system.nec_iworld_dms",
+      "type": "system",
+      "fields": [
+        {
+          "path": "name",
+          "value": "NEC iWorld + DMS"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "system.open_source_revenues",
+      "type": "system",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Open source revenues platform (1000-day potential option)"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "deployment.on_premise",
+      "type": "deployment",
+      "fields": [
+        {
+          "path": "name",
+          "value": "On premise"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "deployment.cloud",
+      "type": "deployment",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cloud"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "deployment.shared_cloud",
+      "type": "deployment",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Shared cloud"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.application_interface",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Application interface"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.citizen_access",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Citizen Access portal"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.web_interface",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Web interface"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.avd",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Application interface (Azure Virtual Desktop)"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.dms_interface",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Application interface (DMS)"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.cloud_forms_citizen_platform",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cloud forms / citizen platform"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "initiative.revenue_benefits_roadmap",
+      "type": "initiative",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Revenue and Benefits systems roadmap"
+        },
+        {
+          "path": "objective",
+          "value": "Model current and target-state Revenue & Benefits systems and infrastructure across Gloucestershire councils through LGR vesting day and post-vesting consolidation"
+        }
+      ]
+    },
+    {
+      "id": "phase.now",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "Now"
+        },
+        {
+          "path": "date",
+          "value": "Now"
+        }
+      ]
+    },
+    {
+      "id": "phase.plus_12_months",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "Shadow"
+        },
+        {
+          "path": "date",
+          "value": "10 May 2027"
+        }
+      ]
+    },
+    {
+      "id": "phase.vesting_day",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "At Vesting Day"
+        },
+        {
+          "path": "date",
+          "value": "1 April 2028"
+        }
+      ]
+    },
+    {
+      "id": "phase.vesting_day_shared",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "At Vesting Day - Shared Infrastructure"
+        },
+        {
+          "path": "date",
+          "value": "1 April 2028"
+        }
+      ]
+    },
+    {
+      "id": "phase.thousand_days_consolidated",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "1000 days - Consolidated solution"
+        },
+        {
+          "path": "date",
+          "value": "27 December 2030"
+        }
+      ]
+    },
+    {
+      "id": "phase.thousand_days_potential",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "1000 days - Potential solution"
+        },
+        {
+          "path": "date",
+          "value": "27 December 2030"
+        }
+      ]
+    },
+    {
+      "id": "issue.identity_access",
+      "type": "issue",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Resolve identity and access"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        },
+        {
+          "path": "note",
+          "value": "Civica cloud/AVD deployments support SSO \u2014 narrows this to configuration and integration rather than a platform gap"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "issue.legacy_migration",
+      "type": "issue",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Legacy access + migration plan"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "issue.cloud_opportunity_2028",
+      "type": "issue",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Opportunity to move to cloud - May 2028"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "issue.dwp_psn",
+      "type": "issue",
+      "fields": [
+        {
+          "path": "title",
+          "value": "DWP moving off PSN"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "issue.gloucester_contract_bridge",
+      "type": "issue",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Civica contract ends 30/09/2027, ahead of estimated Vesting Day (2028)"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        },
+        {
+          "path": "note",
+          "value": "2 x 1 year extension options available on the contract to bridge to vesting"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "task.contract_dates",
+      "type": "task",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Contract dates in each system"
+        },
+        {
+          "path": "status",
+          "value": "partially resolved"
+        },
+        {
+          "path": "note",
+          "value": "End dates now captured for Cheltenham, Cotswold, Forest of Dean, Gloucester and Tewkesbury via the system/contract register. Stroud's end date is still outstanding."
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "task.bc_priority_unrated",
+      "type": "task",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Business Continuity priority not yet rated for any system"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        },
+        {
+          "path": "note",
+          "value": "The BC Priority column in the system/contract register is blank for every entry"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "task.cost_eol_unrated",
+      "type": "task",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Annual cost and vendor end-of-life not yet captured for any system"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        },
+        {
+          "path": "note",
+          "value": "Needed to compare Civica Open Revenues against the open-source option at the 1000-day decision"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "decision.infra_consolidation_timing",
+      "type": "decision",
+      "fields": [
+        {
+          "path": "question",
+          "value": "Consolidate Cotswold and Forest of Dean onto shared Civica cloud at Vesting Day, or defer to the May 2028 contract opportunity?"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "decision.target_platform_1000days",
+      "type": "decision",
+      "fields": [
+        {
+          "path": "question",
+          "value": "At 1000 days, remain on Civica Open Revenues or migrate to an open-source revenues platform?"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "constraint.vesting_readiness",
+      "type": "constraint",
+      "fields": [
+        {
+          "path": "rule",
+          "value": "Every council-system pairing must reach a resolved identity/access state, or have an explicit migration plan, by Vesting Day"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "state.now.cheltenham",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.now.cotswold",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Forest of Dean"
+        }
+      ]
+    },
+    {
+      "id": "state.now.forest_of_dean",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Cotswold"
+        }
+      ]
+    },
+    {
+      "id": "state.now.stroud",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.now.gloucester",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.now.tewkesbury",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "NEC iWorld + DMS"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.cheltenham",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.cotswold",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Forest of Dean"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.forest_of_dean",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Cotswold"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.stroud",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.gloucester",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.tewkesbury",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "NEC iWorld + DMS"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.cheltenham",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.cotswold",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Forest of Dean"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.forest_of_dean",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Cotswold"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.stroud",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.gloucester",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.tewkesbury",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "NEC iWorld + DMS"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.cheltenham",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Shared cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.cotswold",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Shared cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.forest_of_dean",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Shared cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.stroud",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Shared cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.gloucester",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Shared cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.tewkesbury",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "NEC iWorld + DMS"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.thousand_days_consolidated.gloucestershire",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.thousand_days_potential.gloucestershire",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Open source revenues platform (1000-day potential option)"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        }
+      ]
+    },
+    {
+      "id": "contract.cheltenham",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revs & Bens"
+        },
+        {
+          "path": "system_name",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "version",
+          "value": "26.0.09"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "On-premise"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "Civica"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "31/05/2028"
+        },
+        {
+          "path": "extensions_available",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "contract.cotswold",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revs & Bens"
+        },
+        {
+          "path": "system_name",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "version",
+          "value": "26.0.09"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "On-premise"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "Civica"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "31/05/2028"
+        },
+        {
+          "path": "extensions_available",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "contract.forest_of_dean",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revs & Bens"
+        },
+        {
+          "path": "system_name",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "version",
+          "value": "26.0.09"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "On-premise"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "Civica"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "31/05/2028"
+        },
+        {
+          "path": "extensions_available",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "contract.stroud",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revs & Bens"
+        },
+        {
+          "path": "system_name",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "version",
+          "value": "26.0.10"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "On-premise"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "Civica"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "Not captured"
+        },
+        {
+          "path": "extensions_available",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "contract.gloucester",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revs & Bens"
+        },
+        {
+          "path": "system_name",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "version",
+          "value": "26.0.09"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "Civica OR"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "30/09/2027"
+        },
+        {
+          "path": "extensions_available",
+          "value": "2 x 1 year"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "contract.tewkesbury",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revenues & Benefits"
+        },
+        {
+          "path": "system_name",
+          "value": "NEC iWorld + DMS"
+        },
+        {
+          "path": "version",
+          "value": "7.14.04"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "On prem"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "NEC Software Solutions UK Limited"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "21/01/2028"
+        },
+        {
+          "path": "extensions_available",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "server.civica_app",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Civica Open Revenues application server"
+        },
+        {
+          "path": "role",
+          "value": "application server"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.civica_db",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Civica Open Revenues database server"
+        },
+        {
+          "path": "role",
+          "value": "database server"
+        },
+        {
+          "path": "engine",
+          "value": "Microsoft SQL Server (sample guess)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.nec_app",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "NEC iWorld application server"
+        },
+        {
+          "path": "role",
+          "value": "application server"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.nec_db",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "NEC iWorld database server"
+        },
+        {
+          "path": "role",
+          "value": "database server"
+        },
+        {
+          "path": "engine",
+          "value": "Progress OpenEdge (sample guess)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.dms_filesync",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "DMS file sync server"
+        },
+        {
+          "path": "role",
+          "value": "file sync server"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.osr_app",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Open source revenues application server"
+        },
+        {
+          "path": "role",
+          "value": "application server"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.osr_db",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Open source revenues database server"
+        },
+        {
+          "path": "role",
+          "value": "database server"
+        },
+        {
+          "path": "engine",
+          "value": "PostgreSQL (sample guess)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.cheltenham_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cheltenham Borough Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.cotswold_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cotswold District Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.forest_of_dean_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Forest of Dean District Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.stroud_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Stroud District Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.gloucester_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucester City Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.tewkesbury_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Tewkesbury Borough Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "network_path.legacy_backhaul",
+      "type": "network_path",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Site-to-site network (sample)"
+        },
+        {
+          "path": "technology",
+          "value": "Point-to-point / MPLS (sample guess) \u2014 this is the network in live use today, not a deprecated route"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "network_path.zero_trust",
+      "type": "network_path",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Zero Trust / SASE backhaul (sample)"
+        },
+        {
+          "path": "technology",
+          "value": "Cloud-delivered Zero Trust (sample guess)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "business_function.revenues_and_benefits",
+      "type": "business_function",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Council Tax, Benefits & NNDR"
+        },
+        {
+          "path": "note",
+          "value": "One combined service \u2014 all three are handled as a single function, not three separate ones."
+        }
+      ]
+    },
+    {
+      "id": "user_group.cheltenham_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Cheltenham locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.cotswold_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Cotswold locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.forest_of_dean_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Forest of Dean locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.stroud_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Stroud locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.gloucester_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Gloucester locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.tewkesbury_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Tewkesbury locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.gloucestershire_staff_consolidated",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: one consolidated team, size TBC)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.civica_cloud_platform",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Civica Open Revenues \u2014 cloud platform"
+        },
+        {
+          "path": "role",
+          "value": "vendor-managed cloud application (SaaS) \u2014 no visibility into Civica\u2019s own server architecture"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.osr_cloud_platform",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Open source revenues platform \u2014 cloud platform"
+        },
+        {
+          "path": "role",
+          "value": "cloud-hosted application (specific hosting arrangement not yet decided)"
+        }
+      ],
+      "sample": true
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge.init_phase.001",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.now",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.init_phase.002",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.plus_12_months",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.init_phase.003",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.vesting_day",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.init_phase.004",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.vesting_day_shared",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.init_phase.005",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.thousand_days_consolidated",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.init_phase.006",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.thousand_days_potential",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.seq.007",
+      "from": "phase.now",
+      "to": "phase.plus_12_months",
+      "kind": "precedes"
+    },
+    {
+      "id": "edge.seq.008",
+      "from": "phase.plus_12_months",
+      "to": "phase.vesting_day",
+      "kind": "precedes"
+    },
+    {
+      "id": "edge.fork.009",
+      "from": "phase.vesting_day",
+      "to": "phase.vesting_day_shared",
+      "kind": "alternative_to"
+    },
+    {
+      "id": "edge.seq.010",
+      "from": "phase.vesting_day",
+      "to": "phase.thousand_days_consolidated",
+      "kind": "precedes"
+    },
+    {
+      "id": "edge.seq.011",
+      "from": "phase.vesting_day_shared",
+      "to": "phase.thousand_days_consolidated",
+      "kind": "precedes"
+    },
+    {
+      "id": "edge.fork.012",
+      "from": "phase.thousand_days_consolidated",
+      "to": "phase.thousand_days_potential",
+      "kind": "alternative_to"
+    },
+    {
+      "id": "edge.risk.013",
+      "from": "issue.dwp_psn",
+      "to": "phase.plus_12_months",
+      "kind": "blocks"
+    },
+    {
+      "id": "edge.risk2.014",
+      "from": "task.bc_priority_unrated",
+      "to": "phase.vesting_day",
+      "kind": "blocks"
+    },
+    {
+      "id": "edge.decide.017",
+      "from": "decision.infra_consolidation_timing",
+      "to": "phase.vesting_day",
+      "kind": "determines"
+    },
+    {
+      "id": "edge.decide.018",
+      "from": "decision.infra_consolidation_timing",
+      "to": "phase.vesting_day_shared",
+      "kind": "determines"
+    },
+    {
+      "id": "edge.decide.019",
+      "from": "decision.target_platform_1000days",
+      "to": "phase.thousand_days_consolidated",
+      "kind": "determines"
+    },
+    {
+      "id": "edge.decide.020",
+      "from": "decision.target_platform_1000days",
+      "to": "phase.thousand_days_potential",
+      "kind": "determines"
+    },
+    {
+      "id": "edge.risk2.021",
+      "from": "task.bc_priority_unrated",
+      "to": "decision.target_platform_1000days",
+      "kind": "blocks"
+    },
+    {
+      "id": "edge.risk3.022",
+      "from": "task.cost_eol_unrated",
+      "to": "decision.target_platform_1000days",
+      "kind": "blocks"
+    },
+    {
+      "id": "edge.gov.023",
+      "from": "constraint.vesting_readiness",
+      "to": "phase.vesting_day",
+      "kind": "governs"
+    },
+    {
+      "id": "edge.gov.024",
+      "from": "constraint.vesting_readiness",
+      "to": "phase.vesting_day_shared",
+      "kind": "governs"
+    },
+    {
+      "id": "edge.phase_state.025",
+      "from": "phase.now",
+      "to": "state.now.cheltenham",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.026",
+      "from": "state.now.cheltenham",
+      "to": "council.cheltenham",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.027",
+      "from": "state.now.cheltenham",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.028",
+      "from": "state.now.cheltenham",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.029",
+      "from": "state.now.cheltenham",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.030",
+      "from": "state.now.cheltenham",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.031",
+      "from": "phase.now",
+      "to": "state.now.cotswold",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.032",
+      "from": "state.now.cotswold",
+      "to": "council.cotswold",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.033",
+      "from": "state.now.cotswold",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.034",
+      "from": "state.now.cotswold",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.035",
+      "from": "state.now.cotswold",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.036",
+      "from": "state.now.cotswold",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.037",
+      "from": "phase.now",
+      "to": "state.now.forest_of_dean",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.038",
+      "from": "state.now.forest_of_dean",
+      "to": "council.forest_of_dean",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.039",
+      "from": "state.now.forest_of_dean",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.040",
+      "from": "state.now.forest_of_dean",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.041",
+      "from": "state.now.forest_of_dean",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.042",
+      "from": "state.now.forest_of_dean",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.043",
+      "from": "phase.now",
+      "to": "state.now.stroud",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.044",
+      "from": "state.now.stroud",
+      "to": "council.stroud",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.045",
+      "from": "state.now.stroud",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.046",
+      "from": "state.now.stroud",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.047",
+      "from": "state.now.stroud",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.048",
+      "from": "state.now.stroud",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.049",
+      "from": "phase.now",
+      "to": "state.now.gloucester",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.050",
+      "from": "state.now.gloucester",
+      "to": "council.gloucester",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.051",
+      "from": "state.now.gloucester",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.052",
+      "from": "state.now.gloucester",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.053",
+      "from": "state.now.gloucester",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.054",
+      "from": "state.now.gloucester",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.055",
+      "from": "phase.now",
+      "to": "state.now.tewkesbury",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.056",
+      "from": "state.now.tewkesbury",
+      "to": "council.tewkesbury",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.057",
+      "from": "state.now.tewkesbury",
+      "to": "system.nec_iworld_dms",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.058",
+      "from": "state.now.tewkesbury",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.059",
+      "from": "state.now.tewkesbury",
+      "to": "interface.web_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.060",
+      "from": "state.now.tewkesbury",
+      "to": "interface.dms_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.061",
+      "from": "state.now.tewkesbury",
+      "to": "interface.cloud_forms_citizen_platform",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.062",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.cheltenham",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.063",
+      "from": "state.plus_12_months.cheltenham",
+      "to": "council.cheltenham",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.064",
+      "from": "state.plus_12_months.cheltenham",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.065",
+      "from": "state.plus_12_months.cheltenham",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.066",
+      "from": "state.plus_12_months.cheltenham",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.067",
+      "from": "state.plus_12_months.cheltenham",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.068",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.cotswold",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.069",
+      "from": "state.plus_12_months.cotswold",
+      "to": "council.cotswold",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.070",
+      "from": "state.plus_12_months.cotswold",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.071",
+      "from": "state.plus_12_months.cotswold",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.072",
+      "from": "state.plus_12_months.cotswold",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.073",
+      "from": "state.plus_12_months.cotswold",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.074",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.forest_of_dean",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.075",
+      "from": "state.plus_12_months.forest_of_dean",
+      "to": "council.forest_of_dean",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.076",
+      "from": "state.plus_12_months.forest_of_dean",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.077",
+      "from": "state.plus_12_months.forest_of_dean",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.078",
+      "from": "state.plus_12_months.forest_of_dean",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.079",
+      "from": "state.plus_12_months.forest_of_dean",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.080",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.stroud",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.081",
+      "from": "state.plus_12_months.stroud",
+      "to": "council.stroud",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.082",
+      "from": "state.plus_12_months.stroud",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.083",
+      "from": "state.plus_12_months.stroud",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.084",
+      "from": "state.plus_12_months.stroud",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.085",
+      "from": "state.plus_12_months.stroud",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.086",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.gloucester",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.087",
+      "from": "state.plus_12_months.gloucester",
+      "to": "council.gloucester",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.088",
+      "from": "state.plus_12_months.gloucester",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.089",
+      "from": "state.plus_12_months.gloucester",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.090",
+      "from": "state.plus_12_months.gloucester",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.091",
+      "from": "state.plus_12_months.gloucester",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.092",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.tewkesbury",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.093",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "council.tewkesbury",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.094",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "system.nec_iworld_dms",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.095",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.096",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "interface.web_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.097",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "interface.dms_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.098",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "interface.cloud_forms_citizen_platform",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.099",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.cheltenham",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.100",
+      "from": "state.vesting_day.cheltenham",
+      "to": "council.cheltenham",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.101",
+      "from": "state.vesting_day.cheltenham",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.102",
+      "from": "state.vesting_day.cheltenham",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.103",
+      "from": "state.vesting_day.cheltenham",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.104",
+      "from": "state.vesting_day.cheltenham",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.105",
+      "from": "state.vesting_day.cheltenham",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.106",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.cotswold",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.107",
+      "from": "state.vesting_day.cotswold",
+      "to": "council.cotswold",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.108",
+      "from": "state.vesting_day.cotswold",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.109",
+      "from": "state.vesting_day.cotswold",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.110",
+      "from": "state.vesting_day.cotswold",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.111",
+      "from": "state.vesting_day.cotswold",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.112",
+      "from": "state.vesting_day.cotswold",
+      "to": "issue.cloud_opportunity_2028",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.113",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.forest_of_dean",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.114",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "council.forest_of_dean",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.115",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.116",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.117",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.118",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.119",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "issue.cloud_opportunity_2028",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.120",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.stroud",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.121",
+      "from": "state.vesting_day.stroud",
+      "to": "council.stroud",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.122",
+      "from": "state.vesting_day.stroud",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.123",
+      "from": "state.vesting_day.stroud",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.124",
+      "from": "state.vesting_day.stroud",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.125",
+      "from": "state.vesting_day.stroud",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.126",
+      "from": "state.vesting_day.stroud",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.127",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.gloucester",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.128",
+      "from": "state.vesting_day.gloucester",
+      "to": "council.gloucester",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.129",
+      "from": "state.vesting_day.gloucester",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.130",
+      "from": "state.vesting_day.gloucester",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.131",
+      "from": "state.vesting_day.gloucester",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.132",
+      "from": "state.vesting_day.gloucester",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.133",
+      "from": "state.vesting_day.gloucester",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.134",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.tewkesbury",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.135",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "council.tewkesbury",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.136",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "system.nec_iworld_dms",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.137",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.138",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "interface.web_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.139",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "interface.dms_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.140",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "interface.cloud_forms_citizen_platform",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.141",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "issue.legacy_migration",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.142",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.cheltenham",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.143",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "council.cheltenham",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.144",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.145",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "deployment.shared_cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.146",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.147",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.148",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.149",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.cotswold",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.150",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "council.cotswold",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.151",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.152",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "deployment.shared_cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.153",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.154",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.155",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.156",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.forest_of_dean",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.157",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "council.forest_of_dean",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.158",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.159",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "deployment.shared_cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.160",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.161",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.162",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.163",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.stroud",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.164",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "council.stroud",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.165",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.166",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "deployment.shared_cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.167",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.168",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.169",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.170",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.gloucester",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.171",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "council.gloucester",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.172",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.173",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "deployment.shared_cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.174",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.175",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.176",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.177",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.tewkesbury",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.178",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "council.tewkesbury",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.179",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "system.nec_iworld_dms",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.180",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.181",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "interface.web_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.182",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "interface.dms_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.183",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "interface.cloud_forms_citizen_platform",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.184",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "issue.legacy_migration",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.185",
+      "from": "phase.thousand_days_consolidated",
+      "to": "state.thousand_days_consolidated.gloucestershire",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.186",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "to": "council.gloucestershire",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.187",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.188",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.190",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.191",
+      "from": "phase.thousand_days_potential",
+      "to": "state.thousand_days_potential.gloucestershire",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.192",
+      "from": "state.thousand_days_potential.gloucestershire",
+      "to": "council.gloucestershire",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.193",
+      "from": "state.thousand_days_potential.gloucestershire",
+      "to": "system.open_source_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.194",
+      "from": "state.thousand_days_potential.gloucestershire",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue2.195",
+      "from": "state.vesting_day.gloucester",
+      "to": "issue.gloucester_contract_bridge",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.state_issue2.196",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "issue.gloucester_contract_bridge",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.contract_council.197",
+      "from": "contract.cheltenham",
+      "to": "council.cheltenham",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.198",
+      "from": "contract.cheltenham",
+      "to": "system.civica_open_revenues",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_resolves.199",
+      "from": "contract.cheltenham",
+      "to": "task.contract_dates",
+      "kind": "resolves"
+    },
+    {
+      "id": "edge.contract_council.200",
+      "from": "contract.cotswold",
+      "to": "council.cotswold",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.201",
+      "from": "contract.cotswold",
+      "to": "system.civica_open_revenues",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_resolves.202",
+      "from": "contract.cotswold",
+      "to": "task.contract_dates",
+      "kind": "resolves"
+    },
+    {
+      "id": "edge.contract_council.203",
+      "from": "contract.forest_of_dean",
+      "to": "council.forest_of_dean",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.204",
+      "from": "contract.forest_of_dean",
+      "to": "system.civica_open_revenues",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_resolves.205",
+      "from": "contract.forest_of_dean",
+      "to": "task.contract_dates",
+      "kind": "resolves"
+    },
+    {
+      "id": "edge.contract_council.206",
+      "from": "contract.stroud",
+      "to": "council.stroud",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.207",
+      "from": "contract.stroud",
+      "to": "system.civica_open_revenues",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_blocks.208",
+      "from": "contract.stroud",
+      "to": "task.contract_dates",
+      "kind": "blocks"
+    },
+    {
+      "id": "edge.contract_council.209",
+      "from": "contract.gloucester",
+      "to": "council.gloucester",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.210",
+      "from": "contract.gloucester",
+      "to": "system.civica_open_revenues",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_resolves.211",
+      "from": "contract.gloucester",
+      "to": "task.contract_dates",
+      "kind": "resolves"
+    },
+    {
+      "id": "edge.contract_council.212",
+      "from": "contract.tewkesbury",
+      "to": "council.tewkesbury",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.213",
+      "from": "contract.tewkesbury",
+      "to": "system.nec_iworld_dms",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_resolves.214",
+      "from": "contract.tewkesbury",
+      "to": "task.contract_dates",
+      "kind": "resolves"
+    },
+    {
+      "id": "edge.issue_contract.215",
+      "from": "issue.cloud_opportunity_2028",
+      "to": "contract.cotswold",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.issue_contract.216",
+      "from": "issue.cloud_opportunity_2028",
+      "to": "contract.forest_of_dean",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.issue_contract.217",
+      "from": "issue.legacy_migration",
+      "to": "contract.tewkesbury",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.issue_contract.218",
+      "from": "issue.gloucester_contract_bridge",
+      "to": "contract.gloucester",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.decision_informs.219",
+      "from": "contract.cotswold",
+      "to": "decision.infra_consolidation_timing",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.decision_informs.220",
+      "from": "contract.forest_of_dean",
+      "to": "decision.infra_consolidation_timing",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.uses.917",
+      "from": "user_group.cheltenham_staff",
+      "kind": "uses",
+      "to": "system.civica_open_revenues",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.918",
+      "from": "user_group.cotswold_staff",
+      "kind": "uses",
+      "to": "system.civica_open_revenues",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.919",
+      "from": "user_group.forest_of_dean_staff",
+      "kind": "uses",
+      "to": "system.civica_open_revenues",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.920",
+      "from": "user_group.stroud_staff",
+      "kind": "uses",
+      "to": "system.civica_open_revenues",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.921",
+      "from": "user_group.gloucester_staff",
+      "kind": "uses",
+      "to": "system.civica_open_revenues",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.922",
+      "from": "user_group.tewkesbury_staff",
+      "kind": "uses",
+      "to": "system.nec_iworld_dms",
+      "sample": true
+    },
+    {
+      "id": "edge.supports.951",
+      "from": "system.civica_open_revenues",
+      "kind": "supports",
+      "to": "business_function.revenues_and_benefits"
+    },
+    {
+      "id": "edge.supports.952",
+      "from": "system.nec_iworld_dms",
+      "kind": "supports",
+      "to": "business_function.revenues_and_benefits"
+    },
+    {
+      "id": "edge.supports.953",
+      "from": "system.open_source_revenues",
+      "kind": "supports",
+      "to": "business_function.revenues_and_benefits"
+    },
+    {
+      "id": "edge.for.991",
+      "from": "user_group.cheltenham_staff",
+      "kind": "for",
+      "to": "council.cheltenham",
+      "sample": true
+    },
+    {
+      "id": "edge.for.992",
+      "from": "user_group.cotswold_staff",
+      "kind": "for",
+      "to": "council.cotswold",
+      "sample": true
+    },
+    {
+      "id": "edge.for.993",
+      "from": "user_group.forest_of_dean_staff",
+      "kind": "for",
+      "to": "council.forest_of_dean",
+      "sample": true
+    },
+    {
+      "id": "edge.for.994",
+      "from": "user_group.stroud_staff",
+      "kind": "for",
+      "to": "council.stroud",
+      "sample": true
+    },
+    {
+      "id": "edge.for.995",
+      "from": "user_group.gloucester_staff",
+      "kind": "for",
+      "to": "council.gloucester",
+      "sample": true
+    },
+    {
+      "id": "edge.for.996",
+      "from": "user_group.tewkesbury_staff",
+      "kind": "for",
+      "to": "council.tewkesbury",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1011",
+      "from": "user_group.cheltenham_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1012",
+      "from": "user_group.cheltenham_staff_unitary",
+      "kind": "locality",
+      "to": "council.cheltenham",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1013",
+      "from": "user_group.cotswold_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1014",
+      "from": "user_group.cotswold_staff_unitary",
+      "kind": "locality",
+      "to": "council.cotswold",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1015",
+      "from": "user_group.forest_of_dean_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1016",
+      "from": "user_group.forest_of_dean_staff_unitary",
+      "kind": "locality",
+      "to": "council.forest_of_dean",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1017",
+      "from": "user_group.stroud_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1018",
+      "from": "user_group.stroud_staff_unitary",
+      "kind": "locality",
+      "to": "council.stroud",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1019",
+      "from": "user_group.gloucester_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1020",
+      "from": "user_group.gloucester_staff_unitary",
+      "kind": "locality",
+      "to": "council.gloucester",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1021",
+      "from": "user_group.tewkesbury_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1022",
+      "from": "user_group.tewkesbury_staff_unitary",
+      "kind": "locality",
+      "to": "council.tewkesbury",
+      "sample": true
+    },
+    {
+      "id": "edge.for.2000",
+      "from": "user_group.gloucestershire_staff_consolidated",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3001",
+      "from": "state.now.cheltenham",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3002",
+      "from": "state.now.cotswold",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3003",
+      "from": "state.now.forest_of_dean",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3004",
+      "from": "state.now.stroud",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3005",
+      "from": "state.now.gloucester",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3006",
+      "from": "state.now.tewkesbury",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3008",
+      "from": "state.plus_12_months.cotswold",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3009",
+      "from": "state.plus_12_months.forest_of_dean",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3012",
+      "from": "state.plus_12_months.tewkesbury",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3014",
+      "from": "state.vesting_day.cotswold",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3015",
+      "from": "state.vesting_day.forest_of_dean",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3018",
+      "from": "state.vesting_day.tewkesbury",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3024",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.4001",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "kind": "uses",
+      "to": "interface.web_interface",
+      "protocol": "HTTPS",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.4002",
+      "from": "state.thousand_days_potential.gloucestershire",
+      "kind": "uses",
+      "to": "interface.web_interface",
+      "protocol": "HTTPS",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5001",
+      "from": "state.now.cheltenham",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5002",
+      "from": "state.now.cheltenham",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5003",
+      "from": "state.now.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5004",
+      "from": "state.now.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5005",
+      "from": "state.now.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5006",
+      "from": "state.now.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5007",
+      "from": "state.now.stroud",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5008",
+      "from": "state.now.stroud",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5009",
+      "from": "state.now.gloucester",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5010",
+      "from": "state.now.gloucester",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5011",
+      "from": "state.now.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5012",
+      "from": "state.now.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5013",
+      "from": "state.now.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.dms_filesync",
+      "port": "File system",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5014",
+      "from": "state.plus_12_months.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5015",
+      "from": "state.plus_12_months.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5016",
+      "from": "state.plus_12_months.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5017",
+      "from": "state.plus_12_months.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5018",
+      "from": "state.plus_12_months.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5019",
+      "from": "state.plus_12_months.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5020",
+      "from": "state.plus_12_months.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.dms_filesync",
+      "port": "File system",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5021",
+      "from": "state.vesting_day.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5022",
+      "from": "state.vesting_day.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5023",
+      "from": "state.vesting_day.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5024",
+      "from": "state.vesting_day.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5025",
+      "from": "state.vesting_day.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5026",
+      "from": "state.vesting_day.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5027",
+      "from": "state.vesting_day.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.dms_filesync",
+      "port": "File system",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5028",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5029",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5030",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.dms_filesync",
+      "port": "File system",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6001",
+      "from": "state.plus_12_months.cheltenham",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6002",
+      "from": "state.plus_12_months.stroud",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6003",
+      "from": "state.plus_12_months.gloucester",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6004",
+      "from": "state.vesting_day.cheltenham",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6005",
+      "from": "state.vesting_day.stroud",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6006",
+      "from": "state.vesting_day.gloucester",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6007",
+      "from": "state.vesting_day_shared.cheltenham",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6008",
+      "from": "state.vesting_day_shared.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6009",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6010",
+      "from": "state.vesting_day_shared.stroud",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6011",
+      "from": "state.vesting_day_shared.gloucester",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6012",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6013",
+      "from": "state.thousand_days_potential.gloucestershire",
+      "kind": "hosted_on",
+      "to": "server.osr_cloud_platform",
+      "port": "443",
+      "sample": true
+    }
+  ]
+}

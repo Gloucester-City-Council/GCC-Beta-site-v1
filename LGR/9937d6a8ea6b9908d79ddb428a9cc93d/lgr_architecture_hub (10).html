@@ -1,0 +1,4721 @@
+<!DOCTYPE html>
+<html lang="en" class="govuk-template">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gloucestershire LGR Application Architecture Hub</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/govuk-frontend@5.7.1/dist/govuk/govuk-frontend.min.css">
+<style>
+  body{ background:#f3f2f1; }
+  .app-hero{ background:#1d70b8; color:#fff; padding:30px 0 25px; }
+  .app-hero h1{ color:#fff; }
+  .app-hero p{ color:#fff; }
+  .app-actions{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+  .app-save-flag{ font-size:14px; color:#00703c; opacity:0; transition:opacity .3s; }
+  .app-save-flag.show{ opacity:1; }
+  .app-card{ background:#fff; border:1px solid #b1b4b6; padding:20px; height:100%; }
+  .app-card__eyebrow{ font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#1d70b8; margin:0 0 5px; }
+  .app-card__title{ margin-bottom:10px !important; }
+  .app-card__tags{ margin-bottom:10px; }
+  .app-card__tags .govuk-tag{ margin-right:5px; margin-bottom:5px; }
+  .app-card__chips{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+  .app-chip{ font-size:14px; border:1px solid #b1b4b6; border-radius:12px; padding:2px 10px; color:#505a5f; }
+  .app-card .govuk-warning-text{ margin:10px 0; }
+  .app-card__contract{ font-size:14px; color:#505a5f; border-top:1px solid #b1b4b6; padding-top:8px; margin-top:8px; }
+  .app-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:15px; margin-top:20px; }
+  .app-spine-wrap{ background:#fff; border:1px solid #b1b4b6; padding:20px; }
+  .app-phase-track{ position:relative; padding:0 4px; }
+  .app-phase-stations{ position:relative; display:flex; }
+  .app-phase-station{ flex:1 1 0; display:flex; flex-direction:column; align-items:center; min-width:0; padding:0 6px; box-sizing:border-box; }
+  .app-phase-line{ position:absolute; left:0; right:0; height:2px; background:#b1b4b6; z-index:0; }
+  .app-phase-slot{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:64px; width:100%; }
+  .app-phase-slot.bottom{ justify-content:flex-start; }
+  .app-phase-dot{ width:14px; height:14px; border-radius:50%; background:#fff; border:2px solid #505a5f; z-index:1; box-sizing:border-box; flex-shrink:0; }
+  .app-phase-dot.passed{ background:#1d70b8; border-color:#1d70b8; }
+  .app-phase-station-label{ font-size:13px; font-weight:700; margin-top:8px; text-align:center; word-break:break-word; max-width:100%; }
+  .app-phase-connector{ width:2px; height:12px; background:#505a5f; flex-shrink:0; }
+  .app-phase-fork-box{ border:1.5px solid #505a5f; border-radius:3px; padding:5px 8px; font-size:12px; font-weight:700; text-align:center; background:#fff; color:#0b0c0c; cursor:pointer; max-width:130px; word-break:break-word; box-sizing:border-box; font-family:inherit; }
+  .app-phase-fork-box:hover{ background:#f3f2f1; }
+  .app-phase-fork-box.active{ border-color:#1d70b8; color:#1d70b8; background:#e6f1fb; }
+  .app-slider-row{ display:flex; align-items:center; margin:20px 0 16px; }
+  .app-slider-row input[type=range]{
+    -webkit-appearance:none; appearance:none; width:84%; margin:0 8%; flex:none;
+    height:4px; border-radius:2px; background:#b1b4b6; outline:none; cursor:pointer;
+  }
+  .app-slider-row input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:22px; height:22px; border-radius:50%;
+    background:#1d70b8; border:3px solid #fff; box-shadow:0 0 0 1.5px #1d70b8; cursor:pointer; margin-top:0;
+  }
+  .app-slider-row input[type=range]::-moz-range-thumb{
+    width:22px; height:22px; border-radius:50%; background:#1d70b8; border:3px solid #fff; box-shadow:0 0 0 1.5px #1d70b8; cursor:pointer;
+  }
+  .app-slider-row input[type=range]::-moz-range-track{ height:4px; border-radius:2px; background:#b1b4b6; }
+  .app-slider-row input[type=range]:focus-visible{ box-shadow:0 0 0 3px #ffdd00; }
+  .app-step-caption-row{ display:flex; justify-content:space-between; padding:0 8%; margin-bottom:12px; }
+  input[type=range]{ flex:1; }
+  .app-step-label{ font-size:14px; color:#505a5f; min-width:70px; }
+  .app-fork-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+  .app-segmented{ display:inline-flex; border:1px solid #0b0c0c; border-radius:0; overflow:hidden; }
+  .app-segmented button{ font-size:16px; padding:8px 14px; background:#fff; color:#0b0c0c; border:none; cursor:pointer; font-family:inherit; }
+  .app-segmented button + button{ border-left:1px solid #0b0c0c; }
+  .app-segmented button[aria-pressed="true"]{ background:#1d70b8; color:#fff; font-weight:700; }
+  .app-explore-link{ display:block; margin-top:8px; }
+  .app-crumbs{ list-style:none; padding:0; margin:0 0 15px; display:flex; flex-wrap:wrap; gap:4px; font-size:16px; }
+  .app-crumbs li:not(:last-child)::after{ content:"/"; margin-left:6px; color:#505a5f; }
+  .app-pivot-groups{ margin-top:10px; }
+  .app-pivot-groups h3{ margin-bottom:8px; }
+  .app-pivot-btn{ display:inline-block; margin:0 6px 8px 0; padding:6px 12px; border:1px solid #1d70b8; background:#fff; color:#1d70b8; font-size:16px; font-family:inherit; cursor:pointer; }
+  .app-pivot-btn:hover{ background:#1d70b8; color:#fff; }
+  .app-empty{ background:#fff; border:1px dashed #b1b4b6; padding:20px; text-align:center; color:#505a5f; }
+  .app-field-row{ display:grid; grid-template-columns:160px 1fr 90px; gap:8px; margin-bottom:8px; align-items:center; }
+  .app-node-card{ margin-bottom:15px; }
+  .app-edge-table input{ width:100%; }
+  .app-search-row{ display:flex; gap:8px; align-items:flex-end; margin-bottom:20px; flex-wrap:wrap; }
+  .app-search-row .govuk-form-group{ margin-bottom:0; flex:1; min-width:200px; }
+  .app-function-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:15px; }
+  .app-function-btn{ font-size:16px; font-family:inherit; padding:10px 18px; border:2px solid #1d70b8; background:#fff; color:#1d70b8; cursor:pointer; }
+  .app-function-btn[aria-pressed="true"]{ background:#1d70b8; color:#fff; }
+  .app-function-panel{ background:#fff; border:1px solid #b1b4b6; padding:15px 20px; margin-bottom:20px; }
+  .app-sample-tag{ background:#f3f2f1; color:#0b0c0c; }
+  .app-mini-row{ font-size:14px; color:#505a5f; margin:4px 0; }
+  .app-mini-row strong{ color:#0b0c0c; }
+  .app-org-row{ display:flex; gap:20px; flex-wrap:wrap; align-items:flex-start; }
+  .app-org-col{ flex:1 1 220px; max-width:260px; min-width:210px; min-height:0; background:#fff; border:1px solid #b1b4b6; padding:15px; display:flex; flex-direction:column; align-items:center; text-align:center; box-sizing:border-box; }
+  .app-node-title{ font-weight:700; font-size:16px; margin:0 0 6px; word-break:break-word; overflow-wrap:break-word; }
+  .app-connector{ width:2px; height:16px; background:#505a5f; margin:0 auto; flex-shrink:0; }
+  .app-node-box{ border:1.5px solid #0b0c0c; border-radius:4px; padding:10px 12px; width:100%; min-width:0; background:#fff; cursor:pointer; box-sizing:border-box; }
+  .app-node-box:hover{ background:#f3f2f1; }
+  .app-node-label{ font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:#1d70b8; font-weight:700; margin:0 0 4px; }
+  .app-node-value{ font-size:14px; font-weight:700; margin:0; word-break:break-word; overflow-wrap:break-word; }
+  .app-node-sub{ font-size:12px; color:#505a5f; margin:4px 0 0; word-break:break-word; overflow-wrap:break-word; }
+  .app-fan-row{ position:relative; display:flex; gap:14px; flex-wrap:wrap; justify-content:center; width:100%; padding-top:14px; }
+  .app-fan-row::before{ content:""; position:absolute; top:0; left:0; right:0; height:2px; background:#505a5f; }
+  .app-fan-item{ display:flex; flex-direction:column; align-items:center; width:100px; min-width:0; }
+  .app-fan-label{ font-size:11px; font-weight:700; color:#1d70b8; margin:4px 0 2px; word-break:break-word; }
+  .app-connector-sm{ width:2px; height:10px; background:#505a5f; margin:0 auto; flex-shrink:0; }
+  .app-expand-controls{ margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .app-merge-boxes{ display:flex; gap:14px; justify-content:center; width:100%; position:relative; padding-bottom:14px; }
+  .app-merge-boxes::before{ content:""; position:absolute; bottom:0; left:0; right:0; height:2px; background:#505a5f; }
+  .app-merge-item{ flex:1 1 0; min-width:0; position:relative; padding-bottom:14px; }
+  .app-merge-item::after{ content:""; position:absolute; bottom:0; left:50%; width:2px; height:14px; background:#505a5f; transform:translateX(-50%); }
+  .app-expand-btn{ font-size:13px; font-family:inherit; background:#fff; border:1px solid #1d70b8; color:#1d70b8; padding:6px 10px; cursor:pointer; border-radius:3px; }
+  .app-expand-btn:hover{ background:#1d70b8; color:#fff; }
+  .app-collapse-btn{ font-size:13px; font-family:inherit; background:transparent; border:none; color:#505a5f; text-decoration:underline; cursor:pointer; padding:6px 0; }
+  .app-modal-backdrop{ position:fixed; inset:0; background:rgba(11,12,12,0.65); display:flex; align-items:center; justify-content:center; z-index:1000; padding:20px; }
+  .app-modal-backdrop[hidden]{ display:none; }
+  .app-modal{ background:#fff; width:100%; max-width:520px; max-height:82vh; overflow-y:auto; padding:30px; position:relative; border-top:5px solid #1d70b8; }
+  .app-modal-close{ position:absolute; top:12px; right:12px; background:transparent; border:none; font-size:28px; line-height:1; cursor:pointer; color:#0b0c0c; padding:4px 8px; }
+  .app-modal-close:hover{ color:#1d70b8; }
+  .app-modal-conn-list{ list-style:none; padding:0; margin:6px 0 0; }
+  .app-modal-conn-list li{ font-size:14px; color:#505a5f; padding:2px 0; }
+</style>
+</head>
+<body class="govuk-template__body">
+<script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+
+<header class="govuk-header" data-module="govuk-header">
+  <div class="govuk-header__container govuk-width-container">
+    <div class="govuk-header__logo">
+      <a href="#" class="govuk-header__link govuk-header__link--homepage" style="pointer-events:none;">
+        <span class="govuk-header__logotype-text" style="font-size:24px;">Gloucestershire LGR</span>
+      </a>
+    </div>
+    <div class="govuk-header__content"></div>
+  </div>
+</header>
+
+<div class="govuk-phase-banner govuk-width-container">
+  <p class="govuk-phase-banner__content">
+    <strong class="govuk-tag govuk-phase-banner__content__tag">alpha</strong>
+    <span class="govuk-phase-banner__text">This is a new tool for tracking application architecture through LGR &mdash; feedback welcome.</span>
+  </p>
+</div>
+
+<div class="app-hero">
+  <div class="govuk-width-container">
+    <h1 class="govuk-heading-xl" id="pageTitle" style="margin-bottom:10px;">Application Architecture Hub</h1>
+    <p class="govuk-body-l" id="pageLede" style="margin-bottom:0;">See how systems are changing over time, pivot between decision routes, and drill into the detail behind any system.</p>
+  </div>
+</div>
+
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper" id="main-content">
+
+    <div class="app-actions">
+      <span class="app-save-flag" id="saveFlag">Saved</span>
+    </div>
+
+    <div class="govuk-inset-text">
+      Council Tax, Benefits and NNDR are shown as separate core functions based on what each council's contract register actually says they cover.
+      Anything tagged <span class="govuk-tag app-sample-tag">Sample data</span> &mdash; servers, hosting engines, user numbers and network backhaul &mdash;
+      is an illustrative guess, not a captured fact. The real server estate, user counts and network paths haven't been gathered yet for these councils;
+      replace these nodes in <strong>Manage data</strong> once the real detail is known.
+    </div>
+
+    <div class="govuk-tabs" data-module="govuk-tabs">
+      <h2 class="govuk-tabs__title">Contents</h2>
+      <ul class="govuk-tabs__list">
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+          <a class="govuk-tabs__tab" href="#panel-timeline">Timeline</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#panel-drilldown">Drill-down explorer</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#panel-register">Data register</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#panel-manage">Manage data</a>
+        </li>
+      </ul>
+
+      <div class="govuk-tabs__panel" id="panel-timeline">
+        <h2 class="govuk-heading-l">Timeline</h2>
+        <p class="govuk-body">Move through time to see how every council's system is changing, from the function down to individual servers.</p>
+        <div class="app-function-panel" id="functionPanel"></div>
+        <div class="app-spine-wrap">
+          <div class="app-phase-track" id="phaseTrack"></div>
+          <div class="app-slider-row">
+            <input type="range" id="slider" min="0" max="0" step="1" value="0" aria-label="Move through time">
+          </div>
+          <div class="app-step-caption-row">
+            <span class="app-step-label" id="stepLeftLabel"></span>
+            <span class="app-step-label" id="stepRightLabel" style="text-align:right;"></span>
+          </div>
+          <div id="riskStrip"></div>
+        </div>
+        <div id="stackWrap" style="margin-top:20px;"></div>
+        <p class="govuk-body-s" id="footnote" style="color:#505a5f; margin-top:20px;"></p>
+      </div>
+
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="panel-drilldown">
+        <h2 class="govuk-heading-l">Drill-down explorer</h2>
+        <p class="govuk-body">Start anywhere and pivot through the connections &mdash; every system, contract, issue or (once added) server and business function is explorable this way.</p>
+        <div class="app-search-row">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="pivotSearch">Jump to</label>
+            <input class="govuk-input" id="pivotSearch" list="allNodesDatalist" placeholder="Type a name or id&hellip;">
+            <datalist id="allNodesDatalist"></datalist>
+          </div>
+          <button class="govuk-button govuk-button--secondary" id="pivotGoBtn" style="margin-bottom:0;">Go</button>
+        </div>
+        <ol class="app-crumbs" id="pivotCrumbs"></ol>
+        <div id="pivotDetail"></div>
+      </div>
+
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="panel-register">
+        <h2 class="govuk-heading-l">Data register</h2>
+        <p class="govuk-body">Decisions, issues, tasks, constraints and the system contract register.</p>
+        <div id="registerContent"></div>
+      </div>
+
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="panel-manage">
+        <h2 class="govuk-heading-l">Manage data</h2>
+        <p class="govuk-body">Add, edit or remove the underlying records. Fields marked <strong class="govuk-tag govuk-tag--grey">locked</strong> are read-only here.</p>
+
+        <div class="govuk-accordion" data-module="govuk-accordion" id="manageAccordion">
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h3 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-heading-nodes">Nodes</span>
+              </h3>
+            </div>
+            <div id="accordion-content-nodes" class="govuk-accordion__section-content">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="typeSelect">Node type</label>
+                <select class="govuk-select" id="typeSelect"></select>
+              </div>
+              <div id="nodeEditorArea"></div>
+              <h4 class="govuk-heading-s">Add a node</h4>
+              <div class="app-search-row">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="newNodeType">Type</label>
+                  <input class="govuk-input" id="newNodeType" list="typeDatalist">
+                </div>
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="newNodeId">Id</label>
+                  <input class="govuk-input" id="newNodeId">
+                </div>
+                <button class="govuk-button" id="addNodeBtn" style="margin-bottom:0;">Add node</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h3 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-heading-edges">Edges</span>
+              </h3>
+            </div>
+            <div id="accordion-content-edges" class="govuk-accordion__section-content">
+              <table class="govuk-table app-edge-table">
+                <thead class="govuk-table__head">
+                  <tr class="govuk-table__row"><th class="govuk-table__header">From</th><th class="govuk-table__header">Kind</th><th class="govuk-table__header">To</th><th class="govuk-table__header">Zone</th><th class="govuk-table__header"></th></tr>
+                </thead>
+                <tbody class="govuk-table__body" id="edgesBody"></tbody>
+              </table>
+              <h4 class="govuk-heading-s">Add an edge</h4>
+              <div class="app-search-row">
+                <div class="govuk-form-group"><label class="govuk-label" for="newEdgeFrom">From</label><input class="govuk-input" id="newEdgeFrom" list="nodeIdDatalist"></div>
+                <div class="govuk-form-group"><label class="govuk-label" for="newEdgeKind">Kind</label><input class="govuk-input" id="newEdgeKind" list="kindDatalist"></div>
+                <div class="govuk-form-group"><label class="govuk-label" for="newEdgeTo">To</label><input class="govuk-input" id="newEdgeTo" list="nodeIdDatalist"></div>
+                <button class="govuk-button" id="addEdgeBtn" style="margin-bottom:0;">Add edge</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="govuk-accordion__section">
+            <div class="govuk-accordion__section-header">
+              <h3 class="govuk-accordion__section-heading">
+                <span class="govuk-accordion__section-button" id="accordion-heading-io">Import and export</span>
+              </h3>
+            </div>
+            <div id="accordion-content-io" class="govuk-accordion__section-content">
+              <div class="app-actions" style="margin-bottom:15px;">
+                <label class="govuk-button govuk-button--secondary" for="uploadInput" style="margin-bottom:0;">Upload JSON</label>
+                <input type="file" id="uploadInput" accept="application/json" style="display:none;">
+                <button class="govuk-button govuk-button--secondary" id="downloadBtn" style="margin-bottom:0;">Download JSON</button>
+                <button class="govuk-button govuk-button--warning" id="resetBtn" style="margin-bottom:0;">Reset to original</button>
+              </div>
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="jsonArea">Raw graph JSON</label>
+                <textarea class="govuk-textarea" id="jsonArea" rows="16" spellcheck="false" style="font-family:monospace; font-size:13px;"></textarea>
+              </div>
+              <div class="app-actions">
+                <button class="govuk-button" id="applyJsonBtn" style="margin-bottom:0;">Apply from text</button>
+                <button class="govuk-button govuk-button--secondary" id="copyJsonBtn" style="margin-bottom:0;">Copy</button>
+                <button class="govuk-button govuk-button--secondary" id="prettyJsonBtn" style="margin-bottom:0;">Re-format</button>
+              </div>
+              <p class="govuk-body" id="jsonStatus"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<div class="app-modal-backdrop" id="nodeModal" hidden>
+  <div class="app-modal" role="dialog" aria-modal="true" aria-labelledby="nodeModalTitle">
+    <button class="app-modal-close" id="nodeModalClose" aria-label="Close">&times;</button>
+    <div id="nodeModalContent"></div>
+  </div>
+</div>
+
+<footer class="govuk-footer">
+  <div class="govuk-width-container">
+    <div class="govuk-footer__meta">
+      <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+        <span class="govuk-footer__licence-description">
+          Built for Gloucestershire local government reorganisation programme planning.
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="application/json" id="default-graph">
+{
+  "id": "graph_revenue_benefits_lgr",
+  "profile": "project_outline",
+  "default_authority": {
+    "node": "delegated",
+    "edge": "key_decision"
+  },
+  "edge_authority": {
+    "governs": "locked",
+    "derives_from": "locked",
+    "precedes": "key_decision",
+    "blocks": "key_decision",
+    "depends_on": "key_decision",
+    "resolves": "key_decision",
+    "contains": "delegated",
+    "produces": "delegated",
+    "tests": "delegated",
+    "alternative_to": "key_decision",
+    "determines": "key_decision",
+    "uses": "delegated",
+    "for": "delegated",
+    "supports": "locked",
+    "hosted_on": "delegated"
+  },
+  "nodes": [
+    {
+      "id": "council.cheltenham",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cheltenham Borough Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.cotswold",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cotswold District Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.forest_of_dean",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Forest of Dean District Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.stroud",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Stroud District Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.gloucester",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucester City Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.tewkesbury",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Tewkesbury Borough Council"
+        },
+        {
+          "path": "council_type",
+          "value": "district"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "council.gloucestershire",
+      "type": "council",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council (post-LGR unitary)"
+        },
+        {
+          "path": "council_type",
+          "value": "unitary"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "system.civica_open_revenues",
+      "type": "system",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Civica Open Revenues"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "system.nec_iworld_dms",
+      "type": "system",
+      "fields": [
+        {
+          "path": "name",
+          "value": "NEC iWorld + DMS"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "system.open_source_revenues",
+      "type": "system",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Open source revenues platform (1000-day potential option)"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "deployment.on_premise",
+      "type": "deployment",
+      "fields": [
+        {
+          "path": "name",
+          "value": "On premise"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "deployment.cloud",
+      "type": "deployment",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cloud"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "deployment.shared_cloud",
+      "type": "deployment",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Shared cloud"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.application_interface",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Application interface"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.citizen_access",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Citizen Access portal"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.web_interface",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Web interface"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.avd",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Application interface (Azure Virtual Desktop)"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.dms_interface",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Application interface (DMS)"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "interface.cloud_forms_citizen_platform",
+      "type": "interface",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cloud forms / citizen platform"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "initiative.revenue_benefits_roadmap",
+      "type": "initiative",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Revenue and Benefits systems roadmap"
+        },
+        {
+          "path": "objective",
+          "value": "Model current and target-state Revenue & Benefits systems and infrastructure across Gloucestershire councils through LGR vesting day and post-vesting consolidation"
+        }
+      ]
+    },
+    {
+      "id": "phase.now",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "Now"
+        },
+        {
+          "path": "date",
+          "value": "Now"
+        }
+      ]
+    },
+    {
+      "id": "phase.plus_12_months",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "Shadow"
+        },
+        {
+          "path": "date",
+          "value": "10 May 2027"
+        }
+      ]
+    },
+    {
+      "id": "phase.vesting_day",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "At Vesting Day"
+        },
+        {
+          "path": "date",
+          "value": "1 April 2028"
+        }
+      ]
+    },
+    {
+      "id": "phase.vesting_day_shared",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "At Vesting Day - Shared Infrastructure"
+        },
+        {
+          "path": "date",
+          "value": "1 April 2028"
+        }
+      ]
+    },
+    {
+      "id": "phase.thousand_days_consolidated",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "1000 days - Consolidated solution"
+        },
+        {
+          "path": "date",
+          "value": "27 December 2030"
+        }
+      ]
+    },
+    {
+      "id": "phase.thousand_days_potential",
+      "type": "milestone",
+      "fields": [
+        {
+          "path": "label",
+          "value": "1000 days - Potential solution"
+        },
+        {
+          "path": "date",
+          "value": "27 December 2030"
+        }
+      ]
+    },
+    {
+      "id": "issue.identity_access",
+      "type": "issue",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Resolve identity and access"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        },
+        {
+          "path": "note",
+          "value": "Civica cloud/AVD deployments support SSO \u2014 narrows this to configuration and integration rather than a platform gap"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "issue.legacy_migration",
+      "type": "issue",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Legacy access + migration plan"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "issue.cloud_opportunity_2028",
+      "type": "issue",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Opportunity to move to cloud - May 2028"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "issue.dwp_psn",
+      "type": "issue",
+      "fields": [
+        {
+          "path": "title",
+          "value": "DWP moving off PSN"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "issue.gloucester_contract_bridge",
+      "type": "issue",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Civica contract ends 30/09/2027, ahead of estimated Vesting Day (2028)"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        },
+        {
+          "path": "note",
+          "value": "2 x 1 year extension options available on the contract to bridge to vesting"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "task.contract_dates",
+      "type": "task",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Contract dates in each system"
+        },
+        {
+          "path": "status",
+          "value": "partially resolved"
+        },
+        {
+          "path": "note",
+          "value": "End dates now captured for Cheltenham, Cotswold, Forest of Dean, Gloucester and Tewkesbury via the system/contract register. Stroud's end date is still outstanding."
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "task.bc_priority_unrated",
+      "type": "task",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Business Continuity priority not yet rated for any system"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        },
+        {
+          "path": "note",
+          "value": "The BC Priority column in the system/contract register is blank for every entry"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "task.cost_eol_unrated",
+      "type": "task",
+      "fields": [
+        {
+          "path": "title",
+          "value": "Annual cost and vendor end-of-life not yet captured for any system"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        },
+        {
+          "path": "note",
+          "value": "Needed to compare Civica Open Revenues against the open-source option at the 1000-day decision"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "decision.infra_consolidation_timing",
+      "type": "decision",
+      "fields": [
+        {
+          "path": "question",
+          "value": "Consolidate Cotswold and Forest of Dean onto shared Civica cloud at Vesting Day, or defer to the May 2028 contract opportunity?"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "decision.target_platform_1000days",
+      "type": "decision",
+      "fields": [
+        {
+          "path": "question",
+          "value": "At 1000 days, remain on Civica Open Revenues or migrate to an open-source revenues platform?"
+        },
+        {
+          "path": "status",
+          "value": "open"
+        }
+      ],
+      "authority": {
+        "zone": "key_decision"
+      }
+    },
+    {
+      "id": "constraint.vesting_readiness",
+      "type": "constraint",
+      "fields": [
+        {
+          "path": "rule",
+          "value": "Every council-system pairing must reach a resolved identity/access state, or have an explicit migration plan, by Vesting Day"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "state.now.cheltenham",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.now.cotswold",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Forest of Dean"
+        }
+      ]
+    },
+    {
+      "id": "state.now.forest_of_dean",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Cotswold"
+        }
+      ]
+    },
+    {
+      "id": "state.now.stroud",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.now.gloucester",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.now.tewkesbury",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "NEC iWorld + DMS"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.cheltenham",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.cotswold",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Forest of Dean"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.forest_of_dean",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Cotswold"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.stroud",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.gloucester",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.plus_12_months.tewkesbury",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "NEC iWorld + DMS"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.cheltenham",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.cotswold",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Forest of Dean"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.forest_of_dean",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        },
+        {
+          "path": "hosting_note",
+          "value": "Shared on-premise infrastructure with Cotswold"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.stroud",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.gloucester",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day.tewkesbury",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "NEC iWorld + DMS"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.cheltenham",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Shared cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.cotswold",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Shared cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.forest_of_dean",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Shared cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.stroud",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Shared cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.gloucester",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Shared cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.vesting_day_shared.tewkesbury",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "NEC iWorld + DMS"
+        },
+        {
+          "path": "deployment",
+          "value": "On premise"
+        }
+      ]
+    },
+    {
+      "id": "state.thousand_days_consolidated.gloucestershire",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "state.thousand_days_potential.gloucestershire",
+      "type": "state",
+      "fields": [
+        {
+          "path": "system",
+          "value": "Open source revenues platform (1000-day potential option)"
+        },
+        {
+          "path": "deployment",
+          "value": "Cloud"
+        }
+      ]
+    },
+    {
+      "id": "contract.cheltenham",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revs & Bens"
+        },
+        {
+          "path": "system_name",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "version",
+          "value": "26.0.09"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "On-premise"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "Civica"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "31/05/2028"
+        },
+        {
+          "path": "extensions_available",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "contract.cotswold",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revs & Bens"
+        },
+        {
+          "path": "system_name",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "version",
+          "value": "26.0.09"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "On-premise"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "Civica"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "31/05/2028"
+        },
+        {
+          "path": "extensions_available",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "contract.forest_of_dean",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revs & Bens"
+        },
+        {
+          "path": "system_name",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "version",
+          "value": "26.0.09"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "On-premise"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "Civica"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "31/05/2028"
+        },
+        {
+          "path": "extensions_available",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "contract.stroud",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revs & Bens"
+        },
+        {
+          "path": "system_name",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "version",
+          "value": "26.0.10"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "On-premise"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "Civica"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "Not captured"
+        },
+        {
+          "path": "extensions_available",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "contract.gloucester",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revs & Bens"
+        },
+        {
+          "path": "system_name",
+          "value": "Civica Open Revenues"
+        },
+        {
+          "path": "version",
+          "value": "26.0.09"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "Civica OR"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "30/09/2027"
+        },
+        {
+          "path": "extensions_available",
+          "value": "2 x 1 year"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "contract.tewkesbury",
+      "type": "contract",
+      "fields": [
+        {
+          "path": "service_name",
+          "value": "Revenues & Benefits"
+        },
+        {
+          "path": "system_name",
+          "value": "NEC iWorld + DMS"
+        },
+        {
+          "path": "version",
+          "value": "7.14.04"
+        },
+        {
+          "path": "purpose",
+          "value": "Council Tax, Benefits and NDR billing"
+        },
+        {
+          "path": "hosting",
+          "value": "On prem"
+        },
+        {
+          "path": "supports_sso",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "vendor",
+          "value": "NEC Software Solutions UK Limited"
+        },
+        {
+          "path": "contract_end_date",
+          "value": "21/01/2028"
+        },
+        {
+          "path": "extensions_available",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "terminate_for_convenience",
+          "value": "Not stated in register"
+        },
+        {
+          "path": "bc_priority",
+          "value": "Not rated"
+        },
+        {
+          "path": "annual_cost",
+          "value": "Not captured"
+        },
+        {
+          "path": "end_of_life",
+          "value": "Not captured"
+        }
+      ],
+      "authority": {
+        "zone": "locked"
+      }
+    },
+    {
+      "id": "server.civica_app",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Civica Open Revenues application server"
+        },
+        {
+          "path": "role",
+          "value": "application server"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.civica_db",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Civica Open Revenues database server"
+        },
+        {
+          "path": "role",
+          "value": "database server"
+        },
+        {
+          "path": "engine",
+          "value": "Microsoft SQL Server (sample guess)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.nec_app",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "NEC iWorld application server"
+        },
+        {
+          "path": "role",
+          "value": "application server"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.nec_db",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "NEC iWorld database server"
+        },
+        {
+          "path": "role",
+          "value": "database server"
+        },
+        {
+          "path": "engine",
+          "value": "Progress OpenEdge (sample guess)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.dms_filesync",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "DMS file sync server"
+        },
+        {
+          "path": "role",
+          "value": "file sync server"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.osr_app",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Open source revenues application server"
+        },
+        {
+          "path": "role",
+          "value": "application server"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.osr_db",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Open source revenues database server"
+        },
+        {
+          "path": "role",
+          "value": "database server"
+        },
+        {
+          "path": "engine",
+          "value": "PostgreSQL (sample guess)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.cheltenham_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cheltenham Borough Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.cotswold_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Cotswold District Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.forest_of_dean_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Forest of Dean District Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.stroud_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Stroud District Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.gloucester_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucester City Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.tewkesbury_staff",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Tewkesbury Borough Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "network_path.legacy_backhaul",
+      "type": "network_path",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Site-to-site network (sample)"
+        },
+        {
+          "path": "technology",
+          "value": "Point-to-point / MPLS (sample guess) \u2014 this is the network in live use today, not a deprecated route"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "network_path.zero_trust",
+      "type": "network_path",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Zero Trust / SASE backhaul (sample)"
+        },
+        {
+          "path": "technology",
+          "value": "Cloud-delivered Zero Trust (sample guess)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "business_function.revenues_and_benefits",
+      "type": "business_function",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Council Tax, Benefits & NNDR"
+        },
+        {
+          "path": "note",
+          "value": "One combined service \u2014 all three are handled as a single function, not three separate ones."
+        }
+      ]
+    },
+    {
+      "id": "user_group.cheltenham_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Cheltenham locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.cotswold_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Cotswold locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.forest_of_dean_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Forest of Dean locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.stroud_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Stroud locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.gloucester_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Gloucester locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.tewkesbury_staff_unitary",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Tewkesbury locality Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: 15-25)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "user_group.gloucestershire_staff_consolidated",
+      "type": "user_group",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Gloucestershire Council \u2014 Revenues & Benefits staff"
+        },
+        {
+          "path": "headcount",
+          "value": "not captured (sample estimate: one consolidated team, size TBC)"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.civica_cloud_platform",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Civica Open Revenues \u2014 cloud platform"
+        },
+        {
+          "path": "role",
+          "value": "vendor-managed cloud application (SaaS) \u2014 no visibility into Civica\u2019s own server architecture"
+        }
+      ],
+      "sample": true
+    },
+    {
+      "id": "server.osr_cloud_platform",
+      "type": "server",
+      "fields": [
+        {
+          "path": "name",
+          "value": "Open source revenues platform \u2014 cloud platform"
+        },
+        {
+          "path": "role",
+          "value": "cloud-hosted application (specific hosting arrangement not yet decided)"
+        }
+      ],
+      "sample": true
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge.init_phase.001",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.now",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.init_phase.002",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.plus_12_months",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.init_phase.003",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.vesting_day",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.init_phase.004",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.vesting_day_shared",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.init_phase.005",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.thousand_days_consolidated",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.init_phase.006",
+      "from": "initiative.revenue_benefits_roadmap",
+      "to": "phase.thousand_days_potential",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.seq.007",
+      "from": "phase.now",
+      "to": "phase.plus_12_months",
+      "kind": "precedes"
+    },
+    {
+      "id": "edge.seq.008",
+      "from": "phase.plus_12_months",
+      "to": "phase.vesting_day",
+      "kind": "precedes"
+    },
+    {
+      "id": "edge.fork.009",
+      "from": "phase.vesting_day",
+      "to": "phase.vesting_day_shared",
+      "kind": "alternative_to"
+    },
+    {
+      "id": "edge.seq.010",
+      "from": "phase.vesting_day",
+      "to": "phase.thousand_days_consolidated",
+      "kind": "precedes"
+    },
+    {
+      "id": "edge.seq.011",
+      "from": "phase.vesting_day_shared",
+      "to": "phase.thousand_days_consolidated",
+      "kind": "precedes"
+    },
+    {
+      "id": "edge.fork.012",
+      "from": "phase.thousand_days_consolidated",
+      "to": "phase.thousand_days_potential",
+      "kind": "alternative_to"
+    },
+    {
+      "id": "edge.risk.013",
+      "from": "issue.dwp_psn",
+      "to": "phase.plus_12_months",
+      "kind": "blocks"
+    },
+    {
+      "id": "edge.risk2.014",
+      "from": "task.bc_priority_unrated",
+      "to": "phase.vesting_day",
+      "kind": "blocks"
+    },
+    {
+      "id": "edge.decide.017",
+      "from": "decision.infra_consolidation_timing",
+      "to": "phase.vesting_day",
+      "kind": "determines"
+    },
+    {
+      "id": "edge.decide.018",
+      "from": "decision.infra_consolidation_timing",
+      "to": "phase.vesting_day_shared",
+      "kind": "determines"
+    },
+    {
+      "id": "edge.decide.019",
+      "from": "decision.target_platform_1000days",
+      "to": "phase.thousand_days_consolidated",
+      "kind": "determines"
+    },
+    {
+      "id": "edge.decide.020",
+      "from": "decision.target_platform_1000days",
+      "to": "phase.thousand_days_potential",
+      "kind": "determines"
+    },
+    {
+      "id": "edge.risk2.021",
+      "from": "task.bc_priority_unrated",
+      "to": "decision.target_platform_1000days",
+      "kind": "blocks"
+    },
+    {
+      "id": "edge.risk3.022",
+      "from": "task.cost_eol_unrated",
+      "to": "decision.target_platform_1000days",
+      "kind": "blocks"
+    },
+    {
+      "id": "edge.gov.023",
+      "from": "constraint.vesting_readiness",
+      "to": "phase.vesting_day",
+      "kind": "governs"
+    },
+    {
+      "id": "edge.gov.024",
+      "from": "constraint.vesting_readiness",
+      "to": "phase.vesting_day_shared",
+      "kind": "governs"
+    },
+    {
+      "id": "edge.phase_state.025",
+      "from": "phase.now",
+      "to": "state.now.cheltenham",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.026",
+      "from": "state.now.cheltenham",
+      "to": "council.cheltenham",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.027",
+      "from": "state.now.cheltenham",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.028",
+      "from": "state.now.cheltenham",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.029",
+      "from": "state.now.cheltenham",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.030",
+      "from": "state.now.cheltenham",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.031",
+      "from": "phase.now",
+      "to": "state.now.cotswold",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.032",
+      "from": "state.now.cotswold",
+      "to": "council.cotswold",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.033",
+      "from": "state.now.cotswold",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.034",
+      "from": "state.now.cotswold",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.035",
+      "from": "state.now.cotswold",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.036",
+      "from": "state.now.cotswold",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.037",
+      "from": "phase.now",
+      "to": "state.now.forest_of_dean",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.038",
+      "from": "state.now.forest_of_dean",
+      "to": "council.forest_of_dean",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.039",
+      "from": "state.now.forest_of_dean",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.040",
+      "from": "state.now.forest_of_dean",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.041",
+      "from": "state.now.forest_of_dean",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.042",
+      "from": "state.now.forest_of_dean",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.043",
+      "from": "phase.now",
+      "to": "state.now.stroud",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.044",
+      "from": "state.now.stroud",
+      "to": "council.stroud",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.045",
+      "from": "state.now.stroud",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.046",
+      "from": "state.now.stroud",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.047",
+      "from": "state.now.stroud",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.048",
+      "from": "state.now.stroud",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.049",
+      "from": "phase.now",
+      "to": "state.now.gloucester",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.050",
+      "from": "state.now.gloucester",
+      "to": "council.gloucester",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.051",
+      "from": "state.now.gloucester",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.052",
+      "from": "state.now.gloucester",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.053",
+      "from": "state.now.gloucester",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.054",
+      "from": "state.now.gloucester",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.055",
+      "from": "phase.now",
+      "to": "state.now.tewkesbury",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.056",
+      "from": "state.now.tewkesbury",
+      "to": "council.tewkesbury",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.057",
+      "from": "state.now.tewkesbury",
+      "to": "system.nec_iworld_dms",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.058",
+      "from": "state.now.tewkesbury",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.059",
+      "from": "state.now.tewkesbury",
+      "to": "interface.web_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.060",
+      "from": "state.now.tewkesbury",
+      "to": "interface.dms_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.061",
+      "from": "state.now.tewkesbury",
+      "to": "interface.cloud_forms_citizen_platform",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.062",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.cheltenham",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.063",
+      "from": "state.plus_12_months.cheltenham",
+      "to": "council.cheltenham",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.064",
+      "from": "state.plus_12_months.cheltenham",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.065",
+      "from": "state.plus_12_months.cheltenham",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.066",
+      "from": "state.plus_12_months.cheltenham",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.067",
+      "from": "state.plus_12_months.cheltenham",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.068",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.cotswold",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.069",
+      "from": "state.plus_12_months.cotswold",
+      "to": "council.cotswold",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.070",
+      "from": "state.plus_12_months.cotswold",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.071",
+      "from": "state.plus_12_months.cotswold",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.072",
+      "from": "state.plus_12_months.cotswold",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.073",
+      "from": "state.plus_12_months.cotswold",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.074",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.forest_of_dean",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.075",
+      "from": "state.plus_12_months.forest_of_dean",
+      "to": "council.forest_of_dean",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.076",
+      "from": "state.plus_12_months.forest_of_dean",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.077",
+      "from": "state.plus_12_months.forest_of_dean",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.078",
+      "from": "state.plus_12_months.forest_of_dean",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.079",
+      "from": "state.plus_12_months.forest_of_dean",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.080",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.stroud",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.081",
+      "from": "state.plus_12_months.stroud",
+      "to": "council.stroud",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.082",
+      "from": "state.plus_12_months.stroud",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.083",
+      "from": "state.plus_12_months.stroud",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.084",
+      "from": "state.plus_12_months.stroud",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.085",
+      "from": "state.plus_12_months.stroud",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.086",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.gloucester",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.087",
+      "from": "state.plus_12_months.gloucester",
+      "to": "council.gloucester",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.088",
+      "from": "state.plus_12_months.gloucester",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.089",
+      "from": "state.plus_12_months.gloucester",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.090",
+      "from": "state.plus_12_months.gloucester",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.091",
+      "from": "state.plus_12_months.gloucester",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.092",
+      "from": "phase.plus_12_months",
+      "to": "state.plus_12_months.tewkesbury",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.093",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "council.tewkesbury",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.094",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "system.nec_iworld_dms",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.095",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.096",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "interface.web_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.097",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "interface.dms_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.098",
+      "from": "state.plus_12_months.tewkesbury",
+      "to": "interface.cloud_forms_citizen_platform",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.099",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.cheltenham",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.100",
+      "from": "state.vesting_day.cheltenham",
+      "to": "council.cheltenham",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.101",
+      "from": "state.vesting_day.cheltenham",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.102",
+      "from": "state.vesting_day.cheltenham",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.103",
+      "from": "state.vesting_day.cheltenham",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.104",
+      "from": "state.vesting_day.cheltenham",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.105",
+      "from": "state.vesting_day.cheltenham",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.106",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.cotswold",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.107",
+      "from": "state.vesting_day.cotswold",
+      "to": "council.cotswold",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.108",
+      "from": "state.vesting_day.cotswold",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.109",
+      "from": "state.vesting_day.cotswold",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.110",
+      "from": "state.vesting_day.cotswold",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.111",
+      "from": "state.vesting_day.cotswold",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.112",
+      "from": "state.vesting_day.cotswold",
+      "to": "issue.cloud_opportunity_2028",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.113",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.forest_of_dean",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.114",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "council.forest_of_dean",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.115",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.116",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.117",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "interface.application_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.118",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.119",
+      "from": "state.vesting_day.forest_of_dean",
+      "to": "issue.cloud_opportunity_2028",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.120",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.stroud",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.121",
+      "from": "state.vesting_day.stroud",
+      "to": "council.stroud",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.122",
+      "from": "state.vesting_day.stroud",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.123",
+      "from": "state.vesting_day.stroud",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.124",
+      "from": "state.vesting_day.stroud",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.125",
+      "from": "state.vesting_day.stroud",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.126",
+      "from": "state.vesting_day.stroud",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.127",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.gloucester",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.128",
+      "from": "state.vesting_day.gloucester",
+      "to": "council.gloucester",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.129",
+      "from": "state.vesting_day.gloucester",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.130",
+      "from": "state.vesting_day.gloucester",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.131",
+      "from": "state.vesting_day.gloucester",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.132",
+      "from": "state.vesting_day.gloucester",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.133",
+      "from": "state.vesting_day.gloucester",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.134",
+      "from": "phase.vesting_day",
+      "to": "state.vesting_day.tewkesbury",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.135",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "council.tewkesbury",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.136",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "system.nec_iworld_dms",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.137",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.138",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "interface.web_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.139",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "interface.dms_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.140",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "interface.cloud_forms_citizen_platform",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.141",
+      "from": "state.vesting_day.tewkesbury",
+      "to": "issue.legacy_migration",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.142",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.cheltenham",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.143",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "council.cheltenham",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.144",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.145",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "deployment.shared_cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.146",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.147",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.148",
+      "from": "state.vesting_day_shared.cheltenham",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.149",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.cotswold",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.150",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "council.cotswold",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.151",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.152",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "deployment.shared_cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.153",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.154",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.155",
+      "from": "state.vesting_day_shared.cotswold",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.156",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.forest_of_dean",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.157",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "council.forest_of_dean",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.158",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.159",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "deployment.shared_cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.160",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.161",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.162",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.163",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.stroud",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.164",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "council.stroud",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.165",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.166",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "deployment.shared_cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.167",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.168",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.169",
+      "from": "state.vesting_day_shared.stroud",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.170",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.gloucester",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.171",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "council.gloucester",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.172",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.173",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "deployment.shared_cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.174",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "interface.avd",
+      "kind": "uses",
+      "protocol": "RDP",
+      "sample": true
+    },
+    {
+      "id": "edge.state_iface.175",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.176",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "issue.identity_access",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.177",
+      "from": "phase.vesting_day_shared",
+      "to": "state.vesting_day_shared.tewkesbury",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.178",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "council.tewkesbury",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.179",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "system.nec_iworld_dms",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.180",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "deployment.on_premise",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.181",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "interface.web_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.182",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "interface.dms_interface",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.183",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "interface.cloud_forms_citizen_platform",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue.184",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "to": "issue.legacy_migration",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.phase_state.185",
+      "from": "phase.thousand_days_consolidated",
+      "to": "state.thousand_days_consolidated.gloucestershire",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.186",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "to": "council.gloucestershire",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.187",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "to": "system.civica_open_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.188",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_iface.190",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "to": "interface.citizen_access",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.phase_state.191",
+      "from": "phase.thousand_days_potential",
+      "to": "state.thousand_days_potential.gloucestershire",
+      "kind": "contains"
+    },
+    {
+      "id": "edge.state_council.192",
+      "from": "state.thousand_days_potential.gloucestershire",
+      "to": "council.gloucestershire",
+      "kind": "for"
+    },
+    {
+      "id": "edge.state_system.193",
+      "from": "state.thousand_days_potential.gloucestershire",
+      "to": "system.open_source_revenues",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_deploy.194",
+      "from": "state.thousand_days_potential.gloucestershire",
+      "to": "deployment.cloud",
+      "kind": "uses"
+    },
+    {
+      "id": "edge.state_issue2.195",
+      "from": "state.vesting_day.gloucester",
+      "to": "issue.gloucester_contract_bridge",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.state_issue2.196",
+      "from": "state.vesting_day_shared.gloucester",
+      "to": "issue.gloucester_contract_bridge",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.contract_council.197",
+      "from": "contract.cheltenham",
+      "to": "council.cheltenham",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.198",
+      "from": "contract.cheltenham",
+      "to": "system.civica_open_revenues",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_resolves.199",
+      "from": "contract.cheltenham",
+      "to": "task.contract_dates",
+      "kind": "resolves"
+    },
+    {
+      "id": "edge.contract_council.200",
+      "from": "contract.cotswold",
+      "to": "council.cotswold",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.201",
+      "from": "contract.cotswold",
+      "to": "system.civica_open_revenues",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_resolves.202",
+      "from": "contract.cotswold",
+      "to": "task.contract_dates",
+      "kind": "resolves"
+    },
+    {
+      "id": "edge.contract_council.203",
+      "from": "contract.forest_of_dean",
+      "to": "council.forest_of_dean",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.204",
+      "from": "contract.forest_of_dean",
+      "to": "system.civica_open_revenues",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_resolves.205",
+      "from": "contract.forest_of_dean",
+      "to": "task.contract_dates",
+      "kind": "resolves"
+    },
+    {
+      "id": "edge.contract_council.206",
+      "from": "contract.stroud",
+      "to": "council.stroud",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.207",
+      "from": "contract.stroud",
+      "to": "system.civica_open_revenues",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_blocks.208",
+      "from": "contract.stroud",
+      "to": "task.contract_dates",
+      "kind": "blocks"
+    },
+    {
+      "id": "edge.contract_council.209",
+      "from": "contract.gloucester",
+      "to": "council.gloucester",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.210",
+      "from": "contract.gloucester",
+      "to": "system.civica_open_revenues",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_resolves.211",
+      "from": "contract.gloucester",
+      "to": "task.contract_dates",
+      "kind": "resolves"
+    },
+    {
+      "id": "edge.contract_council.212",
+      "from": "contract.tewkesbury",
+      "to": "council.tewkesbury",
+      "kind": "for"
+    },
+    {
+      "id": "edge.contract_system.213",
+      "from": "contract.tewkesbury",
+      "to": "system.nec_iworld_dms",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.contract_resolves.214",
+      "from": "contract.tewkesbury",
+      "to": "task.contract_dates",
+      "kind": "resolves"
+    },
+    {
+      "id": "edge.issue_contract.215",
+      "from": "issue.cloud_opportunity_2028",
+      "to": "contract.cotswold",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.issue_contract.216",
+      "from": "issue.cloud_opportunity_2028",
+      "to": "contract.forest_of_dean",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.issue_contract.217",
+      "from": "issue.legacy_migration",
+      "to": "contract.tewkesbury",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.issue_contract.218",
+      "from": "issue.gloucester_contract_bridge",
+      "to": "contract.gloucester",
+      "kind": "derives_from"
+    },
+    {
+      "id": "edge.decision_informs.219",
+      "from": "contract.cotswold",
+      "to": "decision.infra_consolidation_timing",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.decision_informs.220",
+      "from": "contract.forest_of_dean",
+      "to": "decision.infra_consolidation_timing",
+      "kind": "depends_on"
+    },
+    {
+      "id": "edge.uses.917",
+      "from": "user_group.cheltenham_staff",
+      "kind": "uses",
+      "to": "system.civica_open_revenues",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.918",
+      "from": "user_group.cotswold_staff",
+      "kind": "uses",
+      "to": "system.civica_open_revenues",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.919",
+      "from": "user_group.forest_of_dean_staff",
+      "kind": "uses",
+      "to": "system.civica_open_revenues",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.920",
+      "from": "user_group.stroud_staff",
+      "kind": "uses",
+      "to": "system.civica_open_revenues",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.921",
+      "from": "user_group.gloucester_staff",
+      "kind": "uses",
+      "to": "system.civica_open_revenues",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.922",
+      "from": "user_group.tewkesbury_staff",
+      "kind": "uses",
+      "to": "system.nec_iworld_dms",
+      "sample": true
+    },
+    {
+      "id": "edge.supports.951",
+      "from": "system.civica_open_revenues",
+      "kind": "supports",
+      "to": "business_function.revenues_and_benefits"
+    },
+    {
+      "id": "edge.supports.952",
+      "from": "system.nec_iworld_dms",
+      "kind": "supports",
+      "to": "business_function.revenues_and_benefits"
+    },
+    {
+      "id": "edge.supports.953",
+      "from": "system.open_source_revenues",
+      "kind": "supports",
+      "to": "business_function.revenues_and_benefits"
+    },
+    {
+      "id": "edge.for.991",
+      "from": "user_group.cheltenham_staff",
+      "kind": "for",
+      "to": "council.cheltenham",
+      "sample": true
+    },
+    {
+      "id": "edge.for.992",
+      "from": "user_group.cotswold_staff",
+      "kind": "for",
+      "to": "council.cotswold",
+      "sample": true
+    },
+    {
+      "id": "edge.for.993",
+      "from": "user_group.forest_of_dean_staff",
+      "kind": "for",
+      "to": "council.forest_of_dean",
+      "sample": true
+    },
+    {
+      "id": "edge.for.994",
+      "from": "user_group.stroud_staff",
+      "kind": "for",
+      "to": "council.stroud",
+      "sample": true
+    },
+    {
+      "id": "edge.for.995",
+      "from": "user_group.gloucester_staff",
+      "kind": "for",
+      "to": "council.gloucester",
+      "sample": true
+    },
+    {
+      "id": "edge.for.996",
+      "from": "user_group.tewkesbury_staff",
+      "kind": "for",
+      "to": "council.tewkesbury",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1011",
+      "from": "user_group.cheltenham_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1012",
+      "from": "user_group.cheltenham_staff_unitary",
+      "kind": "locality",
+      "to": "council.cheltenham",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1013",
+      "from": "user_group.cotswold_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1014",
+      "from": "user_group.cotswold_staff_unitary",
+      "kind": "locality",
+      "to": "council.cotswold",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1015",
+      "from": "user_group.forest_of_dean_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1016",
+      "from": "user_group.forest_of_dean_staff_unitary",
+      "kind": "locality",
+      "to": "council.forest_of_dean",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1017",
+      "from": "user_group.stroud_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1018",
+      "from": "user_group.stroud_staff_unitary",
+      "kind": "locality",
+      "to": "council.stroud",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1019",
+      "from": "user_group.gloucester_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1020",
+      "from": "user_group.gloucester_staff_unitary",
+      "kind": "locality",
+      "to": "council.gloucester",
+      "sample": true
+    },
+    {
+      "id": "edge.for.1021",
+      "from": "user_group.tewkesbury_staff_unitary",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.locality.1022",
+      "from": "user_group.tewkesbury_staff_unitary",
+      "kind": "locality",
+      "to": "council.tewkesbury",
+      "sample": true
+    },
+    {
+      "id": "edge.for.2000",
+      "from": "user_group.gloucestershire_staff_consolidated",
+      "kind": "for",
+      "to": "council.gloucestershire",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3001",
+      "from": "state.now.cheltenham",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3002",
+      "from": "state.now.cotswold",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3003",
+      "from": "state.now.forest_of_dean",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3004",
+      "from": "state.now.stroud",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3005",
+      "from": "state.now.gloucester",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3006",
+      "from": "state.now.tewkesbury",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3008",
+      "from": "state.plus_12_months.cotswold",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3009",
+      "from": "state.plus_12_months.forest_of_dean",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3012",
+      "from": "state.plus_12_months.tewkesbury",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3014",
+      "from": "state.vesting_day.cotswold",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3015",
+      "from": "state.vesting_day.forest_of_dean",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3018",
+      "from": "state.vesting_day.tewkesbury",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.3024",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "kind": "uses",
+      "to": "network_path.legacy_backhaul",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.4001",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "kind": "uses",
+      "to": "interface.web_interface",
+      "protocol": "HTTPS",
+      "sample": true
+    },
+    {
+      "id": "edge.uses.4002",
+      "from": "state.thousand_days_potential.gloucestershire",
+      "kind": "uses",
+      "to": "interface.web_interface",
+      "protocol": "HTTPS",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5001",
+      "from": "state.now.cheltenham",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5002",
+      "from": "state.now.cheltenham",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5003",
+      "from": "state.now.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5004",
+      "from": "state.now.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5005",
+      "from": "state.now.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5006",
+      "from": "state.now.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5007",
+      "from": "state.now.stroud",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5008",
+      "from": "state.now.stroud",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5009",
+      "from": "state.now.gloucester",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5010",
+      "from": "state.now.gloucester",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5011",
+      "from": "state.now.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5012",
+      "from": "state.now.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5013",
+      "from": "state.now.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.dms_filesync",
+      "port": "File system",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5014",
+      "from": "state.plus_12_months.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5015",
+      "from": "state.plus_12_months.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5016",
+      "from": "state.plus_12_months.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5017",
+      "from": "state.plus_12_months.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5018",
+      "from": "state.plus_12_months.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5019",
+      "from": "state.plus_12_months.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5020",
+      "from": "state.plus_12_months.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.dms_filesync",
+      "port": "File system",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5021",
+      "from": "state.vesting_day.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5022",
+      "from": "state.vesting_day.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5023",
+      "from": "state.vesting_day.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5024",
+      "from": "state.vesting_day.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5025",
+      "from": "state.vesting_day.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5026",
+      "from": "state.vesting_day.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5027",
+      "from": "state.vesting_day.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.dms_filesync",
+      "port": "File system",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5028",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_app",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5029",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.nec_db",
+      "port": "1443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.5030",
+      "from": "state.vesting_day_shared.tewkesbury",
+      "kind": "hosted_on",
+      "to": "server.dms_filesync",
+      "port": "File system",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6001",
+      "from": "state.plus_12_months.cheltenham",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6002",
+      "from": "state.plus_12_months.stroud",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6003",
+      "from": "state.plus_12_months.gloucester",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6004",
+      "from": "state.vesting_day.cheltenham",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6005",
+      "from": "state.vesting_day.stroud",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6006",
+      "from": "state.vesting_day.gloucester",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6007",
+      "from": "state.vesting_day_shared.cheltenham",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6008",
+      "from": "state.vesting_day_shared.cotswold",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6009",
+      "from": "state.vesting_day_shared.forest_of_dean",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6010",
+      "from": "state.vesting_day_shared.stroud",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6011",
+      "from": "state.vesting_day_shared.gloucester",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6012",
+      "from": "state.thousand_days_consolidated.gloucestershire",
+      "kind": "hosted_on",
+      "to": "server.civica_cloud_platform",
+      "port": "443",
+      "sample": true
+    },
+    {
+      "id": "edge.hosted_on.6013",
+      "from": "state.thousand_days_potential.gloucestershire",
+      "kind": "hosted_on",
+      "to": "server.osr_cloud_platform",
+      "port": "443",
+      "sample": true
+    }
+  ]
+}
+</script>
+
+<script type="module">
+import { initAll } from "https://cdn.jsdelivr.net/npm/govuk-frontend@5.7.1/dist/govuk/govuk-frontend.min.js";
+initAll();
+</script>
+
+<script>
+/* ==========================================================================
+   Gloucestershire LGR Application Architecture Hub
+   Generic node/edge graph engine: timeline, register and a pivoting
+   drill-down explorer, all derived from the graph — no hardcoded domain
+   knowledge in the rendering logic.
+   ========================================================================= */
+
+let graph = null;
+let phaseIndex = 0;
+let forkSelection = {};
+let activeType = null;
+let focusNodeId = null;
+let pivotHistory = [];
+let saveTimer = null;
+
+const STORAGE_KEY = 'lgr-hub-graph-v1';
+const $ = id => document.getElementById(id);
+
+function defaultGraph(){ return JSON.parse(document.getElementById('default-graph').textContent); }
+
+async function loadGraph(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, false);
+    if (res && res.value){ graph = JSON.parse(res.value); return; }
+  }catch(err){ /* nothing stored yet */ }
+  graph = defaultGraph();
+}
+
+function scheduleSave(){ clearTimeout(saveTimer); saveTimer = setTimeout(saveGraph, 400); }
+async function saveGraph(){
+  try{
+    const ok = await window.storage.set(STORAGE_KEY, JSON.stringify(graph), false);
+    if (ok){ $('saveFlag').classList.add('show'); setTimeout(() => $('saveFlag').classList.remove('show'), 1200); }
+  }catch(err){ console.error('save failed', err); }
+}
+function mutate(fn){ fn(); scheduleSave(); render(); }
+
+/* ---------- graph helpers ---------- */
+function node(id){ return graph.nodes.find(n => n.id === id); }
+function out(id, kind){ return graph.edges.filter(e => e.from === id && (!kind || e.kind === kind)); }
+function into(id, kind){ return graph.edges.filter(e => e.to === id && (!kind || e.kind === kind)); }
+function fval(n, path, fb=''){ if(!n) return fb; const f=(n.fields||[]).find(x=>x.path===path); return f ? f.value : fb; }
+function setField(n, path, value){ let f=(n.fields||[]).find(x=>x.path===path); if (f) f.value = value; else { n.fields = n.fields || []; n.fields.push({path, value}); } }
+function nodeZone(n){ return (n && n.authority && n.authority.zone) || graph.default_authority.node; }
+function edgeZone(e){ return (e.authority && e.authority.zone) || graph.edge_authority[e.kind] || graph.default_authority.edge; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function displayName(n){
+  if (!n) return '';
+  const candidates = ['label','title','name','question','rule','vendor','service_name','system_name'];
+  for (const c of candidates){ const v = fval(n, c, null); if (v) return v; }
+  return n.id;
+}
+function shortPlaceName(n){
+  return displayName(n).replace(/\s*\(.*?\)\s*$/,'').replace(/\s+(Borough|District|City)?\s*Council$/,'').trim();
+}
+function stripAnnotation(n){ return displayName(n).replace(/\s*\(.*?\)\s*$/,'').trim(); }
+function tagClass(zone){ return zone === 'locked' ? 'govuk-tag--grey' : zone === 'delegated' ? 'govuk-tag--green' : 'govuk-tag--orange'; }
+function zoneTag(zone){ return `<span class="govuk-tag ${tagClass(zone)}">${esc(zone.replace('_',' '))}</span>`; }
+function isSample(x){ return !!(x && x.sample === true); }
+function sampleTag(){ return `<span class="govuk-tag app-sample-tag">Sample data</span>`; }
+
+/* ---------- timeline derivation ---------- */
+function commonPrefix(strs){
+  if (!strs.length) return '';
+  let p = strs[0];
+  for (const s of strs.slice(1)){ let i=0; while (i<p.length && i<s.length && p[i]===s[i]) i++; p = p.slice(0,i); }
+  return p;
+}
+function computeSlots(){
+  const milestones = graph.nodes.filter(n => n.type === 'milestone');
+  if (!milestones.length) return [];
+  const parent = {}; milestones.forEach(m => parent[m.id] = m.id);
+  const find = x => { while (parent[x] !== x) x = parent[x]; return x; };
+  const union = (a,b) => { const ra=find(a), rb=find(b); if (ra!==rb) parent[ra]=rb; };
+  graph.edges.filter(e => e.kind === 'alternative_to').forEach(e => { if (parent[e.from]!==undefined && parent[e.to]!==undefined) union(e.from,e.to); });
+  const groups = {}; milestones.forEach(m => { const r=find(m.id); (groups[r]=groups[r]||[]).push(m); });
+  const slots = Object.values(groups);
+  const slotOf = {}; slots.forEach(s => s.forEach(m => slotOf[m.id]=s));
+  const slotIndex = new Map(); slots.forEach((s,i)=>slotIndex.set(s,i));
+  const adj = slots.map(()=>new Set()); const indeg = slots.map(()=>0);
+  graph.edges.filter(e => e.kind==='precedes').forEach(e => {
+    const sf=slotOf[e.from], st=slotOf[e.to]; if (!sf||!st) return;
+    const fi=slotIndex.get(sf), ti=slotIndex.get(st); if (fi===ti) return;
+    if (!adj[fi].has(ti)){ adj[fi].add(ti); indeg[ti]++; }
+  });
+  const order=[]; const q=[]; indeg.forEach((d,i)=>{ if(d===0) q.push(i); }); q.sort((a,b)=>a-b);
+  const indegCopy=[...indeg];
+  while(q.length){ const i=q.shift(); order.push(i); [...adj[i]].sort((a,b)=>a-b).forEach(j=>{ indegCopy[j]--; if(indegCopy[j]===0) q.push(j); }); }
+  slots.forEach((_,i)=>{ if(!order.includes(i)) order.push(i); });
+  return order.map(i=>slots[i]);
+}
+function slotKey(slot){ return slot.map(m=>m.id).sort().join('|'); }
+function slotLabel(slot){
+  const labels = slot.map(m => fval(m,'label',m.id));
+  if (slot.length===1) return labels[0].toUpperCase();
+  const prefix = commonPrefix(labels).replace(/[\s\-–]+$/,'');
+  return (prefix || labels[0]).toUpperCase();
+}
+function slotDate(slot){ return fval(slot[0],'date',''); }
+function forkOptionLabel(slot, m){
+  const labels = slot.map(mm => fval(mm,'label',mm.id));
+  const prefix = commonPrefix(labels);
+  const own = fval(m,'label',m.id);
+  let rest = own.slice(prefix.length).replace(/^[\s\-–]+/,'').trim();
+  if (!rest) rest = 'Primary';
+  return rest;
+}
+const POST_VESTING_MILESTONES = ['phase.vesting_day','phase.vesting_day_shared','phase.thousand_days_consolidated','phase.thousand_days_potential'];
+function milestoneForState(stateId){ return into(stateId,'contains').map(e=>node(e.from)).find(n=>n && n.type==='milestone'); }
+function statesFor(milestoneId){ return out(milestoneId,'contains').map(e=>node(e.to)).filter(n=>n && n.type==='state'); }
+function stateInfo(s){
+  const councilN = out(s.id,'for').map(e=>node(e.to)).find(n=>n && n.type==='council');
+  const uses = out(s.id,'uses').map(e=>node(e.to)).filter(Boolean);
+  const system = uses.find(n=>n.type==='system');
+  const deployment = uses.find(n=>n.type==='deployment');
+  const interfaces = uses.filter(n=>n.type==='interface');
+  const issues = out(s.id,'depends_on').map(e=>node(e.to)).filter(n=>n && n.type==='issue');
+  const contract = councilN ? graph.nodes.filter(n=>n.type==='contract').find(c=>out(c.id,'for').some(e=>e.to===councilN.id)) : null;
+  const servers = out(s.id,'hosted_on').map(e=>node(e.to)).filter(Boolean);
+  const milestone = milestoneForState(s.id);
+  const postVesting = milestone && POST_VESTING_MILESTONES.includes(milestone.id);
+  const unitary = graph.nodes.find(n=>n.type==='council' && /unitary/i.test(fval(n,'council_type','')));
+  const unitaryId = unitary ? unitary.id : (councilN ? councilN.id : null);
+  let userGroups = [];
+  let orgName = councilN ? displayName(councilN) : null;
+  let orgLocality = null;
+  if (councilN){
+    if (postVesting){
+      if (councilN.id === unitaryId){
+        userGroups = graph.nodes.filter(n=>n.type==='user_group').filter(u =>
+          out(u.id,'for').some(e=>e.to===unitaryId) && out(u.id,'locality').length===0);
+        orgName = unitary ? stripAnnotation(unitary) : orgName;
+      } else {
+        userGroups = graph.nodes.filter(n=>n.type==='user_group').filter(u =>
+          out(u.id,'for').some(e=>e.to===unitaryId) && out(u.id,'locality').some(e=>e.to===councilN.id));
+        orgName = unitary ? stripAnnotation(unitary) : orgName;
+        orgLocality = shortPlaceName(councilN);
+      }
+    } else {
+      userGroups = into(councilN.id,'for').map(e=>node(e.from)).filter(n=>n && n.type==='user_group');
+    }
+  }
+  const networkPaths = out(s.id,'uses').map(e=>node(e.to)).filter(n=>n && n.type==='network_path');
+  let connectivitySummary = null;
+  let connectivitySample = false;
+  if (networkPaths.length){
+    connectivitySummary = networkPaths.map(x=>displayName(x)).join(', ');
+    connectivitySample = out(s.id,'uses').some(e => networkPaths.some(np=>np.id===e.to) && e.sample);
+  } else {
+    const taggedIface = interfaces.map(iface => ({iface, edge: edgeBetween(s.id, iface.id, 'uses')})).find(x => x.edge && x.edge.protocol);
+    if (taggedIface){
+      connectivitySummary = `${displayName(taggedIface.iface)} (${taggedIface.edge.protocol})`;
+      connectivitySample = !!taggedIface.edge.sample;
+    }
+  }
+  return {state:s, council:councilN, orgName, orgLocality, postVesting, system, deployment, interfaces, issues, contract, servers, userGroups, networkPaths, connectivitySummary, connectivitySample};
+}
+function renderFunctionPanel(){
+  const fn = graph.nodes.find(n => n.type === 'business_function');
+  if (!fn){ $('functionPanel').innerHTML = ''; return; }
+  $('functionPanel').innerHTML = `<p class="govuk-body" style="margin-bottom:5px;"><strong>Function:</strong> ${esc(displayName(fn))}</p>
+    <p class="govuk-body-s" style="color:#505a5f; margin-bottom:0;">${esc(fval(fn,'note',''))}</p>`;
+}
+
+function edgeBetween(fromId, toId, kind){ return graph.edges.find(e => e.from===fromId && e.to===toId && e.kind===kind); }
+
+function stackBranches(info){
+  const branches = [];
+  out(info.state.id,'hosted_on').forEach(e => {
+    branches.push({ label: e.port || 'connection', target: node(e.to), sample: !!e.sample });
+  });
+  info.interfaces.forEach(iface => {
+    const e = edgeBetween(info.state.id, iface.id, 'uses');
+    if (e && e.protocol) branches.push({ label: e.protocol, target: iface, sample: !!e.sample });
+  });
+  return branches;
+}
+
+let expandLevels = {};
+
+function renderOrgTree(states){
+  if (!states.length) return '<div class="app-empty">No systems linked to this point in time yet. Add state nodes in Manage data and connect them with a &ldquo;contains&rdquo; edge.</div>';
+  return '<div class="app-org-row">' + states.map(s => renderOrgColumn(s)).join('') + '</div>';
+}
+
+function renderOrgColumn(s){
+  const info = stateInfo(s);
+  const expandKey = info.council ? info.council.id : s.id;
+  const level = expandLevels[expandKey] || 1;
+  const councilName = info.orgName || (info.council ? displayName(info.council) : s.id);
+  const systemName = info.system ? displayName(info.system) : 'No system linked';
+  const deployName = info.deployment ? displayName(info.deployment) : '';
+  const dc = deployClass(deployName);
+  const issuesHtml = info.issues.map(iss => `<p style="color:#d4351c; font-size:12px; font-weight:700; margin:6px 0 0;">! ${esc(fval(iss,'title',''))}</p>`).join('');
+  const contractHtml = info.contract ? `<p style="font-size:11px; color:#505a5f; margin:6px 0 0;">${esc(fval(info.contract,'vendor',''))} \u00b7 ends ${esc(fval(info.contract,'contract_end_date','not captured'))}</p>` : '';
+
+  const applicationBox = `
+    <div class="app-node-box" data-pivot="${esc(info.system ? info.system.id : '')}">
+      <p class="app-node-label">Application</p>
+      <p class="app-node-value">${esc(systemName)}</p>
+      ${issuesHtml}
+      ${contractHtml}
+    </div>`;
+
+  const usersLabel = info.userGroups.length ? info.userGroups.map(u=>displayName(u)).join(', ') : 'Not yet captured';
+  const usersBox = `
+    <div class="app-node-box" data-pivot="${esc(info.userGroups[0] ? info.userGroups[0].id : '')}">
+      <p class="app-node-label">Users</p>
+      <p class="app-node-value">${esc(usersLabel)}</p>
+    </div>`;
+
+  let html = `<div class="app-org-col">
+    <p class="app-node-title">${esc(councilName)}</p>
+    ${info.orgLocality ? `<p class="govuk-body-s" style="color:#505a5f; margin:-4px 0 6px;">${esc(info.orgLocality)} locality</p>` : ''}
+    ${deployName ? `<span class="govuk-tag govuk-tag--${dc}" style="font-weight:400; margin-bottom:8px;">${esc(deployName)}</span>` : ''}
+    <div class="app-connector"></div>`;
+
+  if (level >= 1){
+    // Application and Users are peers under Org, both feeding into Interfaces below
+    html += `<div class="app-merge-boxes">
+      <div class="app-merge-item">${applicationBox}</div>
+      <div class="app-merge-item">${usersBox}</div>
+    </div>`;
+  } else {
+    html += applicationBox;
+  }
+
+  if (level >= 2){
+    const networkLabel = info.connectivitySummary || 'Not yet captured';
+    html += `<div class="app-connector"></div>
+    <div class="app-node-box" data-pivot="${esc(info.networkPaths[0] ? info.networkPaths[0].id : '')}">
+      <p class="app-node-label">Interfaces</p>
+      <p class="app-node-value">${esc(networkLabel)}</p>
+      ${info.connectivitySample ? `<p class="app-node-sub">${sampleTag()}</p>` : ''}
+    </div>`;
+  }
+  if (level >= 3){
+    const branches = stackBranches(info);
+    if (branches.length){
+      html += `<div class="app-connector"></div><div class="app-fan-row">` + branches.map(b => {
+        const targetName = b.target ? displayName(b.target) : 'Unknown';
+        const targetSub = (b.target && b.target.type==='server' ? (fval(b.target,'engine','') || fval(b.target,'role','')) : (b.target ? b.target.type : '')) + (b.sample ? ' (sample)' : '');
+        return `<div class="app-fan-item">
+          <div class="app-connector-sm"></div>
+          <p class="app-fan-label">${esc(b.label)}</p>
+          <div class="app-connector-sm"></div>
+          <div class="app-node-box" data-pivot="${esc(b.target ? b.target.id : '')}">
+            <p class="app-node-value" style="font-size:13px;">${esc(targetName)}</p>
+            <p class="app-node-sub">${esc(targetSub)}</p>
+          </div>
+        </div>`;
+      }).join('') + `</div>`;
+    } else {
+      html += `<div class="app-connector"></div><p class="govuk-body-s" style="color:#505a5f;">No connections captured yet</p>`;
+    }
+  }
+
+  const nextLabels = ['Users','Interfaces','Servers & connections'];
+  html += `<div class="app-expand-controls">`;
+  if (level < 3) html += `<button class="app-expand-btn" data-expand="${esc(expandKey)}">+ ${esc(nextLabels[level])}</button>`;
+  if (level > 1) html += `<button class="app-collapse-btn" data-collapse="${esc(expandKey)}">Collapse</button>`;
+  html += `</div></div>`;
+  return html;
+}
+
+function openNodeModal(id){
+  const n = node(id);
+  if (!n) return;
+  const fieldsRows = (n.fields||[]).map(f => `<div class="govuk-summary-list__row"><dt class="govuk-summary-list__key">${esc(f.path)}</dt><dd class="govuk-summary-list__value">${esc(f.value)}</dd></div>`).join('');
+  const outEdges = out(n.id);
+  const groups = {};
+  outEdges.forEach(e => { (groups[e.kind] = groups[e.kind] || []).push(e.to); });
+  const connHtml = Object.keys(groups).length ? Object.keys(groups).map(k => `
+    <p class="govuk-body-s" style="margin:8px 0 2px;"><strong>${esc(k)}:</strong></p>
+    <ul class="app-modal-conn-list">${groups[k].map(id2 => `<li>${esc(displayName(node(id2)))} (${esc(node(id2) ? node(id2).type : '?')})</li>`).join('')}</ul>
+  `).join('') : '';
+  $('nodeModalContent').innerHTML = `
+    <h2 class="govuk-heading-m" id="nodeModalTitle" style="margin-bottom:2px;">${esc(displayName(n))}</h2>
+    <p class="govuk-body-s" style="color:#505a5f; margin-bottom:10px;">${esc(n.type)} ${zoneTag(nodeZone(n))} ${isSample(n) ? sampleTag() : ''}</p>
+    <dl class="govuk-summary-list">${fieldsRows || '<div class="govuk-summary-list__row"><dt class="govuk-summary-list__key">Fields</dt><dd class="govuk-summary-list__value">None recorded</dd></div>'}</dl>
+    ${connHtml ? `<h3 class="govuk-heading-s" style="margin-top:15px;">Connections</h3>${connHtml}` : ''}
+  `;
+  $('nodeModal').hidden = false;
+}
+function closeNodeModal(){ $('nodeModal').hidden = true; }
+$('nodeModalClose').addEventListener('click', closeNodeModal);
+$('nodeModal').addEventListener('click', (ev) => { if (ev.target.id === 'nodeModal') closeNodeModal(); });
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') closeNodeModal(); });
+
+function wireOrgTreeClicks(container){
+  container.querySelectorAll('[data-pivot]').forEach(el => {
+    const id = el.getAttribute('data-pivot');
+    if (!id) return;
+    el.addEventListener('click', () => openNodeModal(id));
+  });
+  container.querySelectorAll('[data-expand]').forEach(btn => {
+    btn.addEventListener('click', () => { const id = btn.getAttribute('data-expand'); expandLevels[id] = (expandLevels[id]||1) + 1; render(); });
+  });
+  container.querySelectorAll('[data-collapse]').forEach(btn => {
+    btn.addEventListener('click', () => { const id = btn.getAttribute('data-collapse'); expandLevels[id] = 1; render(); });
+  });
+}
+function riskForMilestone(mId){ return into(mId,'blocks').map(e=>node(e.from)).filter(n=>n && n.type==='issue'); }
+function deployClass(name){ if (!name) return 'grey'; const k=name.toLowerCase(); if (k.includes('shared')) return 'purple'; if (k.includes('cloud')) return 'blue'; return 'grey'; }
+function ssoConfirmed(info){
+  const dep = info.deployment ? fval(info.deployment,'name','') : '';
+  if (info.system && /civica/i.test(fval(info.system,'name','')) && /cloud/i.test(dep)) return true;
+  if (info.contract){ const s = fval(info.contract,'supports_sso',''); return /yes/i.test(s); }
+  return false;
+}
+
+/* ---------- timeline rendering ---------- */
+function renderTimeline(){
+  renderFunctionPanel();
+  const slots = computeSlots();
+  if (!slots.length){
+    $('phaseTrack').innerHTML=''; $('grid').innerHTML='<div class="app-empty">No milestone nodes found &mdash; add milestone nodes linked with &ldquo;precedes&rdquo; edges to build a timeline.</div>';
+    $('riskStrip').innerHTML=''; $('stepLeftLabel').textContent=''; $('stepRightLabel').textContent=''; $('footnote').textContent='';
+    return;
+  }
+  if (phaseIndex > slots.length-1) phaseIndex = slots.length-1;
+  const n = slots.length;
+  slots.forEach(slot => { const key=slotKey(slot); if (!(key in forkSelection)) forkSelection[key]=slot[0].id; });
+
+  const slotHeight = 64, dotSize = 14;
+  const lineTop = slotHeight + dotSize/2 - 1;
+  const insetPct = 100/(2*n);
+  let track = `<div class="app-phase-line" style="top:${lineTop}px; left:${insetPct}%; right:${insetPct}%;"></div><div class="app-phase-stations">`;
+  slots.forEach((slot,i) => {
+    const passed = i<=phaseIndex ? 'passed' : '';
+    let topSlot = `<div class="app-phase-slot"></div>`;
+    let bottomSlot = `<div class="app-phase-slot bottom"></div>`;
+    if (slot.length===2){
+      const chosen = forkSelection[slotKey(slot)];
+      const upActive = chosen===slot[0].id;
+      topSlot = `<div class="app-phase-slot">
+        <button type="button" class="app-phase-fork-box ${upActive?'active':''}" data-fork-slot="${esc(slotKey(slot))}" data-fork-choice="${esc(slot[0].id)}">${esc(forkOptionLabel(slot,slot[0]).toUpperCase())}</button>
+        <div class="app-phase-connector"></div>
+      </div>`;
+      bottomSlot = `<div class="app-phase-slot bottom">
+        <div class="app-phase-connector"></div>
+        <button type="button" class="app-phase-fork-box ${!upActive?'active':''}" data-fork-slot="${esc(slotKey(slot))}" data-fork-choice="${esc(slot[1].id)}">${esc(forkOptionLabel(slot,slot[1]).toUpperCase())}</button>
+      </div>`;
+    }
+    track += `<div class="app-phase-station">
+      ${topSlot}
+      <div class="app-phase-dot ${passed}"></div>
+      ${bottomSlot}
+      <p class="app-phase-station-label">${esc(slotLabel(slot))}</p>
+    </div>`;
+  });
+  track += `</div>`;
+  $('phaseTrack').innerHTML = track;
+  $('phaseTrack').querySelectorAll('[data-fork-slot]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      forkSelection[btn.getAttribute('data-fork-slot')] = btn.getAttribute('data-fork-choice');
+      render();
+    });
+  });
+
+  const curSlot = slots[phaseIndex];
+  const chosenId = forkSelection[slotKey(curSlot)];
+
+  $('stepLeftLabel').textContent = slotDate(slots[0]) ? `${slotLabel(slots[0])} (${slotDate(slots[0])})` : slotLabel(slots[0]);
+  $('stepRightLabel').textContent = slotDate(slots[n-1]) ? `${slotLabel(slots[n-1])} (${slotDate(slots[n-1])})` : slotLabel(slots[n-1]);
+  const slider = $('slider'); slider.max = n-1; slider.value = phaseIndex;
+  if (slider.dataset.inset !== String(insetPct)){
+    slider.style.width = `${100 - 2*insetPct}%`;
+    slider.style.margin = `0 ${insetPct}%`;
+    slider.dataset.inset = String(insetPct);
+    $('stepLeftLabel').parentElement.style.padding = `0 ${insetPct}%`;
+  }
+
+  const risks = curSlot.flatMap(m => riskForMilestone(m.id));
+  const riskTitles = risks.map(r => fval(r,'title','')).filter(Boolean);
+  $('riskStrip').innerHTML = riskTitles.length ? `<div class="govuk-warning-text"><span class="govuk-warning-text__icon" aria-hidden="true">!</span><strong class="govuk-warning-text__text"><span class="govuk-visually-hidden">Warning</span>${esc(riskTitles.join(' &middot; '))}</strong></div>` : '';
+
+  const milestone = node(chosenId);
+  const states = statesFor(milestone.id);
+
+  const stackWrap = $('stackWrap');
+  const gateDate = slotDate(curSlot);
+  const gateLabel = gateDate ? `${slotLabel(curSlot)} \u00b7 ${gateDate}` : slotLabel(curSlot);
+  const fn = graph.nodes.find(n=>n.type==='business_function');
+  const gateSummary = `<p class="govuk-body" style="margin-bottom:15px;"><strong>${fn ? esc(displayName(fn)) : 'Function'}</strong> &rarr; <strong>${esc(gateLabel)}</strong> &mdash; expand a council below to see its application, users, interfaces and servers.</p>`;
+  if (!states.length){
+    stackWrap.innerHTML = gateSummary + '<div class="app-empty">No systems linked to this point in time yet. Add state nodes in Manage data and connect them with a &ldquo;contains&rdquo; edge.</div>';
+  } else {
+    stackWrap.innerHTML = gateSummary + renderOrgTree(states);
+    wireOrgTreeClicks(stackWrap);
+  }
+
+  const tasks = graph.nodes.filter(n => n.type==='task' && fval(n,'status','') !== 'resolved');
+  $('footnote').textContent = tasks.map(t => `\u26A0 ${fval(t,'note', fval(t,'title',''))}`).join('  ');
+}
+
+/* ---------- drill-down / pivot explorer ---------- */
+function pivotTo(id){
+  if (!node(id)) return;
+  if (focusNodeId && focusNodeId !== id) pivotHistory.push(focusNodeId);
+  focusNodeId = id;
+  render();
+}
+function renderPivot(){
+  if (!focusNodeId){
+    const init = graph.nodes.find(n=>n.type==='initiative');
+    focusNodeId = init ? init.id : (graph.nodes[0] ? graph.nodes[0].id : null);
+  }
+  const datalistOpts = graph.nodes.map(n => `<option value="${esc(displayName(n))}" data-id="${esc(n.id)}">${esc(n.id)}</option>`).join('');
+  $('allNodesDatalist').innerHTML = datalistOpts;
+
+  if (!focusNodeId){ $('pivotCrumbs').innerHTML=''; $('pivotDetail').innerHTML='<div class="app-empty">No nodes in this graph yet.</div>'; return; }
+  const n = node(focusNodeId);
+  const crumbs = [...pivotHistory, focusNodeId];
+  $('pivotCrumbs').innerHTML = crumbs.map((id,i) => {
+    const nn = node(id); const label = nn ? displayName(nn) : id;
+    return i === crumbs.length-1
+      ? `<li>${esc(label)}</li>`
+      : `<li><a class="govuk-link" href="#" data-crumb="${i}">${esc(label)}</a></li>`;
+  }).join('');
+  $('pivotCrumbs').querySelectorAll('[data-crumb]').forEach(a => {
+    a.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const i = parseInt(a.getAttribute('data-crumb'),10);
+      focusNodeId = crumbs[i];
+      pivotHistory = crumbs.slice(0,i);
+      render();
+    });
+  });
+
+  const fieldsRows = (n.fields||[]).map(f => `<div class="govuk-summary-list__row"><dt class="govuk-summary-list__key">${esc(f.path)}</dt><dd class="govuk-summary-list__value">${esc(f.value)}</dd></div>`).join('');
+  const outEdges = out(n.id);
+  const inEdges = into(n.id);
+  const groupByKind = (edges, dir) => {
+    const groups = {};
+    edges.forEach(e => { (groups[e.kind] = groups[e.kind] || []).push(dir==='out' ? e.to : e.from); });
+    return groups;
+  };
+  const outGroups = groupByKind(outEdges,'out');
+  const inGroups = groupByKind(inEdges,'in');
+  function groupsHtml(groups, title){
+    const kinds = Object.keys(groups);
+    if (!kinds.length) return `<p class="govuk-body-s" style="color:#505a5f;">None</p>`;
+    return kinds.map(k => `
+      <h4 class="govuk-heading-s" style="margin-bottom:6px;">${esc(k)}</h4>
+      <p style="margin-bottom:12px;">${groups[k].map(id => `<button class="app-pivot-btn" data-pivot="${esc(id)}">${esc(displayName(node(id)))} <span style="opacity:.6;">(${esc(node(id) ? node(id).type : '?')}${isSample(node(id)) ? ' \u2013 sample' : ''})</span></button>`).join(' ')}</p>
+    `).join('');
+  }
+  $('pivotDetail').innerHTML = `
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <h3 class="govuk-heading-m">${esc(displayName(n))} ${zoneTag(nodeZone(n))} ${isSample(n) ? sampleTag() : ''}</h3>
+        <p class="govuk-body-s" style="color:#505a5f;">${esc(n.type)} &middot; ${esc(n.id)}</p>
+        <dl class="govuk-summary-list">${fieldsRows || '<div class="govuk-summary-list__row"><dt class="govuk-summary-list__key">Fields</dt><dd class="govuk-summary-list__value">None recorded</dd></div>'}</dl>
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+            <h3 class="govuk-heading-s">Connects to</h3>
+            ${groupsHtml(outGroups,'Connects to')}
+          </div>
+          <div class="govuk-grid-column-one-half">
+            <h3 class="govuk-heading-s">Connected from</h3>
+            ${groupsHtml(inGroups,'Connected from')}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  $('pivotDetail').querySelectorAll('[data-pivot]').forEach(btn => {
+    btn.addEventListener('click', () => pivotTo(btn.getAttribute('data-pivot')));
+  });
+}
+$('pivotGoBtn').addEventListener('click', () => {
+  const val = $('pivotSearch').value.trim();
+  if (!val) return;
+  let target = node(val);
+  if (!target) target = graph.nodes.find(nn => displayName(nn).toLowerCase() === val.toLowerCase());
+  if (!target) target = graph.nodes.find(nn => displayName(nn).toLowerCase().includes(val.toLowerCase()));
+  if (target){ pivotTo(target.id); $('pivotSearch').value=''; }
+  else alert('No matching node found.');
+});
+
+/* ---------- register ---------- */
+function statusSelect(n, path, options){
+  const zone = nodeZone(n); const locked = zone === 'locked';
+  const current = fval(n, path, options[0]);
+  const opts = options.map(o => `<option value="${esc(o)}" ${o===current?'selected':''}>${esc(o)}</option>`).join('');
+  return `<select class="govuk-select" data-node="${n.id}" data-path="${path}" data-kind="regfield" ${locked?'disabled':''}>${opts}</select>`;
+}
+function textInput(n, path){
+  const zone = nodeZone(n); const locked = zone === 'locked';
+  return `<input class="govuk-input" type="text" data-node="${n.id}" data-path="${path}" data-kind="regfield" value="${esc(fval(n,path,''))}" ${locked?'disabled':''}>`;
+}
+function renderRegister(){
+  const decisions = graph.nodes.filter(n=>n.type==='decision');
+  const issues = graph.nodes.filter(n=>n.type==='issue');
+  const tasks = graph.nodes.filter(n=>n.type==='task');
+  const constraints = graph.nodes.filter(n=>n.type==='constraint');
+  const contracts = graph.nodes.filter(n=>n.type==='contract');
+  const statusOpts = ['open','partially resolved','resolved'];
+  function card(title, zone, body){
+    return `<div class="govuk-summary-card" style="margin-bottom:15px;">
+      <div class="govuk-summary-card__title-wrapper"><h3 class="govuk-summary-card__title">${esc(title)}</h3><ul class="govuk-summary-card__actions"><li class="govuk-summary-card__action">${zone}</li></ul></div>
+      <div class="govuk-summary-card__content">${body}</div>
+    </div>`;
+  }
+  function section(title, items, render){ if (!items.length) return ''; return `<h3 class="govuk-heading-m">${esc(title)}</h3>${items.map(render).join('')}`; }
+  let html = '';
+  html += section('Decisions', decisions, n => card(fval(n,'question',n.id), zoneTag(nodeZone(n)), `<div class="govuk-form-group">${statusSelect(n,'status',statusOpts)}</div>`));
+  html += section('Issues', issues, n => card(fval(n,'title',n.id), zoneTag(nodeZone(n)), `<div class="govuk-form-group">${statusSelect(n,'status',statusOpts)}</div>${fval(n,'note') ? `<p class="govuk-body-s">${esc(fval(n,'note'))}</p>` : ''}`));
+  html += section('Tasks', tasks, n => card(fval(n,'title',n.id), zoneTag(nodeZone(n)), `<div class="govuk-form-group">${statusSelect(n,'status',statusOpts)}</div>${fval(n,'note') ? `<p class="govuk-body-s">${esc(fval(n,'note'))}</p>` : ''}`));
+  html += section('Constraints', constraints, n => card(fval(n,'rule',n.id), zoneTag(nodeZone(n)), ''));
+  if (contracts.length){
+    html += `<h3 class="govuk-heading-m">System and contract register</h3><table class="govuk-table"><thead class="govuk-table__head"><tr class="govuk-table__row"><th class="govuk-table__header">Council</th><th class="govuk-table__header">System</th><th class="govuk-table__header">Vendor</th><th class="govuk-table__header">Version</th><th class="govuk-table__header">Ends</th><th class="govuk-table__header">Zone</th></tr></thead><tbody class="govuk-table__body">`;
+    contracts.forEach(c => {
+      const councilN = out(c.id,'for').map(e=>node(e.to)).find(n=>n && n.type==='council');
+      html += `<tr class="govuk-table__row"><td class="govuk-table__cell">${esc(councilN ? displayName(councilN) : '\u2014')}</td><td class="govuk-table__cell">${textInput(c,'system_name')}</td><td class="govuk-table__cell">${textInput(c,'vendor')}</td><td class="govuk-table__cell">${textInput(c,'version')}</td><td class="govuk-table__cell">${textInput(c,'contract_end_date')}</td><td class="govuk-table__cell">${zoneTag(nodeZone(c))}</td></tr>`;
+    });
+    html += `</tbody></table>`;
+  }
+  $('registerContent').innerHTML = html || '<div class="app-empty">No decisions, issues, tasks, constraints or contracts in this graph yet.</div>';
+  $('registerContent').querySelectorAll('[data-kind="regfield"]').forEach(el => {
+    el.addEventListener('change', () => { const n = node(el.getAttribute('data-node')); mutate(() => setField(n, el.getAttribute('data-path'), el.value)); });
+  });
+}
+
+/* ---------- manage data ---------- */
+function renderTypeSelect(){
+  const types = [...new Set(graph.nodes.map(n=>n.type))].sort();
+  if (activeType === null || !types.includes(activeType)) activeType = types[0] || null;
+  $('typeSelect').innerHTML = types.map(t => `<option value="${esc(t)}" ${t===activeType?'selected':''}>${esc(t)} (${graph.nodes.filter(n=>n.type===t).length})</option>`).join('');
+  $('typeDatalist') || null;
+  const dl = document.getElementById('typeDatalist');
+  if (!dl){ const d = document.createElement('datalist'); d.id='typeDatalist'; document.body.appendChild(d); }
+  document.getElementById('typeDatalist').innerHTML = types.map(t=>`<option value="${esc(t)}">`).join('');
+}
+function renderNodeCards(){
+  const nodes = graph.nodes.filter(n => n.type === activeType);
+  const area = $('nodeEditorArea');
+  if (!nodes.length){ area.innerHTML = '<div class="app-empty">No nodes of this type yet.</div>'; return; }
+  area.innerHTML = nodes.map(n => {
+    const zone = nodeZone(n); const locked = zone === 'locked';
+    const fieldsHtml = (n.fields||[]).map((f,idx) => `
+      <div class="app-field-row">
+        <input class="govuk-input" type="text" value="${esc(f.path)}" data-node="${n.id}" data-idx="${idx}" data-part="path" ${locked?'disabled':''}>
+        <input class="govuk-input" type="text" value="${esc(f.value)}" data-node="${n.id}" data-idx="${idx}" data-part="value" ${locked?'disabled':''}>
+        <button class="govuk-button govuk-button--warning" style="margin-bottom:0;" data-node="${n.id}" data-idx="${idx}" data-action="delfield" ${locked?'disabled':''}>Remove</button>
+      </div>`).join('');
+    return `<div class="app-node-card app-card">
+      <p class="govuk-body-s" style="color:#505a5f; margin-bottom:5px;">${esc(n.id)} ${zoneTag(zone)} ${isSample(n) ? sampleTag() : ''}</p>
+      ${fieldsHtml}
+      <div style="display:flex; gap:10px;">
+        <button class="govuk-button govuk-button--secondary" style="margin-bottom:0;" data-node="${n.id}" data-action="addfield" ${locked?'disabled':''}>Add field</button>
+        <button class="govuk-button govuk-button--warning" style="margin-bottom:0;" data-node="${n.id}" data-action="delnode">Delete node</button>
+      </div>
+    </div>`;
+  }).join('');
+  area.querySelectorAll('input[data-part]').forEach(inp => { inp.addEventListener('change', () => { const n=node(inp.getAttribute('data-node')); const idx=parseInt(inp.getAttribute('data-idx'),10); const part=inp.getAttribute('data-part'); mutate(()=>{ n.fields[idx][part]=inp.value; }); }); });
+  area.querySelectorAll('[data-action="delfield"]').forEach(btn => { btn.addEventListener('click', () => { const n=node(btn.getAttribute('data-node')); const idx=parseInt(btn.getAttribute('data-idx'),10); mutate(()=>{ n.fields.splice(idx,1); }); }); });
+  area.querySelectorAll('[data-action="addfield"]').forEach(btn => { btn.addEventListener('click', () => { const n=node(btn.getAttribute('data-node')); mutate(()=>{ n.fields=n.fields||[]; n.fields.push({path:'new_field', value:''}); }); }); });
+  area.querySelectorAll('[data-action="delnode"]').forEach(btn => { btn.addEventListener('click', () => { const id=btn.getAttribute('data-node'); if (!confirm(`Delete node "${id}" and all its edges?`)) return; mutate(()=>{ graph.nodes=graph.nodes.filter(n=>n.id!==id); graph.edges=graph.edges.filter(e=>e.from!==id && e.to!==id); }); }); });
+}
+function renderEdgesTable(){
+  const body = $('edgesBody');
+  body.innerHTML = graph.edges.map(e => `<tr class="govuk-table__row"><td class="govuk-table__cell">${esc(e.from)}</td><td class="govuk-table__cell">${esc(e.kind)}</td><td class="govuk-table__cell">${esc(e.to)}</td><td class="govuk-table__cell">${zoneTag(edgeZone(e))}</td><td class="govuk-table__cell"><button class="govuk-button govuk-button--warning" style="margin-bottom:0;" data-edge="${esc(e.id)}">Delete</button></td></tr>`).join('');
+  body.querySelectorAll('button[data-edge]').forEach(btn => { btn.addEventListener('click', () => { const id=btn.getAttribute('data-edge'); mutate(()=>{ graph.edges = graph.edges.filter(e=>e.id!==id); }); }); });
+  const ids = graph.nodes.map(n=>n.id);
+  document.getElementById('nodeIdDatalist') || (() => { const d=document.createElement('datalist'); d.id='nodeIdDatalist'; document.body.appendChild(d); })();
+  document.getElementById('nodeIdDatalist').innerHTML = ids.map(i=>`<option value="${esc(i)}">`).join('');
+  const kinds = [...new Set(graph.edges.map(e=>e.kind))].sort();
+  document.getElementById('kindDatalist') || (() => { const d=document.createElement('datalist'); d.id='kindDatalist'; document.body.appendChild(d); })();
+  document.getElementById('kindDatalist').innerHTML = kinds.map(k=>`<option value="${esc(k)}">`).join('');
+}
+function renderManage(){ renderTypeSelect(); renderNodeCards(); renderEdgesTable(); }
+$('typeSelect').addEventListener('change', () => { activeType = $('typeSelect').value; renderNodeCards(); });
+
+/* ---------- json ---------- */
+function renderJsonTab(){ $('jsonArea').value = JSON.stringify(graph, null, 2); $('jsonStatus').textContent = ''; }
+
+/* ---------- top-level render ---------- */
+function render(){
+  renderTimeline();
+  renderPivot();
+  renderRegister();
+  renderManage();
+  renderJsonTab();
+}
+
+$('slider').addEventListener('input', () => { phaseIndex = parseInt($('slider').value,10); render(); });
+
+$('downloadBtn').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(graph,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob); const a = document.createElement('a');
+  a.href = url; a.download = (graph.id || 'graph') + '.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+});
+$('resetBtn').addEventListener('click', () => {
+  if (!confirm('Reset to the originally uploaded graph? This discards all edits.')) return;
+  graph = defaultGraph(); phaseIndex = 0; forkSelection = {}; focusNodeId = null; pivotHistory = [];
+  scheduleSave(); render();
+});
+$('uploadInput').addEventListener('change', (ev) => {
+  const file = ev.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{ graph = JSON.parse(reader.result); phaseIndex=0; forkSelection={}; focusNodeId=null; pivotHistory=[]; scheduleSave(); render(); }
+    catch(err){ alert('Could not parse that file as JSON: ' + err.message); }
+  };
+  reader.readAsText(file); ev.target.value='';
+});
+$('addNodeBtn').addEventListener('click', () => {
+  const type = $('newNodeType').value.trim(); const id = $('newNodeId').value.trim();
+  if (!type || !id){ alert('Type and id are required.'); return; }
+  if (node(id)){ alert('A node with that id already exists.'); return; }
+  mutate(() => { graph.nodes.push({id, type, fields:[]}); });
+  activeType = type; $('newNodeType').value=''; $('newNodeId').value=''; renderManage();
+});
+$('addEdgeBtn').addEventListener('click', () => {
+  const from = $('newEdgeFrom').value.trim(); const kind = $('newEdgeKind').value.trim(); const to = $('newEdgeTo').value.trim();
+  if (!from || !kind || !to){ alert('From, kind and to are all required.'); return; }
+  if (!node(from) || !node(to)){ alert('Both from and to must be existing node ids.'); return; }
+  const nextNum = graph.edges.length ? Math.max(...graph.edges.map(e=>{ const m=/\.(\d+)$/.exec(e.id); return m?parseInt(m[1],10):0; }))+1 : 1;
+  mutate(() => { graph.edges.push({id:`edge.custom.${nextNum}`, from, kind, to}); });
+  $('newEdgeFrom').value=''; $('newEdgeKind').value=''; $('newEdgeTo').value='';
+});
+$('applyJsonBtn').addEventListener('click', () => {
+  try{ graph = JSON.parse($('jsonArea').value); $('jsonStatus').textContent='Applied.'; scheduleSave(); render(); }
+  catch(err){ $('jsonStatus').textContent='Invalid JSON: ' + err.message; }
+});
+$('copyJsonBtn').addEventListener('click', () => { navigator.clipboard.writeText($('jsonArea').value).then(()=>{ $('jsonStatus').textContent='Copied to clipboard.'; }); });
+$('prettyJsonBtn').addEventListener('click', () => { renderJsonTab(); });
+
+(async function init(){ await loadGraph(); render(); })();
+</script>
+</body>
+</html>
