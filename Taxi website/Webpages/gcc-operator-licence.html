@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function(){
+  try {
+    var SCALES=[1,1.15,1.3];
+    var idx=parseInt(localStorage.getItem('gccA11yTextScale'),10);
+    if(!isNaN(idx)&&idx>=0&&idx<SCALES.length&&idx!==0){
+      document.documentElement.style.fontSize=(16*SCALES[idx])+'px';
+    }
+    if(localStorage.getItem('gccA11yContrast')==='1'){
+      document.documentElement.setAttribute('data-a11y-contrast','on');
+    }
+  } catch(e) {}
+})();
+</script>
+
+<title>Private hire operator licence — Gloucester City Council</title>
+<style>
+/* ══════════════════════════════════════════════════════════════
+   GCC LICENSING — SHARED STYLESHEET
+   GOV.UK Done With Intention
+   All pages: landing, driver, vehicle, operator
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Brand */
+  --blue:       #0054A4;
+  --hover:      #003E7B;
+  --deep:       #0B2E53;
+  --white:      #FFFFFF;
+  --grey:       #F3F2F1;
+  --grey2:      #E8E8E8;
+  --border:     #B1B4B6;
+  --border-dk:  #0B0C0C;
+  --divider:    #D8D8D8;
+  --text:       #0B0C0C;
+  --text2:      #505A5F;
+  --muted:      #6F777B;
+  --link:       #0054A4;
+  --focus:      #FFDD00;
+
+  /* Spacing */
+  --sp1:4px; --sp2:8px; --sp3:16px; --sp4:24px;
+  --sp5:32px; --sp6:48px; --sp7:64px;
+
+  /* Type scale — GOV.UK */
+  --t-xl:      2.25rem;   /* h1 desktop */
+  --t-xl-m:    1.875rem;  /* h1 mobile */
+  --t-section: 1.75rem;   /* h2 section headings */
+  --t-lg:      1.5rem;    /* h2 base */
+  --t-md:      1.125rem;  /* h3 */
+  --t-body:    1rem;
+  --t-sm:      .875rem;
+  --t-xs:      .75rem;
+
+  /* Line heights */
+  --lh-heading: 1.1;
+  --lh-body:    1.5;
+  --lh-tight:   1.4;
+
+  /* Components */
+  --btn-pad-v: 10px;
+  --touch:     44px;
+  --max:       1200px;
+}
+
+/* ── RESET ──────────────────────────────────────────────────── */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+html { font-size:16px; scroll-behavior:smooth }
+body {
+  font-family:"GDS Transport",Arial,sans-serif;
+  font-size:var(--t-body);
+  line-height:var(--lh-body);
+  color:var(--text);
+  background:var(--white);
+  -webkit-font-smoothing:antialiased;
+}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+
+/* ── TYPOGRAPHY ─────────────────────────────────────────────── */
+h1 { font-size:var(--t-xl); line-height:var(--lh-heading); font-weight:700; margin-bottom:var(--sp2) }
+h2 { font-size:var(--t-lg); line-height:var(--lh-heading); font-weight:700; color:var(--deep); margin:0 0 var(--sp3) }
+h3 { font-size:var(--t-md); line-height:var(--lh-heading); font-weight:700; color:var(--text); margin:0 0 var(--sp2) }
+p  { font-size:var(--t-body); line-height:var(--lh-body); margin-bottom:var(--sp3) }
+p:last-child { margin-bottom:0 }
+a  { color:var(--link); text-decoration:underline; text-underline-offset:3px }
+a:hover { color:var(--hover) }
+a:visited { color:#4c2c92 }
+
+/* ── SECTION CAPTIONS (h2 variant) ─────────────────────────── */
+h2.section-caption {
+  font-size:var(--t-section);
+  font-weight:700;
+  color:var(--deep);
+  padding-left:var(--sp3);
+  border-left:5px solid var(--blue);
+  margin-top:var(--sp6);
+  margin-bottom:var(--sp4);
+  line-height:var(--lh-heading);
+}
+.pg-hdr + section h2.section-caption { margin-top:0 }
+
+/* ── FOCUS ──────────────────────────────────────────────────── */
+:focus-visible {
+  outline:3px solid var(--focus);
+  outline-offset:0;
+  background:var(--focus);
+  color:var(--text);
+  box-shadow:0 -2px var(--focus),0 4px var(--border-dk);
+}
+a:focus-visible { color:var(--text) }
+
+/* ── SKIP ───────────────────────────────────────────────────── */
+.skip {
+  position:absolute; top:-100px; left:var(--sp3);
+  background:var(--focus); color:var(--text);
+  padding:var(--sp2) var(--sp3); font-weight:700;
+  z-index:1000; text-decoration:none;
+}
+.skip:focus { top:var(--sp2) }
+
+/* ── HEADER ─────────────────────────────────────────────────── */
+.hdr { background:var(--deep); border-bottom:4px solid var(--blue) }
+.hdr-in {
+  max-width:var(--max); margin:0 auto;
+  padding:var(--sp3) var(--sp4);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo { display:flex; align-items:center; gap:var(--sp2); text-decoration:none; color:var(--white) }
+.logo img { height:40px; width:auto }
+.logo-txt { font-size:var(--t-md); font-weight:700 }
+.hdr-nav { display:flex; gap:var(--sp3); list-style:none }
+.hdr-nav a {
+  color:rgba(255,255,255,.85); text-decoration:none;
+  font-size:var(--t-sm); padding:var(--sp1) var(--sp2);
+  min-height:var(--touch); display:flex; align-items:center;
+}
+.hdr-nav a:hover { color:var(--white); text-decoration:underline }
+
+/* ── SERVICE BAR ────────────────────────────────────────────── */
+.svc { background:var(--blue); padding:var(--sp2) var(--sp4) }
+.svc-in { max-width:var(--max); margin:0 auto; font-size:var(--t-sm); color:var(--white) }
+
+/* ── BREADCRUMB ─────────────────────────────────────────────── */
+.bc { background:var(--grey); border-bottom:1px solid var(--divider) }
+.bc-in { max-width:var(--max); margin:0 auto; padding:var(--sp2) var(--sp4) }
+.bc-list { list-style:none; display:flex; flex-wrap:wrap; gap:var(--sp1); font-size:var(--t-sm) }
+.bc-item { display:flex; align-items:center; gap:var(--sp1) }
+.bc-item+.bc-item::before { content:"›"; color:var(--muted) }
+.bc-item a { color:var(--link); display:inline-flex; align-items:center; min-height:24px; padding:2px 0 }
+.bc-cur { color:var(--text2); font-weight:700 }
+
+/* ── PAGE LAYOUT ────────────────────────────────────────────── */
+.page { max-width:var(--max); margin:0 auto; padding:var(--sp5) var(--sp4) var(--sp7) }
+
+/* ── BACK LINK ──────────────────────────────────────────────── */
+.back {
+  display:inline-flex; align-items:center; gap:var(--sp1);
+  font-size:var(--t-sm); color:var(--link);
+  text-decoration:none; margin-bottom:var(--sp5);
+  min-height:var(--touch); padding:var(--sp1) 0;
+}
+.back::before {
+  content:""; display:inline-block; width:0; height:0;
+  border-top:5px solid transparent; border-bottom:5px solid transparent;
+  border-right:6px solid var(--link); margin-top:1px;
+}
+.back:hover { color:var(--hover) }
+.back:hover::before { border-right-color:var(--hover) }
+
+/* ── PAGE HEADER ────────────────────────────────────────────── */
+.pg-hdr { margin-bottom:var(--sp4) }
+.pg-lead { font-size:var(--t-md); color:var(--text2); line-height:var(--lh-tight); margin-top:var(--sp2) }
+
+/* ── TOGGLES ────────────────────────────────────────────────── */
+.toggles { display:flex; flex-direction:column; gap:var(--sp3); margin-bottom:var(--sp5) }
+.toggle-row { display:grid; grid-template-columns:160px auto; align-items:center; gap:var(--sp3) }
+.toggle-lbl { font-size:var(--t-sm); font-weight:700; color:var(--text2) }
+.toggle { display:inline-flex; border:2px solid var(--border-dk); width:fit-content }
+.tog-btn {
+  padding:var(--btn-pad-v) var(--sp4);
+  background:var(--white); color:var(--text);
+  border:none; border-right:1px solid var(--border);
+  font-size:var(--t-sm); font-weight:700;
+  cursor:pointer; min-height:var(--touch); min-width:140px;
+  font-family:inherit; transition:background .1s; text-align:center;
+}
+.tog-btn:last-child { border-right:none }
+.tog-btn:hover { background:var(--grey) }
+.tog-btn.active { background:var(--deep); color:var(--white) }
+
+/* ── ELIGIBILITY LIST ───────────────────────────────────────── */
+.elig-list { list-style:none; border-top:1px solid var(--divider) }
+.elig-item {
+  display:grid; grid-template-columns:28px 1fr; gap:var(--sp2);
+  padding:var(--sp3) 0; border-bottom:1px solid var(--divider);
+  border-top:1px solid var(--divider); margin-top:-1px;
+  font-size:var(--t-body); align-items:flex-start; line-height:var(--lh-body);
+}
+.elig-mark {
+  width:22px; height:22px; border-radius:50%;
+  background:var(--blue); color:var(--white);
+  display:flex; align-items:center; justify-content:center;
+  font-size:var(--t-xs); font-weight:700; flex-shrink:0; margin-top:2px;
+}
+.elig-note {
+  font-size:var(--t-body); color:var(--text2);
+  margin-top:var(--sp1); margin-bottom:0; line-height:var(--lh-tight);
+}
+
+/* ── REQUIREMENT LIST (documents) ───────────────────────────── */
+.req-list { list-style:none; border-top:1px solid var(--divider) }
+.req-item {
+  border-left:5px solid var(--blue);
+  padding:var(--sp3) 0 var(--sp3) var(--sp4);
+  margin-bottom:var(--sp1);
+  border-bottom:1px solid var(--divider);
+}
+.req-item:last-of-type { border-bottom:none }
+.req-title { font-size:var(--t-body); font-weight:700; color:var(--text); margin-bottom:var(--sp1) }
+.req-desc { font-size:var(--t-body); color:var(--text2); margin:0; line-height:var(--lh-body) }
+
+/* ── INSET ──────────────────────────────────────────────────── */
+.inset {
+  border-left:5px solid var(--border);
+  padding:var(--sp2) var(--sp3); margin-top:var(--sp2);
+}
+.inset p { font-size:var(--t-body); color:var(--text2); line-height:var(--lh-tight); margin-bottom:var(--sp1) }
+.inset p:last-child { margin-bottom:0 }
+
+/* ── FEE TAGS ───────────────────────────────────────────────── */
+.fee-tag+.fee-tag { margin-left:var(--sp2) }
+.fee-tag {
+  display:inline-block; font-size:var(--t-body); font-weight:700;
+  color:var(--deep); background:var(--grey);
+  padding:3px 10px; border:1px solid var(--border); margin-top:var(--sp2);
+}
+
+/* ── GOV.UK DETAILS/SUMMARY ─────────────────────────────────── */
+.govuk-details { margin-top:var(--sp2) }
+.govuk-details summary {
+  font-size:var(--t-body); color:var(--link); cursor:pointer;
+  list-style:none; display:inline-flex; align-items:center; gap:var(--sp1);
+  padding:var(--sp2) 0; min-height:var(--touch); font-weight:700;
+}
+.govuk-details summary::-webkit-details-marker { display:none }
+.govuk-details summary::before { content:"▶"; font-size:.6875rem; transition:transform .15s }
+.govuk-details[open] summary::before { transform:rotate(90deg) }
+.govuk-details-body {
+  font-size:var(--t-body); color:var(--text2);
+  padding:var(--sp2) 0 var(--sp2) var(--sp4);
+  border-left:5px solid var(--border);
+  margin-top:var(--sp1); line-height:var(--lh-body);
+}
+.govuk-details-body p { margin-bottom:var(--sp2) }
+.govuk-details-body p:last-child { margin-bottom:0 }
+
+/* ── CTA ────────────────────────────────────────────────────── */
+.cta-wrap { margin-top:var(--sp6); padding-top:var(--sp4) }
+.cta {
+  display:inline-flex; align-items:center; gap:var(--sp2);
+  background:var(--blue); color:var(--white);
+  padding:var(--btn-pad-v) var(--sp5);
+  font-size:var(--t-md); font-weight:700;
+  text-decoration:none; min-height:var(--touch);
+  cursor:pointer; font-family:inherit; transition:background .1s;
+}
+.cta:hover { background:var(--hover); color:var(--white); text-decoration:none }
+.cta:visited { color:var(--white) }
+.cta:focus-visible {
+  outline:3px solid var(--focus); outline-offset:0;
+  background:var(--focus); color:var(--text);
+  box-shadow:0 -2px var(--focus),0 4px var(--border-dk);
+}
+.cta-sub { margin-top:var(--sp3); font-size:var(--t-sm); color:var(--muted) }
+
+/* ── FOOTER ─────────────────────────────────────────────────── */
+.ftr { background:var(--deep); color:var(--white); padding:var(--sp5) var(--sp4) }
+.ftr-in { max-width:var(--max); margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:var(--sp5) }
+.ftr-h { font-size:var(--t-xs); font-weight:700; text-transform:uppercase; letter-spacing:.06em; margin-bottom:var(--sp3) }
+.ftr-ul { list-style:none }
+.ftr-ul li { margin-bottom:var(--sp2) }
+.ftr-ul a { color:rgba(255,255,255,.75); font-size:var(--t-sm); text-decoration:underline }
+.ftr-ul a:hover { color:var(--white) }
+.ftr-bot {
+  max-width:var(--max); margin:var(--sp4) auto 0;
+  padding-top:var(--sp3); border-top:1px solid rgba(255,255,255,.12);
+  font-size:var(--t-xs); color:rgba(255,255,255,.65);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:var(--sp2);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media(max-width:800px) {
+  .hdr-in,.bc-in,.svc-in,.page { padding-left:var(--sp3); padding-right:var(--sp3) }
+  .hdr-nav { display:none }
+  h1 { font-size:var(--t-xl-m) }
+  h2.section-caption { font-size:var(--t-lg) }
+  .toggle-row { grid-template-columns:1fr; gap:var(--sp1) }
+  .toggle { width:100% }
+  .tog-btn { min-width:0; flex:1 }
+}
+@media(max-width:480px) {
+  h1 { font-size:var(--t-lg) }
+  .cta { width:100%; justify-content:center }
+}
+@media(forced-colors:active) {
+  .cta,.elig-mark { border:2px solid ButtonText }
+  .req-item { border-left-color:ButtonText }
+}
+
+
+/* ══ ACCESSIBILITY TOOLS WIDGET ══════════════════════════════════ */
+:root[data-a11y-contrast="on"] {
+  --text: #000000;
+  --text2: #000000;
+  --muted: #1a1a1a;
+  --hover: #000000;
+  --border: #000000;
+  --border-dk: #000000;
+  --divider: #000000;
+  --grey: #FFFFFF;
+  --grey2: #FFFFFF;
+}
+:root[data-a11y-contrast="on"] body { background:#FFFFFF; }
+:root[data-a11y-contrast="on"] .hdr { background:#000000; border-bottom-color:#000000; }
+:root[data-a11y-contrast="on"] .ftr { background:#000000; }
+:root[data-a11y-contrast="on"] .svc { background:#000000; }
+
+.a11y-widget { position:fixed; right:16px; bottom:16px; z-index:2000; font-family:"GDS Transport",Arial,sans-serif; }
+.a11y-toggle {
+  display:flex; align-items:center; gap:8px;
+  min-height:44px; padding:10px 18px;
+  background:#0B2E53; color:#FFFFFF; border:2px solid #0B2E53;
+  font-size:0.9375rem; font-weight:700; font-family:inherit;
+  cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+.a11y-toggle:hover { background:#003E7B; border-color:#003E7B; }
+.a11y-toggle:focus-visible { outline:3px solid #FFDD00; outline-offset:2px; }
+.a11y-panel {
+  position:absolute; right:0; bottom:calc(100% + 8px);
+  width:260px; max-width:calc(100vw - 32px);
+  background:#FFFFFF; border:2px solid #0B2E53; color:#0B0C0C;
+  box-shadow:0 4px 16px rgba(0,0,0,.35);
+  padding:16px; display:none;
+}
+.a11y-panel[data-open="true"] { display:block; }
+.a11y-panel h2 { font-size:1rem; margin-bottom:12px; color:#0B2E53; }
+.a11y-row { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:10px 0; border-bottom:1px solid #D8D8D8; }
+.a11y-row:last-child { border-bottom:none; }
+.a11y-label { font-size:0.9375rem; color:#0B0C0C; }
+.a11y-btns { display:flex; align-items:center; gap:6px; }
+.a11y-btn {
+  min-width:44px; min-height:44px;
+  border:2px solid #0B0C0C; background:#FFFFFF; color:#0B0C0C;
+  font-family:inherit; font-weight:700; cursor:pointer; font-size:0.875rem;
+}
+.a11y-btn[aria-pressed="true"] { background:#0B2E53; color:#FFFFFF; border-color:#0B2E53; }
+.a11y-btn:hover:not(:disabled) { background:#F3F2F1; }
+.a11y-btn[aria-pressed="true"]:hover { background:#003E7B; }
+.a11y-btn:disabled { opacity:.4; cursor:default; }
+.a11y-btn:focus-visible { outline:3px solid #FFDD00; outline-offset:2px; }
+.a11y-text-level { font-size:0.8125rem; color:#505A5F; min-width:38px; text-align:center; }
+
+#a11y-reading-guide {
+  position:fixed; left:0; width:100%; height:2.75em;
+  background:rgba(255,221,0,.35);
+  border-top:2px solid rgba(11,12,12,.65); border-bottom:2px solid rgba(11,12,12,.65);
+  pointer-events:none; z-index:1999; display:none;
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip">Skip to main content</a>
+
+<header class="hdr" role="banner">
+  <div class="hdr-in">
+    <a href="/" class="logo" aria-label="Gloucester City Council — home">
+      <img src="https://raw.githubusercontent.com/Gloucester-City-Council/GCC-Beta-site-v1/main/templates/assets/GCC_logo.svg" alt="Gloucester City Council" style="filter:brightness(0) invert(1)">
+    </a>
+  </div>
+</header>
+
+<div class="svc"><div class="svc-in">Licensing &amp; regulations</div></div>
+
+<nav class="bc" aria-label="Breadcrumb">
+  <div class="bc-in"><ol class="bc-list">
+    <li class="bc-item"><a href="https://www.gloucester.gov.uk/">Home</a></li>
+    <li class="bc-item"><a href="https://www.gloucester.gov.uk/licensing-regulations/">Licensing &amp; regulations</a></li>
+    <li class="bc-item"><a href="gcc-hcph-landing.html">Hackney carriage and private hire</a></li>
+    <li class="bc-item"><span class="bc-cur" aria-current="page">Private hire operator licence</span></li>
+  </ol></div>
+</nav>
+
+<main id="main-content">
+<div class="page">
+
+  <a href="gcc-hcph-landing.html" class="back">Back</a>
+
+  <header class="pg-hdr">
+    <h1>Private hire operator licence</h1>
+    <p class="pg-lead">Apply for a new operator licence or renew an existing one. This covers running a private hire vehicle booking business in Gloucester.</p>
+  </header>
+
+  <!-- TOGGLE -->
+  <div class="toggles">
+    <div class="toggle-row" role="group" aria-label="New licence or renewal?">
+      <span class="toggle-lbl">What do you need?</span>
+      <div class="toggle">
+        <button class="tog-btn active" id="btn-new"   onclick="setMode('new')"   aria-pressed="true">New licence</button>
+        <button class="tog-btn"        id="btn-renew" onclick="setMode('renew')" aria-pressed="false">Renew my licence</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ NEW APPLICATION ══════════════════════════════════════ -->
+  <div id="view-new">
+
+    <!-- 1. ELIGIBILITY -->
+    <section aria-labelledby="h-elig">
+      <h2 class="section-caption" id="h-elig">Check you are eligible</h2>
+      <ul class="elig-list">
+
+        <li class="elig-item">
+          <span class="elig-mark" aria-hidden="true">✓</span>
+          <div>
+            <span>Be a fit and proper person</span>
+            <p class="elig-note">A licence will not be granted unless the Licensing Authority is satisfied that you are a fit and proper person. Where the applicant is a company or partnership, every director or partner must meet this standard.</p>
+            <p class="elig-note">You must declare any convictions, cautions, fixed penalties or pending court cases that arise between submitting your application and your licence being issued.</p>
+          </div>
+        </li>
+
+        <li class="elig-item">
+          <span class="elig-mark" aria-hidden="true">✓</span>
+          <div>
+            <span>Be eligible to work in the UK</span>
+            <p class="elig-note">A right to work check will be carried out on the applicant (or, for a company or partnership, the nominated responsible person) before your licence is issued.</p>
+          </div>
+        </li>
+
+        <li class="elig-item">
+          <span class="elig-mark" aria-hidden="true">✓</span>
+          <span>Have appropriate public liability insurance for your private hire operating business</span>
+        </li>
+
+        <li class="elig-item">
+          <span class="elig-mark" aria-hidden="true">✓</span>
+          <div>
+            <span>Keep proper booking records</span>
+            <p class="elig-note">You must keep a record of every booking accepted, including the driver and vehicle assigned, and make these available to the council on request.</p>
+          </div>
+        </li>
+
+        <li class="elig-item">
+          <span class="elig-mark" aria-hidden="true">✓</span>
+          <span>Only accept bookings for vehicles and drivers licensed by a UK licensing authority</span>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- 2. DOCUMENTS — NEW -->
+    <section aria-labelledby="h-docs-new">
+      <h2 class="section-caption" id="h-docs-new">Gather your documents and apply</h2>
+      <p style="font-size:var(--t-body);color:var(--text2);margin-bottom:var(--sp4)">Have everything below ready before you start. You will not be able to save and return to your application.</p>
+
+      <ul class="req-list">
+
+        <li class="req-item">
+          <div class="req-title">Public liability insurance certificate</div>
+          <p class="req-desc">Covering your private hire operating business.</p>
+        </li>
+
+        <li class="req-item">
+          <div class="req-title">Basic DBS check</div>
+          <p class="req-desc">For the applicant, and for every director or partner if the applicant is a company or partnership. <a href="https://www.gov.uk/request-copy-criminal-record">Apply for a basic DBS check at gov.uk</a>.</p>
+        </li>
+
+        <li class="req-item">
+          <div class="req-title">Details of your operating base</div>
+          <p class="req-desc">Address from which bookings will be accepted and records kept, if you have one.</p>
+        </li>
+
+        <li class="req-item">
+          <div class="req-title">Application fee</div>
+          <p class="req-desc">Paid when you submit your application online. The fee depends on the number of vehicles in your fleet — see the <a href="gcc-hcph-fees.html">full fee schedule</a>.</p>
+          <span class="fee-tag">From £352.00 (1 year, up to 3 vehicles)</span>
+        </li>
+
+      </ul>
+
+      <div class="cta-wrap">
+        <a href="#" class="cta" role="button">Apply now <span aria-hidden="true">→</span></a>
+        <p class="cta-sub">This form is not yet linked — the Licensing Team needs to confirm the online application URL.</p>
+      </div>
+    </section>
+
+  </div><!-- /view-new -->
+
+  <!-- ══ RENEWAL ═══════════════════════════════════════════════ -->
+  <div id="view-renew" style="display:none">
+
+    <!-- EXPIRY WARNING -->
+    <div class="inset" role="note" style="margin-bottom:var(--sp4);border-left-color:var(--blue)">
+      <p style="font-weight:700;margin-bottom:var(--sp2)">Renew before your licence expires</p>
+      <p>A licence renewed after the expiry date is not valid — you cannot operate as a licensed private hire operator until a new licence is issued. There is no period of grace.</p>
+    </div>
+
+    <!-- DOCUMENTS — RENEWAL -->
+    <section aria-labelledby="h-docs-renew">
+      <h2 class="section-caption" id="h-docs-renew">Gather your documents and renew</h2>
+      <p style="font-size:var(--t-body);color:var(--text2);margin-bottom:var(--sp4)">Have everything below ready before you start. All documents must be received before the licence can be issued.</p>
+
+      <ul class="req-list">
+
+        <li class="req-item">
+          <div class="req-title">Public liability insurance certificate</div>
+          <p class="req-desc">Covering your private hire operating business.</p>
+        </li>
+
+        <li class="req-item">
+          <div class="req-title">Basic DBS check</div>
+          <p class="req-desc">If your existing DBS subscription for the applicant and all directors or partners is active with the Update Service, you do not need a new certificate. Otherwise <a href="https://www.gov.uk/request-copy-criminal-record">apply for a basic DBS check at gov.uk</a>.</p>
+        </li>
+
+        <li class="req-item">
+          <div class="req-title">Renewal fee</div>
+          <p class="req-desc">Paid when you submit your renewal online. The fee depends on the number of vehicles in your fleet — see the <a href="gcc-hcph-fees.html">full fee schedule</a>.</p>
+          <span class="fee-tag">From £352.00 (1 year, up to 3 vehicles)</span>
+        </li>
+
+      </ul>
+
+      <div class="cta-wrap">
+        <a href="#" class="cta" role="button">Renew now <span aria-hidden="true">→</span></a>
+        <p class="cta-sub">This form is not yet linked — the Licensing Team needs to confirm the online renewal URL.</p>
+      </div>
+    </section>
+
+  </div><!-- /view-renew -->
+
+
+  <!-- RELATED INFORMATION -->
+  <aside aria-label="Related information" style="margin-top:var(--sp7)">
+    <h2 class="section-caption">Related information</h2>
+    <ul style="list-style:none;border-top:1px solid var(--divider)">
+      <li style="padding:var(--sp3) 0;border-bottom:1px solid var(--divider)">
+        <a href="gcc-hcph-documents.html" style="font-weight:700;font-size:var(--t-body)">Licensing information</a>
+        <p style="font-size:var(--t-body);color:var(--text2);margin-top:var(--sp1)">Rule books, policies, forms and reference documents, including the Private Hire Operators Rule Book</p>
+      </li>
+      <li style="padding:var(--sp3) 0;border-bottom:1px solid var(--divider)">
+        <a href="gcc-hcph-fees.html" style="font-weight:700;font-size:var(--t-body)">Fees and charges</a>
+        <p style="font-size:var(--t-body);color:var(--text2);margin-top:var(--sp1)">Full fee schedule for 2026 to 2027</p>
+      </li>
+      <li style="padding:var(--sp3) 0;border-bottom:1px solid var(--divider)">
+        <a href="gcc-hcph-changes.html" style="font-weight:700;font-size:var(--t-body)">Something has changed</a>
+        <p style="font-size:var(--t-body);color:var(--text2);margin-top:var(--sp1)">Updates to your licence, vehicle or circumstances</p>
+      </li>
+    </ul>
+  </aside>
+
+</div>
+</main>
+
+<footer class="ftr" role="contentinfo">
+  <div class="ftr-in">
+    <div>
+      <div class="ftr-h">Contact us</div>
+      <ul class="ftr-ul">
+        <li><address style="font-style:normal">Gloucester City Council<br>Eastgate Management Suite<br>Eastgate Street<br>Gloucester<br>GL1 1PA</address></li>
+        <li><a href="tel:01452396396">01452 396 396</a></li>
+        <li><a href="https://gloucester-self.achieveservice.com/service/Contact_us">Contact us</a></li>
+      </ul>
+      <div style="display:flex;gap:12px;margin-top:var(--sp2)">
+        <a href="https://www.facebook.com/GloucesterCityCouncil/" target="_blank" rel="noopener" aria-label="Gloucester City Council on Facebook" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:rgba(255,255,255,.85)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>
+        <a href="https://x.com/GloucesterCity" target="_blank" rel="noopener" aria-label="Gloucester City Council on X" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:rgba(255,255,255,.85)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.9 2H22l-7.2 8.3L23.3 22h-6.7l-5.2-6.8L5.4 22H2.2l7.7-8.9L1 2h6.9l4.7 6.2L18.9 2zm-1.2 18h1.9L7.4 4H5.4l12.3 16z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <div class="ftr-h">About us</div>
+      <ul class="ftr-ul">
+        <li><a href="https://www.gloucester.gov.uk/accessibility/">Accessibility statement</a></li>
+        <li><a href="https://www.gloucester.gov.uk/about-the-council/data-protection-and-freedom-of-information/data-protection/">Privacy notice</a></li>
+        <li><a href="https://www.gloucester.gov.uk/cookies/">Cookies</a></li>
+        <li><a href="https://www.gloucester.gov.uk/sitemap/">Site map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ftr-bot">
+    <span>© Gloucester City Council</span>
+    <span>Last updated: July 2026</span>
+  </div>
+</footer>
+
+<script>
+let mode='new';
+
+function show(id){const el=document.getElementById(id);if(el)el.style.display='block'}
+function hide(id){const el=document.getElementById(id);if(el)el.style.display='none'}
+
+function render(){
+  if(mode==='new'){ show('view-new'); hide('view-renew'); }
+  else { hide('view-new'); show('view-renew'); }
+}
+
+function setMode(m){
+  mode=m;
+  ['new','renew'].forEach(v=>{
+    const b=document.getElementById('btn-'+v);
+    b.classList.toggle('active',v===m);
+    b.setAttribute('aria-pressed',v===m?'true':'false');
+  });
+  render();
+}
+
+render();
+</script>
+<div class="a11y-widget">
+  <button type="button" class="a11y-toggle" id="a11y-toggle" aria-expanded="false" aria-controls="a11y-panel">Accessibility tools</button>
+  <div class="a11y-panel" id="a11y-panel" data-open="false" role="region" aria-labelledby="a11y-panel-heading">
+    <h2 id="a11y-panel-heading">Accessibility tools</h2>
+    <div class="a11y-row">
+      <span class="a11y-label" id="a11y-contrast-lbl">High contrast</span>
+      <button type="button" class="a11y-btn" id="a11y-contrast-btn" aria-pressed="false" aria-labelledby="a11y-contrast-lbl a11y-contrast-btn">Off</button>
+    </div>
+    <div class="a11y-row">
+      <span class="a11y-label" id="a11y-text-lbl">Text size</span>
+      <div class="a11y-btns" role="group" aria-labelledby="a11y-text-lbl">
+        <button type="button" class="a11y-btn" id="a11y-text-dec" aria-label="Decrease text size">A&minus;</button>
+        <span class="a11y-text-level" id="a11y-text-level" aria-live="polite">100%</span>
+        <button type="button" class="a11y-btn" id="a11y-text-inc" aria-label="Increase text size">A+</button>
+      </div>
+    </div>
+    <div class="a11y-row">
+      <span class="a11y-label" id="a11y-guide-lbl">Reading guide</span>
+      <button type="button" class="a11y-btn" id="a11y-guide-btn" aria-pressed="false" aria-labelledby="a11y-guide-lbl a11y-guide-btn">Off</button>
+    </div>
+  </div>
+</div>
+<div id="a11y-reading-guide" aria-hidden="true"></div>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var KEY_CONTRAST = 'gccA11yContrast';
+  var KEY_SCALE = 'gccA11yTextScale';
+  var KEY_GUIDE = 'gccA11yGuide';
+  var SCALES = [1, 1.15, 1.3];
+  var SCALE_PCT = [100, 115, 130];
+
+  var toggleBtn = document.getElementById('a11y-toggle');
+  var panel = document.getElementById('a11y-panel');
+  var contrastBtn = document.getElementById('a11y-contrast-btn');
+  var decBtn = document.getElementById('a11y-text-dec');
+  var incBtn = document.getElementById('a11y-text-inc');
+  var levelEl = document.getElementById('a11y-text-level');
+  var guideBtn = document.getElementById('a11y-guide-btn');
+  var guideEl = document.getElementById('a11y-reading-guide');
+
+  var scaleIdx = parseInt(localStorage.getItem(KEY_SCALE), 10);
+  if (isNaN(scaleIdx) || scaleIdx < 0 || scaleIdx >= SCALES.length) scaleIdx = 0;
+  var contrastOn = localStorage.getItem(KEY_CONTRAST) === '1';
+  var guideOn = localStorage.getItem(KEY_GUIDE) === '1';
+
+  function applyContrast(on) {
+    if (on) root.setAttribute('data-a11y-contrast', 'on');
+    else root.removeAttribute('data-a11y-contrast');
+  }
+  function applyScale(idx) {
+    root.style.fontSize = idx === 0 ? '' : (16 * SCALES[idx]) + 'px';
+    levelEl.textContent = SCALE_PCT[idx] + '%';
+  }
+  function moveGuide(e) {
+    guideEl.style.top = (e.clientY - guideEl.offsetHeight / 2) + 'px';
+  }
+  function applyGuide(on) {
+    guideEl.style.display = on ? 'block' : 'none';
+    if (on) document.addEventListener('mousemove', moveGuide);
+    else document.removeEventListener('mousemove', moveGuide);
+  }
+
+  contrastBtn.setAttribute('aria-pressed', contrastOn ? 'true' : 'false');
+  contrastBtn.textContent = contrastOn ? 'On' : 'Off';
+  guideBtn.setAttribute('aria-pressed', guideOn ? 'true' : 'false');
+  guideBtn.textContent = guideOn ? 'On' : 'Off';
+  decBtn.disabled = scaleIdx === 0;
+  incBtn.disabled = scaleIdx === SCALES.length - 1;
+  levelEl.textContent = SCALE_PCT[scaleIdx] + '%';
+  applyGuide(guideOn);
+
+  toggleBtn.addEventListener('click', function () {
+    var open = panel.getAttribute('data-open') === 'true';
+    panel.setAttribute('data-open', open ? 'false' : 'true');
+    toggleBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    if (!open) panel.querySelector('button').focus();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && panel.getAttribute('data-open') === 'true') {
+      panel.setAttribute('data-open', 'false');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.focus();
+    }
+  });
+
+  contrastBtn.addEventListener('click', function () {
+    contrastOn = !contrastOn;
+    applyContrast(contrastOn);
+    localStorage.setItem(KEY_CONTRAST, contrastOn ? '1' : '0');
+    contrastBtn.setAttribute('aria-pressed', contrastOn ? 'true' : 'false');
+    contrastBtn.textContent = contrastOn ? 'On' : 'Off';
+  });
+
+  decBtn.addEventListener('click', function () {
+    if (scaleIdx > 0) {
+      scaleIdx--;
+      applyScale(scaleIdx);
+      localStorage.setItem(KEY_SCALE, scaleIdx);
+      decBtn.disabled = scaleIdx === 0;
+      incBtn.disabled = false;
+    }
+  });
+  incBtn.addEventListener('click', function () {
+    if (scaleIdx < SCALES.length - 1) {
+      scaleIdx++;
+      applyScale(scaleIdx);
+      localStorage.setItem(KEY_SCALE, scaleIdx);
+      incBtn.disabled = scaleIdx === SCALES.length - 1;
+      decBtn.disabled = false;
+    }
+  });
+
+  guideBtn.addEventListener('click', function () {
+    guideOn = !guideOn;
+    applyGuide(guideOn);
+    localStorage.setItem(KEY_GUIDE, guideOn ? '1' : '0');
+    guideBtn.setAttribute('aria-pressed', guideOn ? 'true' : 'false');
+    guideBtn.textContent = guideOn ? 'On' : 'Off';
+  });
+})();
+</script>
+</body>
+</html>
