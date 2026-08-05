@@ -153,6 +153,30 @@ a:focus-visible { color:var(--text) }
 .bc-item+.bc-item::before { content:"›"; color:var(--muted) }
 .bc-item a { color:var(--link); display:inline-flex; align-items:center; min-height:24px; padding:2px 0 }
 .bc-cur { color:var(--text2); font-weight:700 }
+/* ── UPDATE BANNER ──────────────────────────────────────────── */
+.update-banner { background:#EFF6FC; border-top:4px solid var(--blue); border-bottom:1px solid var(--divider) }
+.update-banner-in {
+  max-width:var(--max); margin:0 auto; padding:var(--sp4);
+  display:flex; flex-wrap:wrap; align-items:center; gap:var(--sp4);
+}
+.update-banner-copy { flex:1 1 360px }
+.update-banner-title { margin:0 0 var(--sp2); font-size:var(--t-md); font-weight:700; color:var(--text) }
+.update-banner-copy p:not(.update-banner-title) { margin:0 0 var(--sp2); font-size:var(--t-body); color:var(--text2) }
+.update-banner-copy p:last-child { margin-bottom:0 }
+.update-banner-btn {
+  flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  background:var(--blue); color:var(--white); text-decoration:none; font-weight:700;
+  padding:var(--btn-pad-v) var(--sp4); min-height:var(--touch); white-space:nowrap;
+}
+.update-banner-btn:hover { background:var(--hover); color:var(--white); text-decoration:none }
+.update-banner-btn:visited { color:var(--white) }
+.update-banner-btn:focus-visible {
+  outline:3px solid var(--focus); outline-offset:0;
+  background:var(--focus); color:var(--text);
+}
+@media (max-width:600px) {
+  .update-banner-btn { width:100% }
+}
 
 /* ── PAGE LAYOUT ────────────────────────────────────────────── */
 .page { max-width:var(--max); margin:0 auto; padding:var(--sp5) var(--sp4) var(--sp7) }
@@ -503,6 +527,18 @@ a:focus-visible { color:var(--text) }
     <li class="bc-item"><span class="bc-cur" aria-current="page">Fees and charges</span></li>
   </ol></div>
 </nav>
+
+<div class="update-banner" role="region" aria-labelledby="update-banner-title">
+  <div class="update-banner-in">
+    <div class="update-banner-copy">
+      <p class="update-banner-title" id="update-banner-title">Welcome to our refreshed Hackney Carriage and Private Hire pages</p>
+      <p>We've introduced a new and improved experience designed to make accessing information and services easier than ever.</p>
+      <p>We're keen to hear your thoughts. Your feedback will help us continue to improve and ensure these pages meet your needs.</p>
+    </div>
+    <!-- Feedback form not yet live — replace href with the real destination URL once available -->
+    <a href="#" class="update-banner-btn">Give Feedback</a>
+  </div>
+</div>
 
 <main id="main-content">
 <div class="page">
