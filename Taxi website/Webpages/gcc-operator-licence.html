@@ -449,7 +449,6 @@ a:focus-visible { color:var(--text) }
             <span>Be a fit and proper person</span>
             <p class="elig-note">A licence will not be granted unless the Licensing Authority is satisfied that you are a fit and proper person.</p>
             <p class="elig-note">You must declare any convictions, cautions, fixed penalties or pending court cases that arise between submitting your application and your licence being issued.</p>
-            <p class="elig-note">Where the applicant is a company or partnership, every director or partner must meet this standard.</p>
           </div>
         </li>
 
@@ -458,7 +457,17 @@ a:focus-visible { color:var(--text) }
           <div>
             <span>Be eligible to work in the UK</span>
             <p class="elig-note">A right to work check will be carried out automatically before your licence is issued.</p>
-            <p class="elig-note">Where the applicant is a company or partnership, this check is carried out on the nominated responsible person.</p>
+            <details class="govuk-details">
+              <summary>Nationality and visa requirements</summary>
+              <div class="govuk-details-body">
+                <div id="visa-hc" style="display:none"><p><strong>Student visas</strong></p><p>Applications will not be accepted from people who hold a student visa.</p></div>
+                <div id="visa-ph"><p><strong>Student visas</strong></p><p>Foreign nationals that hold a Student Visa are only permitted to work for up to 20 hours during term time (depending on the course studied). The private hire operator may be liable if the driver breaches the limitations of the student visa. Information may be shared with the Border Agency.</p></div>
+                <p style="margin-top:var(--sp3)"><strong>Lived outside the UK</strong></p>
+                <p>If you have lived outside the UK since the age of 18, you must provide a Certificate of Good Conduct, a Criminal Record Check or similar document from each country where you have been resident for more than 6 months in a calendar year. If the certificate is not in English, provide a translation from the Embassy or Consulate of that country.</p>
+                <p style="margin-top:var(--sp3)"><strong>Non-EU or EEA driving licence</strong></p>
+                <p>If your driving licence was issued outside the EU or EEA, you must convert it to a GB DVLA licence before applying. The convertible licence can be used to demonstrate 12 months of driving experience.</p>
+              </div>
+            </details>
           </div>
         </li>
 
