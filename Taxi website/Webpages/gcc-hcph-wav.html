@@ -46,17 +46,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;c
 .bc-item+.bc-item::before{content:"›";color:var(--muted)}
 .bc-cur{color:var(--text);font-weight:600}
 /* ── UPDATE BANNER ──────────────────────────────────────────── */
-.update-banner{background:var(--blue);border-bottom:4px solid var(--hover)}
-.update-banner-in{max-width:var(--max);margin:0 auto;padding:var(--sp4);display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp4)}
-.update-banner-copy{flex:1 1 360px}
-.update-banner-title{margin:0 0 var(--sp2);font-size:var(--t-md);font-weight:700;color:var(--white)}
-.update-banner-copy p:not(.update-banner-title){margin:0 0 var(--sp2);font-size:var(--t-body);color:rgba(255,255,255,.88)}
-.update-banner-copy p:last-child{margin-bottom:0}
-.update-banner-btn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;background:var(--white);color:var(--blue);text-decoration:none;font-weight:700;padding:10px var(--sp4);min-height:var(--touch);white-space:nowrap}
-.update-banner-btn:hover{background:var(--grey);color:var(--hover);text-decoration:none}
-.update-banner-btn:visited{color:var(--blue)}
+.update-banner{background:#FFF9E5;border-bottom:1px solid var(--divider)}
+.update-banner-in{max-width:var(--max);margin:0 auto;padding:var(--sp4)}
+.update-banner-title{margin:0 0 var(--sp2);font-size:var(--t-md);font-weight:700;color:var(--deep)}
+.update-banner-in > p:not(.update-banner-title){margin:0 0 var(--sp2);max-width:70ch;font-size:var(--t-body);color:var(--text2)}
+.update-banner-btn{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:var(--white);text-decoration:none;font-weight:700;padding:10px var(--sp4);min-height:var(--touch);white-space:nowrap}
+.update-banner-btn:hover{background:var(--hover);color:var(--white);text-decoration:none}
+.update-banner-btn:visited{color:var(--white)}
 .update-banner-btn:focus-visible{outline:3px solid #FFDD00;outline-offset:0;background:#FFDD00;color:var(--text)}
-@media (max-width:600px){.update-banner-btn{width:100%}}
 .page{max-width:var(--max);margin:0 auto;padding:var(--sp5) var(--sp4) var(--sp7)}
 .back{display:inline-flex;align-items:center;gap:var(--sp1);font-size:var(--t-sm);color:var(--link);text-decoration:none;margin-bottom:var(--sp5);min-height:var(--touch);padding:var(--sp1) 0}
 .back::before{content:"‹";font-size:1.2em}
@@ -177,11 +174,9 @@ h1{font-size:var(--t-h1);font-weight:700;color:var(--deep);margin-bottom:var(--s
 
 <div class="update-banner" role="region" aria-labelledby="update-banner-title">
   <div class="update-banner-in">
-    <div class="update-banner-copy">
-      <p class="update-banner-title" id="update-banner-title">Welcome to our refreshed Hackney Carriage and Private Hire pages</p>
-      <p>We've introduced a new and improved experience designed to make accessing information and services easier than ever.</p>
-      <p>We're keen to hear your thoughts. Your feedback will help us continue to improve and ensure these pages meet your needs.</p>
-    </div>
+    <p class="update-banner-title" id="update-banner-title">Welcome to our refreshed Hackney Carriage and Private Hire pages</p>
+    <p>We've introduced a new and improved experience designed to make accessing information and services easier than ever.</p>
+    <p>We're keen to hear your thoughts. Your feedback will help us continue to improve and ensure these pages meet your needs.</p>
     <!-- Feedback form not yet live — replace href with the real destination URL once available -->
     <a href="#" class="update-banner-btn">Give Feedback</a>
   </div>
