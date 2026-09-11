@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GCC HC/PH — Action List</title>
+<style>
+:root{
+  --deep:#1F3763;--blue:#0054A4;--white:#fff;--grey:#f9fafb;
+  --border:#e5e7eb;--text:#111827;--text2:#6b7280;
+  --query:#1565c0;--query-bg:#e3f0fc;
+  --changed:#b45309;--changed-bg:#fef3cd;
+  --rejected:#b91c1c;--rejected-bg:#fee2e2;
+  --done:#1a7a3a;--done-bg:#e6f4ec;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--grey);color:var(--text);line-height:1.6;font-size:16px}
+.hdr{background:var(--deep);color:#fff;padding:20px 32px}
+.hdr h1{font-size:1.375rem;font-weight:700;margin-bottom:4px}
+.hdr p{font-size:.875rem;color:rgba(255,255,255,.75)}
+.toolbar{background:#fff;border-bottom:1px solid var(--border);
+  padding:12px 32px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn{font-family:inherit;font-size:.875rem;font-weight:600;padding:8px 16px;
+  border:none;cursor:pointer;border-radius:4px}
+.btn-primary{background:var(--deep);color:#fff}
+.btn-primary:hover{background:#162c54}
+.btn-secondary{background:var(--grey);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{background:#f3f4f6}
+.filter-group{display:flex;gap:8px;align-items:center;margin-left:auto}
+.filter-group label{font-size:.875rem;color:var(--text2)}
+.filter-group select{font-family:inherit;font-size:.875rem;padding:6px 10px;
+  border:1px solid var(--border);border-radius:4px;background:#fff}
+.stats{padding:12px 32px;background:#fff;border-bottom:1px solid var(--border);
+  display:flex;gap:24px;font-size:.875rem;flex-wrap:wrap}
+.stat{display:flex;align-items:center;gap:6px}
+.stat-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.main{max-width:1100px;margin:0 auto;padding:24px 32px}
+.page-group{margin-bottom:32px}
+.page-title{font-size:1rem;font-weight:700;color:var(--deep);
+  background:#fff;border:1px solid var(--border);border-bottom:none;
+  padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.page-badge{font-size:.75rem;font-weight:600;background:var(--deep);
+  color:#fff;padding:2px 8px;border-radius:12px}
+.action-card{background:#fff;border:1px solid var(--border);
+  border-bottom:none;transition:background .15s}
+.action-card:last-child{border-bottom:1px solid var(--border)}
+.action-card.done{background:var(--done-bg)}
+.card-header{padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.card-id{font-family:monospace;font-size:.8125rem;font-weight:700;
+  background:#f3f4f6;padding:2px 6px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.card-body{flex:1;min-width:0}
+.card-status{display:inline-flex;align-items:center;gap:4px;
+  font-size:.75rem;font-weight:700;padding:2px 8px;margin-bottom:6px}
+.status-query{background:var(--query-bg);color:var(--query)}
+.status-changed{background:var(--changed-bg);color:var(--changed)}
+.status-rejected{background:var(--rejected-bg);color:var(--rejected)}
+.status-done{background:var(--done-bg);color:var(--done)}
+.card-comment{font-size:.9375rem;font-weight:600;color:var(--deep);margin-bottom:6px}
+.card-detail{font-size:.875rem;color:var(--text2);margin-bottom:10px}
+.card-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.card-expand{font-size:.8125rem;color:var(--blue);cursor:pointer;
+  background:none;border:none;font-family:inherit;padding:0;text-decoration:underline}
+.notes-section{padding:0 16px 14px 16px;border-top:1px dashed var(--border);
+  display:none;margin-top:4px}
+.notes-section.open{display:block}
+.notes-label{font-size:.8125rem;font-weight:600;color:var(--text2);margin-bottom:4px}
+.notes-input{width:100%;font-family:inherit;font-size:.875rem;padding:8px;
+  border:1px solid var(--border);resize:vertical;min-height:64px;
+  background:#fff;color:var(--text)}
+.notes-input:focus{outline:2px solid var(--blue);border-color:var(--blue)}
+.complete-btn{font-family:inherit;font-size:.8125rem;font-weight:600;
+  padding:6px 14px;border:none;cursor:pointer;border-radius:3px}
+.complete-btn.mark{background:var(--done);color:#fff}
+.complete-btn.mark:hover{background:#156030}
+.complete-btn.unmark{background:#e5e7eb;color:var(--text)}
+.complete-btn.unmark:hover{background:#d1d5db}
+.done-stamp{font-size:.8125rem;font-weight:700;color:var(--done);margin-left:auto}
+.save-pill{font-size:.8125rem;color:var(--text2);padding:4px 10px;
+  background:var(--grey);border:1px solid var(--border);border-radius:12px}
+@media print{
+  .toolbar,.filter-group,.card-expand,.notes-section,.complete-btn{display:none!important}
+  .action-card.done{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <h1>GCC HC/PH — Manager Action List</h1>
+  <p>Actions arising from manager review · July 2026 · <span id="pending-count"></span> pending · <span id="done-count"></span> completed</p>
+</div>
+
+<div class="toolbar">
+  <button class="btn btn-primary" onclick="exportJSON()">Export progress (JSON)</button>
+  <label class="btn btn-secondary" style="cursor:pointer">
+    Import progress (JSON)
+    <input type="file" accept=".json" style="display:none" onchange="importJSON(event)">
+  </label>
+  <button class="btn btn-secondary" onclick="window.print()">Print / PDF</button>
+  <div class="filter-group">
+    <label>Filter:</label>
+    <select onchange="setFilter(this.value)">
+      <option value="all">All items</option>
+      <option value="pending">Pending only</option>
+      <option value="done">Completed only</option>
+      <option value="query">Queries</option>
+      <option value="changed">Changed</option>
+      <option value="rejected">Rejected</option>
+    </select>
+    <select onchange="setPage(this.value)" id="page-filter">
+      <option value="all">All pages</option>
+    </select>
+  </div>
+</div>
+
+<div class="stats" id="stats"></div>
+<div class="main" id="main"></div>
+
+<script>
+const KEY = 'gcc_hcph_actions_v1';
+
+const ACTIONS = [{"id": "FLAG_OPR-026_Apply_for_a_Private_Hire_Operator_Licence_page_\u2014_Licence_duration", "status": "query", "comment": "it states the duration which they want to apply for on the application and fee.", "page": "Operators page (not yet built)", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_OPR-027_Apply_for_a_Private_Hire_Operator_Licence_page_\u2014_Conviction_notification", "status": "query", "comment": "can it be added.", "page": "Operators page (not yet built)", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_OPR-036_Apply_for_a_Private_Hire_Operator_Licence_page_\u2014_Booking_and_dispatch_staff_DBS", "status": "query", "comment": "can this be added.", "page": "Operators page (not yet built)", "detail": "", "completed": false, "notes": ""}, {"id": "OPR-002", "status": "changed", "comment": "", "page": "Operators page (not yet built)", "detail": "Apply for a Private Hire Operator Licence page \u2014 Fleet-based fee variation", "completed": false, "notes": ""}, {"id": "FLAG_DRV-HC-017_Para_1.5K", "status": "rejected", "comment": "", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_DRV-PH-006_Section_1_-_New_Applications", "status": "query", "comment": "correct, HC drivers are not required to have an operator signature.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_DRV-PH-010_Section_1_-_New_Applications", "status": "query", "comment": "can you add code", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_DRV-PH-023_Section_1_-_Foreign_Nationals", "status": "query", "comment": "Thats fine that only applicable to PH.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_DRV-PH-030_Section_1_-_Renewal_Applications", "status": "query", "comment": "add code.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_DRV-PH-041_Section_3_-_Code_of_Conduct", "status": "query", "comment": "Can you put in Licensing Officers.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_DRV-PH-044_Section_4_-_Guide_Dogs", "status": "query", "comment": "can they both say must not refuse.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_GUID-DRV-001_Driver_Guidance_Notes_\u2014_Fee_discrepancy", "status": "query", "comment": "safeguarding training is \u00a340 and cash should be taken off.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_GUID-OPR-002_PHO_Guidance_Notes_\u2014_ROA_1974_conflict", "status": "query", "comment": "can this be updated.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_OPR-004_Section_1_-_Foreign_Nationals", "status": "query", "comment": "current policy", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_OPR-023_Section_3_-_Delegation_of_Powers", "status": "query", "comment": "change to Director.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_REG-027_Section_3_-_Motoring_Convictions", "status": "query", "comment": "no as they do not have to be a driver.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_REG-047_Section_7_-_Penalty_Points_Tariff", "status": "query", "comment": "", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_SHR-HC-011_Para_3.21", "status": "query", "comment": "It should be 11 now.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_SHR-HC-026_Para_5.15", "status": "changed", "comment": "", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_SHR-PH-004_Section_5_-_Glossary", "status": "query", "comment": "Yes match.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_SIX-014_Section_-_Mandatory_Training", "status": "query", "comment": "can it be updated to include equality training also.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_SIX-022_Appendix_B_-_ROA_1974", "status": "query", "comment": "add it.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_SIX-024_Appendix_B_-_Hand-Held_Device", "status": "query", "comment": "add five years.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-022_Para_2.5G", "status": "query", "comment": "We should have the latest certificate on record of the when it the meter was updated with the current tariff.", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-053_Para_2.9", "status": "query", "comment": "Will let the author no if it changes?", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-068_Para_3.36", "status": "query", "comment": "Same comment as above", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-089_Para_3.61-3.62", "status": "query", "comment": "full", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-PH-009_Section_2_-_New_Applications", "status": "query", "comment": "yes it is", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-PH-010_Section_2_-_Renewal_Applications", "status": "changed", "comment": "", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-PH-049_Section_3_-_Vehicles_General", "status": "query", "comment": "can you put a c in Licence?", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-PH-063_Section_3_-_CCTV", "status": "query", "comment": "Licensing Officer", "page": "Schema / Rule book", "detail": "", "completed": false, "notes": ""}, {"id": "REG-047", "status": "query", "comment": "This needs to be in a table so it is easily read and better to understand.", "page": "Schema / Rule book", "detail": "Section 7 - Penalty Points Tariff", "completed": false, "notes": ""}, {"id": "REG-048", "status": "query", "comment": "This needs to be put into a table.", "page": "Schema / Rule book", "detail": "Section 8 - Table of Delegations", "completed": false, "notes": ""}, {"id": "DRV-HC-012", "status": "query", "comment": "This needs to be taken off - (Please note you will be required to take the Driving Assessment every ten years).", "page": "gcc-driver-licence.html", "detail": "Para 1.5G", "completed": false, "notes": ""}, {"id": "DRV-PH-014", "status": "query", "comment": "Need to take off Please note you will be required to take the Driving Assessment every ten years).", "page": "gcc-driver-licence.html", "detail": "provide evidence of successful completion of the Driving Assessment for Hackney Carriage and Private Hire vehicles from the Council's approved list which are currently Diamond Advance Test, Green Penn", "completed": false, "notes": ""}, {"id": "DRV-PH-017", "status": "query", "comment": "We need to add the wording from the rule book", "page": "gcc-driver-licence.html", "detail": "Undertake the English proficiency test as approved by the Council and achieve a satisfactory score unless the applicant can demonstrate their ability to communicate in English by providing an appropri", "completed": false, "notes": ""}, {"id": "FLAG_DRV-HC-007_Apply_for_driver_licence_page_\u2014_Photograph", "status": "query", "comment": "add", "page": "gcc-driver-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_DRV-HC-015_Apply_for_driver_licence_page_\u2014_Right_to_work", "status": "query", "comment": "think it should.", "page": "gcc-driver-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_DRV-HC-040_Change_the_Address_on_your_Licence_page", "status": "query", "comment": "add the 7 day rule.", "page": "gcc-hcph-changes.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_OPR-015_Apply_for_a_Vehicle_Plate_Exemption_page", "status": "query", "comment": "add this information.", "page": "gcc-hcph-changes.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-039_Change_of_Vehicle_Registration_page", "status": "query", "comment": "add this information.", "page": "gcc-hcph-changes.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-096_Report_a_Hackney_Carriage_or_Private_Hire_Accident_page", "status": "query", "comment": "can this be visible ", "page": "gcc-hcph-changes.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-PH-027_Section_2_-_Transfer_of_Ownership", "status": "query", "comment": "yes it is.", "page": "gcc-hcph-changes.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-PH-067_Apply_for_a_replacement_plate_or_badge_page", "status": "query", "comment": "add fees", "page": "gcc-hcph-changes.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_SHR-HC-016_Public_Register_page_\u2014_update_dates", "status": "query", "comment": "can this be done on a monthly basis?", "page": "gcc-hcph-register.html", "detail": "", "completed": false, "notes": ""}, {"id": "WEB-001", "status": "query", "comment": "Yes we can make reference to it in the rule books", "page": "gcc-hcph-wav.html", "detail": "WAV Guidance page \u2014 2022 Act", "completed": false, "notes": ""}, {"id": "WEB-002", "status": "query", "comment": "Yes it can be added.", "page": "gcc-hcph-wav.html", "detail": "Drivers of wheelchair accessible hackney carriages or private hire vehicles must: carry the wheelchair if the passenger chooses to sit in a passenger seat; give the passenger reasonable mobility assis", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-001_Apply_for_a_new_vehicle_licence_page_\u2014_Like-for-like_temporary_vehicle_wording", "status": "changed", "comment": "", "page": "gcc-vehicle-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-008_Apply_for_a_new_vehicle_licence_page_\u2014_Inspection_certificate", "status": "query", "comment": "add", "page": "gcc-vehicle-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-009_Apply_for_a_new_vehicle_licence_page_\u2014_Meter_certificate_wording", "status": "query", "comment": "PHV only require a meter inspection if they have one.", "page": "gcc-vehicle-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-010_Apply_for_a_new_vehicle_licence_page_\u2014_DBS_terminology", "status": "query", "comment": "correct website.", "page": "gcc-vehicle-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-020_Renew_a_vehicle_licence_page_\u2014_MOT_at_renewal", "status": "query", "comment": "add", "page": "gcc-vehicle-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-025_Apply_to_Transfer_the_Ownership_of_a_Vehicle_Licence_page_\u2014_Fee_not_linked", "status": "query", "comment": "add", "page": "gcc-vehicle-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-068_Apply_to_Transfer_the_Ownership_of_a_Vehicle_Licence_page_\u2014_Age_threshold_conflict", "status": "query", "comment": "the 15 year rule for first registration is for WAVS.", "page": "gcc-vehicle-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-HC-072_Apply_for_a_new_vehicle_licence_page_\u2014_HC_vehicle_colour", "status": "query", "comment": "add the wording.", "page": "gcc-vehicle-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "FLAG_VEH-PH-060_Apply_for_a_new_vehicle_licence_page_\u2014_PH_vehicle_colour", "status": "query", "comment": "add the wording.", "page": "gcc-vehicle-licence.html", "detail": "", "completed": false, "notes": ""}, {"id": "VEH-HC-046", "status": "query", "comment": "This needs to change to 15 years.", "page": "gcc-vehicle-licence.html", "detail": "The vehicle supplied must be similar in type and not older than 15 years of age. The vehicle cannot be licensed by another authority at the same time. The vehicle must be white in colour. The temporar", "completed": false, "notes": ""}, {"id": "VEH-HC-048", "status": "query", "comment": "We do not have appointments anymore.", "page": "gcc-vehicle-licence.html", "detail": "An application form with payment shall be completed and presented to the Licensing Team at least three working days prior to the day in which the vehicle is required, by emailing the completed form an", "completed": false, "notes": ""}, {"id": "VEH-PH-009", "status": "changed", "comment": "", "page": "gcc-vehicle-licence.html", "detail": "Section 2 - New Applications", "completed": false, "notes": ""}, {"id": "VEH-PH-010", "status": "changed", "comment": "", "page": "gcc-vehicle-licence.html", "detail": "Section 2 - Renewal Applications", "completed": false, "notes": ""}, {"id": "VEH-PH-018", "status": "changed", "comment": "", "page": "gcc-vehicle-licence.html", "detail": "produce an appropriate insurance certificate or cover note for Private Hire purposes in accordance with the requirements of current legislation. If a cover note is offered, the full insurance certific", "completed": false, "notes": ""}, {"id": "VEH-PH-027", "status": "changed", "comment": "", "page": "gcc-vehicle-licence.html", "detail": "Section 2 - Transfer of Ownership", "completed": false, "notes": ""}, {"id": "VEH-PH-043", "status": "query", "comment": "I don't understand this wording?", "page": "gcc-vehicle-licence.html", "detail": "Gloucester City Council will issue licenses to proprietors for temporary vehicles when their vehicle is involved in an accident or is unusable for mechanical reasons due to the accident. [Conditions a", "completed": false, "notes": ""}, {"id": "VEH-PH-062", "status": "changed", "comment": "", "page": "gcc-vehicle-licence.html", "detail": "Section 3 - Fire Extinguisher", "completed": false, "notes": ""}];
+
+let progress = {};
+
+function load() {
+  try {
+    const s = localStorage.getItem(KEY);
+    if (s) progress = JSON.parse(s);
+  } catch(e) { progress = {}; }
+}
+
+function save() {
+  localStorage.setItem(KEY, JSON.stringify(progress));
+  document.getElementById('pending-count').textContent = 
+    Object.values(progress).filter(v => v.done).length + ' of ' + ACTIONS.length + ' done';
+}
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(progress, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'gcc_hcph_actions_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+}
+
+function importJSON(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      const data = JSON.parse(ev.target.result);
+      progress = data;
+      save();
+      render();
+      alert('Progress imported successfully.');
+    } catch(err) {
+      alert('Invalid JSON file.');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function toggleDone(id) {
+  if (!progress[id]) progress[id] = {};
+  progress[id].done = !progress[id].done;
+  save();
+  render();
+}
+
+function saveNote(id, val) {
+  if (!progress[id]) progress[id] = {};
+  progress[id].notes = val;
+  save();
+}
+
+function toggleNotes(id) {
+  const el = document.getElementById('notes-' + safeId(id));
+  el.classList.toggle('open');
+}
+
+function safeId(id) {
+  return id.replace(/[^a-zA-Z0-9]/g, '_');
+}
+
+let currentFilter = 'all';
+let currentPage = 'all';
+
+function setFilter(val) { currentFilter = val; render(); }
+function setPage(val) { currentPage = val; render(); }
+
+function render() {
+  const done = ACTIONS.filter(a => progress[a.id]?.done).length;
+  const pending = ACTIONS.length - done;
+  document.getElementById('pending-count').textContent = pending + ' pending';
+  document.getElementById('done-count').textContent = done + ' completed';
+
+  // Stats bar
+  const byStatus = {};
+  ACTIONS.forEach(a => {
+    byStatus[a.status] = (byStatus[a.status]||0) + 1;
+  });
+  const colours = {query:'#1565c0',changed:'#b45309',rejected:'#b91c1c'};
+  document.getElementById('stats').innerHTML = 
+    Object.entries(byStatus).map(([s,c]) =>
+      `<div class="stat"><div class="stat-dot" style="background:${colours[s]||'#374151'}"></div>
+       <span>${c} ${s}</span></div>`
+    ).join('') +
+    `<div class="stat"><div class="stat-dot" style="background:#1a7a3a"></div><span>${done} completed</span></div>`;
+
+  // Group by page
+  const pages = {};
+  ACTIONS.forEach(a => {
+    if (!pages[a.page]) pages[a.page] = [];
+    pages[a.page].push(a);
+  });
+
+  // Populate page filter
+  const pf = document.getElementById('page-filter');
+  const existingPages = Array.from(pf.options).map(o => o.value);
+  Object.keys(pages).sort().forEach(p => {
+    if (!existingPages.includes(p)) {
+      const opt = document.createElement('option');
+      opt.value = p; opt.textContent = p;
+      pf.appendChild(opt);
+    }
+  });
+
+  let html = '';
+  Object.keys(pages).sort().forEach(page => {
+    if (currentPage !== 'all' && currentPage !== page) return;
+
+    const items = pages[page].filter(a => {
+      if (currentFilter === 'pending') return !progress[a.id]?.done;
+      if (currentFilter === 'done') return progress[a.id]?.done;
+      if (currentFilter === 'query') return a.status === 'query';
+      if (currentFilter === 'changed') return a.status === 'changed';
+      if (currentFilter === 'rejected') return a.status === 'rejected';
+      return true;
+    });
+    if (!items.length) return;
+
+    const pageCount = items.length;
+    const pageDone = items.filter(a => progress[a.id]?.done).length;
+
+    html += `<div class="page-group">
+      <div class="page-title">
+        <span>📄 ${page}</span>
+        <span class="page-badge">${pageDone}/${pageCount}</span>
+      </div>`;
+
+    items.forEach(a => {
+      const isDone = progress[a.id]?.done || false;
+      const note = progress[a.id]?.notes || '';
+      const sid = safeId(a.id);
+
+      html += `<div class="action-card${isDone?' done':''}" id="card-${sid}">
+        <div class="card-header">
+          <code class="card-id">${a.id}</code>
+          <div class="card-body">
+            <div class="card-status status-${a.status}">${a.status.toUpperCase()}</div>
+            <p class="card-comment">${a.comment || '(No comment recorded)'}</p>
+            ${a.detail ? `<p class="card-detail">${a.detail.slice(0,250)}${a.detail.length>250?'…':''}</p>` : ''}
+            <div class="card-actions">
+              <button class="complete-btn ${isDone?'unmark':'mark'}" onclick="toggleDone('${a.id}')">
+                ${isDone ? '✓ Mark as pending' : '✓ Mark complete'}
+              </button>
+              <button class="card-expand" onclick="toggleNotes('${a.id}')">
+                ${note ? '📝 Notes' : '+ Add notes'}
+              </button>
+              ${isDone ? '<span class="done-stamp">✓ Completed</span>' : ''}
+            </div>
+          </div>
+        </div>
+        <div class="notes-section${note?' open':''}" id="notes-${sid}">
+          <div class="notes-label">Notes / implementation detail</div>
+          <textarea class="notes-input" placeholder="Add notes about how this was implemented or why it was deferred…"
+            onchange="saveNote('${a.id}', this.value)">${note}</textarea>
+        </div>
+      </div>`;
+    });
+
+    html += '</div>';
+  });
+
+  document.getElementById('main').innerHTML = html;
+}
+
+load();
+render();
+</script>
+</body>
+</html>

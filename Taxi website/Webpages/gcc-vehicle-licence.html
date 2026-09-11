@@ -601,7 +601,7 @@ a:focus-visible { color:var(--text) }
         <li class="req-item">
           <div class="req-title">V5 registration document</div>
           <p class="req-desc" id="v5-hc">Or the new keeper supplement if you have recently purchased the vehicle.</p>
-          <p class="req-desc" id="v5-ph" style="display:none">Or the new keeper supplement if you have recently purchased the vehicle. The V5 is also sufficient as proof of ownership.</p>
+          <p class="req-desc" id="v5-ph" style="display:none">Or the new keeper supplement if you have recently purchased the vehicle.</p>
         </li>
 
         <li class="req-item">
@@ -826,7 +826,7 @@ function render(){
     show('ph-already-licensed');
     // Eligibility — PH specific
     hide('elig-hc-items'); show('elig-ph-items');
-    hide('ownership-hc-item'); hide('v5-hc'); show('v5-ph');
+    show('ownership-hc-item'); hide('v5-hc'); show('v5-ph');
   }
 }
 
