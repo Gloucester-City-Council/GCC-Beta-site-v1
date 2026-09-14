@@ -1,0 +1,220 @@
+/* Gloucester Council Tax — customer pages
+   Ink/stone/moss palette; Newsreader (serif, headings) + Public Sans (body) */
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --ink:#1C2B39;
+  --ink-soft:#3B4A56;
+  --paper:#EDEFEA;
+  --panel:#FFFFFF;
+  --accent:#2B6E5E;      /* moss green — money off, links, primary */
+  --accent-dark:#1E4F43;
+  --warn:#8A4B2B;        /* brick rust — warnings, enforcement */
+  --warn-bg:#F7ECE4;
+  --rule:#C9CDC2;
+  --table-head:#DCE1D6;
+  --table-alt:#F5F6F2;
+  --focus:#0B5FFF;
+}
+
+*{box-sizing:border-box;}
+
+html{-webkit-text-size-adjust:100%;}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size:17px;
+  line-height:1.6;
+}
+
+a{color:var(--accent-dark);}
+a:hover{color:var(--accent);}
+a:focus-visible, button:focus-visible, input:focus-visible{
+  outline:3px solid var(--focus);
+  outline-offset:2px;
+}
+
+h1,h2,h3{
+  font-family:'Newsreader', Georgia, serif;
+  color:var(--ink);
+  line-height:1.25;
+  font-weight:600;
+}
+
+h1{font-size:2.1rem; margin:0 0 .3em;}
+h2{font-size:1.5rem; margin:2em 0 .6em; padding-top:.4em; border-top:1px solid var(--rule);}
+h2:first-of-type{border-top:none; padding-top:0;}
+h3{font-size:1.15rem; margin:1.6em 0 .5em; color:var(--accent-dark);}
+
+p{margin:0 0 1em; max-width:70ch;}
+ul,ol{margin:0 0 1em; padding-left:1.3em; max-width:70ch;}
+li{margin-bottom:.35em;}
+
+/* ---------- site chrome ---------- */
+
+.topbar{
+  background:var(--ink);
+  color:#EDEFEA;
+  padding:.7em 1.5rem;
+  font-size:.92rem;
+}
+.topbar strong{font-weight:600; letter-spacing:.01em;}
+
+.pagenav{
+  background:var(--panel);
+  border-bottom:1px solid var(--rule);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.pagenav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:0;
+  margin:0;
+  padding:0 1.5rem;
+  max-width:840px;
+  margin:0 auto;
+}
+.pagenav li{margin:0;}
+.pagenav a{
+  display:block;
+  padding:.9em 1em;
+  text-decoration:none;
+  color:var(--ink-soft);
+  font-weight:600;
+  font-size:.95rem;
+  border-bottom:3px solid transparent;
+}
+.pagenav a:hover{color:var(--accent-dark);}
+.pagenav a[aria-current="page"]{
+  color:var(--accent-dark);
+  border-bottom-color:var(--accent);
+}
+
+main{
+  max-width:840px;
+  margin:0 auto;
+  padding:2.2rem 1.5rem 4rem;
+}
+
+.lede{
+  font-size:1.15rem;
+  color:var(--ink-soft);
+  max-width:65ch;
+}
+
+footer{
+  border-top:1px solid var(--rule);
+  padding:2rem 1.5rem 3rem;
+  max-width:840px;
+  margin:0 auto;
+  color:var(--ink-soft);
+  font-size:.9rem;
+}
+
+/* ---------- callouts ---------- */
+
+.callout{
+  border-left:4px solid var(--accent);
+  background:var(--table-alt);
+  padding:1em 1.2em;
+  margin:1.4em 0;
+  max-width:70ch;
+}
+.callout p:last-child{margin-bottom:0;}
+.callout.warn{
+  border-left-color:var(--warn);
+  background:var(--warn-bg);
+}
+.callout h3{margin-top:0;}
+
+/* ---------- tables ---------- */
+
+.table-wrap{overflow-x:auto; margin:1.2em 0 1.8em;}
+
+table{
+  border-collapse:collapse;
+  width:100%;
+  font-size:.95rem;
+  font-variant-numeric:tabular-nums;
+}
+caption{
+  text-align:left;
+  font-weight:600;
+  color:var(--ink-soft);
+  margin-bottom:.5em;
+  font-size:.95rem;
+}
+th,td{
+  border:1px solid var(--rule);
+  padding:.55em .7em;
+  text-align:left;
+  vertical-align:top;
+}
+thead th{
+  background:var(--table-head);
+  font-weight:700;
+}
+tbody tr:nth-child(even){background:var(--table-alt);}
+td.num, th.num{text-align:right;}
+.total-col{font-weight:700;}
+
+/* ---------- definition-style blocks ---------- */
+
+dl.terms{margin:0 0 1.5em;}
+dl.terms dt{
+  font-weight:700;
+  color:var(--ink);
+  margin-top:1.1em;
+}
+dl.terms dt:first-child{margin-top:0;}
+dl.terms dd{margin:.25em 0 0; padding-left:0; max-width:70ch;}
+
+/* ---------- ordered escalation steps ---------- */
+
+ol.steps{
+  list-style:none;
+  padding:0;
+  margin:1.2em 0;
+  counter-reset:step;
+}
+ol.steps li{
+  position:relative;
+  padding:0 0 1.1em 2.6em;
+  margin:0 0 1.1em;
+  border-left:2px solid var(--rule);
+}
+ol.steps li:last-child{border-left-color:transparent; padding-bottom:0;}
+ol.steps li::before{
+  counter-increment:step;
+  content:counter(step);
+  position:absolute;
+  left:-1.05em;
+  top:0;
+  width:1.9em;
+  height:1.9em;
+  line-height:1.9em;
+  text-align:center;
+  background:var(--warn);
+  color:#fff;
+  border-radius:50%;
+  font-weight:700;
+  font-size:.85rem;
+}
+ol.steps h3{margin:0 0 .3em;}
+
+/* ---------- utility ---------- */
+
+.small{font-size:.9rem; color:var(--ink-soft);}
+.linklist li{margin-bottom:.5em;}
+
+@media (max-width:520px){
+  h1{font-size:1.7rem;}
+  body{font-size:16px;}
+}
