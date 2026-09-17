@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Measuring what is happening now against what normally happens</title>
+<style>
+:root{
+  --bg:#fbfaf7; --surface:#ffffff; --surface-2:#f5f3ed; --ink:#22211f; --ink-2:#56544e; --ink-3:#807d75;
+  --line:#e2dfd6; --accent:#534AB7;
+  --p-fill:#EEEDFE; --p-line:#534AB7; --p-title:#3C3489; --p-sub:#534AB7;
+  --t-fill:#E1F5EE; --t-line:#0F6E56; --t-title:#085041; --t-sub:#0F6E56;
+  --g-fill:#F1EFE8; --g-line:#5F5E5A; --g-title:#444441; --g-sub:#5F5E5A;
+  --arr:#807d75; --dash:#b4b2a9;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#17161a; --surface:#1f1e23; --surface-2:#26252b; --ink:#eceae4; --ink-2:#b5b2a9; --ink-3:#8b8880;
+    --line:#33313a; --accent:#AFA9EC;
+    --p-fill:#3C3489; --p-line:#AFA9EC; --p-title:#CECBF6; --p-sub:#AFA9EC;
+    --t-fill:#085041; --t-line:#5DCAA5; --t-title:#9FE1CB; --t-sub:#5DCAA5;
+    --g-fill:#444441; --g-line:#B4B2A9; --g-title:#D3D1C7; --g-sub:#B4B2A9;
+    --arr:#8b8880; --dash:#5f5e5a;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#17161a; --surface:#1f1e23; --surface-2:#26252b; --ink:#eceae4; --ink-2:#b5b2a9; --ink-3:#8b8880;
+  --line:#33313a; --accent:#AFA9EC;
+  --p-fill:#3C3489; --p-line:#AFA9EC; --p-title:#CECBF6; --p-sub:#AFA9EC;
+  --t-fill:#085041; --t-line:#5DCAA5; --t-title:#9FE1CB; --t-sub:#5DCAA5;
+  --g-fill:#444441; --g-line:#B4B2A9; --g-title:#D3D1C7; --g-sub:#B4B2A9;
+  --arr:#8b8880; --dash:#5f5e5a;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:17px; line-height:1.68; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:740px; margin:0 auto; padding:3.5rem 1.25rem 5rem}
+header{margin-bottom:2.5rem}
+.kicker{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin:0 0 1rem}
+h1{font-size:2.05rem; line-height:1.18; font-weight:600; margin:0 0 1rem; letter-spacing:-.02em}
+.standfirst{font-size:1.15rem; line-height:1.55; color:var(--ink-2); margin:0}
+.summary{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:1.4rem 1.5rem; margin:2.5rem 0 3rem}
+.summary p{margin:0; font-size:1.02rem}
+.summary .lbl{display:block; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:.6rem}
+nav{border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:1.2rem 0; margin-bottom:3rem}
+nav ol{margin:0; padding:0; list-style:none; counter-reset:n; columns:2; column-gap:2rem}
+nav li{counter-increment:n; margin:0 0 .4rem; font-size:14.5px; break-inside:avoid}
+nav li::before{content:counter(n) ". "; color:var(--ink-3)}
+nav a{color:var(--ink-2); text-decoration:none; border-bottom:1px solid transparent}
+nav a:hover{color:var(--accent); border-bottom-color:var(--accent)}
+section{margin-bottom:3.2rem}
+h2{font-size:1.35rem; font-weight:600; margin:0 0 1rem; letter-spacing:-.012em; display:flex; gap:.7rem; align-items:baseline}
+h2 .num{font-size:.85rem; color:var(--ink-3); font-weight:500; font-variant-numeric:tabular-nums}
+h3{font-size:1.03rem; font-weight:600; margin:2rem 0 .45rem}
+p{margin:0 0 1.15rem}
+ul{margin:0 0 1.15rem; padding-left:1.25rem}
+li{margin-bottom:.55rem}
+strong{font-weight:600}
+.fig{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:1.4rem 1.1rem; margin:2rem 0}
+.fig-scroll{overflow-x:auto}
+.fig svg{display:block; width:100%; height:auto}
+.fig-wide svg{min-width:520px}
+.fig-primer svg{min-width:460px}
+.cap{font-size:13.5px; color:var(--ink-3); margin:1rem 0 0; padding-top:1rem; border-top:1px solid var(--line); line-height:1.55}
+.legend{display:flex; flex-wrap:wrap; gap:.9rem 1.4rem; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--line); font-size:13px; color:var(--ink-2)}
+.legend span{display:flex; align-items:center; gap:.45rem}
+.sw{width:12px; height:12px; border-radius:3px; border:1px solid; flex:none}
+.sw-p{background:var(--p-fill); border-color:var(--p-line)}
+.sw-t{background:var(--t-fill); border-color:var(--t-line)}
+.sw-g{background:var(--g-fill); border-color:var(--g-line)}
+.callout{background:var(--surface-2); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:0; padding:1.1rem 1.3rem; margin:1.8rem 0}
+.callout p:last-child{margin-bottom:0}
+.callout .lbl{font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:.4rem}
+.pull{font-size:1.2rem; line-height:1.5; color:var(--ink); margin:2.2rem 0; padding-left:1.3rem; border-left:3px solid var(--accent)}
+table{width:100%; border-collapse:collapse; margin:1.4rem 0; font-size:15px}
+th,td{text-align:left; padding:.7rem .65rem; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-weight:600; color:var(--ink-3); font-size:12px; letter-spacing:.06em; text-transform:uppercase}
+td:first-child{font-weight:600; white-space:nowrap}
+footer{margin-top:1rem; padding-top:1.5rem; border-top:1px solid var(--line); font-size:14px; color:var(--ink-3)}
+@media (max-width:620px){
+  body{font-size:16px}
+  .wrap{padding:2.25rem 1rem 3.5rem}
+  h1{font-size:1.55rem}
+  .standfirst{font-size:1.05rem}
+  nav ol{columns:1}
+  .pull{font-size:1.08rem}
+  td:first-child{white-space:normal}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">Architecture note</p>
+  <h1>Measuring what is happening now against what normally happens</h1>
+  <p class="standfirst">A method for running a statutory process continuously while measuring how closely today's caseload matches the rules that govern it and the history of how it has been handled before.</p>
+</header>
+
+<div class="summary">
+  <span class="lbl">In one paragraph</span>
+  <p>Encode the rules of a service as a graph. Encode the approved procedure as a second graph that cases are walked through. Every completed case leaves behind the route it took. Those accumulated routes are the historic norm. Each new case is then measured against two things at once: what the rules say should happen, and what has actually tended to happen. Where a case or a run of cases sits away from both, the size and character of that gap determines what happens next, from a second review through to escalation.</p>
+</div>
+
+<nav>
+  <ol>
+    <li><a href="#s1">What cannot currently be seen</a></li>
+    <li><a href="#s2">What a graph is</a></li>
+    <li><a href="#s3">Why two graphs</a></li>
+    <li><a href="#s4">The architecture</a></li>
+    <li><a href="#s5">The layers</a></li>
+    <li><a href="#s6">Two baselines, not one</a></li>
+    <li><a href="#s7">Fingerprints and what they grade</a></li>
+    <li><a href="#s8">What a divergence means</a></li>
+    <li><a href="#s9">Where the method stops</a></li>
+    <li><a href="#s10">Limits worth stating</a></li>
+    <li><a href="#s11">Where it would start</a></li>
+  </ol>
+</nav>
+
+<section id="s1">
+<h2><span class="num">01</span> What cannot currently be seen</h2>
+
+<p>A council can tell you how many council tax discount claims it received last month, how many were awarded, and how long they took. Volumes, outcomes, elapsed time. Every performance report in local government is built from those three.</p>
+
+<p>None of them describe the shape of the work. Two months can carry identical volumes, identical award rates and identical turnaround, while the cases arriving in the second month are materially different from those in the first: different circumstances, handled through different routes, for different reasons. Nothing in a standard management report would show it.</p>
+
+<p>The gap matters more as processing becomes automated. A service where every case is touched by an officer has informal detection built in. Someone notices they are seeing a lot of a particular thing lately. Remove the officer from the routine cases, which is the point of automating them, and that informal sense goes with them. Volumes carry on looking normal while the composition underneath changes.</p>
+
+<p>Audit is the formal answer and it is retrospective and sampled. It tells you about the cases someone examined, some months after they were decided.</p>
+
+<p class="pull">What is missing is a continuous measure of how today's work compares with the rules that govern it and with how the same work has been handled before.</p>
+
+<p>What follows produces that measure as a by-product of running the process.</p>
+</section>
+
+<section id="s2">
+<h2><span class="num">02</span> What a graph is</h2>
+
+<p>A graph, in this context, is a way of holding information as things and the relationships between them. The things are nodes. The relationships are the connections between them.</p>
+
+<p>It sounds trivial and it is not, because of what the structure permits. A document describes relationships in prose, which a person has to read and interpret. A conventional database fixes the questions you can ask when the tables are designed. A graph stores the relationships themselves as data, so they can be traversed, tested for contradiction, and used to answer questions nobody anticipated when it was built.</p>
+
+<div class="fig fig-primer">
+  <div class="fig-scroll">
+    <svg viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Two kinds of graph</title>
+      <desc>On the left, a knowledge graph: four connected nodes representing facts and relationships in a domain, with no direction of travel. On the right, a process graph: states connected by permitted transitions, with one route through highlighted to show a single case's actual path.</desc>
+      <defs>
+        <marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <rect x="30" y="56" width="300" height="192" rx="14" fill="none" stroke="var(--dash)" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <text x="180" y="42" text-anchor="middle" fill="var(--ink-2)" font-size="14" font-weight="500">Knowledge graph</text>
+
+      <line x1="115" y1="122" x2="115" y2="178" stroke="var(--arr)" stroke-width="0.5"/>
+      <line x1="170" y1="104" x2="215" y2="104" stroke="var(--arr)" stroke-width="0.5"/>
+      <line x1="170" y1="196" x2="215" y2="196" stroke="var(--arr)" stroke-width="0.5"/>
+      <line x1="265" y1="122" x2="265" y2="178" stroke="var(--arr)" stroke-width="0.5"/>
+      <line x1="170" y1="118" x2="215" y2="182" stroke="var(--arr)" stroke-width="0.5"/>
+
+      <g>
+        <rect x="60" y="86" width="110" height="36" rx="8" fill="var(--p-fill)" stroke="var(--p-line)" stroke-width="0.5"/>
+        <text x="115" y="104" text-anchor="middle" dominant-baseline="central" fill="var(--p-title)" font-size="14" font-weight="500">Resident</text>
+      </g>
+      <g>
+        <rect x="215" y="86" width="100" height="36" rx="8" fill="var(--p-fill)" stroke="var(--p-line)" stroke-width="0.5"/>
+        <text x="265" y="104" text-anchor="middle" dominant-baseline="central" fill="var(--p-title)" font-size="14" font-weight="500">Student</text>
+      </g>
+      <g>
+        <rect x="60" y="178" width="110" height="36" rx="8" fill="var(--p-fill)" stroke="var(--p-line)" stroke-width="0.5"/>
+        <text x="115" y="196" text-anchor="middle" dominant-baseline="central" fill="var(--p-title)" font-size="14" font-weight="500">Dwelling</text>
+      </g>
+      <g>
+        <rect x="215" y="178" width="100" height="36" rx="8" fill="var(--p-fill)" stroke="var(--p-line)" stroke-width="0.5"/>
+        <text x="265" y="196" text-anchor="middle" dominant-baseline="central" fill="var(--p-title)" font-size="14" font-weight="500">Discount</text>
+      </g>
+      <text x="180" y="270" text-anchor="middle" fill="var(--ink-3)" font-size="12">What is true, and how it relates</text>
+
+      <rect x="360" y="56" width="290" height="192" rx="14" fill="none" stroke="var(--dash)" stroke-width="0.5" stroke-dasharray="4 4"/>
+      <text x="505" y="42" text-anchor="middle" fill="var(--ink-2)" font-size="14" font-weight="500">Process graph</text>
+
+      <line x1="505" y1="118" x2="505" y2="146" stroke="var(--t-line)" stroke-width="2" marker-end="url(#a2)"/>
+      <path d="M505 182 L505 196 L425 196 L425 210" fill="none" stroke="var(--t-line)" stroke-width="2" marker-end="url(#a2)"/>
+      <path d="M505 182 L505 196 L585 196 L585 210" fill="none" stroke="var(--arr)" stroke-width="0.5" marker-end="url(#a2)"/>
+
+      <g>
+        <rect x="445" y="82" width="120" height="36" rx="8" fill="var(--t-fill)" stroke="var(--t-line)" stroke-width="0.5"/>
+        <text x="505" y="100" text-anchor="middle" dominant-baseline="central" fill="var(--t-title)" font-size="14" font-weight="500">Claim</text>
+      </g>
+      <g>
+        <rect x="445" y="146" width="120" height="36" rx="8" fill="var(--t-fill)" stroke="var(--t-line)" stroke-width="0.5"/>
+        <text x="505" y="164" text-anchor="middle" dominant-baseline="central" fill="var(--t-title)" font-size="14" font-weight="500">Check</text>
+      </g>
+      <g>
+        <rect x="380" y="210" width="90" height="36" rx="8" fill="var(--t-fill)" stroke="var(--t-line)" stroke-width="0.5"/>
+        <text x="425" y="228" text-anchor="middle" dominant-baseline="central" fill="var(--t-title)" font-size="14" font-weight="500">Award</text>
+      </g>
+      <g>
+        <rect x="540" y="210" width="90" height="36" rx="8" fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="0.5"/>
+        <text x="585" y="228" text-anchor="middle" dominant-baseline="central" fill="var(--g-title)" font-size="14" font-weight="500">Refuse</text>
+      </g>
+      <text x="505" y="270" text-anchor="middle" fill="var(--ink-3)" font-size="12">What may happen next, and what did</text>
+    </svg>
+  </div>
+  <p class="cap">Left: relationships without a direction of travel. Right: states with permitted transitions, and one case's actual route drawn through them.</p>
+</div>
+
+<p>A <strong>knowledge graph</strong> holds what is true in a domain. A person under eighteen is disregarded. A disregarded person is not counted as a resident. A dwelling with one counted resident attracts a discount. Each of those is a relationship between things, stored so a machine can follow it.</p>
+
+<ul>
+  <li><strong>It answers questions it was never given.</strong> Nobody has to write down that a dwelling occupied by one adult and one sixteen-year-old attracts a discount. Following the relationships produces it.</li>
+  <li><strong>It can be checked for contradiction.</strong> A new policy statement that conflicts with an existing one can be found by the structure, rather than by someone who happens to have read both.</li>
+  <li><strong>It carries provenance.</strong> A relationship can be attached to the section of legislation it came from, so an answer traces back to its source.</li>
+</ul>
+
+<p>A <strong>walkable graph</strong>, or process graph, uses the same structure to hold something different: the states a case can be in, and the transitions permitted between them. It is a runnable version of a procedure rather than a description of one. A case sits at a node, the graph says what may happen next, the case moves, and the sequence of nodes it visited is left behind.</p>
+
+<p>That sequence is what everything else here depends on. Because the route is data, the process can be executed, every possible route can be enumerated and tested before anything goes live, any decision can be explained by pointing at the route that produced it, and every completed case adds to a record of how the work has actually been done.</p>
+</section>
+
+<section id="s3">
+<h2><span class="num">03</span> Why two graphs</h2>
+
+<p>The law permits a range of lawful procedures. An organisation picks one and approves it. Those are two different pieces of information, and keeping them apart lets them disagree.</p>
+
+<p>The knowledge graph holds the rule. The process graph holds one organisation's chosen implementation of it. Before anything runs, every possible route through the process graph can be checked against the knowledge graph: does this path stay lawful? That check is logical rather than statistical. It returns a yes or no, with a reason.</p>
+
+<p>Collapse them into one graph and you lose the ability to tell a bad case from a bad procedure. A case that goes wrong because it was mishandled and a case that goes wrong because the approved procedure was never lawful call for entirely different responses. One graph cannot separate them.</p>
+</section>
+
+<section id="s4">
+<h2><span class="num">04</span> The architecture</h2>
+
+<div class="fig fig-wide">
+  <div class="fig-scroll">
+    <svg viewBox="0 0 680 762" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Now-against-normal measurement architecture</title>
+      <desc>A knowledge graph validates a walkable process graph. Historic cases form a baseline and current activity is compared against it. Two measurements, per-fork probability and full-path fingerprint, produce a divergence figure. That figure grades the response as second review, closer attention, or escalation. A named human interprets it, and the outcome feeds back to revise the process graph or the knowledge graph.</desc>
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <g>
+        <rect x="190" y="40" width="300" height="56" rx="8" fill="var(--p-fill)" stroke="var(--p-line)" stroke-width="0.5"/>
+        <text x="340" y="60" text-anchor="middle" dominant-baseline="central" fill="var(--p-title)" font-size="14" font-weight="500">Knowledge graph</text>
+        <text x="340" y="80" text-anchor="middle" dominant-baseline="central" fill="var(--p-sub)" font-size="12">Legislation, policy, practice</text>
+      </g>
+
+      <line x1="340" y1="96" x2="340" y2="126" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="352" y="111" dominant-baseline="central" fill="var(--ink-3)" font-size="12">conformance check</text>
+
+      <g>
+        <rect x="190" y="136" width="300" height="56" rx="8" fill="var(--p-fill)" stroke="var(--p-line)" stroke-width="0.5"/>
+        <text x="340" y="156" text-anchor="middle" dominant-baseline="central" fill="var(--p-title)" font-size="14" font-weight="500">Process graph</text>
+        <text x="340" y="176" text-anchor="middle" dominant-baseline="central" fill="var(--p-sub)" font-size="12">Approved local procedure</text>
+      </g>
+
+      <path d="M340 192 L340 212 L205 212 L205 232" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <path d="M340 192 L340 212 L475 212 L475 232" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <g>
+        <rect x="100" y="242" width="210" height="56" rx="8" fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="0.5"/>
+        <text x="205" y="262" text-anchor="middle" dominant-baseline="central" fill="var(--g-title)" font-size="14" font-weight="500">Historic cases</text>
+        <text x="205" y="282" text-anchor="middle" dominant-baseline="central" fill="var(--g-sub)" font-size="12">How it has been done</text>
+      </g>
+
+      <g>
+        <rect x="370" y="242" width="210" height="56" rx="8" fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="0.5"/>
+        <text x="475" y="262" text-anchor="middle" dominant-baseline="central" fill="var(--g-title)" font-size="14" font-weight="500">Current activity</text>
+        <text x="475" y="282" text-anchor="middle" dominant-baseline="central" fill="var(--g-sub)" font-size="12">What is happening now</text>
+      </g>
+
+      <path d="M205 298 L205 318 L340 318 L340 328" fill="none" stroke="var(--arr)" stroke-width="1.5"/>
+      <path d="M475 298 L475 318 L340 318" fill="none" stroke="var(--arr)" stroke-width="1.5"/>
+      <path d="M340 328 L340 338 L205 338 L205 358" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <path d="M340 328 L340 338 L475 338 L475 358" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <g>
+        <rect x="100" y="368" width="210" height="56" rx="8" fill="var(--t-fill)" stroke="var(--t-line)" stroke-width="0.5"/>
+        <text x="205" y="388" text-anchor="middle" dominant-baseline="central" fill="var(--t-title)" font-size="14" font-weight="500">Per-fork probability</text>
+        <text x="205" y="408" text-anchor="middle" dominant-baseline="central" fill="var(--t-sub)" font-size="12">At each branch point</text>
+      </g>
+
+      <g>
+        <rect x="370" y="368" width="210" height="56" rx="8" fill="var(--t-fill)" stroke="var(--t-line)" stroke-width="0.5"/>
+        <text x="475" y="388" text-anchor="middle" dominant-baseline="central" fill="var(--t-title)" font-size="14" font-weight="500">Full-path fingerprint</text>
+        <text x="475" y="408" text-anchor="middle" dominant-baseline="central" fill="var(--t-sub)" font-size="12">Shape of whole journey</text>
+      </g>
+
+      <path d="M205 424 L205 444 L340 444 L340 464" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <path d="M475 424 L475 444 L340 444" fill="none" stroke="var(--arr)" stroke-width="1.5"/>
+
+      <g>
+        <rect x="190" y="474" width="300" height="56" rx="8" fill="var(--t-fill)" stroke="var(--t-line)" stroke-width="0.5"/>
+        <text x="340" y="494" text-anchor="middle" dominant-baseline="central" fill="var(--t-title)" font-size="14" font-weight="500">Divergence, measured</text>
+        <text x="340" y="514" text-anchor="middle" dominant-baseline="central" fill="var(--t-sub)" font-size="12">Now against normal</text>
+      </g>
+
+      <path d="M340 530 L340 550 L145 550 L145 570" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <path d="M340 530 L340 570" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <path d="M340 530 L340 550 L535 550 L535 570" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <g>
+        <rect x="60" y="580" width="170" height="56" rx="8" fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="0.5"/>
+        <text x="145" y="600" text-anchor="middle" dominant-baseline="central" fill="var(--g-title)" font-size="14" font-weight="500">Second review</text>
+        <text x="145" y="620" text-anchor="middle" dominant-baseline="central" fill="var(--g-sub)" font-size="12">Check the decision</text>
+      </g>
+
+      <g>
+        <rect x="255" y="580" width="170" height="56" rx="8" fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="0.5"/>
+        <text x="340" y="600" text-anchor="middle" dominant-baseline="central" fill="var(--g-title)" font-size="14" font-weight="500">Closer attention</text>
+        <text x="340" y="620" text-anchor="middle" dominant-baseline="central" fill="var(--g-sub)" font-size="12">Worth looking into</text>
+      </g>
+
+      <g>
+        <rect x="450" y="580" width="170" height="56" rx="8" fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="0.5"/>
+        <text x="535" y="600" text-anchor="middle" dominant-baseline="central" fill="var(--g-title)" font-size="14" font-weight="500">Escalate</text>
+        <text x="535" y="620" text-anchor="middle" dominant-baseline="central" fill="var(--g-sub)" font-size="12">Raise it now</text>
+      </g>
+
+      <path d="M145 636 L145 656 L340 656 L340 676" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <path d="M340 636 L340 676" fill="none" stroke="var(--arr)" stroke-width="1.5"/>
+      <path d="M535 636 L535 656 L340 656" fill="none" stroke="var(--arr)" stroke-width="1.5"/>
+
+      <g>
+        <rect x="190" y="686" width="300" height="56" rx="8" fill="var(--g-fill)" stroke="var(--g-line)" stroke-width="0.5"/>
+        <text x="340" y="706" text-anchor="middle" dominant-baseline="central" fill="var(--g-title)" font-size="14" font-weight="500">Interpretation</text>
+        <text x="340" y="726" text-anchor="middle" dominant-baseline="central" fill="var(--g-sub)" font-size="12">Named human decides</text>
+      </g>
+
+      <path d="M490 714 L652 714 L652 164 L500 164" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <path d="M652 430 L652 68 L500 68" fill="none" stroke="var(--arr)" stroke-width="1.5" marker-end="url(#arrow)"/>
+    </svg>
+  </div>
+  <div class="legend">
+    <span><i class="sw sw-p"></i>Authored: true by construction</span>
+    <span><i class="sw sw-t"></i>Measured: true by observation</span>
+    <span><i class="sw sw-g"></i>Cases, responses, judgement</span>
+  </div>
+  <p class="cap">The return arrows are the point. This is a loop, not a pipeline. What comes out of the bottom changes what sits at the top.</p>
+</div>
+</section>
+
+<section id="s5">
+<h2><span class="num">05</span> The layers</h2>
+
+<h3>Knowledge graph</h3>
+<p>The rule, encoded from the authoritative source. Declarative. Nothing walks through it. It exists so other things can be checked against it. It is not learned from data, which is what allows it to disagree with observed behaviour rather than simply describe it.</p>
+
+<h3>Process graph</h3>
+<p>One organisation's approved procedure in walkable form, validated against the knowledge graph before anything runs.</p>
+
+<h3>Historic cases and current activity</h3>
+<p>Both are cases walked through the same process graph. The difference is what they are used for. Completed cases accumulate into the baseline. Live and recent cases are the thing being measured against it. The same data serves both roles as it ages.</p>
+
+<h3>Two measurements</h3>
+<ul>
+  <li><strong>Per-fork transition probability.</strong> At each individual branch, what proportion of cases historically took each route. Local. Answers: was this choice a common one?</li>
+  <li><strong>Full-path fingerprint.</strong> The whole walked sequence treated as a shape and compared against the population of other journeys. Global. Answers: has a journey like this been seen before?</li>
+</ul>
+
+<h3>Interpretation</h3>
+<p>Divergence does not interpret itself. Someone decides what a gap means and what follows from it. Content in the layers above can be machine-generated. The judgement, and accountability for acting on it, traces to a named person. The public tends to forgive a human mistake and to treat a machine's mistake as grounds for an inquiry, so the accountability needs to be locatable before anything acts on the output.</p>
+</section>
+
+<section id="s6">
+<h2><span class="num">06</span> Two baselines, not one</h2>
+
+<p>A case is measured against two different things, and they answer different questions.</p>
+
+<p>The <strong>graph</strong> says what should happen. It comes from legislation and approved policy. It is true by construction and does not change because cases change.</p>
+
+<p>The <strong>history</strong> says what normally happens. It comes from the accumulated routes of every case already handled. It is true by observation and it moves.</p>
+
+<p>Holding both is what makes the measurement useful, because a case can sit oddly against one and not the other.</p>
+
+<table>
+  <thead><tr><th></th><th>Matches history</th><th>Away from history</th></tr></thead>
+  <tbody>
+    <tr><td>Conforms to the rule</td><td>Routine. The large majority.</td><td>Lawful but unusual. Often a legitimate edge case worth recognising as its own pattern.</td></tr>
+    <tr><td>Breaks the rule</td><td>The dangerous quadrant. A non-conformant route that has become normal practice.</td><td>A one-off error, or a new failure beginning.</td></tr>
+  </tbody>
+</table>
+
+<p>The bottom-left cell is the reason the graph cannot be replaced by history alone. If a route breaks the rule but has become the usual way of doing things, no amount of statistical comparison will flag it, because there is nothing rare about it. Only the conformance check against the knowledge graph finds it, and that check is logical rather than statistical.</p>
+
+<p>The top-right cell is the reason history cannot be replaced by the graph alone. A perfectly lawful case can still be one nobody has handled before, and that is worth knowing at the point it arrives rather than at audit.</p>
+</section>
+
+<section id="s7">
+<h2><span class="num">07</span> Fingerprints and what they grade</h2>
+
+<p>A fingerprint is the shape of a whole journey, expressed as a set of named, readable features: the route taken, how ordinary each individual branch choice was, how many times the case returned to a step, how long it sat at each one.</p>
+
+<p>Whole-journey comparison exists because per-branch comparison misses a specific and common thing. A case can be built entirely from individually ordinary choices and still form a combination that nothing else in the record matches. Looking at each fork in isolation cannot see that. The two measurements are not the same thing at two zoom levels.</p>
+
+<p>Once a population of fingerprints exists, normal turns out not to be one shape. There will be several legitimate common journeys through the same process, each with its own distinct signature. A new case is judged by how close it sits to the nearest of those, rather than by distance from a single average, which is what allows an uncommon but previously seen pattern to be treated differently from one that matches nothing at all.</p>
+
+<div class="callout">
+  <span class="lbl">Design constraint</span>
+  <p>Fingerprints are built from named features rather than learned representations. A learned representation would probably score better on raw detection. A decision that has to survive challenge cannot rest on distance in a space nobody can describe. "This route is taken by three per cent of comparable cases, and returned to the verification step twice" can be put in front of a resident, a councillor or a tribunal. A vector distance cannot.</p>
+</div>
+
+<p>The output is graded rather than binary, because the appropriate response to an unusual case varies with how unusual it is and in what way.</p>
+
+<table>
+  <thead><tr><th>Response</th><th>Triggered by</th><th>What it costs</th></tr></thead>
+  <tbody>
+    <tr><td>Second review</td><td>A case close to a known pattern but not quite on it. The decision is probably right and is worth confirming.</td><td>A small amount of officer time on a case that is usually fine.</td></tr>
+    <tr><td>Closer attention</td><td>A case far from every known pattern, or a run of cases starting to cluster somewhere new.</td><td>Investigation effort, some of which will find nothing.</td></tr>
+    <tr><td>Escalate</td><td>A route that fails the conformance check, or a shift large enough to suggest the process itself has changed behaviour.</td><td>Management time, and the credibility cost if it turns out to be noise.</td></tr>
+  </tbody>
+</table>
+
+<p>Two of those three can be triggered by a population rather than a single case. A gradual shift in the mix of fingerprints arriving is a signal even when every individual case in it is unremarkable. That is the thing a volume report cannot show and an officer handling every case used to notice informally.</p>
+</section>
+
+<section id="s8">
+<h2><span class="num">08</span> What a divergence means</h2>
+
+<p>One case cannot tell you which of these applies. A distribution can.</p>
+
+<ul>
+  <li><strong>The case is genuinely unusual.</strong> Reality is varied. A single case away from the norm is a case, not a finding. It may simply warrant a second look.</li>
+  <li><strong>The procedure is wrong.</strong> A stable, recurring cluster off the approved path means the approved path does not fit how the work has to be done.</li>
+  <li><strong>The rule is wrong.</strong> A cluster the legal model cannot accommodate at all means either the encoding is faulty or the legislation has drifted from the situations it governs.</li>
+</ul>
+
+<p>The return arrows carry the remedy, and which one fires is the diagnosis. Back to the process graph means change the local procedure. Back to the knowledge graph means fix the encoding, or escalate to whoever owns the rule.</p>
+
+<p>Two further points that run against instinct.</p>
+
+<p>Zero divergence is a suspicious result. If reality matches the model perfectly, the likely explanations are that the model was derived from the data rather than from the law, or that recording practice has been shaped to fit the system rather than the system fitted to the work.</p>
+
+<p>Where divergence is large and stable, the starting assumption should be that the graph is wrong rather than reality. A graph is cheap to revise. How the work actually gets done is usually adapted to constraints the model never captured, and is not cheap to revise.</p>
+</section>
+
+<section id="s9">
+<h2><span class="num">09</span> Where the method stops</h2>
+
+<p>A worked example of what this does not do, because the boundary is easy to misjudge and expensive to misjudge.</p>
+
+<p>Consider a single person discount claimed by someone who is not in fact living alone. That case walks the graph in exactly the same way as an honest one. The same questions are answered, in the same order, with the same values, arriving at the same node by the same route. Its fingerprint sits squarely inside the most ordinary cluster there is, because the path is not where the misstatement lives. It lives in a fact the process accepted without checking.</p>
+
+<p class="pull">This measures cases handled unusually. It does not find cases misrepresented consistently.</p>
+
+<p>Separating a false claim from a true one needs external evidence brought alongside the case: the electoral roll, other council tax accounts, benefit records. That is a different technique answering a different question, and it works precisely because it does not depend on the claim looking odd.</p>
+
+<p>Both are worth having and they are not the same system. Conflating them produces something trusted for work it cannot do, which is worse than not having it.</p>
+</section>
+
+<section id="s10">
+<h2><span class="num">10</span> Limits worth stating</h2>
+
+<p><strong>Common and wrong is invisible to the statistics.</strong> Frequency and lawfulness are independent. A route can be the most travelled on the map and still fail the legal check. Comparison against history is built on rarity and will never surface it. Only the conformance check between the two graphs does, which is why both halves are present.</p>
+
+<p><strong>The baseline is not neutral.</strong> History records what was done, not what should have been done. If a process has been handled badly for two years, two years of poor handling is the norm the measurement compares against. That is exactly why the graph sits alongside it rather than being replaced by it.</p>
+
+<p><strong>Time is a dimension on the measurements, not a layer.</strong> Branch probabilities drift, journey shapes move. Treating the measurements as a time series rather than a snapshot allows a drift point to be located, and a drift point is more diagnostic than a divergence rate. It narrows the cause to a policy change, a system upgrade, a form redesign, or a change in who does the work.</p>
+
+<p><strong>The model needs maintaining.</strong> Legislation changes and local policy changes. A knowledge graph that is not kept current stops measuring anything, and its divergence figures become noise that reads as signal.</p>
+
+<p><strong>New processes have no history.</strong> Until enough cases have been walked, only the conformance check is available. The historic baseline builds over time and the comparison is weak until it does.</p>
+</section>
+
+<section id="s11">
+<h2><span class="num">11</span> Where it would start</h2>
+
+<p>Single Person Discount is a reasonable first domain. The legal core is well defined, the disregard categories carry genuine complexity, reviews generate labelled outcomes, and there is enough volume for the historic baseline to mean something.</p>
+
+<p>It is a starting point chosen for being tractable and evidenced. Any statutory process with an encodable rule and a recorded procedure fits the same shape.</p>
+
+<p>The authored half, the two graphs and the walking of them, has a method behind it. The open piece is the statistical layer: choosing the right technique for each of the two measurements, and deciding how branch probability and whole-journey similarity combine into a graded response that a reasoning layer can interpret without losing the ability to explain itself.</p>
+</section>
+
+<footer>
+  Architecture note, September 2026.
+</footer>
+
+</div>
+</body>
+</html>
