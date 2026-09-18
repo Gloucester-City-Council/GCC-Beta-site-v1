@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gloucestershire Data Catalogue – Knowledge Graph Concept</title>
+<style>
+:root{
+  --bg:#f7f7f3; --ink:#17202a; --muted:#5f6b76; --card:#fff; --line:#d7ddd8;
+  --blue:#20639b; --org:#f3efe7; --dataset:#e8f1f8; --service:#eef5e8;
+  --system:#f8eee5; --supplier:#f2eaf7; --concept:#fff5cf;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1240px;margin:0 auto;padding:42px 28px 64px}
+.hero{display:grid;grid-template-columns:1.5fr .8fr;gap:34px;align-items:end;margin-bottom:28px}
+.eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700}
+h1{font-size:46px;line-height:1.03;margin:10px 0 14px;max-width:920px}
+.hero p{font-size:19px;line-height:1.52;color:var(--muted);max-width:860px;margin:0}
+.callout{background:var(--ink);color:white;border-radius:18px;padding:22px 24px}
+.callout strong{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px;color:#dbeafe}
+.callout span{font-size:19px;line-height:1.4}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 8px 28px rgba(0,0,0,.035)}
+.intro{margin-bottom:22px}
+.intro h2,.grid h2,.value h2,.growth h2{font-size:24px;margin:0 0 12px}
+.intro p,.value p,.growth p{margin:0;color:#46545f;font-size:16px;line-height:1.55}
+.graph-card{padding:18px 18px 8px}
+svg{width:100%;height:auto;display:block}
+.edge{stroke:#8b949e;stroke-width:1.45;fill:none;marker-end:url(#arrow)}
+.edge.strong{stroke-width:2.3}
+.edge.meaning{stroke-dasharray:5 4}
+.edge-label{font-size:10px;fill:#667085;font-weight:700;letter-spacing:.035em}
+.node rect{stroke:#7b8792;stroke-width:1.15}
+.node.org rect{fill:var(--org)} .node.dataset rect{fill:var(--dataset)} .node.service rect{fill:var(--service)}
+.node.system rect{fill:var(--system)} .node.supplier rect{fill:var(--supplier)} .node.concept rect{fill:var(--concept)}
+.node-label{font-size:12px;fill:#111827;font-weight:700}.node-type{font-size:9px;fill:#667085}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.type{border-radius:14px;padding:14px;border:1px solid var(--line)}
+.type b{display:block;margin-bottom:4px}.type span{font-size:13px;color:var(--muted);line-height:1.35}
+.rels{display:grid;grid-template-columns:1fr 1fr;gap:7px 14px}
+.rel{padding:10px 8px;border-bottom:1px solid #eef1ef;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+.value{margin-top:22px;padding:24px;border-left:4px solid var(--blue);background:#eef6fb;border-radius:0 16px 16px 0}
+.value-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+.question{background:white;border:1px solid #d7e4ec;border-radius:12px;padding:13px 15px;font-size:14px;line-height:1.4}
+.metadata{margin-top:22px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tag{background:#f2f4f3;border:1px solid #dde2df;border-radius:999px;padding:7px 10px;font-size:12px;color:#4d5962}
+.growth{margin-top:22px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px}
+.step b{display:block;margin-bottom:5px}.step span{font-size:13px;color:var(--muted);line-height:1.4}
+.small{font-size:12px;color:#71808c;margin-top:16px;line-height:1.45}
+@media(max-width:860px){
+  .hero,.grid,.value-grid,.steps{grid-template-columns:1fr}
+  h1{font-size:36px}.types{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<main>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">Gloucestershire data catalogue</div>
+    <h1>Using a knowledge graph to understand the council information estate</h1>
+    <p>A conventional data catalogue lists datasets one row at a time. A knowledge graph adds the connections between them: which organisations use them, which systems process them, who supplies those systems, and what the data is actually about.</p>
+  </div>
+  <div class="callout">
+    <strong>The idea in one sentence</strong>
+    <span>Keep the catalogue simple, but make important relationships explicit so patterns emerge across organisations, technology and data.</span>
+  </div>
+</section>
+
+<section class="card intro">
+  <h2>What is being modelled?</h2>
+  <p>Each important thing becomes a node in the graph. Connections between those things become labelled relationships. The graph does not try to model every field in every database. It starts with a small set of reusable building blocks and becomes richer only where that creates useful understanding.</p>
+</section>
+
+<section class="card graph-card">
+<svg viewBox="0 0 1220 870" role="img" aria-label="Illustrative Gloucestershire data catalogue knowledge graph">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+    <path d="M0,0 L0,6 L9,3 z" fill="#6b7280"/>
+  </marker>
+</defs>
+
+<!-- Organisations to systems -->
+<line class="edge strong" x1="160" y1="120" x2="520" y2="255"/>
+<line class="edge strong" x1="160" y1="190" x2="520" y2="255"/>
+<line class="edge strong" x1="160" y1="260" x2="520" y2="255"/>
+<line class="edge strong" x1="160" y1="330" x2="520" y2="255"/>
+<line class="edge strong" x1="160" y1="400" x2="520" y2="255"/>
+<line class="edge strong" x1="160" y1="510" x2="520" y2="510"/>
+
+<text class="edge-label" x="315" y="175" text-anchor="middle">USES</text>
+<text class="edge-label" x="315" y="215" text-anchor="middle">USES</text>
+<text class="edge-label" x="320" y="252" text-anchor="middle">USES</text>
+<text class="edge-label" x="315" y="315" text-anchor="middle">USES</text>
+<text class="edge-label" x="315" y="380" text-anchor="middle">USES</text>
+<text class="edge-label" x="320" y="498" text-anchor="middle">USES</text>
+
+<!-- Systems to suppliers -->
+<line class="edge" x1="520" y1="255" x2="760" y2="125"/>
+<line class="edge" x1="520" y1="510" x2="760" y2="510"/>
+<text class="edge-label" x="640" y="180" text-anchor="middle">SUPPLIED_BY</text>
+<text class="edge-label" x="640" y="497" text-anchor="middle">SUPPLIED_BY</text>
+
+<!-- Systems to datasets -->
+<line class="edge" x1="520" y1="255" x2="770" y2="260"/>
+<line class="edge" x1="520" y1="255" x2="770" y2="345"/>
+<line class="edge" x1="520" y1="255" x2="770" y2="430"/>
+<line class="edge" x1="520" y1="510" x2="770" y2="260"/>
+<line class="edge" x1="520" y1="510" x2="770" y2="345"/>
+<line class="edge" x1="520" y1="510" x2="770" y2="430"/>
+
+<text class="edge-label" x="640" y="248" text-anchor="middle">PROCESSES</text>
+<text class="edge-label" x="640" y="302" text-anchor="middle">PROCESSES</text>
+<text class="edge-label" x="640" y="358" text-anchor="middle">PROCESSES</text>
+<text class="edge-label" x="640" y="420" text-anchor="middle">PROCESSES</text>
+<text class="edge-label" x="640" y="445" text-anchor="middle">PROCESSES</text>
+<text class="edge-label" x="640" y="470" text-anchor="middle">PROCESSES</text>
+
+<!-- Dataset to concept meaning layer -->
+<line class="edge meaning" x1="770" y1="260" x2="1035" y2="625"/>
+<line class="edge meaning" x1="770" y1="260" x2="1035" y2="705"/>
+<line class="edge meaning" x1="770" y1="260" x2="1035" y2="785"/>
+
+<line class="edge meaning" x1="770" y1="345" x2="1035" y2="625"/>
+<line class="edge meaning" x1="770" y1="345" x2="1035" y2="705"/>
+<line class="edge meaning" x1="770" y1="345" x2="1035" y2="785"/>
+
+<line class="edge meaning" x1="770" y1="430" x2="1035" y2="705"/>
+<line class="edge meaning" x1="770" y1="430" x2="1035" y2="785"/>
+
+<text class="edge-label" x="900" y="505" text-anchor="middle">ABOUT</text>
+<text class="edge-label" x="905" y="560" text-anchor="middle">ABOUT</text>
+<text class="edge-label" x="910" y="610" text-anchor="middle">ABOUT</text>
+
+<!-- Organisation nodes -->
+<g class="node org"><rect x="40" y="92" width="240" height="56" rx="14"/><text class="node-label" x="160" y="118" text-anchor="middle">Gloucester City Council</text><text class="node-type" x="160" y="136" text-anchor="middle">Organisation</text></g>
+<g class="node org"><rect x="35" y="162" width="250" height="56" rx="14"/><text class="node-label" x="160" y="188" text-anchor="middle">Cheltenham Borough Council</text><text class="node-type" x="160" y="206" text-anchor="middle">Organisation</text></g>
+<g class="node org"><rect x="40" y="232" width="240" height="56" rx="14"/><text class="node-label" x="160" y="258" text-anchor="middle">Cotswold District Council</text><text class="node-type" x="160" y="276" text-anchor="middle">Organisation</text></g>
+<g class="node org"><rect x="20" y="302" width="280" height="56" rx="14"/><text class="node-label" x="160" y="328" text-anchor="middle">Forest of Dean District Council</text><text class="node-type" x="160" y="346" text-anchor="middle">Organisation</text></g>
+<g class="node org"><rect x="55" y="372" width="210" height="56" rx="14"/><text class="node-label" x="160" y="398" text-anchor="middle">Stroud District Council</text><text class="node-type" x="160" y="416" text-anchor="middle">Organisation</text></g>
+<g class="node org"><rect x="30" y="482" width="260" height="56" rx="14"/><text class="node-label" x="160" y="508" text-anchor="middle">Tewkesbury Borough Council</text><text class="node-type" x="160" y="526" text-anchor="middle">Organisation</text></g>
+
+<!-- Systems -->
+<g class="node system"><rect x="395" y="219" width="250" height="72" rx="16"/><text class="node-label" x="520" y="251" text-anchor="middle">Civica OpenRevenues</text><text class="node-type" x="520" y="272" text-anchor="middle">System</text></g>
+<g class="node system"><rect x="385" y="474" width="270" height="72" rx="16"/><text class="node-label" x="520" y="506" text-anchor="middle">NEC Revenues &amp; Benefits</text><text class="node-type" x="520" y="527" text-anchor="middle">System</text></g>
+
+<!-- Suppliers -->
+<g class="node supplier"><rect x="700" y="97" width="120" height="56" rx="14"/><text class="node-label" x="760" y="123" text-anchor="middle">Civica</text><text class="node-type" x="760" y="141" text-anchor="middle">Supplier</text></g>
+<g class="node supplier"><rect x="705" y="482" width="110" height="56" rx="14"/><text class="node-label" x="760" y="508" text-anchor="middle">NEC</text><text class="node-type" x="760" y="526" text-anchor="middle">Supplier</text></g>
+
+<!-- Datasets -->
+<g class="node dataset"><rect x="705" y="232" width="130" height="56" rx="14"/><text class="node-label" x="770" y="258" text-anchor="middle">Council Tax</text><text class="node-type" x="770" y="276" text-anchor="middle">Dataset / domain</text></g>
+<g class="node dataset"><rect x="690" y="317" width="160" height="56" rx="14"/><text class="node-label" x="770" y="343" text-anchor="middle">Housing Benefit</text><text class="node-type" x="770" y="361" text-anchor="middle">Dataset / domain</text></g>
+<g class="node dataset"><rect x="720" y="402" width="100" height="56" rx="14"/><text class="node-label" x="770" y="428" text-anchor="middle">NNDR</text><text class="node-type" x="770" y="446" text-anchor="middle">Dataset / domain</text></g>
+
+<!-- Concepts -->
+<g class="node concept"><rect x="970" y="597" width="130" height="56" rx="14"/><text class="node-label" x="1035" y="623" text-anchor="middle">Person</text><text class="node-type" x="1035" y="641" text-anchor="middle">Concept</text></g>
+<g class="node concept"><rect x="965" y="677" width="140" height="56" rx="14"/><text class="node-label" x="1035" y="703" text-anchor="middle">Property</text><text class="node-type" x="1035" y="721" text-anchor="middle">Concept</text></g>
+<g class="node concept"><rect x="975" y="757" width="120" height="56" rx="14"/><text class="node-label" x="1035" y="783" text-anchor="middle">Money</text><text class="node-type" x="1035" y="801" text-anchor="middle">Concept</text></g>
+
+<!-- labels for the two reading directions -->
+<text x="120" y="645" font-size="13" font-weight="700" fill="#5f6b76">TECHNOLOGY &amp; ORGANISATION</text>
+<text x="865" y="845" font-size="13" font-weight="700" fill="#5f6b76">MEANING</text>
+</svg>
+</section>
+
+<section class="grid">
+  <div class="card">
+    <h2>How to read the graph</h2>
+    <div class="rels">
+      <div class="rel">Council → USES → System</div>
+      <div class="rel">System → SUPPLIED_BY → Supplier</div>
+      <div class="rel">System → PROCESSES → Dataset</div>
+      <div class="rel">Dataset → ABOUT → Concept</div>
+    </div>
+    <p class="small">Example: Gloucester City Council uses Civica OpenRevenues. Civica supplies that system. The system processes Council Tax, Housing Benefit and NNDR information. Those datasets can then be tagged with broad concepts describing what the information is about.</p>
+  </div>
+
+  <div class="card">
+    <h2>The basic building blocks</h2>
+    <div class="types">
+      <div class="type" style="background:var(--org)"><b>Organisation</b><span>A council or other organisation.</span></div>
+      <div class="type" style="background:var(--service)"><b>Service</b><span>A council function such as Revenues or Waste.</span></div>
+      <div class="type" style="background:var(--dataset)"><b>Dataset</b><span>An important body or domain of information.</span></div>
+      <div class="type" style="background:var(--system)"><b>System</b><span>The application that stores or processes the data.</span></div>
+      <div class="type" style="background:var(--supplier)"><b>Supplier</b><span>The organisation providing the technology.</span></div>
+      <div class="type" style="background:var(--concept)"><b>Concept</b><span>A broad description of what the data means: Person, Property, Money and so on.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="value">
+  <h2>What does this reveal that a spreadsheet does not?</h2>
+  <p>The value is not simply displaying the catalogue as a diagram. Once many catalogue records share the same nodes, patterns emerge across the whole estate.</p>
+  <div class="value-grid">
+    <div class="question"><b>Technology concentration</b><br>Which councils depend on the same system or supplier?</div>
+    <div class="question"><b>Divergence</b><br>Where are councils delivering the same function through different technology?</div>
+    <div class="question"><b>Semantic overlap</b><br>Which datasets contain information about the same things, such as people or property?</div>
+    <div class="question"><b>Impact</b><br>If a system changes, which datasets, services and organisations are affected?</div>
+    <div class="question"><b>Opportunity</b><br>Where could common data, integrations or procurement approaches be reused?</div>
+    <div class="question"><b>Risk</b><br>Where does dependence converge on one supplier, system or information source?</div>
+  </div>
+</section>
+
+<section class="card metadata">
+  <h2>Not everything needs to become a graph node</h2>
+  <p>Ordinary catalogue information can remain as properties of the dataset. It only needs to become a separate node when making it traversable adds value.</p>
+  <div class="tags">
+    <span class="tag">Description</span>
+    <span class="tag">Owning service</span>
+    <span class="tag">Information asset owner</span>
+    <span class="tag">Criticality</span>
+    <span class="tag">Retention</span>
+    <span class="tag">Sensitivity</span>
+    <span class="tag">Quality issues</span>
+    <span class="tag">Update frequency</span>
+    <span class="tag">Personal data</span>
+    <span class="tag">Special category data</span>
+    <span class="tag">Notes / risks</span>
+  </div>
+</section>
+
+<section class="growth">
+  <h2>Start small and let useful questions drive the detail</h2>
+  <p>The model is deliberately capable of growing without requiring a complete enterprise ontology on day one.</p>
+  <div class="steps">
+    <div class="step"><b>1 · Establish the estate</b><span>Load organisations, major datasets, systems and suppliers.</span></div>
+    <div class="step"><b>2 · Add meaning</b><span>Tag datasets with a small set of concepts such as Person, Property, Business, Money, Case or Location.</span></div>
+    <div class="step"><b>3 · Deepen only where useful</b><span>Add dependencies, sharing, contracts, identifiers, data elements or detailed lineage when there is a real question to answer.</span></div>
+  </div>
+  <p class="small">The Gloucestershire revenues example above is illustrative. The working picture shown is that Gloucester, Cheltenham, Cotswold, Forest of Dean and Stroud use Civica OpenRevenues, while Tewkesbury uses NEC Revenues &amp; Benefits.</p>
+</section>
+
+</main>
+</body>
+</html>
