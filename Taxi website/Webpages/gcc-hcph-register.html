@@ -205,7 +205,7 @@ tr:last-child td{border-bottom:none}
   <div class="table-wrap">
     <table id="reg-table" aria-label="Public register">
       <thead id="thead"></thead>
-      <tbody id="tbody"><tr><td colspan="7" class="loading">Loading register…</td></tr></tbody>
+      <tbody id="tbody"><tr><td colspan="6" class="loading">Loading register…</td></tr></tbody>
     </table>
   </div>
 
@@ -249,15 +249,20 @@ tr:last-child td{border-bottom:none}
 // replace the file's contents each month, no code or URL changes needed.
 const JSON_URL = 'https://raw.githubusercontent.com/Gloucester-City-Council/GCC-Beta-site-v1/main/Taxi%20website/PublicRegister/LIC_Public_Register.json';
 
-const COLUMNS = [
-  { label: 'Plate / ref',    get: r => r.plate_ref },
-  { label: 'Licence type',   get: r => r.licence_type },
-  { label: 'Registration',   get: r => r.vehicle_reg_no },
-  { label: 'Vehicle',        get: r => [r.vehicle_make, r.vehicle_model].filter(Boolean).join(' ') || null },
-  { label: 'Trading as',     get: r => r.trading_as },
-  { label: 'Issued',         get: r => fmtDate(r.issued_date) },
-  { label: 'Expiry',         get: r => fmtDate(r.expiry_date) },
+const ALL_COLUMNS = [
+  { key: 'plate_ref',    label: 'Plate / ref',    get: r => r.plate_ref },
+  { key: 'licence_type', label: 'Licence type',   get: r => r.licence_type },
+  { key: 'registration', label: 'Registration',   get: r => r.vehicle_reg_no },
+  { key: 'vehicle',      label: 'Vehicle',        get: r => [r.vehicle_make, r.vehicle_model].filter(Boolean).join(' ') || null },
+  { key: 'trading_as',   label: 'Trading as',     get: r => r.trading_as },
+  { key: 'issued',       label: 'Issued',         get: r => fmtDate(r.issued_date) },
+  { key: 'expiry',       label: 'Expiry',         get: r => fmtDate(r.expiry_date) },
 ];
+
+// Drivers and vehicles don't show "Trading as" — only operators do.
+function getColumns(view) {
+  return view === 'operator' ? ALL_COLUMNS : ALL_COLUMNS.filter(c => c.key !== 'trading_as');
+}
 
 let DATA = null;
 let currentView = 'driver';
@@ -287,31 +292,32 @@ function parseData(data) {
   };
 }
 
-function renderHead() {
+function renderHead(view) {
   document.getElementById('thead').innerHTML =
-    '<tr>' + COLUMNS.map(c => '<th scope="col">' + esc(c.label) + '</th>').join('') + '</tr>';
+    '<tr>' + getColumns(view).map(c => '<th scope="col">' + esc(c.label) + '</th>').join('') + '</tr>';
 }
 
 function renderRows(view) {
   const tbody = document.getElementById('tbody');
   const count = document.getElementById('count');
+  const columns = getColumns(view);
 
   if (!DATA) {
-    tbody.innerHTML = '<tr><td colspan="' + COLUMNS.length + '" class="loading">Loading register…</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="' + columns.length + '" class="loading">Loading register…</td></tr>';
     count.textContent = '';
     return;
   }
 
   const rows = DATA[view] || [];
   if (!rows.length) {
-    tbody.innerHTML = '<tr><td colspan="' + COLUMNS.length + '" class="loading">No records found.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="' + columns.length + '" class="loading">No records found.</td></tr>';
     count.textContent = '0 records';
     return;
   }
 
   count.textContent = rows.length + (rows.length === 1 ? ' record' : ' records');
   tbody.innerHTML = rows.map(r =>
-    '<tr>' + COLUMNS.map(c => '<td>' + cell(c.get(r)) + '</td>').join('') + '</tr>'
+    '<tr>' + columns.map(c => '<td>' + cell(c.get(r)) + '</td>').join('') + '</tr>'
   ).join('');
 }
 
@@ -320,10 +326,11 @@ function setView(view) {
   ['driver','vehicle','operator'].forEach(v => {
     document.getElementById('btn-' + v).setAttribute('aria-pressed', v === view ? 'true' : 'false');
   });
+  renderHead(view);
   renderRows(view);
 }
 
-renderHead();
+renderHead(currentView);
 
 fetch(JSON_URL)
   .then(r => { if (!r.ok) throw new Error('Failed'); return r.json(); })
@@ -332,7 +339,7 @@ fetch(JSON_URL)
     setView(currentView);
   })
   .catch(() => {
-    document.getElementById('tbody').innerHTML = '<tr><td colspan="' + COLUMNS.length + '" class="loading">Unable to load the register at this time. Please try again later.</td></tr>';
+    document.getElementById('tbody').innerHTML = '<tr><td colspan="' + getColumns(currentView).length + '" class="loading">Unable to load the register at this time. Please try again later.</td></tr>';
     document.getElementById('count').textContent = '';
   });
 </script>
