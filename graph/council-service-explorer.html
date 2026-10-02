@@ -1,0 +1,3837 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Council services, connected</title>
+<style>
+:root{--ink:#173d39;--muted:#647872;--paper:#f7f7f0;--white:#fff;--line:#dce5df;--green:#dff1e8;--orange:#fff0e1;--orangeink:#9b532b;--teal:#17695d;--shadow:0 14px 45px #173d3909}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer;color:inherit}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #da9453;outline-offset:3px}button{border:0;background:none}header{padding:25px 5vw 0;max-width:1600px;margin:auto}.brand{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.06em;font-weight:650}.mark{width:30px;height:30px;background:var(--teal);border-radius:9px;display:grid;place-items:center;color:white}.top{display:flex;justify-content:space-between;align-items:center}.quiet{padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:#ffffff80;font-size:13px}.hero{display:flex;justify-content:space-between;align-items:end;gap:20px;padding:38px 0 28px}h1{font-family:Georgia,serif;font-size:clamp(32px,4vw,51px);font-weight:400;letter-spacing:-.04em;line-height:1.08;margin:0 0 13px}p{margin:0 0 14px}.hero p{color:var(--muted);max-width:670px;font-size:16px}.version{white-space:nowrap;font-size:12px;color:var(--muted);padding-bottom:16px}.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:12px;overflow:auto}.tab{padding:11px 17px;border-radius:10px;white-space:nowrap;color:var(--muted);font-size:14px}.tab[aria-selected=true]{background:var(--ink);color:white}.tab span{opacity:.6;margin-right:8px}main{max-width:1600px;margin:auto;padding:28px 5vw 55px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:25px;align-items:start}.section-head{margin:0 0 22px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:var(--teal);margin-bottom:7px}h2{font:400 28px/1.2 Georgia,serif;margin:0 0 9px;letter-spacing:-.02em}h3{font-size:16px;margin:0 0 7px}small,.small{font-size:12px;color:var(--muted)}.sub{color:var(--muted);max-width:760px}.panel{background:var(--white);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);padding:24px}.inspector{position:sticky;top:20px}.inspector h2{font-size:26px;margin:12px 0}.badge{font-size:11px;padding:4px 8px;border-radius:6px;background:#edf2ef;display:inline-block;margin:0 5px 5px 0}.badge.example{background:var(--orange);color:var(--orangeink)}.badge.pending{background:#f5e9fa;color:#765288}.divider{border-top:1px solid var(--line);margin:20px 0}.chip{padding:6px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;display:inline-block;margin:3px 4px 3px 0;font-size:13px;text-align:left}.chip:hover,.chip.active{background:var(--green);border-color:#8ab9a3}.chip.resident{background:var(--green)}.chip.council{background:var(--orange);color:var(--orangeink)}.action{padding:11px 15px;border-radius:9px;background:var(--teal);color:white;font-size:13px}.link{color:var(--teal);text-decoration:underline;text-underline-offset:3px;text-align:left;padding:4px 0;font-size:13px}.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.spine{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:0 0 24px}.stage{padding:15px 10px;border:1px solid var(--line);border-radius:13px;text-align:left;background:#fff;position:relative}.stage em{display:block;font-size:10px;letter-spacing:.05em;color:var(--muted);font-style:normal;margin-bottom:6px}.stage b{font-size:14px;font-weight:600}.stage:not(:last-child):after{content:'→';position:absolute;right:-10px;top:36%;z-index:1;color:#86a79b}.stage:first-child,.stage:last-child{background:var(--green)}.stack{display:flex;flex-direction:column;gap:10px}.layer{display:grid;grid-template-columns:215px 1fr;gap:18px;background:white;border:1px solid var(--line);border-radius:13px;padding:19px 21px;position:relative}.layer-name{text-align:left;padding:0;font-weight:650;font-size:15px}.layer-name span{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:5px}.layer-number{font-size:10px;color:var(--muted);letter-spacing:.07em;margin-bottom:7px}.layer.selected{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal)}.cross{margin-top:14px;padding:15px 20px;background:#e9efe9;border-radius:12px;display:flex;gap:14px;align-items:center}.cross p{margin:0;color:var(--muted);font-size:13px}.legend{display:flex;gap:20px;font-size:12px;color:var(--muted);margin:14px 0}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#aed7c2;margin-right:6px}.dot.orange{background:#e6b28a}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:20px;flex-wrap:wrap}select,input{border:1px solid #cbd9d1;border-radius:9px;padding:10px 12px;background:white;color:var(--ink);max-width:100%}input{min-width:210px}label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}.notice{background:var(--orange);color:var(--orangeink);border-radius:10px;padding:13px 17px;font-size:13px;margin:0 0 22px}.journey{position:relative;display:flex;flex-direction:column;gap:9px}.journey:before{content:'';position:absolute;left:23px;top:20px;bottom:20px;width:1px;background:#c9d9d0}.usage{display:grid;grid-template-columns:46px 1fr;gap:16px;position:relative}.num{margin-top:16px;border:1px solid var(--line);background:var(--paper);border-radius:50%;width:46px;height:46px;display:grid;place-items:center;font-size:12px;z-index:1}.usage-button{padding:15px 19px;text-align:left;background:white;border:1px solid var(--line);border-radius:12px;width:100%}.usage-button:hover,.usage-button.selected{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal)}.usage-button .who{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--teal)}.usage-button.council .who{color:var(--orangeink)}.usage-title{display:flex;justify-content:space-between;gap:10px;margin:4px 0}.usage-title b{font-size:16px}.usage-purpose{font-size:13px;color:var(--muted)}.condition{display:block;margin-top:8px;font-size:12px;color:var(--orangeink)}.pattern-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.pattern{padding:20px;background:white;border:1px solid var(--line);border-radius:13px}.pattern .chain{margin-top:16px;display:flex;align-items:center;flex-wrap:wrap;gap:4px}.component-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.component{background:white;border:1px solid var(--line);border-radius:13px;padding:19px;text-align:left;min-height:120px}.component:hover,.component.selected{border-color:var(--teal)}.component strong{display:block;margin:7px 0}.count{font-size:12px;color:var(--muted)}.search-area{display:grid;grid-template-columns:240px 1fr;gap:19px}.catalogue{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:white}.catalogue-list{max-height:630px;overflow:auto}.catalogue button{display:block;width:100%;text-align:left;padding:12px 16px;border-bottom:1px solid #edf1ee}.catalogue button.active{background:var(--green)}.catalogue button span{display:block;font-size:11px;color:var(--muted);margin-top:3px}.network{background:white;border:1px solid var(--line);border-radius:15px;padding:20px;min-width:0}.network svg{width:100%;height:auto;display:block}.network svg text{fill:var(--ink);font:12px system-ui}.network svg .node{cursor:pointer}.network svg .node:hover rect{stroke:var(--teal);stroke-width:2}.network svg path{stroke:#bbcec1;fill:none;stroke-width:1.4}.connection-list{margin-top:18px;border-top:1px solid var(--line);padding-top:16px;max-height:380px;overflow:auto}.connection-item{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:9px;font-size:12px}.relation{color:var(--muted);font-size:11px}.empty{padding:25px;color:var(--muted);font-size:13px}.detail-list{display:flex;flex-direction:column;gap:9px}.detail-list button{text-align:left;padding:9px 11px;border-radius:8px;background:#f4f7f3;font-size:13px}.detail-list button:hover{background:var(--green)}details{margin-top:16px;font-size:12px}summary{cursor:pointer;color:var(--teal)}pre{white-space:pre-wrap;word-break:break-word;font-size:11px;background:var(--paper);padding:12px;border-radius:8px}.footer{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:20px;margin-top:25px}.modal{position:fixed;inset:0;background:#123e3960;z-index:20;display:grid;place-items:center;padding:20px}.modal[hidden]{display:none}.modal-content{background:var(--paper);max-width:720px;width:100%;max-height:85vh;overflow:auto;border-radius:20px;padding:30px}.modal-content li{margin-bottom:10px;color:var(--muted);font-size:14px}.close{float:right;font-size:22px}.pillbar{display:flex;gap:7px;margin-bottom:18px}.pillbar button{padding:8px 13px;border-radius:8px;border:1px solid var(--line);font-size:12px}.pillbar button.active{background:var(--ink);color:#fff}.fact{padding:13px 0;border-bottom:1px solid var(--line)}.fact strong{display:block;font-size:12px}.fact span{font-size:13px;color:var(--muted)}
+@media(min-width:1350px){.layout{grid-template-columns:minmax(0,1fr) 350px}}@media(max-width:1100px){.layout{grid-template-columns:minmax(0,1fr) 280px}.layer{grid-template-columns:170px 1fr}.component-grid{grid-template-columns:1fr 1fr}.search-area{grid-template-columns:190px 1fr}}@media(max-width:850px){.layout{grid-template-columns:1fr}.inspector{position:static}.hero{display:block}.version{padding:0}.search-area{grid-template-columns:1fr}.catalogue-list{max-height:210px}.component-grid{grid-template-columns:1fr 1fr}.layer{grid-template-columns:150px 1fr}.tabs{margin-top:10px}}@media(max-width:520px){header{padding:20px 18px 0}main{padding:22px 18px}.hero{padding:28px 0 20px}.spine{gap:5px}.stage{padding:12px 6px}.stage b{font-size:12px}.stage em{font-size:9px}.layer{grid-template-columns:1fr;gap:10px;padding:17px}.component-grid,.pattern-grid{grid-template-columns:1fr}.panel{padding:20px}.tab{padding:10px 12px}.hero p{font-size:14px}.footer{display:block}.top .quiet{font-size:11px}.network{padding:10px}.usage-title{display:block}.usage-title small{display:block}.num{width:35px;height:35px}.usage{grid-template-columns:35px 1fr;gap:10px}.journey:before{left:17px}}
+@media print{header .top button,.tabs,.toolbar,.footer,.modal{display:none}.layout{display:block}.inspector{margin-top:25px}.panel,.layer{break-inside:avoid}body{background:white}}
+</style></head><body>
+<header><div class="top"><div class="brand"><span class="mark">↗</span> THE CONNECTED COUNCIL</div><button class="quiet" id="about">About this model ↗</button></div><div class="hero"><div><h1>Council services, connected.</h1><p>From a resident’s first question to the work that follows. Explore how services, people and technology fit together.</p></div><div class="version" id="version"></div></div><nav class="tabs" aria-label="Views of the service model" role="tablist"></nav></header>
+<main><div id="app"></div><div class="footer"><span>One model. Four ways to understand it.</span><span>Source relationships are preserved. Service examples await verification.</span></div></main>
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-content"><button class="close" id="close" aria-label="Close">×</button><div class="eyebrow">Read the model with confidence</div><h2 id="modal-title">What this model tells you</h2><div id="about-content"></div></div></div>
+<script id="graph-data" type="application/json">{
+  "meta": {
+    "title": "Council service model: customer spine, steps and architecture",
+    "version": "0.8",
+    "sources": {
+      "steps_model": "Services, steps, patterns and components. Steps and processes from Dave Briggs, Sensible Tech.",
+      "customer_spine": "Need, Learn, Ask, In progress, Outcome.",
+      "architecture": "Council digital architecture v12: layers, capabilities and cross-cutting concerns.",
+      "model": "Edges joining the three strands.",
+      "proposed": "Additions not in any source. Those accepted carry status 'confirmed'. The rest still need a decision.",
+      "example": "Illustrative service instances and step usages. Check before relying on them."
+    },
+    "notes": [
+      "Layers are a stack, not a sequence. No ordering is encoded.",
+      "The stage chain and its 'leg' values describe a typical journey. can_exit_to marks early outcomes.",
+      "Channels are generic. Whether staff or AI handle a contact is something the Council does, recorded under cross_ai, not a property of the channel.",
+      "Archetype-level edges are possibilities: may_comprise, may_use, may_require. Firm requires edges sit on service instances.",
+      "Archetype step lists are illustrative, not complete. A service instance may use steps its archetype does not list.",
+      "Stage support for an archetype is derived from step occurs_in stage and step carried_by layer. For a named service, use its step usages and their at_stage edges instead.",
+      "Only Need and Outcome have explicit layer edges.",
+      "Step usages give each service its own order, purpose, stage and conditions. Order is a readable sequence. It does not yet encode loops, branches or parallel steps.",
+      "Edge 'origin' records where each edge came from. retyped_from, retargeted_from and renamed_from record changes to earlier versions.",
+      "Integration sits in Foundations. Security and data standards stay there for now.",
+      "Relation meanings, node types and status values are defined in schema. Queries should read schema rather than infer meaning from names."
+    ],
+    "open_questions": [
+      "Confirm Submit? If so, keep the name Apply, check and notify and add a scope note: it covers any Submit, including Request.",
+      "Single customer view: central or federated?",
+      "If the graph will drive services, add transitions for loops, branches and parallel steps such as Track.",
+      "Check the HMO licence and missed bin usages and their requires edges against how GCC runs them.",
+      "Add owners, verified system mappings and outcomes to the service instances."
+    ],
+    "changes_in_0_2": [
+      "Determination renamed Service delivery.",
+      "Line of business solution split into a system class and two capabilities: Service decisions and Service fulfilment.",
+      "Archetype edges retyped to may_comprise, may_use and may_require.",
+      "Submit added as the parent of Request and Apply. Apply, check and notify now bundles Submit.",
+      "Pattern membership carries order.",
+      "Route added as the Orchestration step.",
+      "Stage location edges removed. Need and Outcome anchored in the resident layer. Early exits added.",
+      "Pay and Fulfil can occur at Outcome. Feedback can occur In progress.",
+      "Most realises edges weakened to supports or provides_data_for.",
+      "Service casework separated from shared case management.",
+      "Channels separated from assistance modes.",
+      "Two service instances added with step usages: HMO licence and Missed bin report."
+    ],
+    "resolved": {
+      "Request and Apply": "Kept separate, both subtypes of Submit.",
+      "Notify in two stages": "One reusable step with distinct usages.",
+      "Orchestration step": "Route added.",
+      "Pay at Outcome": "Allowed. Timing set per service through usages.",
+      "Central customer record": "Renamed Single customer view. Central or federated implementation still open."
+    },
+    "changes_in_0_3": [
+      "Channels made generic and grouped: Online, Messaging, Telephone, In person, Post.",
+      "Assistance modes removed. AI handling of contact moved to the AI crosscut.",
+      "IVR removed as a channel: it is how the Council handles telephone contact.",
+      "Chatbot renamed Web chat.",
+      "Central customer record renamed Single customer view. Customer record component renamed Customer view.",
+      "Case management relabelled Shared case coordination. Original label kept in label_in_steps_model.",
+      "Notify membership in patterns carries a purpose.",
+      "Illustrative content carries status 'illustrative'.",
+      "Notes added on archetype completeness, stage support for named services and the limits of order."
+    ],
+    "changes_in_0_4": [
+      "Decide records possible results: yes, no or in part. A no goes to Notify. Fulfil follows only a yes or partial yes.",
+      "Clarify added as a council step. It hands the case back to the resident and can stop or restart the clock.",
+      "HMO example: the request for missing information now uses Clarify, and the reply returns to Check.",
+      "First transitions added: leads_to between steps and returns_to between usages."
+    ],
+    "changes_in_0_5": [
+      "Route, Clarify, Decide and Fulfil confirmed, with their may_require and leads_to edges.",
+      "Archetype and pattern edges into these steps stay proposed."
+    ],
+    "awaiting_decision": [
+      "cap_service_fulfilment",
+      "outcome_booking",
+      "outcome_decision",
+      "outcome_information",
+      "outcome_payment",
+      "outcome_work_done",
+      "step_submit",
+      "Proposed may_comprise and bundles edges on archetypes and patterns"
+    ],
+    "changes_in_0_6": [
+      "Routing, Customer view, SLA management and Service casework confirmed, with the edges that depend on them."
+    ],
+    "changes_in_0_7": [
+      "schema added: node type definitions, relation meanings with from and to types, the two levels, and status values with an explicit default.",
+      "leads_to retyped can_lead_to: a possible path that may pass through other steps.",
+      "Clarify reworded: the Council keeps ownership while it waits, and clock effects follow each service's rules.",
+      "Outcome broadened. Five outcome types added, each produced by a step.",
+      "Diagram: 'yes or no' removed from Outcome. 'Decide · Fulfil if yes' is where the diagram shows a no."
+    ],
+    "changes_in_0_8": [
+      "anchored_in redefined: it places a stage in the resident band whatever layers carry its steps.",
+      "Decision made renamed Decision received. Notify communicates it, separating the internal decision from the resident's outcome.",
+      "Diagram description corrected: Fulfil follows a yes or a partial yes."
+    ]
+  },
+  "schema": {
+    "node_types": {
+      "stage": "A state in the customer spine. The resident's view of where they are.",
+      "layer": "A layer of the architecture stack. Layers have no order.",
+      "capability": "What a layer provides.",
+      "channel": "A generic way a resident makes contact. Says nothing about whether staff or AI handle it.",
+      "crosscut": "Something that runs across every layer rather than sitting in one.",
+      "service_archetype": "A kind of service, such as Report it. Its edges are possibilities.",
+      "service": "A named service, such as HMO licence. Its edges are firm.",
+      "pattern": "A reusable group of steps in a typical order.",
+      "step": "A reusable action by the resident or the Council.",
+      "step_usage": "One use of a step inside a named service, with its own order, purpose, stage and condition.",
+      "component": "A reusable technical building block.",
+      "system_class": "A kind of system, not a specific product.",
+      "outcome_type": "A kind of result the resident can get."
+    },
+    "relations": {
+      "anchored_in": {
+        "meaning": "Places the stage in the resident needs and outcomes band, independently of which layers carry its steps.",
+        "from": [
+          "stage"
+        ],
+        "to": [
+          "layer"
+        ]
+      },
+      "at_stage": {
+        "meaning": "The stage at which this usage happens in this service.",
+        "from": [
+          "step_usage"
+        ],
+        "to": [
+          "stage"
+        ]
+      },
+      "bundles": {
+        "meaning": "The pattern contains this step, at the position given by order.",
+        "from": [
+          "pattern"
+        ],
+        "to": [
+          "step"
+        ]
+      },
+      "can_be": {
+        "meaning": "One kind of result this stage can deliver.",
+        "from": [
+          "stage"
+        ],
+        "to": [
+          "outcome_type"
+        ]
+      },
+      "can_exit_to": {
+        "meaning": "The journey can end early and go straight to this stage.",
+        "from": [
+          "stage"
+        ],
+        "to": [
+          "stage"
+        ]
+      },
+      "can_lead_to": {
+        "meaning": "This step can be followed by that one, directly or after other steps. For exact sequence, use a named service's step usages.",
+        "from": [
+          "step"
+        ],
+        "to": [
+          "step"
+        ]
+      },
+      "carried_by": {
+        "meaning": "The layer that carries this step.",
+        "from": [
+          "step"
+        ],
+        "to": [
+          "layer"
+        ]
+      },
+      "feeds_back_to": {
+        "meaning": "The return path from this layer to that one.",
+        "from": [
+          "layer"
+        ],
+        "to": [
+          "layer"
+        ]
+      },
+      "in_service": {
+        "meaning": "This usage belongs to that named service.",
+        "from": [
+          "step_usage"
+        ],
+        "to": [
+          "service"
+        ]
+      },
+      "instance_of": {
+        "meaning": "This named service is a service of that kind.",
+        "from": [
+          "service"
+        ],
+        "to": [
+          "service_archetype"
+        ]
+      },
+      "may_comprise": {
+        "meaning": "A service of this kind may include this step. Not every one does.",
+        "from": [
+          "service_archetype"
+        ],
+        "to": [
+          "step"
+        ]
+      },
+      "may_require": {
+        "meaning": "This step may need this component, depending on the service.",
+        "from": [
+          "step"
+        ],
+        "to": [
+          "component"
+        ]
+      },
+      "may_use": {
+        "meaning": "A service of this kind may follow this pattern.",
+        "from": [
+          "service_archetype"
+        ],
+        "to": [
+          "pattern"
+        ]
+      },
+      "mediates": {
+        "meaning": "Residents reach this layer through this one.",
+        "from": [
+          "layer"
+        ],
+        "to": [
+          "layer"
+        ]
+      },
+      "occurs_in": {
+        "meaning": "This step can happen at this stage. A step can occur at several stages.",
+        "from": [
+          "step"
+        ],
+        "to": [
+          "stage"
+        ]
+      },
+      "of_step": {
+        "meaning": "This usage is an instance of that reusable step.",
+        "from": [
+          "step_usage"
+        ],
+        "to": [
+          "step"
+        ]
+      },
+      "part_of": {
+        "meaning": "Belongs to this layer.",
+        "from": [
+          "capability",
+          "channel"
+        ],
+        "to": [
+          "layer"
+        ]
+      },
+      "precedes": {
+        "meaning": "The typical next stage. Not mandatory.",
+        "from": [
+          "stage"
+        ],
+        "to": [
+          "stage"
+        ]
+      },
+      "produces": {
+        "meaning": "This step can produce this kind of outcome. Where the resident only learns of it later, communicates names the step that tells them.",
+        "from": [
+          "step"
+        ],
+        "to": [
+          "outcome_type"
+        ]
+      },
+      "provides": {
+        "meaning": "This kind of system usually provides this component.",
+        "from": [
+          "system_class"
+        ],
+        "to": [
+          "component"
+        ]
+      },
+      "provides_data_for": {
+        "meaning": "Supplies data this capability depends on.",
+        "from": [
+          "component"
+        ],
+        "to": [
+          "capability"
+        ]
+      },
+      "realises": {
+        "meaning": "Delivers this capability.",
+        "from": [
+          "component"
+        ],
+        "to": [
+          "capability"
+        ]
+      },
+      "requires": {
+        "meaning": "This named service needs this component.",
+        "from": [
+          "service"
+        ],
+        "to": [
+          "component"
+        ]
+      },
+      "returns_to": {
+        "meaning": "In this named service, the journey goes back to that earlier usage.",
+        "from": [
+          "step_usage"
+        ],
+        "to": [
+          "step_usage"
+        ]
+      },
+      "sits_in": {
+        "meaning": "Is located in this layer.",
+        "from": [
+          "component",
+          "system_class"
+        ],
+        "to": [
+          "layer"
+        ]
+      },
+      "spans": {
+        "meaning": "Runs across this layer.",
+        "from": [
+          "crosscut"
+        ],
+        "to": [
+          "layer"
+        ]
+      },
+      "subtype_of": {
+        "meaning": "A more specific form of that step.",
+        "from": [
+          "step"
+        ],
+        "to": [
+          "step"
+        ]
+      },
+      "supports": {
+        "meaning": "Contributes to this capability without delivering all of it.",
+        "from": [
+          "component",
+          "system_class"
+        ],
+        "to": [
+          "capability"
+        ]
+      },
+      "communicates": {
+        "meaning": "This step tells the resident about this outcome.",
+        "from": [
+          "step"
+        ],
+        "to": [
+          "outcome_type"
+        ]
+      }
+    },
+    "levels": {
+      "archetype": "Archetypes, patterns and reusable steps describe what is possible. Their edges use may_ and can_ relations.",
+      "service": "Named services and their step usages describe what actually happens. Their edges are firm, and exact sequence lives here."
+    },
+    "provenance": "source on nodes and origin on edges record where an item came from. Values are listed in meta.sources.",
+    "status": {
+      "values": {
+        "confirmed": "Accepted into the model.",
+        "illustrative": "Example content not yet checked by a service owner.",
+        "service_owner_verified": "Checked and confirmed by the service owner."
+      },
+      "default": "No status means no review state is recorded. The item stands as its source or origin gives it. For steps_model, architecture and customer_spine that means as sourced. For model it means a join behind the reviewed diagram. For proposed it means still awaiting a decision."
+    }
+  },
+  "nodes": [
+    {
+      "id": "svc_report_it",
+      "label": "Report it",
+      "type": "service_archetype",
+      "description": "A resident reports a problem — a pothole, a missed bin, fly-tipping — and expects it to be acted on.",
+      "source": "steps_model"
+    },
+    {
+      "id": "svc_apply_for",
+      "label": "Apply for something",
+      "type": "service_archetype",
+      "description": "A resident applies for a permit, licence, exemption or entitlement from the Council.",
+      "source": "steps_model"
+    },
+    {
+      "id": "svc_pay_for",
+      "label": "Pay for something",
+      "type": "service_archetype",
+      "description": "A resident pays money owed to the Council — a bill, penalty, or charge.",
+      "source": "steps_model"
+    },
+    {
+      "id": "svc_book_it",
+      "label": "Book something",
+      "type": "service_archetype",
+      "description": "A resident books a Council resource — a room, appointment, or collection.",
+      "source": "steps_model"
+    },
+    {
+      "id": "svc_get_support",
+      "label": "Get support",
+      "type": "service_archetype",
+      "description": "A resident establishes eligibility for and receives ongoing Council support.",
+      "source": "steps_model"
+    },
+    {
+      "id": "svc_order_it",
+      "label": "Order something",
+      "type": "service_archetype",
+      "description": "A resident orders a physical item from the Council — a bin, badge, or document.",
+      "source": "steps_model"
+    },
+    {
+      "id": "svc_stay_informed",
+      "label": "Stay informed",
+      "type": "service_archetype",
+      "description": "A resident finds information and tracks progress on something that matters to them.",
+      "source": "steps_model"
+    },
+    {
+      "id": "step_find",
+      "label": "Find",
+      "type": "step",
+      "description": "The user wishes to find information, advice or guidance to help them achieve their goal.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "step_identify",
+      "label": "Identify",
+      "type": "step",
+      "description": "To achieve their goal, the user needs to identify who they are.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "step_report",
+      "label": "Report",
+      "type": "step",
+      "description": "The user wishes to report something that is wrong to the Council.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "step_request",
+      "label": "Request",
+      "type": "step",
+      "description": "The user wants to request something from the Council.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "step_check",
+      "label": "Check",
+      "type": "step",
+      "description": "The council needs to check whether a person is eligible for the service they are requesting.",
+      "source": "steps_model",
+      "actor": "council"
+    },
+    {
+      "id": "step_book",
+      "label": "Book",
+      "type": "step",
+      "description": "The user needs to book a meeting, a room, or some other asset from the Council.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "step_apply",
+      "label": "Apply",
+      "type": "step",
+      "description": "The user needs to apply for something from the Council, such as a permit or a licence.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "step_order",
+      "label": "Order",
+      "type": "step",
+      "description": "The user wishes to order something from the Council.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "step_notify",
+      "label": "Notify",
+      "type": "step",
+      "description": "The user needs to be notified about the status of their interaction with the Council.",
+      "source": "steps_model",
+      "actor": "council"
+    },
+    {
+      "id": "step_track",
+      "label": "Track",
+      "type": "step",
+      "description": "The user wants to proactively track where things are at with their interaction with the Council.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "step_update",
+      "label": "Update",
+      "type": "step",
+      "description": "The user wishes to update the Council with new information.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "step_pay",
+      "label": "Pay",
+      "type": "step",
+      "description": "The user wants to pay some money they owe to the Council.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "step_feedback",
+      "label": "Feedback",
+      "type": "step",
+      "description": "The user wants to let the Council know what they think.",
+      "source": "steps_model",
+      "actor": "resident"
+    },
+    {
+      "id": "tech_publishing",
+      "label": "Publishing",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "tech_search",
+      "label": "Search",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "tech_directory",
+      "label": "Directory",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "tech_map",
+      "label": "Map",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "tech_verify_identity",
+      "label": "Verify identity",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "tech_document_management",
+      "label": "Document management",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "tech_data_capture",
+      "label": "Data capture",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "tech_case_management",
+      "label": "Shared case coordination",
+      "type": "component",
+      "source": "steps_model",
+      "label_in_steps_model": "Case management",
+      "description": "Coordinates cases across services. Casework inside a service sits in Service delivery."
+    },
+    {
+      "id": "tech_integration",
+      "label": "Integration",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "tech_payment",
+      "label": "Payment",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "tech_notification",
+      "label": "Notification",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "tech_resource_management",
+      "label": "Resource management",
+      "type": "component",
+      "source": "steps_model"
+    },
+    {
+      "id": "pat_find_and_report",
+      "label": "Find and report",
+      "type": "pattern",
+      "description": "User locates the relevant service or place, then submits a report. Common in environmental and highways services.",
+      "source": "steps_model"
+    },
+    {
+      "id": "pat_prove_and_apply",
+      "label": "Prove and apply",
+      "type": "pattern",
+      "description": "User establishes their identity and eligibility before submitting a formal application.",
+      "source": "steps_model"
+    },
+    {
+      "id": "pat_pay_and_confirm",
+      "label": "Pay and confirm",
+      "type": "pattern",
+      "description": "User makes a payment and receives confirmation. Applies wherever a transaction closes a service interaction.",
+      "source": "steps_model"
+    },
+    {
+      "id": "pat_apply_check_notify",
+      "label": "Apply, check and notify",
+      "type": "pattern",
+      "description": "User applies, the Council checks eligibility, and the outcome is communicated back. The core pattern for entitlement services.",
+      "source": "steps_model"
+    },
+    {
+      "id": "pat_book_and_confirm",
+      "label": "Book and confirm",
+      "type": "pattern",
+      "description": "User selects and reserves a resource, pays if required, and receives confirmation.",
+      "source": "steps_model"
+    },
+    {
+      "id": "pat_track_and_update",
+      "label": "Track and update",
+      "type": "pattern",
+      "description": "User monitors case progress and can push new information back to the Council. Keeps long-running cases current.",
+      "source": "steps_model"
+    },
+    {
+      "id": "pat_order_and_deliver",
+      "label": "Order and deliver",
+      "type": "pattern",
+      "description": "User orders a physical item or document, pays if required, and the Council fulfils the order.",
+      "source": "steps_model"
+    },
+    {
+      "id": "stage_need",
+      "label": "Need",
+      "type": "stage",
+      "source": "customer_spine",
+      "description": "The resident has something they need from the Council. This happens before any contact.",
+      "leg": "start"
+    },
+    {
+      "id": "stage_learn",
+      "label": "Learn",
+      "type": "stage",
+      "source": "customer_spine",
+      "description": "The resident finds out what is possible, what they are entitled to and what to expect.",
+      "leg": "descent"
+    },
+    {
+      "id": "stage_ask",
+      "label": "Ask",
+      "type": "stage",
+      "source": "customer_spine",
+      "description": "The resident makes contact and asks for something: a report, a request, an application, a booking, an order or a payment.",
+      "leg": "descent"
+    },
+    {
+      "id": "stage_in_progress",
+      "label": "In progress",
+      "type": "stage",
+      "source": "customer_spine",
+      "description": "The Council is working on it and the resident is following it. Both sides are active.",
+      "leg": "turn"
+    },
+    {
+      "id": "stage_outcome",
+      "label": "Outcome",
+      "type": "stage",
+      "source": "customer_spine",
+      "description": "The resident gets the result. That can be a decision they have been told about, information, a payment made, a booking or work done. A no is one possible outcome, not the only alternative to a yes.",
+      "leg": "return"
+    },
+    {
+      "id": "layer_resident",
+      "label": "Resident needs and outcomes",
+      "type": "layer",
+      "source": "architecture",
+      "description": "Where the journey starts and where it ends."
+    },
+    {
+      "id": "layer_presentation",
+      "label": "Presentation",
+      "type": "layer",
+      "source": "architecture",
+      "description": "The channels a resident uses. Every stage after Need passes through here."
+    },
+    {
+      "id": "layer_information",
+      "label": "Information",
+      "type": "layer",
+      "source": "architecture",
+      "description": "What the resident can read: guidance, rules and the status of their case."
+    },
+    {
+      "id": "layer_interaction",
+      "label": "Interaction",
+      "type": "layer",
+      "source": "architecture",
+      "description": "Where the resident does things: forms, payments, bookings, identity and notifications."
+    },
+    {
+      "id": "layer_orchestration",
+      "label": "Orchestration",
+      "type": "layer",
+      "source": "architecture",
+      "description": "Routing, the customer record and commitments. The resident never sees this layer directly."
+    },
+    {
+      "id": "layer_foundations",
+      "label": "Technology foundations",
+      "type": "layer",
+      "source": "architecture",
+      "description": "Cloud, security and identity, integration and data standards."
+    },
+    {
+      "id": "cap_guidance_content",
+      "label": "Guidance content",
+      "type": "capability",
+      "source": "architecture",
+      "description": "Eligibility and what to expect."
+    },
+    {
+      "id": "cap_knowledge_base",
+      "label": "Knowledge base",
+      "type": "capability",
+      "source": "architecture",
+      "description": "Policies, FAQs and service rules."
+    },
+    {
+      "id": "cap_status_updates",
+      "label": "Status and case updates",
+      "type": "capability",
+      "source": "architecture",
+      "description": "Where things are and what happens next."
+    },
+    {
+      "id": "cap_online_services",
+      "label": "Online services",
+      "type": "capability",
+      "source": "architecture",
+      "description": "Forms and uploads."
+    },
+    {
+      "id": "cap_shared_components",
+      "label": "Shared components",
+      "type": "capability",
+      "source": "architecture",
+      "description": "Payments and bookings."
+    },
+    {
+      "id": "cap_notifications",
+      "label": "Notifications",
+      "type": "capability",
+      "source": "architecture",
+      "description": "SMS, email and push."
+    },
+    {
+      "id": "cap_verification",
+      "label": "Verification",
+      "type": "capability",
+      "source": "architecture",
+      "description": "Identity and evidence."
+    },
+    {
+      "id": "cap_rules_routing",
+      "label": "Rules and routing",
+      "type": "capability",
+      "source": "architecture",
+      "description": "Triage, assignment and escalation."
+    },
+    {
+      "id": "cap_slas_care",
+      "label": "SLAs and customer care",
+      "type": "capability",
+      "source": "architecture",
+      "description": "Commitments, history and surveys."
+    },
+    {
+      "id": "cap_cloud",
+      "label": "Cloud",
+      "type": "capability",
+      "source": "architecture"
+    },
+    {
+      "id": "cap_security_identity",
+      "label": "Security and identity",
+      "type": "capability",
+      "source": "architecture"
+    },
+    {
+      "id": "cap_integration",
+      "label": "Integration",
+      "type": "capability",
+      "source": "architecture"
+    },
+    {
+      "id": "cap_data_standards",
+      "label": "Data standards",
+      "type": "capability",
+      "source": "architecture"
+    },
+    {
+      "id": "cross_ai",
+      "label": "AI",
+      "type": "crosscut",
+      "source": "architecture",
+      "description": "Handling contact, reasoning, retrieval, drafting and routing. Something the Council does across all layers and on any channel. Not a channel and not a layer."
+    },
+    {
+      "id": "cross_dcx",
+      "label": "Digital and customer experience",
+      "type": "crosscut",
+      "source": "architecture",
+      "description": "Monitoring and reporting, and automation."
+    },
+    {
+      "id": "step_decide",
+      "label": "Decide",
+      "type": "step",
+      "source": "proposed",
+      "description": "The Council decides: yes, no or in part. Approve, refuse, allocate, assess or refer. A no is a valid outcome. It goes straight to Notify, with any right of review or appeal, and Fulfil does not happen.",
+      "actor": "council",
+      "possible_results": [
+        "yes",
+        "no",
+        "in part"
+      ],
+      "status": "confirmed"
+    },
+    {
+      "id": "step_fulfil",
+      "label": "Fulfil",
+      "type": "step",
+      "source": "proposed",
+      "description": "The Council does what was decided: fixes it, delivers it, issues it or provides it. Only follows a yes or a partial yes.",
+      "actor": "council",
+      "status": "confirmed"
+    },
+    {
+      "id": "tech_routing",
+      "label": "Routing",
+      "type": "component",
+      "source": "proposed",
+      "description": "Triage, assignment and escalation rules.",
+      "status": "confirmed"
+    },
+    {
+      "id": "tech_sla_management",
+      "label": "SLA management",
+      "type": "component",
+      "source": "proposed",
+      "description": "Commitments, timers and customer care history.",
+      "status": "confirmed"
+    },
+    {
+      "id": "layer_service_delivery",
+      "label": "Service delivery",
+      "type": "layer",
+      "source": "architecture",
+      "description": "Where service areas decide and do the work: officer decisions, casework and fulfilment.",
+      "renamed_from": "Determination"
+    },
+    {
+      "id": "cap_service_decisions",
+      "label": "Service decisions",
+      "type": "capability",
+      "source": "architecture",
+      "description": "Officer decisions, approvals, refusals, allocations, assessments and referrals."
+    },
+    {
+      "id": "cap_service_fulfilment",
+      "label": "Service fulfilment",
+      "type": "capability",
+      "source": "proposed",
+      "description": "Doing the work: repairing, collecting, delivering, issuing."
+    },
+    {
+      "id": "sys_line_of_business",
+      "label": "Line of business solution",
+      "type": "system_class",
+      "source": "architecture",
+      "description": "A shared or dedicated system for a service area."
+    },
+    {
+      "id": "step_submit",
+      "label": "Submit",
+      "type": "step",
+      "source": "proposed",
+      "description": "The user submits something to the Council for it to act on. Parent of Request and Apply.",
+      "actor": "resident"
+    },
+    {
+      "id": "step_route",
+      "label": "Route",
+      "type": "step",
+      "source": "proposed",
+      "description": "The Council triages the case, assigns it to the right team or officer and escalates it when needed.",
+      "actor": "council",
+      "status": "confirmed"
+    },
+    {
+      "id": "tech_service_casework",
+      "label": "Service casework",
+      "type": "component",
+      "source": "proposed",
+      "description": "Case handling inside a service area. Often provided by the line of business solution.",
+      "status": "confirmed"
+    },
+    {
+      "id": "ch_website",
+      "label": "Website",
+      "type": "channel",
+      "source": "architecture",
+      "group": "Online"
+    },
+    {
+      "id": "ch_online_services",
+      "label": "Online services",
+      "type": "channel",
+      "source": "architecture",
+      "group": "Online"
+    },
+    {
+      "id": "ch_whatsapp",
+      "label": "WhatsApp",
+      "type": "channel",
+      "source": "architecture",
+      "group": "Messaging"
+    },
+    {
+      "id": "ch_email",
+      "label": "Email",
+      "type": "channel",
+      "source": "architecture",
+      "group": "Messaging"
+    },
+    {
+      "id": "ch_telephone",
+      "label": "Telephone",
+      "type": "channel",
+      "source": "architecture",
+      "group": "Telephone"
+    },
+    {
+      "id": "ch_in_person",
+      "label": "In person",
+      "type": "channel",
+      "source": "architecture",
+      "group": "In person"
+    },
+    {
+      "id": "ch_post",
+      "label": "Post",
+      "type": "channel",
+      "source": "architecture",
+      "group": "Post"
+    },
+    {
+      "id": "service_hmo_licence",
+      "label": "HMO licence",
+      "type": "service",
+      "source": "example",
+      "description": "Licence for a house in multiple occupation under Part 2 of the Housing Act 2004.",
+      "status": "illustrative"
+    },
+    {
+      "id": "service_missed_bin",
+      "label": "Missed bin report",
+      "type": "service",
+      "source": "example",
+      "description": "A resident reports that their bin was not collected on the scheduled day.",
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_01",
+      "label": "HMO licence: Find",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Check whether the property needs a licence",
+      "order": 1,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_02",
+      "label": "HMO licence: Identify",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Establish the applicant and any manager",
+      "order": 2,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_03",
+      "label": "HMO licence: Apply",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Submit the application and supporting documents",
+      "order": 3,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_04",
+      "label": "HMO licence: Pay",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Pay the application fee",
+      "order": 4,
+      "condition": "Where the fee is charged in two parts, this is the first part",
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_05",
+      "label": "HMO licence: Notify",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Acknowledge the application",
+      "order": 5,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_06",
+      "label": "HMO licence: Route",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Assign the application to a licensing officer",
+      "order": 6,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_07",
+      "label": "HMO licence: Check",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Validate the application and assess fit and proper person and management arrangements",
+      "order": 7,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_08",
+      "label": "HMO licence: Clarify",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Ask for missing information",
+      "order": 8,
+      "condition": "If the application is incomplete",
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_09",
+      "label": "HMO licence: Update",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Applicant supplies the missing information",
+      "order": 9,
+      "condition": "If the application is incomplete",
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_10",
+      "label": "HMO licence: Notify",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Send the proposed licence or proposed refusal for representations",
+      "order": 10,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_11",
+      "label": "HMO licence: Decide",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Grant with conditions, or refuse",
+      "order": 11,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_12",
+      "label": "HMO licence: Pay",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Pay the second part of the fee",
+      "order": 12,
+      "condition": "If granted and the fee is charged in two parts",
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_13",
+      "label": "HMO licence: Fulfil",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Issue the licence",
+      "order": 13,
+      "condition": "If granted",
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_14",
+      "label": "HMO licence: Notify",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Send the decision notice with appeal rights",
+      "order": 14,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_15",
+      "label": "HMO licence: Feedback",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Customer feedback",
+      "order": 15,
+      "optional": true,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_hmo_16",
+      "label": "HMO licence: Track",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Applicant follows progress",
+      "order": null,
+      "optional": true,
+      "repeatable": true,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_bin_01",
+      "label": "Missed bin report: Find",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Check the collection day and any known delays",
+      "order": 1,
+      "exit_if": "The collection is not yet late",
+      "status": "illustrative"
+    },
+    {
+      "id": "use_bin_02",
+      "label": "Missed bin report: Report",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Report the missed collection at the address",
+      "order": 2,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_bin_03",
+      "label": "Missed bin report: Notify",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Acknowledge the report",
+      "order": 3,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_bin_04",
+      "label": "Missed bin report: Check",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Check crew records for the round",
+      "order": 4,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_bin_05",
+      "label": "Missed bin report: Decide",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Decide whether a return visit is due or the bin was not presented",
+      "order": 5,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_bin_06",
+      "label": "Missed bin report: Route",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Add the address to the crew's return list",
+      "order": 6,
+      "condition": "If a return visit is due",
+      "status": "illustrative"
+    },
+    {
+      "id": "use_bin_07",
+      "label": "Missed bin report: Fulfil",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Collect the bin",
+      "order": 7,
+      "condition": "If a return visit is due",
+      "status": "illustrative"
+    },
+    {
+      "id": "use_bin_08",
+      "label": "Missed bin report: Notify",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Confirm the collection or explain why not",
+      "order": 8,
+      "status": "illustrative"
+    },
+    {
+      "id": "use_bin_09",
+      "label": "Missed bin report: Feedback",
+      "type": "step_usage",
+      "source": "example",
+      "purpose": "Customer feedback",
+      "order": 9,
+      "optional": true,
+      "status": "illustrative"
+    },
+    {
+      "id": "ch_web_chat",
+      "label": "Web chat",
+      "type": "channel",
+      "source": "architecture",
+      "renamed_from": "Chatbot",
+      "group": "Messaging"
+    },
+    {
+      "id": "cap_single_customer_view",
+      "label": "Single customer view",
+      "type": "capability",
+      "source": "architecture",
+      "description": "One view of the resident across services. Whether it is held centrally or federated is still open.",
+      "renamed_from": "Central customer record"
+    },
+    {
+      "id": "tech_customer_view",
+      "label": "Customer view",
+      "type": "component",
+      "source": "proposed",
+      "description": "Links a resident's records and identity across services to give one view.",
+      "renamed_from": "Customer record",
+      "status": "confirmed"
+    },
+    {
+      "id": "step_clarify",
+      "label": "Clarify",
+      "type": "step",
+      "source": "proposed",
+      "description": "The Council asks the resident for input it needs to continue: to clarify what they need or to supply missing information. The Council still owns the case while it waits, and the resident replies through Update. Whether the clock stops depends on the service's own rules. For an FOI request, the time limit runs from when the clarification arrives.",
+      "actor": "council",
+      "status": "confirmed"
+    },
+    {
+      "id": "outcome_decision",
+      "label": "Decision received",
+      "type": "outcome_type",
+      "source": "proposed",
+      "description": "The resident has been told the decision: yes, no or in part. The decision is made at Decide and reaches the resident through Notify.",
+      "renamed_from": "Decision made"
+    },
+    {
+      "id": "outcome_information",
+      "label": "Information received",
+      "type": "outcome_type",
+      "source": "proposed",
+      "description": "The resident has what they needed to know."
+    },
+    {
+      "id": "outcome_payment",
+      "label": "Payment made",
+      "type": "outcome_type",
+      "source": "proposed",
+      "description": "The resident has paid what they owe."
+    },
+    {
+      "id": "outcome_booking",
+      "label": "Booking confirmed",
+      "type": "outcome_type",
+      "source": "proposed",
+      "description": "The resident has a confirmed booking."
+    },
+    {
+      "id": "outcome_work_done",
+      "label": "Work done",
+      "type": "outcome_type",
+      "source": "proposed",
+      "description": "Fixed, collected, delivered, issued or provided."
+    }
+  ],
+  "edges": [
+    {
+      "source": "svc_report_it",
+      "target": "step_find",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "step_report",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "step_notify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "step_track",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "step_feedback",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_find",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_identify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_apply",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_check",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_pay",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_notify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_feedback",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_pay_for",
+      "target": "step_find",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_pay_for",
+      "target": "step_identify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_pay_for",
+      "target": "step_pay",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_pay_for",
+      "target": "step_notify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_book_it",
+      "target": "step_find",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_book_it",
+      "target": "step_identify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_book_it",
+      "target": "step_book",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_book_it",
+      "target": "step_pay",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_book_it",
+      "target": "step_notify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_find",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_identify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_request",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_check",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_notify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_track",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_update",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_feedback",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_order_it",
+      "target": "step_find",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_order_it",
+      "target": "step_identify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_order_it",
+      "target": "step_order",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_order_it",
+      "target": "step_pay",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_order_it",
+      "target": "step_notify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_stay_informed",
+      "target": "step_find",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_stay_informed",
+      "target": "step_identify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_stay_informed",
+      "target": "step_track",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_stay_informed",
+      "target": "step_notify",
+      "relation": "may_comprise",
+      "origin": "steps_model",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "pat_find_and_report",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "pat_track_and_update",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "pat_prove_and_apply",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "pat_apply_check_notify",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "pat_pay_and_confirm",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "svc_pay_for",
+      "target": "pat_pay_and_confirm",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "svc_book_it",
+      "target": "pat_book_and_confirm",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "pat_apply_check_notify",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "pat_track_and_update",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "svc_order_it",
+      "target": "pat_order_and_deliver",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "svc_stay_informed",
+      "target": "pat_track_and_update",
+      "relation": "may_use",
+      "origin": "steps_model",
+      "retyped_from": "uses"
+    },
+    {
+      "source": "step_find",
+      "target": "tech_publishing",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_find",
+      "target": "tech_search",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_find",
+      "target": "tech_directory",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_find",
+      "target": "tech_map",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_identify",
+      "target": "tech_verify_identity",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_identify",
+      "target": "tech_document_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_report",
+      "target": "tech_data_capture",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_report",
+      "target": "tech_document_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_report",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_report",
+      "target": "tech_integration",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_report",
+      "target": "tech_map",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_request",
+      "target": "tech_data_capture",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_request",
+      "target": "tech_document_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_request",
+      "target": "tech_payment",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_request",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_request",
+      "target": "tech_integration",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_check",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_check",
+      "target": "tech_integration",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_book",
+      "target": "tech_data_capture",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_book",
+      "target": "tech_resource_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_book",
+      "target": "tech_payment",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_book",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_book",
+      "target": "tech_integration",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_apply",
+      "target": "tech_data_capture",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_apply",
+      "target": "tech_document_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_apply",
+      "target": "tech_payment",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_apply",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_apply",
+      "target": "tech_integration",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_order",
+      "target": "tech_data_capture",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_order",
+      "target": "tech_payment",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_order",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_order",
+      "target": "tech_integration",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_notify",
+      "target": "tech_notification",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_track",
+      "target": "tech_verify_identity",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_track",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_track",
+      "target": "tech_integration",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_update",
+      "target": "tech_data_capture",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_update",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_update",
+      "target": "tech_document_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_update",
+      "target": "tech_notification",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_pay",
+      "target": "tech_payment",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_pay",
+      "target": "tech_integration",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_feedback",
+      "target": "tech_data_capture",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_feedback",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "step_feedback",
+      "target": "tech_document_management",
+      "relation": "may_require",
+      "origin": "steps_model",
+      "retyped_from": "requires"
+    },
+    {
+      "source": "pat_find_and_report",
+      "target": "step_find",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 1
+    },
+    {
+      "source": "pat_find_and_report",
+      "target": "step_report",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 2
+    },
+    {
+      "source": "pat_find_and_report",
+      "target": "step_notify",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 3,
+      "purpose": "Report acknowledgement"
+    },
+    {
+      "source": "pat_prove_and_apply",
+      "target": "step_identify",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 1
+    },
+    {
+      "source": "pat_prove_and_apply",
+      "target": "step_apply",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 2
+    },
+    {
+      "source": "pat_prove_and_apply",
+      "target": "step_check",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 3
+    },
+    {
+      "source": "pat_pay_and_confirm",
+      "target": "step_pay",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 1
+    },
+    {
+      "source": "pat_pay_and_confirm",
+      "target": "step_notify",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 2,
+      "purpose": "Payment confirmation"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "step_submit",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "retargeted_from": "step_apply",
+      "order": 1
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "step_check",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 2
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "step_notify",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 4,
+      "purpose": "Decision notification"
+    },
+    {
+      "source": "pat_book_and_confirm",
+      "target": "step_book",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 1
+    },
+    {
+      "source": "pat_book_and_confirm",
+      "target": "step_pay",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 2
+    },
+    {
+      "source": "pat_book_and_confirm",
+      "target": "step_notify",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 3,
+      "purpose": "Booking confirmation"
+    },
+    {
+      "source": "pat_track_and_update",
+      "target": "step_track",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 1
+    },
+    {
+      "source": "pat_track_and_update",
+      "target": "step_update",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 2
+    },
+    {
+      "source": "pat_track_and_update",
+      "target": "step_notify",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 3,
+      "purpose": "Progress update"
+    },
+    {
+      "source": "pat_order_and_deliver",
+      "target": "step_order",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 1
+    },
+    {
+      "source": "pat_order_and_deliver",
+      "target": "step_pay",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 2
+    },
+    {
+      "source": "pat_order_and_deliver",
+      "target": "step_notify",
+      "relation": "bundles",
+      "origin": "steps_model",
+      "order": 3,
+      "purpose": "Order acknowledgement"
+    },
+    {
+      "source": "stage_need",
+      "target": "stage_learn",
+      "relation": "precedes",
+      "origin": "customer_spine"
+    },
+    {
+      "source": "stage_learn",
+      "target": "stage_ask",
+      "relation": "precedes",
+      "origin": "customer_spine"
+    },
+    {
+      "source": "stage_ask",
+      "target": "stage_in_progress",
+      "relation": "precedes",
+      "origin": "customer_spine"
+    },
+    {
+      "source": "stage_in_progress",
+      "target": "stage_outcome",
+      "relation": "precedes",
+      "origin": "customer_spine"
+    },
+    {
+      "source": "cap_guidance_content",
+      "target": "layer_information",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_knowledge_base",
+      "target": "layer_information",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_status_updates",
+      "target": "layer_information",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_online_services",
+      "target": "layer_interaction",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_shared_components",
+      "target": "layer_interaction",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_notifications",
+      "target": "layer_interaction",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_verification",
+      "target": "layer_interaction",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_rules_routing",
+      "target": "layer_orchestration",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_single_customer_view",
+      "target": "layer_orchestration",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_slas_care",
+      "target": "layer_orchestration",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_cloud",
+      "target": "layer_foundations",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_security_identity",
+      "target": "layer_foundations",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_integration",
+      "target": "layer_foundations",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_data_standards",
+      "target": "layer_foundations",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_presentation",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_information",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_interaction",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_orchestration",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_service_delivery",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_ai",
+      "target": "layer_foundations",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_dcx",
+      "target": "layer_presentation",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_dcx",
+      "target": "layer_information",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_dcx",
+      "target": "layer_interaction",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_dcx",
+      "target": "layer_orchestration",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_dcx",
+      "target": "layer_service_delivery",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "cross_dcx",
+      "target": "layer_foundations",
+      "relation": "spans",
+      "origin": "architecture"
+    },
+    {
+      "source": "layer_service_delivery",
+      "target": "layer_presentation",
+      "relation": "feeds_back_to",
+      "origin": "architecture",
+      "label": "Resolution outcomes and status notifications"
+    },
+    {
+      "source": "step_find",
+      "target": "stage_learn",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_identify",
+      "target": "stage_ask",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_report",
+      "target": "stage_ask",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_request",
+      "target": "stage_ask",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_apply",
+      "target": "stage_ask",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_book",
+      "target": "stage_ask",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_order",
+      "target": "stage_ask",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_pay",
+      "target": "stage_ask",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_check",
+      "target": "stage_in_progress",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_track",
+      "target": "stage_in_progress",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_update",
+      "target": "stage_in_progress",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_decide",
+      "target": "stage_in_progress",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_fulfil",
+      "target": "stage_in_progress",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_notify",
+      "target": "stage_in_progress",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_notify",
+      "target": "stage_outcome",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_feedback",
+      "target": "stage_outcome",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_find",
+      "target": "layer_information",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_track",
+      "target": "layer_information",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_identify",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_report",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_request",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_apply",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_book",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_order",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_pay",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_update",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_notify",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_feedback",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_check",
+      "target": "layer_service_delivery",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_decide",
+      "target": "layer_service_delivery",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_fulfil",
+      "target": "layer_service_delivery",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "tech_publishing",
+      "target": "layer_information",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_search",
+      "target": "layer_information",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_directory",
+      "target": "layer_information",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_map",
+      "target": "layer_information",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_verify_identity",
+      "target": "layer_interaction",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_data_capture",
+      "target": "layer_interaction",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_document_management",
+      "target": "layer_interaction",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_payment",
+      "target": "layer_interaction",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_resource_management",
+      "target": "layer_interaction",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_notification",
+      "target": "layer_interaction",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_case_management",
+      "target": "layer_orchestration",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_routing",
+      "target": "layer_orchestration",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_customer_view",
+      "target": "layer_orchestration",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_sla_management",
+      "target": "layer_orchestration",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_integration",
+      "target": "layer_foundations",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_publishing",
+      "target": "cap_guidance_content",
+      "relation": "supports",
+      "origin": "model",
+      "retyped_from": "realises"
+    },
+    {
+      "source": "tech_search",
+      "target": "cap_knowledge_base",
+      "relation": "supports",
+      "origin": "model",
+      "retyped_from": "realises"
+    },
+    {
+      "source": "tech_data_capture",
+      "target": "cap_online_services",
+      "relation": "supports",
+      "origin": "model",
+      "retyped_from": "realises"
+    },
+    {
+      "source": "tech_document_management",
+      "target": "cap_online_services",
+      "relation": "supports",
+      "origin": "model",
+      "retyped_from": "realises"
+    },
+    {
+      "source": "tech_document_management",
+      "target": "cap_verification",
+      "relation": "supports",
+      "origin": "model",
+      "retyped_from": "realises"
+    },
+    {
+      "source": "tech_verify_identity",
+      "target": "cap_verification",
+      "relation": "supports",
+      "origin": "model",
+      "retyped_from": "realises"
+    },
+    {
+      "source": "tech_payment",
+      "target": "cap_shared_components",
+      "relation": "supports",
+      "origin": "model",
+      "retyped_from": "realises"
+    },
+    {
+      "source": "tech_resource_management",
+      "target": "cap_shared_components",
+      "relation": "supports",
+      "origin": "model",
+      "retyped_from": "realises"
+    },
+    {
+      "source": "tech_notification",
+      "target": "cap_notifications",
+      "relation": "realises",
+      "origin": "model"
+    },
+    {
+      "source": "tech_case_management",
+      "target": "cap_status_updates",
+      "relation": "provides_data_for",
+      "origin": "model",
+      "retyped_from": "realises"
+    },
+    {
+      "source": "tech_integration",
+      "target": "cap_integration",
+      "relation": "realises",
+      "origin": "model"
+    },
+    {
+      "source": "tech_routing",
+      "target": "cap_rules_routing",
+      "relation": "realises",
+      "origin": "model"
+    },
+    {
+      "source": "tech_customer_view",
+      "target": "cap_single_customer_view",
+      "relation": "realises",
+      "origin": "model"
+    },
+    {
+      "source": "tech_sla_management",
+      "target": "cap_slas_care",
+      "relation": "realises",
+      "origin": "model"
+    },
+    {
+      "source": "step_decide",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "proposed",
+      "retyped_from": "requires",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_decide",
+      "target": "tech_integration",
+      "relation": "may_require",
+      "origin": "proposed",
+      "retyped_from": "requires",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_fulfil",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "proposed",
+      "retyped_from": "requires",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_fulfil",
+      "target": "tech_integration",
+      "relation": "may_require",
+      "origin": "proposed",
+      "retyped_from": "requires",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_fulfil",
+      "target": "tech_resource_management",
+      "relation": "may_require",
+      "origin": "proposed",
+      "retyped_from": "requires",
+      "status": "confirmed"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_decide",
+      "relation": "may_comprise",
+      "origin": "proposed",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_fulfil",
+      "relation": "may_comprise",
+      "origin": "proposed",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_track",
+      "relation": "may_comprise",
+      "origin": "proposed",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_decide",
+      "relation": "may_comprise",
+      "origin": "proposed",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_fulfil",
+      "relation": "may_comprise",
+      "origin": "proposed",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "step_fulfil",
+      "relation": "may_comprise",
+      "origin": "proposed",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "step_update",
+      "relation": "may_comprise",
+      "origin": "proposed",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_order_it",
+      "target": "step_fulfil",
+      "relation": "may_comprise",
+      "origin": "proposed",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_book_it",
+      "target": "step_fulfil",
+      "relation": "may_comprise",
+      "origin": "proposed",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "svc_stay_informed",
+      "target": "step_update",
+      "relation": "may_comprise",
+      "origin": "proposed",
+      "retyped_from": "comprises"
+    },
+    {
+      "source": "pat_apply_check_notify",
+      "target": "step_decide",
+      "relation": "bundles",
+      "origin": "proposed",
+      "order": 3
+    },
+    {
+      "source": "pat_order_and_deliver",
+      "target": "step_fulfil",
+      "relation": "bundles",
+      "origin": "proposed",
+      "order": 4
+    },
+    {
+      "source": "pat_find_and_report",
+      "target": "step_fulfil",
+      "relation": "bundles",
+      "origin": "proposed",
+      "order": 4
+    },
+    {
+      "source": "cap_service_decisions",
+      "target": "layer_service_delivery",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "cap_service_fulfilment",
+      "target": "layer_service_delivery",
+      "relation": "part_of",
+      "origin": "proposed"
+    },
+    {
+      "source": "sys_line_of_business",
+      "target": "layer_service_delivery",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "sys_line_of_business",
+      "target": "cap_service_decisions",
+      "relation": "supports",
+      "origin": "model"
+    },
+    {
+      "source": "sys_line_of_business",
+      "target": "cap_service_fulfilment",
+      "relation": "supports",
+      "origin": "model"
+    },
+    {
+      "source": "step_request",
+      "target": "step_submit",
+      "relation": "subtype_of",
+      "origin": "proposed"
+    },
+    {
+      "source": "step_apply",
+      "target": "step_submit",
+      "relation": "subtype_of",
+      "origin": "proposed"
+    },
+    {
+      "source": "step_submit",
+      "target": "stage_ask",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_submit",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_route",
+      "target": "stage_in_progress",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_route",
+      "target": "layer_orchestration",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_route",
+      "target": "tech_routing",
+      "relation": "may_require",
+      "origin": "proposed",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_route",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "proposed",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_route",
+      "target": "tech_customer_view",
+      "relation": "may_require",
+      "origin": "proposed",
+      "status": "confirmed"
+    },
+    {
+      "source": "stage_need",
+      "target": "layer_resident",
+      "relation": "anchored_in",
+      "origin": "model"
+    },
+    {
+      "source": "stage_outcome",
+      "target": "layer_resident",
+      "relation": "anchored_in",
+      "origin": "model"
+    },
+    {
+      "source": "layer_presentation",
+      "target": "layer_information",
+      "relation": "mediates",
+      "origin": "model"
+    },
+    {
+      "source": "layer_presentation",
+      "target": "layer_interaction",
+      "relation": "mediates",
+      "origin": "model"
+    },
+    {
+      "source": "stage_learn",
+      "target": "stage_outcome",
+      "relation": "can_exit_to",
+      "origin": "model"
+    },
+    {
+      "source": "stage_ask",
+      "target": "stage_outcome",
+      "relation": "can_exit_to",
+      "origin": "model"
+    },
+    {
+      "source": "step_pay",
+      "target": "stage_outcome",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_feedback",
+      "target": "stage_in_progress",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_fulfil",
+      "target": "stage_outcome",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_service_casework",
+      "target": "layer_service_delivery",
+      "relation": "sits_in",
+      "origin": "model"
+    },
+    {
+      "source": "tech_service_casework",
+      "target": "cap_service_decisions",
+      "relation": "supports",
+      "origin": "model"
+    },
+    {
+      "source": "sys_line_of_business",
+      "target": "tech_service_casework",
+      "relation": "provides",
+      "origin": "model"
+    },
+    {
+      "source": "step_check",
+      "target": "tech_service_casework",
+      "relation": "may_require",
+      "origin": "proposed",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_decide",
+      "target": "tech_service_casework",
+      "relation": "may_require",
+      "origin": "proposed",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_fulfil",
+      "target": "tech_service_casework",
+      "relation": "may_require",
+      "origin": "proposed",
+      "status": "confirmed"
+    },
+    {
+      "source": "ch_website",
+      "target": "layer_presentation",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "ch_online_services",
+      "target": "layer_presentation",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "ch_web_chat",
+      "target": "layer_presentation",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "ch_whatsapp",
+      "target": "layer_presentation",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "ch_email",
+      "target": "layer_presentation",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "ch_telephone",
+      "target": "layer_presentation",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "ch_in_person",
+      "target": "layer_presentation",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "ch_post",
+      "target": "layer_presentation",
+      "relation": "part_of",
+      "origin": "architecture"
+    },
+    {
+      "source": "service_hmo_licence",
+      "target": "svc_apply_for",
+      "relation": "instance_of",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "service_missed_bin",
+      "target": "svc_report_it",
+      "relation": "instance_of",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_01",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_01",
+      "target": "step_find",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_01",
+      "target": "stage_learn",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_02",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_02",
+      "target": "step_identify",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_02",
+      "target": "stage_ask",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_03",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_03",
+      "target": "step_apply",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_03",
+      "target": "stage_ask",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_04",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_04",
+      "target": "step_pay",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_04",
+      "target": "stage_ask",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_05",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_05",
+      "target": "step_notify",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_05",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_06",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_06",
+      "target": "step_route",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_06",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_07",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_07",
+      "target": "step_check",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_07",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_08",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_08",
+      "target": "step_clarify",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative",
+      "retargeted_from": "step_notify"
+    },
+    {
+      "source": "use_hmo_08",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_09",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_09",
+      "target": "step_update",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_09",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_10",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_10",
+      "target": "step_notify",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_10",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_11",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_11",
+      "target": "step_decide",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_11",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_12",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_12",
+      "target": "step_pay",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_12",
+      "target": "stage_outcome",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_13",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_13",
+      "target": "step_fulfil",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_13",
+      "target": "stage_outcome",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_14",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_14",
+      "target": "step_notify",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_14",
+      "target": "stage_outcome",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_15",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_15",
+      "target": "step_feedback",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_15",
+      "target": "stage_outcome",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_16",
+      "target": "service_hmo_licence",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_16",
+      "target": "step_track",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_hmo_16",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_01",
+      "target": "service_missed_bin",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_01",
+      "target": "step_find",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_01",
+      "target": "stage_learn",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_02",
+      "target": "service_missed_bin",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_02",
+      "target": "step_report",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_02",
+      "target": "stage_ask",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_03",
+      "target": "service_missed_bin",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_03",
+      "target": "step_notify",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_03",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_04",
+      "target": "service_missed_bin",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_04",
+      "target": "step_check",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_04",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_05",
+      "target": "service_missed_bin",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_05",
+      "target": "step_decide",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_05",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_06",
+      "target": "service_missed_bin",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_06",
+      "target": "step_route",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_06",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_07",
+      "target": "service_missed_bin",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_07",
+      "target": "step_fulfil",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_07",
+      "target": "stage_in_progress",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_08",
+      "target": "service_missed_bin",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_08",
+      "target": "step_notify",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_08",
+      "target": "stage_outcome",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_09",
+      "target": "service_missed_bin",
+      "relation": "in_service",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_09",
+      "target": "step_feedback",
+      "relation": "of_step",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "use_bin_09",
+      "target": "stage_outcome",
+      "relation": "at_stage",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "service_hmo_licence",
+      "target": "tech_data_capture",
+      "relation": "requires",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "service_hmo_licence",
+      "target": "tech_document_management",
+      "relation": "requires",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "service_hmo_licence",
+      "target": "tech_payment",
+      "relation": "requires",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "service_hmo_licence",
+      "target": "tech_notification",
+      "relation": "requires",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "service_missed_bin",
+      "target": "tech_data_capture",
+      "relation": "requires",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "service_missed_bin",
+      "target": "tech_notification",
+      "relation": "requires",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "service_missed_bin",
+      "target": "tech_integration",
+      "relation": "requires",
+      "origin": "example",
+      "status": "illustrative"
+    },
+    {
+      "source": "step_decide",
+      "target": "step_fulfil",
+      "relation": "can_lead_to",
+      "origin": "proposed",
+      "condition": "If the answer is yes or in part",
+      "status": "confirmed",
+      "retyped_from": "leads_to"
+    },
+    {
+      "source": "step_decide",
+      "target": "step_notify",
+      "relation": "can_lead_to",
+      "origin": "proposed",
+      "condition": "If the answer is no: notify the decision, the reasons and any right of review or appeal",
+      "status": "confirmed",
+      "retyped_from": "leads_to"
+    },
+    {
+      "source": "step_clarify",
+      "target": "stage_in_progress",
+      "relation": "occurs_in",
+      "origin": "model"
+    },
+    {
+      "source": "step_clarify",
+      "target": "layer_interaction",
+      "relation": "carried_by",
+      "origin": "model"
+    },
+    {
+      "source": "step_clarify",
+      "target": "tech_notification",
+      "relation": "may_require",
+      "origin": "proposed",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_clarify",
+      "target": "tech_data_capture",
+      "relation": "may_require",
+      "origin": "proposed",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_clarify",
+      "target": "tech_case_management",
+      "relation": "may_require",
+      "origin": "proposed",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_clarify",
+      "target": "tech_sla_management",
+      "relation": "may_require",
+      "origin": "proposed",
+      "status": "confirmed"
+    },
+    {
+      "source": "step_clarify",
+      "target": "step_update",
+      "relation": "can_lead_to",
+      "origin": "proposed",
+      "condition": "When the resident replies",
+      "status": "confirmed",
+      "retyped_from": "leads_to"
+    },
+    {
+      "source": "svc_apply_for",
+      "target": "step_clarify",
+      "relation": "may_comprise",
+      "origin": "proposed"
+    },
+    {
+      "source": "svc_get_support",
+      "target": "step_clarify",
+      "relation": "may_comprise",
+      "origin": "proposed"
+    },
+    {
+      "source": "svc_report_it",
+      "target": "step_clarify",
+      "relation": "may_comprise",
+      "origin": "proposed"
+    },
+    {
+      "source": "use_hmo_09",
+      "target": "use_hmo_07",
+      "relation": "returns_to",
+      "origin": "example",
+      "status": "illustrative",
+      "condition": "Check again once the missing information arrives"
+    },
+    {
+      "source": "stage_outcome",
+      "target": "outcome_decision",
+      "relation": "can_be",
+      "origin": "proposed"
+    },
+    {
+      "source": "step_decide",
+      "target": "outcome_decision",
+      "relation": "produces",
+      "origin": "proposed"
+    },
+    {
+      "source": "stage_outcome",
+      "target": "outcome_information",
+      "relation": "can_be",
+      "origin": "proposed"
+    },
+    {
+      "source": "step_find",
+      "target": "outcome_information",
+      "relation": "produces",
+      "origin": "proposed"
+    },
+    {
+      "source": "stage_outcome",
+      "target": "outcome_payment",
+      "relation": "can_be",
+      "origin": "proposed"
+    },
+    {
+      "source": "step_pay",
+      "target": "outcome_payment",
+      "relation": "produces",
+      "origin": "proposed"
+    },
+    {
+      "source": "stage_outcome",
+      "target": "outcome_booking",
+      "relation": "can_be",
+      "origin": "proposed"
+    },
+    {
+      "source": "step_book",
+      "target": "outcome_booking",
+      "relation": "produces",
+      "origin": "proposed"
+    },
+    {
+      "source": "stage_outcome",
+      "target": "outcome_work_done",
+      "relation": "can_be",
+      "origin": "proposed"
+    },
+    {
+      "source": "step_fulfil",
+      "target": "outcome_work_done",
+      "relation": "produces",
+      "origin": "proposed"
+    },
+    {
+      "source": "step_notify",
+      "target": "outcome_decision",
+      "relation": "communicates",
+      "origin": "proposed"
+    }
+  ]
+}</script>
+<script>
+(()=>{'use strict';
+const G=JSON.parse(document.getElementById('graph-data').textContent),N=Object.fromEntries(G.nodes.map(n=>[n.id,n])),E=G.edges;
+const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const out=(id,r)=>E.filter(e=>e.source===id&&(!r||e.relation===r)),inc=(id,r)=>E.filter(e=>e.target===id&&(!r||e.relation===r));
+const types={stage:'Customer stage',layer:'Architecture layer',capability:'What the council can do',channel:'Contact channel',crosscut:'Across the architecture',service_archetype:'Type of service',service:'Example service',pattern:'Reusable service pattern',step:'Reusable action',step_usage:'Action in a service',component:'Shared building block',system_class:'Type of system',outcome_type:'Type of outcome'};
+const relation={may_comprise:'may include',may_require:'may need',may_use:'may follow',bundles:'includes',part_of:'belongs to',occurs_in:'can happen during',carried_by:'is supported by',sits_in:'sits within',realises:'delivers',spans:'works across',requires:'needs',precedes:'typically comes before',can_exit_to:'can finish at',in_service:'belongs to',of_step:'uses the action',at_stage:'happens during',instance_of:'is a type of',supports:'helps provide',provides_data_for:'supplies information for',provides:'usually provides',subtype_of:'is a form of',can_lead_to:'can lead to',returns_to:'returns to',produces:'can produce',communicates:'tells the resident about',can_be:'can result in',anchored_in:'is anchored in',mediates:'provides access to',feeds_back_to:'returns information to'};
+let view='overview',selected='layer_information',service='service_missed_bin',journeyMode='examples',query='',typeFilter='all';
+const views=[['overview','01','The big picture'],['journeys','02','Service journeys'],['components','03','Shared building blocks'],['explore','04','Explore connections']];
+const layerIds=['layer_presentation','layer_information','layer_interaction','layer_orchestration','layer_service_delivery','layer_foundations'];
+const summaries={layer_presentation:['Ways to get in touch','The front door: online, messaging, telephone, in person and post.'],layer_information:['Understand and follow','Help people find answers and see how their case is progressing.'],layer_interaction:['Ask and exchange','Capture requests, take payments and exchange information.'],layer_orchestration:['Coordinate the work','Assign ownership, connect records and manage commitments.'],layer_service_delivery:['Decide and deliver','Check the case, make a decision and carry out approved work.'],layer_foundations:['Keep it all working','The underlying technology, identity, integration and data standards.']};
+function state(n){if(n.status==='illustrative'||n.source==='example')return ['Example · awaiting verification','example'];if(n.status==='confirmed')return ['Accepted into the model',''];if(n.status==='service_owner_verified')return ['Verified by service owner',''];if(n.source==='proposed')return ['Proposed · awaiting acceptance','pending'];return ['Reference model',''];}
+function badges(n){const [text,cls]=state(n);return `<span class="badge">${esc(types[n.type]||n.type)}</span><span class="badge ${cls}">${text}</span>`;}
+function chip(id,cls=''){return `<button class="chip ${cls} ${selected===id?'active':''}" data-node="${id}">${esc(N[id].label)}</button>`;}
+function relatedList(edges,incoming=false,limit=10){return edges.slice(0,limit).map(e=>{const id=incoming?e.source:e.target;return `<button data-node="${id}">${incoming?`<strong>${esc(N[id].label)}</strong><br><small>${esc(relation[e.relation]||e.relation.replaceAll('_',' '))} this item</small>`:`<small>${esc(relation[e.relation]||e.relation.replaceAll('_',' '))}</small><br>${esc(N[id].label)}`}</button>`}).join('');}
+function inspector(){const n=N[selected];const edges=out(n.id),incoming=inc(n.id);let descr=n.description||n.purpose||'A reusable part of the service model. Select a connection to see how it fits.';let specific='';if(n.type==='step_usage'){specific=['purpose','condition','exit_if'].filter(k=>n[k]).map(k=>`<div class="fact"><strong>${{purpose:'What happens',condition:'When this applies',exit_if:'Early finish'}[k]}</strong><span>${esc(n[k])}</span></div>`).join('');if(n.repeatable)specific+='<div class="fact"><strong>Alongside the journey</strong><span>This action can be repeated.</span></div>';}return `<aside class="panel inspector" aria-live="polite"><div class="eyebrow">A closer look</div>${badges(n)}<h2>${esc(n.label)}</h2><p class="sub">${esc(descr)}</p>${specific}${n.possible_results?`<div class="fact"><strong>Possible decisions</strong><span>${esc(n.possible_results.join(', '))}</span></div>`:''}<button class="link" data-explore="${n.id}">Explore its connections →</button><div class="divider"></div><h3>Connected to</h3><div class="detail-list">${relatedList(edges)||'<small>No outgoing relationships recorded.</small>'}</div>${incoming.length?`<div class="divider"></div><h3>Used or referenced by</h3><div class="detail-list">${relatedList(incoming,true,5)}</div>${incoming.length>5?`<small>${incoming.length-5} more in Explore connections</small>`:''}`:''}<details><summary>Source and model detail</summary><p class="small" style="margin-top:10px">${esc(G.meta.sources[n.source]||n.source)}</p><pre>${esc(JSON.stringify(n,null,2))}</pre></details></aside>`;}
+function overview(){return `<div class="section-head"><div class="eyebrow">Start with the whole picture</div><h2>A journey supported by six layers.</h2><p class="sub">The stages describe the resident’s experience. The layers show what supports it. Select any stage, action or layer to look closer.</p></div><div class="spine">${['stage_need','stage_learn','stage_ask','stage_in_progress','stage_outcome'].map((id,i)=>`<button class="stage" data-node="${id}"><em>${String(i+1).padStart(2,'0')}</em><b>${esc(N[id].label)}</b></button>`).join('')}</div><div class="stack">${layerIds.map((id,i)=>{const steps=inc(id,'carried_by').map(e=>e.source);const members=inc(id,'part_of').map(e=>e.source);return `<section class="layer ${selected===id?'selected':''}"><div><div class="layer-number">${String(i+1).padStart(2,'0')} / ${summaries[id][0].toUpperCase()}</div><button class="layer-name" data-node="${id}">${esc(N[id].label)}<span>${esc(summaries[id][1])}</span></button></div><div>${steps.length?steps.map(s=>chip(s,N[s].actor)).join(''):members.map(s=>chip(s)).join('')}${steps.length?`<div style="margin-top:8px"><small>${members.map(s=>esc(N[s].label)).join(' · ')}</small></div>`:''}</div></section>`}).join('')}</div><div class="cross"><button class="layer-name" data-node="cross_ai">AI across the layers</button><p>Handling contact, retrieval, drafting, reasoning and routing.</p></div><div class="cross"><button class="layer-name" data-node="cross_dcx">Customer experience</button><p>Monitoring, reporting and automation across the service.</p></div><div class="legend"><span><i class="dot"></i>Resident action</span><span><i class="dot orange"></i>Council action</span></div><p class="small">A typical journey: it can finish early, repeat steps or move between stages. Layers are not a mandatory sequence.</p>`;}
+function journeys(){const services=G.nodes.filter(n=>n.type==='service');let html=`<div class="section-head"><div class="eyebrow">Follow the work</div><h2>What happens along the way?</h2><p class="sub">See how reusable actions become a particular service journey, or explore the patterns shared by different types of service.</p></div><div class="pillbar"><button data-mode="examples" class="${journeyMode==='examples'?'active':''}">Example journeys</button><button data-mode="patterns" class="${journeyMode==='patterns'?'active':''}">Reusable patterns</button></div>`;if(journeyMode==='patterns'){return html+`<div class="pattern-grid">${G.nodes.filter(n=>n.type==='pattern').map(n=>`<section class="pattern"><button class="layer-name" data-node="${n.id}">${esc(n.label)}</button><p class="small" style="margin-top:9px">${esc(n.description)}</p><div class="chain">${out(n.id,'bundles').sort((a,b)=>a.order-b.order).map((e,i)=>`${i?'→':''}${chip(e.target,N[e.target].actor)}`).join('')}</div><details><summary>Where this pattern may help</summary>${inc(n.id,'may_use').map(e=>chip(e.source)).join('')}<p class="small">Pattern membership is a typical sequence; payments and fulfilment may depend on the service.</p></details></section>`).join('')}</div>`;}
+const usages=inc(service,'in_service').map(e=>N[e.source]).sort((a,b)=>(a.order??999)-(b.order??999));return html+`<div class="toolbar"><div><label for="service">Choose an example</label><select id="service">${services.map(n=>`<option value="${n.id}" ${service===n.id?'selected':''}>${esc(n.label)}</option>`).join('')}</select></div><div class="legend"><span><i class="dot"></i>Resident</span><span><i class="dot orange"></i>Council</span></div></div><div class="notice">Illustrative journey. The sequence and requirements have not yet been verified by a service owner. This view describes the service; it does not run it.</div><div class="journey">${usages.map(n=>{const step=N[out(n.id,'of_step')[0].target],stage=N[out(n.id,'at_stage')[0].target],loop=out(n.id,'returns_to')[0];return `<div class="usage"><div class="num">${n.order??'↻'}</div><button class="usage-button ${step.actor} ${selected===n.id?'selected':''}" data-node="${n.id}"><span class="who">${step.actor==='council'?'Council action':'Resident action'}${n.optional?' · optional':''}${n.repeatable?' · repeatable':''}</span><div class="usage-title"><b>${esc(step.label)}</b><small>${esc(stage.label)}</small></div><div class="usage-purpose">${esc(n.purpose)}</div>${n.condition?`<span class="condition">When: ${esc(n.condition)}</span>`:''}${n.exit_if?`<span class="condition">Can finish here: ${esc(n.exit_if)}</span>`:''}${loop?`<span class="condition">↶ Return to ${esc(N[out(loop.target,'of_step')[0].target].label)} after the reply</span>`:''}</button></div>`}).join('')}</div>`;}
+function components(){const comps=G.nodes.filter(n=>n.type==='component');return `<div class="section-head"><div class="eyebrow">Find what can be shared</div><h2>Common building blocks.</h2><p class="sub">Select a component to see the actions it may support and the service examples that explicitly need it. Possible dependencies are distinct from recorded service requirements.</p></div><div class="component-grid">${comps.map(n=>{const steps=inc(n.id,'may_require'),services=inc(n.id,'requires'),layer=out(n.id,'sits_in')[0];return `<button class="component ${selected===n.id?'selected':''}" data-node="${n.id}"><small>${layer?esc(N[layer.target].label):'Shared component'}</small><strong>${esc(n.label)}</strong><span class="count">${steps.length} possible action ${steps.length===1?'link':'links'}${services.length?` · ${services.length} service ${services.length===1?'example':'examples'}`:''}</span></button>`}).join('')}</div><p class="small" style="margin-top:18px">Counts describe recorded links, not deployment, availability or completeness.</p>`;}
+function nodeBox(id,x,y,w,h,centre=false){const n=N[id],words=n.label.split(' '),lines=[];let line='';for(const word of words){if((line+' '+word).trim().length>(centre?23:25)&&line){lines.push(line);line=word}else line=(line+' '+word).trim()}if(line)lines.push(line);return `<g class="node" data-node="${id}" tabindex="0" role="button" aria-label="${esc(n.label)}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="${centre?'#dff1e8':'#f7f9f5'}" stroke="#dce5df"/><text x="${x+w/2}" y="${y+h/2-(lines.length-1)*8}" text-anchor="middle">${lines.slice(0,3).map((l,i)=>`<tspan x="${x+w/2}" dy="${i?16:0}">${esc(l)}</tspan>`).join('')}</text></g>`;}
+function neighbourhood(){const incoming=inc(selected),outgoing=out(selected);const left=[...new Set(incoming.map(e=>e.source))],right=[...new Set(outgoing.map(e=>e.target))];const limit=5,L=left.slice(0,limit),R=right.slice(0,limit),h=Math.max(L.length,R.length,2)*85+50,cy=h/2;let svg=`<svg viewBox="0 0 690 ${h}" aria-label="Immediate connections for ${esc(N[selected].label)}"><text x="115" y="18" text-anchor="middle">References this item</text><text x="575" y="18" text-anchor="middle">This item connects to</text>`;L.forEach((id,i)=>{const y=40+i*85;svg+=`<path d="M 215 ${y+30} C 255 ${y+30}, 240 ${cy}, 260 ${cy}"/>`});R.forEach((id,i)=>{const y=40+i*85;svg+=`<path d="M 430 ${cy} C 470 ${cy}, 435 ${y+30}, 475 ${y+30}"/>`});L.forEach((id,i)=>svg+=nodeBox(id,15,40+i*85,200,60));R.forEach((id,i)=>svg+=nodeBox(id,475,40+i*85,200,60));svg+=nodeBox(selected,260,cy-40,170,80,true)+'</svg>';const all=[...incoming.map(e=>({e,incoming:true})),...outgoing.map(e=>({e,incoming:false}))];return `<div class="network"><div class="eyebrow">Immediate neighbourhood</div><h3>${esc(N[selected].label)}</h3><p class="small">Select a connected item to move through the model.</p>${svg}${left.length>limit||right.length>limit?'<p class="small">The picture shows up to five neighbours on each side. All relationships appear below.</p>':''}<div class="connection-list"><h3>All ${all.length} relationships</h3>${all.map(({e,incoming})=>`<div class="connection-item">${chip(e.source)}<span class="relation">${esc(relation[e.relation]||e.relation)} →</span>${chip(e.target)}${e.condition?`<span class="small">${esc(e.condition)}</span>`:''}${e.status==='illustrative'?'<span class="badge example">Illustrative</span>':(!e.status&&e.origin==='proposed'?'<span class="badge pending">Proposed</span>':'')}<details><summary>Relationship meaning</summary><p>${esc(G.schema.relations[e.relation]?.meaning)}</p><pre>${esc(JSON.stringify(e,null,2))}</pre></details></div>`).join('')||'<p class="small">No relationships recorded.</p>'}</div></div>`;}
+function explore(){const filtered=G.nodes.filter(n=>(typeFilter==='all'||n.type===typeFilter)&&(`${n.label} ${n.description||''} ${n.purpose||''}`).toLowerCase().includes(query.toLowerCase()));return `<div class="section-head"><div class="eyebrow">Explore the underlying model</div><h2>Everything has a connection.</h2><p class="sub">Search the full model, then follow one neighbourhood at a time. Plain-language links explain how the pieces relate.</p></div><div class="toolbar"><div><label for="search">Find anything in the model</label><input id="search" type="search" value="${esc(query)}" placeholder="Try payment, case or decision…"></div><div><label for="type">Show</label><select id="type"><option value="all">All kinds of item</option>${Object.entries(types).map(([k,v])=>`<option value="${k}" ${k===typeFilter?'selected':''}>${esc(v)}</option>`).join('')}</select></div></div><div class="search-area"><div class="catalogue"><div style="padding:12px 16px;border-bottom:1px solid var(--line)"><small>${filtered.length} items</small></div><div class="catalogue-list">${filtered.map(n=>`<button class="${selected===n.id?'active':''}" data-node="${n.id}">${esc(n.label)}<span>${esc(types[n.type])}</span></button>`).join('')||'<div class="empty">No matching items. Try another term.</div>'}</div></div>${neighbourhood()}</div>`;}
+function render(preserveSearch=false){const active=document.activeElement?.id,pos=active==='search'?document.activeElement.selectionStart:null;document.querySelector('.tabs').innerHTML=views.map(([id,num,label])=>`<button class="tab" role="tab" aria-selected="${view===id}" data-view="${id}"><span>${num}</span>${label}</button>`).join('');$('app').innerHTML=`<div class="layout"><section>${({overview,journeys,components,explore}[view])()}</section>${inspector()}</div>`;if(preserveSearch&&active==='search'){$('search').focus();$('search').setSelectionRange(pos,pos)}}
+function selectNode(id){if(!N[id])return;selected=id;render();}
+document.addEventListener('click',e=>{const node=e.target.closest('[data-node]'),tab=e.target.closest('[data-view]'),exp=e.target.closest('[data-explore]'),mode=e.target.closest('[data-mode]');if(node)selectNode(node.dataset.node);else if(tab){view=tab.dataset.view;if(view==='components'&&N[selected].type!=='component')selected='tech_notification';if(view==='journeys')selected=service;render()}else if(exp){view='explore';selected=exp.dataset.explore;query='';typeFilter='all';render()}else if(mode){journeyMode=mode.dataset.mode;render()}});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('g[data-node]')){e.preventDefault();selectNode(e.target.dataset.node)}if(e.key==='Escape')closeModal()});
+document.addEventListener('change',e=>{if(e.target.id==='service'){service=e.target.value;selected=service;render()}if(e.target.id==='type'){typeFilter=e.target.value;render()}});document.addEventListener('input',e=>{if(e.target.id==='search'){query=e.target.value;render(true)}});
+$('version').textContent=`Reference model · v${G.meta.version}`;
+$('about-content').innerHTML=`<p>This presentation is built from the supplied council service knowledge graph, version ${esc(G.meta.version)}. All four views use the same embedded model.</p><div class="fact"><strong>Reference architecture</strong><span>Stages describe the customer experience. Layers describe the support behind it. A journey need not visit every layer.</span></div><div class="fact"><strong>Possible versus required</strong><span>Reusable steps and service types describe possibilities. Named services record their own requirements, subject to their review status.</span></div><div class="fact"><strong>Accepted is different from verified</strong><span>“Accepted into the model” records a modelling decision. “Verified by service owner” records operational confirmation. The two example services are illustrative.</span></div><div class="fact"><strong>Journey limits</strong><span>Ordering is descriptive. Most branches, waits and parallel work are not executable transitions. The explorer does not automate or operate a service.</span></div><h3 style="margin-top:24px">Open decisions in the source</h3><ul>${G.meta.open_questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ul><h3>Sources</h3>${Object.entries(G.meta.sources).map(([k,v])=>`<p class="small"><b>${esc(k.replaceAll('_',' '))}</b><br>${esc(v)}</p>`).join('')}<details><summary>Review-status defaults</summary><p>${esc(G.schema.status.default)}</p></details><button class="action" id="download" style="margin-top:20px">Download the source graph</button>`;
+let previousFocus;function closeModal(){$('modal').hidden=true;previousFocus?.focus()};$('about').onclick=()=>{previousFocus=document.activeElement;$('modal').hidden=false;$('close').focus()};$('close').onclick=closeModal;$('modal').onclick=e=>{if(e.target===$('modal'))closeModal()};$('modal').addEventListener('keydown',e=>{if(e.key==='Tab'){const items=[...$('modal').querySelectorAll('button,summary')].filter(el=>el.getClientRects().length);const first=items[0],last=items.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});$('download').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(G,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='council-service-model-kg-v'+G.meta.version+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+render();
+})();
+</script></body></html>
