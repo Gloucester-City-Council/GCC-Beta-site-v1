@@ -533,6 +533,28 @@ a:focus-visible { color:var(--text) }
           </div>
         </li>
 
+        <li class="elig-item">
+          <span class="elig-mark" aria-hidden="true">✓</span>
+          <div>
+            <span>Passenger seats must meet minimum dimensions</span>
+            <p class="elig-note">Height, knee space, width and seat depth.</p>
+            <details class="govuk-details">
+              <summary>Seat dimensions</summary>
+              <div class="govuk-details-body">
+                <p>Each passenger seat shall be as follows:</p>
+                <ol style="list-style:decimal;padding-left:1.25em;margin-top:var(--sp2)">
+                  <li style="margin-bottom:var(--sp2)"><strong>Height</strong> – from the top of the seat cushion to the roof at the lowest point must not be less than 30 inches (762mm).</li>
+                  <li style="margin-bottom:var(--sp2)"><strong>Knee space</strong> – the measurement between the front of each seat and the rear of the seat in front shall not be less than 10 inches (254mm).</li>
+                  <li style="margin-bottom:var(--sp2)"><strong>Width</strong> – the width of each passenger seat from side to side shall not be less than 16 inches (406mm). A seat designed for more than one passenger such as a rear seat must allow a width of 16 inches (406mm) for each passenger permitted.</li>
+                  <li style="margin-bottom:var(--sp2)"><strong>Depth</strong> – the measurement of a seat cushion between the front and back shall not be less than 18 inches (457mm).</li>
+                  <li style="margin-bottom:var(--sp2)">Dimensions for knee space and seat depth may be considered together subject to the approval of a Licensing Officer.</li>
+                </ol>
+                <p id="seat-ph-exemption" style="display:none">Occasional use fold down seats in purpose built wheelchair accessible vehicles are exempt from the seat dimension requirements listed above.</p>
+              </div>
+            </details>
+          </div>
+        </li>
+
       </ul>
 
       <!-- HC specific — outside ul so borders don't conflict with hidden PH items -->
@@ -789,6 +811,7 @@ function render(){
     // Eligibility — HC specific
     show('elig-hc-items'); hide('elig-ph-items');
     show('ownership-hc-item'); show('v5-hc'); hide('v5-ph');
+    hide('seat-ph-exemption');
   } else {
     // Insurance
     hide('ins-new-hc'); show('ins-new-ph');
@@ -802,6 +825,7 @@ function render(){
     // Eligibility — PH specific
     hide('elig-hc-items'); show('elig-ph-items');
     show('ownership-hc-item'); hide('v5-hc'); show('v5-ph');
+    show('seat-ph-exemption');
   }
 }
 
