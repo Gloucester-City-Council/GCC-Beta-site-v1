@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Part-time bank holiday entitlement calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Literata:opsz,wght@7..72,500..700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#EDF0EC;--ink:#17262B;--muted:#4A5B58;--rule:#C3CCC6;
+  --field:#FFFFFF;--line:#5E706C;--link:#0F5C5C;
+  --btn-bg:#0F5C5C;--btn-ink:#FFFFFF;--focus:#0B4F9C;
+  --tint:#DCE8E3;--mark:#0F5C5C;
+  --panel:#0F5C5C;--panel-ink:#FFFFFF;--panel-muted:#D3E8E6;
+  --warn-bg:#FBEAE7;--warn:#8A1F11;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#121C1D;--ink:#E8EFEC;--muted:#A9B9B5;--rule:#2F3E3E;
+    --field:#0C1415;--line:#8AA09B;--link:#6FD0C8;
+    --btn-bg:#6FD0C8;--btn-ink:#06201F;--focus:#FFD54A;
+    --tint:#1E3333;--mark:#6FD0C8;
+    --panel:#0F4A4A;--panel-ink:#FFFFFF;--panel-muted:#BFDAD6;
+    --warn-bg:#3A1713;--warn:#FFB4A8;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#121C1D;--ink:#E8EFEC;--muted:#A9B9B5;--rule:#2F3E3E;
+  --field:#0C1415;--line:#8AA09B;--link:#6FD0C8;
+  --btn-bg:#6FD0C8;--btn-ink:#06201F;--focus:#FFD54A;
+  --tint:#1E3333;--mark:#6FD0C8;
+  --panel:#0F4A4A;--panel-ink:#FFFFFF;--panel-muted:#BFDAD6;
+  --warn-bg:#3A1713;--warn:#FFB4A8;
+}
+
+*,*::before,*::after{box-sizing:inherit}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:1.0625rem/1.55 "Atkinson Hyperlegible",Verdana,system-ui,sans-serif}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+
+.wrap{max-width:68rem;margin:0 auto;padding:clamp(1rem,4vw,2.5rem)}
+
+h1,h2,h3{font-family:Literata,Georgia,"Times New Roman",serif;line-height:1.2;margin:0}
+h1{font-size:clamp(1.75rem,1.2rem + 2.4vw,2.6rem);font-weight:700;letter-spacing:-.01em;max-width:24ch}
+h2{font-size:1.4rem;font-weight:600}
+h3{font-size:1.1rem;font-weight:600;margin:1.5rem 0 .35rem}
+p{margin:.5rem 0}
+.lede{max-width:44rem;font-size:1.125rem;margin-top:.9rem}
+.meta{color:var(--muted);margin-top:.9rem}
+.note{color:var(--muted);font-size:.95rem;max-width:40rem}
+
+a,.link{color:var(--link)}
+.link{background:none;border:0;padding:.25rem .1rem;font:inherit;text-decoration:underline;cursor:pointer;min-height:24px}
+
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+.grid{max-width:46rem;margin-top:2rem}
+
+.sec{border-top:2px solid var(--ink);padding:1.25rem 0 2rem}
+
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;font-weight:700;margin-bottom:.4rem}
+.field{margin:1rem 0}
+.field label{display:block;font-weight:700;margin-bottom:.25rem}
+.help{color:var(--muted);font-size:.95rem;margin:0 0 .4rem}
+input[type=text],input[type=date],select{
+  font:inherit;color:var(--ink);background:var(--field);
+  border:2px solid var(--line);border-radius:6px;
+  min-height:2.75rem;padding:.4rem .7rem;width:100%;max-width:11rem;
+}
+select{max-width:16rem}
+#year{max-width:min(100%,34rem)}
+#sday{max-width:6rem}
+#smonth{max-width:12rem}
+input[type=date]{max-width:13rem}
+input[type=text].wide{max-width:20rem}
+input[aria-invalid="true"]{border-color:var(--warn);box-shadow:0 0 0 1px var(--warn)}
+input[type=checkbox],input[type=radio]{width:1.4rem;height:1.4rem;accent-color:var(--link);margin:0}
+.err{color:var(--warn);font-weight:700;margin:.35rem 0 0}
+.warnbox{background:var(--warn-bg);border-left:4px solid var(--warn);padding:.5rem .8rem;margin:.75rem 0}
+
+.radios{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
+.radios label{display:flex;align-items:center;gap:.5rem;min-height:2.75rem;cursor:pointer}
+
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(4.4rem,1fr));gap:.75rem .6rem;max-width:36rem}
+.days .field{margin:0}
+.days input{max-width:none}
+.total{margin:.75rem 0 0}
+
+.ft{margin-top:1.5rem;padding-top:.25rem;border-top:1px solid var(--rule)}
+.ft .pair{display:flex;flex-wrap:wrap;gap:0 2rem}
+.ft .field{margin:.5rem 0}
+
+.btn{font:inherit;font-weight:700;min-height:2.75rem;padding:0 1.1rem;border-radius:6px;cursor:pointer;
+  background:var(--btn-bg);color:var(--btn-ink);border:2px solid var(--btn-bg)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:.6rem;margin:.75rem 0}
+
+/* Result panel */
+.panel{background:var(--panel);color:var(--panel-ink);border-radius:10px;padding:1.5rem;margin:1.25rem 0 2rem}
+.panel h2{font-size:1.05rem;font-weight:600;color:var(--panel-muted)}
+.figure{font:700 clamp(3.25rem,9vw,4.75rem)/1 Literata,Georgia,serif;font-variant-numeric:lining-nums tabular-nums;margin:.6rem 0 0;overflow-wrap:anywhere}
+.figure .unit{font:400 1.2rem/1 "Atkinson Hyperlegible",Verdana,system-ui,sans-serif;margin-left:.4rem}
+.panel .eq{color:var(--panel-muted);margin:.5rem 0 0}
+.panel .formula{margin:.9rem 0 0;font-size:1rem}
+.facts{margin:1rem 0 0;padding:0}
+.facts div{display:flex;justify-content:space-between;gap:1rem;padding:.45rem 0;border-top:1px solid rgba(255,255,255,.3)}
+.facts dt{color:var(--panel-muted)}
+.facts dd{margin:0;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.panel h3{font-size:1rem;margin:1.25rem 0 0;color:var(--panel-ink)}
+.panel .btn{background:#FFFFFF;color:var(--panel);border-color:#FFFFFF}
+.panel .btn.ghost{background:transparent;color:#FFFFFF;border-color:#FFFFFF}
+.panel :focus-visible{outline-color:#FFD54A}
+.panel .row{margin-top:1.25rem}
+.panel textarea{width:100%;min-height:9rem;margin-top:.75rem;font:.9rem/1.4 ui-monospace,Menlo,Consolas,monospace;background:#FFFFFF;color:#17262B;border:2px solid #FFFFFF;border-radius:6px;padding:.5rem}
+.copystat{color:var(--panel-muted);margin:.6rem 0 0;min-height:1.5rem}
+.hint{margin:.75rem 0 0}
+
+/* Holiday table */
+.tablewrap{overflow-x:auto;margin:.75rem 0 .5rem}
+table{border-collapse:collapse;width:100%;min-width:19rem}
+th{text-align:left;font-size:.95rem;padding:.4rem .5rem;border-bottom:2px solid var(--ink)}
+td{padding:.35rem .5rem;border-bottom:1px solid var(--rule);vertical-align:middle}
+td.chk{width:3rem;text-align:center}
+td label{display:block;cursor:pointer;padding:.2rem 0}
+.hname{display:block;font-weight:700}
+.hdate,.hnote{display:block;color:var(--muted)}
+td.book{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+th.col-book{text-align:right}
+table[data-pattern="off"] .col-book{display:none}
+tr.off .hname{font-weight:400}
+
+details{margin:1rem 0}
+summary{min-height:2.75rem;display:flex;align-items:center;cursor:pointer;font-weight:700}
+.two{display:flex;flex-wrap:wrap;gap:0 2rem}
+.addbox{margin-top:1rem;padding-top:.5rem;border-top:1px solid var(--rule)}
+
+/* Weekday strip */
+.strip{display:grid;grid-template-columns:repeat(var(--cols,5),minmax(0,1fr));gap:.5rem;align-items:end;margin:1.25rem 0 .5rem;max-width:36rem}
+.dcol{display:flex;flex-direction:column;align-items:center;padding:.5rem .25rem;border-radius:6px;text-align:center}
+.dcol.works{background:var(--tint)}
+.stack{display:flex;flex-direction:column-reverse;align-items:center;gap:.35rem;width:100%}
+.sq{display:block;width:70%;max-width:3.2rem;height:1.1rem;border-radius:3px;background:var(--mark);border:2px solid var(--mark)}
+.sq.hollow{background:transparent}
+.dn{font-weight:700;margin-top:.5rem}
+.dc{font:700 1.5rem/1.1 Literata,Georgia,serif;font-variant-numeric:lining-nums}
+.dh{font-size:.9rem;color:var(--muted);min-height:1.3rem}
+
+/* Explanation */
+.how{border-top:2px solid var(--ink);padding:1.25rem 0 1rem;margin-top:1rem}
+.how .cols{max-width:42rem}
+.how p{max-width:42rem}
+footer{border-top:1px solid var(--rule);padding-top:1rem;margin-top:1.5rem}
+
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:.6rem 1rem calc(.6rem + env(safe-area-inset-bottom,0px));background:var(--panel);color:var(--panel-ink)}
+.bar .barv{margin:0}
+.bar strong{font:700 1.4rem/1 Literata,Georgia,serif;font-variant-numeric:lining-nums tabular-nums;margin-left:.4rem}
+.bar .btn{background:#FFFFFF;color:var(--panel);border-color:#FFFFFF}
+.bar :focus-visible{outline-color:#FFD54A}
+.wrap{padding-bottom:5.5rem}
+#patNudge{margin:1rem 0 0}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Part-time bank holiday entitlement</h1>
+  <p class="lede">Bank holidays land on Mondays and Fridays far more often than on other days, so counting only the ones an employee misses treats part-time staff unevenly. This works out a pro-rata entitlement in hours first, then shows where each bank holiday falls in their week.</p>
+  <p class="meta" id="sub"></p>
+  <noscript><p class="warnbox">This calculator needs JavaScript to run.</p></noscript>
+</header>
+
+<main class="grid">
+
+  <section class="sec hours" aria-labelledby="h-hours">
+    <h2 id="h-hours">1. Enter the working hours</h2>
+
+    <fieldset class="field">
+      <legend>How do you want to enter the employee’s contracted hours?</legend>
+      <div class="radios">
+        <label><input type="radio" name="mode" value="weekly" checked> A weekly total</label>
+        <label><input type="radio" name="mode" value="days"> Hours on each day</label>
+      </div>
+    </fieldset>
+
+    <div id="weeklyBox" class="field">
+      <label for="weekly">Contracted hours per week</label>
+      <input id="weekly" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="22.5" aria-describedby="weekly-err">
+      <p class="err" id="weekly-err" hidden></p>
+    </div>
+
+    <div id="daysBox" hidden>
+      <fieldset class="field">
+        <legend>Hours on each day</legend>
+        <p class="help">Leave a day blank if the employee does not work it.</p>
+        <div class="days" id="dayfields"></div>
+        <p class="err" id="days-err" hidden></p>
+        <p class="total">Total hours per week <strong id="daysTotal">0</strong></p>
+      </fieldset>
+    </div>
+
+    <p class="warnbox" id="ratioWarn" hidden>The contracted hours are more than the full-time hours. Check both figures.</p>
+
+    <details class="ft" id="ftBox">
+      <summary id="ftSum">Full-time week</summary>
+      <div class="pair">
+        <div class="field">
+          <label for="ft">Full-time hours per week</label>
+          <input id="ft" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="37" aria-describedby="ft-err">
+          <p class="err" id="ft-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="dayh">Full-time hours in one day</label>
+          <p class="help" id="dayh-help">Starts as a fifth of the full-time week.</p>
+          <input id="dayh" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="dayh-help dayh-err">
+          <p class="err" id="dayh-err" hidden></p>
+          <button type="button" class="link" id="dayAuto" hidden>Use a fifth of the full-time week</button>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="sec holidays" aria-labelledby="h-hol">
+    <h2 id="h-hol">2. Choose the leave year and bank holidays</h2>
+    <p class="note">Every bank holiday in the leave year starts ticked. Untick any that do not apply.</p>
+    <fieldset class="field">
+      <legend>When does the leave year start?</legend>
+      <div class="two">
+        <div class="field">
+          <label for="sday">Day</label>
+          <select id="sday"></select>
+        </div>
+        <div class="field">
+          <label for="smonth">Month</label>
+          <select id="smonth"></select>
+        </div>
+      </div>
+      <p class="help">Common starts
+        <button type="button" class="link" data-start="1-4">1 April</button>
+        <button type="button" class="link" data-start="1-1">1 January</button>
+        <button type="button" class="link" data-start="1-9">1 September</button>
+      </p>
+    </fieldset>
+    <div class="field">
+      <label for="year">Leave year</label>
+      <select id="year"></select>
+    </div>
+    <p class="note" id="yearNote"></p>
+    <p class="note" id="dataNote"></p>
+
+    <div class="tablewrap" role="region" aria-labelledby="h-hol" tabindex="0">
+      <table id="tbl" data-pattern="off">
+        <caption class="sr">Bank holidays in the leave year. Tick the ones that apply.</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="chk"><span class="sr">Include</span></th>
+            <th scope="col">Bank holiday</th>
+            <th scope="col" class="col-book">Hours to book</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <button type="button" class="btn ghost" id="selAll">Select all</button>
+      <button type="button" class="btn ghost" id="clrAll">Clear</button>
+    </div>
+
+    <details>
+      <summary>Joiners, leavers and one-off bank holidays</summary>
+      <div class="two">
+        <div class="field">
+          <label for="from">Employment starts</label>
+          <input id="from" type="date">
+        </div>
+        <div class="field">
+          <label for="to">Employment ends</label>
+          <input id="to" type="date">
+        </div>
+      </div>
+      <p class="note">Bank holidays outside these dates are not counted. The HR policy decides how joiners and leavers are treated.</p>
+      <p class="err" id="range-err" hidden></p>
+
+      <fieldset class="addbox">
+        <legend>Add a one-off bank holiday</legend>
+        <div class="two">
+          <div class="field">
+            <label for="cname">Name (optional)</label>
+            <input id="cname" type="text" class="wide" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="cdate">Date</label>
+            <input id="cdate" type="date" aria-describedby="add-err">
+          </div>
+        </div>
+        <p class="err" id="add-err" hidden></p>
+        <button type="button" class="btn ghost" id="addBtn">Add bank holiday</button>
+      </fieldset>
+    </details>
+  </section>
+
+  <section class="panel result" id="result" aria-labelledby="h-result">
+    <h2 id="h-result" tabindex="-1">3. Pro-rata bank holiday entitlement</h2>
+    <p class="figure"><span id="ent">—</span><span class="unit">hours</span></p>
+    <p class="hint" id="hint" hidden></p>
+    <div id="resultBody">
+      <p class="eq" id="eq"></p>
+      <p class="formula" id="formula"></p>
+      <dl class="facts">
+        <div><dt>Share of full-time (FTE)</dt><dd id="fte"></dd></div>
+        <div><dt>Bank holidays counted</dt><dd id="count"></dd></div>
+        <div><dt>Worth of each bank holiday</dt><dd id="each"></dd></div>
+      </dl>
+      <p id="patNudge"><button type="button" class="btn ghost" id="toPattern">Show how this lands on their working days</button></p>
+      <div id="bookBox" hidden>
+        <h3>On the days they work</h3>
+        <dl class="facts">
+          <div><dt>Booked on bank holidays that fall on a working day</dt><dd><span id="bookedV"></span></dd></div>
+          <div><dt id="leftLabel">Left in the entitlement</dt><dd id="leftV"></dd></div>
+        </dl>
+        <p class="eq" id="bookedN"></p>
+        <p class="eq" id="overNote" hidden>The HR policy decides how this difference is met.</p>
+      </div>
+    </div>
+    <div class="row">
+      <button type="button" class="btn" id="copy">Copy summary</button>
+      <button type="button" class="btn ghost" id="reset">Reset</button>
+    </div>
+    <p class="copystat" id="copystat" role="status"></p>
+    <textarea id="fallback" readonly hidden aria-label="Summary to copy"></textarea>
+    <p class="sr" id="live" role="status" aria-atomic="true"></p>
+  </section>
+
+  <section class="sec insight" aria-labelledby="h-fall">
+    <h2 id="h-fall">Where the bank holidays fall in the week</h2>
+    <p id="fallText"></p>
+    <div class="strip" id="strip" aria-hidden="true"></div>
+    <p class="note" id="legend"></p>
+  </section>
+
+</main>
+
+<section class="how" aria-labelledby="h-how">
+  <h2 id="h-how">How the calculation works</h2>
+  <div class="cols">
+    <h3>Why the entitlement comes first</h3>
+    <p id="gWhy"></p>
+
+    <h3>The calculation</h3>
+    <p>Number of bank holidays × full-time hours in a day × FTE. FTE is the contracted hours divided by the full-time hours. The calculation uses the exact FTE and rounds only the answer, to two decimal places.</p>
+    <p id="gEx"></p>
+
+    <h3>When a bank holiday arrives</h3>
+    <p>Where entitlement works as an hours allowance, an employee books the hours they would normally have worked if the bank holiday falls on a working day. If it falls on a day off, they book nothing. Whatever is left stays in their allowance, subject to the council’s leave rules. Choose “Hours on each day” to see this for a working pattern.</p>
+
+    <h3>Why you choose the bank holidays</h3>
+    <p id="gChoose"></p>
+
+    <h3>What this tool does not decide</h3>
+    <p>It calculates pro-rata entitlement. It does not set Gloucester City Council’s contractual or HR rules. Recording, rounding, remaining hours, joiners and leavers, and changes to contracted hours are for the HR policy and the employee’s terms to settle.</p>
+  </div>
+  <footer>
+    <p class="note">Based on GOV.UK holiday entitlement guidance and ACAS bank holiday guidance. Dates come from the GOV.UK bank holiday calendar for England and Wales, checked on 26 November 2026.</p>
+  </footer>
+</section>
+
+</div>
+
+<div class="bar" id="bar">
+  <p class="barv"><span>Entitlement</span> <strong id="barV">—</strong></p>
+  <button type="button" class="btn" id="barGo">See result</button>
+</div>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const DAYN=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const SHORT=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+const pad=x=>String(x).padStart(2,'0');
+const COV_START='2019-01-01',COV_END='2028-12-31';
+/* England and Wales bank holidays from the GOV.UK calendar. A third value of 1 marks a one-off. */
+const ALL=[
+['2019-01-01','New Year’s Day'],['2019-04-19','Good Friday'],['2019-04-22','Easter Monday'],['2019-05-06','Early May bank holiday'],['2019-05-27','Spring bank holiday'],['2019-08-26','Summer bank holiday'],['2019-12-25','Christmas Day'],['2019-12-26','Boxing Day'],
+['2020-01-01','New Year’s Day'],['2020-04-10','Good Friday'],['2020-04-13','Easter Monday'],['2020-05-08','Early May bank holiday (VE day)'],['2020-05-25','Spring bank holiday'],['2020-08-31','Summer bank holiday'],['2020-12-25','Christmas Day'],['2020-12-28','Boxing Day (substitute day)'],
+['2021-01-01','New Year’s Day'],['2021-04-02','Good Friday'],['2021-04-05','Easter Monday'],['2021-05-03','Early May bank holiday'],['2021-05-31','Spring bank holiday'],['2021-08-30','Summer bank holiday'],['2021-12-27','Christmas Day (substitute day)'],['2021-12-28','Boxing Day (substitute day)'],
+['2022-01-03','New Year’s Day (substitute day)'],['2022-04-15','Good Friday'],['2022-04-18','Easter Monday'],['2022-05-02','Early May bank holiday'],['2022-06-02','Spring bank holiday'],['2022-06-03','Platinum Jubilee bank holiday',1],['2022-08-29','Summer bank holiday'],['2022-09-19','Bank Holiday for the State Funeral of Queen Elizabeth II',1],['2022-12-26','Boxing Day'],['2022-12-27','Christmas Day (substitute day)'],
+['2023-01-02','New Year’s Day (substitute day)'],['2023-04-07','Good Friday'],['2023-04-10','Easter Monday'],['2023-05-01','Early May bank holiday'],['2023-05-08','Bank holiday for the coronation of King Charles III',1],['2023-05-29','Spring bank holiday'],['2023-08-28','Summer bank holiday'],['2023-12-25','Christmas Day'],['2023-12-26','Boxing Day'],
+['2024-01-01','New Year’s Day'],['2024-03-29','Good Friday'],['2024-04-01','Easter Monday'],['2024-05-06','Early May bank holiday'],['2024-05-27','Spring bank holiday'],['2024-08-26','Summer bank holiday'],['2024-12-25','Christmas Day'],['2024-12-26','Boxing Day'],
+['2025-01-01','New Year’s Day'],['2025-04-18','Good Friday'],['2025-04-21','Easter Monday'],['2025-05-05','Early May bank holiday'],['2025-05-26','Spring bank holiday'],['2025-08-25','Summer bank holiday'],['2025-12-25','Christmas Day'],['2025-12-26','Boxing Day'],
+['2026-01-01','New Year’s Day'],['2026-04-03','Good Friday'],['2026-04-06','Easter Monday'],['2026-05-04','Early May bank holiday'],['2026-05-25','Spring bank holiday'],['2026-08-31','Summer bank holiday'],['2026-12-25','Christmas Day'],['2026-12-28','Boxing Day (substitute day)'],
+['2027-01-01','New Year’s Day'],['2027-03-26','Good Friday'],['2027-03-29','Easter Monday'],['2027-05-03','Early May bank holiday'],['2027-05-31','Spring bank holiday'],['2027-08-30','Summer bank holiday'],['2027-12-27','Christmas Day (substitute day)'],['2027-12-28','Boxing Day (substitute day)'],
+['2028-01-03','New Year’s Day (substitute day)'],['2028-04-14','Good Friday'],['2028-04-17','Easter Monday'],['2028-05-01','Early May bank holiday'],['2028-05-29','Spring bank holiday'],['2028-08-28','Summer bank holiday'],['2028-12-25','Christmas Day'],['2028-12-26','Boxing Day']
+];
+function addDays(iso,n){const p=parts(iso),d=new Date(Date.UTC(p.y,p.m-1,p.d+n));return d.getUTCFullYear()+'-'+pad(d.getUTCMonth()+1)+'-'+pad(d.getUTCDate())}
+function makeNote(hol){
+  const n=hol.length;
+  const gf=hol.filter(h=>h[0]==='Good Friday').map(h=>h[1]);
+  const em=hol.filter(h=>h[0]==='Easter Monday').map(h=>h[1]);
+  const full=gf.filter(g=>em.indexOf(addDays(g,3))>-1).length;
+  let s='This leave year holds '+plural(n,'bank holiday','bank holidays')+'. ';
+  if(gf.length+em.length===0)s+='No Easter bank holiday falls inside it.';
+  else if(full===gf.length&&full===em.length)s+=(full===1?'One Easter weekend falls':'Two Easter weekends fall')+' inside it, with Good Friday on '+listJoin(gf.map(plainDate),'and')+'.';
+  else s+='Easter is split across leave years. It holds '+(gf.length?plural(gf.length,'Good Friday','Good Fridays'):'no Good Friday')+' and '+(em.length?plural(em.length,'Easter Monday','Easter Mondays'):'no Easter Monday')+', because the leave year starts or ends between Good Friday and Easter Monday.';
+  hol.filter(h=>h[2]).forEach(h=>{s+=' It includes a one-off bank holiday on '+plainDate(h[1])+' ('+h[0]+').'});
+  return s;
+}
+function windowFor(startISO){
+  const p=parts(startISO);
+  const end=addDays((p.y+1)+'-'+pad(p.m)+'-'+pad(p.d),-1);
+  const hol=ALL.filter(h=>h[0]>=startISO&&h[0]<=end).map(h=>[h[1],h[0],!!h[2]]);
+  return{key:startISO,start:startISO,end:end,label:plainDate(startISO)+' to '+plainDate(end),holidays:hol,note:makeNote(hol)};
+}
+
+const state={year:'',day:1,month:4,off:new Set(),custom:{},touched:false};
+const cur=()=>windowFor(state.year);
+const cust=()=>state.custom[state.year]||(state.custom[state.year]=[]);
+let last=null,liveTimer=null;
+
+/* dates */
+function parts(iso){const a=iso.split('-').map(Number);return{y:a[0],m:a[1],d:a[2]}}
+function wd(iso){const p=parts(iso);return (new Date(Date.UTC(p.y,p.m-1,p.d)).getUTCDay()+6)%7}
+function plainDate(iso){const p=parts(iso);return p.d+' '+MON[p.m-1]+' '+p.y}
+function longDate(iso){return DAYN[wd(iso)]+' '+plainDate(iso)}
+
+/* numbers and text */
+const trim2=x=>String(+x.toFixed(2));
+const h2=x=>x.toFixed(2);
+const plural=(n,s,p)=>n+' '+(n===1?s:p);
+function listJoin(a,conj){return a.length<2?a.join(''):a.slice(0,-1).join(', ')+' '+conj+' '+a[a.length-1]}
+function num(el){
+  const s=el.value.trim().replace(',','.');
+  if(s==='')return{empty:true,bad:false,v:0};
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(s))return{empty:false,bad:true,v:NaN};
+  return{empty:false,bad:false,v:parseFloat(s)};
+}
+function setErr(inputId,errId,msg){
+  const e=$(errId);e.hidden=!msg;e.textContent=msg?'Error: '+msg:'';
+  if(inputId)$(inputId).setAttribute('aria-invalid',msg?'true':'false');
+}
+function announce(msg,delay){
+  clearTimeout(liveTimer);
+  liveTimer=setTimeout(()=>{$('live').textContent=msg},delay||0);
+}
+
+/* holidays */
+function items(){
+  const base=cur().holidays.map(a=>({id:'h'+a[1],name:a[0],date:a[1],custom:false}));
+  return base.concat(cust()).sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
+}
+function range(){
+  const f=$('from').value,t=$('to').value;
+  if(f&&t&&f>t)return{bad:true,from:'',to:''};
+  return{bad:false,from:f,to:t};
+}
+const inRange=(d,r)=>(!r.from||d>=r.from)&&(!r.to||d<=r.to);
+
+function buildTable(){
+  const body=$('tbody');body.innerHTML='';
+  items().forEach(h=>{
+    const tr=document.createElement('tr');
+    tr.dataset.id=h.id;tr.dataset.date=h.date;tr.dataset.wd=wd(h.date);tr.dataset.name=h.name;
+    tr.innerHTML='<td class="chk"><input type="checkbox" class="bh"></td>'+
+      '<td><label><span class="hname"></span><span class="hdate"></span><span class="hnote"></span></label></td>'+
+      '<td class="book"></td>';
+    const cb=tr.querySelector('.bh');cb.id='c-'+h.id;cb.dataset.id=h.id;
+    tr.querySelector('label').setAttribute('for',cb.id);
+    tr.querySelector('.hname').textContent=h.name+(h.custom?' (one-off)':'');
+    tr.querySelector('.hdate').textContent=longDate(h.date);
+    if(h.custom){
+      const b=document.createElement('button');
+      b.type='button';b.className='link';b.dataset.remove=h.id;
+      b.innerHTML='Remove<span class="sr"></span>';
+      b.querySelector('.sr').textContent=' '+h.name+', '+plainDate(h.date);
+      tr.children[1].appendChild(b);
+    }
+    body.appendChild(tr);
+  });
+}
+
+function buildDayFields(){
+  $('dayfields').innerHTML=SHORT.map((s,i)=>
+    '<div class="field"><label for="d'+i+'"><span aria-hidden="true">'+s+'</span><span class="sr">'+DAYN[i]+' hours</span></label>'+
+    '<input id="d'+i+'" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></div>').join('');
+}
+
+function weekdaySentence(cn,n,counted){
+  const nz=cn.map((v,i)=>[v,i]).filter(x=>x[0]>0);
+  const noun=counted?'bank holidays counted':'bank holidays';
+  if(n===0)return counted?'No bank holidays are counted.':'No bank holidays are listed.';
+  let t;
+  if(n===1)t=(counted?'The one bank holiday counted':'The one bank holiday')+' falls on a '+DAYN[nz[0][1]]+'.';
+  else if(nz.length===1)t='All '+n+' '+noun+' fall on a '+DAYN[nz[0][1]]+'.';
+  else t='Of the '+n+' '+noun+', '+listJoin(nz.map((x,k)=>k===0?x[0]+(x[0]===1?' falls':' fall')+' on a '+DAYN[x[1]]:x[0]+' on a '+DAYN[x[1]]),'and')+'.';
+  const zero=[0,1,2,3,4].filter(i=>cn[i]===0).map(i=>DAYN[i]);
+  if(n>1&&zero.length>0)t+=' None fall on a '+listJoin(zero,'or')+'.';
+  return t;
+}
+
+/* guidance that follows the leave year */
+function renderGuide(){
+  const y=cur(),n=y.holidays.length,cn=[0,0,0,0,0,0,0];
+  y.holidays.forEach(h=>cn[wd(h[1])]++);
+  let top=0,low=0;
+  for(let i=0;i<5;i++){if(cn[i]>cn[top])top=i;if(cn[i]<cn[low])low=i}
+  const s=weekdaySentence(cn,n,false);
+  const gap=cn[top]===cn[low]
+    ?'If entitlement followed the days an employee misses, people on the same contract could get different amounts depending on which days they work.'
+    :'If entitlement followed the days an employee misses, a '+DAYN[top]+' worker and a '+DAYN[low]+' worker on the same contract would get very different amounts.';
+  $('gWhy').textContent='In the leave year '+y.label+', '+s.charAt(0).toLowerCase()+s.slice(1)+' '+gap+' So the calculation works out a pro-rata entitlement for the contract first, and the working pattern comes second.';
+  const ex=n*7.4*22.5/37;
+  $('gEx').textContent='For example, 22.5 hours against a 37 hour week is 60.81% FTE. With '+n+' bank holidays in this leave year and a 7.4 hour day, that is '+n+' × 7.4 × 60.81% = '+ex.toFixed(2)+' hours.';
+  $('gChoose').textContent='A leave year does not always hold the same number of bank holidays. '+y.note+' Extra bank holidays can also be announced. Untick the holidays that do not apply, or add a one-off date.';
+}
+
+/* main update */
+function update(live){
+  const pat=document.querySelector('input[name=mode]:checked').value==='days';
+  $('weeklyBox').hidden=pat;$('daysBox').hidden=!pat;
+  $('tbl').dataset.pattern=pat?'on':'off';
+  let errs=0;
+
+  const ftR=num($('ft'));
+  const ftOK=!(ftR.bad||ftR.empty||ftR.v<=0||ftR.v>168);
+  setErr('ft','ft-err',ftOK?'':'Enter the full-time hours in a week, for example 37.');
+  if(!ftOK)errs++;
+
+  if(!state.touched)$('dayh').value=ftOK?trim2(ftR.v/5):'';
+  $('dayAuto').hidden=!state.touched;
+  const dR=num($('dayh'));
+  const dOK=!(dR.bad||dR.empty||dR.v<=0||dR.v>24);
+  setErr('dayh','dayh-err',dOK?'':'Enter the full-time hours in one day, for example 7.4.');
+  if(!dOK)errs++;
+  $('ftSum').textContent='Full-time week is '+(ftOK?trim2(ftR.v):'not set')+' hours, '+(dOK?trim2(dR.v):'not set')+' in a day. Change these';
+  if(!ftOK||!dOK)$('ftBox').open=true;
+
+  let c=0,cOK=true;const dayHrs=[0,0,0,0,0,0,0];
+  if(!pat){
+    const w=num($('weekly'));
+    cOK=!(w.bad||w.empty||w.v>168);
+    setErr('weekly','weekly-err',cOK?'':(w.empty?'Enter the employee’s hours per week, for example 22.5.':'Enter hours as a number up to 168, for example 22.5.'));
+    if(cOK)c=w.v;else errs++;
+  }else{
+    let bad=false;
+    for(let i=0;i<7;i++){
+      const el=$('d'+i),r=num(el),b=r.bad||r.v>24;
+      el.setAttribute('aria-invalid',b?'true':'false');
+      if(b)bad=true;else dayHrs[i]=r.v;
+    }
+    setErr(null,'days-err',bad?'Enter each day as a number between 0 and 24, for example 7.5.':'');
+    cOK=!bad;if(bad)errs++;
+    c=dayHrs.reduce((a,b)=>a+b,0);
+    $('daysTotal').textContent=trim2(c);
+  }
+
+  const ratio=(ftOK&&cOK)?c/ftR.v:NaN;
+  $('ratioWarn').hidden=!(ratio>1);
+  const incomplete=pat&&cOK&&c===0;
+  const valid=errs===0&&!incomplete;
+
+  /* rows */
+  const r=range();
+  $('range-err').hidden=!r.bad;
+  $('range-err').textContent=r.bad?'Error: The employment end date is before the start date. Check both dates.':'';
+  const counted=[];
+  Array.from($('tbody').rows).forEach(tr=>{
+    const id=tr.dataset.id,date=tr.dataset.date,w=+tr.dataset.wd;
+    const cb=tr.querySelector('.bh');
+    const inr=inRange(date,r),on=!state.off.has(id),cnt=on&&inr;
+    if(cb.checked!==on)cb.checked=on;
+    cb.disabled=!inr;
+    tr.classList.toggle('off',!cnt);
+    tr.querySelector('.hnote').textContent=inr?'':'Outside the employment dates';
+    const cell=tr.querySelector('.book');
+    if(!cnt)cell.textContent='Not counted';
+    else cell.textContent=dayHrs[w]>0?trim2(dayHrs[w])+' hours':'Day off';
+    if(cnt)counted.push({wd:w,date:date,name:tr.dataset.name,hrs:dayHrs[w]});
+  });
+  const n=counted.length;
+
+  /* result */
+  const dayh=dR.v;
+  const per=valid?dayh*ratio:NaN;
+  const ent=valid?n*per:NaN;
+  const fteTxt=valid?(ratio*100).toFixed(2)+'%':'';
+  let booked=0,bookedN=0,left=0;
+
+  $('patNudge').hidden=pat;
+  $('barV').textContent=valid?h2(ent)+' hours':'Check the fields';
+  $('resultBody').hidden=!valid;
+  $('hint').hidden=valid;
+  if(valid){
+    $('ent').textContent=h2(ent);
+    $('eq').textContent='Equal to '+h2(ent/dayh)+' full-time days of '+trim2(dayh)+' hours.';
+    $('formula').textContent=plural(n,'bank holiday','bank holidays')+' × '+trim2(dayh)+' hours × '+fteTxt+' FTE = '+h2(ent)+' hours';
+    $('fte').textContent=fteTxt;
+    $('count').textContent=n;
+    $('each').textContent=h2(per)+' hours';
+    $('bookBox').hidden=!pat;
+    if(pat){
+      counted.forEach(x=>{booked+=x.hrs;if(x.hrs>0)bookedN++});
+      left=ent-booked;if(Math.abs(left)<0.005)left=0;
+      $('bookedV').textContent=h2(booked)+' hours';
+      $('bookedN').textContent=bookedN===0?'None of the counted bank holidays fall on a day they work.':plural(bookedN,'bank holiday falls','bank holidays fall')+' on a day they work.';
+      $('leftLabel').textContent=left>=0?'Left in the entitlement':'Over the entitlement by';
+      $('leftV').textContent=h2(Math.abs(left))+' hours';
+      $('overNote').hidden=left>=0;
+    }
+  }else{
+    $('ent').textContent='—';
+    $('hint').textContent=errs>0?'Fix the fields marked with an error to see the result.':'Enter the hours they work on each day to see the result.';
+  }
+
+  /* weekday strip */
+  const cn=[0,0,0,0,0,0,0];counted.forEach(x=>cn[x.wd]++);
+  const show=[0,1,2,3,4];
+  [5,6].forEach(i=>{if(cn[i]>0||(pat&&dayHrs[i]>0))show.push(i)});
+  const max=Math.max(1,...cn);
+  const strip=$('strip');
+  strip.style.setProperty('--cols',show.length);
+  strip.innerHTML=show.map(i=>{
+    const works=pat&&dayHrs[i]>0;
+    let sq='';for(let k=0;k<cn[i];k++)sq+='<span class="sq'+((pat&&!works)?' hollow':'')+'"></span>';
+    return '<div class="dcol'+(works?' works':'')+'"><div class="stack" style="height:'+(max*1.45)+'rem">'+sq+'</div>'+
+      '<div class="dn">'+SHORT[i]+'</div><div class="dc">'+cn[i]+'</div>'+
+      '<div class="dh">'+(works?trim2(dayHrs[i])+' h':(pat?'day off':''))+'</div></div>';
+  }).join('');
+  $('legend').textContent=pat?'Filled squares land on a day they work. Outlined squares land on a day off.':'Choose “Hours on each day” to see which of these land on days they work.';
+
+  $('fallText').textContent=weekdaySentence(cn,n,true);
+
+  last={valid:valid,pat:pat,c:c,ft:ftR.v,dayh:dayh,fte:fteTxt,n:n,ent:ent,booked:booked,bookedN:bookedN,left:left,counted:counted,dayHrs:dayHrs};
+  if(live)announce(valid?'Entitlement '+h2(ent)+' hours':'Result not available. Check the fields marked with an error.',700);
+}
+
+/* leave year */
+function yearList(){
+  const out=[];
+  for(let y=2019;y<=2028;y++){
+    const s=y+'-'+pad(state.month)+'-'+pad(state.day),w=windowFor(s);
+    if(s>=COV_START&&w.end<=COV_END)out.push(w);
+  }
+  return out;
+}
+function todayISO(){const n=new Date();return n.getFullYear()+'-'+pad(n.getMonth()+1)+'-'+pad(n.getDate())}
+function fillDays(){
+  const dim=[31,28,31,30,31,30,31,31,30,31,30,31][state.month-1];
+  if(state.day>dim)state.day=dim;
+  const sel=$('sday');sel.innerHTML='';
+  for(let d=1;d<=dim;d++){const o=document.createElement('option');o.value=d;o.textContent=d;sel.appendChild(o)}
+  sel.value=state.day;
+}
+function fillYears(preferYear){
+  const list=yearList(),sel=$('year'),t=todayISO();
+  sel.innerHTML='';
+  list.forEach(w=>{const o=document.createElement('option');o.value=w.key;o.textContent=w.label+' ('+plural(w.holidays.length,'bank holiday','bank holidays')+')';sel.appendChild(o)});
+  let nx=null;
+  for(let y=2019;y<=2032&&!nx;y++){const w=windowFor(y+'-'+pad(state.month)+'-'+pad(state.day));if(w.end>COV_END)nx=w}
+  $('dataNote').textContent='The GOV.UK calendar for England and Wales covers '+plainDate(COV_START)+' to '+plainDate(COV_END)+'. The next leave year with this start date, '+nx.label+', needs GOV.UK to publish dates up to '+plainDate(nx.end)+'.';
+  let pick=preferYear!=null?list.find(w=>parts(w.start).y===preferYear):null;
+  if(!pick)pick=list.find(w=>t>=w.start&&t<=w.end)||list[list.length-1];
+  setYear(pick.key);
+}
+function setStart(day,month,fresh){
+  const prev=(!fresh&&state.year)?parts(state.year).y:null;
+  state.day=day;state.month=month;
+  $('smonth').value=month;fillDays();
+  fillYears(prev);
+}
+function setYear(k){
+  state.year=k;$('year').value=k;
+  const y=cur();
+  $('sub').textContent='Leave year '+y.label+', England and Wales';
+  $('yearNote').textContent=y.note;
+  $('cdate').min=y.start;$('cdate').max=y.end;
+  renderGuide();buildTable();update(true);
+}
+
+/* summary and copy */
+function summary(){
+  const L=last,y=cur();
+  const out=[];
+  out.push('Bank holiday entitlement calculation, leave year '+y.label);
+  out.push('Contracted hours: '+trim2(L.c)+' a week');
+  if(L.pat){
+    const d=L.dayHrs.map((h,i)=>h>0?SHORT[i]+' '+trim2(h):'').filter(Boolean);
+    out.push('Hours on each day: '+d.join(', '));
+  }
+  out.push('Full-time week: '+trim2(L.ft)+' hours, with '+trim2(L.dayh)+' hours in a full-time day');
+  out.push('FTE: '+L.fte);
+  out.push('Bank holidays counted: '+L.n);
+  out.push('Pro-rata entitlement: '+h2(L.ent)+' hours ('+h2(L.ent/L.dayh)+' full-time days)');
+  out.push('Calculation: '+$('formula').textContent);
+  if(L.pat){
+    out.push('Booked on bank holidays that fall on a working day: '+h2(L.booked)+' hours');
+    out.push((L.left>=0?'Left in the entitlement: ':'Over the entitlement by: ')+h2(Math.abs(L.left))+' hours');
+  }
+  out.push('');
+  out.push('Bank holidays counted');
+  L.counted.forEach(x=>out.push('- '+longDate(x.date)+', '+x.name+(L.pat?(x.hrs>0?' (book '+trim2(x.hrs)+' hours)':' (day off)'):'')));
+  out.push('');
+  out.push('This calculates pro-rata entitlement. It does not set Gloucester City Council’s contractual or HR rules.');
+  return out.join('\n');
+}
+async function copy(){
+  const st=$('copystat'),ta=$('fallback');
+  if(!last||!last.valid){st.textContent='Fix the fields marked with an error before copying.';return}
+  const text=summary();
+  let ok=false;
+  try{await navigator.clipboard.writeText(text);ok=true}catch(e){}
+  if(!ok){
+    ta.hidden=false;ta.value=text;ta.focus();ta.select();
+    try{ok=document.execCommand('copy')}catch(e){}
+    if(ok)ta.hidden=true;
+  }
+  st.textContent=ok?'Summary copied.':'Copying was blocked. The summary is selected below. Press Ctrl+C or Cmd+C to copy it.';
+}
+
+/* reset */
+function reset(){
+  state.off.clear();state.custom={};state.touched=false;
+  $('weekly').value='22.5';$('ft').value='37';
+  document.querySelector('input[name=mode][value=weekly]').checked=true;
+  for(let i=0;i<7;i++)$('d'+i).value='';
+  $('from').value='';$('to').value='';$('cname').value='';$('cdate').value='';
+  setErr(null,'add-err','');
+  $('copystat').textContent='';$('fallback').hidden=true;
+  setStart(1,4,true);
+  announce('Calculator reset',0);
+}
+
+/* events */
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.type==='checkbox'||t.type==='radio'||t.tagName==='SELECT')return;
+  if(t.id==='dayh')state.touched=true;
+  update(true);
+});
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.id==='year'){setYear(t.value);return}
+  if(t.id==='sday'){setStart(+t.value,state.month);return}
+  if(t.id==='smonth'){setStart(state.day,+t.value);return}
+  if(t.classList&&t.classList.contains('bh')){
+    if(t.checked)state.off.delete(t.dataset.id);else state.off.add(t.dataset.id);
+  }
+  update(true);
+});
+document.addEventListener('click',e=>{
+  const pre=e.target.closest&&e.target.closest('[data-start]');
+  if(pre){const a=pre.dataset.start.split('-');setStart(+a[0],+a[1]);return}
+  const rm=e.target.closest&&e.target.closest('[data-remove]');
+  if(rm){
+    const id=rm.dataset.remove;
+    state.custom[state.year]=cust().filter(h=>h.id!==id);
+    state.off.delete(id);
+    buildTable();update(true);
+    $('selAll').focus();
+  }
+});
+$('dayAuto').addEventListener('click',()=>{state.touched=false;update(true);$('dayh').focus()});
+$('selAll').addEventListener('click',()=>{state.off.clear();update(true)});
+$('clrAll').addEventListener('click',()=>{items().forEach(h=>state.off.add(h.id));update(true)});
+$('copy').addEventListener('click',copy);
+$('reset').addEventListener('click',reset);
+$('addBtn').addEventListener('click',()=>{
+  const y=cur(),date=$('cdate').value,name=$('cname').value.trim()||'One-off bank holiday';
+  let msg='';
+  if(!date)msg='Choose a date for the bank holiday.';
+  else if(date<y.start||date>y.end)msg='Choose a date between '+plainDate(y.start)+' and '+plainDate(y.end)+'.';
+  else if(items().some(h=>h.date===date))msg='That date is already in the list.';
+  setErr('cdate','add-err',msg);
+  if(msg)return;
+  cust().push({id:'h'+date,name:name,date:date,custom:true});
+  $('cname').value='';$('cdate').value='';
+  buildTable();update(false);
+  announce('Added '+name+' on '+longDate(date),0);
+});
+
+$('toPattern').addEventListener('click',()=>{
+  const r=document.querySelector('input[name=mode][value=days]');r.checked=true;update(true);
+  $('weeklyBox').scrollIntoView({block:'center'});$('d0').focus();
+});
+$('barGo').addEventListener('click',()=>{const h=$('h-result');h.scrollIntoView({block:'start'});h.focus()});
+if('IntersectionObserver' in window){
+  new IntersectionObserver(es=>{$('bar').hidden=es[0].isIntersecting},{threshold:0.2}).observe($('result'));
+}
+
+/* start */
+MON.forEach((m,i)=>{const o=document.createElement('option');o.value=i+1;o.textContent=m;$('smonth').appendChild(o)});
+buildDayFields();
+setStart(1,4,true);
+})();
+</script>
+</body>
+</html>
