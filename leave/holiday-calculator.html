@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Part-time bank holiday entitlement calculator</title>
+<title>Annual leave and bank holiday entitlement calculator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Literata:opsz,wght@7..72,500..700&amp;display=swap" rel="stylesheet">
@@ -168,14 +168,30 @@ footer{border-top:1px solid var(--rule);padding-top:1rem;margin-top:1.5rem}
 .wrap{padding-bottom:5.5rem}
 #patNudge{margin:1rem 0 0}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* v3 additions */
+.opt{display:flex;gap:.65rem;align-items:flex-start;margin:.7rem 0;cursor:pointer}
+.opt input{margin-top:.2rem;flex:none}
+.opt .help{margin:0}
+.opt strong{display:block}
+.chg{display:flex;flex-wrap:wrap;gap:0 1.5rem;align-items:flex-end;border-top:1px solid var(--rule);padding:.4rem 0}
+.chg .field{margin:.5rem 0}
+.prop{font-weight:700;margin:.5rem 0 0}
+.panel details{margin:1rem 0 0}
+.panel summary{color:var(--panel-ink)}
+.panel .warnbox{color:var(--warn);font-weight:700}
+.work ul{margin:.5rem 0 0;padding-left:1.1rem}
+.work li{margin:.35rem 0;color:var(--panel-ink)}
+.panel h3.sub{margin:1.25rem 0 0}
+select#rnd{max-width:22rem}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <header>
-  <h1>Part-time bank holiday entitlement</h1>
-  <p class="lede">Bank holidays land on Mondays and Fridays far more often than on other days, so counting only the ones an employee misses treats part-time staff unevenly. This works out a pro-rata entitlement in hours first, then shows where each bank holiday falls in their week.</p>
+  <h1>Annual leave and bank holiday entitlement</h1>
+  <p class="lede">Part-time staff, joiners and leavers each need an entitlement worked out from their own hours and dates, and bank holidays land on Mondays and Fridays far more often than on other days. This calculator works out annual leave and bank holiday entitlement in hours for the time someone is employed, then shows what is left to take.</p>
   <p class="meta" id="sub"></p>
   <noscript><p class="warnbox">This calculator needs JavaScript to run.</p></noscript>
 </header>
@@ -184,6 +200,7 @@ footer{border-top:1px solid var(--rule);padding-top:1rem;margin-top:1.5rem}
 
   <section class="sec hours" aria-labelledby="h-hours">
     <h2 id="h-hours">1. Enter the working hours</h2>
+    <p class="note">This calculator is for people who work regular hours all year. For irregular hours or term-time only work, use the <a href="https://www.gov.uk/calculate-your-holiday-entitlement" target="_blank" rel="noopener">GOV.UK holiday entitlement calculator</a>.</p>
 
     <fieldset class="field">
       <legend>How do you want to enter the employee’s contracted hours?</legend>
@@ -211,6 +228,14 @@ footer{border-top:1px solid var(--rule);padding-top:1rem;margin-top:1.5rem}
 
     <p class="warnbox" id="ratioWarn" hidden>The contracted hours are more than the full-time hours. Check both figures.</p>
 
+    <details class="ft" id="chgBox">
+      <summary>Contracted hours change during the year</summary>
+      <p class="help">Add a row for each change. The new weekly hours apply from the date shown. The working-days view is switched off while there are changes, because it needs one pattern.</p>
+      <div id="chgList"></div>
+      <p class="err" id="chg-err" hidden></p>
+      <button type="button" class="btn ghost" id="chgAdd">Add a change</button>
+    </details>
+
     <details class="ft" id="ftBox">
       <summary id="ftSum">Full-time week</summary>
       <div class="pair">
@@ -230,9 +255,9 @@ footer{border-top:1px solid var(--rule);padding-top:1rem;margin-top:1.5rem}
     </details>
   </section>
 
-  <section class="sec holidays" aria-labelledby="h-hol">
-    <h2 id="h-hol">2. Choose the leave year and bank holidays</h2>
-    <p class="note">Every bank holiday in the leave year starts ticked. Untick any that do not apply.</p>
+  <section class="sec leaveyear" aria-labelledby="h-year">
+    <h2 id="h-year">2. Choose the leave year and employment dates</h2>
+
     <fieldset class="field">
       <legend>When does the leave year start?</legend>
       <div class="two">
@@ -258,6 +283,76 @@ footer{border-top:1px solid var(--rule);padding-top:1rem;margin-top:1.5rem}
     <p class="note" id="yearNote"></p>
     <p class="note" id="dataNote"></p>
 
+    <fieldset class="field">
+      <legend>Employment dates in this leave year</legend>
+      <p class="help">Leave both blank if the employee is employed for the whole leave year.</p>
+      <div class="two">
+        <div class="field">
+          <label for="from">Employment starts</label>
+          <input id="from" type="date" aria-describedby="emp-err">
+        </div>
+        <div class="field">
+          <label for="to">Employment ends</label>
+          <input id="to" type="date" aria-describedby="emp-err">
+        </div>
+      </div>
+      <p class="err" id="emp-err" hidden></p>
+      <p class="prop" id="prop"></p>
+    </fieldset>
+  </section>
+
+  <section class="sec annual" aria-labelledby="h-annual">
+    <h2 id="h-annual">3. Enter the annual leave</h2>
+    <div class="field">
+      <label for="al">Full-time annual leave in days</label>
+      <p class="help" id="al-help">Use the full-time figure from the employee’s terms. Leave it blank to work out bank holidays only.</p>
+      <input id="al" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="al-help al-err">
+      <p class="err" id="al-err" hidden></p>
+    </div>
+
+    <details class="ft" id="svcBox">
+      <summary>Annual leave goes up during the year</summary>
+      <p class="help">Use this when annual leave increases on a date in the leave year, for example after a period of service.</p>
+      <div class="two">
+        <div class="field">
+          <label for="svcDate">Increase takes effect on</label>
+          <input id="svcDate" type="date" aria-describedby="svc-err">
+        </div>
+        <div class="field">
+          <label for="svcDays">New full-time annual leave in days</label>
+          <input id="svcDays" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="svc-err">
+        </div>
+      </div>
+      <p class="err" id="svc-err" hidden></p>
+    </details>
+
+    <details class="ft" id="balBoxIn">
+      <summary>Leave brought forward, used or bought</summary>
+      <p class="help">All three are in hours and all are optional. They feed the “what is left to take” figure.</p>
+      <div class="two">
+        <div class="field">
+          <label for="carry">Carried over from the last leave year</label>
+          <input id="carry" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="carry-err">
+          <p class="err" id="carry-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="extra">Extra or purchased leave</label>
+          <input id="extra" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="extra-err">
+          <p class="err" id="extra-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="taken">Annual leave taken or booked so far</label>
+          <input id="taken" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="taken-err">
+          <p class="err" id="taken-err" hidden></p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="sec holidays" aria-labelledby="h-hol">
+    <h2 id="h-hol">4. Choose the bank holidays</h2>
+    <p class="note">Every bank holiday in the leave year starts ticked. Untick any that do not apply.</p>
+
     <div class="tablewrap" role="region" aria-labelledby="h-hol" tabindex="0">
       <table id="tbl" data-pattern="off">
         <caption class="sr">Bank holidays in the leave year. Tick the ones that apply.</caption>
@@ -277,23 +372,32 @@ footer{border-top:1px solid var(--rule);padding-top:1rem;margin-top:1.5rem}
       <button type="button" class="btn ghost" id="clrAll">Clear</button>
     </div>
 
-    <details>
-      <summary>Joiners, leavers and one-off bank holidays</summary>
-      <div class="two">
-        <div class="field">
-          <label for="from">Employment starts</label>
-          <input id="from" type="date">
-        </div>
-        <div class="field">
-          <label for="to">Employment ends</label>
-          <input id="to" type="date">
-        </div>
-      </div>
-      <p class="note">Bank holidays outside these dates are not counted. The HR policy decides how joiners and leavers are treated.</p>
-      <p class="err" id="range-err" hidden></p>
+    <fieldset class="field">
+      <legend>How does your HR policy count bank holidays for a part year?</legend>
+      <label class="opt"><input type="radio" name="method" value="in" checked>
+        <span><strong>Bank holidays inside the employment dates</strong><span class="help">Each bank holiday that falls between the start and end dates counts. This is the same as the full-year figure when someone is employed all year.</span></span></label>
+      <label class="opt"><input type="radio" name="method" value="time">
+        <span><strong>Full-year entitlement scaled by time employed</strong><span class="help">All the ticked bank holidays count, then the total is scaled by the share of the leave year the employee is employed.</span></span></label>
+    </fieldset>
 
+    <div class="field">
+      <label for="rnd">Rounding</label>
+      <p class="help">Annual leave and bank holidays are rounded separately, then added together. Statutory leave cannot be rounded down, and in the first year of employment part days must be rounded up to the nearest half day. A half day is half the full-time hours in a day.</p>
+      <select id="rnd">
+        <option value="none">No rounding (two decimal places)</option>
+        <option value="halfday-up">Up to the next half day</option>
+        <option value="halfday-nearest">To the nearest half day</option>
+        <option value="half-nearest">To the nearest half hour</option>
+        <option value="half-up">Up to the next half hour</option>
+        <option value="hour-nearest">To the nearest whole hour</option>
+        <option value="hour-up">Up to the next whole hour</option>
+      </select>
+    </div>
+
+    <details>
+      <summary>Add a one-off bank holiday</summary>
       <fieldset class="addbox">
-        <legend>Add a one-off bank holiday</legend>
+        <legend>One-off bank holiday</legend>
         <div class="two">
           <div class="field">
             <label for="cname">Name (optional)</label>
@@ -311,27 +415,47 @@ footer{border-top:1px solid var(--rule);padding-top:1rem;margin-top:1.5rem}
   </section>
 
   <section class="panel result" id="result" aria-labelledby="h-result">
-    <h2 id="h-result" tabindex="-1">3. Pro-rata bank holiday entitlement</h2>
+    <h2 id="h-result" tabindex="-1">5. Pro-rata bank holiday entitlement</h2>
     <p class="figure"><span id="ent">—</span><span class="unit">hours</span></p>
     <p class="hint" id="hint" hidden></p>
     <div id="resultBody">
       <p class="eq" id="eq"></p>
-      <p class="formula" id="formula"></p>
+      <dl class="facts">
+        <div id="rowAnnual"><dt>Annual leave</dt><dd id="vAnnual"></dd></div>
+        <div><dt>Bank holidays</dt><dd id="vBh"></dd></div>
+      </dl>
       <dl class="facts">
         <div><dt>Share of full-time (FTE)</dt><dd id="fte"></dd></div>
+        <div><dt>Time employed</dt><dd id="vTime"></dd></div>
         <div><dt>Bank holidays counted</dt><dd id="count"></dd></div>
-        <div><dt>Worth of each bank holiday</dt><dd id="each"></dd></div>
       </dl>
-      <p id="patNudge"><button type="button" class="btn ghost" id="toPattern">Show how this lands on their working days</button></p>
-      <div id="bookBox" hidden>
-        <h3>On the days they work</h3>
+      <p class="eq" id="otherMethod" hidden></p>
+
+      <div id="balBox" hidden>
+        <h3 class="sub">What is left to take</h3>
         <dl class="facts">
-          <div><dt>Booked on bank holidays that fall on a working day</dt><dd><span id="bookedV"></span></dd></div>
-          <div><dt id="leftLabel">Left in the entitlement</dt><dd id="leftV"></dd></div>
+          <div><dt>Entitlement</dt><dd id="bEnt"></dd></div>
+          <div id="rCarry"><dt>Add carried over</dt><dd id="bCarry"></dd></div>
+          <div id="rExtra"><dt>Add extra or purchased leave</dt><dd id="bExtra"></dd></div>
+          <div id="rTaken"><dt>Take off leave used or booked</dt><dd id="bTaken"></dd></div>
+          <div id="rBh"><dt>Take off bank holidays on working days</dt><dd id="bBh"></dd></div>
+          <div><dt id="leftLabel">Left to take</dt><dd id="leftV"></dd></div>
         </dl>
-        <p class="eq" id="bookedN"></p>
+        <p class="eq" id="balNote"></p>
         <p class="eq" id="overNote" hidden>The HR policy decides how this difference is met.</p>
       </div>
+
+      <div id="statBox" hidden>
+        <h3 class="sub">Statutory minimum</h3>
+        <p id="statTxt"></p>
+      </div>
+
+      <p id="patNudge"><button type="button" class="btn ghost" id="toPattern">Show how this lands on their working days</button></p>
+
+      <details class="work">
+        <summary>Show the working</summary>
+        <ul id="workBody"></ul>
+      </details>
     </div>
     <div class="row">
       <button type="button" class="btn" id="copy">Copy summary</button>
@@ -358,8 +482,15 @@ footer{border-top:1px solid var(--rule);padding-top:1rem;margin-top:1.5rem}
     <p id="gWhy"></p>
 
     <h3>The calculation</h3>
-    <p>Number of bank holidays × full-time hours in a day × FTE. FTE is the contracted hours divided by the full-time hours. The calculation uses the exact FTE and rounds only the answer, to two decimal places.</p>
+    <p>Bank holidays are the number of bank holidays × full-time hours in a day × FTE. Annual leave is the full-time annual leave days × full-time hours in a day × FTE. FTE is the contracted hours divided by the full-time hours. The calculation uses the exact FTE and rounds only at the end.</p>
     <p id="gEx"></p>
+    <p id="gEx2"></p>
+
+    <h3>Joiners and leavers</h3>
+    <p>Annual leave is the full-year figure multiplied by the days employed and divided by the days in the leave year. Bank holidays have two common approaches. One counts the bank holidays that fall inside the employment dates. The other scales the full-year bank holiday entitlement by the time employed. Choose the one your HR policy uses. The result shows the other figure too, so you can see the difference.</p>
+
+    <h3>Changes during the year</h3>
+    <p>When contracted hours or annual leave change on a date, the calculation splits the leave year at that date and works out each part with its own hours and days. Each bank holiday is valued at the FTE on the day it falls.</p>
 
     <h3>When a bank holiday arrives</h3>
     <p>Where entitlement works as an hours allowance, an employee books the hours they would normally have worked if the bank holiday falls on a working day. If it falls on a day off, they book nothing. Whatever is left stays in their allowance, subject to the council’s leave rules. Choose “Hours on each day” to see this for a working pattern.</p>
@@ -367,8 +498,12 @@ footer{border-top:1px solid var(--rule);padding-top:1rem;margin-top:1.5rem}
     <h3>Why you choose the bank holidays</h3>
     <p id="gChoose"></p>
 
+    <h3>Statutory minimum</h3>
+    <p>Workers have a right to 5.6 weeks of paid leave a year, capped at 28 days, and employers can count bank holidays towards it. For part-time workers with regular hours it is 5.6 times their weekly hours. The calculator compares the entitlement with that figure for the time employed. Part-time staff must not be treated less favourably than full-time staff, so contractual leave and bank holidays are given pro rata.</p>
+    <p>Part days cannot be rounded down. In the first year of employment they must be rounded up to the nearest half day. GOV.UK builds up first-year leave one month at a time, so its figure for a joiner can differ slightly from the calendar days used here. Check statutory figures for joiners with the GOV.UK calculator. This check is a guide and not legal advice.</p>
+
     <h3>What this tool does not decide</h3>
-    <p>It calculates pro-rata entitlement. It does not set Gloucester City Council’s contractual or HR rules. Recording, rounding, remaining hours, joiners and leavers, and changes to contracted hours are for the HR policy and the employee’s terms to settle.</p>
+    <p>It calculates entitlement for people on regular hours. It does not cover irregular hours or part-year workers, who build up leave from the hours they work. It does not set Gloucester City Council’s contractual or HR rules. Rounding, leave during sickness or family leave, unpaid absence, carry-over limits and how a leave year that starts or ends part way through employment is treated are for the HR policy and the employee’s terms to settle.</p>
   </div>
   <footer>
     <p class="note">Based on GOV.UK holiday entitlement guidance and ACAS bank holiday guidance. Dates come from the GOV.UK bank holiday calendar for England and Wales, checked on 26 November 2026.</p>
@@ -406,6 +541,29 @@ const ALL=[
 ['2028-01-03','New Year’s Day (substitute day)'],['2028-04-14','Good Friday'],['2028-04-17','Easter Monday'],['2028-05-01','Early May bank holiday'],['2028-05-29','Spring bank holiday'],['2028-08-28','Summer bank holiday'],['2028-12-25','Christmas Day'],['2028-12-26','Boxing Day']
 ];
 function addDays(iso,n){const p=parts(iso),d=new Date(Date.UTC(p.y,p.m-1,p.d+n));return d.getUTCFullYear()+'-'+pad(d.getUTCMonth()+1)+'-'+pad(d.getUTCDate())}
+function dayDiff(a,b){const p=parts(a),q=parts(b);return Math.round((Date.UTC(q.y,q.m-1,q.d)-Date.UTC(p.y,p.m-1,p.d))/864e5)}
+function parts(iso){const a=iso.split('-').map(Number);return{y:a[0],m:a[1],d:a[2]}}
+function wd(iso){const p=parts(iso);return (new Date(Date.UTC(p.y,p.m-1,p.d)).getUTCDay()+6)%7}
+function plainDate(iso){const p=parts(iso);return p.d+' '+MON[p.m-1]+' '+p.y}
+function longDate(iso){return DAYN[wd(iso)]+' '+plainDate(iso)}
+
+const trim2=x=>String(+x.toFixed(2));
+const h2=x=>x.toFixed(2);
+const plural=(n,s,p)=>n+' '+(n===1?s:p);
+function listJoin(a,conj){return a.length<2?a.join(''):a.slice(0,-1).join(', ')+' '+conj+' '+a[a.length-1]}
+function num(el){
+  const s=el.value.trim().replace(',','.');
+  if(s==='')return{empty:true,bad:false,v:0};
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(s))return{empty:false,bad:true,v:NaN};
+  return{empty:false,bad:false,v:parseFloat(s)};
+}
+function setErr(inputId,errId,msg){
+  const e=$(errId);e.hidden=!msg;e.textContent=msg?'Error: '+msg:'';
+  if(inputId)$(inputId).setAttribute('aria-invalid',msg?'true':'false');
+}
+let liveTimer=null;
+function announce(msg,delay){clearTimeout(liveTimer);liveTimer=setTimeout(()=>{$('live').textContent=msg},delay||0)}
+
 function makeNote(hol){
   const n=hol.length;
   const gf=hol.filter(h=>h[0]==='Good Friday').map(h=>h[1]);
@@ -426,47 +584,14 @@ function windowFor(startISO){
 }
 
 const state={year:'',day:1,month:4,off:new Set(),custom:{},touched:false};
+let last=null,chgN=0;
 const cur=()=>windowFor(state.year);
 const cust=()=>state.custom[state.year]||(state.custom[state.year]=[]);
-let last=null,liveTimer=null;
 
-/* dates */
-function parts(iso){const a=iso.split('-').map(Number);return{y:a[0],m:a[1],d:a[2]}}
-function wd(iso){const p=parts(iso);return (new Date(Date.UTC(p.y,p.m-1,p.d)).getUTCDay()+6)%7}
-function plainDate(iso){const p=parts(iso);return p.d+' '+MON[p.m-1]+' '+p.y}
-function longDate(iso){return DAYN[wd(iso)]+' '+plainDate(iso)}
-
-/* numbers and text */
-const trim2=x=>String(+x.toFixed(2));
-const h2=x=>x.toFixed(2);
-const plural=(n,s,p)=>n+' '+(n===1?s:p);
-function listJoin(a,conj){return a.length<2?a.join(''):a.slice(0,-1).join(', ')+' '+conj+' '+a[a.length-1]}
-function num(el){
-  const s=el.value.trim().replace(',','.');
-  if(s==='')return{empty:true,bad:false,v:0};
-  if(!/^(\d+\.?\d*|\.\d+)$/.test(s))return{empty:false,bad:true,v:NaN};
-  return{empty:false,bad:false,v:parseFloat(s)};
-}
-function setErr(inputId,errId,msg){
-  const e=$(errId);e.hidden=!msg;e.textContent=msg?'Error: '+msg:'';
-  if(inputId)$(inputId).setAttribute('aria-invalid',msg?'true':'false');
-}
-function announce(msg,delay){
-  clearTimeout(liveTimer);
-  liveTimer=setTimeout(()=>{$('live').textContent=msg},delay||0);
-}
-
-/* holidays */
 function items(){
   const base=cur().holidays.map(a=>({id:'h'+a[1],name:a[0],date:a[1],custom:false}));
   return base.concat(cust()).sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
 }
-function range(){
-  const f=$('from').value,t=$('to').value;
-  if(f&&t&&f>t)return{bad:true,from:'',to:''};
-  return{bad:false,from:f,to:t};
-}
-const inRange=(d,r)=>(!r.from||d>=r.from)&&(!r.to||d<=r.to);
 
 function buildTable(){
   const body=$('tbody');body.innerHTML='';
@@ -497,6 +622,18 @@ function buildDayFields(){
     '<input id="d'+i+'" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></div>').join('');
 }
 
+function addChange(){
+  const i=++chgN,div=document.createElement('div');
+  div.className='chg';
+  div.innerHTML='<div class="field"><label for="cd'+i+'">Takes effect on</label><input id="cd'+i+'" type="date" class="cdt"></div>'+
+    '<div class="field"><label for="cw'+i+'">New contracted hours per week</label><input id="cw'+i+'" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" class="cwk"></div>'+
+    '<button type="button" class="link" data-chg-remove="1">Remove<span class="sr"> this change</span></button>';
+  $('chgList').appendChild(div);
+  $('chgBox').open=true;
+  $('cd'+i).focus();
+}
+
+/* weekday wording */
 function weekdaySentence(cn,n,counted){
   const nz=cn.map((v,i)=>[v,i]).filter(x=>x[0]>0);
   const noun=counted?'bank holidays counted':'bank holidays';
@@ -510,9 +647,8 @@ function weekdaySentence(cn,n,counted){
   return t;
 }
 
-/* guidance that follows the leave year */
 function renderGuide(){
-  const y=cur(),n=y.holidays.length,cn=[0,0,0,0,0,0,0];
+  const y=cur(),n=y.holidays.length,cn=[0,0,0,0,0,0,0],D=dayDiff(y.start,y.end)+1;
   y.holidays.forEach(h=>cn[wd(h[1])]++);
   let top=0,low=0;
   for(let i=0;i<5;i++){if(cn[i]>cn[top])top=i;if(cn[i]<cn[low])low=i}
@@ -522,22 +658,57 @@ function renderGuide(){
     :'If entitlement followed the days an employee misses, a '+DAYN[top]+' worker and a '+DAYN[low]+' worker on the same contract would get very different amounts.';
   $('gWhy').textContent='In the leave year '+y.label+', '+s.charAt(0).toLowerCase()+s.slice(1)+' '+gap+' So the calculation works out a pro-rata entitlement for the contract first, and the working pattern comes second.';
   const ex=n*7.4*22.5/37;
-  $('gEx').textContent='For example, 22.5 hours against a 37 hour week is 60.81% FTE. With '+n+' bank holidays in this leave year and a 7.4 hour day, that is '+n+' × 7.4 × 60.81% = '+ex.toFixed(2)+' hours.';
+  $('gEx').textContent='For example, 22.5 hours against a 37 hour week is 60.81% FTE. With '+n+' bank holidays in this leave year and a 7.4 hour day, bank holidays come to '+n+' × 7.4 × 60.81% = '+ex.toFixed(2)+' hours.';
+  const part=Math.ceil(D/2),full=25*7.4,fte=full*22.5/37;
+  $('gEx2').textContent='For annual leave, 25 full-time days of 7.4 hours is '+h2(full)+' hours. At 60.81% FTE that is '+h2(fte)+' hours. If the employee is employed for '+part+' of the '+D+' days in the leave year, it becomes '+h2(fte)+' × '+part+' ÷ '+D+' = '+h2(fte*part/D)+' hours.';
   $('gChoose').textContent='A leave year does not always hold the same number of bank holidays. '+y.note+' Extra bank holidays can also be announced. Untick the holidays that do not apply, or add a one-off date.';
+}
+
+/* calculation helpers */
+function rnd(x,mode,dayh){
+  const hd=dayh/2;
+  if(mode==='halfday-up')return Math.ceil(x/hd-1e-9)*hd;
+  if(mode==='halfday-nearest')return Math.round(x/hd+1e-9)*hd;
+  if(mode==='half-nearest')return Math.round(x*2+1e-9)/2;
+  if(mode==='half-up')return Math.ceil(x*2-1e-9)/2;
+  if(mode==='hour-nearest')return Math.round(x+1e-9);
+  if(mode==='hour-up')return Math.ceil(x-1e-9);
+  return x;
+}
+const RND_TEXT={'none':'No rounding','halfday-up':'Up to the next half day','halfday-nearest':'Nearest half day','half-nearest':'Nearest half hour','half-up':'Up to the next half hour','hour-nearest':'Nearest whole hour','hour-up':'Up to the next whole hour'};
+
+/* split the employed period wherever hours or annual leave change */
+function segments(m){
+  const ch=m.changes.slice().sort((x,y)=>x.date<y.date?-1:x.date>y.date?1:0);
+  const bounds=[m.S];
+  ch.forEach(c=>{if(c.date>m.S&&c.date<=m.E)bounds.push(c.date)});
+  if(m.svc&&m.svc.date>m.S&&m.svc.date<=m.E)bounds.push(m.svc.date);
+  const u=Array.from(new Set(bounds)).sort();
+  u.push(addDays(m.E,1));
+  const out=[];
+  for(let i=0;i<u.length-1;i++){
+    const a=u[i],b=addDays(u[i+1],-1);
+    let w=m.w0;ch.forEach(c=>{if(c.date<=a)w=c.hrs});
+    const days=(m.svc&&m.svc.date<=a)?m.svc.days:m.alDays;
+    out.push({a:a,b:b,n:dayDiff(a,b)+1,w:w,days:days});
+  }
+  return out;
 }
 
 /* main update */
 function update(live){
   const pat=document.querySelector('input[name=mode]:checked').value==='days';
-  $('weeklyBox').hidden=pat;$('daysBox').hidden=!pat;
-  $('tbl').dataset.pattern=pat?'on':'off';
+  const method=document.querySelector('input[name=method]:checked').value;
+  const mode=$('rnd').value;
+  const y=cur(),LS=y.start,LE=y.end,D=dayDiff(LS,LE)+1;
   let errs=0;
+  $('weeklyBox').hidden=pat;$('daysBox').hidden=!pat;
 
+  /* full-time figures */
   const ftR=num($('ft'));
   const ftOK=!(ftR.bad||ftR.empty||ftR.v<=0||ftR.v>168);
   setErr('ft','ft-err',ftOK?'':'Enter the full-time hours in a week, for example 37.');
   if(!ftOK)errs++;
-
   if(!state.touched)$('dayh').value=ftOK?trim2(ftR.v/5):'';
   $('dayAuto').hidden=!state.touched;
   const dR=num($('dayh'));
@@ -547,6 +718,7 @@ function update(live){
   $('ftSum').textContent='Full-time week is '+(ftOK?trim2(ftR.v):'not set')+' hours, '+(dOK?trim2(dR.v):'not set')+' in a day. Change these';
   if(!ftOK||!dOK)$('ftBox').open=true;
 
+  /* contracted hours */
   let c=0,cOK=true;const dayHrs=[0,0,0,0,0,0,0];
   if(!pat){
     const w=num($('weekly'));
@@ -565,85 +737,185 @@ function update(live){
     c=dayHrs.reduce((a,b)=>a+b,0);
     $('daysTotal').textContent=trim2(c);
   }
-
-  const ratio=(ftOK&&cOK)?c/ftR.v:NaN;
-  $('ratioWarn').hidden=!(ratio>1);
   const incomplete=pat&&cOK&&c===0;
-  const valid=errs===0&&!incomplete;
+  $('ratioWarn').hidden=!(ftOK&&cOK&&c/ftR.v>1);
 
-  /* rows */
-  const r=range();
-  $('range-err').hidden=!r.bad;
-  $('range-err').textContent=r.bad?'Error: The employment end date is before the start date. Check both dates.':'';
-  const counted=[];
+  /* changes to contracted hours */
+  const chg=[];let chgBad=false;
+  document.querySelectorAll('#chgList .chg').forEach(r=>{
+    const dt=r.querySelector('.cdt'),wk=r.querySelector('.cwk'),wv=num(wk);
+    if(dt.value||wk.value.trim()){
+      const okW=!wv.bad&&!wv.empty&&wv.v<=168,okD=!!dt.value;
+      dt.setAttribute('aria-invalid',okD?'false':'true');wk.setAttribute('aria-invalid',okW?'false':'true');
+      if(okW&&okD)chg.push({date:dt.value,hrs:wv.v});else chgBad=true;
+    }else{dt.setAttribute('aria-invalid','false');wk.setAttribute('aria-invalid','false')}
+  });
+  setErr(null,'chg-err',chgBad?'Each change needs a date and new weekly hours, for example 22.5.':'');
+  if(chgBad){errs++;$('chgBox').open=true}
+  const bookable=pat&&chg.length===0;
+  $('tbl').dataset.pattern=bookable?'on':'off';
+
+  /* employment dates */
+  const f=$('from').value,t=$('to').value;
+  let S=LS,E=LE,empOK=true,empMsg='';
+  if(f&&t&&f>t){empOK=false;empMsg='The employment end date is before the start date. Check both dates.'}
+  else{
+    S=(f&&f>LS)?f:LS;E=(t&&t<LE)?t:LE;
+    if(S>E){empOK=false;empMsg='The employment dates do not overlap this leave year.';S=LS;E=LE}
+  }
+  setErr(null,'emp-err',empMsg);
+  $('from').setAttribute('aria-invalid',empOK?'false':'true');$('to').setAttribute('aria-invalid',empOK?'false':'true');
+  if(!empOK)errs++;
+  const dEmp=empOK?dayDiff(S,E)+1:0,share=empOK?dEmp/D:0;
+  $('prop').textContent=!empOK?'':(dEmp===D?'Employed for the whole leave year ('+D+' days).':'Employed for '+dEmp+' of the '+D+' days in this leave year ('+(share*100).toFixed(2)+'%).');
+
+  /* annual leave */
+  const alR=num($('al')),alOK=!(alR.bad||alR.v>366);
+  setErr('al','al-err',alOK?'':'Enter annual leave as a number of days, for example 27.');
+  if(!alOK)errs++;
+  const alDays=(alOK&&!alR.empty)?alR.v:0;
+  const sd=$('svcDate').value,sR=num($('svcDays'));
+  let svc=null,svcMsg='';
+  if(sd||!sR.empty){
+    if(!sd||sR.empty||sR.bad||sR.v>366)svcMsg='Enter both a date and the new number of full-time days, for example 30.';
+    else svc={date:sd,days:sR.v};
+  }
+  setErr(null,'svc-err',svcMsg);
+  if(svcMsg){errs++;$('svcBox').open=true}
+  const alEntered=(alOK&&!alR.empty)||!!svc;
+
+  /* balance inputs */
+  const bal={};
+  ['carry','extra','taken'].forEach(k=>{
+    const r=num($(k)),bad=r.bad||r.v>100000;
+    setErr(k,k+'-err',bad?'Enter hours as a number, for example 37.5.':'');
+    if(bad){errs++;$('balBoxIn').open=true}else bal[k]=r.v;
+  });
+
+  /* bank holiday rows */
+  const useWin=method==='in';
+  const inWin=[];let tickedN=0;
   Array.from($('tbody').rows).forEach(tr=>{
     const id=tr.dataset.id,date=tr.dataset.date,w=+tr.dataset.wd;
     const cb=tr.querySelector('.bh');
-    const inr=inRange(date,r),on=!state.off.has(id),cnt=on&&inr;
+    const inr=date>=S&&date<=E,on=!state.off.has(id);
     if(cb.checked!==on)cb.checked=on;
-    cb.disabled=!inr;
-    tr.classList.toggle('off',!cnt);
-    tr.querySelector('.hnote').textContent=inr?'':'Outside the employment dates';
+    cb.disabled=useWin&&!inr;
+    tr.classList.toggle('off',!on||(useWin&&!inr));
+    tr.querySelector('.hnote').textContent=inr?'':(useWin?'Outside the employment dates':'Outside the employment dates, still part of the full-year figure');
     const cell=tr.querySelector('.book');
-    if(!cnt)cell.textContent='Not counted';
+    if(!on)cell.textContent='Not counted';
+    else if(!inr)cell.textContent='Outside employment dates';
     else cell.textContent=dayHrs[w]>0?trim2(dayHrs[w])+' hours':'Day off';
-    if(cnt)counted.push({wd:w,date:date,name:tr.dataset.name,hrs:dayHrs[w]});
+    if(on)tickedN++;
+    if(on&&inr)inWin.push({wd:w,date:date,name:tr.dataset.name,hrs:dayHrs[w]});
   });
-  const n=counted.length;
 
-  /* result */
+  const valid=errs===0&&!incomplete;
   const dayh=dR.v;
-  const per=valid?dayh*ratio:NaN;
-  const ent=valid?n*per:NaN;
-  const fteTxt=valid?(ratio*100).toFixed(2)+'%':'';
-  let booked=0,bookedN=0,left=0;
+  let R=null;
+  if(valid){
+    const segs=segments({S:S,E:E,w0:c,changes:chg,alDays:alDays,svc:svc});
+    let annualRaw=0,statRaw=0,tw=0;
+    segs.forEach(s=>{
+      s.fte=s.w/ftR.v;
+      s.ah=s.fte*s.days*dayh*s.n/D;
+      annualRaw+=s.ah;statRaw+=5.6*s.w*s.n/D;tw+=s.fte*s.n/D;
+    });
+    const daysWorked=dayHrs.filter(h=>h>0).length;
+    const capF=(bookable&&daysWorked>5)?5/daysWorked:1;
+    statRaw*=capF;
+    const fteAt=date=>{const s=segs.find(x=>date>=x.a&&date<=x.b);return s?s.fte:0};
+    let bhA=0;inWin.forEach(x=>{bhA+=dayh*fteAt(x.date)});
+    const bhB=tickedN*dayh*tw;
+    const bhRaw=useWin?bhA:bhB,otherRaw=useWin?bhB:bhA;
+    const annualR=alEntered?rnd(annualRaw,mode,dayh):0,bhR=rnd(bhRaw,mode,dayh),otherR=rnd(otherRaw,mode,dayh);
+    const total=annualR+bhR;
+    let booked=0;
+    if(bookable)inWin.forEach(x=>{booked+=x.hrs});
+    const showBal=alEntered||bal.carry>0||bal.extra>0||bal.taken>0;
+    const left=total+bal.carry+bal.extra-bal.taken-booked;
+    const sameFte=segs.every(s=>Math.abs(s.fte-segs[0].fte)<1e-12);
+    R={segs:segs,annualRaw:annualRaw,annualR:annualR,bhRaw:bhRaw,bhR:bhR,otherR:otherR,total:total,statRaw:statRaw,tw:tw,booked:booked,left:Math.abs(left)<0.005?0:left,showBal:showBal,sameFte:sameFte,capF:capF,n:useWin?inWin.length:tickedN};
+  }
 
+  /* render result */
+  $('h-result').textContent=alEntered?'5. Pro-rata leave entitlement':'5. Pro-rata bank holiday entitlement';
   $('patNudge').hidden=pat;
-  $('barV').textContent=valid?h2(ent)+' hours':'Check the fields';
   $('resultBody').hidden=!valid;
   $('hint').hidden=valid;
   if(valid){
-    $('ent').textContent=h2(ent);
-    $('eq').textContent='Equal to '+h2(ent/dayh)+' full-time days of '+trim2(dayh)+' hours.';
-    $('formula').textContent=plural(n,'bank holiday','bank holidays')+' × '+trim2(dayh)+' hours × '+fteTxt+' FTE = '+h2(ent)+' hours';
-    $('fte').textContent=fteTxt;
-    $('count').textContent=n;
-    $('each').textContent=h2(per)+' hours';
-    $('bookBox').hidden=!pat;
-    if(pat){
-      counted.forEach(x=>{booked+=x.hrs;if(x.hrs>0)bookedN++});
-      left=ent-booked;if(Math.abs(left)<0.005)left=0;
-      $('bookedV').textContent=h2(booked)+' hours';
-      $('bookedN').textContent=bookedN===0?'None of the counted bank holidays fall on a day they work.':plural(bookedN,'bank holiday falls','bank holidays fall')+' on a day they work.';
-      $('leftLabel').textContent=left>=0?'Left in the entitlement':'Over the entitlement by';
-      $('leftV').textContent=h2(Math.abs(left))+' hours';
-      $('overNote').hidden=left>=0;
+    const dd=x=>h2(x/dayh);
+    $('ent').textContent=h2(R.total);
+    $('barV').textContent=h2(R.total)+' hours';
+    $('eq').textContent='Equal to '+dd(R.total)+' full-time days of '+trim2(dayh)+' hours.';
+    $('rowAnnual').hidden=!alEntered;
+    $('vAnnual').textContent=h2(R.annualR)+' hours ('+dd(R.annualR)+' days)';
+    $('vBh').textContent=h2(R.bhR)+' hours ('+dd(R.bhR)+' days)';
+    $('fte').textContent=R.sameFte?(R.segs[0].fte*100).toFixed(2)+'%':'Changes during the year';
+    $('vTime').textContent=dEmp===D?'Whole leave year':dEmp+' of '+D+' days ('+(share*100).toFixed(2)+'%)';
+    $('count').textContent=R.n;
+    const diff=Math.abs(R.otherR-R.bhR)>0.005;
+    $('otherMethod').hidden=!diff;
+    if(diff)$('otherMethod').textContent=(useWin?'Scaling the full-year entitlement by time employed':'Counting only the bank holidays inside the employment dates')+' would give '+h2(R.otherR)+' hours for bank holidays.';
+
+    $('balBox').hidden=!R.showBal;
+    if(R.showBal){
+      $('bEnt').textContent=h2(R.total)+' hours';
+      $('rCarry').hidden=!(bal.carry>0);$('bCarry').textContent=h2(bal.carry)+' hours';
+      $('rExtra').hidden=!(bal.extra>0);$('bExtra').textContent=h2(bal.extra)+' hours';
+      $('rTaken').hidden=!(bal.taken>0);$('bTaken').textContent=h2(bal.taken)+' hours';
+      $('rBh').hidden=!bookable;$('bBh').textContent=h2(R.booked)+' hours';
+      $('leftLabel').textContent=R.left>=0?'Left to take':'Over the entitlement by';
+      $('leftV').textContent=h2(Math.abs(R.left))+' hours ('+dd(Math.abs(R.left))+' days)';
+      $('overNote').hidden=R.left>=0;
+      $('balNote').textContent=!pat?'Bank holidays that fall on working days come off this as they are booked. Choose “Hours on each day” to take them off now.':(chg.length>0?'Bank holidays on working days are not taken off here, because contracted hours change during the year.':'');
+      $('balNote').hidden=!$('balNote').textContent;
     }
+
+    $('statBox').hidden=!alEntered;
+    if(alEntered){
+      const ok=R.total>=R.statRaw-0.005;
+      $('statTxt').textContent='The statutory minimum of 5.6 weeks, for these hours and the time employed, is '+h2(R.statRaw)+' hours'+(R.capF<1?', with the 28 day cap applied because they work more than five days a week':'')+'. This entitlement is '+(ok?'at or above':'below')+' that.';
+      $('statTxt').className=ok?'':'warnbox';
+    }
+
+    const W=$('workBody');W.innerHTML='';
+    const li=s=>{const e=document.createElement('li');e.textContent=s;W.appendChild(e)};
+    li('Leave year '+y.label+', '+D+' days.');
+    li('Employed '+plainDate(S)+' to '+plainDate(E)+', '+dEmp+' days ('+(share*100).toFixed(2)+'%).');
+    li('Full-time week '+trim2(ftR.v)+' hours, with '+trim2(dayh)+' hours in a full-time day.');
+    R.segs.forEach(s=>li(plainDate(s.a)+' to '+plainDate(s.b)+', '+s.n+' days, '+trim2(s.w)+' hours a week ('+(s.fte*100).toFixed(2)+'% FTE)'+(alEntered?', '+trim2(s.days)+' full-time annual leave days, '+h2(s.ah)+' hours':'')+'.'));
+    if(alEntered)li('Annual leave '+h2(R.annualRaw)+' hours'+(mode==='none'?'.':', rounded to '+h2(R.annualR)+'.'));
+    li(useWin?'Bank holidays inside the employment dates, '+R.n+' counted, each worth '+trim2(dayh)+' hours × the FTE on its date, '+h2(R.bhRaw)+' hours'+(mode==='none'?'.':', rounded to '+h2(R.bhR)+'.'):
+      'Bank holidays, '+R.n+' ticked × '+trim2(dayh)+' hours × '+(R.tw*100).toFixed(2)+'% (FTE scaled by time employed), '+h2(R.bhRaw)+' hours'+(mode==='none'?'.':', rounded to '+h2(R.bhR)+'.'));
+    li(mode==='none'?'No rounding applied.':'Rounding applied, '+RND_TEXT[mode].toLowerCase()+'.');
   }else{
     $('ent').textContent='—';
+    $('barV').textContent='Check the fields';
     $('hint').textContent=errs>0?'Fix the fields marked with an error to see the result.':'Enter the hours they work on each day to see the result.';
   }
 
   /* weekday strip */
-  const cn=[0,0,0,0,0,0,0];counted.forEach(x=>cn[x.wd]++);
+  const cn=[0,0,0,0,0,0,0];inWin.forEach(x=>cn[x.wd]++);
+  const n=inWin.length;
   const show=[0,1,2,3,4];
-  [5,6].forEach(i=>{if(cn[i]>0||(pat&&dayHrs[i]>0))show.push(i)});
+  [5,6].forEach(i=>{if(cn[i]>0||(bookable&&dayHrs[i]>0))show.push(i)});
   const max=Math.max(1,...cn);
   const strip=$('strip');
   strip.style.setProperty('--cols',show.length);
   strip.innerHTML=show.map(i=>{
-    const works=pat&&dayHrs[i]>0;
-    let sq='';for(let k=0;k<cn[i];k++)sq+='<span class="sq'+((pat&&!works)?' hollow':'')+'"></span>';
+    const works=bookable&&dayHrs[i]>0;
+    let sq='';for(let k=0;k<cn[i];k++)sq+='<span class="sq'+((bookable&&!works)?' hollow':'')+'"></span>';
     return '<div class="dcol'+(works?' works':'')+'"><div class="stack" style="height:'+(max*1.45)+'rem">'+sq+'</div>'+
       '<div class="dn">'+SHORT[i]+'</div><div class="dc">'+cn[i]+'</div>'+
-      '<div class="dh">'+(works?trim2(dayHrs[i])+' h':(pat?'day off':''))+'</div></div>';
+      '<div class="dh">'+(works?trim2(dayHrs[i])+' h':(bookable?'day off':''))+'</div></div>';
   }).join('');
-  $('legend').textContent=pat?'Filled squares land on a day they work. Outlined squares land on a day off.':'Choose “Hours on each day” to see which of these land on days they work.';
-
+  $('legend').textContent=bookable?'Filled squares land on a day they work. Outlined squares land on a day off.':(pat?'The working-days view is off while contracted hours change during the year.':'Choose “Hours on each day” to see which of these land on days they work.');
   $('fallText').textContent=weekdaySentence(cn,n,true);
 
-  last={valid:valid,pat:pat,c:c,ft:ftR.v,dayh:dayh,fte:fteTxt,n:n,ent:ent,booked:booked,bookedN:bookedN,left:left,counted:counted,dayHrs:dayHrs};
-  if(live)announce(valid?'Entitlement '+h2(ent)+' hours':'Result not available. Check the fields marked with an error.',700);
+  last={valid:valid,R:R,y:y,D:D,S:S,E:E,dEmp:dEmp,share:share,pat:pat,bookable:bookable,c:c,ft:ftR.v,dayh:dayh,dayHrs:dayHrs,alEntered:alEntered,alDays:alDays,svc:svc,mode:mode,useWin:useWin,bal:bal,inWin:inWin,chg:chg};
+  if(live)announce(valid?'Entitlement '+h2(R.total)+' hours':'Result not available. Check the fields marked with an error.',700);
 }
 
 /* leave year */
@@ -691,28 +963,29 @@ function setYear(k){
 
 /* summary and copy */
 function summary(){
-  const L=last,y=cur();
-  const out=[];
-  out.push('Bank holiday entitlement calculation, leave year '+y.label);
-  out.push('Contracted hours: '+trim2(L.c)+' a week');
-  if(L.pat){
-    const d=L.dayHrs.map((h,i)=>h>0?SHORT[i]+' '+trim2(h):'').filter(Boolean);
-    out.push('Hours on each day: '+d.join(', '));
-  }
+  const L=last,R=L.R,y=L.y,dd=x=>h2(x/L.dayh),out=[];
+  out.push('Leave entitlement calculation, leave year '+y.label);
+  out.push('Employed: '+plainDate(L.S)+' to '+plainDate(L.E)+', '+L.dEmp+' of '+L.D+' days ('+(L.share*100).toFixed(2)+'%)');
   out.push('Full-time week: '+trim2(L.ft)+' hours, with '+trim2(L.dayh)+' hours in a full-time day');
-  out.push('FTE: '+L.fte);
-  out.push('Bank holidays counted: '+L.n);
-  out.push('Pro-rata entitlement: '+h2(L.ent)+' hours ('+h2(L.ent/L.dayh)+' full-time days)');
-  out.push('Calculation: '+$('formula').textContent);
-  if(L.pat){
-    out.push('Booked on bank holidays that fall on a working day: '+h2(L.booked)+' hours');
-    out.push((L.left>=0?'Left in the entitlement: ':'Over the entitlement by: ')+h2(Math.abs(L.left))+' hours');
+  if(L.pat)out.push('Hours on each day: '+L.dayHrs.map((h,i)=>h>0?SHORT[i]+' '+trim2(h):'').filter(Boolean).join(', '));
+  R.segs.forEach(s=>out.push('From '+plainDate(s.a)+' to '+plainDate(s.b)+': '+trim2(s.w)+' hours a week ('+(s.fte*100).toFixed(2)+'% FTE)'+(L.alEntered?', '+trim2(s.days)+' full-time annual leave days':'')));
+  if(L.alEntered)out.push('Annual leave: '+h2(R.annualR)+' hours ('+dd(R.annualR)+' days)');
+  out.push('Bank holidays: '+h2(R.bhR)+' hours ('+dd(R.bhR)+' days), '+R.n+' counted, '+(L.useWin?'inside the employment dates':'full-year entitlement scaled by time employed'));
+  out.push('Total entitlement: '+h2(R.total)+' hours ('+dd(R.total)+' full-time days)');
+  out.push('Rounding: '+RND_TEXT[L.mode]);
+  if(R.showBal){
+    if(L.bal.carry>0)out.push('Carried over: '+h2(L.bal.carry)+' hours');
+    if(L.bal.extra>0)out.push('Extra or purchased leave: '+h2(L.bal.extra)+' hours');
+    if(L.bal.taken>0)out.push('Taken or booked so far: '+h2(L.bal.taken)+' hours');
+    if(L.bookable)out.push('Bank holidays on working days: '+h2(R.booked)+' hours');
+    out.push((R.left>=0?'Left to take: ':'Over the entitlement by: ')+h2(Math.abs(R.left))+' hours');
   }
+  if(L.alEntered)out.push('Statutory minimum (5.6 weeks): '+h2(R.statRaw)+' hours, '+(R.total>=R.statRaw-0.005?'met':'not met'));
   out.push('');
-  out.push('Bank holidays counted');
-  L.counted.forEach(x=>out.push('- '+longDate(x.date)+', '+x.name+(L.pat?(x.hrs>0?' (book '+trim2(x.hrs)+' hours)':' (day off)'):'')));
+  out.push('Bank holidays inside the employment dates');
+  L.inWin.forEach(x=>out.push('- '+longDate(x.date)+', '+x.name+(L.bookable?(x.hrs>0?' (book '+trim2(x.hrs)+' hours)':' (day off)'):'')));
   out.push('');
-  out.push('This calculates pro-rata entitlement. It does not set Gloucester City Council’s contractual or HR rules.');
+  out.push('This calculates entitlement. It does not set Gloucester City Council’s contractual or HR rules.');
   return out.join('\n');
 }
 async function copy(){
@@ -734,8 +1007,11 @@ function reset(){
   state.off.clear();state.custom={};state.touched=false;
   $('weekly').value='22.5';$('ft').value='37';
   document.querySelector('input[name=mode][value=weekly]').checked=true;
+  document.querySelector('input[name=method][value=in]').checked=true;
   for(let i=0;i<7;i++)$('d'+i).value='';
-  $('from').value='';$('to').value='';$('cname').value='';$('cdate').value='';
+  ['from','to','cname','cdate','al','svcDate','svcDays','carry','extra','taken'].forEach(k=>{$(k).value=''});
+  $('rnd').value='none';
+  $('chgList').innerHTML='';
   setErr(null,'add-err','');
   $('copystat').textContent='';$('fallback').hidden=true;
   setStart(1,4,true);
@@ -760,9 +1036,12 @@ document.addEventListener('change',e=>{
   update(true);
 });
 document.addEventListener('click',e=>{
-  const pre=e.target.closest&&e.target.closest('[data-start]');
+  const T=e.target.closest?e.target:e.target.parentElement;
+  const pre=T.closest('[data-start]');
   if(pre){const a=pre.dataset.start.split('-');setStart(+a[0],+a[1]);return}
-  const rm=e.target.closest&&e.target.closest('[data-remove]');
+  const rc=T.closest('[data-chg-remove]');
+  if(rc){rc.closest('.chg').remove();update(true);$('chgAdd').focus();return}
+  const rm=T.closest('[data-remove]');
   if(rm){
     const id=rm.dataset.remove;
     state.custom[state.year]=cust().filter(h=>h.id!==id);
@@ -771,6 +1050,7 @@ document.addEventListener('click',e=>{
     $('selAll').focus();
   }
 });
+$('chgAdd').addEventListener('click',()=>{addChange();update(false)});
 $('dayAuto').addEventListener('click',()=>{state.touched=false;update(true);$('dayh').focus()});
 $('selAll').addEventListener('click',()=>{state.off.clear();update(true)});
 $('clrAll').addEventListener('click',()=>{items().forEach(h=>state.off.add(h.id));update(true)});
@@ -789,7 +1069,6 @@ $('addBtn').addEventListener('click',()=>{
   buildTable();update(false);
   announce('Added '+name+' on '+longDate(date),0);
 });
-
 $('toPattern').addEventListener('click',()=>{
   const r=document.querySelector('input[name=mode][value=days]');r.checked=true;update(true);
   $('weeklyBox').scrollIntoView({block:'center'});$('d0').focus();
@@ -804,6 +1083,7 @@ MON.forEach((m,i)=>{const o=document.createElement('option');o.value=i+1;o.textC
 buildDayFields();
 setStart(1,4,true);
 })();
+
 </script>
 </body>
 </html>
